@@ -1,0 +1,201 @@
+{
+  "date": "2026-09-09",
+  "scope": "Complete main-text Holant section, including the internally proved exact coupling bound and every stated matching/cover, orthant, and diagonal corollary.",
+  "verification": {
+    "command": "./scripts/check.sh",
+    "build_jobs": 3626,
+    "audited_project_declarations": 3740,
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "all_holant_modules_imported": true
+  },
+  "modules": {
+    "CI2ZF/HolantAmbientGraph.lean": {
+      "sha256": "76c732d50f00f81b3927772a119f1796416dae909a648dd78e02bdccd62701b8",
+      "lines": 89
+    },
+    "CI2ZF/HolantAnalytic.lean": {
+      "sha256": "07febcbca399c07eec6f265206f08cee84c88bd4cb0325f93d88d72d95d4e1c7",
+      "lines": 185
+    },
+    "CI2ZF/HolantAnalyticContinuation.lean": {
+      "sha256": "7574d4acfc60965b8fabcb85ef9d156b80af9b9ca1f2fde3bb6cd3590efc4520",
+      "lines": 95
+    },
+    "CI2ZF/HolantApplications.lean": {
+      "sha256": "85b8a5262460faf007d05a6886a5bf60c2295a6d93d2a07dc18cb4197b421555",
+      "lines": 346
+    },
+    "CI2ZF/HolantBoundedInstances.lean": {
+      "sha256": "92daaee43f3e9d2b6304c83679912542171f60a11b66dca99dd4452accef6385",
+      "lines": 76
+    },
+    "CI2ZF/HolantCapacities.lean": {
+      "sha256": "c651fea9607c14470e634d2e17f9ade68e42b50f65a2041f838afd6d4e96bc20",
+      "lines": 202
+    },
+    "CI2ZF/HolantCoefficientBounds.lean": {
+      "sha256": "1f101958f65ef853073d38d2581e478ece8f188b6fcd65bb0c927b2e85f9d0e0",
+      "lines": 111
+    },
+    "CI2ZF/HolantCorollaries.lean": {
+      "sha256": "3a40fffca8c5a4cbe2d8df87f48854406d490ebf7fa50567183264269e70363e",
+      "lines": 104
+    },
+    "CI2ZF/HolantCoupling.lean": {
+      "sha256": "27ca0f4dd85aaa8fa234e11ba14537aa63d78d080d6593bab457eb565d364f57",
+      "lines": 207
+    },
+    "CI2ZF/HolantCouplingBoundary.lean": {
+      "sha256": "798c92da94abdfe0edfaa12749a2a78d7739d76b5039a750433da5e3a1fc784e",
+      "lines": 139
+    },
+    "CI2ZF/HolantCouplingDeletion.lean": {
+      "sha256": "63d7fa3ba93567423384488da52ace549a490de03279e58761e458429a8d7294",
+      "lines": 181
+    },
+    "CI2ZF/HolantCouplingGibbs.lean": {
+      "sha256": "07bd42cfc62c51df3ad2de5d0901a840c3056ec2ce11df77f26e3b46995ff8c3",
+      "lines": 168
+    },
+    "CI2ZF/HolantCouplingInstance.lean": {
+      "sha256": "59e050d0bed25acc49ada37d083b60ce1ee1e6cbb08f4b2246205dfa0e7f724d",
+      "lines": 315
+    },
+    "CI2ZF/HolantCouplingRecursion.lean": {
+      "sha256": "b96dc10016f6ce0f1bbed52e16323bc809f4400eb6971c34707a69ff1142b010",
+      "lines": 300
+    },
+    "CI2ZF/HolantCouplingSharpZero.lean": {
+      "sha256": "f1c5378b8351acb4cb45f12b2cda7de0966452f5ced9325903110c237f18ebfe",
+      "lines": 119
+    },
+    "CI2ZF/HolantCouplingTheorem.lean": {
+      "sha256": "89c2f5a7e72ea71049f9ab1a6271542ca3b62936fd0d606d7d0be5330263cab3",
+      "lines": 199
+    },
+    "CI2ZF/HolantCouplingTransport.lean": {
+      "sha256": "755d87e9f3beb785830356fab99de4cb6ffdc05db149cbcb94fc9d47a8475a27",
+      "lines": 156
+    },
+    "CI2ZF/HolantCouplingZero.lean": {
+      "sha256": "99a72bb5996a8b7b9efbb7bf51b3b365435e59933f7ccfe0ef42e706c2c7066f",
+      "lines": 191
+    },
+    "CI2ZF/HolantGeometry.lean": {
+      "sha256": "183b763cf2c29fe330cbe04d17829ef0ab15c62837232256fd8a5d4b04190f58",
+      "lines": 140
+    },
+    "CI2ZF/HolantInductiveExterior.lean": {
+      "sha256": "079c77e937a50d21606feb66b9b4dfe47b9c69a2a542dae151602890b38362df",
+      "lines": 181
+    },
+    "CI2ZF/HolantInstanceSeparator.lean": {
+      "sha256": "2376a867283ed2b1087e8e0a6fb326ccba5048e0faa72059d95de5cc862b1235",
+      "lines": 283
+    },
+    "CI2ZF/HolantLocalResponse.lean": {
+      "sha256": "1c43fa3218b1fb465ebbcc10f148df081114c6dad8a6e369df61b49d450f84a4",
+      "lines": 93
+    },
+    "CI2ZF/HolantLocalStability.lean": {
+      "sha256": "e6a5baff3a4b77df87dd545147529a99ea7d65bbde7f5194c2142f5614a5ae6c",
+      "lines": 110
+    },
+    "CI2ZF/HolantModel.lean": {
+      "sha256": "9b6c124660274fad4ce88098942f4a859fc789f4286089c91951165017e6f71a",
+      "lines": 341
+    },
+    "CI2ZF/HolantParent.lean": {
+      "sha256": "d992d8d7ca102c11987558ec8aa5f80a89583679089bb044998fe59744f7cc8f",
+      "lines": 112
+    },
+    "CI2ZF/HolantPathParent.lean": {
+      "sha256": "539495753b9d114a5686e3f604d67d009c99a2d0c19afef31ac7ba850b07e2b0",
+      "lines": 142
+    },
+    "CI2ZF/HolantPaths.lean": {
+      "sha256": "a272bd9b18701835435f9535f3850e33d2762acb0f17bbdbcc824712ef7d8e4c",
+      "lines": 139
+    },
+    "CI2ZF/HolantPolynomialStability.lean": {
+      "sha256": "cce08b34961b7692cd05343b8a5df0efff1594361eed93d40f4a76a3b73bc0fe",
+      "lines": 127
+    },
+    "CI2ZF/HolantPolytube.lean": {
+      "sha256": "a5f2f090c16cbbc1d8c7cbf9e8368b571d31464b3ea3e19d066feaa7536caa19",
+      "lines": 108
+    },
+    "CI2ZF/HolantResidualModel.lean": {
+      "sha256": "2d03b87fedd157dd5f4bfd92ef1b14f51713915ff9af73caccef807bdd032ccc",
+      "lines": 430
+    },
+    "CI2ZF/HolantSeparator.lean": {
+      "sha256": "27bbf6518f0dd872a4cf01ba00ef65734ec27140162454bafd90201b6ab7bacc",
+      "lines": 366
+    },
+    "CI2ZF/HolantSeparatorCoefficients.lean": {
+      "sha256": "00c1a8201bbc40a6ab77e9a95445f2dcf4e66aa81076a2bd6f7f2a12d388c655",
+      "lines": 143
+    },
+    "CI2ZF/HolantSeparatorEstimates.lean": {
+      "sha256": "a1283833db2d95bf14e100c7c811880dd2cc1b2d8ed9483689160f89c4962de1",
+      "lines": 121
+    },
+    "CI2ZF/HolantSeparatorResponse.lean": {
+      "sha256": "519683bc23a1a3465bc29223f33048dc971096725e6f8c8117516262bd60c9f7",
+      "lines": 157
+    },
+    "CI2ZF/HolantShellAdjacency.lean": {
+      "sha256": "5c4f1fbbcc89600c70b253747ff8b0b49462470b3955b56f513a0527c8405e15",
+      "lines": 198
+    },
+    "CI2ZF/HolantShellCostSelection.lean": {
+      "sha256": "8bc2deca28dac9e273f2fea63ec1b29162901ce843599b06e41bf578854c42dd",
+      "lines": 28
+    },
+    "CI2ZF/HolantShellLipschitz.lean": {
+      "sha256": "332cd93272334d74b0b3cece45237defd9f8e2578911f4d047c219cfd687a193",
+      "lines": 142
+    },
+    "CI2ZF/HolantShellMarginals.lean": {
+      "sha256": "c0d0bb61c6fda77ca2d00ebb7d1566cede15ef8bccb548622e429b0f95fa6822",
+      "lines": 346
+    },
+    "CI2ZF/HolantShellSelection.lean": {
+      "sha256": "255034508c9aa57c5d81706a804b5aedffca2feeb4d9ab97950481ff29348a7d",
+      "lines": 224
+    },
+    "CI2ZF/HolantSignatures.lean": {
+      "sha256": "20c115b2c95ba6cd37afdaf4128d60983e80aa46b5a139f3b4f8e180797e598a",
+      "lines": 375
+    },
+    "CI2ZF/HolantStrongInduction.lean": {
+      "sha256": "c07e53e3af11562eb8aac2eaa11b473cc176b946173cf38025841fc505fc4ac0",
+      "lines": 95
+    },
+    "CI2ZF/HolantSupportGeometry.lean": {
+      "sha256": "ad38a8df50d07cfe1a5b7b36cedc6577b349ee499788ae276435deab760c1d5a",
+      "lines": 154
+    },
+    "CI2ZF/HolantTheorem.lean": {
+      "sha256": "8186aa2854707a2a85bd873193437f91ccca0a6c0598db36b60bddab73921d5a",
+      "lines": 59
+    },
+    "CI2ZF/HolantTransferParameters.lean": {
+      "sha256": "914a9b5dc3472cf513ed29256c8f1aeb6ea3ccbeec4c0079d404a309b8f95ad6",
+      "lines": 100
+    },
+    "CI2ZF/HolantTubeTheorem.lean": {
+      "sha256": "15c977292788e4ae3b483266e217db5f36be2dce8ab16fb0de15d5802b12771f",
+      "lines": 102
+    },
+    "CI2ZF/HolantUniformResponse.lean": {
+      "sha256": "2dfad61524971829dc8d2422274b3855e49f34bdabb5367d0a5c630df38b887e",
+      "lines": 77
+    }
+  }
+}

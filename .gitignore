@@ -1,0 +1,6 @@
+.lake/
+.tools
+.cache/
+scratch/
+logs/
+.DS_Store

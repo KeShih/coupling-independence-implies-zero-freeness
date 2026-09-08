@@ -1,0 +1,24 @@
+{
+  "source": "/Users/keshi/Code/LaTeX/CI2ZF/anc/lean-potts-ci",
+  "source_lean_toolchain": "leanprover/lean4:v4.28.0",
+  "files_sha256_at_import": {
+    "PottsCI/FinDist.lean": "2e85f701031a2ae970bdea2218224da7b75f2a0a181a7c848dd518ed87942733",
+    "PottsCI/PathCoupling.lean": "2dbd91231de5aac0efa4af1df5fb9445bc3fd8ddf3be35797b3ecf22716a3473",
+    "PottsCI/TwoMetric.lean": "72abcd39d5b767f79519fe091431c5d7e13ca5e727261d3908c271ef0a070d5a",
+    "PottsCI/EndpointContinuity.lean": "bc8876aa6accf1f0d089676ddf568fbab7f5518ba709b678388421c1f596a8bd",
+    "PottsCI/Potts/Model.lean": "38e43a036089e90d51e1d2e1e59a28c0c66f36f953ec7e995267ba222c5091bb",
+    "PottsCI/Potts/Pinning.lean": "0a0618d69c2a7c7f4ccfa9350f5843ced372dc4e677e0942219eaeac3367f3d9",
+    "PottsCI/Potts/ActiveConstraints.lean": "e015d24a9368915fd0b514a16390c96ae022881fd4d66a0c4a57cfbcb960dd72",
+    "PottsCI/Potts/SoftKernel.lean": "22296efe4b66ca7222b3de976cf56bb7a64251a28bb1cc9e4f2d3b14257e9d6c",
+    "PottsCI/Potts/Endpoint.lean": "e44844599fabba3c55140a668fb2a079cfeb207023c56db2eadae3c2483c173b",
+    "PottsCI/Vigoda/ComponentCoupling.lean": "a81427fe685c3f62b858e1ee4cf381cf37393f04ab422997ad38c8a16641d728",
+    "PottsCI/Vigoda/Endgame.lean": "bc5d9a1cfe83c43eb185a5674905597193f1ba8fbd1a09f3c93d42903d5280d8"
+  },
+  "adapted_extracts": {
+    "CI2ZF/PartialCoupling.lean": {
+      "source_file": "PottsCI/CarlsonVigoda/ComponentCoupling.lean",
+      "source_file_sha256": "3acee9ab2dda089cb2ff0f2826b95921baa52707b013bc533fbe9b0470e06669",
+      "scope": "Generic partial coupling, residuals, product completion and completion bound near the start of the source file; Carlson-Vigoda-specific profiles and contracts are not imported. Additional separable-cost proofs are new."
+    }
+  }
+}

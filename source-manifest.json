@@ -1,0 +1,28 @@
+{
+  "paper_source_sha256": {
+    "main.tex": "a4c0d9f3afbf5afdb0e4d716cc2ba969d6bc1559cc3f37b237c5520a27d46b1d",
+    "main.bib": "78ccb7771c00c007b509c6cb08c6bdccae653a29d2a30582b9b0c4035e732bfc",
+    "sections/strict-ci-tools.tex": "fd2a17be5bb0e2efdb04567f9863a4d4c9044a8690e5dc101e375a2a7e39a6bd",
+    "sections/strict-vigoda-ci.tex": "a88608f8012863e50c127802618e0972e189ea2441f6a54559bbc8a8c10c2548"
+  },
+  "lean": {
+    "version": "4.33.1",
+    "source": "https://github.com/leanprover/lean4/releases/tag/v4.33.1",
+    "platform": "darwin_aarch64",
+    "archive_sha256": "88c45aad985b5d2a8d925fe10bd1296bd35f66f408480ab182d3facccd065a9d"
+  },
+  "mathlib": {
+    "source": "https://github.com/leanprover-community/mathlib4",
+    "tag": "v4.33.1",
+    "commit": "0df444a360eaa60ab8c11dca51a86af692955474"
+  },
+  "scope": "Main-text Potts formalization (remaining Potts gaps are documented in README.md) and the complete main-text Holant residual lemma, uniform polytube theorem, orthant and diagonal statements, and b-matching/b-edge-cover corollaries. The actual Holant coupling bound is also proved internally.",
+  "holant_paper_source_sha256": {
+    "main.tex": "a4c0d9f3afbf5afdb0e4d716cc2ba969d6bc1559cc3f37b237c5520a27d46b1d"
+  },
+  "holant_entrypoints": [
+    "CI2ZF/HolantCouplingTheorem.lean",
+    "CI2ZF/HolantTheorem.lean",
+    "CI2ZF/HolantCorollaries.lean"
+  ]
+}
