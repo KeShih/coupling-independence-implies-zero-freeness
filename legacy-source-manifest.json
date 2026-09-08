@@ -1,5 +1,5 @@
 {
-  "source": "/Users/keshi/Code/LaTeX/CI2ZF/anc/lean-potts-ci",
+  "source": "CI2ZF/anc/lean-potts-ci (earlier local project)",
   "source_lean_toolchain": "leanprover/lean4:v4.28.0",
   "files_sha256_at_import": {
     "PottsCI/FinDist.lean": "2e85f701031a2ae970bdea2218224da7b75f2a0a181a7c848dd518ed87942733",
