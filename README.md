@@ -6,6 +6,15 @@ This repository formalizes the Potts and Holant sections of the main text of *Co
 
 **Holant: the main-text section is fully formalized.** The residual lemma, concrete CI bound, uniform complex polytube theorem, open orthant and uniform diagonal neighborhoods, and all main-text corollaries for b-matchings and b-edge covers have been proved. The final entry points retain no unproved external inputs. All 46 Holant modules are included in the library build and axiom audit.
 
+## Appendix milestones
+
+The edge-Potts, general-graph high-temperature, large-girth `q ≥ Δ+3`, and
+BBR interval results now have completed CI and uniform zero-free theorems.
+See [APPENDIX_STATUS.md](APPENDIX_STATUS.md) for exact statements and the
+explicit literature inputs. Run `bash scripts/check-appendix.sh` for the
+separate completed-region build and axiom audit. The CV and fixed-girth-5
+regions remain in progress.
+
 ## Proved Potts results
 
 | Paper content | Lean file and principal results |

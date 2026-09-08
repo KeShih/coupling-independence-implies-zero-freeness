@@ -86,7 +86,7 @@ theorem edge_partition (x : ℝ) (t : CavityTree C) (c : C) :
   apply Finset.sum_congr rfl
   intro σ _
   by_cases h : c = t.rootColour σ
-  · simp only [h, if_true, eq_comm, mul_ite]
+  · simp only [h, if_true]
     ring
   · simp only [h, Ne.symm h, if_false, one_mul, mul_zero, sub_zero]
 
@@ -100,7 +100,9 @@ theorem rootWeight_node (x : ℝ) (d : ℕ) (b : C → ℕ)
         (child i).configurationWeight x (σ.2 i)) else 0) = _
   rw [Fintype.sum_prod_type, Finset.sum_comm]
   simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true]
-  rw [← Finset.mul_sum, ← Fintype.prod_sum]
+  rw [← Finset.mul_sum, ← Fintype.prod_sum
+    (fun i (σ : (child i).Configuration) =>
+      (if c = (child i).rootColour σ then x else 1) * (child i).configurationWeight x σ)]
   simp_rw [edge_partition]
 
 /-- The recursive message is precisely the normalized Gibbs marginal. -/

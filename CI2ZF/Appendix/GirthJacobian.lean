@@ -6,8 +6,8 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 This file proves the Euclidean energy bound for the explicit transformed
 matrix in `hg-jacobian-factor`. The bound is dimension-independent and
-retains both factors `F₁` and `F₂`. The analytic identification with the
-derivative of the potential-coordinate recursion is a separate obligation.
+retains both factors `F₁` and `F₂`. `GirthDifferential` identifies this
+matrix with the derivative of the actual potential-coordinate recursion.
 -/
 
 namespace CI2ZF.Appendix.Girth
