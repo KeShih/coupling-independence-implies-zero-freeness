@@ -19,20 +19,42 @@ import CI2ZF.Appendix.CVIncidenceRates
 import CI2ZF.Appendix.CVComponentCharge
 import CI2ZF.Appendix.CVBranchEncoding
 import CI2ZF.Appendix.CVActualOne
+import CI2ZF.Appendix.CVTwoFamily
+import CI2ZF.Appendix.CVTwoIncidence
+import CI2ZF.Appendix.CVMaxChoice
+import CI2ZF.Appendix.CVActualTwo
+import CI2ZF.Appendix.CVSelectedChoice
+import CI2ZF.Appendix.CVGlobalChoice
+import CI2ZF.Appendix.CVRegularSupport
+import CI2ZF.Appendix.CVGlobalRegular
+import CI2ZF.Appendix.CVRootColours
+import CI2ZF.Appendix.CVGlobalCoupling
+import CI2ZF.Appendix.CVPieceSums
+import CI2ZF.Appendix.CVSingletonRegular
+import CI2ZF.Appendix.CVRegularCost
+import CI2ZF.Appendix.CVRootColourCharge
+import CI2ZF.Appendix.CVMoveClassification
+import CI2ZF.Appendix.CVRootCost
+import CI2ZF.Appendix.CVBaselinePartition
+import CI2ZF.Appendix.CVCouplingCharge
+import CI2ZF.Appendix.CVZeroFree
 
 /-!
-# Carlson--Vigoda appendix: proved components
+# Carlson--Vigoda appendix: complete CI and zero-free theorem
 
 This aggregate exports the actual CV kernels, stationarity, component move
 masses, full regular root matches, geometric path metric and its output-score
 upper bound, child--middle discrepancy, kernel-checked low-multiplicity
 certificate, infinite-multiplicity averaging bound, and continuous scalar gap.
-The canonical first-incidence plan is an actual CV coupling; its rates are
-identified with component residuals. The high-multiplicity and missing-colour
-component bounds and the one-neighbour graph-to-certificate estimate are proved.
+The full global canonical coupling combines every regular and both root-colour
+plans. Its Hamming drift is bounded by the actual component charge sum.
+Both low-multiplicity graph-to-certificate estimates, synchronized selector
+existence, and the high-multiplicity and missing-colour bounds are proved.
 
-The final geometric drift theorem is not asserted here: its remaining input
-is a globally combined CV greedy coupling with the expected-discount and
-record-domination/degree assembly proved for that same coupling. In particular,
-no conditional drift hypothesis is presented as the appendix's final CI theorem.
+The activation, geometric discount and complete degree summation prove the
+actual adjacent metric drift. Weighted path coupling and two-metric stationary
+comparison then give CI for the real normalized root children, including both
+endpoints and empty remaining graphs. `option_root_ci` has the explicit constant
+`409060125/50858 < 8043.19`. `zero_free` applies the proved uniform complex
+transfer for every graph size and arbitrary pinning. No external input remains.
 -/

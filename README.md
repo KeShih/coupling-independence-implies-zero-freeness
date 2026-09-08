@@ -9,11 +9,12 @@ This repository formalizes the Potts and Holant sections of the main text of *Co
 ## Appendix milestones
 
 The edge-Potts, general-graph high-temperature, large-girth `q ≥ Δ+3`, and
-BBR interval results now have completed CI and uniform zero-free theorems.
+BBR interval, Carlson–Vigoda, and near-Vigoda results now have completed CI
+and uniform zero-free theorems.
 See [APPENDIX_STATUS.md](APPENDIX_STATUS.md) for exact statements and the
 explicit literature inputs. Run `bash scripts/check-appendix.sh` for the
-separate completed-region build and axiom audit. The CV and fixed-girth-5
-regions remain in progress.
+separate completed-region build and axiom audit. The fixed-girth-5 region
+remains in progress.
 
 ## Proved Potts results
 

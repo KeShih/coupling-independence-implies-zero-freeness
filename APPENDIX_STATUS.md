@@ -14,6 +14,8 @@ Literature results are explicit proposition parameters, not added axioms.
 | Large girth, Δ ≥ 3 and q ≥ Δ+3 | `Girth.high_girth_coupling`: a girth threshold and one coupling constant work uniformly in graph size, pinning, and x in [0,1] | `Girth.high_girth_zero_free` and `Girth.high_girth_original_zero_free`, including arbitrary improper pinning and the exact forced-zero multiplicity |
 | General-graph high temperature, x₀>0 and q>11(1−x₀)Δ/6 | `high_temperature_graph_coupling`: the explicit constant 2(1−x₀)Δ / (q−11(1−x₀)Δ/6) works on [x₀,1] | `high_temperature_zero_free`, for both normalized and full partition functions, without a hard-colouring feasibility bound |
 | BBR large-girth interval, q≥3 and Δ/q≥(e−1/2)/(e−1) | `BBR.high_girth_coupling`: one girth threshold and one CI constant work on the entire closed interval [`BBR.start q Δ`,1] | `BBR.high_girth_zero_free` and `BBR.high_girth_original_zero_free_and_responses`, including actual one-root response logarithms |
+| Carlson–Vigoda, Δ≥125 and q≥1.809Δ | `CV.option_root_ci` and `CV.root_coupling`: actual normalized root-child laws have Hamming transport at most 409060125/50858 < 8043.19, uniformly on [0,1] | `CV.zero_free`: the full original-graph statement, arbitrary pinning, normalized nonvanishing and exact forced-zero multiplicity |
+| Near-Vigoda, Δ≥2 and q≥(11/6−1/84000)Δ | `Regimes` proves the exact integer reduction to the proved strict/CV regimes and at most twenty critical-line hard-colouring inputs | `near_vigoda_zero_free`: the full uniform original-graph statement on [0,1] |
 
 Names in the table are relative to `CI2ZF.Appendix`.
 
@@ -59,8 +61,27 @@ contraction, tree influence and relative spatial decay, and the positive
 zero-free transfer are proved internally. The exceptional (q,Δ)=(3,4)
 interval and all degree-gap-two parameter cases are proved internally.
 
+### Carlson–Vigoda proof and external inputs
+
+No unproved external result is required. The proof uses the actual CV flip
+profile, common-coin activation, feasible component couplings, the complete
+low-multiplicity certificate checked by Lean's kernel, weighted configuration
+paths, and the true output-score discount. The final geometric drift feeds
+weighted path coupling and a two-metric stationary comparison. Finite-state
+continuity gives x=0, while x=1 is the common product law. The bound and its
+uniform complex corollary do not retain any matching, drift, contraction,
+stationarity, or hard-colouring hypothesis.
+
+### Near-Vigoda proof and external inputs
+
+The exact integer reduction leaves only (Δ,q)=(6j,11j), 1≤j≤20, below degree
+125. At those points, the parameter is the explicitly cited CFFGZZ Theorem 20
+hard-colouring coupling result on actual original graphs and arbitrary
+pinning. Its conversion to normalized boundary-count laws is already proved
+in the main text. All other cases use the internally proved strict-Vigoda or
+CV theorem. No appendix-specific conclusion is assumed as a literature input.
+
 ## Work in progress
 
-The CV q/Δ≈1.809 region and fixed girth 5 region are
-still being assembled. Their intermediate modules in the repository are not
-claimed as completed-region theorems by this milestone.
+The fixed girth 5 region is still being assembled. Its intermediate modules
+in the repository are not claimed as a completed-region theorem by this milestone.

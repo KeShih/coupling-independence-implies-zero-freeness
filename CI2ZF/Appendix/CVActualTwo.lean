@@ -81,7 +81,7 @@ lemma canonicalOffRootCharge_two_neighbours {FX FY : HardListInstance V C} {X Y 
   have hfb : oppositeComponentOf h hca hcb iu = oppositeComponentOf h hca hcb iw ↔
       offRootComponent FY Y v (Y v) c iu.val = offRootComponent FY Y v (Y v) c iw.val :=
     Subtype.ext_iff
-  rw [hfa, hfb] at hs
+  simp only [hfa, hfb] at hs
   simpa [canonicalOffRootCharge, componentOf, oppositeComponentOf, rootIncidenceEquiv] using hs
 
 lemma recordTwo_fullFamily (a₀ a₁ b₀ b₁ : Branch) (i j : Bool) :
@@ -194,6 +194,49 @@ theorem canonicalColourCharge_two_corrected {FX FY : HardListInstance V C} {X Y 
     (by dsimp [R]; omega) (by dsimp [R]; omega) hp gain loss
   rw [canonicalColourCharge_eq_recordTwo h hca hcb hav iu iw hN horder i j hp]
   simpa only [R, hs0.1, hs0.2, hs1.1, hs1.2] using hbound
+
+lemma ordered_two_incidence_exists (F : HardListInstance V C) (X : V → C) (v : V) (c : C)
+    (hm : (rootNeighbours F X v c).card = 2) :
+    ∃ iu iw : RootIncidence F X v c, rootNeighbours F X v c = {iu.val, iw.val} ∧
+      CanonicalMatching.index iu < CanonicalMatching.index iw := by
+  obtain ⟨u, w, huw, hN⟩ := Finset.card_eq_two.mp hm
+  let iu : RootIncidence F X v c := ⟨u, by simp [hN]⟩
+  let iw : RootIncidence F X v c := ⟨w, by simp [hN]⟩
+  have hidx : CanonicalMatching.index iu ≠ CanonicalMatching.index iw := by
+    intro hi
+    exact huw (congrArg Subtype.val (CanonicalMatching.index_injective hi))
+  rcases lt_or_gt_of_ne hidx with hlt | hlt
+  · exact ⟨iu, iw, hN, hlt⟩
+  · exact ⟨iw, iu, hN.trans (Finset.pair_comm u w), hlt⟩
+
+/-- Legal actual representatives satisfying the corrected bound exist for
+every two-neighbour colour. Synchronization is constructed, not assumed,
+and the same representatives work for every real coefficient pair. -/
+theorem exists_two_corrected_selectors {FX FY : HardListInstance V C} {X Y : V → C}
+    {v : V} {a b c : C} (h : RootLocalPair FX FY X Y v a b)
+    (hca : c ≠ a) (hcb : c ≠ b) (hav : c ∈ FX.list v)
+    (hm : (rootNeighbours FX X v c).card = 2) :
+    ∃ u w : V, u ∈ rootNeighbours FX X v c ∧ w ∈ rootNeighbours FY Y v c ∧
+      ∀ gain loss : ℝ,
+        canonicalColourCharge h hca hcb u w +
+          loss * (∑ i : RootIncidence FX X v c, componentSafe11 FX FY X Y v i.val c) -
+          gain * (∑ i : RootIncidence FX X v c, componentSafe12 FX FY X Y v i.val c) ≤
+          -1 + 2 * low gain loss := by
+  obtain ⟨iu, iw, hN, horder⟩ := ordered_two_incidence_exists FX X v c hm
+  let R := twoGraphRecord h hca hcb iu iw
+  obtain ⟨i, j, hp⟩ := permitted_exists R.a₀ R.a₁ R.b₀ R.b₁
+  refine ⟨if i then iw.val else iu.val, if j then iw.val else iu.val, ?_, ?_, ?_⟩
+  · cases i <;> first | exact iu.property | exact iw.property
+  · rw [← h.rootNeighbours_eq hca hcb]
+    cases j <;> first | exact iu.property | exact iw.property
+  · have hall (k : RootIncidence FX X v c) : k = iu ∨ k = iw := by
+      have hk : k.val = iu.val ∨ k.val = iw.val := by simpa [hN] using k.property
+      exact hk.imp (fun hk => Subtype.ext hk) (fun hk => Subtype.ext hk)
+    have hne : iu ≠ iw := by intro heq; rw [heq] at horder; exact lt_irrefl _ horder
+    intro gain loss
+    rw [CanonicalMatching.sum_two iu iw hne hall, CanonicalMatching.sum_two iu iw hne hall]
+    simpa only [Nat.cast_add] using
+      canonicalColourCharge_two_corrected h hca hcb hav iu iw hN horder i j hp gain loss
 
 end
 end CI2ZF.Appendix.CV
