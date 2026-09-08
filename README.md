@@ -2,7 +2,7 @@
 
 This repository formalizes the Potts and Holant sections of the main text of *Coupling Independence Implies Zero-Freeness*. The status of each model is reported separately; completion of one does not imply completion of the other.
 
-**Potts: the uniform zero-free main theorem at the strict threshold `q > 11Δ/6` is complete. The concrete coupling-independence proof, joint induction at both endpoints, uniform radius, and neighborhood patching have all been checked by Lean. The equality case retains only an explicitly identified external hard-coloring CI input.** The transfer theorem for arbitrary graph families closed under induced subgraphs is still being completed. No axioms or placeholder proofs conceal unfinished steps.
+**Potts: the uniform zero-free main theorem at the strict threshold `q > 11Δ/6`, and the transfer theorem for arbitrary graph families closed under induced subgraphs, are complete. The concrete coupling-independence proof, joint induction at both endpoints, uniform radius, and neighborhood patching have all been checked by Lean. The equality case retains only an explicitly identified external hard-coloring CI input on original finite graphs with arbitrary pinning.** No axioms or placeholder proofs conceal unfinished steps.
 
 **Holant: the main-text section is fully formalized.** The residual lemma, concrete CI bound, uniform complex polytube theorem, open orthant and uniform diagonal neighborhoods, and all main-text corollaries for b-matchings and b-edge covers have been proved. The final entry points retain no unproved external inputs. All 46 Holant modules are included in the library build and axiom audit.
 
@@ -21,6 +21,7 @@ This repository formalizes the Potts and Holant sections of the main text of *Co
 | Existence and uniqueness of normalized analytic logarithms on nonvanishing disks | `CI2ZF/AnalyticLog.lean`; the interface for actual Potts instances is in `CI2ZF/PottsAnalytic.lean` |
 | The multiplicity at zero of the original pinned partition polynomial is exactly the number of pinned-only monochromatic edges | `CI2ZF/PottsAnalytic.lean`: `fullPolynomial_rootMultiplicity_zero` |
 | For each fixed graph and pinning, some positive zero-free radius exists around [0,1] | `CI2ZF/FixedGraph.lean`: `fixed_instance_zero_free`, `fixed_instance_zero_free_of_vigoda` |
+| Realization of every boundary-count datum by independently pinned leaves, preserving the degree bound and girth | `CI2ZF/PinningLeafRealization.lean`, `PinningLeafCycles.lean`, `PinningLeafGirth.lean`: `realization`, `exists_bounded_girth_realization` |
 
 These theorems allow arbitrary pinning; the pinned part need not itself be a proper coloring. Normalization is defined directly through a finite polynomial, without division by zero at the origin.
 
@@ -54,6 +55,8 @@ The numerical certificates use the actual Vigoda profile `1, 13/42, 1/6, 2/21, 1
 - `root_critical_uniform_ci`: when `q=11Δ/6`, the bound `12/(11δ)` on every interval `[δ,1]` with `δ>0`.
 
 These theorems do not require callers to supply matching, capacity, drift, contraction, or stationarity assumptions. Zero-temperature CI at the critical equality is retained as an explicit external input, as authorized for this formalization. It cannot be obtained by sending δ to zero in the divergent bound `12/(11δ)`. See [EXTERNAL_INPUTS.md](EXTERNAL_INPUTS.md) for the exact interface and source.
+
+`PositiveExactCI.lean` also proves the standalone positive-temperature statement: `root_positive_exact_ci` needs `0 < x ≤ 1` and a positive contraction denominator, without the strict color threshold. Its critical specialization `root_critical_exact_ci` gives `12(1−x)/(11x)`.
 
 `OptionCI.lean` extends the same complete result to `PinningData (Option O) C` with arbitrary boundary-color counts: `none` is the root, and `O` is the common set of remaining vertices. This interface retains the degree bounds and permits repeated boundary counts, allowing it to be used for smaller instances after separation. `RootGibbsSemantics.lean` proves the relationship between these normalized distributions and the conditional weights of the original graph: they agree directly at positive activity; at zero, the original conditional distribution requires the pinned part to be feasible, while the normalized child is defined for every pinning.
 
@@ -96,7 +99,7 @@ The one-step lemmas in this table retain appropriate hypotheses about smaller in
 $$
 \forall G,\tau,\quad \exists\varepsilon(G,\tau)>0,\quad
 \widetilde Z_G^\tau(z)\ne0\quad
-(\operatorname{dist}(z,[0,1])<\varepsilon(G,\tau)).
+(\mathrm{dist}(z,[0,1])<\varepsilon(G,\tau)).
 $$
 
 `strict_potts_zero_free` proves the stronger statement in which the radius is chosen before quantifying over all graphs and pinnings:
@@ -104,10 +107,12 @@ $$
 $$
 \exists\varepsilon(q,\Delta)>0,\quad \forall G,\tau,\quad
 \widetilde Z_G^\tau(z)\ne0\quad
-(\operatorname{dist}(z,[0,1])<\varepsilon(q,\Delta)).
+(\mathrm{dist}(z,[0,1])<\varepsilon(q,\Delta)).
 $$
 
-The fixed-instance conclusion requires only q ≥ Δ+1; the uniform conclusion uses the full CI argument. The final entry point, `CI2ZF/PottsMainTheorem.lean`, contains `strict_potts_zero_free` with no external CI assumption, `critical_potts_zero_free` with only external hard CI, and `potts_zero_free`, which combines them for the weak inequality. The result also identifies the forced zero of the unnormalized partition function and its exact multiplicity.
+The fixed-instance conclusion requires only q ≥ Δ+1; the uniform conclusion uses the full CI argument. `CI2ZF/PottsMainTheorem.lean` contains `strict_potts_zero_free` with no external CI assumption. `CI2ZF/PottsExternalTheorem.lean` supplies the public weak-inequality theorem `potts_zero_free_from_external`: its only external input is hard-coloring CI on original graphs, and it is needed only in the equality branch. The result also identifies the forced zero of the unnormalized partition function and its exact multiplicity.
+
+The paper-facing entry points `potts_main_theorem (q Δ : ℕ)` and `potts_main_strict` use the color set `Fin q` and the integer thresholds `11 * Δ ≤ 6 * q` and `11 * Δ < 6 * q`. Color nonemptiness is derived from the hypotheses. Only the equality branch of `potts_main_theorem` requests the original-graph external CI input.
 
 | Completed connection | Modules |
 | --- | --- |
@@ -117,12 +122,17 @@ The fixed-instance conclusion requires only q ≥ Δ+1; the uniform conclusion u
 | Arbitrary-root relabeling, reduction of small components, and parent recursion | `RootOptionRelabel`, `OptionComponentFactorization`, `OptionParentNonzero` |
 | Simultaneous strong induction on the actual number of free vertices | `UniformInduction`, `InductionComponentSteps`, `InductionParentSteps` |
 | Complete induction at both endpoints and the conclusion for the original graph | `PositiveUniformTransfer`, `HardUniformTransfer`, `UniformZeroFreePackaging`, `PottsMainTheorem` |
+| Standalone positive-temperature transfer and actual original-graph `pinVertex` responses, without an extra color threshold | `PositiveFamilyTransfer`, `PositiveGraphClassTransfer` |
 
-## Remaining Potts work
+## Potts transfer for general graph families
 
-The transfer theorem in the paper allows any graph family closed under induced subgraphs and assumes only that all pinnings of original graphs in that family satisfy CI. The current `bounded_degree_potts_transfer` uses CI for all `PinningData` satisfying the degree bound. To recover the more general quantifiers in the paper, it remains to prove that every separator, shell-unpinning, and root-deletion step belongs to the same realizable graph family, then restrict the induction to that family. Requiring only the free graph to lie in the family is insufficient: an arbitrary family need not be closed under adding the leaves used to realize boundary counts.
+`graph_class_potts_transfer_of_bounded` in `GraphClassPottsTransfer.lean` proves the paper's `thm:potts-transfer`: for `q ≥ Δ+1` and an induced-subgraph-closed family of graphs with maximum degree at most Δ, hard-endpoint CI and uniform CI on positive compact intervals for all pinnings of original graphs imply a complex zero-free neighborhood uniform over the family. `GraphClass` expresses closure under induced pullback by arbitrary embeddings, including relabeling.
 
-This extension is being developed in `PinningRestriction`, `PinningFamily`, and the related family/ambient modules. Unfinished modules are not imported by the main entry point. The critical hard endpoint remains an explicit external input under the agreed scope; it is not classified as an unfinished main-text proof step.
+`AmbientRealization` retains the actual ambient graph, an embedding of the free vertices, and the partial coloring; vertices no longer needed are removed by passing to induced subgraphs. `PinningRestriction` proves composition of further pinning and deletion. `FamilyInduction` and `FamilyBFSResponseSteps` provide actual family-membership proofs for every smaller instance, and `FamilyUniformTransfer` completes both strong inductions within the family. `GraphClassCoupling` transports the original-graph CI bound through actual Gibbs relabeling and Hamming transport. This proof does not require the family to be closed under attaching leaves, or strengthen its CI hypothesis to arbitrary boundary-count data.
+
+The standalone positive-temperature response lemma is also complete as `GraphClass.positive_interval_zero_free_and_responses` in `PositiveGraphClassTransfer.lean`. It returns a uniform nonvanishing neighborhood and analytic root-quotient responses for original graphs and arbitrary pinning. It requires a nonempty color set and actual positive-temperature CI, without the hard-coloring feasibility threshold `q ≥ Δ+1`.
+
+See [EXTERNAL_INPUTS.md](EXTERNAL_INPUTS.md) for the external theorem boundary and [POTTS_PROOF_MAP.md](POTTS_PROOF_MAP.md) for the label-by-label correspondence. The general profile-ρ tools are instantiated with the concrete Vigoda profile needed for the main proof; this is not a claim to formalize every independent profile variant in the paper.
 
 ## The uniform Holant zero-free proof
 
@@ -187,9 +197,9 @@ lake exe cache get
 
 The check script first builds all proofs imported by `CI2ZF.lean`, then runs `AxiomAudit.lean`. Both steps treat warnings as errors. The axiom audit traverses every declaration in the `CI2ZF` and `PottsCI` namespaces and checks its transitive axiom dependencies. Only `propext`, `Classical.choice`, and `Quot.sound` are allowed; any other dependency causes failure. The proof library does not import the audit program.
 
-The published source snapshot contains 279 tracked files, including 267 Lean source files. The default aggregate imports 175 Lean modules, counting the root `CI2ZF.lean`; `AxiomAudit.lean` is run separately. The remaining 91 Lean files are included as source but lie outside the default aggregate build and audit: 75 files under `CI2ZF/Appendix/` and 16 family/ambient modules. A successful default check therefore does not certify all 267 Lean source files. All 46 Holant modules are reachable from the aggregate entry point.
+The default aggregate imports **197 project Lean source files**, counting the root `CI2ZF.lean`; `AxiomAudit.lean` is run separately, making 198 source files for the proof-and-audit closure. All 46 Holant modules and the completed Potts family/ambient modules are reachable from the aggregate entry point. The 75 existing files under `CI2ZF/Appendix/` are preserved as additional source and remain outside the default aggregate build and audit. A successful default check does not certify those unimported Appendix files.
 
-A fresh check of the publishing checkout on 2026-09-09, with all final Holant entry points imported, passed the build (3626 jobs) and the transitive axiom audit of 3740 project declarations. The entry point includes both Potts and Holant modules, so this count is the number of declarations in the entire imported library, not the number of theorems in the paper. Holant comprises 46 modules and 8076 lines of Lean source, all reachable from the aggregate entry point. Per-file verification records are in `holant-source-manifest.json`.
+The full publishing-checkout check on **2026-09-09**, with the final Potts and Holant entry points imported, passed the build (**3665 jobs**) and the transitive axiom audit of **4014 project declarations**. The 197 imported project source files were also scanned for placeholder proofs and unsafe declarations. These counts describe the entire imported library, not the number of theorems in the paper. Holant comprises 46 modules and 8076 lines of Lean source, all reachable from the aggregate entry point. Per-file records and the earlier Holant-stage verification snapshot are in `holant-source-manifest.json`.
 
 On the development machine, the official Lean compiler is installed locally in `.tools/`, and `scripts/lake.sh` selects it automatically without changing the global Lean environment. `.tools/`, `.lake/`, and caches are not part of the source distribution. On other machines, install the dependencies using the Lean/Lake version specified by `lean-toolchain`, then run the same check script.
 
@@ -197,6 +207,6 @@ On the development machine, the official Lean compiler is installed locally in `
 
 `CI2ZF/` contains new proofs for the current main text. The general residual-completion foundation in `PartialCoupling.lean` was adapted from the earlier project and extended. Eleven modules in `PottsCI/`, covering finite distributions, path coupling, the graph model, pinning, activity constraints, the concrete Vigoda kernel, and stationary-distribution comparison, were reused from the earlier `CI2ZF/anc/lean-potts-ci` project. Lean 4.33.1 compatibility issues and component-geometry proof issues were fixed during integration. Hashes of the files before import are recorded in `legacy-source-manifest.json`; provenance of the current paper sources and toolchain is recorded in `source-manifest.json`.
 
-The reused general `SoftKernel` interface is instantiated with the concrete Vigoda kernel in `Vigoda/ComponentCoupling`, where its stationarity is proved. Applications of endpoint continuity and stationary comparison are in `CouplingIndependence` and `RootCI`. The critical hard endpoint is passed explicitly through `CriticalHardColouringInput`; no custom axiom has been added.
+The reused general `SoftKernel` interface is instantiated with the concrete Vigoda kernel in `Vigoda/ComponentCoupling`, where its stationarity is proved. Applications of endpoint continuity and stationary comparison are in `CouplingIndependence` and `RootCI`. The public critical hard-endpoint premise is `ExternalCriticalHardColouringTheorem` on original graphs. `PottsExternalTheorem.lean` derives the internal `CriticalHardColouringInput` through the leaf realization and actual Gibbs-law transport; no custom axiom has been added.
 
-The scope of this directory is the main-text Potts theorem and Holant proof described above. The general graph-family transfer for Potts, and other extensions not listed here, including external fields and high girth, are not claimed as covered by these results.
+The completed scope is the main-text Potts theorem, its general graph-family transfer and standalone positive-temperature response theorem, and the Holant proof described above. Unimported Appendix sources and other extensions not listed here, including external fields and high-girth zero-free results, are not certified by the default check. The proved girth-preservation lemma for the leaf realization is part of the main-text model construction; it does not by itself establish those high-girth extensions.

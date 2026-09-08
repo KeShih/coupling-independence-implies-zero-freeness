@@ -90,5 +90,12 @@ theorem W_gibbs_relabel_le {V W : Type*} [Fintype V] [Fintype W]
     (relabelColouring (C := C) e) (relabelColouring (C := C) e) ham ham_nonneg
   simpa only [ham_relabelColouring] using hw
 
+theorem gibbs_eq_of_data_eq {V : Type*} [Fintype V]
+    (I J : PinningData V C) (h : I = J) (x : ℝ) (hx : 0 ≤ x)
+    (hI : 0 < I.partition x) (hJ : 0 < J.partition x) :
+    I.gibbs x hx hI = J.gibbs x hx hJ := by
+  subst J
+  rfl
+
 end
 end CI2ZF.Potts

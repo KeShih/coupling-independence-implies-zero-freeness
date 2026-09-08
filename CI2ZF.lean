@@ -38,6 +38,12 @@ import CI2ZF.SeparatorHardAnchor
 import CI2ZF.OptionShellMarginals
 import CI2ZF.HardSeparatorStep
 import CI2ZF.PottsMainTheorem
+import CI2ZF.PottsExternalTheorem
+import CI2ZF.GraphClassPottsTransfer
+import CI2ZF.PositiveExactCI
+import CI2ZF.PositiveFamilyTransfer
+import CI2ZF.PositiveGraphClassTransfer
+import CI2ZF.PinningLeafGirth
 import CI2ZF.HolantTheorem
 import CI2ZF.HolantCorollaries
 import CI2ZF.HolantBoundedInstances
