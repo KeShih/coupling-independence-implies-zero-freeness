@@ -1,6 +1,6 @@
-# External input to the main-text Potts proof
+# External inputs to the Potts proofs
 
-The formalization leaves one explicitly identified result as an external input. This boundary is expressed as a theorem parameter, without introducing an `axiom`, using `sorry`, or bypassing the Lean kernel.
+The main-text Potts proof leaves one explicitly identified result as an external input. The Appendix retains the additional literature interfaces listed below. This boundary is expressed as a theorem parameter, without introducing an `axiom`, using `sorry`, or bypassing the Lean kernel.
 
 ## Hard-colouring coupling independence at the critical threshold
 
@@ -14,6 +14,28 @@ The final public interface is `CI2ZF.Potts.ExternalCriticalHardColouringTheorem`
 
 `strict_potts_zero_free` and `potts_main_strict` require neither this input nor any unproved coupling, contraction, stationarity, or complex nonvanishing assumption. The standalone positive-temperature response theorem and the general CI-to-zero-free transfer are also proved internally; the latter retains exactly the CI hypotheses of the paper's conditional transfer theorem.
 
+## Appendix literature interfaces
+
+The [Appendix status document](docs/appendix/STATUS.md) records the exact
+parameter boundary for every region. Edge-Potts, general-graph high
+temperature, and Carlson–Vigoda have no unproved external inputs.
+Near-Vigoda uses the critical hard-colouring theorem above only at its
+finitely many exceptional integer pairs.
+
+The large-girth and BBR routes retain the named CLMM influence–Jacobian
+identity and graph-transfer statements; BBR additionally retains its cited
+Proposition 2.6(i) and Theorem 2.5. Their local appendix-specific estimates
+and uniform transfer are proved internally.
+
+The girth-five route retains only `Girth.SphereCouplingInput`, the
+[CLMM Condition 5.12 / Lemma 5.13](https://arxiv.org/html/2304.01954v3)
+sphere-to-coupling theorem. `CLMM.FixedAmbientSphereDecay` fixes the base
+graph, measures all spheres in that graph, and then quantifies over every
+complete further pinning. The decay error is strictly positive. The
+spectral gap, insertion estimates, Doob conditioning, finite response
+induction, weighted-source bound, endpoints, and complex zero-free
+conclusions are proved in Lean.
+
 ## Meaning of the kernel audit
 
-An explicit mathematical hypothesis does not become an additional Lean axiom. The transitive axiom dependencies of all imported theorems remain limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders; it does not establish the external hard-CI hypothesis itself.
+An explicit mathematical hypothesis does not become an additional Lean axiom. The transitive axiom dependencies of all imported theorems remain limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders; it does not establish the stated literature hypotheses themselves.

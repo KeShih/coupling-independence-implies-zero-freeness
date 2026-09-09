@@ -12,9 +12,9 @@ All seven regions have completed coupling-independence and uniform zero-free
 theorems: edge-Potts, general-graph high temperature, large-girth `q ≥ Δ+3`,
 the BBR interval, Carlson–Vigoda, near-Vigoda, and unrestricted girth 5 at
 `q ≥ (1+δ)Δ` for a degree threshold depending only on δ.
-See [APPENDIX_STATUS.md](APPENDIX_STATUS.md) for exact statements, the
-complete internal girth-five proof, and the explicitly named literature
-inputs. Run `bash scripts/check-appendix.sh` for the completed-region build
+See the [Appendix module guide](docs/appendix/README.md) and
+[proof status](docs/appendix/STATUS.md) for exact statements, the complete
+internal girth-five proof, and the explicitly named literature inputs. Run `bash scripts/check-appendix.sh` for the completed-region build
 and transitive axiom audit. Girth conditions in the paper-facing results
 apply to the free residual graph after arbitrary pinning.
 
@@ -204,14 +204,14 @@ After installing the Lean version manager elan, run the following from the repos
 
 ```bash
 lake exe cache get
-./scripts/check.sh
+./scripts/check-all.sh
 ```
 
-The check script first builds all proofs imported by `CI2ZF.lean`, then runs `AxiomAudit.lean`. Both steps treat warnings as errors. The axiom audit traverses every declaration in the `CI2ZF` and `PottsCI` namespaces and checks its transitive axiom dependencies. Only `propext`, `Classical.choice`, and `Quot.sound` are allowed; any other dependency causes failure. The proof library does not import the audit program.
+`scripts/check-all.sh` builds the main-text aggregate and all completed Appendix regions, then runs `audit/All.lean` over their joint import closure. The separate commands `scripts/check.sh` (main text) and `scripts/check-appendix.sh` (Appendix) remain available. All builds and audits treat warnings as errors. The audits traverse every declaration in the `CI2ZF` and `PottsCI` namespaces and check its transitive axiom dependencies. Only `propext`, `Classical.choice`, and `Quot.sound` are allowed; any other dependency causes failure. The full audit programs are kept outside the proof library.
 
-The default aggregate imports **197 project Lean source files**, counting the root `CI2ZF.lean`; `AxiomAudit.lean` is run separately, making 198 source files for the proof-and-audit closure. All 46 Holant modules and the completed Potts family/ambient modules are reachable from the aggregate entry point. The 75 existing files under `CI2ZF/Appendix/` are preserved as additional source and remain outside the default aggregate build and audit. A successful default check does not certify those unimported Appendix files.
+The main-text aggregate retains its 197 project source files, including all 46 Holant modules. The Appendix has its own aggregate, `CI2ZF.Appendix.CompletedRegions`; the combined check certifies both. The Appendix implementations are organized by region and, for girth five, by spectral, covariance, response, and transfer arguments. Ten former public module paths remain as compatibility imports. See the [module migration record](docs/appendix/MODULE_MOVES.tsv).
 
-The full publishing-checkout check on **2026-09-09**, with the final Potts and Holant entry points imported, passed the build (**3665 jobs**) and the transitive axiom audit of **4014 project declarations**. The 197 imported project source files were also scanned for placeholder proofs and unsafe declarations. These counts describe the entire imported library, not the number of theorems in the paper. Holant comprises 46 modules and 8076 lines of Lean source, all reachable from the aggregate entry point. Per-file records and the earlier Holant-stage verification snapshot are in `holant-source-manifest.json`.
+The earlier main-text publishing snapshot passed 3665 build jobs and an audit of 4014 project declarations on 2026-09-09. The completed Appendix passed 3942 build jobs and an audit of 8219 declarations before directory migration. The final combined verification after migration is recorded in [docs/appendix/VERIFICATION.json](docs/appendix/VERIFICATION.json). Declaration counts describe the imported library, not the number of theorems in the paper. The earlier Holant-stage records remain in `holant-source-manifest.json`.
 
 On the development machine, the official Lean compiler is installed locally in `.tools/`, and `scripts/lake.sh` selects it automatically without changing the global Lean environment. `.tools/`, `.lake/`, and caches are not part of the source distribution. On other machines, install the dependencies using the Lean/Lake version specified by `lean-toolchain`, then run the same check script.
 
@@ -221,4 +221,4 @@ On the development machine, the official Lean compiler is installed locally in `
 
 The reused general `SoftKernel` interface is instantiated with the concrete Vigoda kernel in `Vigoda/ComponentCoupling`, where its stationarity is proved. Applications of endpoint continuity and stationary comparison are in `CouplingIndependence` and `RootCI`. The public critical hard-endpoint premise is `ExternalCriticalHardColouringTheorem` on original graphs. `PottsExternalTheorem.lean` derives the internal `CriticalHardColouringInput` through the leaf realization and actual Gibbs-law transport; no custom axiom has been added.
 
-The completed scope is the main-text Potts theorem, its general graph-family transfer and standalone positive-temperature response theorem, and the Holant proof described above. Unimported Appendix sources and other extensions not listed here, including external fields and high-girth zero-free results, are not certified by the default check. The proved girth-preservation lemma for the leaf realization is part of the main-text model construction; it does not by itself establish those high-girth extensions.
+The completed scope includes the main-text Potts theorem, its general graph-family transfer and positive-temperature response theorem, the Holant proof, and all seven Appendix Potts regions listed above. The Appendix status document specifies each region and its literature parameters. In the girth results the paper-facing original-graph statements require girth only of the free residual graph after arbitrary pinning. Extensions not listed in these completion statements, such as arbitrary external fields, are outside the certified scope.

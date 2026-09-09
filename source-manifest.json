@@ -16,7 +16,7 @@
     "tag": "v4.33.1",
     "commit": "0df444a360eaa60ab8c11dca51a86af692955474"
   },
-  "scope": "Complete main-text Potts proof, including concrete coupling independence, the transfer theorem for arbitrary induced-subgraph-closed graph classes, a uniform zero-free radius, and both endpoints. Only critical zero-temperature hard-colouring CI is retained as an explicit external theorem parameter. Also includes the complete main-text Holant residual lemma, internally proved coupling bound, uniform polytube theorem, orthant and diagonal statements, and b-matching/b-edge-cover corollaries. Appendix sources outside the aggregate import closure are not certified by the default check.",
+  "scope": "Complete main-text Potts and Holant proofs, plus all seven Appendix Potts coupling-independence and uniform zero-free regions. Precisely cited external mathematical results are retained as explicit theorem parameters, as documented in EXTERNAL_INPUTS.md and docs/appendix/STATUS.md.",
   "holant_paper_source_sha256": {
     "main.tex": "a4c0d9f3afbf5afdb0e4d716cc2ba969d6bc1559cc3f37b237c5520a27d46b1d"
   },
@@ -53,6 +53,7 @@
       ],
       "findings": []
     },
-    "excluded_from_default_audit": "75 existing CI2ZF/Appendix source files are outside the aggregate import closure."
-  }
+    "scope": "Historical main-text verification snapshot; see appendix_verification for the final combined check."
+  },
+  "appendix_verification": "docs/appendix/VERIFICATION.json"
 }
