@@ -49,8 +49,10 @@ import CI2ZF.HolantCorollaries
 import CI2ZF.HolantBoundedInstances
 import CI2ZF.HolantCapacities
 import CI2ZF.HolantPolytube
+import CI2ZF.LeeYang
 
 /-!
-Formalization of the Potts and Holant portions of "Coupling Independence
-Implies Zero-Freeness". Modules are added here only after they compile.
+Formalization of the Potts, Lee--Yang colour-field and Holant portions of
+"Coupling Independence Implies Zero-Freeness". Modules are added here only
+after they compile.
 -/

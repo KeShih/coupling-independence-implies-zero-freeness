@@ -2,7 +2,19 @@
 
 This document maps Sections 2 and 3 of `main.tex`, including the imported files `sections/strict-ci-tools.tex` and `sections/strict-vigoda-ci.tex`, to the Lean proofs. It covers the model, concrete Vigoda coupling, complex-analytic transfer, both endpoints, and the Potts main theorem. The seven completed Appendix Potts regions have a separate [proof map and module guide](docs/appendix/README.md). Holant is documented separately in [README.md](README.md) and [HOLANT_AUDIT.md](HOLANT_AUDIT.md). Lean paths below are relative to the repository root; paper labels and line numbers refer to the source snapshot recorded in `source-manifest.json`.
 
-The verification environment is Lean 4.33.1 and mathlib v4.33.1. The full publishing-checkout run of `./scripts/check.sh` on 2026-09-09 passed **3665 build jobs** and the transitive axiom audit of **4014 project declarations**. The aggregate imports **197 project Lean source files**, including the root `CI2ZF.lean`; `AxiomAudit.lean` is run separately. These totals include the completed Holant modules. All completed entries below have compiled. The audit permits only `propext`, `Classical.choice`, and `Quot.sound`; external mathematical inputs appear as explicit theorem parameters. A code scan of the imported source closure, with comments and strings removed, found no `sorry`, `admit`, custom `axiom`, `native_decide`, or `unsafe` declarations.
+The verification environment is Lean 4.33.1 and mathlib v4.33.1.
+The current combined run of `bash scripts/check-all.sh` on 2026-09-09 passed
+**4034 build jobs** and the transitive axiom audit of **9620 project declarations**.
+The audited joint closure includes **489 project source files**, covering
+the main-text Potts, Lee–Yang and Holant results and all completed Appendix
+regions. Only `propext`, `Classical.choice`, and `Quot.sound` are allowed;
+external mathematical inputs appear as explicit theorem parameters.
+The source scan, with comments and strings removed, found no forbidden
+proof constructs. See [VERIFICATION.json](docs/appendix/VERIFICATION.json)
+for exact scope and hashes.
+
+
+The main-text independent-colour-field Lee–Yang proof is mapped separately in [LEE_YANG_PROOF_MAP.md](LEE_YANG_PROOF_MAP.md), including all three vertex regimes, the edge-colouring corollary, and arbitrary pinning semantics.
 
 ## Public statements and quantifiers
 

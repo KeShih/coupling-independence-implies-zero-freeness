@@ -36,6 +36,22 @@ spectral gap, insertion estimates, Doob conditioning, finite response
 induction, weighted-source bound, endpoints, and complex zero-free
 conclusions are proved in Lean.
 
+## Lee–Yang colour-field results
+
+`CI2ZF.LeeYang.Transfer.uniform_curve_transfer` proves the complete
+hard-colouring-CI-to-field induction. Uniform field directions, actual
+separator identities, exterior analytic logarithms and the multivariable
+polydisc conversion are discharged in Lean.
+
+The CV vertex-field and `q ≥ 3Δ` edge-field endpoints have no external
+mathematical inputs. Near-Vigoda retains only the same at most twenty
+critical integer points of `ExternalCriticalHardColouringTheorem`.
+The `q ≥ Δ+3` high-girth endpoint uses the proved Appendix CI theorem
+with the same `CLMMInfluenceIdentity` and `CLMM.Literature` parameters
+listed above. No additional full-range CFFGZZ CI, CWZZ edge CI or
+Lee–Yang transfer premise is introduced. See the
+[Lee–Yang proof map](LEE_YANG_PROOF_MAP.md).
+
 ## Meaning of the kernel audit
 
 An explicit mathematical hypothesis does not become an additional Lean axiom. The transitive axiom dependencies of all imported theorems remain limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders; it does not establish the stated literature hypotheses themselves.

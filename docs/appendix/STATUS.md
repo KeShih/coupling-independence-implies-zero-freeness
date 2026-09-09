@@ -122,10 +122,11 @@ of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
 
 ## Verification
 
-After directory migration, `bash scripts/check-all.sh` passed 4008 build jobs
-and the transitive audit of 9398 project declarations on 2026-09-09.
-Only `propext`, `Classical.choice`, and `Quot.sound` were used. The source
-scan covered the joint 463-file proof closure and found no forbidden proof
-constructs; all ten compatibility imports were also built. See the
-[machine-readable verification record](VERIFICATION.json) for source hashes
-and the exact scope.
+The current combined check, including the main-text independent-colour-field
+Lee–Yang proof, passed **4034 build jobs** and the transitive audit of
+**9620 project declarations** on 2026-09-09. Only `propext`,
+`Classical.choice`, and `Quot.sound` were used. The source scan covered the
+joint **489-file** proof closure and found no forbidden proof constructs;
+all ten compatibility imports were also built. See the
+[machine-readable verification record](VERIFICATION.json) for source hashes,
+precise scope, and the earlier Appendix migration verification.

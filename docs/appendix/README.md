@@ -38,3 +38,8 @@
 此次整理只改变文件和 import 路径；声明名称与 namespace 保持不变。`CompletedRegions`、`CV`、`Regimes` 三个入口原位保留。
 
 以下十个旧模块路径保留 import 包装，均以 `CI2ZF.Appendix.` 为前缀：`BBRHigh`、`CLMMTransfer`、`CVZeroFree`、`EdgePottsZeroFree`、`GirthHigh`、`GirthResidualOriginal`、`GirthFiveClosedPoincare`、`GirthFiveZeroFree`、`HighTemperatureZeroFree`、`NearVigoda`。其余内部模块使用 [MODULE_MOVES.tsv](MODULE_MOVES.tsv) 中的新路径。
+
+
+## 正文 Lee–Yang 色场推论
+
+上述实际硬着色 CI 同时接入正文的独立色场证明，统一入口为 [CI2ZF/LeeYang.lean](../../CI2ZF/LeeYang.lean)。覆盖 near-Vigoda、CV 1.809、大 girth `q≥Δ+3` 三个顶点范围，以及 `q≥3Δ` 的边着色范围。字段转移证明与模型语义见 [LEE_YANG_PROOF_MAP.md](../../LEE_YANG_PROOF_MAP.md)。原有七个附录证明均保留。

@@ -1,10 +1,25 @@
 # Coupling Independence Implies Zero-Freeness — Lean
 
-This repository formalizes the Potts and Holant sections of the main text of *Coupling Independence Implies Zero-Freeness*. The status of each model is reported separately; completion of one does not imply completion of the other.
+This repository formalizes the main-text Potts, independent-colour-field Lee–Yang and Holant results of *Coupling Independence Implies Zero-Freeness*, together with all seven Appendix Potts regions. Exact scopes and explicit literature inputs are documented separately.
 
 **Potts: the uniform zero-free main theorem at the strict threshold `q > 11Δ/6`, and the transfer theorem for arbitrary graph families closed under induced subgraphs, are complete. The concrete coupling-independence proof, joint induction at both endpoints, uniform radius, and neighborhood patching have all been checked by Lean. The equality case retains only an explicitly identified external hard-coloring CI input on original finite graphs with arbitrary pinning.** No axioms or placeholder proofs conceal unfinished steps.
 
 **Holant: the main-text section is fully formalized.** The residual lemma, concrete CI bound, uniform complex polytube theorem, open orthant and uniform diagonal neighborhoods, and all main-text corollaries for b-matchings and b-edge covers have been proved. The final entry points retain no unproved external inputs. All 46 Holant modules are included in the library build and axiom audit.
+
+## Lee–Yang colour fields
+
+The three vertex-colouring regimes in `thm:lee-yang` and the edge-colouring
+corollary at `q ≥ 3Δ` are formalized for independent vertex–colour or
+edge–colour fields. The radius is uniform over graph size, arbitrary
+pinning, and every field coordinate. Actual partition sums, root recursion,
+BFS separation, local support estimates, analytic exterior logs and the
+simultaneous induction are proved internally.
+
+The public aggregate is `CI2ZF.LeeYang`. See the
+[Lee–Yang proof map](LEE_YANG_PROOF_MAP.md) for the four endpoints and
+proper/improper pinning semantics. CV and edge colouring have no external
+mathematical inputs; the other two regimes retain exactly the existing
+critical CFFGZZ and large-girth CLMM literature parameters.
 
 ## Appendix Potts results
 
@@ -209,9 +224,18 @@ lake exe cache get
 
 `scripts/check-all.sh` builds the main-text aggregate and all completed Appendix regions, then runs `audit/All.lean` over their joint import closure. The separate commands `scripts/check.sh` (main text) and `scripts/check-appendix.sh` (Appendix) remain available. All builds and audits treat warnings as errors. The audits traverse every declaration in the `CI2ZF` and `PottsCI` namespaces and check its transitive axiom dependencies. Only `propext`, `Classical.choice`, and `Quot.sound` are allowed; any other dependency causes failure. The full audit programs are kept outside the proof library.
 
-The main-text aggregate retains its 197 project source files, including all 46 Holant modules. The Appendix has its own aggregate, `CI2ZF.Appendix.CompletedRegions`; the combined check certifies both. The Appendix implementations are organized by region and, for girth five, by spectral, covariance, response, and transfer arguments. Ten former public module paths remain as compatibility imports. See the [module migration record](docs/appendix/MODULE_MOVES.tsv).
+The main-text aggregate includes the Potts proof, all 46 Holant modules, and the full Lee–Yang colour-field proof. The Appendix also has its own aggregate, `CI2ZF.Appendix.CompletedRegions`; the combined check certifies both. The Appendix implementations are organized by region and, for girth five, by spectral, covariance, response, and transfer arguments. Ten former public module paths remain as compatibility imports. See the [module migration record](docs/appendix/MODULE_MOVES.tsv).
 
-The earlier main-text publishing snapshot passed 3665 build jobs and an audit of 4014 project declarations on 2026-09-09. The completed Appendix passed 3942 build jobs and an audit of 8219 declarations before directory migration. The final combined verification after migration is recorded in [docs/appendix/VERIFICATION.json](docs/appendix/VERIFICATION.json). Declaration counts describe the imported library, not the number of theorems in the paper. The earlier Holant-stage records remain in `holant-source-manifest.json`.
+The current combined verification (2026-09-09) passed **4034 build jobs**
+and the transitive axiom audit of **9620 project declarations**. The joint
+**489-file** source closure passed the source scan and hash verification;
+all ten compatibility imports were built. Only `propext`, `Classical.choice`
+and `Quot.sound` were used. Exact scope, source hashes and the previous
+verification milestones are recorded in
+[docs/appendix/VERIFICATION.json](docs/appendix/VERIFICATION.json).
+Declaration counts describe the imported library, not the number of
+paper theorems. Earlier Holant-stage provenance remains in
+`holant-source-manifest.json`.
 
 On the development machine, the official Lean compiler is installed locally in `.tools/`, and `scripts/lake.sh` selects it automatically without changing the global Lean environment. `.tools/`, `.lake/`, and caches are not part of the source distribution. On other machines, install the dependencies using the Lean/Lake version specified by `lean-toolchain`, then run the same check script.
 
@@ -221,4 +245,4 @@ On the development machine, the official Lean compiler is installed locally in `
 
 The reused general `SoftKernel` interface is instantiated with the concrete Vigoda kernel in `Vigoda/ComponentCoupling`, where its stationarity is proved. Applications of endpoint continuity and stationary comparison are in `CouplingIndependence` and `RootCI`. The public critical hard-endpoint premise is `ExternalCriticalHardColouringTheorem` on original graphs. `PottsExternalTheorem.lean` derives the internal `CriticalHardColouringInput` through the leaf realization and actual Gibbs-law transport; no custom axiom has been added.
 
-The completed scope includes the main-text Potts theorem, its general graph-family transfer and positive-temperature response theorem, the Holant proof, and all seven Appendix Potts regions listed above. The Appendix status document specifies each region and its literature parameters. In the girth results the paper-facing original-graph statements require girth only of the free residual graph after arbitrary pinning. Extensions not listed in these completion statements, such as arbitrary external fields, are outside the certified scope.
+The completed scope includes the main-text Potts theorem, its general graph-family transfer and positive-temperature response theorem, the independent-colour-field Lee–Yang theorem and edge-colouring corollary, the Holant proof, and all seven Appendix Potts regions listed above. The Appendix status document specifies each region and its literature parameters. In the girth results the paper-facing original-graph statements require girth only of the free residual graph after arbitrary pinning. The Lee–Yang proof map records the independent-field neighborhood and its quantifier order.

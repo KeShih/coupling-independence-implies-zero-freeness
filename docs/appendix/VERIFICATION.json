@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "date": "2026-09-09",
-  "scope": "Main-text Potts and Holant proofs, all seven Appendix Potts CI and zero-free regions, and the retained public import wrappers.",
+  "scope": "Main-text Potts, independent-colour-field Lee-Yang and Holant proofs; all seven Appendix Potts CI and zero-free regions; and the retained public import wrappers.",
   "lean_version": "4.33.1",
   "mathlib_version": "v4.33.1",
   "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
   "command": "bash scripts/check-all.sh",
   "passed": true,
-  "build_jobs": 4008,
-  "audited_project_declarations": 9398,
+  "build_jobs": 4034,
+  "audited_project_declarations": 9620,
   "allowed_axioms": [
     "propext",
     "Classical.choice",
     "Quot.sound"
   ],
-  "joint_import_closure_files": 463,
+  "joint_import_closure_files": 489,
   "appendix_implementation_files_in_closure": 266,
   "compatibility_imports_built": 10,
   "appendix_before_migration": {
@@ -30,7 +30,8 @@
     "retained_original_entrypoints": 3,
     "compatibility_wrappers": 10,
     "mathematical_proof_content_changes": 0,
-    "mapping": "MODULE_MOVES.tsv"
+    "mapping": "MODULE_MOVES.tsv",
+    "scope": "Previously verified Appendix module migration only"
   },
   "source_scan": {
     "scope": "Joint import closure, after lexically removing nested comments and strings",
@@ -49,7 +50,7 @@
     "missing_imports": [],
     "lexer_issues": [],
     "scanner_sha256": "5f27edb9ac39109ec4d59436292e4e3a910e89df135c689f16ed7f61c04e6166",
-    "closure_manifest_sha256": "78a923e3a7c73805de44196a58d6f5137bd3a8890060de44b5a564368f84a9d8"
+    "closure_manifest_sha256": "0288227d2df662b2d2ed037a3af01767551b1804eb0fd72afaa225a03d11652f"
   },
   "audit_only_module": "CI2ZF.Appendix.CV.Audit contains an independent audit command and is not required by the proof aggregate; the combined audit covers its mathematical dependencies.",
   "literature_input_register": "../../EXTERNAL_INPUTS.md",
@@ -64,7 +65,7 @@
     "appendices/high-girth.tex": "6363e4378366bd0c7a660976090709f1360db1f7cadd65f0b4be5401d60aa649"
   },
   "module_sha256": {
-    "CI2ZF": "e664852bd7e58ffb3aa83c8e7371d66b82473032102227f6d39b9dfc0d26caa9",
+    "CI2ZF": "d023ca0c39dc1a7e769ecf05353992bab82fd8cf48bb3e3aea63d0f0e01d360b",
     "CI2ZF.ActivationAverage": "892b4a5513a49ac491e7f280bd573e6ebe137470bca26712b9a337f8f0131f2d",
     "CI2ZF.ActivationCharge": "14bb37e061ffa2d6e4ea16bbfc3b1e2ae16f9a1651d3739c7d1140fbf537fcc5",
     "CI2ZF.ActivationLaw": "17962ae7339bdefd89d99466e0447afe25685bbfbd5b27788b315c4f8bb91297",
@@ -449,6 +450,32 @@
     "CI2ZF.InductionComponentSteps": "14fce0b95b6d012ca3b475dd8e0cc42242f912a2eb119fb3b009d40713efa90f",
     "CI2ZF.InductionParentSteps": "33a26e84f4791aeccdd76066c48f1a57749a5f0e809eb6311c2b39fd4685952e",
     "CI2ZF.InductionState": "f7373af2f8aaa1deaedee4d71050a2e13f31c1c533e8a2c6ff2e6754e59a646e",
+    "CI2ZF.LeeYang": "e3a19751a34867411f752f0e92dea358626909fbaaddf0e4fd50d3349a4b513d",
+    "CI2ZF.LeeYang.Analytic": "faac2be907b169b95061b8d1cfb8ecab80d6fc54098af3b06ded1ce8b57ccf57",
+    "CI2ZF.LeeYang.BFSResponse": "3ef6b9fd9ff4e5c1fb27ffb759e9d9d2de6cb627eed587a37b74d5830a7d1669",
+    "CI2ZF.LeeYang.Component": "0c6293d760dcce1264f3f30ea306e8985f9ce8cb01f33e5804df097d1d8d5fb5",
+    "CI2ZF.LeeYang.Edge": "75b8dda6588b149373e54a7faa9620c278ffff3ba97b58999360c217f81f031f",
+    "CI2ZF.LeeYang.Exterior": "f20d0555bfae5492a5ebbd472071ace281a5446b6c3600dabe641eada4b51097",
+    "CI2ZF.LeeYang.GeometryFields": "5215fad4d466abafc08aaa478a1abcaf19dcad91bd4ff63e541374d2fff9289b",
+    "CI2ZF.LeeYang.GraphClass": "c568b918502d0df0623579fb7f3f9ab5ca764c7c7675be49b8288e7538aaf516",
+    "CI2ZF.LeeYang.HighGirth": "770c50c7c216aa0269db032b5de03a72799598309c8f9120b5410079ab02c3b8",
+    "CI2ZF.LeeYang.Induction": "321778bdfae58a38a4ebce8f45b458de0ceac8d4d65c15c2b522732a0968a72e",
+    "CI2ZF.LeeYang.InductionState": "83ad03bdfd76c36398dde9cfaaadc64449b5d131bbff717edee6c73b5363bf4b",
+    "CI2ZF.LeeYang.Local": "3e32be9151324c86ba46f96260c45de956dd0d33219b7297b075c6b37122aa8a",
+    "CI2ZF.LeeYang.LocalSupport": "6bb430d74e001e75141b469d3d590b1c8d6be461e0c61da46369029a035f3479",
+    "CI2ZF.LeeYang.Model": "148f828e7ffa86b832def3321765908d517aea964765a4f201a7b24f7478650c",
+    "CI2ZF.LeeYang.ModelRoot": "6752a75948eab33fcf8fa34aad3d0d40a559b8d2d1929acffdb78efdd1b1f01c",
+    "CI2ZF.LeeYang.Parent": "30e1353e2d47e7e3bdce8c972ea918406e1282528442d081820b92c1e4ad12ef",
+    "CI2ZF.LeeYang.Pinning": "d261447bc992fd406f73587174c2f3db7509fec020c9f81d271e52d0cd285f3e",
+    "CI2ZF.LeeYang.PinningRoot": "6aba68ce9274cdd8e2eb1a2aa3db3d7ebf37a1db2c224d482650dee31c8095b9",
+    "CI2ZF.LeeYang.Polydisc": "e097c83c42aaaabd27ea5489e71559cf1a9bcb887523a860d76d12f6bfabb888",
+    "CI2ZF.LeeYang.Separator": "f113ba7d2e76f0a4f3687668a68e9e09adc48f87be3458ce7ea925cc085ee223",
+    "CI2ZF.LeeYang.SeparatorLog": "4465d7a6c01c513a3c2ab65297f394bcfe1d07e1f79bbae50d42f4b08ca9db7c",
+    "CI2ZF.LeeYang.Transfer": "5f1d334f0d95d7e4b34fa55f49b22ec3267d885c15ba9d08db7045145d8380c7",
+    "CI2ZF.LeeYang.TransportBFS": "0e2677909907ffc79ebebb417e33007861ccd476223489d32ecae143b16d0d2b",
+    "CI2ZF.LeeYang.TransportRelabel": "0da521fe393a4f8fb000ee184fafc9f90f3d2697471894763afdea21f109b8b3",
+    "CI2ZF.LeeYang.VertexCoupling": "23167bf873d0ce135f1444b429af7f9f7e99b07d3a3eae6ac54eb646fd0eb2fe",
+    "CI2ZF.LeeYang.VertexRegions": "04768ffe05ee5b80c69c47855c2e0c7cd76d54fadd1453c8944325b9d9b00bcf",
     "CI2ZF.LocalResponseLog": "1573e62215d6a79fdcb26a28a4b06cfd02edc8dc7e61721ca115fe6b1f036f92",
     "CI2ZF.LocalStability": "0e0d42f302401b8f5336f7c0c38bfcd30667b1317d3b75b7f369bc41935af285",
     "CI2ZF.OptionBFSCardinality": "7fd4be6daf4c3a79e833414f1271ec55f1117f6729a8dfdeb0b2078f8b25acdc",
@@ -527,5 +554,25 @@
     "PottsCI.TwoMetric": "72abcd39d5b767f79519fe091431c5d7e13ca5e727261d3908c271ef0a070d5a",
     "PottsCI.Vigoda.ComponentCoupling": "150efe41f902b617dfa78d4b424f8b2292cf995f6516d8c0cb429aba10464538",
     "PottsCI.Vigoda.Endgame": "bc5d9a1cfe83c43eb185a5674905597193f1ba8fbd1a09f3c93d42903d5280d8"
-  }
+  },
+  "before_lee_yang": {
+    "build_jobs": 4008,
+    "audited_project_declarations": 9398,
+    "joint_import_closure_files": 463,
+    "published_commit": "4e13584adb31ad258d2e25a52d82a5308e288cc7"
+  },
+  "lee_yang": {
+    "entry": "CI2ZF.LeeYang",
+    "proof_map": "../../LEE_YANG_PROOF_MAP.md",
+    "implementation_modules": 25,
+    "paper_source_sha256": "a4c0d9f3afbf5afdb0e4d716cc2ba969d6bc1559cc3f37b237c5520a27d46b1d",
+    "regimes": [
+      "near-Vigoda vertex fields",
+      "CV 1.809 vertex fields",
+      "high-girth q >= Delta+3 vertex fields",
+      "q >= 3 Delta edge fields"
+    ],
+    "new_external_inputs": []
+  },
+  "verification_log_sha256": "4924ab66e2c28d3bb995eefc3abf8f8b44a3faf3fa223cb5aeb07aef7d28dc11"
 }
