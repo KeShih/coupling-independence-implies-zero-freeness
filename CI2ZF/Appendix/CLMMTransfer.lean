@@ -1,4 +1,5 @@
 import CI2ZF.Appendix.GirthLevels
+import CI2ZF.Appendix.CLMMAmbient
 import CI2ZF.OptionPinning
 import CI2ZF.PottsModel
 import Mathlib.Combinatorics.SimpleGraph.Girth
@@ -10,7 +11,8 @@ import Mathlib.Analysis.SpecificLimits.Normed
 
 The two literature inputs are the precise sphere estimate in CLMM2023,
 Equation (10), proved from Lemmas 5.19 and 5.20, and Lemma 5.13. They are
-stated for the actual finite Potts laws. Neither field assumes tree decay,
+stated for the actual finite Potts laws, on spheres of the fixed base
+graph under all further pinnings. Neither field assumes tree decay,
 an eventual-depth transfer theorem, or the resulting uniform coupling
 bound. The choice of both radii, including the extra burn-in, is proved.
 
@@ -52,24 +54,6 @@ def TreeRelative (Δ : ℕ) (x A ρ : ℝ) (K₀ : ℕ) : Prop :=
       |(CavityTree.node d b t).probability x c /
         (CavityTree.node d b t').probability x c - 1| ≤ A * ρ ^ (k + 2)
 
-def singleSiteMass {O : Type u} [Fintype O] (μ : FinDist (O → C)) (o : O) (c : C) : ℝ :=
-  ∑ σ, if σ o = c then μ.w σ else 0
-
-def sphereInfluence {O : Type u} [Fintype O] (I : PinningData (Option O) C)
-    (R : ℕ) (μ ν : FinDist (O → C)) : ℝ :=
-  ∑ o, if I.graph.edist none (some o) = (R : ℕ∞) then
-    (1 / 2 : ℝ) * ∑ c, |singleSiteMass μ o c - singleSiteMass ν o c| else 0
-
-/-- Uniform sphere influence for the subgraph- and pinning-closed family
-of degree-budget Potts systems whose free graph has the given girth. -/
-def SphereDecay (C : Type v) [Fintype C] (Δ g R : ℕ) (x ε : ℝ) : Prop :=
-  ∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C),
-    I.DegreeBound Δ → (g : ℕ∞) ≤ I.graph.egirth → ∀ (a b : C)
-    (hx : 0 ≤ x) (ha : 0 < (optionChildData I a).partition x)
-    (hb : 0 < (optionChildData I b).partition x),
-    sphereInfluence I R ((optionChildData I a).gibbs x hx ha)
-      ((optionChildData I b).gibbs x hx hb) ≤ ε
-
 /-- Precisely isolated literature inputs. The first field is CLMM (10)
 at the explicitly chosen cutting depth; the second is Lemma 5.13.
 All members here have positive unary Potts weights and hence satisfy (7).
@@ -81,11 +65,11 @@ structure Literature (C : Type v) [Fintype C] [DecidableEq C] [Nonempty C] : Pro
     TreeTID (C := C) Δ x hx A ρ → TreeRelative (C := C) Δ x B ρ K₀ →
     ∀ (R K : ℕ), 2 ≤ R → R < K → K₀ ≤ K →
       Real.log B / (1 - ρ) ≤ K →
-      SphereDecay.{u,v} C Δ (2 * K + 2) R x
+      FixedAmbientSphereDecay.{u,v} C Δ (2 * K + 2) R x
         (2 * B * ρ ^ K * (Δ : ℝ) ^ R + A * ρ ^ R)
   sphere_to_coupling : ∀ (Δ g R : ℕ) (x ε : ℝ), 3 ≤ Δ → 2 ≤ R →
-    ∀ (hx : 0 < x), x ≤ 1 → 0 ≤ ε → ε ≤ 1 / (8 * R * Real.log Δ) →
-    SphereDecay.{u,v} C Δ g R x ε →
+    ∀ (hx : 0 < x), x ≤ 1 → 0 < ε → ε ≤ 1 / (8 * R * Real.log Δ) →
+    FixedAmbientSphereDecay.{u,v} C Δ g R x ε →
     ∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C),
       I.DegreeBound Δ → (g : ℕ∞) ≤ I.graph.egirth → ∀ (a b : C)
       (ha : 0 < (optionChildData I a).partition x)
@@ -157,7 +141,7 @@ theorem eventual_transfer (external : Literature.{u,v} C) (Δ : ℕ) (hΔ : 3 �
     exact (add_le_add hsmallK hsmallR).trans_eq hhalf
   refine ⟨2 * K + 2, 2 * (Δ : ℝ) ^ R, by omega, by positivity, ?_⟩
   intro x hx O _ I hI hg a b ha hb
-  have hs : SphereDecay.{u,v} C Δ (2 * K + 2) R x ε :=
+  have hs : FixedAmbientSphereDecay.{u,v} C Δ (2 * K + 2) R x ε :=
     external.sphere_estimate Δ x (hJ x hx).1 (hJ x hx).2 A B ρ hΔ hA hB hρ hρ1
     K₀ (htree x hx).1 (htree x hx).2 R K hR hRK hK₀ hlog
   exact external.sphere_to_coupling Δ (2 * K + 2) R x ε hΔ hR

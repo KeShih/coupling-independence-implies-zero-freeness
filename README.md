@@ -6,15 +6,17 @@ This repository formalizes the Potts and Holant sections of the main text of *Co
 
 **Holant: the main-text section is fully formalized.** The residual lemma, concrete CI bound, uniform complex polytube theorem, open orthant and uniform diagonal neighborhoods, and all main-text corollaries for b-matchings and b-edge covers have been proved. The final entry points retain no unproved external inputs. All 46 Holant modules are included in the library build and axiom audit.
 
-## Appendix milestones
+## Appendix Potts results
 
-The edge-Potts, general-graph high-temperature, large-girth `q ≥ Δ+3`, and
-BBR interval, Carlson–Vigoda, and near-Vigoda results now have completed CI
-and uniform zero-free theorems.
-See [APPENDIX_STATUS.md](APPENDIX_STATUS.md) for exact statements and the
-explicit literature inputs. Run `bash scripts/check-appendix.sh` for the
-separate completed-region build and axiom audit. The fixed-girth-5 region
-remains in progress.
+All seven regions have completed coupling-independence and uniform zero-free
+theorems: edge-Potts, general-graph high temperature, large-girth `q ≥ Δ+3`,
+the BBR interval, Carlson–Vigoda, near-Vigoda, and unrestricted girth 5 at
+`q ≥ (1+δ)Δ` for a degree threshold depending only on δ.
+See [APPENDIX_STATUS.md](APPENDIX_STATUS.md) for exact statements, the
+complete internal girth-five proof, and the explicitly named literature
+inputs. Run `bash scripts/check-appendix.sh` for the completed-region build
+and transitive axiom audit. Girth conditions in the paper-facing results
+apply to the free residual graph after arbitrary pinning.
 
 ## Proved Potts results
 

@@ -1,4 +1,4 @@
-# Appendix Potts milestones
+# Appendix Potts proofs
 
 The completed-region entry point is `CI2ZF/Appendix/CompletedRegions.lean`.
 Run `bash scripts/check-appendix.sh` to compile its full dependency closure
@@ -16,6 +16,7 @@ Literature results are explicit proposition parameters, not added axioms.
 | BBR large-girth interval, q≥3 and Δ/q≥(e−1/2)/(e−1) | `BBR.high_girth_coupling`: one girth threshold and one CI constant work on the entire closed interval [`BBR.start q Δ`,1] | `BBR.high_girth_zero_free` and `BBR.high_girth_original_zero_free_and_responses`, including actual one-root response logarithms |
 | Carlson–Vigoda, Δ≥125 and q≥1.809Δ | `CV.option_root_ci` and `CV.root_coupling`: actual normalized root-child laws have Hamming transport at most 409060125/50858 < 8043.19, uniformly on [0,1] | `CV.zero_free`: the full original-graph statement, arbitrary pinning, normalized nonvanishing and exact forced-zero multiplicity |
 | Near-Vigoda, Δ≥2 and q≥(11/6−1/84000)Δ | `Regimes` proves the exact integer reduction to the proved strict/CV regimes and at most twenty critical-line hard-colouring inputs | `near_vigoda_zero_free`: the full uniform original-graph statement on [0,1] |
+| Girth 5, 0<δ≤1, Δ≥`Girth.girthFiveCIThreshold δ`, and q≥(1+δ)Δ | `Girth.girth_five_coupling`: one finite constant for every size, pinning, and x in [0,1] | `Girth.girth_five_zero_free` and `Girth.girth_five_residual_original_zero_free`, with girth required only of the free residual graph |
 
 Names in the table are relative to `CI2ZF.Appendix`.
 
@@ -35,13 +36,21 @@ Only explicitly cited general CLMM2023 results remain as named parameters:
   influence–Jacobian factorization.
 - `CLMM.Literature`: Equation (10), derived from Lemmas 5.19/5.20, giving the
   graph sphere influence estimate, and Lemma 5.13, converting sphere decay to
-  a Hamming coupling bound.
+  a Hamming coupling bound. `CLMM.FixedAmbientSphereDecay` fixes the base
+  graph before quantifying over all further pinnings: every sphere is
+  measured in that same base graph, as required by Condition 5.12.
 
 The interfaces concern actual finite Potts/Gibbs distributions. They do not
 assume this appendix's local contraction, tree decay, coupling independence,
 or zero-free conclusion. All q ≥ Δ+3 estimates, a uniform burn-in, graph CI,
 the x=0 and x=1 endpoints, and normalized/original partition semantics are
 proved in Lean.
+
+`Girth.high_girth_residual_original_zero_free` states the original pinned
+polynomial result with girth required only after pinning. For BBR the
+corresponding entry point is `BBR.high_girth_residual_original_zero_free`;
+its radius is reduced to exclude zero, so both the normalized and full
+polynomials are nonzero throughout the stated positive-temperature neighbourhood.
 
 ### High-temperature proof and external inputs
 
@@ -81,7 +90,32 @@ pinning. Its conversion to normalized boundary-count laws is already proved
 in the main text. All other cases use the internally proved strict-Vigoda or
 CV theorem. No appendix-specific conclusion is assumed as a literature input.
 
-## Work in progress
+### Girth-five proof and external input
 
-The fixed girth 5 region is still being assembled. Its intermediate modules
-in the repository are not claimed as a completed-region theorem by this milestone.
+The only literature parameter is `Girth.SphereCouplingInput`, precisely the
+fixed-base-graph, all-pinnings sphere-to-coupling statement of
+[CLMM2023, Condition 5.12 and Lemma 5.13](https://arxiv.org/html/2304.01954v3).
+The interface uses actual Potts laws and positive sphere-decay error. It
+does not assume the spectral gap, covariance bounds, response induction,
+weighted-source estimate, or the girth-five coupling conclusion.
+
+The following are proved internally:
+
+- Supported conditional-star operators, product decompositions, additive
+  compression and the full unequal-incidence Schur-complement inequality.
+- The global rate-one Glauber spectral estimate and actual Poincaré
+  inequality, including the hard endpoint by finite-law continuity.
+- The actual two-layer insertion law, keeping the full dependent shell and
+  exterior source; local and global covariance estimates and insertion errors.
+- Doob conditioning under successive pinnings, exact root-response identities,
+  and simultaneous finite-size induction for the two response norms.
+- A degree threshold depending only on δ, finite simultaneous response
+  constants, and the weighted-source bound on the full physical interval.
+- Fixed-base-graph sphere decay, radius selection, the hard endpoint coupling
+  limit, graph-family complex transfer, and original partition semantics.
+
+The explicit final threshold is the maximum of the spectral threshold
+`girthFiveThreshold δ` and the natural ceiling of
+`covarianceDegreeThreshold δ`. No extra bound on five-cycle or six-cycle
+counts is imposed. The public original-graph result requires girth only
+of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
