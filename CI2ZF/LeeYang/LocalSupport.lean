@@ -1,4 +1,4 @@
-import CI2ZF.LocalResponseLog
+import CI2ZF.Potts.Transfer.LocalResponseLog
 import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-! Local field polynomials have a fixed hard support. Their normalized

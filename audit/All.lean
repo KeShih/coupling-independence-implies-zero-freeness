@@ -1,5 +1,4 @@
 import CI2ZF
-import CI2ZF.Appendix.CompletedRegions
 import Lean.Util.CollectAxioms
 import Lean.Elab.Command
 

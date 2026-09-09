@@ -1,7 +1,7 @@
-import CI2ZF.FamilyCouplingInputs
-import CI2ZF.Appendix.CV.ZeroFree
-import CI2ZF.Appendix.Regimes
-import CI2ZF.PottsExternalTheorem
+import CI2ZF.Potts.Transfer.FamilyCouplingInputs
+import CI2ZF.Potts.Regions.CV.ZeroFree
+import CI2ZF.Potts.Regions.Arithmetic
+import CI2ZF.Potts.Theorems.PottsExternalTheorem
 
 /-! The hard coupling bounds used by the two unrestricted vertex-field
 regions. The near-Vigoda reduction retains only the twenty stated critical

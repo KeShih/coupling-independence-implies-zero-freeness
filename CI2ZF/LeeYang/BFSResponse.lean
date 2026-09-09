@@ -1,6 +1,6 @@
 import CI2ZF.LeeYang.Exterior
 import CI2ZF.LeeYang.SeparatorLog
-import CI2ZF.FamilyCouplingInputs
+import CI2ZF.Potts.Transfer.FamilyCouplingInputs
 
 /-! The low-Wasserstein BFS shell closes the large-component field
 response step using the actual hard-colouring shell marginals. -/

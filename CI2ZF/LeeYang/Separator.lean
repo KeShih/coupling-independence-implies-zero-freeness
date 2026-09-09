@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.Model
-import CI2ZF.SeparatorInsidePolynomial
+import CI2ZF.Potts.Transfer.SeparatorInsidePolynomial
 
 /-! Exact hard-colouring field factorization over a genuine graph separator.
 All inside and shell field factors belong to the local coefficient; the

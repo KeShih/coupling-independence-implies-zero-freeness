@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.Analytic
-import CI2ZF.PinningRestrictionInstances
+import CI2ZF.Potts.Model.PinningRestrictionInstances
 
 /-! The field-direction induction is uniform over actual members of the
 operation-closed graph family and over all bounded field directions. -/

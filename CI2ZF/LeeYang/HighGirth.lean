@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.GraphClass
-import CI2ZF.Appendix.Girth.High.Theorem
+import CI2ZF.Potts.Regions.Girth.High.Theorem
 
 /-! The q ≥ Δ+3 Lee–Yang regime follows from the proved large-girth
 coupling theorem. The stronger residual-girth statement allows short

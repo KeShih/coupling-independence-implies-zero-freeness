@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.Model
-import CI2ZF.OptionPinning
+import CI2ZF.Potts.Model.OptionPinning
 
 /-! Exact conditioning on a root colour. A blocked root colour has zero
 parent coefficient; its normalized child is still the actual pinned model. -/

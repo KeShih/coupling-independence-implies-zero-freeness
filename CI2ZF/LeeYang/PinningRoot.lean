@@ -1,7 +1,7 @@
 import CI2ZF.LeeYang.Pinning
 import CI2ZF.LeeYang.ModelRoot
 import CI2ZF.LeeYang.TransportRelabel
-import CI2ZF.RootLawRelabel
+import CI2ZF.Potts.Geometry.RootLawRelabel
 
 /-! The original graph root recursion uses the literal enlarged partial
 colouring, including blocked root colours whose parent coefficient is zero. -/

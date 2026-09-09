@@ -1,4 +1,4 @@
-import CI2ZF.PottsModel
+import CI2ZF.Potts.Model.PottsModel
 
 /-! Actual hard-colouring partition functions with independent complex
 vertex-colour fields. Pinned-only constraints have already been omitted

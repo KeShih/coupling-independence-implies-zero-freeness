@@ -1,7 +1,7 @@
 import CI2ZF.LeeYang.Transfer
 import CI2ZF.LeeYang.Polydisc
 import CI2ZF.LeeYang.Pinning
-import CI2ZF.GraphClassCoupling
+import CI2ZF.Potts.Geometry.GraphClassCoupling
 
 /-! Uniform coupling independence implies a field polydisc for every
 actual member of the restriction-closed family. The public original-graph

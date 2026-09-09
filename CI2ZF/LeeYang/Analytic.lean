@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.GeometryFields
-import CI2ZF.InductionState
+import CI2ZF.Potts.Transfer.InductionState
 import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-! One complex parameter parametrizes every bounded direction in the full

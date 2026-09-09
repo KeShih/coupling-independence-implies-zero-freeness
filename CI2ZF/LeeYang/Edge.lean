@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.GraphClass
-import CI2ZF.Appendix.Edge.ZeroFree
+import CI2ZF.Potts.Regions.Edge.ZeroFree
 
 /-! The main-text edge-colouring Lee--Yang corollary at q ≥ 3Δ.
 Independent fields are indexed by the actual edges and their colours. -/

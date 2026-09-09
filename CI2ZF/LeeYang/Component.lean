@@ -1,7 +1,7 @@
 import CI2ZF.LeeYang.TransportRelabel
 import CI2ZF.LeeYang.InductionState
 import CI2ZF.LeeYang.Local
-import CI2ZF.FamilyInduction
+import CI2ZF.Potts.Transfer.FamilyInduction
 
 /-! Field partitions factor exactly over connected components. Only the
 root component contributes to its normalized child-response quotient. -/

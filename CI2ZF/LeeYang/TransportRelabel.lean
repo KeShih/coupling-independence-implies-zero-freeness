@@ -1,8 +1,8 @@
 import CI2ZF.LeeYang.GeometryFields
-import CI2ZF.GenericGibbsRelabel
-import CI2ZF.PinningRestrictionComposition
-import CI2ZF.PinningRestrictionInstances
-import CI2ZF.RootOptionRelabel
+import CI2ZF.Potts.Geometry.GenericGibbsRelabel
+import CI2ZF.Potts.Model.PinningRestrictionComposition
+import CI2ZF.Potts.Model.PinningRestrictionInstances
+import CI2ZF.Potts.Geometry.RootOptionRelabel
 
 /-! Exact transport of the actual field partition under vertex
 relabeling and successive normalized pinnings. -/

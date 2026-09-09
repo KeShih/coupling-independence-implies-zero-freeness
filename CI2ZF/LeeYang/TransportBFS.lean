@@ -1,7 +1,7 @@
 import CI2ZF.LeeYang.TransportRelabel
 import CI2ZF.LeeYang.Analytic
 import CI2ZF.LeeYang.Separator
-import CI2ZF.FamilyBFSResponseSteps
+import CI2ZF.Potts.Transfer.FamilyBFSResponseSteps
 
 /-! Field directions follow the actual parent vertices through BFS
 splitting and one-coordinate unpinning. -/

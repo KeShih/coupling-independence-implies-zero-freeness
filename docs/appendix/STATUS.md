@@ -1,6 +1,10 @@
-# Appendix Potts proofs
+# Potts appendix: theorem status and external inputs
 
-The completed-region entry point is `CI2ZF/Appendix/CompletedRegions.lean`.
+The [module guide](README.md) lists the seven regional entry points. The
+[documentation index](../README.md) covers the main-text Potts, Holant, and
+Lee–Yang proofs.
+
+The completed-region entry point is `CI2ZF/Potts/Regions.lean`.
 Run `bash scripts/check-appendix.sh` to compile its full dependency closure
 with warnings treated as errors and audit every imported project declaration.
 Only Lean's standard `propext`, `Classical.choice`, and `Quot.sound` are allowed.
@@ -122,11 +126,12 @@ of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
 
 ## Verification
 
-The current combined check, including the main-text independent-colour-field
-Lee–Yang proof, passed **4034 build jobs** and the transitive audit of
-**9620 project declarations** on 2026-09-09. Only `propext`,
-`Classical.choice`, and `Quot.sound` were used. The source scan covered the
-joint **489-file** proof closure and found no forbidden proof constructs;
-all ten compatibility imports were also built. See the
-[machine-readable verification record](VERIFICATION.json) for source hashes,
-precise scope, and the earlier Appendix migration verification.
+The complete single-library check, including the main text and all seven
+appendix regions, passed **4027 build jobs** and the transitive axiom
+audit of **9620 project declarations** on 2026-09-09. Only `propext`,
+`Classical.choice`, and `Quot.sound` were used. The source scan covered all
+**492 library modules**, each reachable from `CI2ZF`, and found no forbidden
+proof constructs. The reorganization preserves every mathematical statement
+and proof. See the [verification record](../verification.json) for source
+hashes and [the previous verification](../provenance/lee-yang-verification.json)
+for the earlier layout.

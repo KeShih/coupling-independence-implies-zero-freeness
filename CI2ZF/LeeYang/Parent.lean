@@ -1,6 +1,6 @@
 import CI2ZF.LeeYang.Analytic
 import CI2ZF.LeeYang.ModelRoot
-import CI2ZF.OptionParentNonzero
+import CI2ZF.Potts.Transfer.OptionParentNonzero
 
 /-! The hard field parent cannot vanish: every allowed root colour
 contributes a term with positive real part after one common normalization. -/

@@ -1,5 +1,5 @@
 import CI2ZF.LeeYang.Local
-import CI2ZF.AnalyticComplexAverage
+import CI2ZF.Analysis.AnalyticComplexAverage
 
 /-! The field separator response is an average under the actual hard
 shell law. Zero local supports are included exactly, through a
