@@ -1,23 +1,23 @@
 {
   "schema_version": 2,
-  "date": "2026-09-10",
-  "scope": "Joint Potts, Lee-Yang and Holant library verification, including the internally proved BBR influence identity and all seven appendix regional endpoints under their registered literature inputs. Auxiliary/generalization scope limits remain documented separately.",
+  "date": "2026-09-09",
+  "scope": "Complete Potts, Lee-Yang and Holant formalization, including all seven appendix Potts CI and zero-free regions, under one CI2ZF library.",
   "entry_module": "CI2ZF",
   "lean_version": "4.33.1",
   "mathlib_version": "v4.33.1",
   "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
   "command": "LEAN_NUM_THREADS=2 bash scripts/check-all.sh",
   "passed": true,
-  "build_jobs": 4031,
-  "audited_project_declarations": 9690,
+  "build_jobs": 4027,
+  "audited_project_declarations": 9620,
   "allowed_axioms": [
     "propext",
     "Classical.choice",
     "Quot.sound"
   ],
-  "joint_import_closure_files": 496,
+  "joint_import_closure_files": 492,
   "all_library_modules_reachable": true,
-  "verification_log_sha256": "09e6cb450686d1f151fc97e724cc4255737d3ab6e01dd23cbd1cc3d064bc23e5",
+  "verification_log_sha256": "eff12ac1012a4c21356d2cbf32c960378beea1ed0cbcd9dd74c82e88d90a0dde",
   "organization": {
     "library": "CI2ZF",
     "previous_published_commit": "1161126c2262e963c8042dd7f45423f65cdf3f81",
@@ -39,31 +39,29 @@
       "audit/Main.lean",
       "audit/Appendix.lean",
       "audit/CV.lean"
-    ],
-    "scope_note": "Historical 2026-09-09 reorganization record. Its proof-preservation and change-count fields describe that reorganization, not the subsequent BBR proof update recorded below."
+    ]
   },
   "documentation": {
     "language": "English",
     "markdown_files": 10,
     "readme_lines": 42,
-    "local_markdown_links_checked": 90,
+    "local_markdown_links_checked": 85,
     "broken_local_links": [],
-    "link_check_scope": "Local target file existence; external URLs not fetched by this script.",
     "document_sha256": {
       "README.md": "b36a923335c61da31906fbd97357fee21d3066fe530679da872a8af0411f9d85",
       "docs/README.md": "a76c7e24323da1faa43ae4e9f2f84909e81cb97a0264585667caaaff96db5d6d",
       "docs/appendix/README.md": "f9967290929793777805faf102bca8c43ce125e1383a9e3cb240cea5e734f1ee",
-      "docs/appendix/STATUS.md": "d1327ad1941733afb5e8f01dfb91be8a5900af34009ff5b7366ea6630ae38674",
-      "docs/external-inputs.md": "04b8dbc70d54020ef3c2b59df1d7b4236307c1bbe2dc85a181b86272ac217ae6",
+      "docs/appendix/STATUS.md": "3bd798df0b2611d11d2e783f65812b80374b0dcc638ba68a32eb2baf94480db1",
+      "docs/external-inputs.md": "a257d018cfa7784baf155136e283f3ea6a97bdd52f4f6cc613f7fdba14a87189",
       "docs/holant.md": "b9442e36e263b94e0c42fe69f241049a49467db403b0721b9ca18b43f4e25561",
       "docs/lee-yang.md": "0f41ddd6106585f503ba337cd6066a5af092889a683541894ba6ebd38896c005",
       "docs/overview.md": "74253a08e9024e2c796fa390522e7e1f19dc14cdbd34249602b89defc55c6000",
       "docs/potts.md": "79d08c62d88fb85099f75ff266400b8cfe59d13b7be3bf2cf3c2b3be4e9e3541",
-      "docs/provenance/README.md": "3fd770f753c3911748a054cd418d95dbeee54132537927d9b9669ac9a00a262d"
+      "docs/provenance/README.md": "9302a3dc2c482e10ced8b0ac0a1efa7e1b001c999deb51d739aa6f9dac201262"
     }
   },
   "source_scan": {
-    "scope": "All 496 library modules; comments and strings masked by a nested-comment-aware lexer before scanning.",
+    "scope": "All 492 library modules; comments and strings are removed by a nested-comment-aware lexer before scanning.",
     "forbidden_constructs": [
       "sorry",
       "admit",
@@ -73,15 +71,13 @@
       "implemented_by",
       "sorryAx",
       "ofReduceBool",
-      "trustCompiler",
-      "extern",
-      "debug.skipKernelTC"
+      "trustCompiler"
     ],
     "findings": [],
     "missing_imports": [],
     "lexer_issues": [],
-    "scanner_sha256": "e64165f28e37a9f76dcebd7873fc53d1a73d521c0ff4a06f4e7800426201e8b4",
-    "closure_manifest_sha256": "d4cc32f07b1e0604a3a2e8b4c7f2ea57cf0abbb017d095f7c7c6df11af3d016f"
+    "scanner_sha256": "607f2c8eced41370913ff8baa80a0ef6e315f9969a12d954a0b91fa6c89ae1a9",
+    "closure_manifest_sha256": "61fa17cc130fb754b58a1cb16ed857ee14aec08e2e6565a512a5cbdb75647388"
   },
   "literature_input_register": "external-inputs.md",
   "region_statements_and_inputs": "appendix/STATUS.md",
@@ -96,15 +92,13 @@
     "CI2ZF.Coupling.BBR.Certificate": "182a61a6fa33044415eee43667b833d2f62894048052f77a475e94680dc56751",
     "CI2ZF.Coupling.BBR.CertificateArithmetic": "1ff7bcdbd0426568f5e06a5d5c4f62b48754c8582496f4c1bcf61cad0b41c3e0",
     "CI2ZF.Coupling.BBR.Differential": "7a264e4b5f54cb4792411131e1b20d9399ee0a2479205748918f0cac4d6c25c0",
-    "CI2ZF.Coupling.BBR.InfluenceAlgebra": "e2005b41e61c908fd4ec3242796b56e5f22b07b667b8d518b7d10dbb60bb04cf",
-    "CI2ZF.Coupling.BBR.InfluenceIdentity": "d6e1f60a2e87ec279f28d4a81b4ea58eb25ad441f6c493b8333b0187e552a96d",
     "CI2ZF.Coupling.BBR.Jacobian": "adbcbb538a4e8fb6df71ea235c55202fcc2ec3db32a505b2790677bd14bb8f47",
     "CI2ZF.Coupling.BBR.Messages": "666ed69d2e45a5b84ed8f5d4bb8d0f3bb21cc9a194e9a71afa852c6f42c0457a",
     "CI2ZF.Coupling.BBR.Parameters": "a2777106c1bf91beaaac6d197668e527635e336cbce3e99d2b84bbb5568c6de0",
     "CI2ZF.Coupling.BBR.Relative": "763a7025c9edb1973795411938671ee4dacbedcf5cd13ba4654d59b722f4a9ef",
     "CI2ZF.Coupling.BBR.Response": "ff4ead1965fd301f147244ddd3337a9b3fad278211dcfc5a84d5fdc0beb5750d",
     "CI2ZF.Coupling.BBR.Spatial": "d11cf184093fea0e599e5be0d7ff4618a07df205516d19e7fc3efba8dc44cd33",
-    "CI2ZF.Coupling.BBR.TotalInfluence": "e992afb08225347aa46c819b4f7a41f781e7e04d69f3a8e1dbf1cf7dd5adbcc2",
+    "CI2ZF.Coupling.BBR.TotalInfluence": "3ca49771817930324e1353db90b8c07342f3ad891352d0811cae5e771b4e9fc6",
     "CI2ZF.Coupling.BBR.Weights": "b6b920fb0a87a236f67da17555282983445ebe63cd3b5bb919fa0ff90b82701b",
     "CI2ZF.Coupling.CLMM.Ambient": "73ccd40aa488670e15dc084f2cdd39492a57d396b49ef5e1a96b4f49a9a7a63c",
     "CI2ZF.Coupling.CLMM.AmbientDegree": "39664116aa43a62d24fbd852d07eb459f25ef0a9292c88053c4ae7797f972868",
@@ -350,11 +344,9 @@
     "CI2ZF.Coupling.Girth.Spectral.Threshold": "4a095145e867e37147f2f6a479d91f0919ef1dde00f09bb19e49344eb9da2dd1",
     "CI2ZF.Coupling.Girth.Transfer.SphereCoupling": "66383a996176ae1e8e8fc605ba3f80de4a72512365e8e9c33b8122236125e881",
     "CI2ZF.Coupling.Girth.Transfer.WeightedInfluence": "ad76a6c894079215ccbdcdd86945ba5d9ccbc80aa829b2ec3d8a2cbf9c35b3d6",
-    "CI2ZF.Coupling.Girth.Tree.ConditionalExpectation": "0ef88a6f972698ed6fbdb7a1d4aef190c7bad99da7b30af15e94ba059b7a69d0",
     "CI2ZF.Coupling.Girth.Tree.Decay": "c192a4ba3ecfb8ba68276616928db866df94639d6935a5bf11c457b45c78bdff",
     "CI2ZF.Coupling.Girth.Tree.Gibbs": "c11171629b6065e1beab290d577596446518d41e0c0bb287a990ae9c4f4ca229",
     "CI2ZF.Coupling.Girth.Tree.Influence": "81685948a848daa15212bbe282dfb0ae207b6c16f6cd410fc896fd056d336800",
-    "CI2ZF.Coupling.Girth.Tree.LevelObservable": "e2824d020e1826ebf23f029c661d3906205a08c44894e6878735c0900abd5fc1",
     "CI2ZF.Coupling.Girth.Tree.Levels": "04b491413bb5729dcc55732c10fe7236df7e6e9f9d7aad145eb27e78ad9905e8",
     "CI2ZF.Coupling.Girth.Tree.Messages": "97cf476aeb1e943cb0726c0a025a2ca4d7d26115a7a45ecabce1404d9dbe31e1",
     "CI2ZF.Coupling.Girth.Tree.RatioMixing": "8c779547be691a8ada342f1e8b2531f14a632854c4bd17ccfc62f320309de1ad",
@@ -411,6 +403,7 @@
     "CI2ZF.Coupling.Vigoda.VigodaChargeFormula": "cdd97b758695170c268f4ca4ae590898b974df24bf126473da1b08848b0077f0",
     "CI2ZF.Coupling.Vigoda.VigodaFlexibleCharge": "beea4338bbd8f68e7610bde6dabfc023881880f0c0c73eaa62fdf6991991e6ef",
     "CI2ZF.Coupling.Vigoda.VigodaFlexibleFormula": "641c6e092669370d8fe2451f9c535d462ea58678d4600f048f5c93dc48892c45",
+    "CI2ZF.Holant": "5a4fefb30c644c8b4a5c69540f22cf2e22c64de3d712cc1fab38745d844316b7",
     "CI2ZF.Holant.AmbientGraph": "99f76b25836dc983229031ade2dd98bd0beaa2b18b2b63f960c02860636ff9ca",
     "CI2ZF.Holant.Analytic": "254e0b1d9e25cc18f7d6bc715216c7ae07731d96a0df12aae1ee59800f25d757",
     "CI2ZF.Holant.AnalyticContinuation": "1209aaa51a71251f702c385037a548f496ebef06fc6198533fc0a2802c92257a",
@@ -457,7 +450,7 @@
     "CI2ZF.Holant.TransferParameters": "fb1e51a15bb896557d504f2e4f9ff5dd3305bb3ee12af0b0ab36f0e2ec6b836e",
     "CI2ZF.Holant.TubeTheorem": "ce83405d9e71813b5ebc056ddae2138e71392772b9badda36225d5a3d1e7c920",
     "CI2ZF.Holant.UniformResponse": "b703dab47eab0cba7776e30725995cfc8e1a33a744871698f166e86872e3d544",
-    "CI2ZF.Holant": "5a4fefb30c644c8b4a5c69540f22cf2e22c64de3d712cc1fab38745d844316b7",
+    "CI2ZF.LeeYang": "e3a19751a34867411f752f0e92dea358626909fbaaddf0e4fd50d3349a4b513d",
     "CI2ZF.LeeYang.Analytic": "851dd7ac639a88025b317fe4ee9c03f8d0ae0e1abb8cab721a876788de753780",
     "CI2ZF.LeeYang.BFSResponse": "3e1b2139d9402897146d41495a6db6a35f50f3fe06f8594b7b417d342acf7bdc",
     "CI2ZF.LeeYang.Component": "b891f63cfaf2c67f468e482426da77ba19cd53b19dcfe59a614d3a68cbd9a9df",
@@ -483,7 +476,7 @@
     "CI2ZF.LeeYang.TransportRelabel": "b3381314fc8992bd46e1a50ec9e8c393323e89d81c3e5288f0966c6fb67de19f",
     "CI2ZF.LeeYang.VertexCoupling": "0e57032a963828ee4cade082a7927947746aec122263b06c202442bc0af6ee64",
     "CI2ZF.LeeYang.VertexRegions": "04768ffe05ee5b80c69c47855c2e0c7cd76d54fadd1453c8944325b9d9b00bcf",
-    "CI2ZF.LeeYang": "e3a19751a34867411f752f0e92dea358626909fbaaddf0e4fd50d3349a4b513d",
+    "CI2ZF.Potts": "084b4e8ed1ca9c86a08fe3c85b1a0383a0004cc2be42fef393309950eb8d71f4",
     "CI2ZF.Potts.Geometry.AmbientRealization": "2fd3526a676c1fe4ea7e58a6bdf89cf32f98e5696e4ae44f53681908d9ca00d8",
     "CI2ZF.Potts.Geometry.BFSShellMarginals": "67d04ba065f8188ff1cfd7fd86db8d5508a1d4fc1377d083b877c4ec15187960",
     "CI2ZF.Potts.Geometry.BFSShells": "93cd2eea9f71f20827f41bd599487e5c1919f84baa8f9c772274472efc1eea7c",
@@ -524,19 +517,19 @@
     "CI2ZF.Potts.Model.Real.SoftKernel": "346f9371ca802ff6f5d9e0a6b506d753a0ad76808bd73e2008ec5b48f2642a67",
     "CI2ZF.Potts.Model.RootChildren": "d52c06dea9433f79709f4337e1394a75be1a64d735ed2bc5ecc38706acf0488e",
     "CI2ZF.Potts.Model.RootGibbsSemantics": "488fba5af05518186bba40995327ef30ffc02d35768e808b8189c7b21cff667e",
+    "CI2ZF.Potts.Regions": "81f2a3135a17697f7356784a80a09e785f744378d3bf1c772886f91fc2b063c3",
     "CI2ZF.Potts.Regions.Arithmetic": "07251ea5210a49666a94306087442145e01ad6e70ec5eb602e8e0138b66df934",
-    "CI2ZF.Potts.Regions.BBR.High": "108f4a597456b736e8c7a2b4f61646c1e20f92818615765501fcfbe6680a2618",
-    "CI2ZF.Potts.Regions.CV.ZeroFree": "355d01e673f97a6819dc4062e441d8cb6f4182754c9e1fb993804d1db7fc8901",
+    "CI2ZF.Potts.Regions.BBR.High": "dae35ae9f2487622c88d34b83a3be4826785886663d8e750ee68a06598c5bd5c",
     "CI2ZF.Potts.Regions.CV": "5285a7499ff8d8881a8452d9f6b3e5abbf2d942cac494285047415f2d7e0d1ea",
+    "CI2ZF.Potts.Regions.CV.ZeroFree": "355d01e673f97a6819dc4062e441d8cb6f4182754c9e1fb993804d1db7fc8901",
     "CI2ZF.Potts.Regions.Edge.ZeroFree": "6f5b19353d586f15ad7ebe78980668802e209292ecb9b8c0df08a7ecee4ab14f",
     "CI2ZF.Potts.Regions.Girth.Five.Transfer": "61b6ed12e21fc247df17abf6a7fdeb30a49f66021b563081b0884ce644b11e8d",
     "CI2ZF.Potts.Regions.Girth.Five.ZeroFree": "41d2cbba3f2421bc6b1d29751b4fbe552a903d2f57f8273a40e2a9b5c072d75a",
     "CI2ZF.Potts.Regions.Girth.High.Theorem": "d4dc5a5a659d13ccdaf1bb33c2134ab26ae3a9a39eb009f8355194296f321d4b",
     "CI2ZF.Potts.Regions.Girth.Transfer.Family": "1e27e09eb7700476184c432edbdd0ef55c15d0fe287831b16b1da47eb9a3d2c0",
-    "CI2ZF.Potts.Regions.Girth.Transfer.ResidualOriginal": "181a74d0d26413bd44173e7a00b6e9129c1b34f83026bc924ce6cb09a89d40e7",
+    "CI2ZF.Potts.Regions.Girth.Transfer.ResidualOriginal": "095d2246f083c5bae15e5c7bc1f4c602bba10ce20c9b8396fc4c09d1c792a03c",
     "CI2ZF.Potts.Regions.HighTemperature.ZeroFree": "2ccf30b61aaab9ec91df6f52ae64894a996c2b36725d5baab85699a76a643cc4",
     "CI2ZF.Potts.Regions.NearVigoda.Theorem": "f87fbe6bbb4274c6c61878181425b0d080d25d097f935521098f87a5334cc7c8",
-    "CI2ZF.Potts.Regions": "81f2a3135a17697f7356784a80a09e785f744378d3bf1c772886f91fc2b063c3",
     "CI2ZF.Potts.Theorems.GraphClassPottsTransfer": "dd32a69138e41aec8ebb968a4d19789a44b47ff2f8d0217816e0087ef4d2cff5",
     "CI2ZF.Potts.Theorems.PositiveGraphClassTransfer": "9d51c060ba256b5856797eceb377bd6993474f3172f9a3dc8b1570d9064de4e8",
     "CI2ZF.Potts.Theorems.PottsExternalTheorem": "2f90e6e854c48cf698af297df7679b81f9c1efb46827365c43f775d557bde2fc",
@@ -581,8 +574,7 @@
     "CI2ZF.Potts.Transfer.TransferScales": "8e93822275fb5a265fd542067a6b03be142f5bb898f88d6a55bb6a4c6d3227f2",
     "CI2ZF.Potts.Transfer.UniformInduction": "b3348da57bc3f1e76119f6b6863dd19985eb2791b8eb5e5408b69fc832c75918",
     "CI2ZF.Potts.Transfer.UniformLocalLogs": "4ab94525fafb35920726b80ab7aefcfc11ab6d0ba77613c7f77045ef5daed652",
-    "CI2ZF.Potts.Transfer.UniformZeroFreePackaging": "1f534b831329aba1e65ce274428faeee06950b8db68253dc809bff9812479538",
-    "CI2ZF.Potts": "084b4e8ed1ca9c86a08fe3c85b1a0383a0004cc2be42fef393309950eb8d71f4"
+    "CI2ZF.Potts.Transfer.UniformZeroFreePackaging": "1f534b831329aba1e65ce274428faeee06950b8db68253dc809bff9812479538"
   },
   "verification_files_sha256": {
     "audit/All.lean": "229f691dd75fed348ecf3e2037cf109605a663945e7271ae88563cbd5fdc2d1d",
@@ -593,32 +585,5 @@
     "scripts/check-appendix.sh": "97e22b26ccdfcf645060d27a7fcb0f056cd015297277073d60bfab0a081e0a24",
     "scripts/check.sh": "6701306adf6cea162d041052001beeddf87f0ba7d0d3bb95c8bd40936f26cc23",
     "scripts/lake.sh": "4eed4b62190852f1f43352a1d035baab5470d267f5ae7a4cc110d1ec4e768d65"
-  },
-  "proof_update": {
-    "date": "2026-09-10",
-    "description": "Prove the BBR level influence identity from actual finite Gibbs conditional expectations and normalized Jacobian algebra; remove its premise from every BBR public endpoint.",
-    "previous_verification": "provenance/pre-bbr-influence-20260910-verification.json",
-    "new_modules": [
-      "CI2ZF.Coupling.BBR.InfluenceAlgebra",
-      "CI2ZF.Coupling.BBR.InfluenceIdentity",
-      "CI2ZF.Coupling.Girth.Tree.ConditionalExpectation",
-      "CI2ZF.Coupling.Girth.Tree.LevelObservable"
-    ],
-    "internal_witness": "CI2ZF.Appendix.BBR.influenceIdentity",
-    "public_endpoints_without_identity_premise": [
-      "CI2ZF.Appendix.BBR.high_girth_coupling",
-      "CI2ZF.Appendix.BBR.high_girth_zero_free",
-      "CI2ZF.Appendix.BBR.high_girth_original_zero_free_and_responses",
-      "CI2ZF.Appendix.BBR.high_girth_residual_original_zero_free"
-    ],
-    "remaining_bbr_mathematical_inputs": [
-      "BBR.Literature.proposition_2_6_i",
-      "BBR.Literature.theorem_2_5",
-      "CLMM.Literature.sphere_estimate",
-      "CLMM.Literature.sphere_to_coupling"
-    ],
-    "signature_and_application_check_sha256": "6e95210cd404313231816470b3aab3ade19989efe3d011132931dd11d6609785",
-    "signature_and_application_log_sha256": "29305daa3f456b9d50ac8f50bacf02a16edf0c6e706d3eb1f441571cab56bbf9",
-    "build_mode": "Incremental build with cached unchanged dependencies; changed modules compiled and whole-library transitive axiom audit rerun."
   }
 }

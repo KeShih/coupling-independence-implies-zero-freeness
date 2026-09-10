@@ -4,13 +4,17 @@ The [module guide](README.md) lists the seven regional entry points. The
 [documentation index](../README.md) covers the main-text Potts, Holant, and
 Lee–Yang proofs.
 
-The completed-region entry point is `CI2ZF/Potts/Regions.lean`.
+The regional entry point is `CI2ZF/Potts/Regions.lean`.
 Run `bash scripts/check-appendix.sh` to compile its full dependency closure
 with warnings treated as errors and audit every imported project declaration.
 Only Lean's standard `propext`, `Classical.choice`, and `Quot.sound` are allowed.
 Literature results are explicit proposition parameters, not added axioms.
 
-## Completed regions
+## Regional endpoints
+
+The table records the regional conclusions under the literature inputs
+specified below. The auxiliary and generalization limits are recorded in
+[Scope of the coverage](#scope-of-the-coverage).
 
 | Region | Coupling independence | Uniform zero-free conclusion |
 | --- | --- | --- |
@@ -65,14 +69,22 @@ The proof does not impose q≥Δ+1 and permits arbitrary improper pinning.
 
 ### BBR proof and external inputs
 
-`BBR.Literature` records BBR Proposition 2.6(i) and Theorem 2.5 with their
-published hypotheses. `BBR.InfluenceIdentity` records the general CLMM
-Lemma 8.7 influence–Jacobian identity in square-root message coordinates.
-The same `CLMM.Literature` graph-transfer inputs listed above are retained.
-The message/Gibbs correspondence, exact derivatives, interval-wide
-contraction, tree influence and relative spatial decay, and the positive
-zero-free transfer are proved internally. The exceptional (q,Δ)=(3,4)
-interval and all degree-gap-two parameter cases are proved internally.
+The BBR route retains four cited inputs: BBR Proposition 2.6(i) and
+Theorem 2.5 in `BBR.Literature`, with their published hypotheses, and the
+two `CLMM.Literature` graph-transfer statements listed above. No
+influence-factorization premise remains in the BBR theorem signatures.
+
+The square-root influence–Jacobian identity is proved from actual finite
+Gibbs conditional expectations and the explicit local projection/Jacobian
+algebra. This connects the message/Gibbs correspondence and exact
+derivatives to the response at every tree level; see
+[`BBR/InfluenceIdentity.lean`](../../CI2ZF/Coupling/BBR/InfluenceIdentity.lean).
+Interval-wide contraction,
+tree influence and relative spatial decay, and the positive zero-free
+transfer are derived from the four cited inputs. The exceptional
+(q,Δ)=(3,4) interval and all degree-gap-two parameter cases are proved
+internally. The ordinary `q ≥ Δ+3` large-girth route still retains its
+separate `CavityTree.CLMMInfluenceIdentity` input.
 
 ### Carlson–Vigoda proof and external inputs
 
@@ -124,14 +136,36 @@ The explicit final threshold is the maximum of the spectral threshold
 counts is imposed. The public original-graph result requires girth only
 of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
 
-## Verification
+## Scope of the coverage
+
+These statuses concern the seven Potts regional endpoints and the proofs
+used to obtain them. They do not claim a theorem-by-theorem formalization
+of every auxiliary statement or every generalization in the appendix.
+
+- The paper's eventual-transfer lemma covers general pinning/subgraph-closed
+  pairwise spin-system families, including hard constraints with separate
+  feasibility assumptions. `CLMM.eventual_transfer` is the positive-activity
+  Potts specialization needed for the regional conclusions here.
+- The edge-Potts proof constructs finite positive slot laws and passes to
+  the finite-colour Gibbs-law limit. It does not separately prove the
+  paper's countable exact-slot representation lemma or its entire-function
+  factorization argument.
+
+The BBR proof also uses independent arithmetic certificates for the small
+degree-gap-two cases. Thus the regional conclusions can be proved by a
+different internal argument without reproducing each intermediate proof
+path in the paper.
+
+## Recorded verification
 
 The complete single-library check, including the main text and all seven
-appendix regions, passed **4027 build jobs** and the transitive axiom
-audit of **9620 project declarations** on 2026-09-09. Only `propext`,
+appendix regions, passed **4031 build jobs** and the transitive axiom
+audit of **9690 project declarations** on 2026-09-10. Only `propext`,
 `Classical.choice`, and `Quot.sound` were used. The source scan covered all
-**492 library modules**, each reachable from `CI2ZF`, and found no forbidden
-proof constructs. The reorganization preserves every mathematical statement
-and proof. See the [verification record](../verification.json) for source
-hashes and [the previous verification](../provenance/lee-yang-verification.json)
-for the earlier layout.
+**496 library modules**, each reachable from `CI2ZF`, and found no forbidden
+proof constructs. This was an incremental build using the existing cache;
+the new BBR bridge and its changed downstream modules were compiled, and
+the whole-library transitive axiom audit was rerun. See the
+[verification record](../verification.json) for the current source hashes,
+the [pre-closure snapshot](../provenance/pre-bbr-influence-20260910-verification.json),
+and [the earlier verification](../provenance/lee-yang-verification.json).

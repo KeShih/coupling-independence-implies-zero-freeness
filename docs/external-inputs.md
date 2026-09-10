@@ -22,10 +22,18 @@ temperature, and Carlson–Vigoda have no unproved external inputs.
 Near-Vigoda uses the critical hard-colouring theorem above only at its
 finitely many exceptional integer pairs.
 
-The large-girth and BBR routes retain the named CLMM influence–Jacobian
-identity and graph-transfer statements; BBR additionally retains its cited
-Proposition 2.6(i) and Theorem 2.5. Their local appendix-specific estimates
-and uniform transfer are proved internally.
+The ordinary `q ≥ Δ+3` large-girth route retains the named CLMM
+influence–Jacobian identity and the two graph-transfer statements.
+The BBR route retains exactly four cited inputs: BBR Proposition 2.6(i)
+and Theorem 2.5 in `BBR.Literature`, and the two graph-transfer statements
+in `CLMM.Literature`. Its square-root influence–Jacobian identity is
+proved internally from actual finite Gibbs conditional expectations and
+the explicit projection/Jacobian algebra:
+[`InfluenceIdentity.lean`](../CI2ZF/Coupling/BBR/InfluenceIdentity.lean)
+proves `level_influence_factorization` and constructs `influenceIdentity`.
+No BBR public theorem requires that identity as an input. The interval-wide BBR
+contraction, tree influence and relative spatial decay, and uniform
+positive-temperature zero-free transfer are derived from those four inputs.
 
 The girth-five route retains only `Girth.SphereCouplingInput`, the
 [CLMM Condition 5.12 / Lemma 5.13](https://arxiv.org/html/2304.01954v3)
@@ -55,3 +63,10 @@ Lee–Yang transfer premise is introduced. See the
 ## Meaning of the kernel audit
 
 An explicit mathematical hypothesis does not become an additional Lean axiom. The transitive axiom dependencies of all imported theorems remain limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders; it does not establish the stated literature hypotheses themselves.
+
+The regional conclusions do not assert that every auxiliary lemma or
+generalization in the paper has been formalized at its original scope.
+The general pairwise-family transfer is implemented for positive-activity
+Potts systems, and the edge-Potts proof uses finite slot approximations
+instead of a standalone countable exact-slot representation theorem.
+See the [Appendix scope limits](appendix/STATUS.md#scope-of-the-coverage).
