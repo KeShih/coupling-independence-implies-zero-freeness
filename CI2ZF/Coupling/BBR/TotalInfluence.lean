@@ -1,10 +1,10 @@
-import CI2ZF.Coupling.BBR.Response
+import CI2ZF.Coupling.BBR.InfluenceIdentity
 import CI2ZF.Coupling.Girth.Tree.TotalInfluence
 
-/-! Total influence from actual square-root message derivatives. The only
-external boundary is the general covariance/recursion chain identity of
-CLMM2023, Lemma 8.7. The recursion, its derivative, the terminal scaling,
-and all decay and norm estimates are explicit below. -/
+/-! Total influence from actual square-root message derivatives. The
+influence--Jacobian bridge is proved internally from finite Gibbs sums.
+Only the stated BBR literature inputs for the energy contraction remain;
+the terminal scaling and all influence and norm estimates are explicit. -/
 namespace CI2ZF.Appendix.BBR
 open scoped BigOperators
 open Finset Set PottsCI
@@ -12,17 +12,6 @@ open CI2ZF.Appendix.Girth
 noncomputable section
 set_option linter.unusedSectionVars false
 variable {C : Type*} [Fintype C] [DecidableEq C] [Nonempty C]
-
-/-- CLMM2023, Lemma 8.7, in square-root partition-ratio coordinates.
-The factor two in differentiating log probability cancels the one-half
-in differentiating the terminal square root. Root normalization is the
-orthogonal projection already proved in `BBRDifferential`. No decay or
-coupling conclusion is assumed. -/
-structure InfluenceIdentity (C : Type*) [Fintype C] [DecidableEq C] [Nonempty C] : Prop where
-  factorization : ∀ (x : ℝ) (hx : 0 < x) (_hx1 : x ≤ 1) (t : Girth.CavityTree C)
-    (k : ℕ) (h : t.Level (k + 1) → C → ℝ) (a : C),
-    (∑ v, ∑ c, t.influenceBlock x hx (k + 1) v a c * h v c) =
-      projection (t.message x) (response x t (k + 1) h) a / t.message x a
 
 def totalInfluenceConstant (q Δ : ℕ) (x₀ : ℝ) : ℝ :=
   Real.sqrt (2 * Δ * uniformA q Δ x₀ * q) / Real.sqrt (x₀ ^ Δ)
@@ -55,7 +44,7 @@ theorem totalInfluenceConstant_eq {q Δ : ℕ} (hq : 0 < q)
 
 /-- Source rows are tested against their actual signs. Projection at the
 root does not increase squared energy. -/
-theorem absolute_influence_row_bound (external : Literature C) (identity : InfluenceIdentity C)
+theorem absolute_influence_row_bound (external : Literature C)
     {Δ : ℕ} (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -101,7 +90,7 @@ theorem absolute_influence_row_bound (external : Literature C) (identity : Influ
     have hκ := (contractionSquare_mem hΔ).1.le
     have hnon : 0 ≤ (Δ : ℝ) * A * contractionSquare Δ ^ k * Fintype.card C := by positivity
     nlinarith [sq_abs (projection (t.message x) z a), abs_nonneg (projection (t.message x) z a)]
-  have hid := identity.factorization x hx0 hx.2 t k h a
+  have hid := level_influence_factorization hx0 hx.2 t (k + 1) h a
   simp only [h, CavityTree.mul_signWitness] at hid
   rw [hid]
   calc
@@ -112,7 +101,7 @@ theorem absolute_influence_row_bound (external : Literature C) (identity : Influ
 
 /-- Actual conditional marginals have total-influence decay uniformly on
 all of the BBR interval, including activity one. -/
-theorem total_influence_decay (external : Literature C) (identity : InfluenceIdentity C)
+theorem total_influence_decay (external : Literature C)
     {Δ : ℕ} (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -139,8 +128,8 @@ theorem total_influence_decay (external : Literature C) (identity : InfluenceIde
       (Finset.sum_le_sum (s := (Finset.univ : Finset C)) (fun c _ => hpoint v c))
       (by norm_num : (0 : ℝ) ≤ 1 / 2))
   simp only [Finset.sum_add_distrib, ← Finset.mul_sum] at hsum
-  have ha := absolute_influence_row_bound external identity hq hr hx tree ⟨hroot, ht⟩ k a
-  have hz := absolute_influence_row_bound external identity hq hr hx tree ⟨hroot, ht⟩ k z
+  have ha := absolute_influence_row_bound external hq hr hx tree ⟨hroot, ht⟩ k a
+  have hz := absolute_influence_row_bound external hq hr hx tree ⟨hroot, ht⟩ k z
   unfold CavityTree.levelTotalVariation
   rw [← Finset.mul_sum]
   dsimp only [tree] at hsum ⊢

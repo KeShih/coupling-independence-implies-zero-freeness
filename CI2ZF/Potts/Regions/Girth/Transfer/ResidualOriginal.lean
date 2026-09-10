@@ -68,7 +68,7 @@ namespace BBR
 /-- On the BBR interval both original polynomials are nonzero, uniformly
 over arbitrary pinnings whose free residual graph has the required girth. -/
 theorem high_girth_residual_original_zero_free
-    (external : Literature C) (identity : InfluenceIdentity C) (transfer : CLMM.Literature.{u,v} C)
+    (external : Literature C) (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ eps > 0, ∀ {V : Type u} [Fintype V] (G : SimpleGraph V),
@@ -76,7 +76,7 @@ theorem high_girth_residual_original_zero_free
       (g : ℕ∞) ≤ (tau.toPinningData G).graph.egirth →
       ∀ z ∈ thickening eps (Complex.ofReal '' Icc (start (Fintype.card C) Δ) 1),
         normalizedPartition tau G z ≠ 0 ∧ fullPartition tau G z ≠ 0 := by
-  obtain ⟨g, hg, r, hrpos, hn⟩ := high_girth_zero_free external identity transfer Δ hq hr
+  obtain ⟨g, hg, r, hrpos, hn⟩ := high_girth_zero_free external transfer Δ hq hr
   let x₀ := start (Fintype.card C) Δ
   have hx₀ : 0 < x₀ := (start_mem hq hr).1
   refine ⟨g, hg, min r (x₀ / 2), lt_min hrpos (by positivity), ?_⟩
