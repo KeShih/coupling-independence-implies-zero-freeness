@@ -4,6 +4,7 @@ Lean formalization of the Potts, Lee–Yang and Holant results in
 *Coupling Independence Implies Zero-Freeness*, including all seven
 Appendix Potts regions. The proofs use actual finite partition functions
 and choose zero-free neighborhoods uniformly over graph size and pinning.
+The companion appendix paper is included as [docs/appendix.pdf](docs/appendix.pdf).
 
 ## Results
 
