@@ -2,6 +2,7 @@ import CI2ZF.LeeYang.PinningRoot
 import CI2ZF.LeeYang.VertexRegions
 import CI2ZF.LeeYang.HighGirth
 import CI2ZF.LeeYang.Edge
+import CI2ZF.LeeYang.GraphClassUniform
 
 /-!
 # Main-text Lee--Yang zeros

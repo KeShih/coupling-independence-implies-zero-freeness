@@ -9,17 +9,20 @@ A Lean 4 and mathlib formalization of
 Every statement concerns actual finite partition functions. Potts pinnings
 are arbitrary partial colourings, improper ones included, and every
 zero-free radius is chosen before the graph, its size and the pinning.
-The results the papers cite from the literature are proved in the library
-too, so no paper-facing theorem takes a literature hypothesis, and the
-whole library depends only on Lean's standard axioms `propext`,
+The six cited ingredients that have standalone Lean statements are proved
+in the library. Their formalized scopes and route differences are recorded
+in [docs/external-inputs.md](docs/external-inputs.md). No paper-facing
+theorem takes a literature hypothesis, and the whole library depends only
+on Lean's standard axioms `propext`,
 `Classical.choice` and `Quot.sound`.
 
 The [side-by-side page](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
-sets each paper statement beside the Lean theorem that proves it and matches
-the two phrase by phrase. It also shows each theorem's axioms, the cited
-results its proof uses and the library lemmas it applies, with source links
-pinned to the commit. `scripts/site/build.py` generates it into
-`docs/index.html` and checks every quotation against the sources.
+sets the headline paper statements represented by the generated cards beside
+their Lean declarations and matches those cards phrase by phrase. It also
+shows each card's axioms, the cited ingredients tracked by the formalization,
+and the library lemmas it applies, with source links pinned to the commit.
+`scripts/site/build.py` generates it into `docs/index.html` and checks every
+quotation against the sources.
 
 ## The main theorem
 
@@ -87,9 +90,10 @@ Lean proof differs from the written one.
 
 ## Cited results proved in Lean
 
-Six of the results that the written proofs cite have their own Lean
-statements, about actual finite Potts models and in the form the written
-proofs use. Each is proved in the library.
+Six of the ingredients cited by the written proofs have standalone Lean
+statements about actual finite Potts models. Each formalized statement is
+proved in the library; the scope and route of each statement are recorded
+below.
 
 | Cited result | Source | Lean theorem | File |
 | --- | --- | --- | --- |
@@ -137,8 +141,8 @@ checks the transitive axioms of every project declaration. A successful
 run ends with
 
 ```text
-Build completed successfully (4036 jobs).
-Complete-library axiom audit passed: 10134 declarations; allowed dependencies used: [propext,
+Build completed successfully (4040 jobs).
+Complete-library axiom audit passed: 10372 declarations; allowed dependencies used: [propext,
  Classical.choice,
  Quot.sound]
 ```

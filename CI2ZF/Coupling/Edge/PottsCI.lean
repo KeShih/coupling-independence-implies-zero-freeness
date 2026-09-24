@@ -1,5 +1,6 @@
 import CI2ZF.Coupling.Edge.Slots.ConditionalLimit
 import CI2ZF.Coupling.Edge.Slots.RootSemantics
+import CI2ZF.Coupling.Edge.Slots.SlotLift
 import CI2ZF.Coupling.Edge.Finite.CI
 import CI2ZF.Coupling.Vigoda.RootCoupling
 

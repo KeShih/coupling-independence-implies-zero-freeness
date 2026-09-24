@@ -1667,7 +1667,7 @@ details.uses .ud { color: var(--ink-2); }
 <header class="hero" id="status">
   <div class="eyebrow">Lean formalization · commit @@COMMIT@@</div>
   <h1>The paper and its Lean formalization, side by side</h1>
-  <p>For every result of <em>Coupling Independence Implies Zero-Freeness</em> and its companion paper, this page sets the paper's statement next to the Lean theorem that proves it. A table then matches the two phrase by phrase. Each result also lists the published results its proof relies on, each of them proved in the library too, and the library lemmas its proof applies.</p>
+  <p>For each headline result represented by a card on this page, the paper's statement is shown next to its corresponding Lean declaration. A table then matches the two phrase by phrase. The cards list the cited ingredients tracked by the formalization and the library lemmas each proof applies; the cited-results section records the formalized scope of those ingredients.</p>
   <p>Nothing on the Lean side is written by hand: signatures, axioms and dependencies are read from the compiled library at commit <a href="@@COMMITURL@@"><code>@@COMMIT@@</code></a>, and every source link points to that commit. Every quotation in the correspondence tables is checked verbatim against the paper's LaTeX and the Lean source when the page is built.</p>
 </header>
 
@@ -1681,7 +1681,7 @@ details.uses .ud { color: var(--ink-2); }
 </div>
 
 <h2 id="matrix">Cited results used by each proof</h2>
-<p class="lede">A dot means that the Lean proof of the result depends, through the library, on the Lean proof of that cited result. No Lean statement takes a cited result as a hypothesis, and the axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
+<p class="lede">A dot means that the Lean proof of the result depends, through the library, on the Lean proof of that cited ingredient. No paper-facing theorem takes a cited ingredient as a hypothesis; internal helper bundles may retain the formalized ingredient as a parameter. The axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
 <div class="matrix-wrap">@@MATRIX@@</div>
 
 <h2 id="main">Main paper</h2>
@@ -1697,7 +1697,7 @@ details.uses .ud { color: var(--ink-2); }
 <div class="card glossary">@@GLOSSARY@@</div>
 
 <h2 id="literature">Cited results and their Lean proofs</h2>
-<p class="lede">Each result the papers cite, the Lean proposition that expresses it, and the Lean theorem that proves it. Where the Lean proof takes a different route from the cited paper, the card says so.</p>
+<p class="lede">Each cited ingredient tracked by this formalization, the Lean proposition that expresses its formalized scope, and the Lean theorem that proves it. Where the Lean proof takes a different route from the cited paper, the card says so.</p>
 @@LITERATURE@@
 
 <h2 id="reproduce">Reproduce</h2>

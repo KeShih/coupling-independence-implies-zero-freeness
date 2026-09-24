@@ -38,6 +38,6 @@ names describe their purpose, not a strict layering of every import.
 
 Run `./scripts/check-all.sh` from the repository root to build the whole library and check transitive axiom dependencies. Use `./scripts/check.sh` for the main-text proofs or `./scripts/check-appendix.sh` for the appendix regions.
 
-The audits allow only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`. The cited literature results are proved in the library, so no paper-facing theorem takes a literature hypothesis. The [verification record](verification.json) records the checked scope and source hashes. The [module migration record](module-moves.tsv) maps renamed source modules.
+The audits allow only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`. The standalone Lean statements for the cited ingredients tracked in [external-inputs.md](external-inputs.md) are proved in the library, so no paper-facing theorem takes a literature hypothesis. The [verification record](verification.json) records the checked scope and source hashes. The [module migration record](module-moves.tsv) maps renamed source modules.
 
 Return to the [repository README](../README.md) for setup and the main imports.

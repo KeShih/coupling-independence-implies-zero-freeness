@@ -5,8 +5,9 @@ This document maps Sections 2 and 3 of `main.tex`, including the imported files 
 The verification environment is Lean 4.33.1 and mathlib v4.33.1.
 `bash scripts/check-all.sh` builds the complete library and audits every
 imported project declaration. Only `propext`, `Classical.choice`, and
-`Quot.sound` are allowed. The cited results are proved in the library, so
-no public statement below takes a literature hypothesis. The [verification manifest](verification.json)
+`Quot.sound` are allowed. The standalone Lean statements for the cited
+ingredients tracked in [external-inputs.md](external-inputs.md) are proved
+in the library, so no public statement below takes a literature hypothesis. The [verification manifest](verification.json)
 records the checked source closure, source hashes and build results.
 
 The main-text independent-colour-field Lee–Yang proof is mapped separately in [Lee–Yang proof map](lee-yang.md), including all three vertex regimes, the edge-colouring corollary, and arbitrary pinning semantics.
@@ -91,7 +92,7 @@ The general profile tools in `strict-ci-tools.tex` are implemented for the concr
 - **Arbitrary pinning includes improper pinning.** The normalized polynomial omits pinned-only edges and imposes no properness condition on the original pinning. The full polynomial's forced factor and exact zero multiplicity are proved separately. Conflicts created by adding a root pin are handled in the actual recursion.
 - **Empty cases and endpoints are included.** With no free vertices the normalized partition function is 1. Wasserstein distance on an empty remaining vertex space is zero, and the empty hard chain holds. Empty exteriors, disconnected components, and single-vertex recursions are not excluded by hidden nonemptiness assumptions. The hard endpoint uses feasibility and finite-law limits; `x = 1` uses identities for the uniform law.
 - **The concrete profile is distinguished from the general tools.** The implemented profile is `p_1=1, p_2=13/42, p_3=1/6, p_4=2/21, p_5=1/21, p_6=1/84`, and `p_s=0` for `s≥7`. All generic profile-ρ variants, ancillary irreducibility results, and unused variants are outside this map's completion claim. This implementation choice is not an unproved input to the completed main theorem.
-- **All seven Appendix Potts regions are complete.** Their organized implementations and the cited results they use, all proved in Lean, are documented in [Appendix guide](appendix/README.md) and [STATUS.md](appendix/STATUS.md). `scripts/check-all.sh` verifies the full library.
+- **All seven Appendix Potts regions are complete.** Their organized implementations and the formalized versions of the cited ingredients they use are documented in [Appendix guide](appendix/README.md) and [STATUS.md](appendix/STATUS.md). `scripts/check-all.sh` verifies the full library.
 
 ## Verification and suggested reading order
 

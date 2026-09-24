@@ -25,7 +25,9 @@
 
 ## Proofs of the cited results
 
-The regions use these results cited from the literature, each proved in the library:
+The regions use the following cited ingredients. The Lean versions listed
+here are proved in the library; their formalized scope and route differences
+are recorded in [STATUS.md](STATUS.md):
 
 | Cited result | Used by | Proof |
 | --- | --- | --- |

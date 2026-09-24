@@ -5,6 +5,7 @@ import CI2ZF.Potts.Regions.BBR.High
 import CI2ZF.Potts.Regions.CV
 import CI2ZF.Potts.Regions.NearVigoda.Theorem
 import CI2ZF.Coupling.Girth.Five.ClosedPoincare
+import CI2ZF.Coupling.Girth.Spectral.OperatorGap
 import CI2ZF.Potts.Regions.Girth.Five.ZeroFree
 import CI2ZF.Potts.Regions.Girth.Transfer.ResidualOriginal
 

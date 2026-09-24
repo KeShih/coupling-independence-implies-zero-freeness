@@ -8,8 +8,8 @@ The regional entry point is `CI2ZF/Potts/Regions.lean`.
 Run `bash scripts/check-appendix.sh` to compile its full dependency closure
 with warnings treated as errors and audit every imported project declaration.
 Only Lean's standard `propext`, `Classical.choice`, and `Quot.sound` are allowed.
-The cited literature results are proved in the library, so no regional
-endpoint takes a literature parameter.
+The formalized versions of the cited ingredients listed below are proved in
+the library, so no regional endpoint takes a literature parameter.
 
 ## Regional endpoints
 
@@ -40,7 +40,8 @@ The zero-free corollary uses the already formalized graph-class transfer theorem
 
 ### Large-girth proof and cited results
 
-The proof uses three general CLMM2023 results, each proved in Lean:
+The proof uses three general CLMM2023 ingredients, each with a proved Lean
+version:
 
 - Lemma 8.7, the exact tree influence–Jacobian factorization, stated as
   `CavityTree.CLMMInfluenceIdentity` and proved as
@@ -87,7 +88,7 @@ The proof does not impose q≥Δ+1 and permits arbitrary improper pinning.
 
 ### BBR proof and cited results
 
-The BBR route uses four cited results, each proved in Lean: BBR
+The BBR route uses four cited ingredients, each with a proved Lean version: BBR
 Proposition 2.6(i) and Theorem 2.5, stated in `BBR.Literature` with their
 published hypotheses, and CLMM Equation (10) and Lemma 5.13 as above.
 
@@ -116,7 +117,9 @@ Interval-wide contraction,
 tree influence and relative spatial decay, and the positive zero-free
 transfer are derived from the four cited results. The exceptional
 (q,Δ)=(3,4) interval and all degree-gap-two parameter cases, which lie
-outside the degree range of Proposition 2.6(i), are proved directly. The ordinary `q ≥ Δ+3` large-girth route uses the separate
+outside the degree range of Proposition 2.6(i), are handled directly in
+the application; this does not extend the published Proposition 2.6(i)
+statement. The ordinary `q ≥ Δ+3` large-girth route uses the separate
 CLMM identity `CavityTree.clmmInfluenceIdentity`.
 
 ### Carlson–Vigoda proof and cited results
@@ -160,8 +163,10 @@ share their marginal off the ball. Otherwise it conditions on the sphere
 vertex of least total variation through a maximal coupling, and the
 conditioned laws are smaller instances, with the same root or rerooted at
 that vertex. The Lean bound uses `1 + log ℓ` where the written proof uses
-harmonic numbers. The statement uses actual Potts laws and positive
-sphere-decay error, and assumes none of the spectral gap, covariance
+harmonic numbers. The formalized statement is the positive-activity branch
+with positive sphere-decay error; it does not reproduce the separate
+zero-temperature colouring endpoint. It assumes none of the spectral gap,
+covariance
 bounds, response induction, weighted-source estimate, or girth-five
 coupling conclusion.
 
@@ -202,8 +207,8 @@ of every auxiliary statement or every generalization in the appendix.
   factorization argument.
 
 The BBR proof also uses independent arithmetic certificates for the small
-degree-gap-two cases. Three cited results are proved by a route different
-from the cited proof: the critical-line hard bound by the CV contraction
+degree-gap-two cases. Three cited ingredients are formalized by a route
+different from the cited proof: the critical-line hard bound by the CV contraction
 rather than the CFFGZZ argument, BBR Proposition 2.6(i) by concavity of
 `log` rather than BBR's Lemmas 4.1 and 4.2(i), and CLMM Lemma 5.13 with
 `1 + log ℓ` rather than harmonic numbers. Thus the regional conclusions can
@@ -213,8 +218,8 @@ intermediate proof path in the paper.
 ## Recorded verification
 
 The complete single-library check, including the main text and all seven
-appendix regions, passed **4036 build jobs** and the transitive axiom
-audit of **10134 project declarations** on 2026-09-24. Only `propext`,
+appendix regions, passed **4040 build jobs** and the transitive axiom
+audit of **10372 project declarations** on 2026-09-25. Only `propext`,
 `Classical.choice`, and `Quot.sound` were used. This run includes the
 five modules that prove the cited results:
 `Coupling/Girth/Tree/InfluenceIdentity`, `Coupling/CLMM/SphereCoupling`,

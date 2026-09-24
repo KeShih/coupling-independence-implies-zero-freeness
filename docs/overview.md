@@ -31,7 +31,8 @@ the BBR interval, Carlson–Vigoda, near-Vigoda, and unrestricted girth 5 at
 `q ≥ (1+δ)Δ` for a degree threshold depending only on δ.
 See the [Appendix module guide](appendix/README.md) and
 [proof status](appendix/STATUS.md) for exact statements, the complete
-internal girth-five proof, and the cited results each region uses, all proved in Lean. Run `bash scripts/check-appendix.sh` for the completed-region build
+internal girth-five proof, and the formalized versions of the cited
+ingredients each region uses. Run `bash scripts/check-appendix.sh` for the completed-region build
 and transitive axiom audit. Girth conditions in the paper-facing results
 apply to the free residual graph after arbitrary pinning.
 
