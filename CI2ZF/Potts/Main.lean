@@ -44,5 +44,14 @@ import CI2ZF.Coupling.Vigoda.PositiveExactCI
 import CI2ZF.Potts.Transfer.PositiveFamilyTransfer
 import CI2ZF.Potts.Theorems.PositiveGraphClassTransfer
 import CI2ZF.Potts.Geometry.PinningLeafGirth
+import CI2ZF.Coupling.Foundations.StationaryComparison
+import CI2ZF.Potts.Model.Real.EndpointClosure
+import CI2ZF.Coupling.Vigoda.CoupledActivation
+import CI2ZF.Coupling.Vigoda.SoftFlipKernel
+import CI2ZF.Coupling.Vigoda.RegularColourTable
+import CI2ZF.Potts.Model.PinnedMarginal
+import CI2ZF.Potts.Theorems.ThresholdComparison
+import CI2ZF.Potts.Theorems.UniformClassConstants
+import CI2ZF.Potts.Geometry.PinningLeafTransfer
 
 /-! Main-text Potts coupling and zero-free theorems. -/

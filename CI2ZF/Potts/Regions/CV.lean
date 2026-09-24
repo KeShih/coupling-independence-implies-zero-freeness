@@ -38,6 +38,13 @@ import CI2ZF.Coupling.CV.RootCost
 import CI2ZF.Coupling.CV.BaselinePartition
 import CI2ZF.Coupling.CV.CouplingCharge
 import CI2ZF.Potts.Regions.CV.ZeroFree
+import CI2ZF.Coupling.CV.ClosedKernel
+import CI2ZF.Coupling.CV.RootLocalStructure
+import CI2ZF.Coupling.CV.MovePartition
+import CI2ZF.Coupling.CV.FreshGain
+import CI2ZF.Coupling.CV.ExpectedLoss
+import CI2ZF.Coupling.CV.HighColours
+import CI2ZF.Coupling.CV.Assembly
 
 /-!
 # Carlson--Vigoda appendix: complete CI and zero-free theorem
