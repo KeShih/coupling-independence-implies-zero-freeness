@@ -42,15 +42,12 @@ theorem cv_vertex_field_zero_free {Δ : ℕ} (hΔ : 125 ≤ Δ)
   obtain ⟨cost, hCI⟩ := cv_hard_coupling.{u,v} C hΔ hq hcolours
   exact all_vertex_field_transfer C Δ hcolours cost hCI
 
-/-- Regime (i), retaining CFFGZZ Theorem 20 only at the at most twenty
-critical integer pairs left by the proved near-Vigoda reduction. -/
+/-- Regime (i), with no external literature hypothesis. -/
 theorem near_vigoda_vertex_field_zero_free {Δ : ℕ} (hΔ : 2 ≤ Δ)
-    (hq : ((11 / 6 : ℝ) - 1 / 84000) * Δ ≤ Fintype.card C)
-    (critical : ∀ j : ℕ, 1 ≤ j → j ≤ 20 → Δ = 6 * j → Fintype.card C = 11 * j →
-      ExternalCriticalHardColouringTheorem.{u,v} C Δ) :
+    (hq : ((11 / 6 : ℝ) - 1 / 84000) * Δ ≤ Fintype.card C) :
     ∃ θ > 0, θ ≤ (1 / 2 : ℝ) ∧ UniformVertexFieldZeroFree.{u,v} C Δ θ := by
   have hcolours := colours_succ_of_nearVigoda hΔ hq
-  obtain ⟨cost, hCI⟩ := near_vigoda_hard_coupling C hΔ hq hcolours critical
+  obtain ⟨cost, hCI⟩ := near_vigoda_hard_coupling C hΔ hq hcolours
   exact all_vertex_field_transfer C Δ hcolours cost hCI
 
 omit [Nonempty C] in

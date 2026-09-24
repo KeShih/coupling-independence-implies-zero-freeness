@@ -27,6 +27,23 @@ theorem transfer_inputs {Δ : ℕ} (hΔ : 125 ≤ Δ)
   · intro δ _ _
     exact ⟨ciConstant, fun x hx => root_coupling C hΔ hq hcolours x hx.2⟩
 
+/-- The same root coupling bound in either CV regime, including the
+critical line `q ≥ 11Δ/6` for every `Δ ≥ 6`. -/
+theorem root_coupling_of_regime {Δ : ℕ} (hreg : Regime Δ (Fintype.card C))
+    (hcolours : Δ + 1 ≤ Fintype.card C)
+    (x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1) :
+    RootCouplingBound.{u,v} C Δ hcolours x ciConstant := by
+  intro O _ I hd a b
+  exact option_root_ci_of_regime I hreg hd a b x hx1
+
+theorem transfer_inputs_of_regime {Δ : ℕ} (hreg : Regime Δ (Fintype.card C))
+    (hcolours : Δ + 1 ≤ Fintype.card C) :
+    TransferCouplingInputs.{u,v} C Δ hcolours := by
+  constructor
+  · exact ⟨ciConstant, root_coupling_of_regime C hreg hcolours PinningData.hardParameter (by norm_num)⟩
+  · intro δ _ _
+    exact ⟨ciConstant, fun x hx => root_coupling_of_regime C hreg hcolours x hx.2⟩
+
 /-- Regime (ii): one radius works for every graph size and arbitrary
 pinning on the entire physical interval. No literature input remains. -/
 theorem zero_free {Δ : ℕ} (hΔ : 125 ≤ Δ)

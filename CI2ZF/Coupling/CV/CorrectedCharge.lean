@@ -107,9 +107,9 @@ lemma correctedRegularCharge_unavailable_le
     {FX FY : HardListInstance V C} {X Y : V → C} {v : V} {a b c : C}
     (h : RootLocalPair FX FY X Y v a b) (choice : GlobalChoice h)
     (hca : c ≠ a) (hcb : c ≠ b) (hav : c ∉ FX.list v) (gain : ℝ)
-    {loss : ℝ} (hloss : loss ≤ 799 / 5400) :
+    {loss : ℝ} (hloss : loss ≤ 81 / 500) :
     correctedRegularCharge h choice c hca hcb gain loss ≤
-      (39743 / 27000 : ℝ) * (rootNeighbours FX X v c).card := by
+      (743 / 500 : ℝ) * (rootNeighbours FX X v c).card := by
   have hb := canonicalColourCharge_le_of_unavailable h hca hcb (choice.left c) (choice.right c) hav
   have hl := mul_le_mul_of_nonneg_right hloss
     (Nat.cast_nonneg (rootNeighbours FX X v c).card : (0 : ℝ) ≤ _)
@@ -149,8 +149,8 @@ lemma correctedRegularCharge_available_high_le
   simpa only [correctedRegularCharge, if_pos hav] using
     canonicalColourCharge_high_corrected h choice hca hcb hm hgain hloss
 
-lemma low_le_uniform {gain loss : ℝ} (hgain : 13481 / 361800 ≤ gain)
-    (hloss : loss ≤ 799 / 5400) : low gain loss ≤ 49247 / 27000 := by
+lemma low_le_uniform {gain loss : ℝ} (hgain : 51 / 2200 ≤ gain)
+    (hloss : loss ≤ 81 / 500) : low gain loss ≤ 919 / 500 := by
   unfold low
   apply max_le
   · linarith

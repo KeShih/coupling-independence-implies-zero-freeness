@@ -102,7 +102,7 @@ theorem expected_correctedHardColourCharge_le [Nonempty V] [Nonempty C]
     (I : PinningData V C) (X Y : V → C) (v : V)
     (hroot : X v ≠ Y v) (hagree : ∀ u, u ≠ v → X u = Y u)
     (c : C) (x : ℝ) (hx : x ∈ Set.Icc (0 : ℝ) 1)
-    {gain loss : ℝ} (hgain : 13481 / 361800 ≤ gain) (hloss : loss ≤ 799 / 5400) :
+    {gain loss : ℝ} (hgain : 51 / 2200 ≤ gain) (hloss : loss ≤ 81 / 500) :
     expectReal (commonCoinLaw (K := I.Constraint) (1 - x) ⟨by linarith [hx.2], by linarith [hx.1]⟩)
       (fun ω => let h := activatedSet_rootLocal I X Y ω v (X v) (Y v) rfl rfl hroot hagree
         correctedHardColourCharge h (optimizedChoice h) gain loss c) ≤
@@ -143,7 +143,7 @@ theorem expected_correctedHardCharge_envelope [Nonempty V] [Nonempty C]
     (I : PinningData V C) (X Y : V → C) (v : V)
     (hroot : X v ≠ Y v) (hagree : ∀ u, u ≠ v → X u = Y u)
     (x : ℝ) (hx : x ∈ Set.Icc (0 : ℝ) 1) {Δ : ℕ} (hdegree : I.DegreeBound Δ)
-    {gain loss : ℝ} (hgain : 13481 / 361800 ≤ gain) (hloss : loss ≤ 799 / 5400) :
+    {gain loss : ℝ} (hgain : 51 / 2200 ≤ gain) (hloss : loss ≤ 81 / 500) :
     expectReal (commonCoinLaw (K := I.Constraint) (1 - x) ⟨by linarith [hx.2], by linarith [hx.1]⟩)
       (fun ω => let h := activatedSet_rootLocal I X Y ω v (X v) (Y v) rfl rfl hroot hagree
         ∑ c, correctedHardColourCharge h (optimizedChoice h) gain loss c) ≤

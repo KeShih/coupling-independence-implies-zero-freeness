@@ -91,9 +91,9 @@ lemma high_multiplicity_arithmetic {k : ℝ} (hk : 3 ≤ k) :
   unfold bulk
   linarith
 
-lemma missing_colour_arithmetic {k loss : ℝ} (hk : 0 ≤ k) (hloss : loss ≤ 799 / 5400) :
-    k * (1 + 81 / 250 + loss) ≤ (39743 / 27000) * k ∧
-    (39743 / 27000) * k ≤ bulk * k := by
+lemma missing_colour_arithmetic {k loss : ℝ} (hk : 0 ≤ k) (hloss : loss ≤ 81 / 500) :
+    k * (1 + 81 / 250 + loss) ≤ (743 / 500) * k ∧
+    (743 / 500) * k ≤ bulk * k := by
   constructor
   · nlinarith
   · unfold bulk; nlinarith

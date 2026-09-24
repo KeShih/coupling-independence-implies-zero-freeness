@@ -33,7 +33,7 @@ theorem high_multiplicity_probability_bound {x : ℝ}
 /-- The high physical-multiplicity averaged rate never exceeds the bulk rate. -/
 theorem averaged_high_rate {x : ℝ} (hx : x ∈ Set.Icc (0 : ℝ) 1)
     {m : ℕ} (hm : 3 ≤ m) :
-    bulk * (1 - x) + ((49247 / 27000) - bulk) * (1 - x) * x ^ (m - 2) *
+    bulk * (1 - x) + ((919 / 500) - bulk) * (1 - x) * x ^ (m - 2) *
       (1 + ((m - 2 : ℕ) : ℝ) * (1 - x)) ≤ bulk := by
   have h := high_multiplicity_probability_bound hx hm
   have he : m - 2 = (m - 3) + 1 := by omega
@@ -50,9 +50,9 @@ theorem degree_resource {L H B Lx Δ : ℝ} (hdegree : L + H + B ≤ Δ) :
 /-- The finite-binomial averaging coefficient is strictly below the bulk
 budget, including the contribution of missing colour baselines. -/
 lemma averaging_constants :
-    (39743 / 27000 : ℝ) < bulk ∧ 1 < bulk ∧
-    0 < (49247 / 27000 : ℝ) - bulk ∧
-    0 < 3 * bulk - 2 * (49247 / 27000 : ℝ) := by norm_num [bulk]
+    (743 / 500 : ℝ) < bulk ∧ 1 < bulk ∧
+    0 < (919 / 500 : ℝ) - bulk ∧
+    0 < 3 * bulk - 2 * (919 / 500 : ℝ) := by norm_num [bulk]
 
 end
 end CI2ZF.Appendix.CV

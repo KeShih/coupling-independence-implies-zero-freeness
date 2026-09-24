@@ -25,19 +25,23 @@ lemma colours_slack {Δ : ℕ} (hΔ : 125 ≤ Δ)
   have h : (Δ : ℝ) + 2 ≤ Fintype.card C := by linarith
   exact_mod_cast h
 
+lemma regime_colours_slack {Δ : ℕ} (h : Regime Δ (Fintype.card C)) : Δ + 2 ≤ Fintype.card C := by
+  have hs := h.slack
+  exact_mod_cast hs
+
 /-- All concrete adjacent-drift hypotheses are discharged. -/
 theorem soft_adjacent_contraction [Nonempty V]
-    (I : PinningData V C) {Δ : ℕ} (hΔ : 125 ≤ Δ) (hd : I.DegreeBound Δ)
-    (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C)
+    (I : PinningData V C) {Δ : ℕ} (hreg : Regime Δ (Fintype.card C)) (hd : I.DegreeBound Δ)
     (x : ℝ) (hx0 : 0 < x) (hx1 : x < 1) : AdjacentSoftContraction I Δ x hx0 hx1 := by
   intro X Y hXY
   obtain ⟨v, hv, hagree⟩ := CI2ZF.exists_unique_disagreement hXY
-  have hd0 : 0 < Δ := by omega
+  have hd0 : 0 < Δ := hreg.degree_pos
+  have hq := hreg.colours
   have hfree (u : V) : I.graph.degree u ≤ Δ := (Nat.le_add_right _ _).trans (hd u)
   have hh := (soft_W_le_averagedCost I X Y v hv hagree
     (optimizedAdjacentChoices I X Y v hv hagree) x hx0 hx1 (geometricMetric I x)
     (geometricMetric_nonneg I ⟨hx0.le, hx1.le⟩ hd0 hfree hq)).trans
-      (averaged_geometric_contract I X Y v hv hagree x ⟨hx0.le, hx1.le⟩ hΔ hd hq)
+      (averaged_geometric_contract I X Y v hv hagree x ⟨hx0.le, hx1.le⟩ hreg hd)
   rwa [geometricMetric_adjacent I ⟨hx0.le, hx1.le⟩ hd0 hfree hq hXY] at hh
 
 variable {O : Type*} [Fintype O]
@@ -56,18 +60,18 @@ theorem optionChild_soft_boundary_W_le [Nonempty O]
 
 /-- The exact interior bound has an extra factor `1-x`. -/
 theorem option_root_ci_open [Nonempty O]
-    (I : PinningData (Option O) C) {Δ : ℕ} (hΔ : 125 ≤ Δ) (hd : I.DegreeBound Δ)
-    (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C) (a b : C)
+    (I : PinningData (Option O) C) {Δ : ℕ} (hreg : Regime Δ (Fintype.card C))
+    (hd : I.DegreeBound Δ) (a b : C)
     (x : ℝ) (hx0 : 0 < x) (hx1 : x < 1) :
     W ham ((optionChildData I a).gibbs x hx0.le ((optionChildData I a).partition_pos_of_parameter_pos hx0))
       ((optionChildData I b).gibbs x hx0.le ((optionChildData I b).partition_pos_of_parameter_pos hx0)) ≤
         2 * (1 - x) / (metricLower * gap) := by
-  have hd0 : 0 < Δ := by omega
+  have hd0 : 0 < Δ := hreg.degree_pos
   have hchild (c : C) := optionChildData_degreeBound I hd c
   have hcomp (c : C) := gibbs_comparison_of_adjacent
     (optionChildData I c) (optionMiddleData I) hd0
-    (fun u => (Nat.le_add_right _ _).trans (hchild c u)) hq x hx0 hx1
-    (soft_adjacent_contraction _ hΔ (hchild c) hq x hx0 hx1)
+    (fun u => (Nat.le_add_right _ _).trans (hchild c u)) hreg.colours x hx0 hx1
+    (soft_adjacent_contraction _ hreg (hchild c) x hx0 hx1)
     (fun X => optionChild_soft_boundary_W_le I hd c X x hx0 hx1)
   have ht := W_triangle ham_nonneg ham_nonneg ham_nonneg ham_triangle
     ((optionChildData I a).gibbs x hx0.le ((optionChildData I a).partition_pos_of_parameter_pos hx0))
@@ -104,6 +108,33 @@ theorem closed_gibbs_bound_of_open
       ham_nonneg ham_self ham_triangle ham_le_card hpos
   · exact hpos x hxpos hx1
 
+/-- Full-interval CV root CI in either regime, on actual finite Gibbs laws,
+with no external coupling or contraction premise. -/
+theorem option_root_ci_of_regime
+    (I : PinningData (Option O) C) {Δ : ℕ} (hreg : Regime Δ (Fintype.card C))
+    (hd : I.DegreeBound Δ) (a b : C)
+    (x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1) :
+    W ham
+      ((optionChildData I a).nonnegativeGibbs (optionChildData_degreeBound I hd a)
+        (regime_colours_slack hreg) x)
+      ((optionChildData I b).nonnegativeGibbs (optionChildData_degreeBound I hd b)
+        (regime_colours_slack hreg) x) ≤
+        ciConstant := by
+  apply closed_gibbs_bound_of_open _ _ (optionChildData_degreeBound I hd a)
+    (optionChildData_degreeBound I hd b) (regime_colours_slack hreg) ciConstant_bounds.1.le _ x hx1
+  intro y hy0 hy1
+  cases isEmpty_or_nonempty O with
+  | inl h =>
+    let := h
+    rw [W_ham_eq_zero_of_isEmpty]
+    exact ciConstant_bounds.1.le
+  | inr h =>
+    let := h
+    apply (option_root_ci_open I hreg hd a b y hy0 hy1).trans
+    unfold ciConstant
+    apply div_le_div_of_nonneg_right _ (by norm_num [metricLower, gap])
+    linarith
+
 /-- The appendix's full-interval CV root CI theorem, on actual finite
 Gibbs laws, with no external coupling or contraction premise. -/
 theorem option_root_ci
@@ -113,21 +144,21 @@ theorem option_root_ci
     W ham
       ((optionChildData I a).nonnegativeGibbs (optionChildData_degreeBound I hd a) (colours_slack hΔ hq) x)
       ((optionChildData I b).nonnegativeGibbs (optionChildData_degreeBound I hd b) (colours_slack hΔ hq) x) ≤
-        ciConstant := by
-  apply closed_gibbs_bound_of_open _ _ (optionChildData_degreeBound I hd a)
-    (optionChildData_degreeBound I hd b) (colours_slack hΔ hq) ciConstant_bounds.1.le _ x hx1
-  intro y hy0 hy1
-  cases isEmpty_or_nonempty O with
-  | inl h =>
-    let := h
-    rw [W_ham_eq_zero_of_isEmpty]
-    exact ciConstant_bounds.1.le
-  | inr h =>
-    let := h
-    apply (option_root_ci_open I hΔ hd hq a b y hy0 hy1).trans
-    unfold ciConstant
-    apply div_le_div_of_nonneg_right _ (by norm_num [metricLower, gap])
-    linarith
+        ciConstant :=
+  option_root_ci_of_regime I (Or.inl ⟨hΔ, hq⟩) hd a b x hx1
+
+/-- The same bound on the critical line `q ≥ 11Δ/6`, for every degree `Δ ≥ 6`. -/
+theorem option_root_ci_critical
+    (I : PinningData (Option O) C) {Δ : ℕ} (hΔ : 6 ≤ Δ) (hd : I.DegreeBound Δ)
+    (hq : (11 / 6 : ℝ) * Δ ≤ Fintype.card C) (a b : C)
+    (x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1) :
+    W ham
+      ((optionChildData I a).nonnegativeGibbs (optionChildData_degreeBound I hd a)
+        (regime_colours_slack (Or.inr ⟨hΔ, hq⟩)) x)
+      ((optionChildData I b).nonnegativeGibbs (optionChildData_degreeBound I hd b)
+        (regime_colours_slack (Or.inr ⟨hΔ, hq⟩)) x) ≤
+        ciConstant :=
+  option_root_ci_of_regime I (Or.inr ⟨hΔ, hq⟩) hd a b x hx1
 
 end
 end CI2ZF.Appendix.CV

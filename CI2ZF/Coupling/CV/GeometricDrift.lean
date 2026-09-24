@@ -157,8 +157,7 @@ theorem averaged_geometric_drift_le
     (I : PinningData V C) (X Y : V → C) (v : V)
     (hroot : X v ≠ Y v) (hagree : ∀ u, u ≠ v → X u = Y u)
     (x : ℝ) (hx : x ∈ Set.Icc (0 : ℝ) 1) {Δ : ℕ}
-    (hΔ : 125 ≤ Δ) (hdegree : I.DegreeBound Δ)
-    (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C) :
+    (hreg : Regime Δ (Fintype.card C)) (hdegree : I.DegreeBound Δ) :
     averagedCost I X Y v hroot hagree (optimizedAdjacentChoices I X Y v hroot hagree)
       x hx (geometricMetric I x) ≤ geometricMetric I x X Y -
         gap * Δ / ((Fintype.card V : ℝ) * Fintype.card C) := by
@@ -170,12 +169,9 @@ theorem averaged_geometric_drift_le
   let φ : ℝ := L / d
   let gain : ℝ := gammaGain ρ d
   let loss : ℝ := gammaLoss ρ d θ φ
-  have hd125 : 125 ≤ d := by dsimp [d]; exact_mod_cast hΔ
-  have hd : 0 < d := by linarith
+  have hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C := hreg.colours
+  have hd : 0 < d := by dsimp [d]; exact_mod_cast hreg.degree_pos
   have hn : 0 < (Fintype.card V : ℝ) * Fintype.card C := by positivity
-  have hr : 1809 / 1000 ≤ ρ := by
-    apply (le_div_iff₀ hd).mpr
-    exact hq
   have hθ : θ ∈ Set.Icc (0 : ℝ) 1 := ⟨by dsimp [θ]; linarith [hx.2], by dsimp [θ]; linarith [hx.1]⟩
   have hφ : φ ∈ Set.Icc (0 : ℝ) 1 := by
     constructor
@@ -183,16 +179,16 @@ theorem averaged_geometric_drift_le
     · apply (div_le_one hd).mpr
       exact (lowAvailabilityMass_le_degree I X Y v hx).trans
         (by dsimp [d]; exact_mod_cast ((Nat.le_add_right _ _).trans (hdegree v) : I.graph.degree v ≤ Δ))
-  obtain ⟨hg, _, hl0, hl⟩ := geometric_coefficients_box hr hd125 hθ hφ
+  obtain ⟨hg, hl0, hl⟩ := hreg.coefficients hθ hφ
   have hactual := averaged_geometric_drift_corrected_le I X Y v hroot hagree x hx
-    (by omega : 0 < Δ) hdegree hq (by change 0 ≤ gammaGain ρ d; linarith) hl0
+    hreg.degree_pos hdegree hq (by change 0 ≤ gammaGain ρ d; linarith) hl0
     (gain := gain) (loss := loss) rfl rfl
   have henv := expected_correctedHardCharge_envelope I X Y v hroot hagree x hx hdegree hg hl
   change expectReal (activityCoins I x hx) (fun ω =>
       let h := activatedSet_rootLocal I X Y ω v (X v) (Y v) rfl rfl hroot hagree
       ∑ c, correctedHardColourCharge h (optimizedChoice h) gain loss c) ≤
     -q + θ * low gain loss * L + bulk * (d - L) at henv
-  have hscalar := mul_le_mul_of_nonneg_left (scalar_closure hr hd125 hθ hφ) hd.le
+  have hscalar := mul_le_mul_of_nonneg_left (hreg.scalar_closure hθ hφ) hd.le
   have hid : d * (-ρ + bulk * (1 - φ) + θ * φ * low gain loss) =
       -q + θ * low gain loss * L + bulk * (d - L) := by
     dsimp [ρ, φ]
@@ -217,15 +213,14 @@ theorem averaged_geometric_contract
     (I : PinningData V C) (X Y : V → C) (v : V)
     (hroot : X v ≠ Y v) (hagree : ∀ u, u ≠ v → X u = Y u)
     (x : ℝ) (hx : x ∈ Set.Icc (0 : ℝ) 1) {Δ : ℕ}
-    (hΔ : 125 ≤ Δ) (hdegree : I.DegreeBound Δ)
-    (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C) :
+    (hreg : Regime Δ (Fintype.card C)) (hdegree : I.DegreeBound Δ) :
     averagedCost I X Y v hroot hagree (optimizedAdjacentChoices I X Y v hroot hagree)
       x hx (geometricMetric I x) ≤
       (1 - gap * Δ / ((Fintype.card V : ℝ) * Fintype.card C)) * geometricMetric I x X Y := by
-  have hd := averaged_geometric_drift_le I X Y v hroot hagree x hx hΔ hdegree hq
+  have hd := averaged_geometric_drift_le I X Y v hroot hagree x hx hreg hdegree
   have hfree (u : V) : I.graph.degree u ≤ Δ :=
     (Nat.le_add_right _ _).trans (hdegree u)
-  have hupper := (geometricMetric_comparison I hx (by omega : 0 < Δ) hfree hq X Y).2
+  have hupper := (geometricMetric_comparison I hx hreg.degree_pos hfree hreg.colours X Y).2
   have hham : ham X Y = 1 := by
     change (hamCard X Y : ℝ) = 1
     rw [adjacent_hamCard_one I X Y v hroot hagree]

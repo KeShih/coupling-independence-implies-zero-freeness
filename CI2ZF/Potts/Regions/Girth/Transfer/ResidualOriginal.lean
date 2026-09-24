@@ -55,10 +55,10 @@ theorem girth_five_residual_original_zero_free (external : SphereCouplingInput.{
 
 /-- The q ≥ Δ+3 theorem with the paper's residual-girth hypothesis. -/
 theorem high_girth_residual_original_zero_free
-    (identity : CavityTree.CLMMInfluenceIdentity C) (transfer : CLMM.Literature.{u,v} C)
+    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ eps > 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ g eps := by
-  obtain ⟨g, hg, eps, heps, hn⟩ := high_girth_zero_free identity transfer Δ hΔ hq
+  obtain ⟨g, hg, eps, heps, hn⟩ := high_girth_zero_free transfer Δ hΔ hq
   exact ⟨g, hg, eps, heps, uniformResidualGirthPottsZeroFree_of_residual heps hn⟩
 
 end Girth
