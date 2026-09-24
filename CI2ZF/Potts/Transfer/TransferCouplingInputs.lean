@@ -33,8 +33,9 @@ structure TransferCouplingInputs (C : Type v) [Fintype C] [Nonempty C]
     ∀ x : PinningData.NonnegativeParameter, (x : ℝ) ∈ Set.Icc δ 1 →
       RootCouplingBound.{u, v} C Δ hq x cost
 
-/-- This is precisely the normalized root-deleted hard CI statement
-used from the external colouring theorem; it asserts no zero-freeness. -/
+/-- The normalized root-deleted hard CI statement, the form in which the
+equality case uses CFFGZZ Theorem 20; it asserts no zero-freeness. Proved
+on the critical line as `critical_hard_colouring_input`. -/
 def CriticalHardColouringInput (C : Type v) [Fintype C] [Nonempty C]
     (Δ : ℕ) (hq : Δ + 1 ≤ Fintype.card C) : Prop :=
   ∃ cost : ℝ, RootCouplingBound.{u, v} C Δ hq PinningData.hardParameter cost
