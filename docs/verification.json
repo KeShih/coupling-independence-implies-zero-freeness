@@ -50,7 +50,7 @@
     "broken_local_links": [],
     "link_check_scope": "Local target file existence; external URLs not fetched by this script.",
     "document_sha256": {
-      "README.md": "443ab2ae98f719c0008fffc40d416f4912dcd2934eea336694756ff134a6a1ee",
+      "README.md": "c23cc17ac3fb785f4e7c16efc969508bf9b47a30a3aaeb73bde2a4dfcaf1cbff",
       "docs/README.md": "232d139ce1365a1f2a5680fe6243c614cff916a7d6d571d73eeb5c843c0af61b",
       "docs/appendix/README.md": "fa1c8f435a3b1f01218a201016bc72ba6f9a9733c301a889ee4c089b8341e169",
       "docs/appendix/STATUS.md": "cfbf658f9c343d54b912f70d8c707eb310b3f511dd4fc852be8909b632a3000d",
@@ -81,7 +81,7 @@
     "missing_imports": [],
     "lexer_issues": [],
     "scanner_sha256": "cebfb9f2b8c57f9fb2ab32d91612b1bf0f04f6b1aa7f52525ae21e744a8e3529",
-    "closure_manifest_sha256": "b8a1423319efb6102ee30713a3d97ebe8bfc7e36550c04ceb3647992be4a9fcf"
+    "closure_manifest_sha256": "fffcbd84d6c9557e9e23595616f70a07e2414dd31b3f37566cd9763c64df509f"
   },
   "literature_input_register": "external-inputs.md",
   "region_statements_and_inputs": "appendix/STATUS.md",
@@ -677,7 +677,7 @@
       "CI2ZF.LeeYang.high_girth_original_field_transfer"
     ],
     "retained_mathematical_inputs": [],
-    "companion_pdf_sha256": "e4bf1cba1127f8418d1d1c10347bb15e95dab03f0a0379ef3d8382907a479ff9",
+    "companion_pdf_sha256": "f0bb4462eb20a0353610d735b66733029e3309b3852e5d78b08c15870871c48b",
     "signature_and_axiom_check_sha256": "d444e74019081f7853feee25861b25b354b96cfef3faa5becd2c86a525babdcc",
     "signature_and_axiom_log_sha256": "5d9ca49794fb0d6d15ca51583c011b70d071a6d073e3cbbe8beaca75440e0be7",
     "build_mode": "Incremental build with cached unchanged dependencies; changed modules compiled and whole-library transitive axiom audit rerun."
