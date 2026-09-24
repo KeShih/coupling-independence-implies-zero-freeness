@@ -54,8 +54,9 @@ theorem strict_transfer_coupling_inputs (C : Type v) [Fintype C] [Nonempty C]
   · intro δ _ _
     exact ⟨_, fun x hx => hb x hx.2⟩
 
-/-- At equality the positive-temperature input is proved here. The
-only external hypothesis is the separately named hard colouring input. -/
+/-- At equality the positive-temperature input is proved here. The hard
+colouring input is a parameter; `critical_line_transfer_coupling_inputs`
+supplies it. -/
 theorem critical_transfer_coupling_inputs (C : Type v) [Fintype C] [Nonempty C]
     {Δ : ℕ} (hΔ : 2 ≤ Δ) (hq : (Fintype.card C : ℝ) = (11 / 6 : ℝ) * Δ)
     (hcolours : Δ + 1 ≤ Fintype.card C)

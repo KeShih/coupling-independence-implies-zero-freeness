@@ -63,6 +63,16 @@ theorem critical_hard_colouring_input (C : Type v) [Fintype C] [Nonempty C]
   intro O _ I hd a b
   exact Appendix.CV.option_root_ci_critical I hΔ hd hq a b PinningData.hardParameter (by norm_num)
 
+/-- On the critical line both coupling inputs of the transfer theorem hold:
+the hard bound by `critical_hard_colouring_input`, and the constant
+`12/(11δ)` on `[δ,1]`. -/
+theorem critical_line_transfer_coupling_inputs (C : Type v) [Fintype C] [Nonempty C]
+    {Δ : ℕ} (hΔ : 2 ≤ Δ) (hq : (Fintype.card C : ℝ) = (11 / 6 : ℝ) * Δ)
+    (hcolours : Δ + 1 ≤ Fintype.card C) :
+    TransferCouplingInputs.{u, v} C Δ hcolours :=
+  critical_transfer_coupling_inputs C hΔ hq hcolours
+    (critical_hard_colouring_input C (critical_line_degree_ge_six hΔ hq) hq.ge hcolours)
+
 /-- The complete main-text Potts theorem for `q ≥ 11Δ/6`, with no
 literature hypothesis. -/
 theorem potts_zero_free_of_vigoda_line (C : Type v) [Fintype C] [Nonempty C]
