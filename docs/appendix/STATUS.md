@@ -19,11 +19,11 @@ specified below. The auxiliary and generalization limits are recorded in
 | Region | Coupling independence | Uniform zero-free conclusion |
 | --- | --- | --- |
 | Edge-Potts, maximum original degree Δ≥2 and q ≥ 3Δ | `Edge.root_children_ci`: actual root-conditioned edge-colour Gibbs laws have Hamming transportation distance at most Δ−1, for every x in [0,1] | `Edge.edge_potts_zero_free`, including arbitrary edge pinning and the exact forced-zero multiplicity at zero |
-| Large girth, Δ ≥ 3 and q ≥ Δ+3 | `Girth.high_girth_coupling`: a girth threshold and one coupling constant work uniformly in graph size, pinning, and x in [0,1] | `Girth.high_girth_zero_free` and `Girth.high_girth_original_zero_free`, including arbitrary improper pinning and the exact forced-zero multiplicity |
+| Large girth, Δ ≥ 3 and q ≥ Δ+3 | `Girth.high_girth_coupling`: a girth threshold and one coupling constant work uniformly in graph size, pinning, and x in [0,1] | `Girth.high_girth_zero_free` and `Girth.high_girth_residual_original_zero_free`, with girth required only of the free residual graph, including arbitrary improper pinning and the exact forced-zero multiplicity |
 | General-graph high temperature, x₀>0 and q>11(1−x₀)Δ/6 | `high_temperature_graph_coupling`: the explicit constant 2(1−x₀)Δ / (q−11(1−x₀)Δ/6) works on [x₀,1] | `high_temperature_zero_free`, for both normalized and full partition functions, without a hard-colouring feasibility bound |
-| BBR large-girth interval, q≥3 and Δ/q≥(e−1/2)/(e−1) | `BBR.high_girth_coupling`: one girth threshold and one CI constant work on the entire closed interval [`BBR.start q Δ`,1] | `BBR.high_girth_zero_free` and `BBR.high_girth_original_zero_free_and_responses`, including actual one-root response logarithms |
+| BBR large-girth interval, q≥3 and Δ/q≥(e−1/2)/(e−1) | `BBR.high_girth_coupling`: one girth threshold and one CI constant work on the entire closed interval [`BBR.start q Δ`,1] | `BBR.high_girth_zero_free` and `BBR.high_girth_residual_original_zero_free`, for both normalized and full partition functions, with girth required only of the free residual graph; `BBR.high_girth_original_zero_free_and_responses` adds the actual one-root response logarithms |
 | Carlson–Vigoda, Δ≥125 and q≥1.809Δ | `CV.option_root_ci` and `CV.root_coupling`: actual normalized root-child laws have Hamming transport at most 409060125/50858 < 8043.19, uniformly on [0,1] | `CV.zero_free`: the full original-graph statement, arbitrary pinning, normalized nonvanishing and exact forced-zero multiplicity |
-| Near-Vigoda, Δ≥2 and q≥(11/6−1/84000)Δ | `Regimes` proves the exact integer reduction to the proved strict/CV regimes and at most twenty critical-line hard-colouring inputs | `near_vigoda_zero_free`: the full uniform original-graph statement on [0,1] |
+| Near-Vigoda, Δ≥2 and q≥(11/6−1/84000)Δ | `near_vigoda_transfer_inputs`: the hard-endpoint and every-[δ,1] coupling inputs, via the exact integer reduction `nearVigoda_regime_cases` to the proved strict/CV regimes and at most twenty critical-line hard-colouring inputs; `near_vigoda_noncritical_uniform_ci` gives one constant on [0,1] away from those pairs | `near_vigoda_zero_free`: the full uniform original-graph statement on [0,1] |
 | Girth 5, 0<δ≤1, Δ≥`Girth.girthFiveCIThreshold δ`, and q≥(1+δ)Δ | `Girth.girth_five_coupling`: one finite constant for every size, pinning, and x in [0,1] | `Girth.girth_five_zero_free` and `Girth.girth_five_residual_original_zero_free`, with girth required only of the free residual graph |
 
 Names in the table are relative to `CI2ZF.Appendix`.
@@ -160,12 +160,15 @@ path in the paper.
 
 The complete single-library check, including the main text and all seven
 appendix regions, passed **4031 build jobs** and the transitive axiom
-audit of **9690 project declarations** on 2026-09-10. Only `propext`,
+audit of **9693 project declarations** on 2026-09-24. Only `propext`,
 `Classical.choice`, and `Quot.sound` were used. The source scan covered all
 **496 library modules**, each reachable from `CI2ZF`, and found no forbidden
-proof constructs. This was an incremental build using the existing cache;
-the new BBR bridge and its changed downstream modules were compiled, and
-the whole-library transitive axiom audit was rerun. See the
-[verification record](../verification.json) for the current source hashes,
+proof constructs. This was an incremental build using the existing cache:
+the near-Vigoda module, which gained the packaged coupling theorems
+`near_vigoda_transfer_inputs` and `near_vigoda_noncritical_uniform_ci`, and
+its downstream modules were compiled, and the whole-library transitive
+axiom audit was rerun. See the [verification record](../verification.json)
+for the current source hashes, the
+[previous record](../provenance/pre-near-vigoda-ci-20260924-verification.json),
 the [pre-closure snapshot](../provenance/pre-bbr-influence-20260910-verification.json),
 and [the earlier verification](../provenance/lee-yang-verification.json).

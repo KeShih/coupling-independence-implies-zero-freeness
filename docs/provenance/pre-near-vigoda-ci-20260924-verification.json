@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "date": "2026-09-24",
-  "scope": "Joint Potts, Lee-Yang and Holant library verification, including the internally proved BBR influence identity, the packaged near-Vigoda coupling inputs, and all seven appendix regional endpoints under their registered literature inputs. Auxiliary/generalization scope limits remain documented separately.",
+  "date": "2026-09-10",
+  "scope": "Joint Potts, Lee-Yang and Holant library verification, including the internally proved BBR influence identity and all seven appendix regional endpoints under their registered literature inputs. Auxiliary/generalization scope limits remain documented separately.",
   "entry_module": "CI2ZF",
   "lean_version": "4.33.1",
   "mathlib_version": "v4.33.1",
@@ -9,7 +9,7 @@
   "command": "LEAN_NUM_THREADS=2 bash scripts/check-all.sh",
   "passed": true,
   "build_jobs": 4031,
-  "audited_project_declarations": 9693,
+  "audited_project_declarations": 9690,
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -17,7 +17,7 @@
   ],
   "joint_import_closure_files": 496,
   "all_library_modules_reachable": true,
-  "verification_log_sha256": "d75f9fea3451c9338ffc0ea2da0f431d4056be42ae3c7e5fb6f72b21f7f61fbd",
+  "verification_log_sha256": "09e6cb450686d1f151fc97e724cc4255737d3ab6e01dd23cbd1cc3d064bc23e5",
   "organization": {
     "library": "CI2ZF",
     "previous_published_commit": "1161126c2262e963c8042dd7f45423f65cdf3f81",
@@ -40,26 +40,26 @@
       "audit/Appendix.lean",
       "audit/CV.lean"
     ],
-    "scope_note": "Historical 2026-09-09 reorganization record. Its proof-preservation and change-count fields describe that reorganization, not the later proof updates; the latest is recorded in proof_update and earlier ones in the provenance snapshots."
+    "scope_note": "Historical 2026-09-09 reorganization record. Its proof-preservation and change-count fields describe that reorganization, not the subsequent BBR proof update recorded below."
   },
   "documentation": {
     "language": "English",
     "markdown_files": 10,
-    "readme_lines": 137,
+    "readme_lines": 42,
     "local_markdown_links_checked": 90,
     "broken_local_links": [],
     "link_check_scope": "Local target file existence; external URLs not fetched by this script.",
     "document_sha256": {
-      "README.md": "01eff0836319b354873adff121e571395fb0e3ab662903e963b78c7d5588cca3",
+      "README.md": "b36a923335c61da31906fbd97357fee21d3066fe530679da872a8af0411f9d85",
       "docs/README.md": "a76c7e24323da1faa43ae4e9f2f84909e81cb97a0264585667caaaff96db5d6d",
       "docs/appendix/README.md": "f9967290929793777805faf102bca8c43ce125e1383a9e3cb240cea5e734f1ee",
-      "docs/appendix/STATUS.md": "a55a3cc4e1921b951abfbb878aed95bdbddc6233de9e4ac08c3d9394d4d52f79",
+      "docs/appendix/STATUS.md": "d1327ad1941733afb5e8f01dfb91be8a5900af34009ff5b7366ea6630ae38674",
       "docs/external-inputs.md": "04b8dbc70d54020ef3c2b59df1d7b4236307c1bbe2dc85a181b86272ac217ae6",
       "docs/holant.md": "b9442e36e263b94e0c42fe69f241049a49467db403b0721b9ca18b43f4e25561",
       "docs/lee-yang.md": "0f41ddd6106585f503ba337cd6066a5af092889a683541894ba6ebd38896c005",
       "docs/overview.md": "74253a08e9024e2c796fa390522e7e1f19dc14cdbd34249602b89defc55c6000",
       "docs/potts.md": "79d08c62d88fb85099f75ff266400b8cfe59d13b7be3bf2cf3c2b3be4e9e3541",
-      "docs/provenance/README.md": "f64413d9921d88fff97fa8cdd85b3ed1c85b9be7e872519e6271d9bcd2624e86"
+      "docs/provenance/README.md": "3fd770f753c3911748a054cd418d95dbeee54132537927d9b9669ac9a00a262d"
     }
   },
   "source_scan": {
@@ -80,8 +80,8 @@
     "findings": [],
     "missing_imports": [],
     "lexer_issues": [],
-    "scanner_sha256": "cebfb9f2b8c57f9fb2ab32d91612b1bf0f04f6b1aa7f52525ae21e744a8e3529",
-    "closure_manifest_sha256": "15c23b79a16b04584b018560b58dab9dc1975145b09fbf5d839be5e52f755119"
+    "scanner_sha256": "e64165f28e37a9f76dcebd7873fc53d1a73d521c0ff4a06f4e7800426201e8b4",
+    "closure_manifest_sha256": "d4cc32f07b1e0604a3a2e8b4c7f2ea57cf0abbb017d095f7c7c6df11af3d016f"
   },
   "literature_input_register": "external-inputs.md",
   "region_statements_and_inputs": "appendix/STATUS.md",
@@ -535,7 +535,7 @@
     "CI2ZF.Potts.Regions.Girth.Transfer.Family": "1e27e09eb7700476184c432edbdd0ef55c15d0fe287831b16b1da47eb9a3d2c0",
     "CI2ZF.Potts.Regions.Girth.Transfer.ResidualOriginal": "181a74d0d26413bd44173e7a00b6e9129c1b34f83026bc924ce6cb09a89d40e7",
     "CI2ZF.Potts.Regions.HighTemperature.ZeroFree": "2ccf30b61aaab9ec91df6f52ae64894a996c2b36725d5baab85699a76a643cc4",
-    "CI2ZF.Potts.Regions.NearVigoda.Theorem": "4adf26564db3f272fc70328c4d8534d782f32205520a900545cda3533314fd19",
+    "CI2ZF.Potts.Regions.NearVigoda.Theorem": "f87fbe6bbb4274c6c61878181425b0d080d25d097f935521098f87a5334cc7c8",
     "CI2ZF.Potts.Regions": "81f2a3135a17697f7356784a80a09e785f744378d3bf1c772886f91fc2b063c3",
     "CI2ZF.Potts.Theorems.GraphClassPottsTransfer": "dd32a69138e41aec8ebb968a4d19789a44b47ff2f8d0217816e0087ef4d2cff5",
     "CI2ZF.Potts.Theorems.PositiveGraphClassTransfer": "9d51c060ba256b5856797eceb377bd6993474f3172f9a3dc8b1570d9064de4e8",
@@ -595,23 +595,30 @@
     "scripts/lake.sh": "4eed4b62190852f1f43352a1d035baab5470d267f5ae7a4cc110d1ec4e768d65"
   },
   "proof_update": {
-    "date": "2026-09-24",
-    "description": "Add the packaged near-Vigoda coupling theorems (regime (i) of the companion's coupling-input theorem), assembled from existing proved theorems; no existing statement or proof changed. Refresh the companion paper PDF and the documentation.",
-    "previous_verification": "provenance/pre-near-vigoda-ci-20260924-verification.json",
-    "changed_modules": [
-      "CI2ZF.Potts.Regions.NearVigoda.Theorem"
+    "date": "2026-09-10",
+    "description": "Prove the BBR level influence identity from actual finite Gibbs conditional expectations and normalized Jacobian algebra; remove its premise from every BBR public endpoint.",
+    "previous_verification": "provenance/pre-bbr-influence-20260910-verification.json",
+    "new_modules": [
+      "CI2ZF.Coupling.BBR.InfluenceAlgebra",
+      "CI2ZF.Coupling.BBR.InfluenceIdentity",
+      "CI2ZF.Coupling.Girth.Tree.ConditionalExpectation",
+      "CI2ZF.Coupling.Girth.Tree.LevelObservable"
     ],
-    "new_modules": [],
-    "new_public_theorems": [
-      "CI2ZF.Appendix.near_vigoda_transfer_inputs",
-      "CI2ZF.Appendix.near_vigoda_noncritical_uniform_ci"
+    "internal_witness": "CI2ZF.Appendix.BBR.influenceIdentity",
+    "public_endpoints_without_identity_premise": [
+      "CI2ZF.Appendix.BBR.high_girth_coupling",
+      "CI2ZF.Appendix.BBR.high_girth_zero_free",
+      "CI2ZF.Appendix.BBR.high_girth_original_zero_free_and_responses",
+      "CI2ZF.Appendix.BBR.high_girth_residual_original_zero_free"
     ],
-    "retained_mathematical_inputs": [
-      "CI2ZF.Potts.ExternalCriticalHardColouringTheorem"
+    "remaining_bbr_mathematical_inputs": [
+      "BBR.Literature.proposition_2_6_i",
+      "BBR.Literature.theorem_2_5",
+      "CLMM.Literature.sphere_estimate",
+      "CLMM.Literature.sphere_to_coupling"
     ],
-    "companion_pdf_sha256": "c61d90ab153e52c8dfed1381f50a771427876db9db9e385342f6bb0e325f64bf",
-    "signature_and_axiom_check_sha256": "05897b0dda9ca748dc3d2995041fd16244dc364e1ba3037ac71b60b4338bae4f",
-    "signature_and_axiom_log_sha256": "f7f0dc99a399af4ff6fa5af291813ca9c3ba170c230fc9a95a80e77c08ddda1a",
+    "signature_and_application_check_sha256": "6e95210cd404313231816470b3aab3ade19989efe3d011132931dd11d6609785",
+    "signature_and_application_log_sha256": "29305daa3f456b9d50ac8f50bacf02a16edf0c6e706d3eb1f441571cab56bbf9",
     "build_mode": "Incremental build with cached unchanged dependencies; changed modules compiled and whole-library transitive axiom audit rerun."
   }
 }
