@@ -31,7 +31,9 @@ theorem near_vigoda_uniform_ci {Δ : ℕ} (hΔ : 2 ≤ Δ)
       rw [hd, hc]
       push_cast
       linarith
-    exact ⟨_, fun x hx => CV.root_coupling_of_regime C (Or.inr ⟨h6, hcrit⟩) hcolours x hx⟩
+    refine ⟨CV.ciConstant, fun x hx => ?_⟩
+    intro O _ I hdI a b
+    exact CV.option_root_ci_critical I h6 hdI hcrit a b x hx
 
 /-- Both coupling inputs of regime (i): a hard-endpoint constant and a
 constant on every `[δ,1]`. -/
