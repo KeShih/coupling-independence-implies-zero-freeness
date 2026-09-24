@@ -1,10 +1,10 @@
 # Proof overview
 
-This guide gives the detailed proof structure for the Potts, independent-color-field Lee–Yang and Holant results of *Coupling Independence Implies Zero-Freeness*, together with all seven Appendix Potts regions. Start with the [repository summary](../README.md) or [documentation index](README.md). Exact statements and literature inputs appear in the linked proof maps.
+This guide gives the detailed proof structure for the Potts, independent-color-field Lee–Yang and Holant results of *Coupling Independence Implies Zero-Freeness*, together with all seven Appendix Potts regions. Start with the [repository summary](../README.md) or [documentation index](README.md). Exact statements and the cited results each proof uses appear in the linked proof maps.
 
 The source files are organized by proof topic. Their mathematical namespaces are preserved: a file move does not rename declarations in `PottsCI` or `CI2ZF.Appendix`. Distinguish a Lean import path from the name of a theorem when following the maps below.
 
-**Potts: the uniform zero-free main theorem at the strict threshold `q > 11Δ/6`, and the transfer theorem for arbitrary graph families closed under induced subgraphs, are complete. The concrete coupling-independence proof, joint induction at both endpoints, uniform radius, and neighborhood patching have all been checked by Lean. The equality case retains only an explicitly identified external hard-coloring CI input on original finite graphs with arbitrary pinning.** No custom axioms or placeholder proofs conceal unfinished steps.
+**Potts: the uniform zero-free main theorem for `q ≥ 11Δ/6`, and the transfer theorem for arbitrary graph families closed under induced subgraphs, are complete. The concrete coupling-independence proof, joint induction at both endpoints, uniform radius, and neighborhood patching have all been checked by Lean. At the equality `q = 11Δ/6`, the hard-coloring CI bound that the paper cites from CFFGZZ is proved by the Carlson–Vigoda contraction on the critical line.** No custom axioms or placeholder proofs conceal unfinished steps.
 
 **Holant: the main-text section is fully formalized.** The residual lemma, concrete CI bound, uniform complex polytube theorem, open orthant and uniform diagonal neighborhoods, and all main-text corollaries for b-matchings and b-edge covers have been proved. The final entry points retain no unproved external inputs. All 46 Holant modules are included in the library build and axiom audit.
 
@@ -19,9 +19,9 @@ simultaneous induction are proved internally.
 
 The public aggregate is `CI2ZF.LeeYang`. See the
 [Lee–Yang proof map](lee-yang.md) for the four endpoints and
-proper/improper pinning semantics. CV and edge colouring have no external
-mathematical inputs; the other two regimes retain exactly the existing
-critical CFFGZZ and large-girth CLMM literature parameters.
+proper/improper pinning semantics. No endpoint takes a literature
+parameter: CV and edge colouring use no cited result, near-Vigoda uses the
+proved critical-line bound, and large girth uses the proved CLMM results.
 
 ## Appendix Potts results
 
@@ -31,7 +31,7 @@ the BBR interval, Carlson–Vigoda, near-Vigoda, and unrestricted girth 5 at
 `q ≥ (1+δ)Δ` for a degree threshold depending only on δ.
 See the [Appendix module guide](appendix/README.md) and
 [proof status](appendix/STATUS.md) for exact statements, the complete
-internal girth-five proof, and the explicitly named literature inputs. Run `bash scripts/check-appendix.sh` for the completed-region build
+internal girth-five proof, and the cited results each region uses, all proved in Lean. Run `bash scripts/check-appendix.sh` for the completed-region build
 and transitive axiom audit. Girth conditions in the paper-facing results
 apply to the free residual graph after arbitrary pinning.
 
@@ -83,7 +83,7 @@ The numerical certificates use the actual Vigoda profile `1, 13/42, 1/6, 2/21, 1
 - `root_strict_uniform_ci`: the uniform constant `2/(q/Δ−11/6)` throughout the same strict regime, quantified over all finite graphs and arbitrary pinning, including x=0, x=1, and an empty remaining graph.
 - `root_critical_uniform_ci`: when `q=11Δ/6`, the bound `12/(11δ)` on every interval `[δ,1]` with `δ>0`.
 
-These theorems do not require callers to supply matching, capacity, drift, contraction, or stationarity assumptions. Zero-temperature CI at the critical equality is retained as an explicit external input. It cannot be obtained by sending δ to zero in the divergent bound `12/(11δ)`. See [external inputs](external-inputs.md) for the exact interface and source.
+These theorems do not require callers to supply matching, capacity, drift, contraction, or stationarity assumptions. Zero-temperature CI at the critical equality cannot be obtained by sending δ to zero in the divergent bound `12/(11δ)`. The paper cites CFFGZZ Theorem 20 for it. Lean proves it instead with the Carlson–Vigoda contraction, extended to the critical line for `Δ ≥ 6`: `CI2ZF.Appendix.CV.option_root_ci_critical` in `CI2ZF/Coupling/CV/RootCI.lean`. See [cited results](external-inputs.md) for the statement and proof route.
 
 `CI2ZF/Coupling/Vigoda/PositiveExactCI.lean` also proves the standalone positive-temperature statement: `root_positive_exact_ci` needs `0 < x ≤ 1` and a positive contraction denominator, without the strict color threshold. Its critical specialization `root_critical_exact_ci` gives `12(1−x)/(11x)`.
 
@@ -139,9 +139,9 @@ $$
 (\mathrm{dist}(z,[0,1])<\varepsilon(q,\Delta)).
 $$
 
-The fixed-instance conclusion requires only q ≥ Δ+1; the uniform conclusion uses the full CI argument. `CI2ZF/Potts/Theorems/PottsMainTheorem.lean` contains `strict_potts_zero_free` with no external CI assumption. `CI2ZF/Potts/Theorems/PottsExternalTheorem.lean` supplies the public weak-inequality theorem `potts_zero_free_from_external`: its only external input is hard-coloring CI on original graphs, and it is needed only in the equality branch. The result also identifies the forced zero of the unnormalized partition function and its exact multiplicity.
+The fixed-instance conclusion requires only q ≥ Δ+1; the uniform conclusion uses the full CI argument. `CI2ZF/Potts/Theorems/PottsMainTheorem.lean` contains `strict_potts_zero_free` with no external CI assumption. `CI2ZF/Potts/Theorems/PottsExternalTheorem.lean` proves the weak-inequality theorem `potts_zero_free_of_vigoda_line` with no further hypothesis; `critical_hard_colouring_input` supplies hard-coloring CI in the equality branch. `potts_zero_free_from_external` keeps the paper's cited route for comparison: it takes hard-coloring CI on original graphs as a premise in the equality branch, and `external_critical_hard_colouring_theorem` proves that premise. The result also identifies the forced zero of the unnormalized partition function and its exact multiplicity.
 
-The paper-facing entry points `potts_main_theorem (q Δ : ℕ)` and `potts_main_strict` assume `Δ ≥ 2`, use the color set `Fin q`, and have the integer thresholds `11 * Δ ≤ 6 * q` and `11 * Δ < 6 * q`. Color nonemptiness is derived from the hypotheses. Only the equality branch of `potts_main_theorem` requests the original-graph external CI input.
+The paper-facing entry points `potts_main_theorem (q Δ : ℕ)` and `potts_main_strict` assume `Δ ≥ 2`, use the color set `Fin q`, and have the integer thresholds `11 * Δ ≤ 6 * q` and `11 * Δ < 6 * q`. Color nonemptiness is derived from the hypotheses. Neither takes a literature hypothesis.
 
 | Completed connection | Modules |
 | --- | --- |
@@ -161,7 +161,7 @@ The paper-facing entry points `potts_main_theorem (q Δ : ℕ)` and `potts_main_
 
 The standalone positive-temperature response lemma is also complete as `GraphClass.positive_interval_zero_free_and_responses` in `CI2ZF/Potts/Theorems/PositiveGraphClassTransfer.lean`. It returns a uniform nonvanishing neighborhood and analytic root-quotient responses for original graphs and arbitrary pinning. It requires a nonempty color set and actual positive-temperature CI, without the hard-coloring feasibility threshold `q ≥ Δ+1`.
 
-See [external inputs](external-inputs.md) for the external theorem boundary and [Potts proof map](potts.md) for the label-by-label correspondence. The general profile-ρ tools are instantiated with the concrete Vigoda profile needed for the main proof; this is not a claim to formalize every independent profile variant in the paper.
+See [cited results](external-inputs.md) for the cited theorems and their Lean proofs and [Potts proof map](potts.md) for the label-by-label correspondence. The general profile-ρ tools are instantiated with the concrete Vigoda profile needed for the main proof; this is not a claim to formalize every independent profile variant in the paper.
 
 ## The uniform Holant zero-free proof
 
@@ -236,6 +236,6 @@ On the development machine, the official Lean compiler is installed locally in `
 
 `CI2ZF/` contains the full library, organized into shared analysis, coupling, Potts, Holant and Lee–Yang proofs. The general residual-completion foundation in `CI2ZF/Coupling/Foundations/PartialCoupling.lean` was adapted from the earlier project and extended. Eleven foundation modules, now under `CI2ZF/Coupling/` and `CI2ZF/Potts/Model/Real/`, were reused from the earlier `CI2ZF/anc/lean-potts-ci` project. They cover finite distributions, path coupling, the graph model, pinning, activity constraints, the concrete Vigoda kernel, and stationary-distribution comparison. Lean 4.33.1 compatibility issues and component-geometry proof issues were fixed during integration. Hashes of the files before import are recorded in [the legacy source manifest](provenance/legacy-source-manifest.json); the corresponding paper sources and toolchain snapshot are recorded in [the original source manifest](provenance/source-manifest.json). These historical manifests preserve their original paths. The current source layout and hashes appear in the module map and verification manifest.
 
-The reused general `SoftKernel` interface is instantiated with the concrete Vigoda kernel in `CI2ZF/Coupling/Vigoda/ComponentCoupling.lean`, where its stationarity is proved. Applications of endpoint continuity and stationary comparison are in `CouplingIndependence` and `RootCI`. The public critical hard-endpoint premise is `ExternalCriticalHardColouringTheorem` on original graphs. `CI2ZF/Potts/Theorems/PottsExternalTheorem.lean` derives the internal `CriticalHardColouringInput` through the leaf realization and actual Gibbs-law transport; no custom axiom has been added.
+The reused general `SoftKernel` interface is instantiated with the concrete Vigoda kernel in `CI2ZF/Coupling/Vigoda/ComponentCoupling.lean`, where its stationarity is proved. Applications of endpoint continuity and stationary comparison are in `CouplingIndependence` and `RootCI`. `CI2ZF/Potts/Theorems/PottsExternalTheorem.lean` proves the critical hard-endpoint bound as `critical_hard_colouring_input`, from the CV contraction. For comparison with the paper's cited route, it also derives `CriticalHardColouringInput` from the original-graph statement `ExternalCriticalHardColouringTheorem` through the leaf realization and actual Gibbs-law transport, and proves that statement as `external_critical_hard_colouring_theorem`. No custom axiom has been added.
 
-The completed scope includes the main-text Potts theorem, its general graph-family transfer and positive-temperature response theorem, the independent-colour-field Lee–Yang theorem and edge-colouring corollary, the Holant proof, and all seven Appendix Potts regions listed above. The Appendix status document specifies each region and its literature parameters. In the girth results the paper-facing original-graph statements require girth only of the free residual graph after arbitrary pinning. The Lee–Yang proof map records the independent-field neighborhood and its quantifier order.
+The completed scope includes the main-text Potts theorem, its general graph-family transfer and positive-temperature response theorem, the independent-colour-field Lee–Yang theorem and edge-colouring corollary, the Holant proof, and all seven Appendix Potts regions listed above. The Appendix status document specifies each region and the cited results it uses. In the girth results the paper-facing original-graph statements require girth only of the free residual graph after arbitrary pinning. The Lee–Yang proof map records the independent-field neighborhood and its quantifier order.

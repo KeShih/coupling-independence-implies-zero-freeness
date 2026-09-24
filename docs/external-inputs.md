@@ -1,68 +1,75 @@
-# External mathematical inputs
+# Cited results and their Lean proofs
 
-The main-text Potts proof leaves one explicitly identified result as an external input. The Appendix retains the additional literature interfaces listed below. This boundary is expressed as a theorem parameter, without introducing an `axiom`, using `sorry`, or bypassing the Lean kernel.
+Six of the results that the written proofs cite from the literature have their own Lean statements, propositions about actual finite Potts models in the form the written proofs use. Each is proved in the library. No paper-facing theorem takes one of them as a hypothesis, and none of the proofs introduces an `axiom`, uses `sorry`, or bypasses the Lean kernel. Where the Lean proof takes a different route from the cited one, the section below says so.
 
 ## Hard-colouring coupling independence at the critical threshold
 
-Source: [Chen–Feng–Guo–Zhang–Zou, *Deterministic counting from coupling independence*, arXiv:2410.23225v2, Theorem 20](https://arxiv.org/html/2410.23225v2). The theorem's second parameter regime gives a finite Hamming coupling-independence constant depending only on `q, Δ` when `Δ ≥ 3` and `q ≥ (11/6 − ε₀)Δ`. This includes the critical equality needed here. Its proof explicitly permits partial colourings that are not proper and defines the conditional laws through the remaining list-colouring model.
+Source: [Chen–Feng–Guo–Zhang–Zou, *Deterministic counting from coupling independence*, arXiv:2410.23225v2, Theorem 20](https://arxiv.org/html/2410.23225v2). The theorem's second parameter regime gives a finite Hamming coupling-independence constant depending only on `q, Δ` when `Δ ≥ 3` and `q ≥ (11/6 − ε₀)Δ`. This includes the critical equality, where the main-text proof cites it for the hard endpoint. Its proof explicitly permits partial colourings that are not proper and defines the conditional laws through the remaining list-colouring model.
 
-The final public interface is `CI2ZF.Potts.ExternalCriticalHardColouringTheorem`, defined in [`CI2ZF/Potts/Geometry/BoundedGraphClass.lean`](../CI2ZF/Potts/Geometry/BoundedGraphClass.lean). It asserts that one real constant bounds the Hamming Wasserstein distance between the two normalized child Gibbs laws at activity zero, uniformly over all original finite simple graphs of maximum degree at most Δ, arbitrary partial colourings, free roots, and two root colours. The root is removed from the common configuration space, and constraints involving only pinned vertices are omitted. In particular, the external input is stated on original graphs with arbitrary pinning, rather than on an enlarged abstract class of boundary-count data.
+The Lean proof does not follow the cited one. It extends the Carlson–Vigoda contraction to the two-branch regime `CI2ZF.Appendix.CV.Regime Δ q`, namely `(Δ ≥ 125 ∧ q ≥ 1.809Δ) ∨ (Δ ≥ 6 ∧ q ≥ 11Δ/6)`, in [`CI2ZF/Coupling/CV/Scalar.lean`](../CI2ZF/Coupling/CV/Scalar.lean). On the critical branch the scalar closure holds with the same gap `59/226125`, so the CI constant `ciConstant = 409060125/50858` is unchanged. `CI2ZF.Appendix.CV.option_root_ci_critical` in [`CI2ZF/Coupling/CV/RootCI.lean`](../CI2ZF/Coupling/CV/RootCI.lean) bounds the Hamming transport between the actual normalized root-child laws for `Δ ≥ 6`, `q ≥ 11Δ/6` and every activity in `[0,1]`. `CriticalLineArithmetic` proves that the integer equality `6q = 11Δ` forces Δ to be a positive multiple of six, so `Δ ≥ 6` covers every critical case.
 
-[`CI2ZF/Potts/Theorems/PottsExternalTheorem.lean`](../CI2ZF/Potts/Theorems/PottsExternalTheorem.lean) proves `ExternalCriticalHardColouringTheorem.to_normalizedInput`, which supplies the internal `CriticalHardColouringInput` from this original-graph premise. `PinningLeafRealization` realizes each occurrence of a boundary colour count by a distinct, genuinely pinned leaf. The free degree becomes the original constraint degree, and each new leaf has degree one, so the maximum-degree bound is preserved. `GraphClassCoupling` proves the exact correspondence of the Gibbs laws and their transport bounds. The boundary-count formulation is therefore derived in Lean, not a second external assumption. `PinningLeafCycles` and `PinningLeafGirth` also prove that this realization preserves cycles and girth.
+[`CI2ZF/Potts/Theorems/PottsExternalTheorem.lean`](../CI2ZF/Potts/Theorems/PottsExternalTheorem.lean) proves both forms of the input. `critical_hard_colouring_input` gives the internal boundary-count form `CriticalHardColouringInput`, and `critical_line_transfer_coupling_inputs` combines it with the proved positive-temperature bound. `external_critical_hard_colouring_theorem` proves the original-graph form `ExternalCriticalHardColouringTheorem` for `Δ ≥ 6` and `q ≥ 11Δ/6`, through the relabelling lemma `root_W_le_of_option_relabel` in [`GraphClassCoupling.lean`](../CI2ZF/Potts/Geometry/GraphClassCoupling.lean).
 
-`critical_potts_zero_free_from_external` combines this premise with the internally proved positive-temperature CI bound, the complete positive-temperature and zero-temperature strong inductions, and neighborhood patching. `potts_zero_free_from_external` uses the premise only in the equality case. The paper-facing `potts_main_theorem (q Δ : ℕ)` uses colors `Fin q`, assumes `Δ ≥ 2` and `11 * Δ ≤ 6 * q`, and requests the external premise only when `6 * q = 11 * Δ`. `CriticalLineArithmetic` proves that integer equality forces Δ to be a positive multiple of six, hence Δ ≥ 6, within the degree regime of the cited external theorem.
+`ExternalCriticalHardColouringTheorem`, defined in [`CI2ZF/Potts/Geometry/BoundedGraphClass.lean`](../CI2ZF/Potts/Geometry/BoundedGraphClass.lean), is the statement in the form the paper cites. It asserts that one real constant bounds the Hamming Wasserstein distance between the two normalized child Gibbs laws at activity zero, uniformly over all original finite simple graphs of maximum degree at most Δ, arbitrary partial colourings, free roots, and two root colours. The root is removed from the common configuration space, and constraints involving only pinned vertices are omitted. It is thus stated on original graphs with arbitrary pinning, rather than on an enlarged abstract class of boundary-count data.
 
-`strict_potts_zero_free` and `potts_main_strict` require neither this input nor any unproved coupling, contraction, stationarity, or complex nonvanishing assumption. The standalone positive-temperature response theorem and the general CI-to-zero-free transfer are also proved internally; the latter retains exactly the CI hypotheses of the paper's conditional transfer theorem.
+The paper's cited route is kept for comparison. `ExternalCriticalHardColouringTheorem.to_normalizedInput` derives `CriticalHardColouringInput` from the original-graph statement. `PinningLeafRealization` realizes each occurrence of a boundary colour count by a distinct, genuinely pinned leaf. The free degree becomes the original constraint degree, and each new leaf has degree one, so the maximum-degree bound is preserved. `GraphClassCoupling` proves the exact correspondence of the Gibbs laws and their transport bounds. `PinningLeafCycles` and `PinningLeafGirth` also prove that this realization preserves cycles and girth. `critical_potts_zero_free_from_external` and `potts_zero_free_from_external` take the original-graph premise, the latter only in the equality case, and combine it with the proved positive-temperature CI bound, the positive- and zero-temperature strong inductions, and neighbourhood patching. Their premise is the one `external_critical_hard_colouring_theorem` proves.
 
-## Appendix literature interfaces
+The paper-facing `potts_main_theorem (q Δ : ℕ)` uses colours `Fin q`, assumes `Δ ≥ 2` and `11 * Δ ≤ 6 * q`, and has no further hypothesis. It specializes `potts_zero_free_of_vigoda_line`, the same statement for an arbitrary finite colour type. `strict_potts_zero_free` and `potts_main_strict` use only the Vigoda coupling. The standalone positive-temperature response theorem and the general CI-to-zero-free transfer are also proved; the latter retains exactly the CI hypotheses of the paper's conditional transfer theorem.
+
+## CLMM Lemma 8.7: the tree influence identity
+
+Source: [Chen–Liu–Mani–Moitra, *Strong spatial mixing for colorings on trees and its algorithmic applications*, arXiv:2304.01954v3](https://arxiv.org/html/2304.01954v3), Lemma 8.7. `CI2ZF.Appendix.Girth.CavityTree.CLMMInfluenceIdentity`, in [`Tree/TotalInfluence.lean`](../CI2ZF/Coupling/Girth/Tree/TotalInfluence.lean), states the exact tree influence–Jacobian factorization used by the `q ≥ Δ+3` large-girth route. `clmmInfluenceIdentity` in [`Tree/InfluenceIdentity.lean`](../CI2ZF/Coupling/Girth/Tree/InfluenceIdentity.lean) proves it from the actual finite-tree Gibbs law. The level influence is a difference of conditional expectations, and the CLMM level response is that difference times the scaled potential diagonal, by induction on the level.
+
+The BBR route uses its own square-root influence–Jacobian identity, proved from actual finite Gibbs conditional expectations and the explicit projection/Jacobian algebra: [`BBR/InfluenceIdentity.lean`](../CI2ZF/Coupling/BBR/InfluenceIdentity.lean) proves `level_influence_factorization` and constructs `influenceIdentity`.
+
+## CLMM Lemma 5.13: sphere decay implies coupling
+
+Source: [CLMM2023, Condition 5.12 and Lemma 5.13](https://arxiv.org/html/2304.01954v3). `CI2ZF.Appendix.CLMM.Lemma513.sphere_to_coupling`, in [`CLMM/SphereCoupling.lean`](../CI2ZF/Coupling/CLMM/SphereCoupling.lean), proves that fixed-ambient sphere decay with error `ε ≤ 1/(8R log Δ)` bounds the Hamming transport between the two actual root-child Potts laws by `2Δ^R`. `CLMM.FixedAmbientSphereDecay` fixes the base graph, measures all spheres in that graph, and then quantifies over every complete further pinning. The decay error is strictly positive.
+
+The proof is a strong induction on the number of free vertices, tracking the number ℓ of free vertices on the sphere of radius R. If ℓ = 0, the two laws have a common marginal off the ball, so the transport cost is at most the ball size. If ℓ ≥ 1, the proof conditions on the sphere vertex of least total variation, using a maximal coupling. The conditioned laws are smaller instances, one with the same root and one rerooted at that vertex. The induction bound uses `1 + log ℓ` in place of the harmonic numbers of the written proof.
+
+## CLMM Equation (10): the graph sphere estimate
+
+Source: CLMM2023, Equation (10), derived there from Lemmas 5.19 and 5.20. `CI2ZF.Appendix.CLMM.Literature C` has the single field `sphere_estimate`. It derives fixed-ambient sphere decay, with error `2Bρ^K Δ^R + Aρ^R`, from tree total-influence decay (`TreeTID`) and ratio-form relative strong spatial mixing (`TreeRelative`) at the chosen cutting depth. `CI2ZF.Appendix.CLMM.Eq10.sphere_estimate_proof`, in [`CLMM/SphereEstimate.lean`](../CI2ZF/Coupling/CLMM/SphereEstimate.lean), proves it, and `CI2ZF.Appendix.CLMM.literature C` packages it as `CLMM.Literature C`.
+
+The proof formalizes Lemma 5.19 as a finite-sum decomposition over sphere configurations, and Lemma 5.20 turns the ratio bound into a total-variation bound `2ε`. A ball–tree correspondence uses girth for exactly two facts: no edge joins two vertices of the same distance layer, and each vertex has a unique parent. `CLMM.eventual_transfer` still takes the bundle as its argument `clmm`, and the public large-girth and BBR theorems pass `CLMM.literature C`.
+
+## BBR Theorem 2.5 and Proposition 2.6(i)
+
+Source: [Bencs–Berrekkal–Regts, *Near optimal bounds for weak and strong spatial mixing for the anti-ferromagnetic Potts model on trees*, Electron. J. Probab. 30 (2025)](https://doi.org/10.1214/25-EJP1327), Theorem 2.5 and Proposition 2.6(i); Theorem 7 and Proposition 8(i) of [arXiv:2310.04338v2](https://arxiv.org/html/2310.04338v2). `CI2ZF.Appendix.BBR.Literature C`, in [`BBR/Certificate.lean`](../CI2ZF/Coupling/BBR/Certificate.lean), states both for the actual cavity messages, with their published hypotheses; the printed degree assumption of Proposition 2.6(i) is unchanged.
+
+- `theorem_2_5_holds`, in [`BBR/Theorem25.lean`](../CI2ZF/Coupling/BBR/Theorem25.lean), proves the squared-norm contraction of the square-root message recursion as in BBR Section 3: the mean value theorem along the segment `sR + (1−s)R'`, Cauchy–Schwarz, and the pointwise Jacobian bound `differential_contraction`.
+- `proposition_2_6_i_holds`, in [`BBR/Proposition26.lean`](../CI2ZF/Coupling/BBR/Proposition26.lean), follows BBR Section 4, but replaces their Lemma 4.1 (smoothing) and Lemma 4.2(i) by two uses of the concavity of `log`: a chord bound and Jensen's inequality in AM–GM form. Lemma 4.3 is proved by a derivative argument.
+
+`CI2ZF.Appendix.BBR.literature C` bundles the two proofs. The internal BBR lemmas still take `(bbr : Literature C)`; the public theorems `BBR.high_girth_coupling`, `BBR.high_girth_zero_free`, `BBR.high_girth_original_zero_free_and_responses` and `BBR.high_girth_residual_original_zero_free` pass `BBR.literature C` and take no literature parameter. The interval-wide contraction, tree influence and relative spatial decay, and uniform positive-temperature zero-free transfer are derived from these results.
+
+## Where the cited results are used
 
 The [Appendix status document](appendix/STATUS.md) records the exact
-parameter boundary for every region. Edge-Potts, general-graph high
-temperature, and Carlson–Vigoda have no unproved external inputs.
-Near-Vigoda uses the critical hard-colouring theorem above only at its
-finitely many exceptional integer pairs.
-
-The ordinary `q ≥ Δ+3` large-girth route retains the named CLMM
-influence–Jacobian identity and the two graph-transfer statements.
-The BBR route retains exactly four cited inputs: BBR Proposition 2.6(i)
-and Theorem 2.5 in `BBR.Literature`, and the two graph-transfer statements
-in `CLMM.Literature`. Its square-root influence–Jacobian identity is
-proved internally from actual finite Gibbs conditional expectations and
-the explicit projection/Jacobian algebra:
-[`InfluenceIdentity.lean`](../CI2ZF/Coupling/BBR/InfluenceIdentity.lean)
-proves `level_influence_factorization` and constructs `influenceIdentity`.
-No BBR public theorem requires that identity as an input. The interval-wide BBR
-contraction, tree influence and relative spatial decay, and uniform
-positive-temperature zero-free transfer are derived from those four inputs.
-
-The girth-five route retains only `Girth.SphereCouplingInput`, the
-[CLMM Condition 5.12 / Lemma 5.13](https://arxiv.org/html/2304.01954v3)
-sphere-to-coupling theorem. `CLMM.FixedAmbientSphereDecay` fixes the base
-graph, measures all spheres in that graph, and then quantifies over every
-complete further pinning. The decay error is strictly positive. The
-spectral gap, insertion estimates, Doob conditioning, finite response
-induction, weighted-source bound, endpoints, and complex zero-free
-conclusions are proved in Lean.
-
-## Lee–Yang colour-field results
+hypotheses of every region. Edge-Potts, general-graph high temperature,
+and Carlson–Vigoda use none of the cited results. Near-Vigoda uses the
+critical-line bound only at its twenty exceptional integer pairs
+`(Δ,q) = (6j,11j)`, `1 ≤ j ≤ 20`. The `q ≥ Δ+3` large-girth route uses
+CLMM Lemmas 8.7 and 5.13 and Equation (10). The BBR route uses both BBR
+results with CLMM Lemma 5.13 and Equation (10). The girth-five route uses
+CLMM Lemma 5.13; its spectral gap, insertion estimates, Doob conditioning,
+finite response induction, weighted-source bound, endpoints, and complex
+zero-free conclusions are proved directly.
 
 `CI2ZF.LeeYang.uniform_curve_transfer` proves the complete
 hard-colouring-CI-to-field induction. Uniform field directions, actual
 separator identities, exterior analytic logarithms and the multivariable
-polydisc conversion are discharged in Lean.
-
-The CV vertex-field and `q ≥ 3Δ` edge-field endpoints have no external
-mathematical inputs. Near-Vigoda retains only the same at most twenty
-critical integer points of `ExternalCriticalHardColouringTheorem`.
-The `q ≥ Δ+3` high-girth endpoint uses the proved Appendix CI theorem
-with the same `CLMMInfluenceIdentity` and `CLMM.Literature` parameters
-listed above. No additional full-range CFFGZZ CI, CWZZ edge CI or
-Lee–Yang transfer premise is introduced. See the
+polydisc conversion are discharged in Lean. The CV vertex-field and
+`q ≥ 3Δ` edge-field endpoints use no cited result. Near-Vigoda uses the
+critical-line bound at the same twenty integer pairs, and the `q ≥ Δ+3`
+high-girth endpoint uses the proved Appendix CI theorem. None of these
+endpoints takes a literature parameter, and no full-range CFFGZZ CI, CWZZ
+edge CI or Lee–Yang transfer premise is introduced. See the
 [Lee–Yang proof map](lee-yang.md).
 
 ## Meaning of the kernel audit
 
-An explicit mathematical hypothesis does not become an additional Lean axiom. The transitive axiom dependencies of all imported theorems remain limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders; it does not establish the stated literature hypotheses themselves.
+The transitive axiom dependencies of all imported theorems are limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders and added axioms. The audit does not inspect a theorem's explicit premises, which are part of its statement. With the cited results proved, the premises of the paper-facing theorems are their parameter conditions, together with the coupling assumptions of the conditional transfer theorems.
 
 The regional conclusions do not assert that every auxiliary lemma or
 generalization in the paper has been formalized at its original scope.

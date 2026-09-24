@@ -6,10 +6,10 @@ This library formalizes the paper's coupling-independence and zero-free results 
 | --- | --- |
 | [Potts](potts.md) | Models, concrete Vigoda coupling, uniform complex transfer, and the main theorem |
 | [Potts appendix](appendix/README.md) | Module navigation for all seven additional parameter regions |
-| [Appendix theorem status](appendix/STATUS.md) | Regional hypotheses, proved conclusions, and remaining literature inputs |
+| [Appendix theorem status](appendix/STATUS.md) | Regional hypotheses, proved conclusions, and the cited results each region uses |
 | [Holant](holant.md) | Signature models, recursive coupling, uniform polytubes, and applications |
 | [Lee–Yang colour fields](lee-yang.md) | Independent field coordinates, separator induction, and vertex- and edge-colouring corollaries |
-| [External inputs](external-inputs.md) | Cited results represented as explicit theorem parameters and their exact scope |
+| [Cited results](external-inputs.md) | The results cited from the literature, their Lean statements, and how each is proved |
 
 ## Source layout
 
@@ -19,7 +19,7 @@ The project has one Lean library and one complete entry point, `CI2ZF.lean`.
 | --- | --- |
 | `CI2ZF/Analysis/` | Complex averages, normalized logarithms, and local stability |
 | `CI2ZF/Coupling/Foundations/` | Finite distributions, transport, partial couplings, and shared random coins |
-| `CI2ZF/Coupling/` | Concrete Vigoda, CV, edge-Potts, high-temperature, BBR, and girth coupling proofs; named CLMM interfaces |
+| `CI2ZF/Coupling/` | Concrete Vigoda, CV, edge-Potts, high-temperature, BBR, and girth coupling proofs; proofs of the cited CLMM and BBR results |
 | `CI2ZF/Potts/Model/` and `Geometry/` | Real and complex partition models, pinning, graph restrictions, and separators |
 | `CI2ZF/Potts/Transfer/` | Uniform CI-to-zero-free induction and response estimates |
 | `CI2ZF/Potts/Theorems/` and `Regions/` | Main-text statements and all seven regional applications |
@@ -38,6 +38,6 @@ names describe their purpose, not a strict layering of every import.
 
 Run `./scripts/check-all.sh` from the repository root to build the whole library and check transitive axiom dependencies. Use `./scripts/check.sh` for the main-text proofs or `./scripts/check-appendix.sh` for the appendix regions.
 
-The audits allow only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`. Literature results remain explicit mathematical hypotheses; passing the audit does not prove those hypotheses. The [verification record](verification.json) records the checked scope and source hashes. The [module migration record](module-moves.tsv) maps renamed source modules.
+The audits allow only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`. The cited literature results are proved in the library, so no paper-facing theorem takes a literature hypothesis. The [verification record](verification.json) records the checked scope and source hashes. The [module migration record](module-moves.tsv) maps renamed source modules.
 
 Return to the [repository README](../README.md) for setup and the main imports.

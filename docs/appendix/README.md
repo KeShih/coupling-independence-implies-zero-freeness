@@ -1,6 +1,6 @@
 # Potts appendix: module guide
 
-[Regions.lean](../../CI2ZF/Potts/Regions.lean) imports all seven regions below. See [theorem status and external inputs](STATUS.md) for precise hypotheses and proof boundaries, and the [documentation index](../README.md) for the rest of the library.
+[Regions.lean](../../CI2ZF/Potts/Regions.lean) imports all seven regions below. See [theorem status and cited results](STATUS.md) for precise hypotheses and proof boundaries, and the [documentation index](../README.md) for the rest of the library.
 
 | Region | Main entry point |
 | --- | --- |
@@ -20,8 +20,23 @@
 2. **Insertion estimates.** [Covariance/Insertion/ActualEstimates.lean](../../CI2ZF/Coupling/Girth/Covariance/Insertion/ActualEstimates.lean) connects the actual insertion laws to the proved spectral gap.
 3. **Successive conditioning.** [Covariance/Doob/PinningVertex.lean](../../CI2ZF/Coupling/Girth/Covariance/Doob/PinningVertex.lean) and [Doob/ResponseBounds.lean](../../CI2ZF/Coupling/Girth/Covariance/Doob/ResponseBounds.lean) retain the complete additive source under further pinnings.
 4. **Response induction.** [Covariance/Response/Induction.lean](../../CI2ZF/Coupling/Girth/Covariance/Response/Induction.lean) yields the uniform weighted-source theorem in [Five/Response.lean](../../CI2ZF/Coupling/Girth/Five/Response.lean).
-5. **Sphere decay and coupling.** [CLMM/Ambient.lean](../../CI2ZF/Coupling/CLMM/Ambient.lean) fixes one ambient graph for all spheres. [Transfer/SphereCoupling.lean](../../CI2ZF/Coupling/Girth/Transfer/SphereCoupling.lean) applies CLMM Lemma 5.13 under all further pinnings and handles the real-parameter endpoints.
+5. **Sphere decay and coupling.** [CLMM/Ambient.lean](../../CI2ZF/Coupling/CLMM/Ambient.lean) fixes one ambient graph for all spheres. [CLMM/SphereCoupling.lean](../../CI2ZF/Coupling/CLMM/SphereCoupling.lean) proves CLMM Lemma 5.13, the bound `2Δ^R` from sphere decay, by strong induction on the number of free vertices. [Transfer/SphereCoupling.lean](../../CI2ZF/Coupling/Girth/Transfer/SphereCoupling.lean) applies it under all further pinnings and handles the real-parameter endpoints.
 6. **Uniform complex neighbourhood.** [Five/Transfer.lean](../../CI2ZF/Potts/Regions/Girth/Five/Transfer.lean), [Five/ZeroFree.lean](../../CI2ZF/Potts/Regions/Girth/Five/ZeroFree.lean), and [Transfer/ResidualOriginal.lean](../../CI2ZF/Potts/Regions/Girth/Transfer/ResidualOriginal.lean) give the zero-free and original-graph statements.
+
+## Proofs of the cited results
+
+The regions use these results cited from the literature, each proved in the library:
+
+| Cited result | Used by | Proof |
+| --- | --- | --- |
+| CFFGZZ Theorem 20 at `q = 11Δ/6` | near-Vigoda, main theorem | [CV/Scalar.lean](../../CI2ZF/Coupling/CV/Scalar.lean) extends the CV contraction to `Δ ≥ 6`, `q ≥ 11Δ/6`; [CV/RootCI.lean](../../CI2ZF/Coupling/CV/RootCI.lean) gives `option_root_ci_critical` |
+| CLMM Lemma 8.7 | large girth | [Tree/InfluenceIdentity.lean](../../CI2ZF/Coupling/Girth/Tree/InfluenceIdentity.lean) |
+| CLMM Lemma 5.13 | large girth, BBR, girth five | [CLMM/SphereCoupling.lean](../../CI2ZF/Coupling/CLMM/SphereCoupling.lean) |
+| CLMM Equation (10) | large girth, BBR | [CLMM/SphereEstimate.lean](../../CI2ZF/Coupling/CLMM/SphereEstimate.lean) |
+| BBR Theorem 2.5 | BBR | [BBR/Theorem25.lean](../../CI2ZF/Coupling/BBR/Theorem25.lean) |
+| BBR Proposition 2.6(i) | BBR | [BBR/Proposition26.lean](../../CI2ZF/Coupling/BBR/Proposition26.lean) |
+
+[STATUS.md](STATUS.md) and the [cited-results record](../external-inputs.md) describe each proof and where it differs from the cited one.
 
 ## Build and audit
 

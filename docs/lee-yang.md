@@ -50,17 +50,17 @@ is slightly stronger than the paper's version with strict inequalities.
 
 ## Main-text parameter regimes
 
-| Regime | Entry point | Literature-input boundary |
+| Regime | Entry point | Cited results |
 | --- | --- | --- |
-| (i) `q ≥ (11/6 − 1/84000)Δ`, `Δ ≥ 2` | `VertexRegions.lean`: `near_vigoda_vertex_field_zero_free` | The three-way integer reduction uses the proved strict/CV CI bounds. The existing `ExternalCriticalHardColouringTheorem` parameter remains only at the twenty critical integer pairs. |
-| (ii) `q ≥ 1.809Δ`, `Δ ≥ 125` | `VertexRegions.lean`: `cv_vertex_field_zero_free` | The complete actual CV coupling proof is already in the Appendix library. This regime has no external mathematical input. |
-| (iii) `q ≥ Δ+3`, `Δ ≥ 3`, sufficiently large girth | `HighGirth.lean`: `high_girth_original_field_transfer` | Uses the proved large-girth CI theorem from the Appendix and retains the same general CLMM influence identity and transfer statements as literature parameters. A stronger residual-girth version is also available. |
+| (i) `q ≥ (11/6 − 1/84000)Δ`, `Δ ≥ 2` | `VertexRegions.lean`: `near_vigoda_vertex_field_zero_free` | The three-way integer reduction uses the proved strict/CV CI bounds. The twenty critical integer pairs `(6j,11j)` use the CV contraction on the critical line, which replaces the cited CFFGZZ Theorem 20. No literature hypothesis. |
+| (ii) `q ≥ 1.809Δ`, `Δ ≥ 125` | `VertexRegions.lean`: `cv_vertex_field_zero_free` | The complete actual CV coupling proof is already in the Appendix library. No cited result is used. |
+| (iii) `q ≥ Δ+3`, `Δ ≥ 3`, sufficiently large girth | `HighGirth.lean`: `high_girth_original_field_transfer` | Uses the proved large-girth CI theorem from the Appendix, with CLMM Lemmas 8.7 and 5.13 and Equation (10) proved in Lean. No literature hypothesis. `high_girth_field_transfer` and the stronger residual-girth version `high_girth_residual_original_field_transfer` are also available. |
 | Edge coloring, `q ≥ 3Δ`, `Δ ≥ 2` | `Edge.lean`: `edge_lee_yang` | Uses the proved CI bound for the actual line graph and endpoint geometry. No additional CWZZ or field-transfer hypothesis is assumed. |
 
-No new external literature input is introduced. The retained inputs are
-described in [external inputs](external-inputs.md) and
-[Appendix status](appendix/STATUS.md). They are explicit
-mathematical hypotheses, not Lean axioms.
+No Lee–Yang endpoint takes a literature hypothesis. The cited results
+used by regimes (i) and (iii) and their Lean proofs are described in
+[cited results](external-inputs.md) and
+[Appendix status](appendix/STATUS.md).
 
 ## Verification
 

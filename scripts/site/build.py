@@ -7,8 +7,8 @@ Run from the repository root after the library is built:
     python3 scripts/site/build.py --paper ../main.tex --companion ../companion
 
 Everything on the Lean side is read from the compiled environment:
-signatures, source ranges, axioms, and the literature hypotheses each
-statement takes. The paper side is extracted from the LaTeX sources, with
+signatures, source ranges, axioms, and the cited results each proof
+depends on. The paper side is extracted from the LaTeX sources, with
 numbers and citation labels taken from their .aux and .bbl files. Source
 links are pinned to the last commit that changed the Lean sources, so
 commit Lean changes first.
@@ -31,53 +31,91 @@ KATEX = "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist"
 # ---------------------------------------------------------------------------
 # What to show
 
-LITERATURE = [
+# Results the papers cite. "statement" lists the Lean propositions that express
+# them, "proof" the Lean theorems that prove them, and "targets" the proofs
+# whose use marks a result as depending on the citation (default: "proof").
+CITED = [
     dict(id="cffgzz", short="CFFGZZ Thm 20",
-         lean=["CI2ZF.Potts.ExternalCriticalHardColouringTheorem",
-               "CI2ZF.Potts.CriticalHardColouringInput"],
+         statement=["CI2ZF.Potts.ExternalCriticalHardColouringTheorem",
+                    "CI2ZF.Potts.CriticalHardColouringInput"],
+         proof=["CI2ZF.Potts.external_critical_hard_colouring_theorem",
+                "CI2ZF.Potts.critical_hard_colouring_input",
+                "CI2ZF.Appendix.CV.option_root_ci_critical"],
+         targets=["CI2ZF.Appendix.CV.option_root_ci_critical"],
          source="Chen, Feng, Guo, Zhang, Zou, Deterministic counting from coupling "
                 "independence, arXiv:2410.23225v2, Theorem 20",
          url="https://arxiv.org/abs/2410.23225v2",
          meaning="Hard-colouring coupling independence at x = 0 on all graphs of maximum "
-                 "degree at most Δ, for arbitrary pinnings. CriticalHardColouringInput is "
-                 "the same bound on boundary-count data, derived from it by "
-                 "ExternalCriticalHardColouringTheorem.to_normalizedInput."),
-    dict(id="clmm-lit", short="CLMM Eq. (10), Lemma 5.13",
-         lean=["CI2ZF.Appendix.CLMM.Literature"],
+                 "degree at most Δ, for arbitrary pinnings, needed at q = 11Δ/6. "
+                 "CriticalHardColouringInput is the same bound on boundary-count data.",
+         route="Lean does not follow the citation. It extends the Carlson–Vigoda contraction "
+               "of Appendix A to q ≥ 11Δ/6 for every Δ ≥ 6, with the same constant "
+               "409060125/50858 (option_root_ci_critical). Integer equality 6q = 11Δ forces "
+               "Δ ≥ 6, so this covers every critical case."),
+    dict(id="clmm-10", short="CLMM Eq. (10)",
+         statement=["CI2ZF.Appendix.CLMM.Literature"],
+         proof=["CI2ZF.Appendix.CLMM.Eq10.sphere_estimate_proof", "CI2ZF.Appendix.CLMM.literature"],
+         targets=["CI2ZF.Appendix.CLMM.Eq10.sphere_estimate_proof"],
          source="Chen, Liu, Mani, Moitra, Strong spatial mixing for colorings on trees and "
-                "its algorithmic applications, arXiv:2304.01954v3, Equation (10) (from "
-                "Lemmas 5.19 and 5.20) and Lemma 5.13",
+                "its algorithmic applications, arXiv:2304.01954v3, Equation (10), from "
+                "Lemmas 5.19 and 5.20",
          url="https://arxiv.org/abs/2304.01954v3",
-         meaning="Two fields: tree influence decay and relative spatial mixing give decay "
-                 "on spheres of a fixed base graph under all further pinnings; sphere decay "
-                 "gives a Hamming coupling bound 2Δ^R."),
+         meaning="Tree influence decay and relative spatial mixing give influence decay on "
+                 "the spheres of a fixed base graph, under all further pinnings.",
+         route="As in CLMM, through Lemmas 5.19 and 5.20. Lemma 5.19 becomes a finite-sum "
+               "decomposition over sphere configurations, and Lemma 5.20 bounds the total "
+               "variation by 2ε. The ball around the root is read as a cavity tree; the girth "
+               "is used for two facts only: no edge inside a distance layer, and unique parents."),
     dict(id="clmm-513", short="CLMM Lemma 5.13",
-         lean=["CI2ZF.Appendix.Girth.SphereCouplingInput"],
+         statement=[],
+         proof=["CI2ZF.Appendix.CLMM.Lemma513.sphere_to_coupling"],
          source="Chen, Liu, Mani, Moitra, arXiv:2304.01954v3, Condition 5.12 and Lemma 5.13",
          url="https://arxiv.org/abs/2304.01954v3",
-         meaning="Only the sphere-to-coupling half of CLMM.Literature."),
+         meaning="Sphere influence decay below 1/(8R log Δ) gives the Hamming coupling bound "
+                 "2Δ^R for the two root-child laws.",
+         route="As in CLMM, by strong induction on the number of free vertices. If no sphere "
+               "vertex is free, the two laws agree off the ball. Otherwise the proof conditions "
+               "on the free sphere vertex of least total variation through a maximal coupling; "
+               "the conditioned laws are smaller instances. 1 + log ℓ replaces the harmonic "
+               "number H_ℓ."),
     dict(id="clmm-87", short="CLMM Lemma 8.7",
-         lean=["CI2ZF.Appendix.Girth.CavityTree.CLMMInfluenceIdentity"],
+         statement=["CI2ZF.Appendix.Girth.CavityTree.CLMMInfluenceIdentity"],
+         proof=["CI2ZF.Appendix.Girth.CavityTree.clmmInfluenceIdentity"],
          source="Chen, Liu, Mani, Moitra, arXiv:2304.01954v3, Lemma 8.7",
          url="https://arxiv.org/abs/2304.01954v3",
-         meaning="The tree influence–Jacobian factorization, summed over a whole tree level."),
-    dict(id="bbr", short="BBR Prop 2.6(i), Thm 2.5",
-         lean=["CI2ZF.Appendix.BBR.Literature"],
+         meaning="The tree influence–Jacobian factorization, summed over a whole tree level.",
+         route="Proved from the actual finite-tree Gibbs law, one level at a time."),
+    dict(id="bbr-26", short="BBR Prop 2.6(i)",
+         statement=["CI2ZF.Appendix.BBR.Literature"],
+         proof=["CI2ZF.Appendix.BBR.proposition_2_6_i_holds", "CI2ZF.Appendix.BBR.literature"],
+         targets=["CI2ZF.Appendix.BBR.proposition_2_6_i_holds"],
          source="Bencs, Berrekkal, Regts, Near optimal bounds for weak and strong spatial "
                 "mixing for the anti-ferromagnetic Potts model on trees, Electron. J. Probab. "
-                "30 (2025), paper 65, Proposition 2.6(i) and Theorem 2.5",
+                "30 (2025), paper 65, Proposition 2.6(i)",
          url="https://doi.org/10.1214/25-EJP1327",
-         meaning="The segment-weight bound, used only at its printed hypothesis Δ ≥ q + 3, "
-                 "and the squared-norm contraction of cavity messages."),
+         meaning="The segment-weight bound for cavity messages, used only at its printed "
+                 "hypothesis Δ ≥ q + 3. BBR.Literature bundles it with Theorem 2.5.",
+         route="Follows BBR Section 4, but two uses of the concavity of log, a chord bound and "
+               "Jensen's inequality, replace their Lemma 4.1 and Lemma 4.2(i); Lemma 4.3 is "
+               "proved from a derivative."),
+    dict(id="bbr-25", short="BBR Thm 2.5",
+         statement=[],
+         proof=["CI2ZF.Appendix.BBR.theorem_2_5_holds"],
+         source="Bencs, Berrekkal, Regts, Electron. J. Probab. 30 (2025), paper 65, Theorem 2.5",
+         url="https://doi.org/10.1214/25-EJP1327",
+         meaning="The squared-norm contraction of the square-root message recursion; the "
+                 "theorem_2_5 field of BBR.Literature.",
+         route="As in BBR Section 3: the mean value theorem along the segment between the two "
+               "message vectors, Cauchy–Schwarz, and the pointwise Jacobian bound."),
 ]
 
 RESULTS = [
     dict(id="thm-intro-main", group="main", paper=[("main", "thm:intro-main")],
          lean=["CI2ZF.Potts.potts_main_theorem", "CI2ZF.Potts.potts_main_strict"],
          defs=["CI2ZF.Potts.UniformPottsZeroFree"],
-         hyp_notes={"cffgzz": "only when 6q = 11Δ"},
-         notes=["The literature input is requested only on the line 6q = 11Δ, the equality case "
-                "of the theorem.",
+         notes=["On the line 6q = 11Δ, where the paper cites CFFGZZ Theorem 20, Lean uses the "
+                "Carlson–Vigoda contraction on the critical line instead; the theorem has no "
+                "hypothesis beyond the paper's.",
                 "Graphs range over finite types with every degree at most Δ; the pinning is any "
                 "PartialColouring, improper ones included.",
                 "UniformPottsZeroFree bundles the three conclusions: the normalized polynomial has "
@@ -114,12 +152,12 @@ RESULTS = [
          lean=["CI2ZF.Potts.root_positive_ci"],
          notes=["Lean does not need Δ ≥ 2."]),
     dict(id="cor-critical-line-input", group="main", paper=[("main", "cor:critical-line-input")],
-         lean=["CI2ZF.Potts.critical_transfer_coupling_inputs",
+         lean=["CI2ZF.Potts.critical_line_transfer_coupling_inputs",
                "CI2ZF.Potts.root_critical_uniform_ci"],
          defs=["CI2ZF.Potts.CriticalHardColouringInput"],
-         notes=["The x = 0 bound is the named input CriticalHardColouringInput; "
-                "ExternalCriticalHardColouringTheorem.to_normalizedInput derives it from the "
-                "original-graph form of CFFGZZ Theorem 20.",
+         notes=["The x = 0 bound, for which the paper cites CFFGZZ Theorem 20, is "
+                "critical_hard_colouring_input, proved by the Carlson–Vigoda contraction on the "
+                "critical line.",
                 "root_critical_uniform_ci gives the constant 12/(11δ) on [δ, 1]."]),
     dict(id="prop-field-transfer", group="main", paper=[("main", "prop:field-transfer")],
          lean=["CI2ZF.LeeYang.graph_class_normalized_field_transfer"],
@@ -133,12 +171,13 @@ RESULTS = [
                "CI2ZF.LeeYang.high_girth_original_field_transfer",
                "CI2ZF.LeeYang.high_girth_residual_original_field_transfer"],
          defs=["CI2ZF.LeeYang.UniformVertexFieldZeroFree"],
-         hyp_notes={"cffgzz": "regime (i), only at (Δ, q) = (6j, 11j) with j ≤ 20"},
-         notes=["Regime (i) assumes CFFGZZ Theorem 20 only at (Δ, q) = (6j, 11j), j ≤ 20; "
-                "regime (ii) assumes nothing.",
-                "Regime (iii) uses the large-girth row's CLMM inputs (Lemma 8.7, Equation (10), "
-                "Lemma 5.13) instead of the x = 0 results cited in the paper's proof. The residual "
-                "version needs girth only of G^τ."]),
+         notes=["No regime takes a hypothesis. At the critical pairs (Δ, q) = (6j, 11j) of "
+                "regime (i), the x = 0 bound comes from the Carlson–Vigoda contraction on the "
+                "critical line.",
+                "Regime (iii) uses the large-girth coupling theorem, with its CLMM results "
+                "(Lemma 8.7, Equation (10), Lemma 5.13) proved in Lean, instead of the x = 0 "
+                "results cited in the paper's proof. The residual version needs girth only of "
+                "G^τ."]),
     dict(id="cor-edge-lee-yang", group="main", paper=[("main", "cor:edge-lee-yang")],
          lean=["CI2ZF.LeeYang.edge_lee_yang"],
          notes=["No CWZZ input: the line-graph coupling bound Δ − 1 at x = 0 is proved in Lean."]),
@@ -161,11 +200,11 @@ RESULTS = [
          paper=[("companion", "thm:potts-ci-regimes"), ("companion", "lem:int-reduction"),
                 ("companion", "thm:additional-potts-zf")],
          lean=["CI2ZF.Appendix.near_vigoda_transfer_inputs",
-               "CI2ZF.Appendix.near_vigoda_noncritical_uniform_ci",
+               "CI2ZF.Appendix.near_vigoda_uniform_ci",
                "CI2ZF.Appendix.near_vigoda_zero_free", "CI2ZF.Appendix.integer_reduction"],
-         hyp_notes={"cffgzz": "only at (Δ, q) = (6j, 11j) with j ≤ 20"},
-         notes=["CFFGZZ Theorem 20 is requested only at (Δ, q) = (6j, 11j) with j ≤ 20; for "
-                "Δ ≥ 125 the Carlson–Vigoda theorem is used instead.",
+         notes=["At the critical pairs (Δ, q) = (6j, 11j), j ≤ 20, where the companion cites "
+                "CFFGZZ Theorem 20, Lean uses the Carlson–Vigoda contraction on the critical "
+                "line; for Δ ≥ 125 it uses the Carlson–Vigoda theorem.",
                 "integer_reduction is Lemma 4.3 of the companion, word for word.",
                 "At the critical pairs the constant on [δ, 1] is 12/(11δ) "
                 "(root_critical_uniform_ci)."]),
@@ -178,6 +217,8 @@ RESULTS = [
          notes=["The constant is ciConstant = 409060125/50858 < 8043.19, as in the companion.",
                 "No literature input: the contraction is proved in Lean and x = 0 follows by "
                 "finite-state continuity, so neither CV2024 nor CFFGZZ is assumed.",
+                "The same contraction holds on the critical line q ≥ 11Δ/6 for every Δ ≥ 6, "
+                "with the same constant (Regime, option_root_ci_critical).",
                 "The coupling theorems are stated on boundary-count data (PinningData (Option O) C), "
                 "which covers every (G, τ, r)."]),
     dict(id="large-girth", group="appendix", title="Large-girth regime",
@@ -186,9 +227,10 @@ RESULTS = [
          lean=["CI2ZF.Appendix.Girth.high_girth_coupling",
                "CI2ZF.Appendix.Girth.high_girth_residual_original_zero_free"],
          defs=["CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree"],
-         notes=["CLMM Lemma 8.7 enters in its level-summed form, and the sphere estimate needs "
-                "strong spatial mixing only beyond a fixed depth K₀; the companion justifies both "
-                "in the proof of its Lemma 6.10.",
+         notes=["CLMM Lemma 8.7, Equation (10) and Lemma 5.13 are proved in Lean. Lemma 8.7 is "
+                "used in its level-summed form, and Equation (10) needs strong spatial mixing only "
+                "beyond a fixed depth K₀; the companion justifies both in the proof of its "
+                "Lemma 6.10.",
                 "Girth is required only of the free graph. Lean transfers on residual instances "
                 "directly instead of using the pinned-leaf realization."]),
     dict(id="high-temperature", group="appendix", title="High-temperature regime",
@@ -253,7 +295,7 @@ RCB = "CI2ZF.Potts.GraphClassRootCouplingBound"
 STRICT = "CI2ZF.Potts.root_strict_ci"
 HARD = "CI2ZF.ConditionalHardCouplingEstimate"
 POS = "CI2ZF.Potts.root_positive_ci"
-CRIT = "CI2ZF.Potts.critical_transfer_coupling_inputs"
+CRIT = "CI2ZF.Potts.critical_line_transfer_coupling_inputs"
 FIELD = "CI2ZF.LeeYang.graph_class_normalized_field_transfer"
 LYNV = "CI2ZF.LeeYang.near_vigoda_vertex_field_zero_free"
 LYHG = "CI2ZF.LeeYang.high_girth_original_field_transfer"
@@ -293,9 +335,6 @@ PAIRS = {
              "(∀ z ∈ thickening eps pottsInterval, normalizedPartition tau G z ≠ 0)",
              "thickening eps pottsInterval is the open ε-neighbourhood of [0, 1] in ℂ."),
         pair("thm:intro-main", CONSEQUENTLY, UZF, FULL_ZEROS, "pinnedConflictCount is m_G(τ)."),
-        pair(None, None, MAIN, "(hExternal : 6 * q = 11 * Δ → ExternalCriticalHardColouringTheorem.{u, 0} (Fin q) Δ)",
-             "Not in the statement: the hard-colouring bound of CFFGZZ Theorem 20, which the paper's proof cites "
-             "in the equality case, is a hypothesis here."),
     ],
     "thm-potts-transfer": [
         pair("thm:potts-transfer", r"\(q\ge\Deg+1\)", TRANSFER, "(hq : Δ + 1 ≤ Fintype.card C)",
@@ -390,9 +429,9 @@ PAIRS = {
         pair("cor:critical-line-input", r"\(\Deg\ge2\) and \(q=11\Deg/6\)", CRIT,
              "(hΔ : 2 ≤ Δ) (hq : (Fintype.card C : ℝ) = (11 / 6 : ℝ) * Δ)"),
         pair("cor:critical-line-input", r"Then \(\Gdeg\) satisfies coupling independence at \(x=0\) with a finite constant",
-             CRIT, "(hardInput : CriticalHardColouringInput.{u, v} C Δ hcolours)",
-             "This is where CFFGZZ Theorem 20 enters: the paper's proof cites it, and Lean takes it as the hypothesis "
-             "hardInput."),
+             "CI2ZF.Potts.critical_hard_colouring_input", "CriticalHardColouringInput.{u, v} C Δ hcolours",
+             "The paper's proof cites CFFGZZ Theorem 20 here. Lean proves the bound with the Carlson–Vigoda "
+             "contraction on the critical line; Δ ≥ 6 holds there by critical_line_degree_ge_six."),
         pair("cor:critical-line-input", r"for every \(\delta\in(0,1]\) it satisfies coupling independence on "
              r"\([\delta,1]\) with constant \(12/(11\delta)\)", "CI2ZF.Potts.root_critical_uniform_ci",
              ["(hx : (x : ℝ) ∈ Set.Icc δ 1)", "≤ 12 / (11 * δ)"]),
@@ -434,11 +473,6 @@ PAIRS = {
              "Regimes (i) and (ii) use the closed polydisc; regime (iii) states the open one."),
         pair("thm:lee-yang", r"For a proper pinning, the corresponding statement for \(\Zpin{G}{\tau}(\lambda)\) follows",
              UVF, "((∀ v : tau.domain, ℓ v.val (tau.colour v) ≠ 0) → (fullFieldPartition tau G ℓ ≠ 0 ↔ ProperPinning tau G))"),
-        pair(None, None, LYNV, "(critical : ∀ j : ℕ, 1 ≤ j → j ≤ 20 → Δ = 6 * j → Fintype.card C = 11 * j → "
-             "ExternalCriticalHardColouringTheorem.{u,v} C Δ)",
-             "Not in the statement: the cited hard-colouring bound, needed only at the twenty critical pairs."),
-        pair(None, None, LYHG, "(identity : CavityTree.CLMMInfluenceIdentity C) (transfer : CLMM.Literature.{u,v} C)",
-             "Not in the statement: the CLMM results used for regime (iii)."),
     ],
     "cor-edge-lee-yang": [
         pair("cor:edge-lee-yang", r"\(\Deg\ge2\) and \(q\ge3\Deg\)", EDGELY, "(hΔ : 2 ≤ Δ) (hq : 3 * Δ ≤ Fintype.card C)"),
@@ -497,14 +531,14 @@ PAIRS = {
              r"\(C_\delta=C_\delta(q,\Deg)<\infty\) such that it satisfies \(C_\delta\)-coupling independence on "
              r"\([\delta,1]\).", NVCI, "∃ hcolours : Δ + 1 ≤ Fintype.card C, TransferCouplingInputs.{u,v} C Δ hcolours"),
         pair("thm:potts-ci-regimes", r"The same is true in the noncritical cases of regime~\textup{(i)}.",
-             "CI2ZF.Appendix.near_vigoda_noncritical_uniform_ci",
-             ["(hnc : ¬ ∃ j : ℕ, 1 ≤ j ∧ j ≤ 20 ∧ Δ = 6 * j ∧ Fintype.card C = 11 * j)",
-              "∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 → RootCouplingBound.{u,v} C Δ hcolours x cost"],
-             "One constant for every x ∈ [0, 1]."),
+             "CI2ZF.Appendix.near_vigoda_uniform_ci",
+             "∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 → RootCouplingBound.{u,v} C Δ hcolours x cost",
+             "One constant for every x ∈ [0, 1], and Lean proves it in every case of regime (i), the critical "
+             "pairs included."),
         pair("thm:potts-ci-regimes", r"the endpoint bound is supplied independently by the hard-colouring coupling theorem",
-             NVCI, "(critical : ∀ j : ℕ, 1 ≤ j → j ≤ 20 → Δ = 6 * j → Fintype.card C = 11 * j → "
-             "ExternalCriticalHardColouringTheorem.{u,v} C Δ)",
-             "CFFGZZ Theorem 20, as a hypothesis at exactly these pairs."),
+             "CI2ZF.Potts.critical_hard_colouring_input", "CriticalHardColouringInput.{u, v} C Δ hcolours",
+             "The companion cites CFFGZZ Theorem 20 for this endpoint bound; Lean proves it with the "
+             "Carlson–Vigoda contraction on the critical line."),
         pair("lem:int-reduction", r"Let \(\Deg\) and \(q\) be integers with \(3\le\Deg\le124\)",
              "CI2ZF.Appendix.integer_reduction", "{Δ q : ℕ} (hΔ : 3 ≤ Δ) (hΔmax : Δ ≤ 124)"),
         pair("lem:int-reduction", r"Then either \(q>11\Deg/6\), or \((\Deg,q)=(6j,11j)\) for some integer \(1\le j\le20\).",
@@ -536,8 +570,6 @@ PAIRS = {
         pair("thm:high-girth-soft-ci", r"every pinning $\tau$ with \(\operatorname{girth}(G^\tau)\ge g_*\)", HGCI,
              "(largeGirthFamily.{u,v} C g).RootCouplingBound Δ (by omega) x K",
              "largeGirthFamily C g consists of the residual instances whose free graph has girth at least g."),
-        pair(None, None, HGCI, "(identity : CLMMInfluenceIdentity C) (transfer : CLMM.Literature.{u,v} C)",
-             "Not in the statement: the CLMM results that the companion's proof cites."),
         pair("thm:additional-potts-zf", r"with the additional condition \(\operatorname{girth}(G^\tau)\ge g_*\) in "
              r"regime~\textup{(iii)}", "CI2ZF.Appendix.Girth.high_girth_residual_original_zero_free",
              "∃ g : ℕ, 3 ≤ g ∧ ∃ eps > 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ g eps",
@@ -579,9 +611,6 @@ PAIRS = {
              "tau G z ≠ 0 ∧ fullPartition tau G z ≠ 0", "One ε serves the normalized and the full polynomial."),
         pair("thm:bbr-large-girth-ci", r"every \(x\in[x_0,1]\)", "CI2ZF.Appendix.BBR.high_girth_coupling",
              "∀ (x : ℝ) (hx : 0 < x), x ∈ Icc (start (Fintype.card C) Δ) 1 →"),
-        pair(None, None, "CI2ZF.Appendix.BBR.high_girth_coupling",
-             "(external : Literature C) (transfer : CLMM.Literature.{u,v} C)",
-             "Not in the statement: BBR Proposition 2.6(i) and Theorem 2.5, and the two CLMM results."),
     ],
     "edge-potts": [
         pair("thm:soft-edge-ci", r"\(q\ge3\Deg\)", EDGECI,
@@ -613,8 +642,6 @@ PAIRS = {
              r"\right)\le C_5(q,\Deg,\delta)<\infty", G5CI,
              ["∃ cost : ℝ, 0 ≤ cost ∧", "W ham ((optionChildData I a).gibbs x hx ha) ((optionChildData I b).gibbs x hx hb) ≤ cost"],
              "One constant for all graphs, pinnings and activities."),
-        pair(None, None, G5CI, "(external : SphereCouplingInput.{u,v} C)",
-             "Not in the statement: CLMM Lemma 5.13, the only literature result used."),
         pair("thm:unrestricted-girth5", r"There exists $\eps_5=\eps_5(q,\Deg,\delta)>0$",
              "CI2ZF.Appendix.Girth.girth_five_residual_original_zero_free",
              "∃ eps > 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ 5 eps",
@@ -706,6 +733,28 @@ def moduleOf (env : Environment) (n : Name) : String :=
   | some i => (env.header.moduleNames[i.toNat]!).toString
   | none => ""
 
+def citedTargets : Array Name := #[@@TARGETS@@]
+
+/-- The proofs of cited results that `start` depends on, through the types
+and values of library constants (auxiliary ones included). -/
+def reachedTargets (env : Environment) (start : Name) : Array Name := Id.run do
+  let mut seen : NameSet := {}
+  let mut stack : Array Name := #[start]
+  let mut found : Array Name := #[]
+  while !stack.isEmpty do
+    let n := stack.back!
+    stack := stack.pop
+    if seen.contains n then continue
+    seen := seen.insert n
+    if n != start && citedTargets.contains n then found := found.push n
+    if let some ci := env.find? n then
+      let cs := ci.type.getUsedConstants ++ ((ci.value? (allowOpaque := true)).map (·.getUsedConstants)).getD #[]
+      for c in cs do
+        let s := c.toString
+        if (s.startsWith "CI2ZF." || s.startsWith "PottsCI.") && !seen.contains c then
+          stack := stack.push c
+  return found
+
 #eval show MetaM Unit from do
   let env ← getEnv
   for n in siteNames do
@@ -742,12 +791,14 @@ def moduleOf (env : Environment) (n : Name) : String :=
       IO.println (Json.compress (Json.mkObj [("name", toJson n.toString), ("kind", toJson kind),
         ("module", toJson modName), ("start", toJson l0), ("end", toJson l1),
         ("signature", toJson (sig.fmt.pretty 96)), ("axioms", toJson (axs.map (·.toString))),
-        ("used", toJson used), ("deps", Json.arr deps)]))
+        ("used", toJson used), ("deps", Json.arr deps),
+        ("cited", toJson ((reachedTargets env n).map (·.toString)))]))
 """
 
 
-def lean_extract(names):
-    source = LEAN_TEMPLATE.replace("@@NAMES@@", ", ".join("`" + n for n in names))
+def lean_extract(names, targets):
+    source = (LEAN_TEMPLATE.replace("@@NAMES@@", ", ".join("`" + n for n in names))
+              .replace("@@TARGETS@@", ", ".join("`" + n for n in targets)))
     with tempfile.NamedTemporaryFile("w", suffix=".lean", delete=False) as handle:
         handle.write(source)
         path = handle.name
@@ -1125,7 +1176,18 @@ def statement_html(papers, converters, source, label):
     return ref, title_html, where, conv.convert(body)
 
 
-def decl_html(info, commit, lit_by_name):
+def cited_in_type(info, by_statement):
+    """Cited results whose Lean statement occurs in the type: hypotheses."""
+    return [c for c in CITED if any(by_statement.get(u) is c for u in info["used"])]
+
+
+def cited_in_proof(info, by_target):
+    """Cited results whose Lean proof the declaration depends on."""
+    return [c for c in CITED if any(by_target.get(t) is c for t in info.get("cited", []))]
+
+
+def decl_html(info, commit, index, show_cited=True):
+    by_statement, by_target = index
     doc, code = lean_excerpt(info)
     path = module_file(info["module"]).as_posix()
     url = "%s/blob/%s/%s#L%d-L%d" % (GITHUB, commit, path, info["start"], info["end"])
@@ -1134,10 +1196,13 @@ def decl_html(info, commit, lit_by_name):
     badges = ['<span class="badge good" title="%s"><span aria-hidden="true">✓</span> Standard axioms only</span>'
               % e(", ".join(axioms) or "no axioms") if standard else
               '<span class="badge bad"><span aria-hidden="true">!</span> Axioms: %s</span>' % e(", ".join(axioms))]
-    for lit in sorted({lit_by_name[u]["id"] for u in info["used"] if u in lit_by_name}):
-        entry = next(x for x in LITERATURE if x["id"] == lit)
-        badges.append('<a class="badge hyp" href="#lit-%s"><span class="dot" aria-hidden="true"></span>'
-                      'Assumes %s</a>' % (lit, e(entry["short"])))
+    if show_cited:
+        for c in cited_in_type(info, by_statement):
+            badges.append('<a class="badge bad" href="#lit-%s"><span aria-hidden="true">!</span>'
+                          'Assumes %s</a>' % (c["id"], e(c["short"])))
+        for c in cited_in_proof(info, by_target):
+            badges.append('<a class="badge hyp" href="#lit-%s"><span class="dot" aria-hidden="true"></span>'
+                          'Uses %s, proved in Lean</a>' % (c["id"], e(c["short"])))
     return f"""
 <div class="decl">
   <div class="decl-head"><code class="decl-name">{e(short(info["name"]))}</code>
@@ -1253,15 +1318,17 @@ def build(args):
     names = []
     for result in RESULTS:
         names += result["lean"] + result.get("defs", [])
-    names += [n for lit in LITERATURE for n in lit["lean"]] + [g[0] for g in GLOSSARY]
+    names += [n for c in CITED for n in c["statement"] + c["proof"]] + [g[0] for g in GLOSSARY]
     names += [row["lean"] for rows in PAIRS.values() for row in rows if row["lean"]]
     names = list(dict.fromkeys(names))
-    info = lean_extract(names)
-    lit_by_name = {n: lit for lit in LITERATURE for n in lit["lean"]}
+    by_target = {t: c for c in CITED for t in c.get("targets", c["proof"])}
+    by_statement = {n: c for c in CITED for n in c["statement"]}
+    index = (by_statement, by_target)
+    info = lean_extract(names, list(by_target))
     quotes = check_quotes(papers, info)
 
     # matrix and cards
-    used_by = {lit["id"]: [] for lit in LITERATURE}
+    used_by = {c["id"]: [] for c in CITED}
     rows, cards = [], {"main": [], "appendix": []}
     for result in RESULTS:
         statements = [statement_html(papers, converters, src, label) for src, label in result["paper"]]
@@ -1269,27 +1336,24 @@ def build(args):
         if result["group"] == "appendix":
             ref, title_html = "Appendix A", e(result["title"])
         plain_title = re.sub(r"<[^>]+>|\\[()]", "", title_html)
-        hyps = set()
+        result["_label"] = result.get("title") or ref
         for name in result["lean"]:
-            hyps |= {lit_by_name[u]["id"] for u in info[name]["used"] if u in lit_by_name}
-        for lit in hyps:
-            used_by[lit].append(result)
+            for c in cited_in_type(info[name], by_statement):
+                print(f"warning: {name} takes {c['short']} as a hypothesis", file=sys.stderr)
+        uses = [c for c in CITED if any(c in cited_in_proof(info[n], by_target) for n in result["lean"])]
+        for c in uses:
+            used_by[c["id"]].append(result)
         search = " ".join([ref, re.sub(r"<[^>]+>", "", title_html), *result["lean"]]).lower()
         cells = []
-        for lit in LITERATURE:
-            if lit["id"] in hyps:
-                note = result.get("hyp_notes", {}).get(lit["id"], "")
-                assuming = [short(n) for n in result["lean"]
-                            if any(lit_by_name.get(u, {}).get("id") == lit["id"] for u in info[n]["used"])]
-                cells.append('<td class="cell on" tabindex="0" data-tip-value="Assumed%s" '
+        for c in CITED:
+            if c in uses:
+                via = [short(n) for n in result["lean"] if c in cited_in_proof(info[n], by_target)]
+                cells.append('<td class="cell on" tabindex="0" data-tip-value="Proved in Lean, used by the proof" '
                              'data-tip-label="%s · %s"><span class="dot" aria-hidden="true"></span>'
-                             '<span class="sr">assumed</span></td>'
-                             % (e(" (" + note + ")") if note else "", e(lit["short"]),
-                                e(", ".join(assuming))))
+                             '<span class="sr">used</span></td>' % (e(c["short"]), e(", ".join(via))))
             else:
-                cells.append('<td class="cell"><span class="sr">not assumed</span></td>')
-        count = ('<span class="none"><span aria-hidden="true">✓</span> none</span>' if not hyps
-                 else "%d" % len(hyps))
+                cells.append('<td class="cell"><span class="sr">not used</span></td>')
+        count = ('<span class="none">none</span>' if not uses else "%d" % len(uses))
         rows.append('<tr data-result="%s" data-group="%s" data-search="%s"><th scope="row">'
                     '<a href="#%s"><span class="rref">%s</span> %s</a></th>%s<td class="count">%s</td></tr>'
                     % (result["id"], result["group"], e(search), result["id"], e(ref), title_html,
@@ -1303,7 +1367,7 @@ def build(args):
         if result.get("table"):
             paper_html = ('<p class="table-row"><span class="label">Table A.1</span> %s</p>'
                           % e(result["table"])) + paper_html
-        lean_html = "".join(decl_html(info[n], commit, lit_by_name) for n in result["lean"])
+        lean_html = "".join(decl_html(info[n], commit, index) for n in result["lean"])
         if result.get("defs"):
             lean_html += '<p class="defs">Definitions: %s</p>' % ", ".join(
                 '<a href="#def-%s"><code>%s</code></a>' % (e(n), e(short(n))) for n in result["defs"])
@@ -1324,8 +1388,8 @@ def build(args):
 </article>""")
 
     head = "".join('<th scope="col"><a href="#lit-%s" title="%s">%s</a></th>'
-                   % (lit["id"], e(lit["source"]), e(lit["short"])) for lit in LITERATURE)
-    matrix = ('<table class="matrix"><thead><tr><th scope="col">Result</th>%s<th scope="col">Inputs</th>'
+                   % (c["id"], e(c["source"]), e(c["short"])) for c in CITED)
+    matrix = ('<table class="matrix"><thead><tr><th scope="col">Result</th>%s<th scope="col">Cited</th>'
               '</tr></thead><tbody>%s</tbody></table>' % (head, "".join(rows)))
 
     glossary = []
@@ -1342,16 +1406,20 @@ def build(args):
 </div>""")
 
     literature = []
-    for lit in LITERATURE:
-        users = used_by[lit["id"]]
-        decls = "".join(decl_html(info[n], commit, lit_by_name) for n in lit["lean"])
+    for c in CITED:
+        users = used_by[c["id"]]
+        statement = "".join(decl_html(info[n], commit, index, False) for n in c["statement"])
+        proof = "".join(decl_html(info[n], commit, index, False) for n in c["proof"])
+        user_links = ", ".join('<a href="#%s">%s</a>' % (r["id"], e(r["_label"])) for r in users)
         literature.append(f"""
-<article class="card lit" id="lit-{lit['id']}">
-  <header class="card-head"><div><div class="ref">Literature hypothesis</div><h3>{e(lit['short'])}</h3></div></header>
-  <p class="source"><a href="{e(lit['url'])}">{e(lit['source'])}</a></p>
-  <p>{e(lit['meaning'])}</p>
-  <p class="users">Assumed by: {", ".join('<a href="#%s">%s</a>' % (r['id'], e(r.get('title') or r['id'])) for r in users) or 'no mapped result'}</p>
-  {decls}
+<article class="card lit" id="lit-{c['id']}">
+  <header class="card-head"><div><div class="ref">Cited result</div><h3>{e(c['short'])}</h3></div></header>
+  <p class="source"><a href="{e(c['url'])}">{e(c['source'])}</a></p>
+  <p>{e(c['meaning'])}</p>
+  <p class="route"><strong>Lean proof.</strong> {e(c['route'])}</p>
+  <p class="users">Used by the proofs of: {user_links or 'no result shown on this page'}</p>
+  {'<h4 class="sub">Lean statement</h4>' + statement if statement else ''}
+  <h4 class="sub">Lean proof</h4>{proof}
 </article>""")
 
     tiles = [
@@ -1553,6 +1621,9 @@ table.matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
 .notation { margin: 6px 0 4px; font: 17px var(--serif); }
 .lit .source { font: 16px/1.55 var(--serif); }
 .lit .users { font-size: 14px; color: var(--ink-2); }
+.lit .route { font-size: 15px; line-height: 1.55; }
+.lit h4.sub { font: 600 12px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  margin: 20px 0 4px; }
 .repro pre { background: var(--code-bg); border-radius: 12px; padding: 12px 14px; overflow-x: auto; }
 footer { color: var(--muted); font-size: 13px; padding: 36px 0 64px; margin-top: 48px; border-top: 1px solid var(--grid); }
 .corr { margin-top: 22px; border-top: 1px solid var(--grid); padding-top: 16px; }
@@ -1587,7 +1658,7 @@ details.uses .ud { color: var(--ink-2); }
 <body>
 <div class="topbar"><div class="wrap">
   <span class="brand"><span class="spark" aria-hidden="true">✻</span>CI2ZF <span class="brand-sub">Lean ↔ paper</span></span>
-  <nav aria-label="Sections"><a href="#status">Status</a><a href="#matrix">Hypotheses</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#definitions">Definitions</a><a href="#literature">Literature</a><a href="#reproduce">Reproduce</a></nav>
+  <nav aria-label="Sections"><a href="#status">Status</a><a href="#matrix">Cited results</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#definitions">Definitions</a><a href="#literature">Their proofs</a><a href="#reproduce">Reproduce</a></nav>
   <span class="spacer"></span>
   <button id="theme" type="button" title="Switch colour theme">Theme: auto</button>
 </div></div>
@@ -1596,8 +1667,8 @@ details.uses .ud { color: var(--ink-2); }
 <header class="hero" id="status">
   <div class="eyebrow">Lean formalization · commit @@COMMIT@@</div>
   <h1>The paper and its Lean formalization, side by side</h1>
-  <p>For every result of <em>Coupling Independence Implies Zero-Freeness</em> and its companion paper, this page sets the paper's statement next to the Lean theorem that proves it. A table then matches the two phrase by phrase. Each result also lists the published results its Lean statement takes as hypotheses, and the library lemmas its proof uses.</p>
-  <p>Nothing on the Lean side is written by hand: signatures, axioms, hypotheses and dependencies are read from the compiled library at commit <a href="@@COMMITURL@@"><code>@@COMMIT@@</code></a>, and every source link points to that commit. Every quotation in the correspondence tables is checked verbatim against the paper's LaTeX and the Lean source when the page is built.</p>
+  <p>For every result of <em>Coupling Independence Implies Zero-Freeness</em> and its companion paper, this page sets the paper's statement next to the Lean theorem that proves it. A table then matches the two phrase by phrase. Each result also lists the published results its proof relies on, each of them proved in the library too, and the library lemmas its proof applies.</p>
+  <p>Nothing on the Lean side is written by hand: signatures, axioms and dependencies are read from the compiled library at commit <a href="@@COMMITURL@@"><code>@@COMMIT@@</code></a>, and every source link points to that commit. Every quotation in the correspondence tables is checked verbatim against the paper's LaTeX and the Lean source when the page is built.</p>
 </header>
 
 <div class="tiles">@@TILES@@</div>
@@ -1609,8 +1680,8 @@ details.uses .ud { color: var(--ink-2); }
   <input type="search" id="q" placeholder="Filter by result or Lean name" aria-label="Filter by result or Lean name">
 </div>
 
-<h2 id="matrix">Literature hypotheses by result</h2>
-<p class="lede">A dot means the Lean statement takes that published result as an explicit hypothesis. Nothing else is assumed: the axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
+<h2 id="matrix">Cited results used by each proof</h2>
+<p class="lede">A dot means that the Lean proof of the result depends, through the library, on the Lean proof of that cited result. No Lean statement takes a cited result as a hypothesis, and the axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
 <div class="matrix-wrap">@@MATRIX@@</div>
 
 <h2 id="main">Main paper</h2>
@@ -1625,8 +1696,8 @@ details.uses .ud { color: var(--ink-2); }
 <p class="lede">The Lean objects the statements are written in, next to the paper's notation.</p>
 <div class="card glossary">@@GLOSSARY@@</div>
 
-<h2 id="literature">Literature hypotheses</h2>
-<p class="lede">The exact Lean propositions that stand for cited results. They are theorem hypotheses, not axioms, so a Lean proof only shows that the conclusion follows from them.</p>
+<h2 id="literature">Cited results and their Lean proofs</h2>
+<p class="lede">Each result the papers cite, the Lean proposition that expresses it, and the Lean theorem that proves it. Where the Lean proof takes a different route from the cited paper, the card says so.</p>
 @@LITERATURE@@
 
 <h2 id="reproduce">Reproduce</h2>
