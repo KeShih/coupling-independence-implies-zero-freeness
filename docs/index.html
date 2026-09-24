@@ -16,150 +16,194 @@
 <style>
 :root {
   color-scheme: light;
-  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
-  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11, 11, 11, 0.10);
-  --accent: #2a78d6; --track: #cde2fb; --good: #0ca30c; --good-ink: #006300; --bad: #d03b3b;
-  --code-bg: #f2f1ed; --link: #1c5cab; --wash: rgba(42, 120, 214, 0.07);
+  --serif: "Copernicus", "Tiempos Text", "Tiempos Headline", ui-serif, "New York", Georgia, Cambria, "Times New Roman", serif;
+  --sans: "Styrene B", "Styrene A", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --page: #faf9f5; --surface: #ffffff; --surface-2: #f5f4ee; --code-bg: #f0eee6;
+  --ink: #141413; --ink-2: #5e5d59; --muted: #87867f; --grid: #e8e6dc; --border: #e3e1d7;
+  --accent: #c96442; --accent-ink: #a9502f; --accent-wash: rgba(201, 100, 66, 0.07); --track: #f1ddd3;
+  --good: #0ca30c; --good-ink: #006300; --bad: #d03b3b;
+  --btn: #141413; --btn-ink: #faf9f5;
+  --shadow: 0 1px 2px rgba(20, 20, 19, 0.05), 0 10px 28px rgba(20, 20, 19, 0.08);
 }
 @media (prefers-color-scheme: dark) {
   :root:where(:not([data-theme="light"])) {
     color-scheme: dark;
-    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
-    --grid: #2c2c2a; --axis: #383835; --border: rgba(255, 255, 255, 0.10);
-    --accent: #3987e5; --track: #184f95; --good: #0ca30c; --good-ink: #0ca30c; --bad: #d03b3b;
-    --code-bg: #232322; --link: #86b6ef; --wash: rgba(57, 135, 229, 0.12);
+    --page: #262624; --surface: #30302e; --surface-2: #2b2b29; --code-bg: #1f1e1d;
+    --ink: #faf9f5; --ink-2: #c2c0b6; --muted: #9c9a92; --grid: #3d3d3a; --border: rgba(250, 249, 245, 0.10);
+    --accent: #d57250; --accent-ink: #e8a08a; --accent-wash: rgba(213, 114, 80, 0.13); --track: #5a3426;
+    --good: #0ca30c; --good-ink: #0ca30c; --bad: #d03b3b;
+    --btn: #faf9f5; --btn-ink: #141413;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 10px 28px rgba(0, 0, 0, 0.35);
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
-  --grid: #2c2c2a; --axis: #383835; --border: rgba(255, 255, 255, 0.10);
-  --accent: #3987e5; --track: #184f95; --good: #0ca30c; --good-ink: #0ca30c; --bad: #d03b3b;
-  --code-bg: #232322; --link: #86b6ef; --wash: rgba(57, 135, 229, 0.12);
+  --page: #262624; --surface: #30302e; --surface-2: #2b2b29; --code-bg: #1f1e1d;
+  --ink: #faf9f5; --ink-2: #c2c0b6; --muted: #9c9a92; --grid: #3d3d3a; --border: rgba(250, 249, 245, 0.10);
+  --accent: #d57250; --accent-ink: #e8a08a; --accent-wash: rgba(213, 114, 80, 0.13); --track: #5a3426;
+  --good: #0ca30c; --good-ink: #0ca30c; --bad: #d03b3b;
+  --btn: #faf9f5; --btn-ink: #141413;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 * { box-sizing: border-box; }
-html { scroll-padding-top: 64px; }
-body { margin: 0; background: var(--page); color: var(--ink);
-  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; }
-.wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
-.topbar { position: sticky; top: 0; z-index: 5; background: var(--page); border-bottom: 1px solid var(--grid); }
-.topbar .wrap { display: flex; align-items: center; gap: 18px; height: 52px; }
-.topbar .brand { font-weight: 600; white-space: nowrap; }
-.topbar nav { display: flex; gap: 14px; overflow-x: auto; font-size: 14px; }
-.topbar nav a { color: var(--ink-2); white-space: nowrap; }
-.topbar .spacer { flex: 1; }
-button, .btn { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
-  border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; cursor: pointer; }
-button:hover { background: var(--wash); }
-button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
-header.hero { padding: 28px 0 8px; }
-header.hero h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; font-weight: 650; }
-header.hero p { margin: 4px 0; color: var(--ink-2); max-width: 820px; }
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 18px 0; }
-.tile { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+html { scroll-padding-top: 76px; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15.5px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--accent-ink) 35%, transparent); }
+a:hover { text-decoration-color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+code, pre { font-family: var(--mono); font-size: 12.5px; }
+:not(pre) > code { background: var(--code-bg); border-radius: 5px; padding: 1px 5px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+.eyebrow, .side h4, .notes h4, .corr h4, .card-head .ref {
+  font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.topbar { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid var(--grid);
+  background: color-mix(in srgb, var(--page) 86%, transparent); backdrop-filter: saturate(1.2) blur(12px); }
+.topbar .wrap { display: flex; align-items: center; gap: 22px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; letter-spacing: -0.005em; }
+.brand .spark { color: var(--accent); font-size: 19px; line-height: 1; }
+.brand .brand-sub { color: var(--ink-2); font-weight: 500; }
+.topbar nav { display: flex; gap: 18px; overflow-x: auto; font-size: 14px; }
+.topbar nav a { color: var(--ink-2); text-decoration: none; white-space: nowrap; }
+.topbar nav a:hover { color: var(--ink); }
+.topbar .spacer, .filters .spacer { flex: 1; }
+button { font: 500 13.5px/1 var(--sans); color: var(--ink); background: var(--surface); cursor: pointer;
+  border: 1px solid var(--border); border-radius: 999px; padding: 9px 15px; transition: background .15s, border-color .15s; }
+button:hover { background: var(--surface-2); border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
+button.chip[aria-pressed="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+button.primary { background: var(--btn); color: var(--btn-ink); border-color: var(--btn); }
+button.primary:hover { background: var(--btn); opacity: 0.88; }
+button.ghost { background: transparent; }
+header.hero { padding: 64px 0 18px; }
+header.hero h1 { font: 400 clamp(34px, 4.6vw, 50px)/1.1 var(--serif); letter-spacing: -0.018em; margin: 0 0 18px; max-width: 900px; }
+header.hero p { margin: 8px 0; color: var(--ink-2); font-size: 17px; line-height: 1.6; max-width: 780px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 34px 0 16px; }
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
 .tile-label { font-size: 13px; color: var(--ink-2); }
-.tile-value { font-size: 28px; font-weight: 600; line-height: 1.2; margin-top: 2px; }
-.tile-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.progress { display: flex; align-items: center; gap: 14px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; }
-.progress .label { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
-.progress .value { font-weight: 600; white-space: nowrap; }
-.meter { flex: 1; height: 8px; border-radius: 4px; background: var(--track); overflow: hidden; }
-.meter > span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 4px; }
-.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 8px; }
-.filters input[type="search"] { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
-  border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; min-width: 260px; }
-.filters label { font-size: 13px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
-h2 { font-size: 19px; margin: 34px 0 6px; font-weight: 650; }
-h2 + .lede { margin-top: 0; color: var(--ink-2); max-width: 860px; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 14px 0; }
-.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-.card-head .ref { font-size: 12px; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.card-head h3 { margin: 2px 0 0; font-size: 18px; font-weight: 600; }
-.card-progress { font-size: 13px; color: var(--ink-2); white-space: nowrap; }
-.card.done .card-progress { color: var(--good-ink); }
-.card.done .card-progress::before { content: "✓ "; }
-.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; margin-top: 12px; }
-@media (max-width: 960px) { .cols { grid-template-columns: minmax(0, 1fr); } }
-.side h4, .notes h4, .checks h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 8px; font-weight: 600; }
-details.stmt { border-top: 1px solid var(--grid); padding: 8px 0; }
+.tile-value { font: 500 32px/1.15 var(--sans); letter-spacing: -0.015em; margin-top: 6px; }
+.tile-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 22px 0 6px; }
+.filters input[type="search"] { font: 14px var(--sans); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 999px; padding: 9px 16px; min-width: 280px; }
+.filters input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.filters label { font-size: 13.5px; color: var(--ink-2); display: flex; align-items: center; gap: 7px; margin-left: 6px; }
+input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+h2 { font: 400 32px/1.2 var(--serif); letter-spacing: -0.012em; margin: 64px 0 10px; }
+h2 + .lede { margin: 0 0 8px; color: var(--ink-2); font-size: 16px; max-width: 820px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 26px 30px; margin: 18px 0; }
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.card-head .ref { margin-bottom: 4px; }
+.card-head h3 { margin: 0; font: 400 25px/1.25 var(--serif); letter-spacing: -0.01em; }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px; margin-top: 18px; }
+@media (max-width: 980px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.side.paper { background: var(--surface-2); border-radius: 16px; padding: 18px 20px; align-self: start; }
+.side.leanside { padding-top: 18px; }
+details.stmt { border-top: 1px solid var(--grid); padding: 10px 0 2px; }
 details.stmt:first-of-type { border-top: 0; padding-top: 0; }
-details summary { cursor: pointer; color: var(--ink-2); font-size: 13.5px; }
+details summary { cursor: pointer; color: var(--ink-2); font-size: 14px; }
+details summary::marker { color: var(--muted); }
 details summary .sref { color: var(--ink); font-weight: 600; }
-.tex { margin-top: 8px; overflow-x: auto; }
-.tex .para { margin: 0 0 8px; }
-.tex ol.roman { list-style: none; counter-reset: r; padding-left: 2.2em; margin: 6px 0; }
-.tex ol.roman > li { counter-increment: r; position: relative; margin: 2px 0; }
-.tex ol.roman > li::before { content: "(" counter(r, lower-roman) ")"; position: absolute; left: -2.2em; color: var(--ink-2); }
+.tex { margin-top: 10px; overflow-x: auto; font: 16.5px/1.65 var(--serif); color: var(--ink); }
+.tex .katex { font-size: 1.07em; }
+.tex .para { margin: 0 0 10px; }
+.tex ol.roman { list-style: none; counter-reset: r; padding-left: 2.3em; margin: 6px 0 10px; }
+.tex ol.roman > li { counter-increment: r; position: relative; margin: 3px 0; }
+.tex ol.roman > li::before { content: "(" counter(r, lower-roman) ")"; position: absolute; left: -2.3em; color: var(--ink-2); }
 .tex li[data-label]::before { content: attr(data-label) !important; }
-.table-row { margin: 0 0 10px; font-size: 14px; }
-.table-row .label { font-size: 12px; font-weight: 600; color: var(--muted); margin-right: 6px; text-transform: uppercase; letter-spacing: .03em; }
-.decl { border-top: 1px solid var(--grid); padding: 10px 0; }
+.table-row { margin: 0 0 14px; font-size: 14px; color: var(--ink); }
+.table-row .label { font: 600 11.5px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.decl { border-top: 1px solid var(--grid); padding: 14px 0; }
 .decl:first-of-type { border-top: 0; padding-top: 0; }
 .decl-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
-.decl-name { font-weight: 600; font-size: 13px; }
+.decl-name { font-weight: 600; font-size: 13px; background: none !important; padding: 0 !important; }
 .kind { font-size: 12px; color: var(--muted); }
 .src { font-size: 12.5px; margin-left: auto; }
 .doc { color: var(--ink-2); margin: 6px 0; font-size: 14px; }
-pre.lean { background: var(--code-bg); border-radius: 8px; padding: 10px 12px; margin: 8px 0; overflow-x: auto; line-height: 1.45; }
-details.elab summary { font-size: 12.5px; }
-.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 2px 9px; border-radius: 999px;
-  border: 1px solid var(--border); color: var(--ink-2); background: var(--surface); }
+pre.lean { background: var(--code-bg); border-radius: 12px; padding: 12px 14px; margin: 10px 0; overflow-x: auto; line-height: 1.5; }
+details.elab summary { font-size: 13px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 11px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--ink-2); background: var(--surface-2); text-decoration: none; }
+a.badge:hover { border-color: var(--accent); }
 .badge.good span[aria-hidden] { color: var(--good); font-weight: 700; }
 .badge.bad span[aria-hidden] { color: var(--bad); font-weight: 700; }
+.badge.hyp { color: var(--ink); }
 .badge .dot, .matrix .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
   box-shadow: 0 0 0 2px var(--surface); }
-.defs { font-size: 13px; color: var(--ink-2); margin: 8px 0 0; }
-.notes ul { margin: 0; padding-left: 20px; color: var(--ink); }
-.notes li { margin: 3px 0; }
-.notes, .checks { margin-top: 14px; border-top: 1px solid var(--grid); padding-top: 12px; }
-.check { display: flex; align-items: flex-start; gap: 8px; margin: 4px 0; font-size: 14px; cursor: pointer; }
-.check input { margin-top: 4px; accent-color: var(--accent); }
-.checks textarea { width: 100%; margin-top: 8px; font: inherit; font-size: 14px; color: var(--ink);
-  background: var(--page); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; resize: vertical; }
-.matrix-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; }
+.defs { font-size: 13.5px; color: var(--ink-2); margin: 10px 0 0; }
+.defs a { text-decoration: none; }
+.notes { margin-top: 20px; border-top: 1px solid var(--grid); padding-top: 16px; }
+.notes ul { margin: 0; padding-left: 20px; }
+.notes li { margin: 5px 0; }
+.notes li::marker { color: var(--accent); }
+.matrix-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow-x: auto; margin-top: 18px; }
 table.matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
-.matrix th, .matrix td { padding: 7px 12px; border-bottom: 1px solid var(--grid); }
-.matrix thead th { font-size: 12.5px; font-weight: 600; color: var(--ink-2); text-align: center; vertical-align: bottom; white-space: nowrap; }
-.matrix thead th:first-child { text-align: left; }
-.matrix tbody th { text-align: left; font-weight: 500; }
-.matrix tbody th a { color: var(--ink); }
-.matrix .rref { color: var(--muted); font-size: 12.5px; font-weight: 600; margin-right: 4px; }
-.matrix td.cell { text-align: center; width: 110px; }
-.matrix td.cell.on { cursor: default; }
-.matrix td.cell.on:hover, .matrix td.cell.on:focus { background: var(--wash); outline: none; }
+.matrix th, .matrix td { padding: 10px 14px; border-bottom: 1px solid var(--grid); }
+.matrix thead th { font: 600 12.5px/1.3 var(--sans); color: var(--ink-2); text-align: center; vertical-align: bottom; padding-top: 16px; max-width: 132px; }
+.matrix thead th:first-child { text-align: left; padding-left: 22px; }
+.matrix thead th a { color: var(--ink-2); text-decoration: none; }
+.matrix thead th a:hover { color: var(--ink); }
+.matrix tbody th { text-align: left; font-weight: 400; padding-left: 22px; min-width: 300px; }
+.matrix tbody th a { color: var(--ink); text-decoration: none; font: 15.5px/1.4 var(--serif); }
+.matrix tbody th a:hover { color: var(--accent-ink); }
+.matrix .rref { font: 600 11px var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.matrix td.cell { text-align: center; width: 112px; }
+.matrix td.cell.on:hover, .matrix td.cell.on:focus { background: var(--accent-wash); outline: none; }
 .matrix td.cell.on:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
-.matrix td.count { text-align: center; color: var(--ink-2); white-space: nowrap; }
+.matrix td.count { text-align: center; color: var(--ink-2); white-space: nowrap; padding-right: 22px; }
 .matrix .none span[aria-hidden] { color: var(--good); font-weight: 700; }
-.matrix tbody tr:hover { background: var(--wash); }
+.matrix tbody tr:hover { background: var(--accent-wash); }
 .matrix tbody tr:last-child th, .matrix tbody tr:last-child td { border-bottom: 0; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 #tip { position: fixed; z-index: 20; max-width: 340px; background: var(--surface); color: var(--ink);
-  border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; box-shadow: 0 6px 24px rgba(0,0,0,.14);
+  border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; box-shadow: var(--shadow);
   font-size: 13px; pointer-events: none; }
 #tip strong { display: block; font-size: 14px; }
 #tip div { color: var(--ink-2); }
-.gl-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--grid); }
-.gl-row:first-child { border-top: 0; }
+.gl-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px; padding: 18px 0; border-top: 1px solid var(--grid); }
+.gl-row:first-child { border-top: 0; padding-top: 4px; }
 .gl-row pre.lean { align-self: start; margin: 0; }
-@media (max-width: 960px) { .gl-row { grid-template-columns: minmax(0, 1fr); } }
-.gl-meta p { margin: 4px 0; color: var(--ink-2); font-size: 14px; }
-.notation { margin: 4px 0; }
-.lit .source { font-size: 14px; }
+@media (max-width: 980px) { .gl-row { grid-template-columns: minmax(0, 1fr); } }
+.gl-meta p { margin: 6px 0; color: var(--ink-2); font-size: 14px; }
+.notation { margin: 6px 0 4px; font: 17px var(--serif); }
+.lit .source { font: 16px/1.55 var(--serif); }
 .lit .users { font-size: 14px; color: var(--ink-2); }
-.repro pre { background: var(--code-bg); border-radius: 8px; padding: 10px 12px; overflow-x: auto; }
-footer { color: var(--muted); font-size: 13px; padding: 30px 0 50px; }
+.repro pre { background: var(--code-bg); border-radius: 12px; padding: 12px 14px; overflow-x: auto; }
+footer { color: var(--muted); font-size: 13px; padding: 36px 0 64px; margin-top: 48px; border-top: 1px solid var(--grid); }
+.corr { margin-top: 22px; border-top: 1px solid var(--grid); padding-top: 16px; }
+.corr table { width: 100%; border-collapse: collapse; }
+.corr thead th { font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-align: left; padding: 0 16px 8px 0; }
+.corr td { vertical-align: top; padding: 11px 16px 11px 0; border-top: 1px solid var(--grid); }
+.corr td.p { width: 36%; font: 15.5px/1.55 var(--serif); }
+.corr td.l { width: 40%; }
+.corr td.l code { display: block; white-space: pre-wrap; word-break: break-word; background: var(--code-bg);
+  border-radius: 8px; padding: 6px 10px; margin: 0 0 5px; font-size: 12.5px; line-height: 1.5; }
+.corr td.n { color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
+.corr .from { display: block; font: 600 11px/1.5 var(--sans); letter-spacing: 0.05em; color: var(--muted); margin-bottom: 3px; }
+.corr td.p .from { text-transform: uppercase; }
+.corr .absent { color: var(--muted); font: italic 13.5px var(--sans); }
+@media (max-width: 820px) {
+  .corr thead { display: none; }
+  .corr tr, .corr td { display: block; width: auto !important; }
+  .corr td { border-top: 0; padding: 4px 0; }
+  .corr tr { border-top: 1px solid var(--grid); padding: 8px 0; }
+}
+details.uses { margin-top: 10px; }
+details.uses summary { font-size: 13px; }
+details.uses ul { list-style: none; margin: 8px 0 0; padding: 0; }
+details.uses li { margin: 5px 0; font-size: 13.5px; line-height: 1.45; }
+details.uses li a { text-decoration: none; }
+details.uses .ud { color: var(--ink-2); }
 .hidden { display: none !important; }
-@media print { .topbar, .filters, .checks textarea { display: none; } .card { break-inside: avoid; } }
+@media print { .topbar, .filters { display: none; } .card { break-inside: avoid; } }
 </style>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <span class="brand">CI2ZF · Lean ↔ paper</span>
+  <span class="brand"><span class="spark" aria-hidden="true">✻</span>CI2ZF <span class="brand-sub">Lean ↔ paper</span></span>
   <nav aria-label="Sections"><a href="#status">Status</a><a href="#matrix">Hypotheses</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#definitions">Definitions</a><a href="#literature">Literature</a><a href="#reproduce">Reproduce</a></nav>
   <span class="spacer"></span>
   <button id="theme" type="button" title="Switch colour theme">Theme: auto</button>
@@ -167,27 +211,19 @@ footer { color: var(--muted); font-size: 13px; padding: 30px 0 50px; }
 
 <main class="wrap">
 <header class="hero" id="status">
-  <h1>Checking the Lean formalization against the paper</h1>
-  <p>For each result of <em>Coupling Independence Implies Zero-Freeness</em> and its companion paper, this page shows the paper's statement next to the Lean statement that proves it, the literature results the Lean statement assumes, and its axioms. Everything on the Lean side is read from the compiled library at commit <a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/437cfa7"><code>437cfa7</code></a>, and every source link points to that commit.</p>
-  <p>Tick the checks as you go. Your ticks and notes stay in this browser; <em>Export review</em> saves them as a Markdown file you can send to a coauthor.</p>
+  <div class="eyebrow">Lean formalization · commit 437cfa7</div>
+  <h1>The paper and its Lean formalization, side by side</h1>
+  <p>For every result of <em>Coupling Independence Implies Zero-Freeness</em> and its companion paper, this page sets the paper's statement next to the Lean theorem that proves it. A table then matches the two phrase by phrase. Each result also lists the published results its Lean statement takes as hypotheses, and the library lemmas its proof uses.</p>
+  <p>Nothing on the Lean side is written by hand: signatures, axioms, hypotheses and dependencies are read from the compiled library at commit <a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/437cfa7"><code>437cfa7</code></a>, and every source link points to that commit. Every quotation in the correspondence tables is checked verbatim against the paper's LaTeX and the Lean source when the page is built.</p>
 </header>
 
-<div class="tiles"><div class="tile"><div class="tile-label">Build jobs</div><div class="tile-value">4,031</div><div class="tile-sub">warnings are errors</div></div><div class="tile"><div class="tile-label">Audited declarations</div><div class="tile-value">9,693</div><div class="tile-sub">transitive axiom check</div></div><div class="tile"><div class="tile-label">Library modules</div><div class="tile-value">496</div><div class="tile-sub">all reachable from CI2ZF</div></div><div class="tile"><div class="tile-label">Axioms used</div><div class="tile-value">3</div><div class="tile-sub">propext · Classical.choice · Quot.sound</div></div><div class="tile"><div class="tile-label">Results mapped</div><div class="tile-value">20</div><div class="tile-sub">77 Lean declarations linked</div></div></div>
-<div class="progress" role="group" aria-label="Review progress">
-  <span class="label">Review progress</span>
-  <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="80" aria-valuenow="0" id="meter"><span></span></div>
-  <span class="value" id="progress-text">0 of 80 checks</span>
-</div>
+<div class="tiles"><div class="tile"><div class="tile-label">Build jobs</div><div class="tile-value">4,031</div><div class="tile-sub">warnings are errors</div></div><div class="tile"><div class="tile-label">Audited declarations</div><div class="tile-value">9,693</div><div class="tile-sub">transitive axiom check</div></div><div class="tile"><div class="tile-label">Library modules</div><div class="tile-value">496</div><div class="tile-sub">all reachable from CI2ZF</div></div><div class="tile"><div class="tile-label">Axioms used</div><div class="tile-value">3</div><div class="tile-sub">propext · Classical.choice · Quot.sound</div></div><div class="tile"><div class="tile-label">Verified quotations</div><div class="tile-value">226</div><div class="tile-sub">in 109 correspondences</div></div></div>
 
 <div class="filters" role="search">
-  <button type="button" data-filter="all" aria-pressed="true">All</button>
-  <button type="button" data-filter="main" aria-pressed="false">Main paper</button>
-  <button type="button" data-filter="appendix" aria-pressed="false">Appendix A</button>
+  <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+  <button type="button" class="chip" data-filter="main" aria-pressed="false">Main paper</button>
+  <button type="button" class="chip" data-filter="appendix" aria-pressed="false">Appendix A</button>
   <input type="search" id="q" placeholder="Filter by result or Lean name" aria-label="Filter by result or Lean name">
-  <label><input type="checkbox" id="open-only"> Only unfinished</label>
-  <span class="spacer" style="flex:1"></span>
-  <button type="button" id="export">Export review</button>
-  <button type="button" id="reset">Reset</button>
 </div>
 
 <h2 id="matrix">Literature hypotheses by result</h2>
@@ -200,7 +236,6 @@ footer { color: var(--muted); font-size: 13px; padding: 30px 0 50px; }
 <article class="card result" id="thm-intro-main" data-result="thm-intro-main" data-group="main" data-search="theorem 1.1 potts zero-freeness near \([0,1]\) ci2zf.potts.potts_main_theorem ci2zf.potts.potts_main_strict" data-title="Potts zero-freeness near [0,1]">
   <header class="card-head">
     <div><div class="ref">Theorem 1.1</div><h3>Potts zero-freeness near \([0,1]\)</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Theorem 1.1</span> · Main paper</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge2\) and \(q\ge11\Deg/6\).
@@ -227,6 +262,7 @@ no zeros in \(\mathcal U_\eps([0,1])\).</div></div></details></section>
   (hExternal : 6 * q = 11 * Δ → CI2ZF.Potts.ExternalCriticalHardColouringTheorem (Fin q) Δ) :
   ∃ eps &gt; 0, CI2ZF.Potts.UniformPottsZeroFree (Fin q) Δ eps</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-cffgzz"><span class="dot" aria-hidden="true"></span>Assumes CFFGZZ Thm 20</a></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PottsExternalTheorem.lean#L39-L48"><code>Potts.potts_zero_free_from_external</code></a> <span class="ud">Original-graph form of the complete main-text Potts theorem.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Potts.potts_main_strict</code>
@@ -238,17 +274,15 @@ no zeros in \(\mathcal U_\eps([0,1])\).</div></div></details></section>
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Potts.potts_main_strict.{u} (q Δ : ℕ) (hΔ : 2 ≤ Δ) (hq : 11 * Δ &lt; 6 * q) :
   ∃ eps &gt; 0, CI2ZF.Potts.UniformPottsZeroFree (Fin q) Δ eps</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PottsMainTheorem.lean#L38-L47"><code>Potts.strict_potts_zero_free</code></a> <span class="ud">Full strict-line theorem: actual coupling independence and both complex induction branches have been proved in Lean.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Potts.UniformPottsZeroFree"><code>Potts.UniformPottsZeroFree</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>The literature input is requested only on the line 6q = 11Δ, the equality case of the theorem.</li><li>Graphs range over finite types with every degree at most Δ; the pinning is any PartialColouring, improper ones included.</li><li>UniformPottsZeroFree bundles the three conclusions: the normalized polynomial has no zeros, the full polynomial vanishes only at 0, and its multiplicity there is m_G(τ).</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="thm-intro-main:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="thm-intro-main:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="thm-intro-main:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="thm-intro-main:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="thm-intro-main" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">Let \(q,\Deg\) be integers with \(\Deg\ge2\)</td><td class="l"><span class="from">Potts.potts_main_theorem</span><code>(q Δ : ℕ) (hΔ : 2 ≤ Δ)</code></td><td class="n">The colours are Fin q.</td></tr><tr><td class="p">\(q\ge11\Deg/6\)</td><td class="l"><span class="from">Potts.potts_main_theorem</span><code>(hq : 11 * Δ ≤ 6 * q)</code></td><td class="n">The same inequality with denominators cleared.</td></tr><tr><td class="p">There exists \(\eps=\eps(q,\Deg)&gt;0\) such that</td><td class="l"><span class="from">Potts.potts_main_theorem</span><code>∃ eps &gt; 0, UniformPottsZeroFree.{u, 0} (Fin q) Δ eps</code></td><td class="n">ε is chosen before any graph or pinning, so it depends only on q and Δ.</td></tr><tr><td class="p">for every finite simple graph \(G\) of maximum degree at most \(\Deg\) and every pinning \(\tau\)</td><td class="l"><span class="from">Potts.UniformPottsZeroFree</span><code>∀ {V : Type u} [Fintype V] (G : SimpleGraph V), (∀ w, G.degree w ≤ Δ) → ∀ tau : PartialColouring V C</code></td><td class="n">Any finite vertex type and any partial colouring, proper or not.</td></tr><tr><td class="p">\(\nZpin{G}{\tau}(z)\ne0 \qquad\text{for every }z\in\mathcal U_\eps([0,1]).\)</td><td class="l"><span class="from">Potts.UniformPottsZeroFree</span><code>(∀ z ∈ thickening eps pottsInterval, normalizedPartition tau G z ≠ 0)</code></td><td class="n">thickening eps pottsInterval is the open ε-neighbourhood of [0, 1] in ℂ.</td></tr><tr><td class="p">Consequently, \(\Zpin{G}{\tau}(z)=z^{m_G(\tau)}\nZpin{G}{\tau}(z)\) has no zeros in the same neighbourhood except, when \(m_G(\tau)\ge1\), a zero of multiplicity \(m_G(\tau)\) at \(z=0\).</td><td class="l"><span class="from">Potts.UniformPottsZeroFree</span><code>fullPartition tau G z = 0 ↔ z = 0 ∧ 0 &lt; tau.pinnedConflictCount G</code><code>(fullPolynomial tau G).rootMultiplicity 0 = tau.pinnedConflictCount G</code></td><td class="n">pinnedConflictCount is m_G(τ).</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">Potts.potts_main_theorem</span><code>(hExternal : 6 * q = 11 * Δ → ExternalCriticalHardColouringTheorem.{u, 0} (Fin q) Δ)</code></td><td class="n">Not in the statement: the hard-colouring bound of CFFGZZ Theorem 20, which the paper&#x27;s proof cites in the equality case, is a hypothesis here.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>The literature input is requested only on the line 6q = 11Δ, the equality case of the theorem.</li><li>Graphs range over finite types with every degree at most Δ; the pinning is any PartialColouring, improper ones included.</li><li>UniformPottsZeroFree bundles the three conclusions: the normalized polynomial has no zeros, the full polynomial vanishes only at 0, and its multiplicity there is m_G(τ).</li></ul></section>
 </article>
 <article class="card result" id="thm-potts-transfer" data-result="thm-potts-transfer" data-group="main" data-search="theorem 1.2 coupling independence implies zero-freeness ci2zf.potts.graph_class_potts_transfer_of_bounded" data-title="Coupling independence implies zero-freeness">
   <header class="card-head">
     <div><div class="ref">Theorem 1.2</div><h3>Coupling independence implies zero-freeness</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Theorem 1.2</span> · Main paper</summary><div class="tex"><div class="para">Fix integers \(q,\Deg\) with \(\Deg\ge2\) and \(q\ge\Deg+1\), and let
@@ -302,17 +336,15 @@ of multiplicity \(m_G(\tau)\) at \(z=0\).</div></div></details></section>
               Polynomial.rootMultiplicity 0 (CI2ZF.Potts.fullPolynomial tau G) =
                 tau.pinnedConflictCount G</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/GraphClassPottsTransfer.lean#L14-L38"><code>Potts.graph_class_potts_transfer</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Potts.GraphClass"><code>Potts.GraphClass</code></a>, <a href="#def-CI2ZF.Potts.GraphClassTransferInputs"><code>Potts.GraphClassTransferInputs</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>GraphClass asks for closure under pullback along embeddings: induced subgraphs, relabelled copies included.</li><li>The coupling bounds are required only when both child laws are well defined, which q ≥ Δ + 1 guarantees.</li><li>Lean does not need Δ ≥ 2.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="thm-potts-transfer:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="thm-potts-transfer:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="thm-potts-transfer:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="thm-potts-transfer:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="thm-potts-transfer" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(q\ge\Deg+1\)</td><td class="l"><span class="from">Potts.graph_class_potts_transfer_of_bounded</span><code>(hq : Δ + 1 ≤ Fintype.card C)</code></td><td class="n">q is Fintype.card C, the number of colours. Lean does not need Δ ≥ 2.</td></tr><tr><td class="p">let \(\mathcal G\) be a class of finite simple graphs of maximum degree at most \(\Deg\) that is closed under taking induced subgraphs</td><td class="l"><span class="from">Potts.graph_class_potts_transfer_of_bounded</span><code>(F : GraphClass.{u})</code><code>(hdegree : ∀ {V : Type u} [Fintype V] (G : SimpleGraph V), F.contains G → ∀ w, G.degree w ≤ Δ)</code></td><td class="n">A GraphClass is closed under induced subgraphs by definition.</td></tr><tr><td class="p">\(\mathcal G\) satisfies coupling independence at \(x=0\) with constant \(C_0\)</td><td class="l"><span class="from">Potts.GraphClassTransferInputs</span><code>hard : ∃ cost : ℝ, GraphClassRootCouplingBound F C PinningData.hardParameter cost</code></td><td class="n">hardParameter is the activity x = 0.</td></tr><tr><td class="p">for every \(\delta\in(0,1]\), it satisfies coupling independence on \([\delta,1]\) with a finite constant \(C_\delta\)</td><td class="l"><span class="from">Potts.GraphClassTransferInputs</span><code>positive : ∀ delta : ℝ, 0 &lt; delta → delta ≤ 1 → ∃ cost : ℝ, ∀ x : PinningData.NonnegativeParameter, (x : ℝ) ∈ Set.Icc delta 1 → GraphClassRootCouplingBound F C x cost</code></td><td class="n"></td></tr><tr><td class="p">Then there is \(\eps&gt;0\) such that, for every \(G\in\mathcal G\) and every pinning \(\tau\),</td><td class="l"><span class="from">Potts.graph_class_potts_transfer_of_bounded</span><code>∃ eps &gt; 0, ∀ {V : Type u} [Fintype V] (G : SimpleGraph V), F.contains G → ∀ tau : PartialColouring V C,</code></td><td class="n"></td></tr><tr><td class="p">\(\nZpin{G}{\tau}(z)\ne0 \qquad\text{for every }z\in\mathcal U_\eps([0,1]).\)</td><td class="l"><span class="from">Potts.graph_class_potts_transfer_of_bounded</span><code>(∀ z ∈ thickening eps pottsInterval, normalizedPartition tau G z ≠ 0)</code></td><td class="n"></td></tr><tr><td class="p">Consequently, \(\Zpin{G}{\tau}(z)=z^{m_G(\tau)}\nZpin{G}{\tau}(z)\) has no zeros in the same neighbourhood except, when \(m_G(\tau)\ge1\), a zero of multiplicity \(m_G(\tau)\) at \(z=0\).</td><td class="l"><span class="from">Potts.graph_class_potts_transfer_of_bounded</span><code>fullPartition tau G z = 0 ↔ z = 0 ∧ 0 &lt; tau.pinnedConflictCount G</code><code>(fullPolynomial tau G).rootMultiplicity 0 = tau.pinnedConflictCount G</code></td><td class="n"></td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>GraphClass asks for closure under pullback along embeddings: induced subgraphs, relabelled copies included.</li><li>The coupling bounds are required only when both child laws are well defined, which q ≥ Δ + 1 guarantees.</li><li>Lean does not need Δ ≥ 2.</li></ul></section>
 </article>
 <article class="card result" id="def-potts-ci" data-result="def-potts-ci" data-group="main" data-search="definition 2.2 potts coupling independence ci2zf.potts.graphclassrootcouplingbound ci2zf.potts.rootcouplingbound" data-title="Potts coupling independence">
   <header class="card-head">
     <div><div class="ref">Definition 2.2</div><h3>Potts coupling independence</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Definition 2.2</span> · Main paper</summary><div class="tex"><div class="para">Let \(C\in[0,\infty)\), \(\mathcal G\subseteq\Gdeg\), and
@@ -347,6 +379,7 @@ independence <em>at</em> \(x\).</div></div></details></section>
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Potts.GraphClassRootCouplingBound.{u, v} (F : CI2ZF.Potts.GraphClass) (C : Type v)
   [Fintype C] (x : PottsCI.PinningData.NonnegativeParameter) (cost : ℝ) : Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Potts.RootCouplingBound</code>
@@ -366,17 +399,15 @@ independence <em>at</em> \(x\).</div></div></details></section>
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Potts.RootCouplingBound.{u, v} (C : Type v) [Fintype C] [Nonempty C] (Δ : ℕ)
   (hq : Δ + 1 ≤ Fintype.card C) (x : PottsCI.PinningData.NonnegativeParameter) (cost : ℝ) : Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Potts.rootChildData"><code>Potts.rootChildData</code></a>, <a href="#def-PottsCI.FinDist.W"><code>FinDist.W</code></a>, <a href="#def-PottsCI.ham"><code>ham</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>GraphClassRootCouplingBound is the definition on original graphs and pinnings; RootCouplingBound states the same bound on boundary-count data and is what the proofs use.</li><li>Both laws are normalized child Gibbs laws on V^τ ∖ {r}, compared in the Hamming Wasserstein distance.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="def-potts-ci:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="def-potts-ci:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="def-potts-ci:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="def-potts-ci:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="def-potts-ci" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">for every \(G\in\mathcal G\), every pinning \(\tau\), every \(r\in V^\tau\), all \(a,b\in\colours\)</td><td class="l"><span class="from">Potts.GraphClassRootCouplingBound</span><code>∀ {A : Type u} [Fintype A] (G : SimpleGraph A), F.contains G → ∀ (tau : PartialColouring A C) (r : tau.FreeVertex) (a b : C)</code></td><td class="n">r ranges over the free vertices.</td></tr><tr><td class="p">and every \(x\in J\)</td><td class="l"><span class="from">Potts.GraphClassRootCouplingBound</span><code>(x : PinningData.NonnegativeParameter)</code></td><td class="n">The Lean definition is the bound at one activity; coupling independence on J quantifies it over J, as GraphClassTransferInputs does.</td></tr><tr><td class="p">the two pinned laws are well defined</td><td class="l"><span class="from">Potts.GraphClassRootCouplingBound</span><code>(ha : 0 &lt; (rootChildData tau G r a).partition x)</code><code>(hb : 0 &lt; (rootChildData tau G r b).partition x)</code></td><td class="n">Lean assumes the two partition functions are positive rather than asserting it; for q ≥ Δ + 1 they always are.</td></tr><tr><td class="p">\(\WHam\!\left( \mupin{G}{\tau^{r=a}}{x}, \mupin{G}{\tau^{r=b}}{x} \right)\le C.\)</td><td class="l"><span class="from">Potts.GraphClassRootCouplingBound</span><code>W ham ((rootChildData tau G r a).gibbs x x.property ha) ((rootChildData tau G r b).gibbs x x.property hb) ≤ cost</code></td><td class="n">W ham is the Hamming Wasserstein distance.</td></tr><tr><td class="p">Both laws live on the common free set \(V^\tau\setminus\{r\}\)</td><td class="l"><span class="from">Potts.rootChildData</span><code>PinningData (RootRemaining tau r) C</code></td><td class="n">Both child instances live on RootRemaining tau r, the free vertices other than r.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>GraphClassRootCouplingBound is the definition on original graphs and pinnings; RootCouplingBound states the same bound on boundary-count data and is what the proofs use.</li><li>Both laws are normalized child Gibbs laws on V^τ ∖ {r}, compared in the Hamming Wasserstein distance.</li></ul></section>
 </article>
 <article class="card result" id="thm-strict-ci" data-result="thm-strict-ci" data-group="main" data-search="theorem 4.1 hamming coupling independence on \([0,1]\) ci2zf.potts.root_strict_ci ci2zf.potts.root_strict_uniform_ci" data-title="Hamming coupling independence on [0,1]">
   <header class="card-head">
     <div><div class="ref">Theorem 4.1</div><h3>Hamming coupling independence on \([0,1]\)</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Theorem 4.1</span> · Main paper</summary><div class="tex"><div class="para">Let \(q,\Deg\) be positive integers with \(\Deg\ge2\) and
@@ -418,6 +449,7 @@ the hypotheses imply \(q\ge\Deg+2\).</div></div></details></section>
       (CI2ZF.Potts.actualRootChildGibbs tau G r b hdegree ⋯ x) ≤
     CI2ZF.ciBound ↑(Fintype.card C) ↑Δ ↑x</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/RootCI.lean#L42-L59"><code>Potts.root_strict_ci_from_hard_coupling</code></a> <span class="ud">The paper&#x27;s exact strict-line root bound, including activities zero and one and an empty remaining vertex set, from the actual hard estimate.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/PottsCITheorem.lean#L16-L28"><code>conditionalHardCouplingEstimate</code></a> <span class="ud">The paper&#x27;s conditional hard estimate for the two actual common-coin activation outcomes, with no coupling or drift assumptions.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Potts.root_strict_uniform_ci</code>
@@ -442,17 +474,15 @@ the hypotheses imply \(q\ge\Deg+2\).</div></div></details></section>
       (CI2ZF.Potts.actualRootChildGibbs tau G r b hdegree ⋯ x) ≤
     2 / CI2ZF.ciGap ↑(Fintype.card C) ↑Δ</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/RootCI.lean#L61-L77"><code>Potts.root_strict_uniform_ci_from_hard_coupling</code></a> <span class="ud">Uniform strict-line root CI with the paper&#x27;s constant <code>2/gap</code>.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/PottsCITheorem.lean#L16-L28"><code>conditionalHardCouplingEstimate</code></a> <span class="ud">The paper&#x27;s conditional hard estimate for the two actual common-coin activation outcomes, with no coupling or drift assumptions.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.ciBound"><code>ciBound</code></a>, <a href="#def-CI2ZF.ciGap"><code>ciGap</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>ciBound q Δ x is 2(1−x)Δ / (q − (11/6)(1−x)Δ) and ciGap q Δ is q/Δ − 11/6, as in the paper.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="thm-strict-ci:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="thm-strict-ci:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="thm-strict-ci:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="thm-strict-ci:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="thm-strict-ci" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(\Deg\ge2\) and \(q&gt;11\Deg/6\)</td><td class="l"><span class="from">Potts.root_strict_ci</span><code>(hΔ : 2 ≤ Δ)</code><code>(hq : (11 / 6 : ℝ) * Δ &lt; Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">for every \(G\in\Gdeg\), every pinning \(\tau\), every \(x\in[0,1]\), every \(r\in V^\tau\), and all \(a,b\in\colours\)</td><td class="l"><span class="from">Potts.root_strict_ci</span><code>(tau : PartialColouring V C) (G : SimpleGraph V) (r : tau.FreeVertex) (a b : C)</code><code>(hdegree : ∀ v, G.degree v ≤ Δ)</code><code>(x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1)</code></td><td class="n"></td></tr><tr><td class="p">\(\le \frac{2(1-x)\Deg}{q-(11/6)(1-x)\Deg}\)</td><td class="l"><span class="from">Potts.root_strict_ci</span><code>≤ ciBound (Fintype.card C) Δ x</code></td><td class="n">ciBound q Δ x is this fraction; see the definitions.</td></tr><tr><td class="p">\(\le\frac2{\gapq}\)</td><td class="l"><span class="from">Potts.root_strict_uniform_ci</span><code>≤ 2 / ciGap (Fintype.card C) Δ</code></td><td class="n">ciGap q Δ is γ₀ = q/Δ − 11/6.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>ciBound q Δ x is 2(1−x)Δ / (q − (11/6)(1−x)Δ) and ciGap q Δ is q/Δ − 11/6, as in the paper.</li></ul></section>
 </article>
 <article class="card result" id="prop-hard-one-step" data-result="prop-hard-one-step" data-group="main" data-search="proposition 4.10 conditional hard estimate ci2zf.conditionalhardcouplingestimate" data-title="Conditional hard estimate">
   <header class="card-head">
     <div><div class="ref">Proposition 4.10</div><h3>Conditional hard estimate</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Proposition 4.10</span> · Main paper</summary><div class="tex"><div class="para">The updates admit a coupling \((X',Y')\), with
@@ -472,17 +502,15 @@ that
   [Fintype C] [Nonempty V] [Nonempty C] (I : PottsCI.PinningData V C) :
   CI2ZF.ConditionalHardCouplingEstimate I</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 4 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/HardCouplingCost.lean#L57-L69"><code>hardStep_W_drift_le</code></a> <span class="ud">A concrete root-local pair of hard instances satisfies the exact Wasserstein drift bound used in the paper.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/ActivationLaw.lean#L116-L123"><code>activatedSet_rootLocal</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/ActivationAverage.lean#L60-L68"><code>rootCommonListCount_eq_card</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/ActiveDegree.lean#L52-L75"><code>union_active_degree_eq_coin_count</code></a> <span class="ud">For adjacent configurations, each free root edge is satisfied on at least one side, so its union activation is exactly the successful coin.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.ConditionalHardCouplingEstimate"><code>ConditionalHardCouplingEstimate</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>rootFreeCoinCount counts the edges at v that are active on at least one side, which is Σ_c |N_c|; rootCommonListCount is ℓ = |L_{X,v} ∩ L_{Y,v}|.</li><li>The coupling itself is constructed in Lean; nothing about it is assumed.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="prop-hard-one-step:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="prop-hard-one-step:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="prop-hard-one-step:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="prop-hard-one-step:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="prop-hard-one-step" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">The updates admit a coupling \((X',Y')\), with \(X'\sim\flip_{F_X}(X,\cdot)\) and \(Y'\sim\flip_{F_Y}(Y,\cdot)\)</td><td class="l"><span class="from">ConditionalHardCouplingEstimate</span><code>hardStep (activeHardListInstance I (activatedSet I X ω)) X</code><code>hardStep (activeHardListInstance I (activatedSet I Y ω)) Y</code></td><td class="n">hardStep F X is the hard flip update Φ_F(X, ·); activatedSet I X ω is the hard instance chosen by the common coins ω.</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">ConditionalHardCouplingEstimate</span><code>X v ≠ Y v → (∀ u, u ≠ v → X u = Y u) →</code><code>∀ ω : I.Constraint → Bool,</code></td><td class="n">From the paragraph before the proposition: X and Y differ exactly at v, and ω is the common activation outcome 𝒜.</td></tr><tr><td class="p">\(nq\,\E[\Ham(X',Y')-1\mid\mathcal A]\)</td><td class="l"><span class="from">ConditionalHardCouplingEstimate</span><code>((Fintype.card V : ℝ) * Fintype.card C) * (W ham (hardStep (activeHardListInstance I (activatedSet I X ω)) X) (hardStep (activeHardListInstance I (activatedSet I Y ω)) Y) - 1)</code></td><td class="n">The expectation under the best coupling is the Wasserstein distance W ham; n = |V| and q = |C|.</td></tr><tr><td class="p">\(\le\frac{11}{6}\sum_c|N_c|-\ell.\)</td><td class="l"><span class="from">ConditionalHardCouplingEstimate</span><code>≤ (11 / 6 : ℝ) * rootFreeCoinCount I v ω - rootCommonListCount I X Y v ω</code></td><td class="n">rootFreeCoinCount counts the edges at v active on at least one side, which is Σ_c |N_c|; rootCommonListCount is ℓ.</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">conditionalHardCouplingEstimate</span><code>(I : PinningData V C) : ConditionalHardCouplingEstimate I</code></td><td class="n">Proved for every instance; the coupling is constructed in the proof.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>rootFreeCoinCount counts the edges at v that are active on at least one side, which is Σ_c |N_c|; rootCommonListCount is ℓ = |L_{X,v} ∩ L_{Y,v}|.</li><li>The coupling itself is constructed in Lean; nothing about it is assumed.</li></ul></section>
 </article>
 <article class="card result" id="prop-full-interval-hci" data-result="prop-full-interval-hci" data-group="main" data-search="proposition 4.12 vigoda-profile coupling for newly pinned laws ci2zf.potts.root_positive_ci" data-title="Vigoda-profile coupling for newly pinned laws">
   <header class="card-head">
     <div><div class="ref">Proposition 4.12</div><h3>Vigoda-profile coupling for newly pinned laws</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Proposition 4.12</span> · Main paper</summary><div class="tex"><div class="para">Let \(q,\Deg\) be positive integers with \(\Deg\ge2\).  For every
@@ -515,17 +543,15 @@ If \(q&gt;11\Deg/6\), the bound (35) also holds at
       (CI2ZF.Potts.positiveRootChildGibbs tau G r b x hx) ≤
     CI2ZF.ciBound (↑(Fintype.card C)) (↑Δ) x</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 6 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L118-L123"><code>W_ham_eq_zero_of_isEmpty</code></a> <span class="ud">Empty remaining vertex sets require no transition-kernel construction.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L45-L48"><code>ciBound_nonneg</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Model.lean#L99-L101"><code>PinningData.partition_pos_of_parameter_pos</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L201-L212"><code>gibbs_ci_of_softVigoda_inputs_le_one</code></a> <span class="ud">The direct activity-one identity closes the positive interval without defining the active-constraint transition rule at its degenerate endpoint.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/RootCI.lean#L23-L40"><code>Potts.root_soft_inputs_of_conditional_hard</code></a> <span class="ud">For actual root children, the hard estimate is the only remaining one-step input: the two boundary comparisons are already discharged.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/PottsCITheorem.lean#L16-L28"><code>conditionalHardCouplingEstimate</code></a> <span class="ud">The paper&#x27;s conditional hard estimate for the two actual common-coin activation outcomes, with no coupling or drift assumptions.</span></li></ul></details>
 </div></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>Lean does not need Δ ≥ 2.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="prop-full-interval-hci:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="prop-full-interval-hci:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="prop-full-interval-hci:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="prop-full-interval-hci:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="prop-full-interval-hci" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">For every \(G\in\Gdeg\), every pinning \(\tau\), every \(r\in V^\tau\), all \(a,b\in\colours\)</td><td class="l"><span class="from">Potts.root_positive_ci</span><code>(tau : PartialColouring V C) (G : SimpleGraph V) (r : tau.FreeVertex) (a b : C)</code><code>(hdegree : ∀ v, G.degree v ≤ Δ)</code></td><td class="n"></td></tr><tr><td class="p">every \(x\in(0,1]\) satisfying \(q&gt;(11/6)(1-x)\Deg\)</td><td class="l"><span class="from">Potts.root_positive_ci</span><code>{x : ℝ} (hx : 0 &lt; x) (hx1 : x ≤ 1) (hq : (11 / 6 : ℝ) * (1 - x) * Δ &lt; Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">\(\le\frac{2(1-x)\Deg}{q-(11/6)(1-x)\Deg}.\)</td><td class="l"><span class="from">Potts.root_positive_ci</span><code>≤ ciBound (Fintype.card C) Δ x</code></td><td class="n"></td></tr><tr><td class="p">Let \(q,\Deg\) be positive integers with \(\Deg\ge2\).</td><td class="l"><span class="absent">Not needed in Lean</span></td><td class="n">Not needed in Lean.</td></tr><tr><td class="p">If \(q&gt;11\Deg/6\), the bound (35) also holds at \(x=0\).</td><td class="l"><span class="from">Potts.root_strict_ci</span><code>(hq : (11 / 6 : ℝ) * Δ &lt; Fintype.card C) (x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1)</code></td><td class="n">The case x = 0 is part of root_strict_ci, whose activity ranges over all of [0, 1].</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>Lean does not need Δ ≥ 2.</li></ul></section>
 </article>
 <article class="card result" id="cor-critical-line-input" data-result="cor-critical-line-input" data-group="main" data-search="corollary 4.13 coupling input at \(q=11\deg/6\) ci2zf.potts.critical_transfer_coupling_inputs ci2zf.potts.root_critical_uniform_ci" data-title="Coupling input at q=11\Deg/6">
   <header class="card-head">
     <div><div class="ref">Corollary 4.13</div><h3>Coupling input at \(q=11\Deg/6\)</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Corollary 4.13</span> · Main paper</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge2\) and \(q=11\Deg/6\).
@@ -549,6 +575,7 @@ independence on \([\delta,1]\) with constant \(12/(11\delta)\).</div></div></det
   (hardInput : CI2ZF.Potts.CriticalHardColouringInput C Δ hcolours) :
   CI2ZF.Potts.TransferCouplingInputs C Δ hcolours</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-cffgzz"><span class="dot" aria-hidden="true"></span>Assumes CFFGZZ Thm 20</a></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/OptionCI.lean#L73-L91"><code>Potts.option_root_critical_uniform_ci</code></a> <span class="ud">The critical-line CI bound away from zero, also including empty <code>O</code> and activity <code>1</code>.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Potts.root_critical_uniform_ci</code>
@@ -574,17 +601,15 @@ independence on \([\delta,1]\) with constant \(12/(11\delta)\).</div></div></det
       (CI2ZF.Potts.actualRootChildGibbs tau G r b hdegree ⋯ x) ≤
     12 / (11 * δ)</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/RootCI.lean#L79-L97"><code>Potts.root_critical_uniform_ci_from_hard_coupling</code></a> <span class="ud">The critical-line compact-interval bound.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/PottsCITheorem.lean#L16-L28"><code>conditionalHardCouplingEstimate</code></a> <span class="ud">The paper&#x27;s conditional hard estimate for the two actual common-coin activation outcomes, with no coupling or drift assumptions.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Potts.CriticalHardColouringInput"><code>Potts.CriticalHardColouringInput</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>The x = 0 bound is the named input CriticalHardColouringInput; ExternalCriticalHardColouringTheorem.to_normalizedInput derives it from the original-graph form of CFFGZZ Theorem 20.</li><li>root_critical_uniform_ci gives the constant 12/(11δ) on [δ, 1].</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="cor-critical-line-input:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="cor-critical-line-input:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="cor-critical-line-input:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="cor-critical-line-input:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="cor-critical-line-input" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(\Deg\ge2\) and \(q=11\Deg/6\)</td><td class="l"><span class="from">Potts.critical_transfer_coupling_inputs</span><code>(hΔ : 2 ≤ Δ) (hq : (Fintype.card C : ℝ) = (11 / 6 : ℝ) * Δ)</code></td><td class="n"></td></tr><tr><td class="p">Then \(\Gdeg\) satisfies coupling independence at \(x=0\) with a finite constant</td><td class="l"><span class="from">Potts.critical_transfer_coupling_inputs</span><code>(hardInput : CriticalHardColouringInput.{u, v} C Δ hcolours)</code></td><td class="n">This is where CFFGZZ Theorem 20 enters: the paper&#x27;s proof cites it, and Lean takes it as the hypothesis hardInput.</td></tr><tr><td class="p">for every \(\delta\in(0,1]\) it satisfies coupling independence on \([\delta,1]\) with constant \(12/(11\delta)\)</td><td class="l"><span class="from">Potts.root_critical_uniform_ci</span><code>(hx : (x : ℝ) ∈ Set.Icc δ 1)</code><code>≤ 12 / (11 * δ)</code></td><td class="n"></td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">Potts.critical_transfer_coupling_inputs</span><code>TransferCouplingInputs.{u, v} C Δ hcolours</code></td><td class="n">The conclusion packages both bounds as the inputs of the transfer theorem.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>The x = 0 bound is the named input CriticalHardColouringInput; ExternalCriticalHardColouringTheorem.to_normalizedInput derives it from the original-graph form of CFFGZZ Theorem 20.</li><li>root_critical_uniform_ci gives the constant 12/(11δ) on [δ, 1].</li></ul></section>
 </article>
 <article class="card result" id="prop-field-transfer" data-result="prop-field-transfer" data-group="main" data-search="proposition 5.1 field transfer ci2zf.leeyang.graph_class_normalized_field_transfer" data-title="Field transfer">
   <header class="card-head">
     <div><div class="ref">Proposition 5.1</div><h3>Field transfer</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Proposition 5.1</span> · Main paper</summary><div class="tex"><div class="para">Fix integers \(q,\Deg\) with \(\Deg\ge2\) and \(q\ge\Deg+1\), let
@@ -621,17 +646,15 @@ for every \(G\in\mathcal G\) and every pinning \(\tau\),
               (∀ (v : ↑tau.FreeVertex) (c : C), ‖ℓ (↑v) c - 1‖ ≤ θ) →
                 CI2ZF.LeeYang.normalizedFieldPartition tau G ℓ ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 5 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/GraphClass.lean#L29-L42"><code>LeeYang.uniform_field_transfer_closed</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Geometry/GraphClassCoupling.lean#L68-L77"><code>Potts.GraphClassRootCouplingBound.to_pinningFamily</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/Pinning.lean#L44-L51"><code>LeeYang.normalizedFieldPartition_eq</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Geometry/GraphClassInputs.lean#L48-L51"><code>Potts.GraphClass.original_pinning_mem</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Pinning.lean#L173-L179"><code>PartialColouring.degreeBound_of_original</code></a> <span class="ud">A maximum-degree bound on the original graph is inherited by the induced <code>PinningData</code>.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.LeeYang.normalizedFieldPartition"><code>LeeYang.normalizedFieldPartition</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>θ is chosen after the class F. The paper&#x27;s θ(q, Δ, C₀) follows by applying the theorem to the union of all classes with constant C₀.</li><li>Lean uses the closed polydisc ‖λ − 1‖ ≤ θ and does not need Δ ≥ 2.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="prop-field-transfer:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="prop-field-transfer:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="prop-field-transfer:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="prop-field-transfer:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="prop-field-transfer" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(q\ge\Deg+1\)</td><td class="l"><span class="from">LeeYang.graph_class_normalized_field_transfer</span><code>(hq : Δ + 1 ≤ Fintype.card C)</code></td><td class="n">Lean does not need Δ ≥ 2.</td></tr><tr><td class="p">let \(\mathcal G\subseteq\Gdeg\) be closed under taking induced subgraphs and satisfy \(C_0\)-coupling independence at \(x=0\)</td><td class="l"><span class="from">LeeYang.graph_class_normalized_field_transfer</span><code>(F : GraphClass.{u})</code><code>(cost : ℝ) (hCI : GraphClassRootCouplingBound F C PinningData.hardParameter cost)</code></td><td class="n">The degree bound is imposed on each graph in the conclusion rather than on the class.</td></tr><tr><td class="p">There is \(\theta=\theta(q,\Deg,C_0)\in(0,1/2]\)</td><td class="l"><span class="from">LeeYang.graph_class_normalized_field_transfer</span><code>∃ θ &gt; 0, θ ≤ (1 / 2 : ℝ)</code></td><td class="n">θ is chosen after the class F.</td></tr><tr><td class="p">for every \(G\in\mathcal G\) and every pinning \(\tau\)</td><td class="l"><span class="from">LeeYang.graph_class_normalized_field_transfer</span><code>F.contains G → (∀ v, G.degree v ≤ Δ) → ∀ (tau : PartialColouring V C) (ℓ : V → C → ℂ)</code></td><td class="n">ℓ is the field λ.</td></tr><tr><td class="p">\(\nZpin{G}{\tau}(\lambda)\ne0 \qquad\text{whenever }|\lambda_{u,c}-1|&lt;\theta \quad(u\in V^\tau,\ c\in\colours).\)</td><td class="l"><span class="from">LeeYang.graph_class_normalized_field_transfer</span><code>(∀ (v : tau.FreeVertex) c, ‖ℓ v.val c - 1‖ ≤ θ) → normalizedFieldPartition tau G ℓ ≠ 0</code></td><td class="n">Lean uses the closed polydisc, which is stronger.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>θ is chosen after the class F. The paper&#x27;s θ(q, Δ, C₀) follows by applying the theorem to the union of all classes with constant C₀.</li><li>Lean uses the closed polydisc ‖λ − 1‖ ≤ θ and does not need Δ ≥ 2.</li></ul></section>
 </article>
 <article class="card result" id="thm-lee-yang" data-result="thm-lee-yang" data-group="main" data-search="theorem 5.2 lee–yang polydisc ci2zf.leeyang.near_vigoda_vertex_field_zero_free ci2zf.leeyang.cv_vertex_field_zero_free ci2zf.leeyang.high_girth_original_field_transfer ci2zf.leeyang.high_girth_residual_original_field_transfer" data-title="Lee–Yang polydisc">
   <header class="card-head">
     <div><div class="ref">Theorem 5.2</div><h3>Lee–Yang polydisc</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Theorem 5.2</span> · Main paper</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge2\).  Each of the following
@@ -677,6 +700,7 @@ colour.</div></div></details></section>
             Fintype.card C = 11 * j → CI2ZF.Potts.ExternalCriticalHardColouringTheorem C Δ) :
   ∃ θ &gt; 0, θ ≤ 1 / 2 ∧ CI2ZF.LeeYang.UniformVertexFieldZeroFree C Δ θ</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-cffgzz"><span class="dot" aria-hidden="true"></span>Assumes CFFGZZ Thm 20</a></div>
+  <details class="uses"><summary>The proof applies 3 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L81-L83"><code>Appendix.colours_succ_of_nearVigoda</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/VertexCoupling.lean#L26-L35"><code>LeeYang.near_vigoda_hard_coupling</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/VertexRegions.lean#L24-L35"><code>LeeYang.all_vertex_field_transfer</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">LeeYang.cv_vertex_field_zero_free</code>
@@ -690,6 +714,7 @@ colour.</div></div></details></section>
   (hΔ : 125 ≤ Δ) (hq : 1809 / 1000 * ↑Δ ≤ ↑(Fintype.card C)) :
   ∃ θ &gt; 0, θ ≤ 1 / 2 ∧ CI2ZF.LeeYang.UniformVertexFieldZeroFree C Δ θ</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 3 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L73-L79"><code>Appendix.colours_succ_of_cv</code></a> <span class="ud">All three full-interval colour regimes satisfy hard feasibility.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/VertexCoupling.lean#L20-L24"><code>LeeYang.cv_hard_coupling</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/VertexRegions.lean#L24-L35"><code>LeeYang.all_vertex_field_transfer</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">LeeYang.high_girth_original_field_transfer</code>
@@ -725,6 +750,7 @@ colour.</div></div></details></section>
                         (CI2ZF.LeeYang.fullFieldPartition tau G ℓ ≠ 0 ↔
                           CI2ZF.LeeYang.ProperPinning tau G))</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-clmm-87"><span class="dot" aria-hidden="true"></span>Assumes CLMM Lemma 8.7</a> <a class="badge hyp" href="#lit-clmm-lit"><span class="dot" aria-hidden="true"></span>Assumes CLMM Eq. (10), Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/HighGirth.lean#L28-L45"><code>LeeYang.high_girth_residual_original_field_transfer</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">LeeYang.high_girth_residual_original_field_transfer</code>
@@ -761,17 +787,15 @@ colour.</div></div></details></section>
                           (CI2ZF.LeeYang.fullFieldPartition tau G ℓ ≠ 0 ↔
                             CI2ZF.LeeYang.ProperPinning tau G))</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-clmm-87"><span class="dot" aria-hidden="true"></span>Assumes CLMM Lemma 8.7</a> <a class="badge hyp" href="#lit-clmm-lit"><span class="dot" aria-hidden="true"></span>Assumes CLMM Eq. (10), Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 4 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/HighGirth.lean#L15-L26"><code>LeeYang.high_girth_field_transfer</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/Pinning.lean#L44-L51"><code>LeeYang.normalizedFieldPartition_eq</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Pinning.lean#L173-L179"><code>PartialColouring.degreeBound_of_original</code></a> <span class="ud">A maximum-degree bound on the original graph is inherited by the induced <code>PinningData</code>.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/GraphClass.lean#L17-L27"><code>LeeYang.fullFieldPartition_ne_zero_iff_proper</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.LeeYang.UniformVertexFieldZeroFree"><code>LeeYang.UniformVertexFieldZeroFree</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>Regime (i) assumes CFFGZZ Theorem 20 only at (Δ, q) = (6j, 11j), j ≤ 20; regime (ii) assumes nothing.</li><li>Regime (iii) uses the large-girth row&#x27;s CLMM inputs (Lemma 8.7, Equation (10), Lemma 5.13) instead of the x = 0 results cited in the paper&#x27;s proof. The residual version needs girth only of G^τ.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="thm-lee-yang:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="thm-lee-yang:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="thm-lee-yang:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="thm-lee-yang:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="thm-lee-yang" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(q\ge(11/6-1/84000)\Deg\)</td><td class="l"><span class="from">LeeYang.near_vigoda_vertex_field_zero_free</span><code>(hq : ((11 / 6 : ℝ) - 1 / 84000) * Δ ≤ Fintype.card C)</code></td><td class="n">Regime (i).</td></tr><tr><td class="p">\(\Deg\ge125\) and \(q\ge1.809\Deg\)</td><td class="l"><span class="from">LeeYang.cv_vertex_field_zero_free</span><code>(hΔ : 125 ≤ Δ) (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C)</code></td><td class="n">Regime (ii).</td></tr><tr><td class="p">\(\Deg\ge3\) and \(q\ge\Deg+3\)</td><td class="l"><span class="from">LeeYang.high_girth_original_field_transfer</span><code>(hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C)</code></td><td class="n">Regime (iii).</td></tr><tr><td class="p">there is an integer \(g_{\rm LY}=g_{\rm LY}(q,\Deg)\ge3\) for which we put \(\mathcal G=\Gdegg{g_{\rm LY}}\)</td><td class="l"><span class="from">LeeYang.high_girth_original_field_transfer</span><code>∃ g : ℕ, 3 ≤ g ∧</code><code>(g : ℕ∞) ≤ G.egirth →</code></td><td class="n">egirth is the girth, infinite for forests.</td></tr><tr><td class="p">In each case there is \(\theta=\theta(q,\Deg)\in(0,1/2]\)</td><td class="l"><span class="from">LeeYang.near_vigoda_vertex_field_zero_free</span><code>∃ θ &gt; 0, θ ≤ (1 / 2 : ℝ) ∧ UniformVertexFieldZeroFree.{u,v} C Δ θ</code></td><td class="n"></td></tr><tr><td class="p">\(\nZpin{G}{\tau}(\lambda)\ne0 \qquad\text{whenever }|\lambda_{u,c}-1|&lt;\theta \quad(u\in V^\tau,\ c\in\colours).\)</td><td class="l"><span class="from">LeeYang.UniformVertexFieldZeroFree</span><code>(∀ (v : tau.FreeVertex) c, ‖ℓ v.val c - 1‖ ≤ θ) → normalizedFieldPartition tau G ℓ ≠ 0</code></td><td class="n">Regimes (i) and (ii) use the closed polydisc; regime (iii) states the open one.</td></tr><tr><td class="p">For a proper pinning, the corresponding statement for \(\Zpin{G}{\tau}(\lambda)\) follows</td><td class="l"><span class="from">LeeYang.UniformVertexFieldZeroFree</span><code>((∀ v : tau.domain, ℓ v.val (tau.colour v) ≠ 0) → (fullFieldPartition tau G ℓ ≠ 0 ↔ ProperPinning tau G))</code></td><td class="n"></td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">LeeYang.near_vigoda_vertex_field_zero_free</span><code>(critical : ∀ j : ℕ, 1 ≤ j → j ≤ 20 → Δ = 6 * j → Fintype.card C = 11 * j → ExternalCriticalHardColouringTheorem.{u,v} C Δ)</code></td><td class="n">Not in the statement: the cited hard-colouring bound, needed only at the twenty critical pairs.</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">LeeYang.high_girth_original_field_transfer</span><code>(identity : CavityTree.CLMMInfluenceIdentity C) (transfer : CLMM.Literature.{u,v} C)</code></td><td class="n">Not in the statement: the CLMM results used for regime (iii).</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>Regime (i) assumes CFFGZZ Theorem 20 only at (Δ, q) = (6j, 11j), j ≤ 20; regime (ii) assumes nothing.</li><li>Regime (iii) uses the large-girth row&#x27;s CLMM inputs (Lemma 8.7, Equation (10), Lemma 5.13) instead of the x = 0 results cited in the paper&#x27;s proof. The residual version needs girth only of G^τ.</li></ul></section>
 </article>
 <article class="card result" id="cor-edge-lee-yang" data-result="cor-edge-lee-yang" data-group="main" data-search="corollary 5.4 edge-colour lee–yang polydisc ci2zf.leeyang.edge_lee_yang" data-title="Edge-colour Lee–Yang polydisc">
   <header class="card-head">
     <div><div class="ref">Corollary 5.4</div><h3>Edge-colour Lee–Yang polydisc</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Corollary 5.4</span> · Main paper</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge2\) and \(q\ge3\Deg\).
@@ -815,17 +839,15 @@ imposed at every edge-colour pair.</div></div></details></section>
                   (CI2ZF.LeeYang.fullFieldPartition tau G.lineGraph ℓ ≠ 0 ↔
                     CI2ZF.LeeYang.ProperPinning tau G.lineGraph))</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 5 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Edge/PottsCI.lean#L79-L83"><code>Appendix.Edge.lineGraph_colours_slack</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/LeeYang/GraphClass.lean#L70-L86"><code>LeeYang.graph_class_field_transfer</code></a> <span class="ud">Pinned field factors need only be nonzero.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Edge/ZeroFree.lean#L46-L54"><code>Appendix.Edge.edgeGraphClass_rootCoupling</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Edge/ZeroFree.lean#L40-L44"><code>Appendix.Edge.lineGraph_mem_edgeGraphClass</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Edge/ZeroFree.lean#L31-L38"><code>Appendix.Edge.edgeGraphClass_degree</code></a></li></ul></details>
 </div></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>No CWZZ input: the line-graph coupling bound Δ − 1 at x = 0 is proved in Lean.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="cor-edge-lee-yang:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="cor-edge-lee-yang:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="cor-edge-lee-yang:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="cor-edge-lee-yang:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="cor-edge-lee-yang" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(\Deg\ge2\) and \(q\ge3\Deg\)</td><td class="l"><span class="from">LeeYang.edge_lee_yang</span><code>(hΔ : 2 ≤ Δ) (hq : 3 * Δ ≤ Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">There exists \(\theta=\theta(q,\Deg)\in(0,1/2]\)</td><td class="l"><span class="from">LeeYang.edge_lee_yang</span><code>∃ θ &gt; 0, θ ≤ (1 / 2 : ℝ)</code></td><td class="n"></td></tr><tr><td class="p">for every finite simple graph \(G=(V,E)\) of maximum degree at most \(\Deg\) and every edge-colour pinning \(\tau\)</td><td class="l"><span class="from">LeeYang.edge_lee_yang</span><code>∀ {V : Type u} [Fintype V] (G : SimpleGraph V), (∀ v, G.degree v ≤ Δ) → ∀ (tau : PartialColouring G.edgeSet C) (ℓ : G.edgeSet → C → ℂ)</code></td><td class="n">An edge-colour pinning is a partial colouring of G.edgeSet.</td></tr><tr><td class="p">\(\widehat Z_G^{\mathrm{edge},\tau}(\lambda)\ne0 \qquad\text{whenever}\qquad \abs{\lambda_{e,c}-1}&lt;\theta \quad(e\in E\setminus\Lambda_E,\ c\in\colours).\)</td><td class="l"><span class="from">LeeYang.edge_lee_yang</span><code>(∀ (e : tau.FreeVertex) c, ‖ℓ e.val c - 1‖ ≤ θ) → normalizedFieldPartition tau G.lineGraph ℓ ≠ 0</code></td><td class="n">The edge-colour polynomial is the vertex-colour polynomial of the line graph.</td></tr><tr><td class="p">For a proper pinning, \(Z_G^{\mathrm{edge},\tau}(\lambda)\ne0\) when the same condition is imposed at every edge-colour pair.</td><td class="l"><span class="from">LeeYang.edge_lee_yang</span><code>((∀ e : tau.domain, ℓ e.val (tau.colour e) ≠ 0) → (fullFieldPartition tau G.lineGraph ℓ ≠ 0 ↔ ProperPinning tau G.lineGraph))</code></td><td class="n"></td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>No CWZZ input: the line-graph coupling bound Δ − 1 at x = 0 is proved in Lean.</li></ul></section>
 </article>
 <article class="card result" id="thm-holant-box" data-result="thm-holant-box" data-group="main" data-search="theorem 5.6 log-concave holant polytube ci2zf.holant.exists_uniform_holant_polytube" data-title="Log-concave Holant polytube">
   <header class="card-head">
     <div><div class="ref">Theorem 5.6</div><h3>Log-concave Holant polytube</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Theorem 5.6</span> · Main paper</summary><div class="tex"><div class="para">Fix an integer \(\Deg\ge2\) and a finite family \(\mathcal F\) of log-concave
@@ -876,17 +898,15 @@ graphs and signature assignments above.</div></div></details></section>
                   (∀ e ∈ G.edgeFinset, ∃ x ∈ Set.Icc 0 R, ‖z e - ↑x‖ &lt; ε) →
                     CI2ZF.Holant.graphPartition G (CI2ZF.Holant.complexValues f) z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 4 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/TransferParameters.lean#L26-L70"><code>Holant.exists_transferParameters</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Signatures.lean#L356-L358"><code>Holant.residualGrowthBound_nonneg</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Theorem.lean#L15-L28"><code>Holant.uniform_path_nonzero_and_response</code></a> <span class="ud">No coupling, logarithm, separator, or smaller-instance hypothesis remains in this theorem.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/TubeTheorem.lean#L35-L60"><code>Holant.graphPartition_ne_zero_of_paths</code></a> <span class="ud">Original, unnormalized graph signatures inherit the uniform path theorem.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Holant.Signature"><code>Holant.Signature</code></a>, <a href="#def-CI2ZF.Holant.graphPartition"><code>Holant.graphPartition</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>Lean allows any Δ and any R ≥ 0.</li><li>The Chen–Gu coupling bound used in the proof is proved with the paper&#x27;s constant.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="thm-holant-box:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="thm-holant-box:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="thm-holant-box:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="thm-holant-box:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="thm-holant-box" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">a finite family \(\mathcal F\) of log-concave symmetric Boolean signatures satisfying \(f(0)&gt;0\) for every \(f\in\mathcal F\)</td><td class="l"><span class="from">Holant.exists_uniform_holant_polytube</span><code>(F : Finset Signature)</code></td><td class="n">Signature bundles symmetry, log-concavity, interval support and f(0) &gt; 0.</td></tr><tr><td class="p">For every \(R&gt;0\), there is \(\eps=\eps(\Deg,\mathcal F,R)&gt;0\)</td><td class="l"><span class="from">Holant.exists_uniform_holant_polytube</span><code>{R : ℝ} (hR : 0 ≤ R) : ∃ ε : ℝ, 0 &lt; ε ∧</code></td><td class="n">Lean also allows R = 0 and any Δ.</td></tr><tr><td class="p">For every finite simple graph \(G=(V,E)\) of maximum degree at most \(\Deg\), every assignment \((f_v)_{v\in V}\) with \(f_v\in\mathcal F\) of arity \(\deg_G(v)\)</td><td class="l"><span class="from">Holant.exists_uniform_holant_polytube</span><code>∀ (V : Type u) [Fintype V] [DecidableEq V] (G : SimpleGraph V), (∀ v, G.degree v ≤ Δ) → ∀ f : V → Signature, (∀ v, f v ∈ F) → (∀ v, (f v).arity = G.degree v) →</code></td><td class="n"></td></tr><tr><td class="p">\(Z_{G,\mathbf f}(\mathbf z)\ne0 \qquad\text{whenever}\qquad \mathbf z\in\mathcal U_\eps([0,R])^E.\)</td><td class="l"><span class="from">Holant.exists_uniform_holant_polytube</span><code>(∀ e ∈ G.edgeFinset, ∃ x : ℝ, x ∈ Icc 0 R ∧ ‖z e - (x : ℂ)‖ &lt; ε) → graphPartition G (complexValues f) z ≠ 0</code></td><td class="n">Each edge activity is within ε of its own point of [0, R].</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>Lean allows any Δ and any R ≥ 0.</li><li>The Chen–Gu coupling bound used in the proof is proved with the paper&#x27;s constant.</li></ul></section>
 </article>
 <article class="card result" id="cor-bmatching" data-result="cor-bmatching" data-group="main" data-search="corollary 5.7 \(b\)-matchings ci2zf.holant.bmatching_uniform_polytube ci2zf.holant.bmatching_orthant" data-title="b-matchings">
   <header class="card-head">
     <div><div class="ref">Corollary 5.7</div><h3>\(b\)-matchings</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Corollary 5.7</span> · Main paper</summary><div class="tex"><div class="para">Fix an integer \(\Deg\ge2\) and \(R&gt;0\).  There is
@@ -922,6 +942,7 @@ is an open zero-free neighbourhood of \([0,\infty)^E\).</div></div></details></s
             ∀ z ∈ CI2ZF.Holant.edgePolytube G.edgeFinset ε 0 R,
               CI2ZF.Holant.matchingPartition CI2ZF.Holant.graphIncidence G.edgeFinset b z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Applications.lean#L153-L161"><code>Holant.matching_uniform_polytube</code></a> <span class="ud">Corollary <code>cor:bmatching-short</code>: the width precedes every graph and capacity.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Corollaries.lean#L13-L17"><code>Holant.holant_uniform_tubes</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Holant.bmatching_orthant</code>
@@ -954,17 +975,15 @@ is an open zero-free neighbourhood of \([0,\infty)^E\).</div></div></details></s
             (CI2ZF.Holant.holantWidth (CI2ZF.Holant.capacityFamily Δ) Δ),
         CI2ZF.Holant.matchingPartition CI2ZF.Holant.graphIncidence G.edgeFinset b z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Applications.lean#L163-L177"><code>Holant.matching_orthant</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Corollaries.lean#L13-L17"><code>Holant.holant_uniform_tubes</code></a></li></ul></details>
 </div></section>
   </div>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">Fix an integer \(\Deg\ge2\) and \(R&gt;0\). There is \(\eps=\eps(\Deg,R)&gt;0\)</td><td class="l"><span class="from">Holant.bmatching_uniform_polytube</span><code>(Δ : ℕ) {R : ℝ} (hR : 0 &lt; R) : ∃ ε &gt; 0,</code></td><td class="n"></td></tr><tr><td class="p">every integer vector \(\mathbf b=(b_v)_{v\in V}\) with \(0\le b_v\le\deg_G(v)\)</td><td class="l"><span class="from">Holant.bmatching_uniform_polytube</span><code>∀ b : V → ℕ, (∀ v, b v ≤ G.degree v) →</code></td><td class="n"></td></tr><tr><td class="p">whenever \(\mathbf z\in\mathcal U_\eps([0,R])^E\)</td><td class="l"><span class="from">Holant.bmatching_uniform_polytube</span><code>∀ z ∈ edgePolytube G.edgeFinset ε 0 R, matchingPartition graphIncidence G.edgeFinset b z ≠ 0</code></td><td class="n">matchingPartition is the b-matching polynomial.</td></tr></tbody></table></section>
   
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="cor-bmatching:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="cor-bmatching:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="cor-bmatching:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="cor-bmatching:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="cor-bmatching" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
 </article>
 <article class="card result" id="cor-bcover" data-result="cor-bcover" data-group="main" data-search="corollary 5.9 \(b\)-edge covers ci2zf.holant.bcover_uniform_polytube ci2zf.holant.bcover_orthant" data-title="b-edge covers">
   <header class="card-head">
     <div><div class="ref">Corollary 5.9</div><h3>\(b\)-edge covers</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><details class="stmt" open><summary><span class="sref">Corollary 5.9</span> · Main paper</summary><div class="tex"><div class="para">Fix an integer \(\Deg\ge2\) and
@@ -1003,6 +1022,7 @@ is an open zero-free neighbourhood of \((0,\infty)^E\).</div></div></details></s
             ∀ z ∈ CI2ZF.Holant.edgePolytube G.edgeFinset ε a c,
               CI2ZF.Holant.coverPartition CI2ZF.Holant.graphIncidence G.edgeFinset b z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Applications.lean#L300-L310"><code>Holant.cover_uniform_polytube</code></a> <span class="ud">Corollary <code>cor:bcover-short</code>: positive boxes have a graph- and capacity-independent width.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Corollaries.lean#L13-L17"><code>Holant.holant_uniform_tubes</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Holant.bcover_orthant</code>
@@ -1034,12 +1054,11 @@ is an open zero-free neighbourhood of \((0,\infty)^E\).</div></div></details></s
             (CI2ZF.Holant.bcoverWidth Δ),
         CI2ZF.Holant.coverPartition CI2ZF.Holant.graphIncidence G.edgeFinset b z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Applications.lean#L312-L328"><code>Holant.cover_orthant</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Holant/Corollaries.lean#L13-L17"><code>Holant.holant_uniform_tubes</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Holant.bcoverWidth"><code>Holant.bcoverWidth</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>bcover_uniform_polytube is stated as ∀ λ₋ λ₊ ∃ ε. That the width does not depend on λ₊ is true (bcoverWidth ignores its upper argument, and bcover_orthant uses this) but is not part of that theorem&#x27;s type.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="cor-bcover:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="cor-bcover:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="cor-bcover:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="cor-bcover:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="cor-bcover" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">Fix an integer \(\Deg\ge2\) and \(0&lt;\lambda_-\le\lambda_+&lt;\infty\). There is \(\eps=\eps(\Deg,\lambda_-)&gt;0\)</td><td class="l"><span class="from">Holant.bcover_uniform_polytube</span><code>(Δ : ℕ) {a c : ℝ} (ha : 0 &lt; a) (hac : a ≤ c) : ∃ ε &gt; 0,</code></td><td class="n">Here a = λ₋ and c = λ₊. The remarks explain how the width depends on λ₊.</td></tr><tr><td class="p">whenever \(\mathbf z\in\mathcal U_\eps([\lambda_-,\lambda_+])^E\)</td><td class="l"><span class="from">Holant.bcover_uniform_polytube</span><code>∀ z ∈ edgePolytube G.edgeFinset ε a c, coverPartition graphIncidence G.edgeFinset b z ≠ 0</code></td><td class="n"></td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>bcover_uniform_polytube is stated as ∀ λ₋ λ₊ ∃ ε. That the width does not depend on λ₊ is true (bcoverWidth ignores its upper argument, and bcover_orthant uses this) but is not part of that theorem&#x27;s type.</li></ul></section>
 </article>
 
 <h2 id="appendix">Appendix A: further Potts regimes</h2>
@@ -1048,7 +1067,6 @@ is an open zero-free neighbourhood of \((0,\infty)^E\).</div></div></details></s
 <article class="card result" id="near-vigoda" data-result="near-vigoda" data-group="appendix" data-search="appendix a near-vigoda regime ci2zf.appendix.near_vigoda_transfer_inputs ci2zf.appendix.near_vigoda_noncritical_uniform_ci ci2zf.appendix.near_vigoda_zero_free ci2zf.appendix.integer_reduction" data-title="Near-Vigoda regime">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>Near-Vigoda regime</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> Δ ≥ 2, q ≥ (11/6 − 1/84000)Δ; zero-free near [0, 1]</p><details class="stmt" open><summary><span class="sref">Theorem 4.5</span> · Companion</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge2\), and assume one of the three
@@ -1112,6 +1130,7 @@ except possibly at \(z=0\); its order of vanishing there is
             Fintype.card C = 11 * j → CI2ZF.Potts.ExternalCriticalHardColouringTheorem C Δ) :
   ∃ (hcolours : Δ + 1 ≤ Fintype.card C), CI2ZF.Potts.TransferCouplingInputs C Δ hcolours</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-cffgzz"><span class="dot" aria-hidden="true"></span>Assumes CFFGZZ Thm 20</a></div>
+  <details class="uses"><summary>The proof applies 6 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L81-L83"><code>Appendix.colours_succ_of_nearVigoda</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L59-L71"><code>Appendix.nearVigoda_regime_cases</code></a> <span class="ud">The complete arithmetic case split used for the coupling inputs.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/CV/ZeroFree.lean#L21-L28"><code>Appendix.CV.transfer_inputs</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Transfer/TransferCouplingInputs.lean#L42-L55"><code>Potts.strict_transfer_coupling_inputs</code></a> <span class="ud">Above the Vigoda line both transfer inputs are fully proved by the actual coupled kernels, including the hard endpoint.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Transfer/TransferCouplingInputs.lean#L57-L69"><code>Potts.critical_transfer_coupling_inputs</code></a> <span class="ud">At equality the positive-temperature input is proved here.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PottsExternalTheorem.lean#L16-L27"><code>Potts.ExternalCriticalHardColouringTheorem.to_normalizedInput</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.near_vigoda_noncritical_uniform_ci</code>
@@ -1132,6 +1151,7 @@ except possibly at \(z=0\); its order of vanishing there is
       ∀ (x : PottsCI.PinningData.NonnegativeParameter),
         ↑x ≤ 1 → CI2ZF.Potts.RootCouplingBound C Δ hcolours x cost</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 4 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L81-L83"><code>Appendix.colours_succ_of_nearVigoda</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L59-L71"><code>Appendix.nearVigoda_regime_cases</code></a> <span class="ud">The complete arithmetic case split used for the coupling inputs.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/CV/ZeroFree.lean#L13-L19"><code>Appendix.CV.root_coupling</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/OptionCI.lean#L59-L71"><code>Potts.option_root_strict_uniform_ci</code></a> <span class="ud">The strict-line CI constant is uniform over the entire physical interval.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.near_vigoda_zero_free</code>
@@ -1153,6 +1173,7 @@ except possibly at \(z=0\); its order of vanishing there is
             Fintype.card C = 11 * j → CI2ZF.Potts.ExternalCriticalHardColouringTheorem C Δ) :
   ∃ eps &gt; 0, CI2ZF.Potts.UniformPottsZeroFree C Δ eps</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-cffgzz"><span class="dot" aria-hidden="true"></span>Assumes CFFGZZ Thm 20</a></div>
+  <details class="uses"><summary>The proof applies 4 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L59-L71"><code>Appendix.nearVigoda_regime_cases</code></a> <span class="ud">The complete arithmetic case split used for the coupling inputs.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/CV/ZeroFree.lean#L30-L36"><code>Appendix.CV.zero_free</code></a> <span class="ud">Regime (ii): one radius works for every graph size and arbitrary pinning on the entire physical interval.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PottsMainTheorem.lean#L38-L47"><code>Potts.strict_potts_zero_free</code></a> <span class="ud">Full strict-line theorem: actual coupling independence and both complex induction branches have been proved in Lean.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PottsExternalTheorem.lean#L29-L37"><code>Potts.critical_potts_zero_free_from_external</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.integer_reduction</code>
@@ -1167,17 +1188,15 @@ except possibly at \(z=0\); its order of vanishing there is
   (hq : (11 / 6 - 1 / 84000) * ↑Δ ≤ ↑q) :
   11 / 6 * ↑Δ &lt; ↑q ∨ ∃ j, 1 ≤ j ∧ j ≤ 20 ∧ Δ = 6 * j ∧ q = 11 * j</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Arithmetic.lean#L17-L22"><code>Appendix.critical_line_integer</code></a> <span class="ud">Every integer point on the critical line is exactly <code>(6j,11j)</code>.</span></li></ul></details>
 </div></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>CFFGZZ Theorem 20 is requested only at (Δ, q) = (6j, 11j) with j ≤ 20; for Δ ≥ 125 the Carlson–Vigoda theorem is used instead.</li><li>integer_reduction is Lemma 4.3 of the companion, word for word.</li><li>At the critical pairs the constant on [δ, 1] is 12/(11δ) (root_critical_uniform_ci).</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="near-vigoda:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="near-vigoda:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="near-vigoda:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="near-vigoda:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="near-vigoda" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p"><span class="from">Theorem 4.1</span>\(q\ge(11/6-1/84000)\Deg\)</td><td class="l"><span class="from">Appendix.near_vigoda_zero_free</span><code>(hΔ : 2 ≤ Δ) (hq : ((11 / 6 : ℝ) - 1 / 84000) * Δ ≤ Fintype.card C)</code></td><td class="n">Regime (i) of Theorem 4.1.</td></tr><tr><td class="p"><span class="from">Theorem 4.1</span>There exists \(\eps=\eps(q,\Deg)&gt;0\)</td><td class="l"><span class="from">Appendix.near_vigoda_zero_free</span><code>∃ eps &gt; 0, UniformPottsZeroFree.{u,v} C Δ eps</code></td><td class="n">The same conclusion as Theorem 1.1 of the main paper.</td></tr><tr><td class="p">There exists \(C_0=C_0(q,\Deg)&lt;\infty\) such that \(\mathcal G\) satisfies \(C_0\)-coupling independence at \(x=0\), and for every \(\delta\in(0,1]\) there exists \(C_\delta=C_\delta(q,\Deg)&lt;\infty\) such that it satisfies \(C_\delta\)-coupling independence on \([\delta,1]\).</td><td class="l"><span class="from">Appendix.near_vigoda_transfer_inputs</span><code>∃ hcolours : Δ + 1 ≤ Fintype.card C, TransferCouplingInputs.{u,v} C Δ hcolours</code></td><td class="n"></td></tr><tr><td class="p">The same is true in the noncritical cases of regime (i).</td><td class="l"><span class="from">Appendix.near_vigoda_noncritical_uniform_ci</span><code>(hnc : ¬ ∃ j : ℕ, 1 ≤ j ∧ j ≤ 20 ∧ Δ = 6 * j ∧ Fintype.card C = 11 * j)</code><code>∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 → RootCouplingBound.{u,v} C Δ hcolours x cost</code></td><td class="n">One constant for every x ∈ [0, 1].</td></tr><tr><td class="p">the endpoint bound is supplied independently by the hard-colouring coupling theorem</td><td class="l"><span class="from">Appendix.near_vigoda_transfer_inputs</span><code>(critical : ∀ j : ℕ, 1 ≤ j → j ≤ 20 → Δ = 6 * j → Fintype.card C = 11 * j → ExternalCriticalHardColouringTheorem.{u,v} C Δ)</code></td><td class="n">CFFGZZ Theorem 20, as a hypothesis at exactly these pairs.</td></tr><tr><td class="p"><span class="from">Lemma 4.3</span>Let \(\Deg\) and \(q\) be integers with \(3\le\Deg\le124\)</td><td class="l"><span class="from">Appendix.integer_reduction</span><code>{Δ q : ℕ} (hΔ : 3 ≤ Δ) (hΔmax : Δ ≤ 124)</code></td><td class="n"></td></tr><tr><td class="p"><span class="from">Lemma 4.3</span>Then either \(q&gt;11\Deg/6\), or \((\Deg,q)=(6j,11j)\) for some integer \(1\le j\le20\).</td><td class="l"><span class="from">Appendix.integer_reduction</span><code>(11 / 6 : ℝ) * Δ &lt; q ∨ ∃ j : ℕ, 1 ≤ j ∧ j ≤ 20 ∧ Δ = 6 * j ∧ q = 11 * j</code></td><td class="n"></td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>CFFGZZ Theorem 20 is requested only at (Δ, q) = (6j, 11j) with j ≤ 20; for Δ ≥ 125 the Carlson–Vigoda theorem is used instead.</li><li>integer_reduction is Lemma 4.3 of the companion, word for word.</li><li>At the critical pairs the constant on [δ, 1] is 12/(11δ) (root_critical_uniform_ci).</li></ul></section>
 </article>
 <article class="card result" id="cv" data-result="cv" data-group="appendix" data-search="appendix a carlson–vigoda regime ci2zf.appendix.cv.root_coupling ci2zf.appendix.cv.option_root_ci ci2zf.appendix.cv.zero_free" data-title="Carlson–Vigoda regime">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>Carlson–Vigoda regime</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> Δ ≥ 125, q ≥ 1.809Δ; zero-free near [0, 1]</p><details class="stmt" open><summary><span class="sref">Theorem 5.1</span> · Companion</summary><div class="tex"><div class="para">Let \(q,\Deg\) be positive integers with \(\Deg\ge125\) and
@@ -1228,6 +1247,7 @@ except possibly at \(z=0\); its order of vanishing there is
   (x : PottsCI.PinningData.NonnegativeParameter) (hx1 : ↑x ≤ 1) :
   CI2ZF.Potts.RootCouplingBound C Δ hcolours x CI2ZF.Appendix.CV.ciConstant</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CV/RootCI.lean#L107-L130"><code>Appendix.CV.option_root_ci</code></a> <span class="ud">The appendix&#x27;s full-interval CV root CI theorem, on actual finite Gibbs laws, with no external coupling or contraction premise.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.CV.option_root_ci</code>
@@ -1250,6 +1270,7 @@ except possibly at \(z=0\); its order of vanishing there is
       ((CI2ZF.Potts.optionChildData I b).nonnegativeGibbs ⋯ ⋯ x) ≤
     CI2ZF.Appendix.CV.ciConstant</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 7 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CV/RootCI.lean#L79-L105"><code>Appendix.CV.closed_gibbs_bound_of_open</code></a> <span class="ud">A useful finite-state endpoint lemma: uniform open-interval transport bounds pass to activity zero, and activity one is the common product law.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/OptionPinning.lean#L55-L59"><code>Potts.optionChildData_degreeBound</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CV/RootCI.lean#L22-L26"><code>Appendix.CV.colours_slack</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CV/RootCI.lean#L19-L20"><code>Appendix.CV.ciConstant_bounds</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Model.lean#L99-L101"><code>PinningData.partition_pos_of_parameter_pos</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L118-L123"><code>W_ham_eq_zero_of_isEmpty</code></a> <span class="ud">Empty remaining vertex sets require no transition-kernel construction.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CV/RootCI.lean#L57-L77"><code>Appendix.CV.option_root_ci_open</code></a> <span class="ud">The exact interior bound has an extra factor <code>1-x</code>.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.CV.zero_free</code>
@@ -1263,17 +1284,15 @@ except possibly at \(z=0\); its order of vanishing there is
   (hq : 1809 / 1000 * ↑Δ ≤ ↑(Fintype.card C)) :
   ∃ eps &gt; 0, CI2ZF.Potts.UniformPottsZeroFree C Δ eps</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 3 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CV/RootCI.lean#L22-L26"><code>Appendix.CV.colours_slack</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PottsMainTheorem.lean#L24-L36"><code>Potts.bounded_degree_potts_transfer</code></a> <span class="ud">The two actual real CI inputs imply graph-independent complex zero-freeness.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/CV/ZeroFree.lean#L21-L28"><code>Appendix.CV.transfer_inputs</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Appendix.CV.ciConstant"><code>Appendix.CV.ciConstant</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>The constant is ciConstant = 409060125/50858 &lt; 8043.19, as in the companion.</li><li>No literature input: the contraction is proved in Lean and x = 0 follows by finite-state continuity, so neither CV2024 nor CFFGZZ is assumed.</li><li>The coupling theorems are stated on boundary-count data (PinningData (Option O) C), which covers every (G, τ, r).</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="cv:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="cv:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="cv:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="cv:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="cv" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(\Deg\ge125\) and \(q\ge1.809\,\Deg\)</td><td class="l"><span class="from">Appendix.CV.option_root_ci</span><code>{Δ : ℕ} (hΔ : 125 ≤ Δ) (hd : I.DegreeBound Δ) (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">For every \(G\in\Gdeg\), every pinning \(\tau\), every \(x\in[0,1]\), every \(r\in V^\tau\), and all \(a,b\in\colours\)</td><td class="l"><span class="from">Appendix.CV.option_root_ci</span><code>(I : PinningData (Option O) C)</code><code>(a b : C) (x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1)</code></td><td class="n">A graph with a pinning and a root is encoded as a residual instance on Option O, the root being none; this covers every (G, τ, r).</td></tr><tr><td class="p">\(\le \frac{2}{m_0\delta_{\rm CV}} =\frac{409060125}{50858}&lt;8043.19.\)</td><td class="l"><span class="from">Appendix.CV.option_root_ci</span><code>≤ ciConstant</code></td><td class="n">ciConstant is 409060125/50858; ciConstant_bounds proves that it is below 8043.19.</td></tr><tr><td class="p"><span class="from">Theorem 4.1</span>\(\Deg\ge125\) and \(q\ge1.809\Deg\)</td><td class="l"><span class="from">Appendix.CV.zero_free</span><code>(hΔ : 125 ≤ Δ) (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C) : ∃ eps &gt; 0, UniformPottsZeroFree.{u,v} C Δ eps</code></td><td class="n">Regime (ii) of Theorem 4.1, with no literature hypothesis.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>The constant is ciConstant = 409060125/50858 &lt; 8043.19, as in the companion.</li><li>No literature input: the contraction is proved in Lean and x = 0 follows by finite-state continuity, so neither CV2024 nor CFFGZZ is assumed.</li><li>The coupling theorems are stated on boundary-count data (PinningData (Option O) C), which covers every (G, τ, r).</li></ul></section>
 </article>
 <article class="card result" id="large-girth" data-result="large-girth" data-group="appendix" data-search="appendix a large-girth regime ci2zf.appendix.girth.high_girth_coupling ci2zf.appendix.girth.high_girth_residual_original_zero_free" data-title="Large-girth regime">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>Large-girth regime</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> Δ ≥ 3, q ≥ Δ + 3, girth(G^τ) ≥ g*(q, Δ); zero-free near [0, 1]</p><details class="stmt" open><summary><span class="sref">Theorem 6.1</span> · Companion</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge3\) and \(q\ge\Deg+3\).  There exist
@@ -1330,6 +1349,7 @@ except possibly at \(z=0\); its order of vanishing there is
         ∀ (x : PottsCI.PinningData.NonnegativeParameter),
           ↑x ≤ 1 → (CI2ZF.Appendix.Girth.largeGirthFamily C g).RootCouplingBound Δ ⋯ x K</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-clmm-87"><span class="dot" aria-hidden="true"></span>Assumes CLMM Lemma 8.7</a> <a class="badge hyp" href="#lit-clmm-lit"><span class="dot" aria-hidden="true"></span>Assumes CLMM Eq. (10), Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/High/Theorem.lean#L29-L74"><code>Appendix.Girth.high_girth_soft_coupling</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/Transfer/Family.lean#L41-L69"><code>Appendix.Girth.closed_root_coupling_of_soft</code></a> <span class="ud">Finite-state continuity supplies the hard endpoint; activity one is the common product law.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.Girth.high_girth_residual_original_zero_free</code>
@@ -1346,17 +1366,15 @@ except possibly at \(z=0\); its order of vanishing there is
   (hq : Δ + 3 ≤ Fintype.card C) :
   ∃ g, 3 ≤ g ∧ ∃ eps &gt; 0, CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree C Δ g eps</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-clmm-87"><span class="dot" aria-hidden="true"></span>Assumes CLMM Lemma 8.7</a> <a class="badge hyp" href="#lit-clmm-lit"><span class="dot" aria-hidden="true"></span>Assumes CLMM Eq. (10), Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/High/Theorem.lean#L87-L96"><code>Appendix.Girth.high_girth_zero_free</code></a> <span class="ud">A single complex neighbourhood works for all graph sizes, pinnings, and activities in <code>[0,1]</code> when q ≥ Δ+3 and the residual girth is large.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/Transfer/ResidualOriginal.lean#L29-L44"><code>Appendix.Girth.uniformResidualGirthPottsZeroFree_of_residual</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree"><code>Appendix.Girth.UniformResidualGirthPottsZeroFree</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>CLMM Lemma 8.7 enters in its level-summed form, and the sphere estimate needs strong spatial mixing only beyond a fixed depth K₀; the companion justifies both in the proof of its Lemma 6.10.</li><li>Girth is required only of the free graph. Lean transfers on residual instances directly instead of using the pinned-leaf realization.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="large-girth:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="large-girth:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="large-girth:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="large-girth:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="large-girth" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">Let \(q,\Deg\) be integers with \(\Deg\ge3\) and \(q\ge\Deg+3\).</td><td class="l"><span class="from">Appendix.Girth.high_girth_coupling</span><code>(Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">There exist \(g_*=g_*(q,\Deg)\ge3\) and \(C_*=C_*(q,\Deg)&lt;\infty\)</td><td class="l"><span class="from">Appendix.Girth.high_girth_coupling</span><code>∃ (g : ℕ) (K : ℝ), 3 ≤ g ∧ 0 ≤ K ∧</code></td><td class="n">Both constants are chosen before x, the graph and the pinning.</td></tr><tr><td class="p">the bound below holds for every \(x\in[0,1]\)</td><td class="l"><span class="from">Appendix.Girth.high_girth_coupling</span><code>∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 →</code></td><td class="n"></td></tr><tr><td class="p">every pinning \(\tau\) with \(\operatorname{girth}(G^\tau)\ge g_*\)</td><td class="l"><span class="from">Appendix.Girth.high_girth_coupling</span><code>(largeGirthFamily.{u,v} C g).RootCouplingBound Δ (by omega) x K</code></td><td class="n">largeGirthFamily C g consists of the residual instances whose free graph has girth at least g.</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">Appendix.Girth.high_girth_coupling</span><code>(identity : CLMMInfluenceIdentity C) (transfer : CLMM.Literature.{u,v} C)</code></td><td class="n">Not in the statement: the CLMM results that the companion&#x27;s proof cites.</td></tr><tr><td class="p"><span class="from">Theorem 4.1</span>with the additional condition \(\operatorname{girth}(G^\tau)\ge g_*\) in regime (iii)</td><td class="l"><span class="from">Appendix.Girth.high_girth_residual_original_zero_free</span><code>∃ g : ℕ, 3 ≤ g ∧ ∃ eps &gt; 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ g eps</code></td><td class="n">The girth condition is on the free graph only; see UniformResidualGirthPottsZeroFree.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>CLMM Lemma 8.7 enters in its level-summed form, and the sphere estimate needs strong spatial mixing only beyond a fixed depth K₀; the companion justifies both in the proof of its Lemma 6.10.</li><li>Girth is required only of the free graph. Lean transfers on residual instances directly instead of using the pinned-leaf realization.</li></ul></section>
 </article>
 <article class="card result" id="high-temperature" data-result="high-temperature" data-group="appendix" data-search="appendix a high-temperature regime ci2zf.appendix.high_temperature_graph_coupling ci2zf.appendix.high_temperature_zero_free" data-title="High-temperature regime">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>High-temperature regime</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> Δ ≥ 2, q &gt; (11/6)(1 − x*)Δ, x* ∈ (0, 1]; zero-free near [x*, 1]</p><details class="stmt" open><summary><span class="sref">Corollary 4.7</span> · Companion</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers with \(\Deg\ge2\), and fix \(x_*\in(0,1]\).  If
@@ -1385,6 +1403,7 @@ statement holds for the unnormalized pinned polynomial.</div></div></details></s
   CI2ZF.Potts.GraphClassRootCouplingBound (CI2ZF.Potts.GraphClass.boundedDegree Δ) C ⟨x, ⋯⟩
     (2 * (1 - x₀) * ↑Δ / (↑(Fintype.card C) - 11 / 6 * (1 - x₀) * ↑Δ))</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/HighTemperature/Coupling.lean#L70-L89"><code>Potts.root_high_temperature_uniform_ci</code></a> <span class="ud">One graph-independent CI constant throughout <code>[x₀,1]</code>, exactly the constant used in <code>cor:intro-high-temperature</code>.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.high_temperature_zero_free</code>
@@ -1406,17 +1425,15 @@ statement holds for the unnormalized pinned polynomial.</div></div></details></s
           ∀ z ∈ Metric.thickening eps (Complex.ofReal &#x27;&#x27; Set.Icc x₀ 1),
             CI2ZF.Potts.normalizedPartition tau G z ≠ 0 ∧ CI2ZF.Potts.fullPartition tau G z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 3 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/PositiveGraphClassTransfer.lean#L102-L131"><code>Potts.GraphClass.positive_interval_zero_free_and_responses</code></a> <span class="ud">The paper&#x27;s standalone positive-base response conclusion on <code>[δ,1]</code>, including every original pinning and root.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/HighTemperature/ZeroFree.lean#L16-L23"><code>Appendix.high_temperature_graph_coupling</code></a> <span class="ud">The graph-uniform CI input on the complete positive interval.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Transfer/PottsAnalytic.lean#L49-L55"><code>Potts.fullPartition_ne_zero_of_normalized</code></a> <span class="ud">The ordinary pinned partition has no additional zeros away from zero whenever the normalized partition is nonzero.</span></li></ul></details>
 </div></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>Lean needs neither Δ ≥ 2 nor x* ≤ 1, and one ε serves the normalized and the full polynomial.</li><li>The coupling constant is the companion&#x27;s C* = 2(1 − x*)Δ / (q − (11/6)(1 − x*)Δ).</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="high-temperature:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="high-temperature:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="high-temperature:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="high-temperature:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="high-temperature" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">fix \(x_*\in(0,1]\)</td><td class="l"><span class="from">Appendix.high_temperature_zero_free</span><code>{x₀ : ℝ} (hx₀ : 0 &lt; x₀)</code></td><td class="n">x₀ is x*. Lean needs neither x₀ ≤ 1 nor Δ ≥ 2.</td></tr><tr><td class="p">\(q&gt;\frac{11}{6}(1-x_*)\Deg,\)</td><td class="l"><span class="from">Appendix.high_temperature_zero_free</span><code>(hq : (11 / 6 : ℝ) * (1 - x₀) * Δ &lt; Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">then there is \(\eps=\eps(q,\Deg,x_*)&gt;0\) such that, for every finite simple graph \(G\) of maximum degree at most \(\Deg\) and every pinning \(\tau\)</td><td class="l"><span class="from">Appendix.high_temperature_zero_free</span><code>∃ eps &gt; 0, ∀ {V : Type u} [Fintype V] (G : SimpleGraph V), (∀ v, G.degree v ≤ Δ) → ∀ tau : PartialColouring V C,</code></td><td class="n"></td></tr><tr><td class="p">\(\nZpin{G}{\tau}(z)\ne0 \qquad\text{for every }z\in\mathcal U_\eps([x_*,1]).\)</td><td class="l"><span class="from">Appendix.high_temperature_zero_free</span><code>∀ z ∈ thickening eps (Complex.ofReal &#x27;&#x27; Icc x₀ 1), normalizedPartition tau G z ≠ 0 ∧ fullPartition tau G z ≠ 0</code></td><td class="n">One ε serves the normalized and the full polynomial; the companion shrinks ε below x* for the latter.</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">Appendix.high_temperature_graph_coupling</span><code>(2 * (1 - x₀) * Δ / ((Fintype.card C : ℝ) - (11 / 6 : ℝ) * (1 - x₀) * Δ))</code></td><td class="n">The coupling constant C* of the companion&#x27;s proof, valid on [x*, 1].</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>Lean needs neither Δ ≥ 2 nor x* ≤ 1, and one ε serves the normalized and the full polynomial.</li><li>The coupling constant is the companion&#x27;s C* = 2(1 − x*)Δ / (q − (11/6)(1 − x*)Δ).</li></ul></section>
 </article>
 <article class="card result" id="bbr" data-result="bbr" data-group="appendix" data-search="appendix a bbr interval ci2zf.appendix.bbr.high_girth_coupling ci2zf.appendix.bbr.high_girth_residual_original_zero_free" data-title="BBR interval">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>BBR interval</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> q ≥ 3, Δ/q ≥ (e − 1/2)/(e − 1), girth(G^τ) ≥ g_BBR(q, Δ); zero-free near [x₀, 1]</p><details class="stmt" open><summary><span class="sref">Theorem 4.6</span> · Companion</summary><div class="tex"><div class="para">Let \(q,\Deg\) be integers such that
@@ -1472,6 +1489,7 @@ The two laws are on the common free set \(V^\tau\setminus\{r\}\).</div></div></d
           x ∈ Set.Icc (CI2ZF.Appendix.BBR.start (Fintype.card C) Δ) 1 →
             (CI2ZF.Appendix.Girth.largeGirthFamily C g).PositiveRootCouplingBound Δ x hx K</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-bbr"><span class="dot" aria-hidden="true"></span>Assumes BBR Prop 2.6(i), Thm 2.5</a> <a class="badge hyp" href="#lit-clmm-lit"><span class="dot" aria-hidden="true"></span>Assumes CLMM Eq. (10), Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 8 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/CertificateArithmetic.lean#L15-L21"><code>Appendix.BBR.start_mem</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/Parameters.lean#L24-L30"><code>Appendix.BBR.degree_gt_colours</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/CertificateArithmetic.lean#L28-L34"><code>Appendix.BBR.contractionRate_mem</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/TotalInfluence.lean#L19-L24"><code>Appendix.BBR.totalInfluenceConstant_pos</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/CertificateArithmetic.lean#L23-L26"><code>Appendix.BBR.contractionSquare_mem</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/TotalInfluence.lean#L102-L136"><code>Appendix.BBR.total_influence_decay</code></a> <span class="ud">Actual conditional marginals have total-influence decay uniformly on all of the BBR interval, including activity one.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/Relative.lean#L110-L156"><code>Appendix.BBR.root_relative_ssm</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/CLMM/Transfer.lean#L119-L148"><code>Appendix.CLMM.eventual_transfer</code></a> <span class="ud">The paper&#x27;s eventual-depth transfer, uniform over any activity set.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.BBR.high_girth_residual_original_zero_free</code>
@@ -1506,17 +1524,15 @@ The two laws are on the common free set \(V^\tau\setminus\{r\}\).</div></div></d
                   CI2ZF.Potts.normalizedPartition tau G z ≠ 0 ∧
                     CI2ZF.Potts.fullPartition tau G z ≠ 0</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-bbr"><span class="dot" aria-hidden="true"></span>Assumes BBR Prop 2.6(i), Thm 2.5</a> <a class="badge hyp" href="#lit-clmm-lit"><span class="dot" aria-hidden="true"></span>Assumes CLMM Eq. (10), Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 5 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/BBR/High.lean#L67-L83"><code>Appendix.BBR.high_girth_zero_free</code></a> <span class="ud">The BBR zero-free neighbourhood for every finite residual graph and arbitrary nonnegative boundary counts obeying the degree budget.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/BBR/CertificateArithmetic.lean#L15-L21"><code>Appendix.BBR.start_mem</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Pinning.lean#L173-L179"><code>PartialColouring.degreeBound_of_original</code></a> <span class="ud">A maximum-degree bound on the original graph is inherited by the induced <code>PinningData</code>.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/PinningPolynomial.lean#L105-L109"><code>Potts.pinningProductPartition_toPinningData</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Transfer/PottsAnalytic.lean#L49-L55"><code>Potts.fullPartition_ne_zero_of_normalized</code></a> <span class="ud">The ordinary pinned partition has no additional zeros away from zero whenever the normalized partition is nonzero.</span></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Appendix.BBR.start"><code>Appendix.BBR.start</code></a>, <a href="#def-CI2ZF.Appendix.BBR.intervalStart"><code>Appendix.BBR.intervalStart</code></a>, <a href="#def-CI2ZF.Appendix.BBR.parameter"><code>Appendix.BBR.parameter</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>BBR Proposition 2.6(i) is used only at its printed hypothesis Δ ≥ q + 3. The four pairs with Δ = q + 2, and (q, Δ) = (3, 4), are handled by internal arithmetic; the companion instead extends BBR&#x27;s proof to Δ = q + 2.</li><li>The BBR influence identity (companion Lemma 7.3) is proved in Lean.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="bbr:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="bbr:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="bbr:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="bbr:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="bbr" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(q\ge3, \qquad \frac{\Deg}{q}\ge\frac{e-1/2}{e-1}.\)</td><td class="l"><span class="from">Appendix.BBR.high_girth_residual_original_zero_free</span><code>(hq : 3 ≤ Fintype.card C) (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">If \((q,\Deg)=(3,4)\), put \(x_0:=3/4\).</td><td class="l"><span class="from">Appendix.BBR.start</span><code>if q = 3 ∧ Δ = 4 then 3 / 4 else intervalStart q Δ</code></td><td class="n"></td></tr><tr><td class="p">\(k:=e\frac{\Deg-q/2}{\Deg-q}, \qquad x_0:=1-\frac q\Deg \left(1-\frac{k}{\Deg}\right)^2 \frac{\Deg-k}{\Deg-k/2}.\)</td><td class="l"><span class="from">Appendix.BBR.intervalStart</span><code>1 - q / Δ * (1 - parameter q Δ / Δ) ^ 2 * (Δ - parameter q Δ) / (Δ - parameter q Δ / 2)</code></td><td class="n">parameter q Δ is k = e(Δ − q/2)/(Δ − q).</td></tr><tr><td class="p">there are \(g_{\rm BBR}=g_{\rm BBR}(q,\Deg)\ge3\) and \(\eps=\eps(q,\Deg)&gt;0\)</td><td class="l"><span class="from">Appendix.BBR.high_girth_residual_original_zero_free</span><code>∃ g : ℕ, 3 ≤ g ∧ ∃ eps &gt; 0,</code></td><td class="n"></td></tr><tr><td class="p">every pinning \(\tau\) with \(\operatorname{girth}(G^\tau)\ge g_{\rm BBR}\)</td><td class="l"><span class="from">Appendix.BBR.high_girth_residual_original_zero_free</span><code>(g : ℕ∞) ≤ (tau.toPinningData G).graph.egirth →</code></td><td class="n">(tau.toPinningData G).graph is the free graph G^τ.</td></tr><tr><td class="p">\(\nZpin{G}{\tau}(z)\ne0 \qquad\text{for every }z\in\mathcal U_\eps([x_0,1]).\)</td><td class="l"><span class="from">Appendix.BBR.high_girth_residual_original_zero_free</span><code>∀ z ∈ thickening eps (Complex.ofReal &#x27;&#x27; Icc (start (Fintype.card C) Δ) 1), normalizedPartition tau G z ≠ 0 ∧ fullPartition tau G z ≠ 0</code></td><td class="n">One ε serves the normalized and the full polynomial.</td></tr><tr><td class="p"><span class="from">Theorem 7.6</span>every \(x\in[x_0,1]\)</td><td class="l"><span class="from">Appendix.BBR.high_girth_coupling</span><code>∀ (x : ℝ) (hx : 0 &lt; x), x ∈ Icc (start (Fintype.card C) Δ) 1 →</code></td><td class="n"></td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">Appendix.BBR.high_girth_coupling</span><code>(external : Literature C) (transfer : CLMM.Literature.{u,v} C)</code></td><td class="n">Not in the statement: BBR Proposition 2.6(i) and Theorem 2.5, and the two CLMM results.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>BBR Proposition 2.6(i) is used only at its printed hypothesis Δ ≥ q + 3. The four pairs with Δ = q + 2, and (q, Δ) = (3, 4), are handled by internal arithmetic; the companion instead extends BBR&#x27;s proof to Δ = q + 2.</li><li>The BBR influence identity (companion Lemma 7.3) is proved in Lean.</li></ul></section>
 </article>
 <article class="card result" id="edge-potts" data-result="edge-potts" data-group="appendix" data-search="appendix a edge-potts regime ci2zf.appendix.edge.root_children_ci ci2zf.appendix.edge.edge_potts_zero_free" data-title="Edge-Potts regime">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>Edge-Potts regime</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> Δ ≥ 2, q ≥ 3Δ; the polynomial of the line graph L(G); zero-free near [0, 1]</p><details class="stmt" open><summary><span class="sref">Theorem 8.1</span> · Companion</summary><div class="tex"><div class="para">Let \(q,\Deg\) be positive integers with \(q\ge3\Deg\).  For every finite simple graph \(G\)
@@ -1569,6 +1585,7 @@ except possibly at \(z=0\); its order of vanishing there is
       ((CI2ZF.Potts.rootChildData τ G.lineGraph r b).gibbs ↑x ⋯ ⋯) ≤
     ↑Δ - 1</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 13 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Model.lean#L283-L292"><code>PinningData.partition_pos</code></a> <span class="ud">Positivity of the partition function throughout the nonnegative soft regime, including the hard endpoint under the degree and colour assumptions.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/RootChildren.lean#L148-L152"><code>Potts.rootChildData_degreeBound</code></a> <span class="ud">Actual root pinning preserves the original maximum constraint-degree bound.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Edge/PottsCI.lean#L74-L77"><code>Appendix.Edge.lineGraph_degree_le</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Edge/PottsCI.lean#L79-L83"><code>Appendix.Edge.lineGraph_colours_slack</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Model/Real/Endpoint.lean#L160-L195"><code>PinningData.hard_W_le_of_positive_parameter_bound</code></a> <span class="ud">A uniform transport estimate at positive Potts parameters passes to the hard endpoint.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L229-L232"><code>tendsto_hardApproach</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L220-L222"><code>hardApproach_pos</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Vigoda/CouplingIndependence.lean#L224-L227"><code>hardApproach_le_one</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Foundations/PathCoupling.lean#L29-L29"><code>ham_nonneg</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Foundations/PathCoupling.lean#L33-L33"><code>ham_self</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Foundations/PathCoupling.lean#L67-L69"><code>ham_triangle</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Foundations/PathCoupling.lean#L75-L77"><code>ham_le_card</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Edge/PottsCI.lean#L60-L72"><code>Appendix.Edge.root_children_ci_positive</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.Edge.edge_potts_zero_free</code>
@@ -1597,17 +1614,15 @@ except possibly at \(z=0\); its order of vanishing there is
               Polynomial.rootMultiplicity 0 (CI2ZF.Potts.fullPolynomial τ G.lineGraph) =
                 τ.pinnedConflictCount G.lineGraph</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 5 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Edge/PottsCI.lean#L79-L83"><code>Appendix.Edge.lineGraph_colours_slack</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Theorems/GraphClassPottsTransfer.lean#L40-L55"><code>Potts.graph_class_potts_transfer_of_bounded</code></a> <span class="ud">With the paper&#x27;s class-wide degree premise, no degree premise is left on the individual conclusions.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Edge/ZeroFree.lean#L31-L38"><code>Appendix.Edge.edgeGraphClass_degree</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Edge/ZeroFree.lean#L56-L62"><code>Appendix.Edge.edgeGraphClass_transferInputs</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Edge/ZeroFree.lean#L40-L44"><code>Appendix.Edge.lineGraph_mem_edgeGraphClass</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Appendix.Edge.edgeGraphClass"><code>Appendix.Edge.edgeGraphClass</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>Lean uses finite slot approximations and a limit instead of the countable exact-slot representation (companion Lemma 8.3); x = 0 follows by continuity.</li><li>The transfer runs on line graphs with degree bound 2Δ − 2.</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="edge-potts:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="edge-potts:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="edge-potts:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="edge-potts:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="edge-potts" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">\(q\ge3\Deg\)</td><td class="l"><span class="from">Appendix.Edge.root_children_ci</span><code>(hΔ : 1 ≤ Δ) (hdegree : ∀ v, G.degree v ≤ Δ) (hq : 3 * Δ ≤ Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p">every edge-colour pinning \(\tau\), every \(x\in[0,1]\), every free edge \(i\in E\setminus\operatorname{dom}\tau\), and all \(a,b\in\colours\)</td><td class="l"><span class="from">Appendix.Edge.root_children_ci</span><code>(τ : PartialColouring G.edgeSet C) (r : τ.FreeVertex) (a b : C)</code><code>(x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1)</code></td><td class="n">The free edge i is r.</td></tr><tr><td class="p">\(\WHam\!\left( (\edgegibbs{G}{x})^{\tau,i=a}, (\edgegibbs{G}{x})^{\tau,i=b} \right) \le\Deg-1.\)</td><td class="l"><span class="from">Appendix.Edge.root_children_ci</span><code>W ham ((rootChildData τ G.lineGraph r a).gibbs x x.property</code><code>≤ (Δ : ℝ) - 1</code></td><td class="n">The edge-colour laws are the vertex-colour laws of the line graph G.lineGraph.</td></tr><tr><td class="p"><span class="from">Corollary 8.2</span>\(\Deg\ge2\) and \(q\ge3\Deg\)</td><td class="l"><span class="from">Appendix.Edge.edge_potts_zero_free</span><code>(hΔ : 2 ≤ Δ) (hq : 3 * Δ ≤ Fintype.card C)</code></td><td class="n"></td></tr><tr><td class="p"><span class="from">Corollary 8.2</span>\(\nZpin{L(G)}{\tau}(z)\ne0 \qquad\text{whenever }\dist(z,[0,1])&lt;\eps.\)</td><td class="l"><span class="from">Appendix.Edge.edge_potts_zero_free</span><code>(∀ z ∈ thickening eps pottsInterval, normalizedPartition τ G.lineGraph z ≠ 0)</code></td><td class="n"></td></tr><tr><td class="p"><span class="from">Corollary 8.2</span>its order of vanishing there is \(m_{L(G)}(\tau)\)</td><td class="l"><span class="from">Appendix.Edge.edge_potts_zero_free</span><code>(fullPolynomial τ G.lineGraph).rootMultiplicity 0 = τ.pinnedConflictCount G.lineGraph</code></td><td class="n"></td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>Lean uses finite slot approximations and a limit instead of the countable exact-slot representation (companion Lemma 8.3); x = 0 follows by continuity.</li><li>The transfer runs on line graphs with degree bound 2Δ − 2.</li></ul></section>
 </article>
 <article class="card result" id="girth-five" data-result="girth-five" data-group="appendix" data-search="appendix a girth-five regime ci2zf.appendix.girth.girth_five_coupling ci2zf.appendix.girth.girth_five_residual_original_zero_free ci2zf.appendix.girth.girth_five_closed_poincare" data-title="Girth-five regime">
   <header class="card-head">
     <div><div class="ref">Appendix A</div><h3>Girth-five regime</h3></div>
-    <div class="card-progress"><span class="k">0</span> of 4 checked</div>
   </header>
   <div class="cols">
     <section class="side paper"><h4>Paper</h4><p class="table-row"><span class="label">Table A.1</span> 0 &lt; δ ≤ 1, Δ ≥ Δ₅(δ), q ≥ (1 + δ)Δ, girth(G^τ) ≥ 5; zero-free near [0, 1]</p><details class="stmt" open><summary><span class="sref">Theorem 9.4</span> · Companion</summary><div class="tex"><div class="para">For every fixed \(0&lt;\delta\le1\) there is a threshold
@@ -1676,6 +1691,7 @@ pinning whose free residual graph has girth at least five, and for every
                       ((CI2ZF.Potts.optionChildData I b).gibbs x hx hb) ≤
                     cost</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-clmm-513"><span class="dot" aria-hidden="true"></span>Assumes CLMM Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 7 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Covariance/Response/Constants.lean#L12-L14"><code>Appendix.Girth.girthFiveCIThreshold_gap</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Transfer/SphereCoupling.lean#L139-L153"><code>Appendix.Girth.closed_coupling_from_weighted_source</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/Five/Transfer.lean#L16-L21"><code>Appendix.Girth.girthFiveCIThreshold_degree_three</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Covariance/Threshold.lean#L32-L34"><code>Appendix.Girth.covarianceChi_gt_one</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Covariance/Response/Constants.lean#L58-L68"><code>Appendix.Girth.CovarianceScale.responseM_pos</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Covariance/Response/Constants.lean#L16-L18"><code>Appendix.Girth.girthFiveCIThreshold_covariance</code></a></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Five/Response.lean#L46-L60"><code>Appendix.Girth.actual_uniform_weighted_source</code></a> <span class="ud">Weighted additive response, uniformly over all graph sizes, all residual boundary counts, all admissible weights and the full positive physical interval.</span></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.Girth.girth_five_residual_original_zero_free</code>
@@ -1693,6 +1709,7 @@ pinning whose free residual graph has girth at least five, and for every
   (hq : (1 + δ) * ↑Δ ≤ ↑(Fintype.card C)) :
   ∃ eps &gt; 0, CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree C Δ 5 eps</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span> <a class="badge hyp" href="#lit-clmm-513"><span class="dot" aria-hidden="true"></span>Assumes CLMM Lemma 5.13</a></div>
+  <details class="uses"><summary>The proof applies 2 library lemmas directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/Five/ZeroFree.lean#L35-L50"><code>Appendix.Girth.girth_five_zero_free</code></a> <span class="ud">A single positive complex radius is uniform over all residual graphs, graph sizes, pinnings, and base activities in <code>[0,1]</code>.</span></li><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Potts/Regions/Girth/Transfer/ResidualOriginal.lean#L29-L44"><code>Appendix.Girth.uniformResidualGirthPottsZeroFree_of_residual</code></a></li></ul></details>
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Appendix.Girth.girth_five_closed_poincare</code>
@@ -1704,7 +1721,11 @@ pinning whose free residual graph has girth at least five, and for every
     (hδ : 0 &lt; δ) (hδ1 : δ ≤ 1) (hΔ : girthFiveThreshold δ ≤ Δ)
     (hdegree : I.DegreeBound Δ) (hg : 5 ≤ I.graph.egirth)
     (hq : (1+δ) * Δ ≤ (Fintype.card C : ℝ)) (f : (V → C) → ℝ) :
-    let hq1 : Δ + 1 ≤ Fintype.card C</code></pre>
+    let hq1 : Δ + 1 ≤ Fintype.card C := by have hh := girthFive_colour_slack hδ hδ1 hΔ hq; omega
+    let hZ := partition_pos_of_succ_le I hx hdegree hq1
+    let hlocal := GraphHeatBath.sitePartition_pos I hx hx1 hdegree hq1
+    GraphProjections.spectralGap δ * variance (I.gibbs x hx hZ) f ≤
+      ∑ v, expectReal (I.gibbs x hx hZ) (fun σ =&gt; (f σ - GraphHeatBath.projection I x hx hlocal v f σ) ^ 2)</code></pre>
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Appendix.Girth.girth_five_closed_poincare.{u_1, u_2} {V : Type u_1} {C : Type u_2}
   [Fintype V] [Fintype C] [DecidableEq V] [DecidableEq C] [Nonempty C]
   (I : PottsCI.PinningData V C) {x : ℝ} (hx : 0 ≤ x) (hx1 : x ≤ 1) {δ : ℝ} {Δ : ℕ} (hδ : 0 &lt; δ)
@@ -1719,17 +1740,16 @@ pinning whose free residual graph has girth at least five, and for every
       CI2ZF.expectReal (I.gibbs x hx hZ) fun σ =&gt;
         (f σ - CI2ZF.Appendix.Girth.GraphHeatBath.projection I x hx hlocal v f σ) ^ 2</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  <details class="uses"><summary>The proof applies 1 library lemma directly</summary><ul><li><a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/437cfa7/CI2ZF/Coupling/Girth/Five/ClosedPoincare.lean#L90-L122"><code>Appendix.Girth.girth_five_poincare_value</code></a></li></ul></details>
 </div><p class="defs">Definitions: <a href="#def-CI2ZF.Appendix.Girth.girthFiveCIThreshold"><code>Appendix.Girth.girthFiveCIThreshold</code></a>, <a href="#def-CI2ZF.Appendix.Girth.girthFiveThreshold"><code>Appendix.Girth.girthFiveThreshold</code></a></p></section>
   </div>
-  <section class="notes"><h4>What to look at</h4><ul><li>Δ₅(δ) is explicit: the maximum of ⌈4096(1 + δ)e^{2/δ}/δ⁴⌉ and ⌈covarianceDegreeThreshold δ⌉. The companion&#x27;s Δ₅ is existential with Δ₅ ≥ Δ₀.</li><li>Theorem 9.7 is stated in Poincaré form; x = 0 follows by continuity.</li><li>The coupling theorem is stated on residual instances, which covers every (G, τ, r).</li></ul></section>
-  <section class="checks"><h4>Your checks</h4><label class="check"><input type="checkbox" data-key="girth-five:0"> <span>Hypotheses and parameter ranges match the paper</span></label><label class="check"><input type="checkbox" data-key="girth-five:1"> <span>Quantifier order: constants are chosen before the graph, pinning and activity</span></label><label class="check"><input type="checkbox" data-key="girth-five:2"> <span>The Lean objects are the paper&#x27;s objects (see the definitions below)</span></label><label class="check"><input type="checkbox" data-key="girth-five:3"> <span>Only the listed literature results are assumed</span></label>
-    <textarea data-note="girth-five" rows="2" placeholder="Notes on this result (saved in this browser)"></textarea>
-  </section>
+  <section class="corr"><h4>How the statements correspond</h4><table><thead><tr><th scope="col">Paper</th><th scope="col">Lean</th><th scope="col">Remark</th></tr></thead><tbody><tr><td class="p">For every fixed \(0&lt;\delta\le1\) there is a threshold \(\Deg_5(\delta)\ge\Deg_0(\delta)\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_coupling</span><code>{δ : ℝ} {Δ : ℕ} (hδ : 0 &lt; δ) (hδ1 : δ ≤ 1) (hThreshold : girthFiveCIThreshold δ ≤ Δ)</code></td><td class="n">Lean&#x27;s Δ₅(δ) is the explicit girthFiveCIThreshold δ, which is at least Δ₀(δ).</td></tr><tr><td class="p">\(q\ge(1+\delta)\Deg\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_coupling</span><code>(hq : (1 + δ) * Δ ≤ (Fintype.card C : ℝ))</code></td><td class="n"></td></tr><tr><td class="p">every graph \(G\in\Gdeg\) and pinning \(\tau\) with \(\operatorname{girth}(G^\tau)\ge5\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_coupling</span><code>∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C), I.DegreeBound Δ → 5 ≤ I.graph.egirth →</code></td><td class="n">The pinned graph with its root is a residual instance on Option O.</td></tr><tr><td class="p">for every \(r\in V^\tau\), all \(c,d\in\colours\), and every \(x\in[0,1]\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_coupling</span><code>∀ (x : ℝ) (hx : 0 ≤ x), x ≤ 1 →</code><code>∀ (a b : C)</code></td><td class="n"></td></tr><tr><td class="p">\(\WHam\!\left( \mupin{G}{\tau^{r=c}}{x}, \mupin{G}{\tau^{r=d}}{x} \right)\le C_5(q,\Deg,\delta)&lt;\infty\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_coupling</span><code>∃ cost : ℝ, 0 ≤ cost ∧</code><code>W ham ((optionChildData I a).gibbs x hx ha) ((optionChildData I b).gibbs x hx hb) ≤ cost</code></td><td class="n">One constant for all graphs, pinnings and activities.</td></tr><tr><td class="p"><span class="absent">Not in the statement</span></td><td class="l"><span class="from">Appendix.Girth.girth_five_coupling</span><code>(external : SphereCouplingInput.{u,v} C)</code></td><td class="n">Not in the statement: CLMM Lemma 5.13, the only literature result used.</td></tr><tr><td class="p"><span class="from">Theorem 4.8</span>There exists \(\eps_5=\eps_5(q,\Deg,\delta)&gt;0\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_residual_original_zero_free</span><code>∃ eps &gt; 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ 5 eps</code></td><td class="n">Girth at least five of the free graph; no short-cycle counts are assumed.</td></tr><tr><td class="p"><span class="from">Theorem 9.7</span>\(\mathcal L^2\succeq\gamma_\delta \mathcal L, \qquad \gamma_\delta=\frac{\delta}{4(2+\delta)}.\)</td><td class="l"><span class="from">Appendix.Girth.girth_five_closed_poincare</span><code>GraphProjections.spectralGap δ * variance (I.gibbs x hx hZ) f ≤ ∑ v, expectReal (I.gibbs x hx hZ) (fun σ =&gt; (f σ - GraphHeatBath.projection I x hx hlocal v f σ) ^ 2)</code></td><td class="n">The equivalent Poincaré form: spectralGap δ is γ_δ, and the right side is the Dirichlet form of the rate-one Glauber dynamics.</td></tr></tbody></table></section>
+  <section class="notes"><h4>Remarks</h4><ul><li>Δ₅(δ) is explicit: the maximum of ⌈4096(1 + δ)e^{2/δ}/δ⁴⌉ and ⌈covarianceDegreeThreshold δ⌉. The companion&#x27;s Δ₅ is existential with Δ₅ ≥ Δ₀.</li><li>Theorem 9.7 is stated in Poincaré form; x = 0 follows by continuity.</li><li>The coupling theorem is stated on residual instances, which covers every (G, τ, r).</li></ul></section>
 </article>
 
 <h2 id="definitions">Definitions used in the statements</h2>
 <p class="lede">The Lean objects the statements are written in, next to the paper's notation.</p>
-<div class="card">
+<div class="card glossary">
 <div class="gl-row" id="def-CI2ZF.Potts.normalizedPolynomial">
   <div class="gl-meta"><code class="decl-name">Potts.normalizedPolynomial</code>
     <div class="notation">\(\widehat Z^{\tau}_{G}\)</div><p>The normalized pinned polynomial: one monomial per colouring of the free vertices, counting free–pinned and free–free monochromatic edges.</p>
@@ -1973,6 +1993,7 @@ pinning whose free residual graph has girth at least five, and for every
     C PinningData.hardParameter cost</code></pre>
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Potts.ExternalCriticalHardColouringTheorem.{u, v} (C : Type v) [Fintype C] (Δ : ℕ) : Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 <div class="decl">
   <div class="decl-head"><code class="decl-name">Potts.CriticalHardColouringInput</code>
@@ -1985,6 +2006,7 @@ pinning whose free residual graph has girth at least five, and for every
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Potts.CriticalHardColouringInput.{u, v} (C : Type v) [Fintype C] [Nonempty C] (Δ : ℕ)
   (hq : Δ + 1 ≤ Fintype.card C) : Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 </article>
 <article class="card lit" id="lit-clmm-lit">
@@ -2019,6 +2041,7 @@ pinning whose free residual graph has girth at least five, and for every
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Appendix.CLMM.Literature.{u, v} (C : Type v) [Fintype C] [DecidableEq C] [Nonempty C] :
   Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 </article>
 <article class="card lit" id="lit-clmm-513">
@@ -2045,6 +2068,7 @@ pinning whose free residual graph has girth at least five, and for every
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Appendix.Girth.SphereCouplingInput.{u, v} (C : Type v) [Fintype C] [DecidableEq C]
   [Nonempty C] : Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 </article>
 <article class="card lit" id="lit-clmm-87">
@@ -2069,6 +2093,7 @@ pinning whose free residual graph has girth at least five, and for every
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Appendix.Girth.CavityTree.CLMMInfluenceIdentity.{u_2} (C : Type u_2) [Fintype C]
   [DecidableEq C] [Nonempty C] : Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 </article>
 <article class="card lit" id="lit-bbr">
@@ -2101,6 +2126,7 @@ pinning whose free residual graph has girth at least five, and for every
   <details class="elab"><summary>Elaborated type</summary><pre class="lean"><code>CI2ZF.Appendix.BBR.Literature.{u_2} (C : Type u_2) [Fintype C] [DecidableEq C] [Nonempty C] :
   Prop</code></pre></details>
   <div class="badges"><span class="badge good" title="propext, Classical.choice, Quot.sound"><span aria-hidden="true">✓</span> Standard axioms only</span></div>
+  
 </div>
 </article>
 
@@ -2109,68 +2135,31 @@ pinning whose free residual graph has girth at least five, and for every
 <p>Last full verification: 2026-09-24. From a clone of <a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness">the repository</a>:</p>
 <pre><code>lake exe cache get
 LEAN_NUM_THREADS=2 bash scripts/check-all.sh</code></pre>
-<p>This builds the library with warnings treated as errors and audits the transitive axioms of every project declaration. <a href="verification.json">verification.json</a> records the source hashes and the result. To regenerate this page after changing the Lean sources or the papers, commit the Lean changes and run</p>
+<p>This builds the library with warnings treated as errors and audits the transitive axioms of every project declaration. <a href="verification.json">verification.json</a> records the source hashes and the result. To regenerate this page after changing the Lean sources or the papers, commit the Lean changes and run the command below; it stops if any quotation no longer matches its source.</p>
 <pre><code>python3 scripts/site/build.py --paper ../main.tex --companion ../companion</code></pre>
 </div>
 </main>
-<footer class="wrap">Generated 2026-09-24 from commit <a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/437cfa7">437cfa7</a> by <code>scripts/site/build.py</code>.</footer>
+<footer class="wrap">Generated 2026-09-24 from the Lean sources at commit <a href="https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/437cfa7">437cfa7</a> by <code>scripts/site/build.py</code>.</footer>
 <div id="tip" role="tooltip" hidden></div>
 
 <script>
 (function () {
-  var COMMIT = "437cfa7", CHECKS = ["Hypotheses and parameter ranges match the paper", "Quantifier order: constants are chosen before the graph, pinning and activity", "The Lean objects are the paper's objects (see the definitions below)", "Only the listed literature results are assumed"];
-  var store = window.localStorage, prefix = "ci2zf-review:" + COMMIT + ":";
   var root = document.documentElement, themeButton = document.getElementById("theme");
   function showTheme() { themeButton.textContent = "Theme: " + (root.dataset.theme || "auto"); }
   themeButton.addEventListener("click", function () {
     var next = { "": "light", light: "dark", dark: "" }[root.dataset.theme || ""];
-    if (next) { root.dataset.theme = next; store.setItem("ci2zf-theme", next); }
-    else { delete root.dataset.theme; store.removeItem("ci2zf-theme"); }
+    if (next) { root.dataset.theme = next; localStorage.setItem("ci2zf-theme", next); }
+    else { delete root.dataset.theme; localStorage.removeItem("ci2zf-theme"); }
     showTheme();
   });
   showTheme();
 
-  var boxes = Array.prototype.slice.call(document.querySelectorAll("input[data-key]"));
-  var notes = Array.prototype.slice.call(document.querySelectorAll("textarea[data-note]"));
-  boxes.forEach(function (b) { b.checked = store.getItem(prefix + b.dataset.key) === "1"; });
-  notes.forEach(function (t) { t.value = store.getItem(prefix + "note:" + t.dataset.note) || ""; });
-  function update() {
-    var done = 0;
-    document.querySelectorAll("article.result").forEach(function (card) {
-      var own = card.querySelectorAll("input[data-key]"), k = 0;
-      own.forEach(function (b) { if (b.checked) k++; });
-      card.querySelector(".card-progress .k").textContent = k;
-      card.classList.toggle("done", k === own.length);
-      done += k;
-    });
-    var total = boxes.length;
-    document.querySelector("#meter > span").style.width = (100 * done / total) + "%";
-    document.getElementById("meter").setAttribute("aria-valuenow", done);
-    document.getElementById("progress-text").textContent = done + " of " + total + " checks";
-    applyFilters();
-  }
-  boxes.forEach(function (b) {
-    b.addEventListener("change", function () {
-      if (b.checked) store.setItem(prefix + b.dataset.key, "1"); else store.removeItem(prefix + b.dataset.key);
-      update();
-    });
-  });
-  notes.forEach(function (t) {
-    t.addEventListener("input", function () { store.setItem(prefix + "note:" + t.dataset.note, t.value); });
-  });
-
-  var group = "all", query = document.getElementById("q"), openOnly = document.getElementById("open-only");
-  function visible(el) {
-    var card = document.getElementById(el.dataset.result);
-    var matchGroup = group === "all" || el.dataset.group === group;
-    var q = query.value.trim().toLowerCase();
-    var matchQuery = !q || el.dataset.search.indexOf(q) >= 0;
-    var matchOpen = !openOnly.checked || !card.classList.contains("done");
-    return matchGroup && matchQuery && matchOpen;
-  }
+  var group = "all", query = document.getElementById("q");
   function applyFilters() {
+    var q = query.value.trim().toLowerCase();
     document.querySelectorAll("[data-result]").forEach(function (el) {
-      el.classList.toggle("hidden", !visible(el));
+      var show = (group === "all" || el.dataset.group === group) && (!q || el.dataset.search.indexOf(q) >= 0);
+      el.classList.toggle("hidden", !show);
     });
   }
   document.querySelectorAll("button[data-filter]").forEach(function (b) {
@@ -2183,31 +2172,6 @@ LEAN_NUM_THREADS=2 bash scripts/check-all.sh</code></pre>
     });
   });
   query.addEventListener("input", applyFilters);
-  openOnly.addEventListener("change", applyFilters);
-
-  document.getElementById("reset").addEventListener("click", function () {
-    if (!confirm("Clear all ticks and notes for this commit?")) return;
-    boxes.forEach(function (b) { b.checked = false; store.removeItem(prefix + b.dataset.key); });
-    notes.forEach(function (t) { t.value = ""; store.removeItem(prefix + "note:" + t.dataset.note); });
-    update();
-  });
-  document.getElementById("export").addEventListener("click", function () {
-    var lines = ["# Lean review, commit " + COMMIT, ""];
-    document.querySelectorAll("article.result").forEach(function (card) {
-      lines.push("## " + card.querySelector(".ref").textContent + ": " + card.dataset.title);
-      card.querySelectorAll("input[data-key]").forEach(function (b, i) {
-        lines.push("- [" + (b.checked ? "x" : " ") + "] " + CHECKS[i]);
-      });
-      var note = card.querySelector("textarea").value.trim();
-      if (note) lines.push("", "Notes: " + note);
-      lines.push("");
-    });
-    var blob = new Blob([lines.join("\n")], { type: "text/markdown" });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "ci2zf-review-" + COMMIT + ".md";
-    document.body.appendChild(a); a.click(); a.remove();
-  });
 
   var tip = document.getElementById("tip");
   function show(cell) {
@@ -2229,7 +2193,6 @@ LEAN_NUM_THREADS=2 bash scripts/check-all.sh</code></pre>
   });
   window.addEventListener("scroll", hide, { passive: true });
 
-  update();
   function renderMath() {
     if (!window.renderMathInElement) return;
     renderMathInElement(document.body, {

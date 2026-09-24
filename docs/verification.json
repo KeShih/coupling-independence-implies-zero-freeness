@@ -45,12 +45,12 @@
   "documentation": {
     "language": "English",
     "markdown_files": 10,
-    "readme_lines": 143,
+    "readme_lines": 144,
     "local_markdown_links_checked": 90,
     "broken_local_links": [],
     "link_check_scope": "Local target file existence; external URLs not fetched by this script.",
     "document_sha256": {
-      "README.md": "8499994a17a22d57cf6ae0da3c4f5a86163bd71fb37a3a949ead533079668e12",
+      "README.md": "70d33327fc9d9b48fd9af883c72673b1d31f13e8dca5d5b2b67924e1378945c5",
       "docs/README.md": "a76c7e24323da1faa43ae4e9f2f84909e81cb97a0264585667caaaff96db5d6d",
       "docs/appendix/README.md": "f9967290929793777805faf102bca8c43ce125e1383a9e3cb240cea5e734f1ee",
       "docs/appendix/STATUS.md": "a55a3cc4e1921b951abfbb878aed95bdbddc6233de9e4ac08c3d9394d4d52f79",

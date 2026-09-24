@@ -13,11 +13,12 @@ Results from the literature enter as explicit theorem hypotheses, never as
 axioms: the whole library depends only on Lean's standard axioms `propext`,
 `Classical.choice` and `Quot.sound`.
 
-To check the statements yourself, the
-[checking page](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
-puts each paper statement next to its Lean statement, with pinned source
-links, axioms and literature hypotheses. `scripts/site/build.py` generates
-it into `docs/index.html`.
+The [side-by-side page](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+sets each paper statement beside the Lean theorem that proves it and matches
+the two phrase by phrase. It also shows each theorem's axioms, literature
+hypotheses and the library lemmas its proof applies, with source links
+pinned to the commit. `scripts/site/build.py` generates it into
+`docs/index.html` and checks every quotation against the sources.
 
 ## The main theorem
 
