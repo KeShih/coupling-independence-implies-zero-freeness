@@ -60,8 +60,9 @@ CITED = [
                 "its algorithmic applications, arXiv:2304.01954v3, Equation (10), from "
                 "Lemmas 5.19 and 5.20",
          url="https://arxiv.org/abs/2304.01954v3",
-         meaning="Tree influence decay and relative spatial mixing give influence decay on "
-                 "the spheres of a fixed base graph, under all further pinnings.",
+         meaning="The formalized interface gives the fixed-base-graph sphere estimate in the "
+                 "relative-SSM regime beyond a chosen cutting depth K₀, under all further "
+                 "pinnings.",
          route="As in CLMM, through Lemmas 5.19 and 5.20. Lemma 5.19 becomes a finite-sum "
                "decomposition over sphere configurations, and Lemma 5.20 bounds the total "
                "variation by 2ε. The ball around the root is read as a cavity tree; the girth "
@@ -71,13 +72,15 @@ CITED = [
          proof=["CI2ZF.Appendix.CLMM.Lemma513.sphere_to_coupling"],
          source="Chen, Liu, Mani, Moitra, arXiv:2304.01954v3, Condition 5.12 and Lemma 5.13",
          url="https://arxiv.org/abs/2304.01954v3",
-         meaning="Sphere influence decay below 1/(8R log Δ) gives the Hamming coupling bound "
-                 "2Δ^R for the two root-child laws.",
+         meaning="In the positive-activity branch (x > 0, Δ ≥ 3, R ≥ 2), sphere influence "
+                 "decay below 1/(8R log Δ) gives the Hamming coupling bound 2Δ^R for the "
+                 "two root-child laws.",
          route="As in CLMM, by strong induction on the number of free vertices. If no sphere "
                "vertex is free, the two laws agree off the ball. Otherwise the proof conditions "
                "on the free sphere vertex of least total variation through a maximal coupling; "
                "the conditioned laws are smaller instances. 1 + log ℓ replaces the harmonic "
-               "number H_ℓ."),
+               "number H_ℓ. The separate zero-temperature colouring endpoint is outside this "
+               "formalized proposition."),
     dict(id="clmm-87", short="CLMM Lemma 8.7",
          statement=["CI2ZF.Appendix.Girth.CavityTree.CLMMInfluenceIdentity"],
          proof=["CI2ZF.Appendix.Girth.CavityTree.clmmInfluenceIdentity"],
@@ -95,9 +98,11 @@ CITED = [
          url="https://doi.org/10.1214/25-EJP1327",
          meaning="The segment-weight bound for cavity messages, used only at its printed "
                  "hypothesis Δ ≥ q + 3. BBR.Literature bundles it with Theorem 2.5.",
-         route="Follows BBR Section 4, but two uses of the concavity of log, a chord bound and "
-               "Jensen's inequality, replace their Lemma 4.1 and Lemma 4.2(i); Lemma 4.3 is "
-               "proved from a derivative."),
+         route="Follows BBR Section 4 under the printed hypotheses, but two uses of the "
+               "concavity of log, a chord bound and Jensen's inequality, replace their Lemma "
+               "4.1 and Lemma 4.2(i); Lemma 4.3 is proved from a derivative. The application "
+               "handles separate degree-gap-two cases arithmetically rather than extending "
+               "the published proposition."),
     dict(id="bbr-25", short="BBR Thm 2.5",
          statement=[],
          proof=["CI2ZF.Appendix.BBR.theorem_2_5_holds"],
