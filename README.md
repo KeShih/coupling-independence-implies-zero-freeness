@@ -13,6 +13,12 @@ Results from the literature enter as explicit theorem hypotheses, never as
 axioms: the whole library depends only on Lean's standard axioms `propext`,
 `Classical.choice` and `Quot.sound`.
 
+To check the statements yourself, the
+[checking page](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+puts each paper statement next to its Lean statement, with pinned source
+links, axioms and literature hypotheses. `scripts/site/build.py` generates
+it into `docs/index.html`.
+
 ## The main theorem
 
 For integers `Δ ≥ 2` and `q ≥ 11Δ/6`, one radius works for every graph of
