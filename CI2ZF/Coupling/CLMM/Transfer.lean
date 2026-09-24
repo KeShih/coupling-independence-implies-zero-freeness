@@ -1,5 +1,6 @@
 import CI2ZF.Coupling.Girth.Tree.Levels
 import CI2ZF.Coupling.CLMM.Ambient
+import CI2ZF.Coupling.CLMM.SphereCoupling
 import CI2ZF.Potts.Model.OptionPinning
 import CI2ZF.Potts.Model.PottsModel
 import Mathlib.Combinatorics.SimpleGraph.Girth
@@ -9,12 +10,14 @@ import Mathlib.Analysis.SpecificLimits.Normed
 /-!
 # The eventual-depth form of the CLMM large-girth transfer
 
-The two literature inputs are the precise sphere estimate in CLMM2023,
-Equation (10), proved from Lemmas 5.19 and 5.20, and Lemma 5.13. They are
-stated for the actual finite Potts laws, on spheres of the fixed base
-graph under all further pinnings. Neither field assumes tree decay,
-an eventual-depth transfer theorem, or the resulting uniform coupling
-bound. The choice of both radii, including the extra burn-in, is proved.
+`Literature` isolates the sphere estimate of CLMM2023, Equation (10),
+which CLMM derive from Lemmas 5.19 and 5.20. It is stated for the actual
+finite Potts laws, on spheres of the fixed base graph under all further
+pinnings, and assumes no tree decay, eventual-depth transfer theorem, or
+uniform coupling bound. It is proved as `literature` in
+`CI2ZF.Coupling.CLMM.SphereEstimate`, and CLMM Lemma 5.13 is proved in
+`CI2ZF.Coupling.CLMM.SphereCoupling`. The choice of both radii,
+including the extra burn-in, is proved here.
 
 Source: https://arxiv.org/html/2304.01954v3, Sections 5.2--5.4 and
 Remark 5.11. Positive activities make every colour globally feasible.
@@ -54,10 +57,10 @@ def TreeRelative (Δ : ℕ) (x A ρ : ℝ) (K₀ : ℕ) : Prop :=
       |(CavityTree.node d b t).probability x c /
         (CavityTree.node d b t').probability x c - 1| ≤ A * ρ ^ (k + 2)
 
-/-- Precisely isolated literature inputs. The first field is CLMM (10)
-at the explicitly chosen cutting depth; the second is Lemma 5.13.
-All members here have positive unary Potts weights and hence satisfy (7).
-The same-domain clause in `TreeRelative` is part of Definition 5.7. -/
+/-- CLMM (10) at the explicitly chosen cutting depth, proved as `literature`
+in `CI2ZF.Coupling.CLMM.SphereEstimate`. All members here have positive
+unary Potts weights and hence satisfy (7). The same-domain clause in
+`TreeRelative` is part of Definition 5.7. -/
 structure Literature (C : Type v) [Fintype C] [DecidableEq C] [Nonempty C] : Prop where
   sphere_estimate : ∀ (Δ : ℕ) (x : ℝ) (hx : 0 < x) (_hx1 : x ≤ 1)
     (A B ρ : ℝ) (_hΔ : 3 ≤ Δ) (_hA : 0 < A) (_hB : 0 < B)
@@ -67,15 +70,6 @@ structure Literature (C : Type v) [Fintype C] [DecidableEq C] [Nonempty C] : Pro
       Real.log B / (1 - ρ) ≤ K →
       FixedAmbientSphereDecay.{u,v} C Δ (2 * K + 2) R x
         (2 * B * ρ ^ K * (Δ : ℝ) ^ R + A * ρ ^ R)
-  sphere_to_coupling : ∀ (Δ g R : ℕ) (x ε : ℝ), 3 ≤ Δ → 2 ≤ R →
-    ∀ (hx : 0 < x), x ≤ 1 → 0 < ε → ε ≤ 1 / (8 * R * Real.log Δ) →
-    FixedAmbientSphereDecay.{u,v} C Δ g R x ε →
-    ∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C),
-      I.DegreeBound Δ → (g : ℕ∞) ≤ I.graph.egirth → ∀ (a b : C)
-      (ha : 0 < (optionChildData I a).partition x)
-      (hb : 0 < (optionChildData I b).partition x),
-      W ham ((optionChildData I a).gibbs x hx.le ha)
-        ((optionChildData I b).gibbs x hx.le hb) ≤ 2 * (Δ : ℝ) ^ R
 
 /-- Exponential decay beats all fixed influence-radius lower bounds. -/
 theorem choose_influence_radius {A ρ Δ : ℝ} (hρ : 0 ≤ ρ) (hρ1 : ρ < 1)
@@ -118,7 +112,7 @@ theorem choose_cutting_depth {B ρ Δ : ℝ} (hρ : 0 ≤ ρ) (hρ1 : ρ < 1)
 
 /-- The paper's eventual-depth transfer, uniform over any activity set.
 `2 Δ^R` is the actual transport bound supplied by Lemma 5.13. -/
-theorem eventual_transfer (external : Literature.{u,v} C) (Δ : ℕ) (hΔ : 3 ≤ Δ)
+theorem eventual_transfer (clmm : Literature.{u,v} C) (Δ : ℕ) (hΔ : 3 ≤ Δ)
     (A B ρ : ℝ) (hA : 0 < A) (hB : 0 < B) (hρ : 0 < ρ) (hρ1 : ρ < 1)
     (K₀ : ℕ) (J : Set ℝ)
     (hJ : ∀ x ∈ J, 0 < x ∧ x ≤ 1)
@@ -142,9 +136,9 @@ theorem eventual_transfer (external : Literature.{u,v} C) (Δ : ℕ) (hΔ : 3 �
   refine ⟨2 * K + 2, 2 * (Δ : ℝ) ^ R, by omega, by positivity, ?_⟩
   intro x hx O _ I hI hg a b ha hb
   have hs : FixedAmbientSphereDecay.{u,v} C Δ (2 * K + 2) R x ε :=
-    external.sphere_estimate Δ x (hJ x hx).1 (hJ x hx).2 A B ρ hΔ hA hB hρ hρ1
+    clmm.sphere_estimate Δ x (hJ x hx).1 (hJ x hx).2 A B ρ hΔ hA hB hρ hρ1
     K₀ (htree x hx).1 (htree x hx).2 R K hR hRK hK₀ hlog
-  exact external.sphere_to_coupling Δ (2 * K + 2) R x ε hΔ hR
+  exact Lemma513.sphere_to_coupling C Δ (2 * K + 2) R x ε hΔ hR
     (hJ x hx).1 (hJ x hx).2 (by dsimp [ε]; positivity) heps hs I hI hg a b ha hb
 
 end

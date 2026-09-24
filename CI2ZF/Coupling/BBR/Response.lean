@@ -88,7 +88,7 @@ theorem terminal_response_bound {x : ℝ} (hx : 0 < x) (hx1 : x ≤ 1)
     _ ≤ H := hh ()
 
 /-- Exact branch-count induction for all perturbations on a sphere. -/
-theorem response_energy (external : Literature C) {Δ : ℕ}
+theorem response_energy (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -138,7 +138,7 @@ theorem response_energy (external : Literature C) {Δ : ℕ}
           _ = ∑ i, (((child i).degree : ℝ) * pointCoefficient x (child i)) * T := by
             exact Finset.sum_congr rfl fun _ _ => by ring
           _ ≤ ∑ _i : Fin d, contractionSquare Δ * T := Finset.sum_le_sum fun i _ =>
-            mul_le_mul_of_nonneg_right (point_certificate external hq hr hx (child i) (ht.2 i)) hT
+            mul_le_mul_of_nonneg_right (point_certificate bbr hq hr hx (child i) (ht.2 i)) hT
           _ = _ := by
             simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, T, pow_succ]
             ring

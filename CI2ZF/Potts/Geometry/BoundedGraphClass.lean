@@ -21,9 +21,10 @@ def GraphClass.boundedDegree (Δ : ℕ) : GraphClass.{u} where
   contains G := ∀ w, G.degree w ≤ Δ
   comap_mem G e hG b := (degree_comap_embedding_le G e b).trans (hG (e b))
 
-/-- External CFFGZZ Theorem 20, only in the exact hard root-CI form
-required at equality. This is a hypothesis on actual original graphs
-and arbitrary partial colourings, not on abstract boundary-count data. -/
+/-- CFFGZZ Theorem 20, only in the exact hard root-CI form required at
+equality, stated on actual original graphs and arbitrary partial
+colourings rather than on abstract boundary-count data. Proved for
+`Δ ≥ 6` and `q ≥ 11Δ/6` as `external_critical_hard_colouring_theorem`. -/
 def ExternalCriticalHardColouringTheorem (C : Type v) [Fintype C] (Δ : ℕ) : Prop :=
   ∃ cost : ℝ, GraphClassRootCouplingBound (GraphClass.boundedDegree.{u} Δ)
     C PinningData.hardParameter cost

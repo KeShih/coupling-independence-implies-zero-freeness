@@ -28,11 +28,11 @@ theorem girthFiveCIThreshold_colour_slack {δ : ℝ} {Δ q : ℕ}
   exact_mod_cast hh
 
 theorem large_girth_transfer_inputs_of_weighted_source
-    (external : SphereCouplingInput.{u,v} C) (Δ g : ℕ) (hΔ : 3 ≤ Δ)
+    (Δ g : ℕ) (hΔ : 3 ≤ Δ)
     (hq : Δ + 1 ≤ Fintype.card C) {χ M : ℝ} (hχ : 1 < χ) (hM : 0 ≤ M)
     (hsource : ∀ (x : ℝ), 0 < x → x ≤ 1 → UniformWeightedSource.{u,v} C Δ g x χ M) :
     (largeGirthFamily.{u,v} C g).TransferCouplingInputs Δ hq := by
-  obtain ⟨cost, _, hc⟩ := closed_coupling_from_weighted_source external Δ g hΔ hχ hM hsource
+  obtain ⟨cost, _, hc⟩ := closed_coupling_from_weighted_source Δ g hΔ hχ hM hsource
   have hroot : ∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 →
       (largeGirthFamily.{u,v} C g).RootCouplingBound Δ hq x cost := by
     intro x hx O _ I hg hd a b
@@ -43,14 +43,14 @@ theorem large_girth_transfer_inputs_of_weighted_source
     exact ⟨cost, fun x hx => hroot x hx.2⟩
 
 theorem large_girth_zero_free_of_weighted_source
-    (external : SphereCouplingInput.{u,v} C) (Δ g : ℕ) (hΔ : 3 ≤ Δ)
+    (Δ g : ℕ) (hΔ : 3 ≤ Δ)
     (hq : Δ + 1 ≤ Fintype.card C) {χ M : ℝ} (hχ : 1 < χ) (hM : 0 ≤ M)
     (hsource : ∀ (x : ℝ), 0 < x → x ≤ 1 → UniformWeightedSource.{u,v} C Δ g x χ M) :
     ∃ eps > 0, ∀ {V : Type u} [Fintype V] (I : PinningData V C),
       (g : ℕ∞) ≤ I.graph.egirth → I.DegreeBound Δ →
       ∀ z ∈ thickening eps pottsInterval, pinningProductPartition I z ≠ 0 :=
   (largeGirthFamily.{u,v} C g).uniform_transfer_zero_free Δ hq
-    (large_girth_transfer_inputs_of_weighted_source external Δ g hΔ hq hχ hM hsource)
+    (large_girth_transfer_inputs_of_weighted_source Δ g hΔ hq hχ hM hsource)
 
 /-- The standard original-graph Potts conclusion restricted to graphs
 of the stated girth; the full polynomial keeps exactly its forced zero. -/
@@ -82,11 +82,11 @@ theorem uniformGirthPottsZeroFree_of_residual {Δ g : ℕ} {eps : ℝ} (heps : 0
     fullPolynomial_rootMultiplicity_zero_of_normalized_ne_zero tau G (hnorm 0 hzero)⟩
 
 theorem large_girth_original_zero_free_of_weighted_source
-    (external : SphereCouplingInput.{u,v} C) (Δ g : ℕ) (hΔ : 3 ≤ Δ)
+    (Δ g : ℕ) (hΔ : 3 ≤ Δ)
     (hq : Δ + 1 ≤ Fintype.card C) {χ M : ℝ} (hχ : 1 < χ) (hM : 0 ≤ M)
     (hsource : ∀ (x : ℝ), 0 < x → x ≤ 1 → UniformWeightedSource.{u,v} C Δ g x χ M) :
     ∃ eps > 0, UniformGirthPottsZeroFree.{u,v} C Δ g eps := by
-  obtain ⟨eps, heps, hnz⟩ := large_girth_zero_free_of_weighted_source external Δ g hΔ hq hχ hM hsource
+  obtain ⟨eps, heps, hnz⟩ := large_girth_zero_free_of_weighted_source Δ g hΔ hq hχ hM hsource
   exact ⟨eps, heps, uniformGirthPottsZeroFree_of_residual heps hnz⟩
 
 end

@@ -44,7 +44,7 @@ theorem totalInfluenceConstant_eq {q Δ : ℕ} (hq : 0 < q)
 
 /-- Source rows are tested against their actual signs. Projection at the
 root does not increase squared energy. -/
-theorem absolute_influence_row_bound (external : Literature C)
+theorem absolute_influence_row_bound (bbr : Literature C)
     {Δ : ℕ} (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -68,7 +68,7 @@ theorem absolute_influence_row_bound (external : Literature C)
   have hh (v : t.Level (k + 1)) : squareMass (h v) ≤ (Fintype.card C : ℝ) := by
     simp only [squareMass, h, CavityTree.signWitness_sq, Finset.sum_const,
       Finset.card_univ, nsmul_eq_mul, mul_one, le_refl]
-  have hen := response_energy external hq hr hx k t ht h (Nat.cast_nonneg _) hh
+  have hen := response_energy bbr hq hr hx k t ht h (Nat.cast_nonneg _) hh
   have hd : (t.degree : ℝ) ≤ Δ := by
     cases t with
     | node d b ch => exact_mod_cast (show d ≤ Δ by have := ht.1; omega)
@@ -101,7 +101,7 @@ theorem absolute_influence_row_bound (external : Literature C)
 
 /-- Actual conditional marginals have total-influence decay uniformly on
 all of the BBR interval, including activity one. -/
-theorem total_influence_decay (external : Literature C)
+theorem total_influence_decay (bbr : Literature C)
     {Δ : ℕ} (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -128,8 +128,8 @@ theorem total_influence_decay (external : Literature C)
       (Finset.sum_le_sum (s := (Finset.univ : Finset C)) (fun c _ => hpoint v c))
       (by norm_num : (0 : ℝ) ≤ 1 / 2))
   simp only [Finset.sum_add_distrib, ← Finset.mul_sum] at hsum
-  have ha := absolute_influence_row_bound external hq hr hx tree ⟨hroot, ht⟩ k a
-  have hz := absolute_influence_row_bound external hq hr hx tree ⟨hroot, ht⟩ k z
+  have ha := absolute_influence_row_bound bbr hq hr hx tree ⟨hroot, ht⟩ k a
+  have hz := absolute_influence_row_bound bbr hq hr hx tree ⟨hroot, ht⟩ k z
   unfold CavityTree.levelTotalVariation
   rw [← Finset.mul_sum]
   dsimp only [tree] at hsum ⊢

@@ -1,13 +1,17 @@
 import CI2ZF.Coupling.BBR.TotalInfluence
 import CI2ZF.Coupling.BBR.Relative
+import CI2ZF.Coupling.BBR.Proposition26
+import CI2ZF.Coupling.CLMM.SphereEstimate
 import CI2ZF.Potts.Regions.Girth.Transfer.Family
 import CI2ZF.Potts.Theorems.PositiveGraphClassTransfer
 
 /-! The complete BBR interval: one girth and one coupling constant for
 all activities, followed by the proved positive-base zero-free transfer.
-The only literature parameters are the two precise BBR local results and
-the two general CLMM graph-transfer inputs. The square-root influence
-identity is proved from actual finite Gibbs conditional expectations. -/
+The cited BBR results (Proposition 2.6(i), Theorem 2.5) and CLMM results
+(Equation (10), Lemma 5.13) are all proved, and enter through
+`literature` and `CLMM.literature`; no theorem here has a literature
+hypothesis. The square-root influence identity is proved from actual
+finite Gibbs conditional expectations. -/
 namespace CI2ZF.Appendix.BBR
 open scoped BigOperators
 open PottsCI PottsCI.FinDist CI2ZF.Potts CI2ZF.Potts.Separator Set Metric
@@ -20,7 +24,6 @@ variable {C : Type v} [Fintype C] [Nonempty C]
 /-- Uniform coupling for the actual root-pinned Gibbs laws on the whole
 closed BBR interval. In particular, the constant is chosen before x. -/
 theorem high_girth_coupling
-    (external : Literature C) (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C) :
     ∃ (g : ℕ) (K : ℝ), 3 ≤ g ∧ 0 ≤ K ∧
@@ -55,10 +58,10 @@ theorem high_girth_coupling
         have hr0 : ρ ≠ 0 := hρ.1.ne'
         field_simp [hr0]
       rw [he]
-      exact total_influence_decay external hq hr hx d b t hd ht k a z
+      exact total_influence_decay (literature C) hq hr hx d b t hd ht k a z
     · intro k _ d b t t' hdom hag hd ht ht' c
-      exact root_relative_ssm external hq hr hx k d b t t' hd ht ht' hdom hag c
-  obtain ⟨g, K, hg, hK, hc⟩ := CLMM.eventual_transfer transfer Δ hΔ A B ρ hA hB hρ.1 hρ.2
+      exact root_relative_ssm (literature C) hq hr hx k d b t t' hd ht ht' hdom hag c
+  obtain ⟨g, K, hg, hK, hc⟩ := CLMM.eventual_transfer (CLMM.literature C) Δ hΔ A B ρ hA hB hρ.1 hρ.2
     2 (Icc x₀ 1) (fun _ hx => ⟨hx₀.1.trans_le hx.1, hx.2⟩) htree
   refine ⟨g, K, hg, hK, ?_⟩
   intro x hx hxI O _ I hI hd a b
@@ -67,14 +70,13 @@ theorem high_girth_coupling
 /-- The BBR zero-free neighbourhood for every finite residual graph and
 arbitrary nonnegative boundary counts obeying the degree budget. -/
 theorem high_girth_zero_free
-    (external : Literature C) (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ ε > 0, ∀ {V : Type u} [Fintype V] (I : PinningData V C),
       (g : ℕ∞) ≤ I.graph.egirth → I.DegreeBound Δ →
       ∀ z ∈ thickening ε (Complex.ofReal '' Icc (start (Fintype.card C) Δ) 1),
         pinningProductPartition I z ≠ 0 := by
-  obtain ⟨g, K, hg, _, hci⟩ := high_girth_coupling external transfer Δ hq hr
+  obtain ⟨g, K, hg, _, hci⟩ := high_girth_coupling Δ hq hr
   obtain ⟨ε, hε, hn⟩ := (largeGirthFamily.{u,v} C g).positive_interval_uniform_transfer_of_positive_ci
     Δ (start_mem hq hr).1 K hci
   refine ⟨g, hg, ε, hε, ?_⟩
@@ -85,7 +87,6 @@ theorem high_girth_zero_free
 /-- Original graph and pinning semantics, plus the actual one-root
 response logarithms from the positive-base induction. -/
 theorem high_girth_original_zero_free_and_responses
-    (external : Literature C) (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ ε > 0, ∃ α > 0, ∀ {V : Type u} [Fintype V] (G : SimpleGraph V),
@@ -97,7 +98,7 @@ theorem high_girth_original_zero_free_and_responses
       ∀ (r : tau.FreeVertex) (a b : C) (x : ℝ), x ∈ Icc (start (Fintype.card C) Δ) 1 →
         HasSmallResponseLog (fun z => normalizedPartition (pinVertex tau r a) G z)
           (fun z => normalizedPartition (pinVertex tau r b) G z) (x : ℂ) ε α := by
-  obtain ⟨g, K, hg, _, hci⟩ := high_girth_coupling external transfer Δ hq hr
+  obtain ⟨g, K, hg, _, hci⟩ := high_girth_coupling Δ hq hr
   let J : Set ℂ := Complex.ofReal '' Icc (start (Fintype.card C) Δ) 1
   have hJ : IsCompact J := isCompact_Icc.image Complex.continuous_ofReal
   have hreal : J ⊆ Complex.ofReal '' Ioi 0 := by

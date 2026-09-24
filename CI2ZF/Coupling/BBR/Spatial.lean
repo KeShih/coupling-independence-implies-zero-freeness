@@ -47,7 +47,7 @@ theorem messageDistance_le_card {x : ℝ} (hx : 0 < x) (hx1 : x ≤ 1) (t u : Gi
 @[simp] theorem messageDistance_one (t u : Girth.CavityTree C) : messageDistance 1 t u = 0 := by
   simp [messageDistance, squareMass, Girth.CavityTree.message_one]
 
-theorem finite_difference_step (external : Literature C) {Δ : ℕ}
+theorem finite_difference_step (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1) (hx1 : x < 1)
@@ -61,12 +61,12 @@ theorem finite_difference_step (external : Literature C) {Δ : ℕ}
   have hdq := degree_gt_colours (Nat.cast_pos.mpr Fintype.card_pos) hr
   have hdqn : Fintype.card C < Δ := by exact_mod_cast hdq
   have hΔ : 3 ≤ Δ := by omega
-  have hlocal := external.theorem_2_5 Δ hΔ (by omega) x hx0 hx1 d b t u hroot ht hu hdom
+  have hlocal := bbr.theorem_2_5 Δ hΔ (by omega) x hx0 hx1 d b t u hroot ht hu hdom
   let w : Fin d → ℝ := fun i => (1 - x) / Real.exp 1 * segmentWeightSquare x ((t i).message x) ((u i).message x)
   have hw (i : Fin d) : 0 ≤ w i := mul_nonneg (div_nonneg (sub_nonneg.mpr hx.2) (Real.exp_pos _).le)
     (cavity_segment_nonneg hx0 hx.2 (t i) (u i) (ht i) (hu i))
   have hcert (i : Fin d) : ((t i).degree : ℝ) * w i ≤ contractionSquare Δ := by
-    simpa only [w, mul_assoc] using contraction_certificate external hq hr hx (t i) (u i) (ht i) (hu i) (hdom i) (hb i)
+    simpa only [w, mul_assoc] using contraction_certificate bbr hq hr hx (t i) (u i) (ht i) (hu i) (hdom i) (hb i)
   calc
     _ ≤ ∑ i, w i * messageDistance x (t i) (u i) := hlocal
     _ ≤ ∑ i, w i * (((t i).degree : ℝ) * T) :=
@@ -75,7 +75,7 @@ theorem finite_difference_step (external : Literature C) {Δ : ℕ}
     _ ≤ ∑ _i : Fin d, contractionSquare Δ * T := Finset.sum_le_sum fun i _ => mul_le_mul_of_nonneg_right (hcert i) hT
     _ = _ := by simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
 
-theorem cavity_spatial_energy (external : Literature C) {Δ : ℕ}
+theorem cavity_spatial_energy (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -107,12 +107,12 @@ theorem cavity_spatial_energy (external : Literature C) {Δ : ℕ}
       have hc (i : Fin d) : messageDistance x (t i) (u i) ≤
           ((t i).degree : ℝ) * ((Fintype.card C : ℝ) * contractionSquare Δ ^ k) := by
         simpa only [mul_assoc] using ih (t i) (u i) (ht.2 i) (hu.2 i) (hdom.children i) (hag i)
-      have hh := finite_difference_step external hq hr hx hxlt d b t u (by have := ht.1; omega)
+      have hh := finite_difference_step bbr hq hr hx hxlt d b t u (by have := ht.1; omega)
         ht.2 hu.2 hdom.children (fun i => (hag i).boundary_eq) (by positivity) hc
       simpa only [Girth.CavityTree.degree, pow_succ, mul_assoc, mul_comm, mul_left_comm] using hh
 
 /-- Message SSM at distance `k+2`, including the global root of degree Δ. -/
-theorem root_spatial_energy (external : Literature C) {Δ : ℕ}
+theorem root_spatial_energy (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -138,8 +138,8 @@ theorem root_spatial_energy (external : Literature C) {Δ : ℕ}
   | succ k =>
     have hc (i : Fin d) : messageDistance x (t i) (u i) ≤
         ((t i).degree : ℝ) * ((Fintype.card C : ℝ) * contractionSquare Δ ^ k) := by
-      simpa only [mul_assoc] using cavity_spatial_energy external hq hr hx k (t i) (u i) (ht i) (hu i) (hdom i) (hag i)
-    have hh := finite_difference_step external hq hr hx hxlt d b t u hroot ht hu hdom
+      simpa only [mul_assoc] using cavity_spatial_energy bbr hq hr hx k (t i) (u i) (ht i) (hu i) (hdom i) (hag i)
+    have hh := finite_difference_step bbr hq hr hx hxlt d b t u hroot ht hu hdom
       (fun i => (hag i).boundary_eq) (by positivity) hc
     have hd : (d : ℝ) ≤ Δ := by exact_mod_cast (show d ≤ Δ by omega)
     calc

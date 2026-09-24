@@ -21,10 +21,10 @@ noncomputable section
 
 variable {C : Type*} [Fintype C] [DecidableEq C] [Nonempty C]
 
-/-- External literature boundary: CLMM2023, Lemma 8.7, in finite-tree
-configuration coordinates. The row and terminal factors were derived in
-`GirthInfluenceBounds`; this field supplies only the general influence
-factorization identity. -/
+/-- CLMM2023, Lemma 8.7, in finite-tree configuration coordinates. The row
+and terminal factors were derived in `GirthInfluenceBounds`; this field
+is only the general influence factorization identity. Proved as
+`clmmInfluenceIdentity` in `CI2ZF.Coupling.Girth.Tree.InfluenceIdentity`. -/
 structure CLMMInfluenceIdentity (C : Type*) [Fintype C] [DecidableEq C] [Nonempty C] : Prop where
   factorization : ∀ {Δ : ℕ} (x : ℝ) (hx : 0 < x) (hx1 : x < 1)
     (hq : Δ + 3 ≤ Fintype.card C) (d : ℕ) (b : C → ℕ) (child : Fin d → CavityTree C)
@@ -67,7 +67,7 @@ theorem source_amplitude_square (d : ℕ) (k : ℕ) :
 
 /-- Every source row has uniformly bounded total absolute influence over
 the whole level. The test signs are chosen from the actual influence row. -/
-theorem absolute_influence_row_bound (externalIdentity : CLMMInfluenceIdentity C)
+theorem absolute_influence_row_bound (identity : CLMMInfluenceIdentity C)
     {Δ : ℕ} (x : ℝ) (hx : 0 < x) (hx1 : x < 1) (hq : Δ + 3 ≤ Fintype.card C)
     (d : ℕ) (b : C → ℕ) (child : Fin d → CavityTree C)
     (hroot : d + (∑ c, b c) ≤ Δ) (ht : ∀ i, (child i).DegreeBudget Δ) (k : ℕ) (a : C) :
@@ -81,7 +81,7 @@ theorem absolute_influence_row_bound (externalIdentity : CLMMInfluenceIdentity C
   have henergy := rootLevelResponse_energy x hx hx1.le hq (tree.probabilityLaw x hx)
     d child ht k h (Nat.cast_nonneg (Fintype.card C)) hh
   have hid : (∑ v, ∑ c, |tree.influenceBlock x hx (k + 1) v a c|) = R a := by
-    have hf := externalIdentity.factorization x hx hx1 hq d b child hroot ht k h a
+    have hf := identity.factorization x hx hx1 hq d b child hroot ht k h a
     simpa only [h, tree, R, mul_signWitness] using hf
   have hs : R a ^ 2 ≤ ∑ c, R c ^ 2 :=
     Finset.single_le_sum (fun c _ => sq_nonneg _) (Finset.mem_univ a)
@@ -95,7 +95,7 @@ theorem absolute_influence_row_bound (externalIdentity : CLMMInfluenceIdentity C
 
 /-- CLMM's general influence identity plus the proved contraction gives
 the exact appendix total-influence decay bound on actual Gibbs marginals. -/
-theorem total_influence_decay (externalIdentity : CLMMInfluenceIdentity C)
+theorem total_influence_decay (identity : CLMMInfluenceIdentity C)
     {Δ : ℕ} (x : ℝ) (hx : 0 < x) (hx1 : x < 1) (hq : Δ + 3 ≤ Fintype.card C)
     (d : ℕ) (b : C → ℕ) (child : Fin d → CavityTree C)
     (hroot : d + (∑ c, b c) ≤ Δ) (ht : ∀ i, (child i).DegreeBudget Δ)
@@ -119,8 +119,8 @@ theorem total_influence_decay (externalIdentity : CLMMInfluenceIdentity C)
       (Finset.sum_le_sum (s := (Finset.univ : Finset C)) (fun c _ => hpoint v c))
       (by norm_num : (0 : ℝ) ≤ 1 / 2))
   simp only [Finset.sum_add_distrib, ← Finset.mul_sum] at hsum
-  have ha := absolute_influence_row_bound externalIdentity x hx hx1 hq d b child hroot ht k a
-  have hz := absolute_influence_row_bound externalIdentity x hx hx1 hq d b child hroot ht k z
+  have ha := absolute_influence_row_bound identity x hx hx1 hq d b child hroot ht k a
+  have hz := absolute_influence_row_bound identity x hx hx1 hq d b child hroot ht k z
   have hlocal : tree.levelTotalVariation x hx (k + 1) a z ≤
       totalInfluenceConstant d (Fintype.card C) * decayRate (Fintype.card C) ^ k := by
     unfold levelTotalVariation

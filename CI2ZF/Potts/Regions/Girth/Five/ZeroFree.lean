@@ -15,7 +15,7 @@ variable {C : Type v} [Fintype C] [Nonempty C]
 
 /-- One coupling constant works for all sizes, pinnings, and activities
 in the closed physical interval on residual graphs of girth at least five. -/
-theorem girth_five_coupling (external : SphereCouplingInput.{u,v} C)
+theorem girth_five_coupling
     {δ : ℝ} {Δ : ℕ} (hδ : 0 < δ) (hδ1 : δ ≤ 1)
     (hThreshold : girthFiveCIThreshold δ ≤ Δ)
     (hq : (1 + δ) * Δ ≤ (Fintype.card C : ℝ)) :
@@ -27,14 +27,14 @@ theorem girth_five_coupling (external : SphereCouplingInput.{u,v} C)
         W ham ((optionChildData I a).gibbs x hx ha)
           ((optionChildData I b).gibbs x hx hb) ≤ cost := by
   let p := actualCovarianceScale hδ hδ1 (girthFiveCIThreshold_gap hThreshold) hq
-  exact closed_coupling_from_weighted_source external Δ 5
+  exact closed_coupling_from_weighted_source Δ 5
     (girthFiveCIThreshold_degree_three hδ hδ1 hThreshold) (covarianceChi_gt_one hδ)
     (p.responseM_pos (girthFiveCIThreshold_covariance hThreshold)).le
     (actual_uniform_weighted_source (C := C) hδ hδ1 hThreshold hq)
 
 /-- A single positive complex radius is uniform over all residual
 graphs, graph sizes, pinnings, and base activities in `[0,1]`. -/
-theorem girth_five_zero_free (external : SphereCouplingInput.{u,v} C)
+theorem girth_five_zero_free
     {δ : ℝ} {Δ : ℕ} (hδ : 0 < δ) (hδ1 : δ ≤ 1)
     (hThreshold : girthFiveCIThreshold δ ≤ Δ)
     (hq : (1 + δ) * Δ ≤ (Fintype.card C : ℝ)) :
@@ -43,7 +43,7 @@ theorem girth_five_zero_free (external : SphereCouplingInput.{u,v} C)
       ∀ z ∈ thickening eps pottsInterval, pinningProductPartition I z ≠ 0 := by
   let p := actualCovarianceScale hδ hδ1 (girthFiveCIThreshold_gap hThreshold) hq
   have hcolours := girthFiveCIThreshold_colour_slack hδ hδ1 hThreshold hq
-  exact large_girth_zero_free_of_weighted_source external Δ 5
+  exact large_girth_zero_free_of_weighted_source Δ 5
     (girthFiveCIThreshold_degree_three hδ hδ1 hThreshold) (by omega)
     (covarianceChi_gt_one hδ)
     (p.responseM_pos (girthFiveCIThreshold_covariance hThreshold)).le
@@ -52,12 +52,12 @@ theorem girth_five_zero_free (external : SphereCouplingInput.{u,v} C)
 /-- Original-graph semantics, including arbitrary improper pinnings:
 the normalized partition is zero-free, and the full polynomial has
 exactly its forced pinned-conflict zero and multiplicity. -/
-theorem girth_five_original_zero_free (external : SphereCouplingInput.{u,v} C)
+theorem girth_five_original_zero_free
     {δ : ℝ} {Δ : ℕ} (hδ : 0 < δ) (hδ1 : δ ≤ 1)
     (hThreshold : girthFiveCIThreshold δ ≤ Δ)
     (hq : (1 + δ) * Δ ≤ (Fintype.card C : ℝ)) :
     ∃ eps > 0, UniformGirthPottsZeroFree.{u,v} C Δ 5 eps := by
-  obtain ⟨eps, heps, hnz⟩ := girth_five_zero_free external hδ hδ1 hThreshold hq
+  obtain ⟨eps, heps, hnz⟩ := girth_five_zero_free hδ hδ1 hThreshold hq
   exact ⟨eps, heps, uniformGirthPottsZeroFree_of_residual heps hnz⟩
 
 end

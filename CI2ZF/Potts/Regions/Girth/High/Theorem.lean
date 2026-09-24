@@ -1,6 +1,6 @@
 import CI2ZF.Coupling.Girth.Tree.RatioMixing
 import CI2ZF.Potts.Regions.Girth.Transfer.Family
-import CI2ZF.Coupling.CLMM.Transfer
+import CI2ZF.Coupling.CLMM.SphereEstimate
 import CI2ZF.Coupling.Girth.Tree.InfluenceIdentity
 
 /-!
@@ -8,10 +8,10 @@ import CI2ZF.Coupling.Girth.Tree.InfluenceIdentity
 
 All Potts recursion, differential, norm, finite-difference, spatial-mixing,
 and parameter-uniformity estimates are proved in the imported `Girth`
-modules, and so is the CLMM influence identity (Lemma 8.7). The only
-external parameters are the cited CLMM sphere estimate (Equation (10)) and
-sphere-to-coupling theorem (Lemma 5.13). The uniform burn-in, graph CI,
-both real endpoints, and zero-free transfer are then proved here.
+modules. So are the cited CLMM results: the influence identity (Lemma 8.7),
+the sphere estimate (Equation (10)) and the sphere-to-coupling theorem
+(Lemma 5.13). The uniform burn-in, graph CI, both real endpoints, and
+zero-free transfer are then proved here, with no literature hypothesis.
 -/
 
 namespace CI2ZF.Appendix.Girth
@@ -28,7 +28,6 @@ universe u v
 variable {C : Type v} [Fintype C] [Nonempty C]
 
 theorem high_girth_soft_coupling
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ (g : ℕ) (K : ℝ), 3 ≤ g ∧ 0 ≤ K ∧ SoftLargeGirthCoupling.{u,v} C Δ g K := by
   let q : ℝ := Fintype.card C
@@ -66,7 +65,7 @@ theorem high_girth_soft_coupling
         field_simp
       rw [he]
       exact hk₀ k (by omega) d b t t' hs x hx.1 hx.2 hd ht ht' c
-  obtain ⟨g, K, hg, hK, hcouple⟩ := CLMM.eventual_transfer transfer Δ hΔ A B ρ hA hB hr hr1
+  obtain ⟨g, K, hg, hK, hcouple⟩ := CLMM.eventual_transfer (CLMM.literature C) Δ hΔ A B ρ hA hB hr hr1
     (k₀ + 2) (Ioo 0 1) (fun _ hx => ⟨hx.1, hx.2.le⟩) htree
   refine ⟨g, K, hg, hK, ?_⟩
   intro O _ I hd hgI a b x hx hx1
@@ -77,30 +76,27 @@ theorem high_girth_soft_coupling
 /-- The appendix's graph- and activity-uniform coupling theorem, including
 proper-colouring activity zero and the common product law at activity one. -/
 theorem high_girth_coupling
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ (g : ℕ) (K : ℝ), 3 ≤ g ∧ 0 ≤ K ∧
       ∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 →
         (largeGirthFamily.{u,v} C g).RootCouplingBound Δ (by omega) x K := by
-  obtain ⟨g, K, hg, hK, hsoft⟩ := high_girth_soft_coupling transfer Δ hΔ hq
+  obtain ⟨g, K, hg, hK, hsoft⟩ := high_girth_soft_coupling Δ hΔ hq
   exact ⟨g, K, hg, hK, fun x hx => closed_root_coupling_of_soft (by omega) hK hsoft x hx⟩
 
 /-- A single complex neighbourhood works for all graph sizes, pinnings,
 and activities in `[0,1]` when q ≥ Δ+3 and the residual girth is large. -/
 theorem high_girth_zero_free
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ (g : ℕ), 3 ≤ g ∧ ∃ eps > 0, ∀ {V : Type u} [Fintype V] (I : PinningData V C),
       (g : ℕ∞) ≤ I.graph.egirth → I.DegreeBound Δ →
       ∀ z ∈ thickening eps pottsInterval, pinningProductPartition I z ≠ 0 := by
-  obtain ⟨g, K, hg, hK, hsoft⟩ := high_girth_soft_coupling transfer Δ hΔ hq
+  obtain ⟨g, K, hg, hK, hsoft⟩ := high_girth_soft_coupling Δ hΔ hq
   exact ⟨g, hg, large_girth_zero_free_of_soft_ci (by omega) hK hsoft⟩
 
 /-- Original-graph semantics, including arbitrary improper pinnings: the
 normalized partition has no zero in the uniform neighbourhood, and the
 full partition retains exactly its forced pinned-conflict zero. -/
 theorem high_girth_original_zero_free
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ (g : ℕ), 3 ≤ g ∧ ∃ eps > 0, ∀ {V : Type u} [Fintype V] (G : SimpleGraph V),
       (g : ℕ∞) ≤ G.egirth → (∀ v, G.degree v ≤ Δ) → ∀ tau : PartialColouring V C,
@@ -108,7 +104,7 @@ theorem high_girth_original_zero_free
       (∀ z ∈ thickening eps pottsInterval,
         fullPartition tau G z = 0 ↔ z = 0 ∧ 0 < tau.pinnedConflictCount G) ∧
       (fullPolynomial tau G).rootMultiplicity 0 = tau.pinnedConflictCount G := by
-  obtain ⟨g, hg, eps, heps, hnz⟩ := high_girth_zero_free transfer Δ hΔ hq
+  obtain ⟨g, hg, eps, heps, hnz⟩ := high_girth_zero_free Δ hΔ hq
   have hzero : (0 : ℂ) ∈ thickening eps pottsInterval := by
     apply mem_thickening_iff.mpr
     exact ⟨0, ⟨0, by simp, rfl⟩, by simpa using heps⟩

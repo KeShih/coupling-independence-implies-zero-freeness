@@ -13,20 +13,18 @@ universe u v
 variable {C : Type v} [Fintype C] [Nonempty C]
 
 theorem high_girth_field_transfer
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ θ > 0, θ ≤ (1 / 2 : ℝ) ∧
       ∀ {V : Type u} [Fintype V] (I : PinningData V C),
         (g : ℕ∞) ≤ I.graph.egirth → I.DegreeBound Δ → ∀ ℓ : V → C → ℂ,
         (∀ v c, ‖ℓ v c - 1‖ ≤ θ) → fieldPartition I ℓ ≠ 0 := by
-  obtain ⟨g, K, hg, _, hcouple⟩ := high_girth_coupling transfer Δ hΔ hq
+  obtain ⟨g, K, hg, _, hcouple⟩ := high_girth_coupling Δ hΔ hq
   obtain ⟨θ, hθ, hθ1, hn⟩ := uniform_field_transfer_closed
     (largeGirthFamily.{u,v} C g) Δ (by omega) K
     (hcouple PinningData.hardParameter (by norm_num [PinningData.hardParameter]))
   exact ⟨g, hg, θ, hθ, hθ1, hn⟩
 
 theorem high_girth_residual_original_field_transfer
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ θ > 0, θ ≤ (1 / 2 : ℝ) ∧
       ∀ {V : Type u} [Fintype V] (G : SimpleGraph V),
@@ -36,7 +34,7 @@ theorem high_girth_residual_original_field_transfer
         normalizedFieldPartition tau G ℓ ≠ 0 ∧
           ((∀ v : tau.domain, ℓ v.val (tau.colour v) ≠ 0) →
             (fullFieldPartition tau G ℓ ≠ 0 ↔ ProperPinning tau G)) := by
-  obtain ⟨g, hg, θ, hθ, hθ1, hn⟩ := high_girth_field_transfer transfer Δ hΔ hq
+  obtain ⟨g, hg, θ, hθ, hθ1, hn⟩ := high_girth_field_transfer Δ hΔ hq
   refine ⟨g, hg, θ, hθ, hθ1, ?_⟩
   intro V _ G hd tau hfree ℓ hℓ
   have hnorm : normalizedFieldPartition tau G ℓ ≠ 0 := by
@@ -47,7 +45,6 @@ theorem high_girth_residual_original_field_transfer
 /-- This is the original-graph form of the third vertex-colour regime,
 with the paper's free-coordinate field condition and proper-pinning clause. -/
 theorem high_girth_original_field_transfer
-    (transfer : CLMM.Literature.{u,v} C)
     (Δ : ℕ) (hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C) :
     ∃ g : ℕ, 3 ≤ g ∧ ∃ θ > 0, θ ≤ (1 / 2 : ℝ) ∧
       ∀ {V : Type u} [Fintype V] (G : SimpleGraph V),
@@ -58,7 +55,7 @@ theorem high_girth_original_field_transfer
           ((∀ v : tau.domain, ℓ v.val (tau.colour v) ≠ 0) →
             (fullFieldPartition tau G ℓ ≠ 0 ↔ ProperPinning tau G)) := by
   obtain ⟨g, hg, θ, hθ, hθ1, hn⟩ :=
-    high_girth_residual_original_field_transfer transfer Δ hΔ hq
+    high_girth_residual_original_field_transfer Δ hΔ hq
   refine ⟨g, hg, θ, hθ, hθ1, ?_⟩
   intro V _ G hG hd tau ℓ hℓ
   have hfree : (g : ℕ∞) ≤ (tau.toPinningData G).graph.egirth :=

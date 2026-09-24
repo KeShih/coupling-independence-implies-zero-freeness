@@ -107,7 +107,7 @@ theorem squareProbability_ratio_bound {m : ℝ} (hm : 0 < m) (R R' : C → ℝ)
 def relativeConstant (q Δ : ℕ) (x₀ : ℝ) : ℝ :=
   4 * q * Real.sqrt ((Δ : ℝ) * q) / (Real.sqrt (x₀ ^ Δ)) ^ 3 / contractionSquare Δ
 
-theorem root_relative_ssm (external : Literature C) {Δ : ℕ}
+theorem root_relative_ssm (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -132,7 +132,7 @@ theorem root_relative_ssm (external : Literature C) {Δ : ℕ}
   have hU (c : C) : m ≤ U.message x c := CavityTree.message_uniform_lower hx₀.1 hx.1 hx.2 U Δ hroot c
   have hratio := squareProbability_ratio_bound hm (T.message x) (U.message x) hT hU
     (fun c => (U.message_bounds hx0 hx.2 c).2) c
-  have hdecay := root_spatial_energy external hq hr hx k d b t u hroot ht hu hdom hag
+  have hdecay := root_spatial_energy bbr hq hr hx k d b t u hroot ht hu hdom hag
   have hsq : (Real.sqrt ((Δ : ℝ) * Fintype.card C) * contractionRate Δ ^ k) ^ 2 =
       (Δ : ℝ) * Fintype.card C * contractionSquare Δ ^ k := by
     rw [mul_pow, Real.sq_sqrt (by positivity), ← pow_mul, Nat.mul_comm k 2, pow_mul, contractionRate_sq hΔ]

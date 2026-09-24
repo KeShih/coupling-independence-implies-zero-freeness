@@ -4,9 +4,12 @@ import CI2ZF.Coupling.BBR.CertificateArithmetic
 /-!
 # The BBR contraction certificate on actual cavity messages
 
-The only BBR literature fields are Proposition 2.6(i), with its printed
-degree assumption unchanged, and Theorem 2.5. The four gap-two pairs are
-handled directly from the annulus, as is `(q,Δ)=(3,4)`.
+The BBR results used are Proposition 2.6(i), with its printed degree
+assumption unchanged, and Theorem 2.5, collected in `Literature`. Both are
+proved, in `CI2ZF.Coupling.BBR.Proposition26` and
+`CI2ZF.Coupling.BBR.Theorem25`, and `literature` there supplies the bundle.
+The four gap-two pairs are handled directly from the annulus, as is
+`(q,Δ)=(3,4)`.
 Published source: EJP 30 (2025), article 65, doi:10.1214/25-EJP1327.
 The arXiv v2 versions are Proposition 8(i) and Theorem 7:
 https://arxiv.org/html/2310.04338v2.
@@ -26,6 +29,8 @@ theorem CLMM.SameDomain.refl (t : CavityTree C) : CLMM.SameDomain t t := by
 
 namespace BBR
 
+/-- BBR Proposition 2.6(i) and Theorem 2.5 for the actual cavity messages.
+Proved as `literature` in `CI2ZF.Coupling.BBR.Proposition26`. -/
 structure Literature (C : Type*) [Fintype C] [DecidableEq C] [Nonempty C] : Prop where
   proposition_2_6_i : ∀ (Δ : ℕ) (_hq : 3 ≤ Fintype.card C)
     (_hgap : Fintype.card C + 3 ≤ Δ) (x : ℝ), 0 < x → x < 1 →
@@ -73,7 +78,7 @@ theorem cavity_segment_nonneg {Δ : ℕ} {x : ℝ} (hx : 0 < x) (hx1 : x ≤ 1)
     (t.message x) (u.message x) (hfloor t ht) (hfloor u hu)
 
 /-- The complete certificate, with all exceptional arithmetic internal. -/
-theorem contraction_certificate (external : Literature C) {Δ : ℕ}
+theorem contraction_certificate (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -106,7 +111,7 @@ theorem contraction_certificate (external : Literature C) {Δ : ℕ}
   by_cases hgap : Fintype.card C + 3 ≤ Δ
   · have hkΔ := parameter_lt_degree hq (show Fintype.card C + 2 ≤ Δ by omega)
     have hbasic := intervalStart_ge_basic hq0 hdq (parameter_pos hq0 hdq) hkΔ
-    have hpublished := external.proposition_2_6_i Δ hq hgap x hx0 hxlt (hbasic.trans hxstart) t u ht hu hdom hb
+    have hpublished := bbr.proposition_2_6_i Δ hq hgap x hx0 hxlt (hbasic.trans hxstart) t u ht hu hdom hb
     have hfreer : (t.degree : ℝ) ≤ (Δ : ℝ) - 1 := by
       have hh : (t.degree : ℝ) + 1 ≤ Δ := by exact_mod_cast (show t.degree + 1 ≤ Δ by omega)
       linarith
@@ -125,7 +130,7 @@ theorem point_coefficient_nonneg {x : ℝ} (hx : x ≤ 1) (t : Girth.CavityTree 
     0 ≤ pointCoefficient x t :=
   mul_nonneg (div_nonneg (sub_nonneg.mpr hx) (Real.exp_pos _).le) (pointWeightSquare_nonneg _ _)
 
-theorem point_certificate (external : Literature C) {Δ : ℕ}
+theorem point_certificate (bbr : Literature C) {Δ : ℕ}
     (hq : 3 ≤ Fintype.card C)
     (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)
     {x : ℝ} (hx : x ∈ Icc (start (Fintype.card C) Δ) 1)
@@ -139,7 +144,7 @@ theorem point_certificate (external : Literature C) {Δ : ℕ}
   have h' : (t.degree : ℝ) * pointCoefficient x t ≤
       (t.degree : ℝ) * ((1 - x) / Real.exp 1) * segmentWeightSquare x (t.message x) (t.message x) := by
     simpa only [pointCoefficient, mul_assoc] using h
-  exact h'.trans (contraction_certificate external hq hr hx t t ht ht (CLMM.SameDomain.refl t) rfl)
+  exact h'.trans (contraction_certificate bbr hq hr hx t t ht ht (CLMM.SameDomain.refl t) rfl)
 
 end BBR
 end

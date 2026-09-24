@@ -3,9 +3,9 @@ import CI2ZF.Coupling.CLMM.AmbientDegree
 import CI2ZF.Coupling.Vigoda.CouplingIndependence
 
 /-! The final fixed-girth passage from proved source oscillation to
-uniform coupling.  The sole literature input here is CLMM Lemma 5.13,
-stated for the actual finite Potts laws.  The influence radius and the
-hard-endpoint limit are proved internally. -/
+uniform coupling, through CLMM Lemma 5.13 as proved in
+`CI2ZF.Coupling.CLMM.SphereCoupling`.  The influence radius and the
+hard-endpoint limit are also proved here. -/
 namespace CI2ZF.Appendix.Girth
 open scoped BigOperators Topology
 open PottsCI PottsCI.FinDist Filter CI2ZF.Potts
@@ -15,23 +15,6 @@ set_option linter.unusedSectionVars false
 set_option maxHeartbeats 200000
 universe u v
 variable {C : Type v} [Fintype C] [DecidableEq C] [Nonempty C]
-
-/-- CLMM2023, Lemma 5.13, with its numerical sphere hypothesis and
-transport conclusion; no source estimate or girth-five conclusion is
-part of this external input. -/
-structure SphereCouplingInput (C : Type v) [Fintype C] [DecidableEq C] [Nonempty C] : Prop where
-  sphere_to_coupling : ∀ (Δ g R : ℕ) (x ε : ℝ), 3 ≤ Δ → 2 ≤ R →
-    ∀ (hx : 0 < x), x ≤ 1 → 0 < ε → ε ≤ 1 / (8 * R * Real.log Δ) →
-    CLMM.FixedAmbientSphereDecay.{u,v} C Δ g R x ε →
-    ∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C),
-      I.DegreeBound Δ → (g : ℕ∞) ≤ I.graph.egirth → ∀ (a b : C)
-      (ha : 0 < (optionChildData I a).partition x)
-      (hb : 0 < (optionChildData I b).partition x),
-      W ham ((optionChildData I a).gibbs x hx.le ha)
-        ((optionChildData I b).gibbs x hx.le hb) ≤ 2 * (Δ : ℝ) ^ R
-
-theorem sphereCoupling_of_literature (h : CLMM.Literature.{u,v} C) : SphereCouplingInput.{u,v} C :=
-  ⟨h.sphere_to_coupling⟩
 
 /-- The internally proved source theorem is used at arbitrary positive
 ambient weights; those weights are kept fixed through all pinnings. -/
@@ -84,7 +67,7 @@ theorem sphereDecay_of_weighted_source {Δ g : ℕ} {x χ M : ℝ}
 
 /-- A single radius works for the whole positive interval, and the girth
 of the input family is unchanged by the radius selection. -/
-theorem positive_coupling_from_weighted_source (external : SphereCouplingInput.{u,v} C)
+theorem positive_coupling_from_weighted_source
     (Δ g : ℕ) (hΔ : 3 ≤ Δ) {χ M : ℝ} (hχ : 1 < χ) (_hM : 0 ≤ M)
     (hsource : ∀ (x : ℝ), 0 < x → x ≤ 1 → UniformWeightedSource.{u,v} C Δ g x χ M) :
     ∃ R : ℕ, 2 ≤ R ∧ ∀ (x : ℝ) (hx : 0 < x), x ≤ 1 →
@@ -105,7 +88,7 @@ theorem positive_coupling_from_weighted_source (external : SphereCouplingInput.{
     apply one_div_le_one_div_of_le (by positivity [Real.log_pos hd])
     have hlog := (Real.log_pos hd).le
     nlinarith [show (0 : ℝ) ≤ R from Nat.cast_nonneg R]
-  exact external.sphere_to_coupling Δ g R x (1 / (16 * R * Real.log Δ)) hΔ hR hx hx1
+  exact CLMM.Lemma513.sphere_to_coupling C Δ g R x (1 / (16 * R * Real.log Δ)) hΔ hR hx hx1
     (by positivity [Real.log_pos hd]) he'
     (CLMM.fixedAmbientSphereDecay_mono (sphereDecay_of_weighted_source hx hχ (hsource x hx hx1) R) he)
     I hI hg a b ha hb
@@ -136,7 +119,7 @@ theorem coupling_closed_of_positive {O : Type u} [Fintype O]
       (CI2ZF.hardApproach_pos n) (CI2ZF.hardApproach_le_one n)
   · exact hpos x (lt_of_le_of_ne hx (Ne.symm hz)) hx1
 
-theorem closed_coupling_from_weighted_source (external : SphereCouplingInput.{u,v} C)
+theorem closed_coupling_from_weighted_source
     (Δ g : ℕ) (hΔ : 3 ≤ Δ) {χ M : ℝ} (hχ : 1 < χ) (hM : 0 ≤ M)
     (hsource : ∀ (x : ℝ), 0 < x → x ≤ 1 → UniformWeightedSource.{u,v} C Δ g x χ M) :
     ∃ cost : ℝ, 0 ≤ cost ∧ ∀ (x : ℝ) (hx : 0 ≤ x), x ≤ 1 →
@@ -146,7 +129,7 @@ theorem closed_coupling_from_weighted_source (external : SphereCouplingInput.{u,
         (hb : 0 < (optionChildData I b).partition x),
         W ham ((optionChildData I a).gibbs x hx ha)
           ((optionChildData I b).gibbs x hx hb) ≤ cost := by
-  obtain ⟨R, _, hR⟩ := positive_coupling_from_weighted_source external Δ g hΔ hχ hM hsource
+  obtain ⟨R, _, hR⟩ := positive_coupling_from_weighted_source Δ g hΔ hχ hM hsource
   refine ⟨2 * (Δ : ℝ)^R, by positivity, ?_⟩
   intro x hx hx1 O _ I hd hg a b ha hb
   apply coupling_closed_of_positive (optionChildData I a) (optionChildData I b) (2 * (Δ : ℝ)^R)

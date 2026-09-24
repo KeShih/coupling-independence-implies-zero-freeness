@@ -8,9 +8,10 @@ import CI2ZF.Coupling.CV.RootCI
 /-! The headline theorem. Its equality case `q = 11Δ/6` needs a hard
 coupling bound at activity zero. The paper cites CFFGZZ Theorem 20 for it;
 here it is proved by the Carlson–Vigoda contraction, which extends to the
-critical line for every `Δ ≥ 6`. The cited route, with the external input
-stated on original graphs and converted by a proved leaf realization, is
-kept for comparison. -/
+critical line for every `Δ ≥ 6`. The cited route, with the input stated on
+original graphs and converted by a proved leaf realization, is kept for
+comparison, and `external_critical_hard_colouring_theorem` proves its
+premise too. -/
 namespace CI2ZF.Potts
 open PottsCI
 noncomputable section
@@ -94,6 +95,28 @@ theorem potts_main_strict (q Δ : ℕ) (hΔ : 2 ≤ Δ) (hq : 11 * Δ < 6 * q) :
   simp only [Fintype.card_fin]
   have h : (11 : ℝ) * Δ < 6 * q := by exact_mod_cast hq
   linarith
+
+section Cited
+local instance (priority := 3000) externalCriticalDecEq (T : Type*) : DecidableEq T :=
+  Classical.decEq T
+
+/-- The cited premise itself, the original-graph form of CFFGZZ Theorem 20
+used at `q = 11Δ/6`, holds for every `Δ ≥ 6` and `q ≥ 11Δ/6` by the
+Carlson–Vigoda contraction on the critical line. So the cited route
+above is also closed. -/
+theorem external_critical_hard_colouring_theorem (C : Type v) [Fintype C] [Nonempty C]
+    {Δ : ℕ} (hΔ : 6 ≤ Δ) (hq : (11 / 6 : ℝ) * Δ ≤ Fintype.card C) :
+    ExternalCriticalHardColouringTheorem.{u, v} C Δ := by
+  refine ⟨Appendix.CV.ciConstant, ?_⟩
+  intro A _ G hG tau r a b ha hb
+  let I := rootOptionData (tau.toPinningData G) r
+  have hd : I.DegreeBound Δ :=
+    rootOptionData_degreeBound _ r (tau.degreeBound_of_original G hG)
+  exact root_W_le_of_option_relabel tau G (rootOptionEquiv r).symm I rfl
+    PinningData.hardParameter rfl a b ha hb fun _ _ =>
+      Appendix.CV.option_root_ci_critical I hΔ hd hq a b PinningData.hardParameter (by norm_num)
+
+end Cited
 
 end
 end CI2ZF.Potts
