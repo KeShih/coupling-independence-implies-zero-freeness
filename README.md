@@ -6,6 +6,11 @@ A Lean 4 and mathlib formalization of
 - its companion, *Further Potts Zero-Free Regions from Coupling Independence*,
   included as [docs/appendix.pdf](docs/appendix.pdf).
 
+Every numbered theorem, lemma, proposition and corollary of both papers
+has a Lean counterpart. [docs/coverage.json](docs/coverage.json) lists all
+107 numbered statements, definitions and remarks included, with their
+status and Lean names; the side-by-side page shows the same table.
+
 Every statement concerns actual finite partition functions. Potts pinnings
 are arbitrary partial colourings, improper ones included, and every
 zero-free radius is chosen before the graph, its size and the pinning.
@@ -65,9 +70,9 @@ names are relative to `CI2ZF`.
 | Thm 1.1: Potts zero-freeness near `[0,1]` for `q ≥ 11Δ/6` | `Potts.potts_main_theorem`, `Potts.potts_main_strict` |
 | Thm 1.2: coupling independence implies zero-freeness on induced-subgraph-closed classes | `Potts.graph_class_potts_transfer_of_bounded` |
 | Thm 4.1, Prop 4.10, Prop 4.12: the soft flip coupling and its conditional hard estimate | `Potts.root_strict_ci`, `conditionalHardCouplingEstimate`, `Potts.root_positive_ci` |
-| Prop 5.1, Thm 5.2: Lee–Yang polydiscs for vertex-colour fields | `LeeYang.graph_class_normalized_field_transfer`, `LeeYang.near_vigoda_vertex_field_zero_free`, `LeeYang.cv_vertex_field_zero_free`, `LeeYang.high_girth_residual_original_field_transfer` |
+| Prop 5.1, Thm 5.2: Lee–Yang polydiscs for vertex-colour fields | `LeeYang.prop_field_transfer`, `LeeYang.near_vigoda_vertex_field_zero_free`, `LeeYang.cv_vertex_field_zero_free`, `LeeYang.high_girth_residual_original_field_transfer` |
 | Cor 5.4: edge-colour fields for `q ≥ 3Δ` | `LeeYang.edge_lee_yang` |
-| Thm 5.6, Cors 5.7 and 5.9: log-concave Holant problems, b-matchings and b-edge-covers | `Holant.exists_uniform_holant_polytube`, `Holant.bmatching_uniform_polytube`, `Holant.bcover_uniform_polytube` |
+| Thm 5.6, Cors 5.7 and 5.9: log-concave Holant problems, b-matchings and b-edge-covers | `Holant.exists_uniform_holant_polytube`, `Holant.bmatching_uniform_polytube`, `Holant.cor_bcover_short` |
 
 ### Appendix A: further Potts regimes
 
@@ -87,6 +92,43 @@ Girth conditions apply only to the free graph left after pinning.
 [docs/appendix/STATUS.md](docs/appendix/STATUS.md) gives the exact
 hypotheses, constants and proof route of each regime, including where the
 Lean proof differs from the written one.
+
+### Coverage of the numbered statements
+
+The tables above list the headline results.
+[docs/coverage.json](docs/coverage.json) has one entry for each of the 107
+numbered statements of the two papers, 32 in the main paper and 75 in the
+companion, with its status, its Lean names and a note on any difference of
+form. All Lean names elaborate. Each of the 92 theorems, lemmas,
+propositions and corollaries has one of the three `formalized` statuses:
+
+| Status | Entries | Meaning |
+| --- | --- | --- |
+| `formalized` | 77 | the Lean statement has the written strength (74 results and 3 remarks with mathematical content; the claims about cited work in those remarks are listed below) |
+| `formalized-equivalent` | 16 | an equivalent form, for example on boundary-count data, with the bridge named in the note |
+| `formalized-narrowed` | 2 | companion Lemmas 3.6 and 6.10, in the narrowed form the companion now states |
+| `definition` | 8 | a Lean definition; the claims made inside the definition are proved, except the citation noted below |
+| `remark` | 4 | a remark that makes no claim of its own: it describes the proof, or attributes or compares cited work |
+
+Companion Lemma 6.10 is stated for the Potts family at positive activity
+`x ∈ J ⊆ (0,1]`, the only case the companion uses, and the `k`-fold clause
+of Lemma 3.6 counts labelled free–pinned edges. What remains unformalized
+is citation-level:
+
+- Remark 4.4 of the companion (`rem:critical-scope`) says that CFFGZZ
+  Theorem 20 and Proposition 22 apply along the critical line. That claim
+  about the cited paper is not formalized; Lean proves the same `x = 0`
+  bound by the Carlson–Vigoda contraction
+  (`Potts.critical_line_hard_endpoint`).
+- Definition 5.3 of the companion (`def:cv-metric`) identifies the hard
+  metric with Eq. (2) of Carlson and Vigoda (2024). That identification is
+  not formalized. The hard metric `Appendix.CV.hardMetric`, the coefficient
+  `(P₂ − P₃)/2 = 17/200` and the limit `d_x → d_hard` as `x ↓ 0` are.
+- Cited background in remarks is not formalized: the Heilmann–Lieb
+  theorem and Wagner's method in Remark 5.8 of the main paper
+  (`rem:matching-degree-dependence`, whose star bound is proved), and the
+  attributions and comparisons in the four `remark` entries.
+- Algorithmic and FPTAS claims are outside the scope of a Lean statement.
 
 ## Cited results proved in Lean
 
@@ -141,8 +183,8 @@ checks the transitive axioms of every project declaration. A successful
 run ends with
 
 ```text
-Build completed successfully (4040 jobs).
-Complete-library axiom audit passed: 10372 declarations; allowed dependencies used: [propext,
+Build completed successfully (4066 jobs).
+Complete-library axiom audit passed: 11313 declarations; allowed dependencies used: [propext,
  Classical.choice,
  Quot.sound]
 ```

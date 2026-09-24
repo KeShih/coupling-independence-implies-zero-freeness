@@ -1,15 +1,16 @@
 # Documentation
 
-This library formalizes the paper's coupling-independence and zero-free results for Potts, Holant, and independent colour fields. Start with the [project overview](overview.md) for the theorem scope and proof architecture.
+This library formalizes the paper's coupling-independence and zero-free results for Potts, Holant, and independent colour fields, and the companion's further Potts regimes. Every numbered theorem, lemma, proposition and corollary of both papers has a Lean counterpart, listed in the [coverage table](coverage.json) and on the side-by-side page. Only citation-level claims remain unformalized; the [repository README](../README.md#coverage-of-the-numbered-statements) lists them. Start with the [project overview](overview.md) for the theorem scope and proof architecture.
 
 | Guide | Contents |
 | --- | --- |
 | [Potts](potts.md) | Models, concrete Vigoda coupling, uniform complex transfer, and the main theorem |
-| [Potts appendix](appendix/README.md) | Module navigation for all seven additional parameter regions |
+| [Potts appendix](appendix/README.md) | Module navigation for all seven additional parameter regions and for the companion statements proved in dedicated modules |
 | [Appendix theorem status](appendix/STATUS.md) | Regional hypotheses, proved conclusions, and the cited results each region uses |
 | [Holant](holant.md) | Signature models, recursive coupling, uniform polytubes, and applications |
 | [Lee–Yang colour fields](lee-yang.md) | Independent field coordinates, separator induction, and vertex- and edge-colouring corollaries |
 | [Cited results](external-inputs.md) | The results cited from the literature, their Lean statements, and how each is proved |
+| [Coverage table](coverage.json) | One entry for each of the 107 numbered statements of both papers, with its status and Lean names |
 
 ## Source layout
 

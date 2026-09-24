@@ -47,6 +47,7 @@ is slightly stronger than the paper's version with strict inequalities.
 | Parent nonvanishing and induction | `Parent.lean`, `Induction.lean` | After a common normalization, the weighted terms for allowed root colors have positive real part. Nonvanishing and root responses are proved simultaneously by induction on the number of free vertices. |
 | From CI to a uniform field neighborhood | `Transfer.lean`: `uniform_curve_transfer` | All complex-analytic obligations are discharged. Assuming `q ≥ Δ+1`, the remaining input is a uniform CI bound for the actual hard-coloring Gibbs laws. |
 | Full polydisc | `Polydisc.lean`, `GraphClass.lean` | Set `θ=min(r/2,1/2)` and `d=(ℓ-1)/θ`, then substitute `z=θ` exactly. The quantifiers cover every independent vertex–color coordinate. |
+| `prop:field-transfer` (Proposition 5.1) | `GraphClassUniform.lean`: `prop_field_transfer`, `uniform_graph_class_normalized_field_transfer`, `uniform_graph_class_field_transfer` | `GraphClass.lean` chooses `θ` after the graph class. Applying it once to the union `ciUnionClass` of all induced-subgraph-closed classes with `C₀`-coupling independence at `x = 0` gives `θ = θ(q, Δ, C₀) ∈ (0, 1/2]`, chosen before the class as in the paper. |
 
 ## Main-text parameter regimes
 

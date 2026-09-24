@@ -40,6 +40,49 @@ are recorded in [STATUS.md](STATUS.md):
 
 [STATUS.md](STATUS.md) and the [cited-results record](../external-inputs.md) describe each proof and where it differs from the cited one.
 
+## Companion statements in dedicated modules
+
+Every numbered theorem, lemma, proposition and corollary of the companion
+has a Lean counterpart; the [coverage table](../coverage.json) lists all 75
+numbered statements, definitions and remarks included, with their status
+and Lean names. Most of them are proved in the modules of the regional proofs above.
+The statements below, and a few unnumbered claims of the text, are stated in
+dedicated modules, in the form the companion gives them. Names are relative
+to `CI2ZF`, except those starting with `PottsCI`.
+
+| Companion statement | Lean | Module |
+| --- | --- | --- |
+| 2.1 `lem:pinned-leaf-realization` | `Potts.pinned_leaf_realization`, `Potts.pinned_leaf_realization_girth_class` | [Geometry/PinningLeafTransfer.lean](../../CI2ZF/Potts/Geometry/PinningLeafTransfer.lean) |
+| 2.5 `lem:potts-positive-response` | `Potts.lem_potts_positive_response`, `Potts.uniform_positive_response` | [Theorems/UniformClassConstants.lean](../../CI2ZF/Potts/Theorems/UniformClassConstants.lean) |
+| 3.3 `cor:critical-line-input`, 4.4 `rem:critical-scope` | `Potts.critical_line_hard_endpoint`, `Potts.critical_line_pairs`, `Potts.hardList_slack_critical`, `Potts.gibbs_zero_uniform` | [Theorems/CriticalScope.lean](../../CI2ZF/Potts/Theorems/CriticalScope.lean) |
+| 3.4 `lem:soft-stationary`, 3.6 `lem:boundary-sensitivity` | `Potts.lem_soft_stationary`, `Potts.softFlipKernel_cv`, `Potts.softCVKernel_reversible_irreducible`, `Potts.lem_boundary_sensitivity`, `Potts.rootChild_softCV_boundary_W_le` | [Vigoda/SoftFlipKernel.lean](../../CI2ZF/Coupling/Vigoda/SoftFlipKernel.lean) |
+| 3.5 `lem:coupled-activation-root-local` | `coupled_activation_root_local`, `activationLaw_one` | [Vigoda/CoupledActivation.lean](../../CI2ZF/Coupling/Vigoda/CoupledActivation.lean) |
+| 3.7 `lem:finite-endpoint-closure` | `PottsCI.finite_endpoint_closure`, `PottsCI.finite_endpoint_closure_dist` | [Model/Real/EndpointClosure.lean](../../CI2ZF/Potts/Model/Real/EndpointClosure.lean) |
+| text after 4.6 `thm:intro-bbr-interval` | `Appendix.BBR.rounded_interval_subset`, `Appendix.BBR.rounded_interval_three_four_empty` | [BBR/RoundedInterval.lean](../../CI2ZF/Coupling/BBR/RoundedInterval.lean) |
+| 4.8 `thm:unrestricted-girth5`; main-paper Table A.1 footnote | `Appendix.Girth.girth_five_common_threshold`, `Appendix.Girth.high_girth_common_threshold`, `Appendix.Girth.bbr_common_threshold` | [Girth/CommonThreshold.lean](../../CI2ZF/Potts/Regions/Girth/CommonThreshold.lean) |
+| 5.2 `def:cv-kernel`, 5.3 `def:cv-metric`, 5.25 `thm:cv-contraction`, 5.26 `lem:cv-child-middle` | `Appendix.CV.cvKernel`, `Appendix.CV.hardMetric`, `Appendix.CV.geometricMetric_tendsto_hardMetric_cv`, `Appendix.CV.cv_contraction`, `Appendix.CV.cv_child_middle_ham` | [CV/ClosedKernel.lean](../../CI2ZF/Coupling/CV/ClosedKernel.lean) |
+| 5.6 `lem:cv-root-local-structure` | `Appendix.CV.cv_root_local_structure` | [CV/RootLocalStructure.lean](../../CI2ZF/Coupling/CV/RootLocalStructure.lean) |
+| 5.7 `lem:cv-move-partition` | `Appendix.CV.cv_move_partition` | [CV/MovePartition.lean](../../CI2ZF/Coupling/CV/MovePartition.lean) |
+| 5.12 `lem:cv-fresh` | `Appendix.CV.cv_fresh` | [CV/FreshGain.lean](../../CI2ZF/Coupling/CV/FreshGain.lean) |
+| 5.14 `lem:cv-expected` | `Appendix.CV.cv_expected` | [CV/ExpectedLoss.lean](../../CI2ZF/Coupling/CV/ExpectedLoss.lean) |
+| 5.21 `lem:cv-high` | `Appendix.CV.cv_high_bulk`, `Appendix.CV.cv_high_missing` | [CV/HighColours.lean](../../CI2ZF/Coupling/CV/HighColours.lean) |
+| 5.23 `lem:cv-assembly` | `Appendix.CV.cv_assembly_1809`, `Appendix.CV.cv_assembly` | [CV/Assembly.lean](../../CI2ZF/Coupling/CV/Assembly.lean) |
+| 6.10 `lem:hg-eventual-transfer` | `Appendix.Girth.potts_eventual_transfer_uniform`, `Appendix.Girth.potts_eventual_transfer_source`, `Appendix.Girth.potts_eventual_transfer` | [Girth/Transfer/PottsTransfer.lean](../../CI2ZF/Potts/Regions/Girth/Transfer/PottsTransfer.lean) |
+| text before 6.9 `lem:hg-eventual-relative-ssm` | `Appendix.Girth.no_uniform_distance_one` | [Tree/SingleEdge.lean](../../CI2ZF/Coupling/Girth/Tree/SingleEdge.lean) |
+| 7.1 `lem:bbr-certificate`; BBR Proposition 2.6(i) at `Δ ≥ q + 2` | `Appendix.BBR.contraction_certificate_of_gap_two`, `Appendix.BBR.proposition_2_6_i_of_gap_two` | [BBR/GapTwo.lean](../../CI2ZF/Coupling/BBR/GapTwo.lean) |
+| 8.3 `lem:slot-fact`, 8.4 `lem:edge-slot-lift` | `Appendix.Edge.slot_representation`, `Appendix.Edge.lem_edge_slot_lift` | [Edge/Slots/SlotLift.lean](../../CI2ZF/Coupling/Edge/Slots/SlotLift.lean) |
+| 8.5 `lem:edge-one-label` | `Appendix.Edge.OneLabel.edge_one_label` | [Edge/Slots/OneLabel.lean](../../CI2ZF/Coupling/Edge/Slots/OneLabel.lean) |
+| 9.1 `lem:girth5-disintegration` | `Appendix.Girth.second_layer_disintegration` | [Covariance/Graph/Disintegration.lean](../../CI2ZF/Coupling/Girth/Covariance/Graph/Disintegration.lean) |
+| 9.2 `lem:girth5-one-edge` | `Appendix.Girth.girth5_one_edge` | [Covariance/Insertion/OneEdgeOperator.lean](../../CI2ZF/Coupling/Girth/Covariance/Insertion/OneEdgeOperator.lean) |
+| 9.7 `thm:potts-gap-girth5` | `Appendix.Girth.OperatorGap.potts_gap_girth5` | [Spectral/OperatorGap.lean](../../CI2ZF/Coupling/Girth/Spectral/OperatorGap.lean) |
+
+Lemma 6.10 and the `k`-fold clause of Lemma 3.6 are formalized in the
+narrowed form the companion now states. What remains unformalized is
+citation-level: that CFFGZZ Theorem 20 and Proposition 22 apply in
+Remark 4.4, that `Appendix.CV.hardMetric` is literally Eq. (2) of Carlson
+and Vigoda (2024), and the literature attributions of Remarks 4.2 and 4.9.
+See [STATUS.md](STATUS.md#scope-of-the-coverage).
+
 ## Build and audit
 
 From the repository root, run:

@@ -12,6 +12,8 @@ The Lean proof does not follow the cited one. It extends the Carlson–Vigoda co
 
 `ExternalCriticalHardColouringTheorem`, defined in [`CI2ZF/Potts/Geometry/BoundedGraphClass.lean`](../CI2ZF/Potts/Geometry/BoundedGraphClass.lean), is the statement in the form the paper cites. It asserts that one real constant bounds the Hamming Wasserstein distance between the two normalized child Gibbs laws at activity zero, uniformly over all original finite simple graphs of maximum degree at most Δ, arbitrary partial colourings, free roots, and two root colours. The root is removed from the common configuration space, and constraints involving only pinned vertices are omitted. It is thus stated on original graphs with arbitrary pinning, rather than on an enlarged abstract class of boundary-count data.
 
+`critical_line_hard_endpoint` in [`CI2ZF/Potts/Theorems/CriticalScope.lean`](../CI2ZF/Potts/Theorems/CriticalScope.lean) states the conclusion of companion Remark 4.4 (`rem:critical-scope`): the original-graph input holds along the whole line `q = 11Δ/6`, `Δ ≥ 2`. The same file proves the remark's list-slack inequality `|L_u^τ| − deg_{G^τ}(u) ≥ q − Δ` for arbitrary pinnings (`hardList_slack_original`) and its critical value `5Δ/6` (`hardList_slack_critical`), the fact that every critical integer pair is `(6j, 11j)` (`critical_line_pairs`), and that the normalized law at `x = 0` is uniform on proper list colourings (`gibbs_zero_uniform`). The remark's claim that CFFGZZ Theorem 20 and Proposition 22 apply is a statement about the cited paper and is not formalized.
+
 The paper's cited route is kept for comparison. The declarations
 `ExternalCriticalHardColouringTheorem.to_normalizedInput`,
 `GraphClassCoupling`, and the `PinningLeaf*` modules formalize the
@@ -45,7 +47,7 @@ The proof formalizes Lemma 5.19 as a finite-sum decomposition over sphere config
 
 ## BBR Theorem 2.5 and Proposition 2.6(i)
 
-Source: [Bencs–Berrekkal–Regts, *Near optimal bounds for weak and strong spatial mixing for the anti-ferromagnetic Potts model on trees*, Electron. J. Probab. 30 (2025)](https://doi.org/10.1214/25-EJP1327), Theorem 2.5 and Proposition 2.6(i); Theorem 7 and Proposition 8(i) of [arXiv:2310.04338v2](https://arxiv.org/html/2310.04338v2). `CI2ZF.Appendix.BBR.Literature C`, in [`BBR/Certificate.lean`](../CI2ZF/Coupling/BBR/Certificate.lean), states both for the actual cavity messages, with their published hypotheses; the printed degree assumption of Proposition 2.6(i) is unchanged. The application handles separate degree-gap-two cases by its own arithmetic branch; it does not assert an extension of Proposition 2.6(i)'s published theorem statement.
+Source: [Bencs–Berrekkal–Regts, *Near optimal bounds for weak and strong spatial mixing for the anti-ferromagnetic Potts model on trees*, Electron. J. Probab. 30 (2025)](https://doi.org/10.1214/25-EJP1327), Theorem 2.5 and Proposition 2.6(i); Theorem 7 and Proposition 8(i) of [arXiv:2310.04338v2](https://arxiv.org/html/2310.04338v2). `CI2ZF.Appendix.BBR.Literature C`, in [`BBR/Certificate.lean`](../CI2ZF/Coupling/BBR/Certificate.lean), states both for the actual cavity messages, with their published hypotheses; the printed degree assumption of Proposition 2.6(i) is unchanged. The regional application handles the degree-gap-two cases by its own arithmetic branch. Separately, [`BBR/GapTwo.lean`](../CI2ZF/Coupling/BBR/GapTwo.lean) proves the same statement for `Δ ≥ q + 2` (`proposition_2_6_i_of_gap_two`), as the companion asserts, by the library proof, which uses only `q + 2 ≤ Δ`; `contraction_certificate_of_gap_two` derives the contraction certificate of `lem:bbr-certificate` from it for every `Δ ≥ q + 2`.
 
 - `theorem_2_5_holds`, in [`BBR/Theorem25.lean`](../CI2ZF/Coupling/BBR/Theorem25.lean), proves the squared-norm contraction of the square-root message recursion as in BBR Section 3: the mean value theorem along the segment `sR + (1−s)R'`, Cauchy–Schwarz, and the pointwise Jacobian bound `differential_contraction`.
 - `proposition_2_6_i_holds`, in [`BBR/Proposition26.lean`](../CI2ZF/Coupling/BBR/Proposition26.lean), follows BBR Section 4, but replaces their Lemma 4.1 (smoothing) and Lemma 4.2(i) by two uses of the concavity of `log`: a chord bound and Jensen's inequality in AM–GM form. Lemma 4.3 is proved by a derivative argument.
@@ -80,9 +82,16 @@ edge CI or Lee–Yang transfer premise is introduced. See the
 
 The transitive axiom dependencies of all imported theorems are limited to `propext`, `Classical.choice`, and `Quot.sound`. Passing the audit rules out hidden proof placeholders and added axioms. The audit does not inspect a theorem's explicit premises, which are part of its statement. With these six formalized ingredients proved, the premises of the paper-facing theorems are their parameter conditions, together with the coupling assumptions of the conditional transfer theorems.
 
-The regional conclusions do not assert that every auxiliary lemma or
-generalization in the paper has been formalized at its original scope.
-The general pairwise-family transfer is implemented for positive-activity
-Potts systems, and the edge-Potts proof uses finite slot approximations
-instead of a standalone countable exact-slot representation theorem.
-See the [Appendix scope limits](appendix/STATUS.md#scope-of-the-coverage).
+Every numbered theorem, lemma, proposition and corollary of both papers
+has a Lean counterpart, listed in the [coverage table](coverage.json).
+Companion Lemma 6.10 is proved for the Potts family at positive activity
+`x ∈ J ⊆ (0,1]`, the form the companion now states and the only case the
+companion uses (`CI2ZF.Appendix.Girth.potts_eventual_transfer_uniform`).
+Companion Lemmas 8.3 to 8.5, the countable slot representation, the exact
+countable slot lift and the one-label bound on it, are proved as stated
+(`CI2ZF.Appendix.Edge.slot_representation`, `lem_edge_slot_lift`,
+`OneLabel.edge_one_label`). The unformalized claims are citation-level:
+that CFFGZZ Theorem 20 and Proposition 22 apply in companion Remark 4.4,
+that the hard CV metric is literally Eq. (2) of Carlson and Vigoda
+(2024), and the cited background in remarks, such as the Heilmann–Lieb
+theorem in main-paper Remark 5.8. See the [Appendix coverage notes](appendix/STATUS.md#scope-of-the-coverage).

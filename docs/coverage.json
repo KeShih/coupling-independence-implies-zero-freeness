@@ -1,0 +1,1557 @@
+[
+  {
+    "paper": "main",
+    "number": "1.1",
+    "label": "thm:intro-main",
+    "kind": "theorem",
+    "title": "Potts zero-freeness near [0,1]",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.potts_main_theorem",
+      "CI2ZF.Potts.UniformPottsZeroFree",
+      "CI2ZF.Potts.fullPolynomial_eq",
+      "CI2ZF.pottsInterval"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "1.2",
+    "label": "thm:potts-transfer",
+    "kind": "theorem",
+    "title": "Coupling independence implies zero-freeness",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.graph_class_potts_transfer_of_bounded",
+      "CI2ZF.Potts.GraphClassTransferInputs",
+      "CI2ZF.Potts.GraphClass",
+      "CI2ZF.Potts.GraphClassRootCouplingBound"
+    ],
+    "note": "Lean classes are closed under relabelled induced subgraphs, and the coupling inputs are required only when both child laws exist."
+  },
+  {
+    "paper": "main",
+    "number": "1.3",
+    "label": "rem:beyond-potts",
+    "kind": "remark",
+    "title": "Beyond Potts",
+    "status": "remark",
+    "lean": [],
+    "note": "Describes the ingredients of the transfer proof; it makes no claim of its own."
+  },
+  {
+    "paper": "main",
+    "number": "2.1",
+    "label": "lem:hard-feas",
+    "kind": "lemma",
+    "title": "Hard feasibility",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Potts.card_hardList_of_succ_le",
+      "PottsCI.PartialColouring.degreeBound_of_original",
+      "CI2ZF.Potts.normalizedPartition_zero_ne_zero",
+      "CI2ZF.Potts.partition_zero_pos_of_succ_le"
+    ],
+    "note": "The list bound is card_hardList_of_succ_le at I = τ.toPinningData G, with the degree hypothesis supplied by degreeBound_of_original."
+  },
+  {
+    "paper": "main",
+    "number": "2.2",
+    "label": "def:potts-ci",
+    "kind": "definition",
+    "title": "Potts coupling independence",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Potts.GraphClassRootCouplingBound",
+      "CI2ZF.Potts.GraphClassTransferInputs",
+      "CI2ZF.Potts.rootChildData"
+    ],
+    "note": "Lean requires the bound only when both child partitions are positive, which holds for q ≥ Δ+1."
+  },
+  {
+    "paper": "main",
+    "number": "3.1",
+    "label": "lem:cavg",
+    "kind": "lemma",
+    "title": "Complex averages under nearby laws",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.paper_complex_average_with_anchor",
+      "CI2ZF.centeredAverageLogRatio",
+      "CI2ZF.exp_scaledCenteredAverageLogRatio",
+      "CI2ZF.continued_average_log_bound"
+    ],
+    "note": "That the explicit logarithm is the paper's continuous branch follows from the scaling-path lemmas and uniqueness of continuous logarithms."
+  },
+  {
+    "paper": "main",
+    "number": "3.2",
+    "label": "lem:potts-positive-response",
+    "kind": "lemma",
+    "title": "Positive-activity Potts induction",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.lem_potts_positive_response",
+      "CI2ZF.Potts.uniform_positive_response",
+      "CI2ZF.Potts.HasSmallResponseLog",
+      "CI2ZF.Potts.GraphClass.positive_interval_zero_free_and_responses"
+    ],
+    "note": "ε and α are chosen from (q, Δ, δ, C) before the class, through the union class CI2ZF.Potts.unionClass."
+  },
+  {
+    "paper": "main",
+    "number": "3.3",
+    "label": "lem:potts-hard-comparison",
+    "kind": "lemma",
+    "title": "One-vertex comparison at z=0",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.rootChildData_partition_zero_comparison",
+      "CI2ZF.Potts.normalizedPartition_pinVertex_zero_comparison"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "3.4",
+    "label": "prop:ep-disc",
+    "kind": "proposition",
+    "title": "Potts disc around z=0",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.prop_ep_disc",
+      "CI2ZF.Potts.uniform_hard_disc",
+      "CI2ZF.Potts.unionClass",
+      "CI2ZF.Potts.PinningFamily.hard_uniform_transfer"
+    ],
+    "note": "ρ₀ is chosen from (q, Δ, C₀) before the class."
+  },
+  {
+    "paper": "main",
+    "number": "4.1",
+    "label": "thm:strict-ci",
+    "kind": "theorem",
+    "title": "Hamming coupling independence on [0,1]",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.root_strict_ci",
+      "CI2ZF.Potts.root_strict_uniform_ci",
+      "CI2ZF.ciBound",
+      "CI2ZF.Potts.actualRootChildGibbs"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "4.2",
+    "label": "lem:stationary-comparison",
+    "kind": "lemma",
+    "title": "Stationary comparison",
+    "status": "formalized",
+    "lean": [
+      "PottsCI.stationary_comparison_graphPathMetric",
+      "PottsCI.graphPathMetric",
+      "PottsCI.stationary_comparison_graphPathMetric_of_nonneg",
+      "PottsCI.stationary_comparison_ham"
+    ],
+    "note": "Contraction is assumed only on adjacent states of the path metric and the disagreement bound only as a ν_Q-average, as in the paper."
+  },
+  {
+    "paper": "main",
+    "number": "4.3",
+    "label": "lem:finite-endpoint-closure",
+    "kind": "lemma",
+    "title": "Finite-state continuity of normalized laws",
+    "status": "formalized",
+    "lean": [
+      "PottsCI.finite_endpoint_closure",
+      "PottsCI.finite_endpoint_closure_dist",
+      "PottsCI.W_endpoint_le_liminf",
+      "PottsCI.W_endpoint_le_of_const"
+    ],
+    "note": "Includes the two-family W_d limit and the liminf closure for a varying bound B(x)."
+  },
+  {
+    "paper": "main",
+    "number": "4.4",
+    "label": "lem:active-rep",
+    "kind": "lemma",
+    "title": "Soft Potts as a random hard-colouring model",
+    "status": "formalized-equivalent",
+    "lean": [
+      "PottsCI.PinningData.spinLawGivenActive_eq_uniformHardFibre",
+      "PottsCI.PinningData.sum_jointActiveWeight_eq_weight",
+      "CI2ZF.Potts.activatedSet_law_le",
+      "PottsCI.Vigoda.activeHardListInstance_isProper_iff"
+    ],
+    "note": "Stated in joint-weight form; that the sampling process has joint law J(A,σ)/Z is a definitional unfolding."
+  },
+  {
+    "paper": "main",
+    "number": "4.5",
+    "label": "def:flip",
+    "kind": "definition",
+    "title": "Hard list-flip transition",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Potts.FlipProfile",
+      "CI2ZF.Potts.profileStep",
+      "CI2ZF.Potts.flipKernel",
+      "CI2ZF.Potts.flipKernel_vigoda"
+    ],
+    "note": "Defined for an arbitrary profile; flipSet is the alternating component, which equals the paper's induced component on proper colourings."
+  },
+  {
+    "paper": "main",
+    "number": "4.6",
+    "label": "def:soft-kernel",
+    "kind": "definition",
+    "title": "Soft flip kernel",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Potts.softFlipKernel",
+      "CI2ZF.Potts.Soft.activeLaw",
+      "CI2ZF.Potts.softFlipKernel_eq_coin_mixture",
+      "CI2ZF.Potts.softFlipKernel_vigoda"
+    ],
+    "note": "Defined for an arbitrary profile and every x ∈ (0,1]."
+  },
+  {
+    "paper": "main",
+    "number": "4.7",
+    "label": "lem:soft-stationary",
+    "kind": "lemma",
+    "title": "Soft flip kernels",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.lem_soft_stationary",
+      "CI2ZF.Potts.softFlipKernel_reversible",
+      "CI2ZF.Potts.softFlipKernel_irreducible",
+      "CI2ZF.Potts.softFlipKernel_stationary"
+    ],
+    "note": "Every profile and every x ∈ (0,1], with reversibility, stationarity, and irreducibility when ρ₁ > 0."
+  },
+  {
+    "paper": "main",
+    "number": "4.8",
+    "label": "lem:coupled-activation-root-local",
+    "kind": "lemma",
+    "title": "The two hard instances differ only near v",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.coupled_activation_root_local",
+      "CI2ZF.activationLaw",
+      "CI2ZF.coinActivation_law",
+      "PottsCI.Vigoda.RootLocalPair"
+    ],
+    "note": "One declaration for every 0 < x ≤ 1."
+  },
+  {
+    "paper": "main",
+    "number": "4.9",
+    "label": "lem:boundary-sensitivity",
+    "kind": "lemma",
+    "title": "Effect of adding one labelled free–pinned edge",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.lem_boundary_sensitivity",
+      "CI2ZF.Potts.softFlipKernel_addBoundaries_W_le",
+      "CI2ZF.Potts.flipKernel_sublists_W_le",
+      "CI2ZF.Potts.rootChild_softVigoda_boundary_W_le"
+    ],
+    "note": "A general profile with R_ρ < ∞, every x ∈ (0,1], k added free–pinned edges counted with multiplicity, and k deleted colours."
+  },
+  {
+    "paper": "main",
+    "number": "4.10",
+    "label": "prop:hard-one-step",
+    "kind": "proposition",
+    "title": "Conditional hard estimate",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.conditionalHardCouplingEstimate",
+      "CI2ZF.hardStep_W_drift_le",
+      "CI2ZF.fullHardCoupling_cost_drift_le",
+      "CI2ZF.activatedSet_rootLocal"
+    ],
+    "note": "Stated for every root-local pair and every coin outcome, with no degree bound."
+  },
+  {
+    "paper": "main",
+    "number": "4.11",
+    "label": "lem:soft-contraction",
+    "kind": "lemma",
+    "title": "Soft path contraction",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.lem_soft_contraction",
+      "CI2ZF.Potts.softVigoda_adjacent_coupling",
+      "CI2ZF.Potts.softVigoda_contraction",
+      "CI2ZF.Potts.softVigoda_eq_library"
+    ],
+    "note": "Includes x = 1, an explicit adjacent coupling, and the all-pairs contraction by 1 − κ_x/n."
+  },
+  {
+    "paper": "main",
+    "number": "4.12",
+    "label": "prop:full-interval-hci",
+    "kind": "proposition",
+    "title": "Vigoda-profile coupling for newly pinned laws",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.root_positive_ci",
+      "CI2ZF.Potts.root_strict_ci",
+      "CI2ZF.Potts.positiveRootChildGibbs",
+      "CI2ZF.ciBound"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "4.13",
+    "label": "cor:critical-line-input",
+    "kind": "corollary",
+    "title": "Coupling input at q=11Delta/6",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.critical_line_hard_endpoint",
+      "CI2ZF.Potts.ExternalCriticalHardColouringTheorem",
+      "CI2ZF.Potts.root_critical_uniform_ci"
+    ],
+    "note": "The x = 0 bound is proved by extending the Carlson–Vigoda contraction, not from CFFGZZ Theorem 20 as in the paper's proof."
+  },
+  {
+    "paper": "main",
+    "number": "5.1",
+    "label": "prop:field-transfer",
+    "kind": "proposition",
+    "title": "Field transfer",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.LeeYang.prop_field_transfer",
+      "CI2ZF.LeeYang.uniform_graph_class_normalized_field_transfer",
+      "CI2ZF.LeeYang.uniform_graph_class_field_transfer",
+      "CI2ZF.LeeYang.normalizedFieldPartition"
+    ],
+    "note": "θ is chosen from (q, Δ, C₀) before the class, and the Lean polydisc is closed."
+  },
+  {
+    "paper": "main",
+    "number": "5.2",
+    "label": "thm:lee-yang",
+    "kind": "theorem",
+    "title": "Lee–Yang polydisc",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.LeeYang.near_vigoda_vertex_field_zero_free",
+      "CI2ZF.LeeYang.cv_vertex_field_zero_free",
+      "CI2ZF.LeeYang.high_girth_original_field_transfer",
+      "CI2ZF.LeeYang.UniformVertexFieldZeroFree"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "5.3",
+    "label": "rem:lee-yang-related",
+    "kind": "remark",
+    "title": "Related results",
+    "status": "remark",
+    "lean": [],
+    "note": "Compares Theorem 5.2 with cited results."
+  },
+  {
+    "paper": "main",
+    "number": "5.4",
+    "label": "cor:edge-lee-yang",
+    "kind": "corollary",
+    "title": "Edge-colour Lee–Yang polydisc",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.LeeYang.edge_lee_yang",
+      "CI2ZF.LeeYang.edge_lee_yang_all_fields"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "5.5",
+    "label": "lem:holant-residual-input",
+    "kind": "lemma",
+    "title": "Residual Holant input",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.HolantCoupling.residual_family_sharp_child_W_le",
+      "CI2ZF.Holant.residualFamily_closed",
+      "CI2ZF.Holant.NormalizedInstance.child_partition_le",
+      "CI2ZF.Holant.NormalizedInstance.shifted_partition_zero"
+    ],
+    "note": "The clauses are stated in several declarations."
+  },
+  {
+    "paper": "main",
+    "number": "5.6",
+    "label": "thm:holant-box",
+    "kind": "theorem",
+    "title": "Log-concave Holant polytube",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Holant.exists_uniform_holant_polytube",
+      "CI2ZF.Holant.holant_orthant",
+      "CI2ZF.Holant.holant_uniform_diagonal",
+      "CI2ZF.Holant.graphPartition"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "5.7",
+    "label": "cor:bmatching-short",
+    "kind": "corollary",
+    "title": "b-matchings",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Holant.bmatching_uniform_polytube",
+      "CI2ZF.Holant.bmatching_orthant",
+      "CI2ZF.Holant.matchingPartition",
+      "CI2ZF.Holant.mem_edgePolytube_iff"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "main",
+    "number": "5.8",
+    "label": "rem:matching-degree-dependence",
+    "kind": "remark",
+    "title": "Dependence on the maximum degree",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Holant.star_matchingPartition_diagonal",
+      "CI2ZF.Holant.bmatching_width_le_inv",
+      "CI2ZF.Holant.no_degree_free_width",
+      "CI2ZF.Holant.star"
+    ],
+    "note": "The Heilmann–Lieb and Wagner sentences are cited background."
+  },
+  {
+    "paper": "main",
+    "number": "5.9",
+    "label": "cor:bcover-short",
+    "kind": "corollary",
+    "title": "b-edge covers",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Holant.cor_bcover_short",
+      "CI2ZF.Holant.cor_bcover_short_intrinsic",
+      "CI2ZF.Holant.coverWidth",
+      "CI2ZF.Holant.coverPartition_ne_zero_coverWidth"
+    ],
+    "note": "The width depends only on (Δ, λ₋)."
+  },
+  {
+    "paper": "main",
+    "number": "A.1",
+    "label": "rem:additional-potts-transfer",
+    "kind": "remark",
+    "title": "Transfer and the hard endpoint",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.pinned_leaf_realization_girth_class",
+      "CI2ZF.Potts.zero_free_of_girth_class",
+      "CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree",
+      "CI2ZF.Appendix.high_temperature_zero_free"
+    ],
+    "note": "The library's girth rows are proved through the residual-instance transfer; zero_free_of_girth_class formalizes the leaf-realization route described here."
+  },
+  {
+    "paper": "companion",
+    "number": "2.1",
+    "label": "lem:pinned-leaf-realization",
+    "kind": "lemma",
+    "title": "Pinned-leaf realization",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.pinned_leaf_realization",
+      "CI2ZF.Potts.pinned_leaf_realization_girth_class",
+      "CI2ZF.Potts.leafPinning_polynomial",
+      "CI2ZF.Potts.leafGraph_egirth"
+    ],
+    "note": "The new leaves are indexed by (u, c, k < b_u(c)), in bijection with the edges up of the paper."
+  },
+  {
+    "paper": "companion",
+    "number": "2.2",
+    "label": "lem:hard-feas",
+    "kind": "lemma",
+    "title": "Hard feasibility",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Potts.card_hardList_of_succ_le",
+      "PottsCI.PartialColouring.degreeBound_of_original",
+      "CI2ZF.Potts.normalizedPartition_zero_ne_zero",
+      "CI2ZF.Potts.partition_zero_pos_of_succ_le"
+    ],
+    "note": "The list bound is card_hardList_of_succ_le at I = τ.toPinningData G, with the degree hypothesis supplied by degreeBound_of_original."
+  },
+  {
+    "paper": "companion",
+    "number": "2.3",
+    "label": "def:potts-ci",
+    "kind": "definition",
+    "title": "Potts coupling independence",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Potts.GraphClassRootCouplingBound",
+      "CI2ZF.Potts.GraphClassTransferInputs",
+      "CI2ZF.Potts.rootChildData"
+    ],
+    "note": "Lean requires the bound only when both child partitions are positive, which holds for q ≥ Δ+1."
+  },
+  {
+    "paper": "companion",
+    "number": "2.4",
+    "label": "thm:potts-transfer",
+    "kind": "theorem",
+    "title": "Potts transfer",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.graph_class_potts_transfer_of_bounded",
+      "CI2ZF.Potts.graph_class_potts_transfer",
+      "CI2ZF.Potts.GraphClassTransferInputs",
+      "CI2ZF.Potts.GraphClass"
+    ],
+    "note": "Lean classes are closed under relabelled induced subgraphs, and the coupling inputs are required only when both child laws exist."
+  },
+  {
+    "paper": "companion",
+    "number": "2.5",
+    "label": "lem:potts-positive-response",
+    "kind": "lemma",
+    "title": "Positive-base Potts induction",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.lem_potts_positive_response",
+      "CI2ZF.Potts.uniform_positive_response",
+      "CI2ZF.Potts.HasSmallResponseLog",
+      "CI2ZF.Potts.GraphClass.positive_interval_zero_free_and_responses"
+    ],
+    "note": "ε and α are chosen from (q, Δ, δ, C) before the class, through the union class CI2ZF.Potts.unionClass."
+  },
+  {
+    "paper": "companion",
+    "number": "3.1",
+    "label": "thm:strict-ci",
+    "kind": "theorem",
+    "title": "Hamming coupling independence on [0,1]",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.root_strict_ci",
+      "CI2ZF.Potts.root_strict_uniform_ci",
+      "CI2ZF.ciBound",
+      "CI2ZF.Potts.actualRootChildGibbs"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "3.2",
+    "label": "prop:full-interval-hci",
+    "kind": "proposition",
+    "title": "Vigoda-profile coupling for newly pinned laws",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.root_positive_ci",
+      "CI2ZF.Potts.root_strict_ci",
+      "CI2ZF.Potts.positiveRootChildGibbs",
+      "CI2ZF.ciBound"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "3.3",
+    "label": "cor:critical-line-input",
+    "kind": "corollary",
+    "title": "Critical-line coupling input",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.critical_line_hard_endpoint",
+      "CI2ZF.Potts.ExternalCriticalHardColouringTheorem",
+      "CI2ZF.Potts.root_critical_uniform_ci"
+    ],
+    "note": "The x = 0 bound is proved by extending the Carlson–Vigoda contraction, not from CFFGZZ Theorem 20 as in the paper's proof."
+  },
+  {
+    "paper": "companion",
+    "number": "3.4",
+    "label": "lem:soft-stationary",
+    "kind": "lemma",
+    "title": "Soft flip kernels",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.lem_soft_stationary",
+      "CI2ZF.Potts.softFlipKernel_cv",
+      "CI2ZF.Potts.softCVKernel_reversible_irreducible",
+      "CI2ZF.Potts.cvProfile_rho_one"
+    ],
+    "note": "Every profile and every x ∈ (0,1], with reversibility, stationarity, and irreducibility when ρ₁ > 0."
+  },
+  {
+    "paper": "companion",
+    "number": "3.5",
+    "label": "lem:coupled-activation-root-local",
+    "kind": "lemma",
+    "title": "The two hard instances differ only near v",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.coupled_activation_root_local",
+      "CI2ZF.activationLaw_one",
+      "CI2ZF.activationLaw_w_eq_prod",
+      "CI2ZF.coinActivation_law"
+    ],
+    "note": "One declaration for every 0 < x ≤ 1, including the empty activation at x = 1."
+  },
+  {
+    "paper": "companion",
+    "number": "3.6",
+    "label": "lem:boundary-sensitivity",
+    "kind": "lemma",
+    "title": "Effect of adding one labelled free–pinned edge",
+    "status": "formalized-narrowed",
+    "lean": [
+      "CI2ZF.Potts.lem_boundary_sensitivity",
+      "CI2ZF.Potts.softFlipKernel_addBoundaries_W_le_R",
+      "CI2ZF.Potts.flipKernel_sublists_W_le_R",
+      "CI2ZF.Potts.rootChild_softCV_boundary_W_le"
+    ],
+    "note": "The companion now says 'k labelled free–pinned edges', as in the main text, in place of 'k labelled constraints'."
+  },
+  {
+    "paper": "companion",
+    "number": "3.7",
+    "label": "lem:finite-endpoint-closure",
+    "kind": "lemma",
+    "title": "Finite-state continuity of normalized laws",
+    "status": "formalized",
+    "lean": [
+      "PottsCI.finite_endpoint_closure",
+      "PottsCI.W_endpoint_le_of_const",
+      "PottsCI.finite_endpoint_closure_dist"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "4.1",
+    "label": "thm:additional-potts-zf",
+    "kind": "theorem",
+    "title": "Additional Potts zero-free regimes",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.near_vigoda_zero_free",
+      "CI2ZF.Appendix.CV.zero_free",
+      "CI2ZF.Appendix.Girth.high_girth_residual_original_zero_free",
+      "CI2ZF.Potts.UniformPottsZeroFree"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "4.2",
+    "label": null,
+    "kind": "remark",
+    "title": "Literature and algorithmic use of the three [0,1] regimes",
+    "status": "remark",
+    "lean": [],
+    "note": "Literature attribution for the three regimes."
+  },
+  {
+    "paper": "companion",
+    "number": "4.3",
+    "label": "lem:int-reduction",
+    "kind": "lemma",
+    "title": "Integer reduction",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.integer_reduction",
+      "CI2ZF.Appendix.nearVigoda_regime_cases"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "4.4",
+    "label": "rem:critical-scope",
+    "kind": "remark",
+    "title": "The hard endpoint on the critical line",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Potts.critical_line_pairs",
+      "CI2ZF.Potts.hardList_slack_critical",
+      "CI2ZF.Potts.gibbs_zero_uniform",
+      "CI2ZF.Potts.critical_line_hard_endpoint"
+    ],
+    "note": "That CFFGZZ Theorem 20 and Proposition 22 apply is a claim about the cited papers and is not formalized; Lean proves the same x = 0 bound through the Carlson–Vigoda contraction."
+  },
+  {
+    "paper": "companion",
+    "number": "4.5",
+    "label": "thm:potts-ci-regimes",
+    "kind": "theorem",
+    "title": "Coupling inputs in the three additional Potts regimes",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.near_vigoda_uniform_ci",
+      "CI2ZF.Appendix.CV.root_coupling",
+      "CI2ZF.Appendix.Girth.high_girth_coupling",
+      "CI2ZF.Potts.root_W_le_of_option_relabel"
+    ],
+    "note": "Stated on boundary-count data; the (G, τ, r) form follows by CI2ZF.Potts.root_W_le_of_option_relabel."
+  },
+  {
+    "paper": "companion",
+    "number": "4.6",
+    "label": "thm:intro-bbr-interval",
+    "kind": "theorem",
+    "title": "A BBR-certified interval at large girth",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.BBR.high_girth_residual_original_zero_free",
+      "CI2ZF.Appendix.BBR.start",
+      "CI2ZF.Appendix.BBR.start_mem",
+      "CI2ZF.Appendix.BBR.intervalStart"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "4.7",
+    "label": "cor:intro-high-temperature",
+    "kind": "corollary",
+    "title": "General-graph high-temperature intervals",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.high_temperature_zero_free",
+      "CI2ZF.Appendix.high_temperature_graph_coupling"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "4.8",
+    "label": "thm:unrestricted-girth5",
+    "kind": "theorem",
+    "title": "Unrestricted girth-five zero-freeness",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.girth_five_residual_original_zero_free",
+      "CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree",
+      "CI2ZF.Appendix.Girth.girthFiveCIThreshold",
+      "CI2ZF.Appendix.Girth.girth_five_common_threshold"
+    ],
+    "note": "The existential threshold Δ₅(δ) is fixed as girthFiveCIThreshold δ, shared with the coupling theorem."
+  },
+  {
+    "paper": "companion",
+    "number": "4.9",
+    "label": null,
+    "kind": "remark",
+    "title": "Scope and relation to the spectral-gap input",
+    "status": "remark",
+    "lean": [],
+    "note": "Attributes the ingredients; the gap itself is Theorem 9.7."
+  },
+  {
+    "paper": "companion",
+    "number": "5.1",
+    "label": "thm:cv-ci",
+    "kind": "theorem",
+    "title": "Hamming coupling independence at 1.809 Δ",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.CV.option_root_ci",
+      "CI2ZF.Appendix.CV.ciConstant_bounds",
+      "CI2ZF.Potts.root_W_le_of_option_relabel",
+      "CI2ZF.Potts.rootOptionData_degreeBound"
+    ],
+    "note": "Stated on boundary-count data; the (G, τ, r) form follows by CI2ZF.Potts.root_W_le_of_option_relabel."
+  },
+  {
+    "paper": "companion",
+    "number": "5.2",
+    "label": "def:cv-kernel",
+    "kind": "definition",
+    "title": "Soft-CV kernel",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Appendix.CV.cvKernel",
+      "CI2ZF.Appendix.CV.cvKernel_eq_softCVKernel",
+      "CI2ZF.Appendix.CV.softCVKernel",
+      "CI2ZF.Potts.softFlipKernel_cv"
+    ],
+    "note": "cvKernel covers every x ∈ [0,1] and agrees with softCVKernel on (0,1)."
+  },
+  {
+    "paper": "companion",
+    "number": "5.3",
+    "label": "def:cv-metric",
+    "kind": "definition",
+    "title": "Geometric soft-CV metric",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Appendix.CV.geometricMetric",
+      "CI2ZF.Appendix.CV.cv_coefficient",
+      "CI2ZF.Appendix.CV.hardMetric",
+      "CI2ZF.Appendix.CV.geometricMetric_tendsto_hardMetric_cv"
+    ],
+    "note": "The coefficient (P₂−P₃)/2 and the limit x ↓ 0 are proved; identifying hardMetric with [CV24, Eq. (2)] is a citation and is not formalized."
+  },
+  {
+    "paper": "companion",
+    "number": "5.4",
+    "label": "lem:cv-metric",
+    "kind": "lemma",
+    "title": "Metric comparison; adjacent geodesics",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.geometricMetric_comparison",
+      "CI2ZF.Appendix.CV.geometricMetric_adjacent",
+      "CI2ZF.Appendix.CV.edgeLength_bounds"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.5",
+    "label": "lem:cv-path",
+    "kind": "lemma",
+    "title": "A path upper bound for the geometric metric",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.geometricMetric_path_upper",
+      "CI2ZF.Appendix.CV.outputScore",
+      "CI2ZF.Appendix.CV.blockerCount"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.6",
+    "label": "lem:cv-root-local-structure",
+    "kind": "lemma",
+    "title": "Components near the disagreement vertex",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_root_local_structure",
+      "CI2ZF.Appendix.CV.cv_root_local_structure_part1",
+      "CI2ZF.Appendix.CV.cv_root_local_structure_part1_symm",
+      "CI2ZF.Appendix.CV.cv_root_local_structure_part2"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.7",
+    "label": "lem:cv-move-partition",
+    "kind": "lemma",
+    "title": "Partition of the aggregate moves",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_move_partition",
+      "CI2ZF.Appendix.CV.xFamily_exists_unique",
+      "CI2ZF.Appendix.CV.yFamily_exists_unique",
+      "CI2ZF.Appendix.CV.xFamilyRows_disjoint"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.8",
+    "label": "def:cv-component-matching",
+    "kind": "definition",
+    "title": "Conditional coupling matrix",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Appendix.CV.fullHardPartial",
+      "CI2ZF.Appendix.CV.CanonicalMatching.extend",
+      "CI2ZF.Appendix.CV.regular_root_mass_le_piece_mass",
+      "CI2ZF.Appendix.CV.canonical_incidence_cost"
+    ],
+    "note": "The claims inside the definition (full singleton matching, no overfilling, the one-unit saving, root-colour capacities) are proved."
+  },
+  {
+    "paper": "companion",
+    "number": "5.9",
+    "label": "lem:cv-completion",
+    "kind": "lemma",
+    "title": "Component matching and product completion",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.CV.fullHardCoupling",
+      "CI2ZF.Appendix.CV.fullHardCoupling_dominate_partial",
+      "CI2ZF.PartialCoupling.complete"
+    ],
+    "note": "Lean indexes the matrix by output configurations; distinct feasible moves have distinct outputs, so this matches the paper's indexing by moves."
+  },
+  {
+    "paper": "companion",
+    "number": "5.10",
+    "label": "lem:cv-completion-cost",
+    "kind": "lemma",
+    "title": "Cost of the completed coupling",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.PartialCoupling.complete_cost_le_separable",
+      "CI2ZF.hamDrift_le_moves",
+      "CI2ZF.Appendix.CV.hardCommonOffRoot_cost_hamDrift",
+      "CI2ZF.root_colour_holding_ham"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.11",
+    "label": "lem:cv-component-budgets",
+    "kind": "lemma",
+    "title": "Conditional component budgets",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.fullHardCoupling_rootEvent_le",
+      "CI2ZF.Appendix.CV.fullHardCoupling_active_blocker_badMass_le",
+      "CI2ZF.Appendix.CV.fullHardCoupling_safe_cross_lower",
+      "CI2ZF.Appendix.CV.retained_root_add_crossCredit_le_outputScore"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.12",
+    "label": "lem:cv-fresh",
+    "kind": "lemma",
+    "title": "Fresh-colour gain",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_fresh",
+      "CI2ZF.Appendix.CV.singleBlocker_probability",
+      "CI2ZF.Appendix.CV.singleBlockerEvent",
+      "CI2ZF.Appendix.CV.sum_freshGainAt_eq_freshGainCost"
+    ],
+    "note": "Stated per regular neighbour u, with Pr(SB_u) = Rθ²x^{R+e−1}."
+  },
+  {
+    "paper": "companion",
+    "number": "5.13",
+    "label": "lem:cv-incidence",
+    "kind": "lemma",
+    "title": "Ordered-incidence discount bound",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.ordered_incidence_average_le",
+      "CI2ZF.Appendix.CV.targetConstraints",
+      "CI2ZF.Appendix.CV.incidenceDiscount_cross"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.14",
+    "label": "lem:cv-expected",
+    "kind": "lemma",
+    "title": "Expected loss of the geometric discount",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_expected",
+      "CI2ZF.Appendix.CV.betaPlus",
+      "CI2ZF.Appendix.CV.rootEvent_rate",
+      "CI2ZF.Appendix.CV.discountLoss_dominates"
+    ],
+    "note": "Lean's Loss_u is the first-cause charge, an upper bound on the paper's."
+  },
+  {
+    "paper": "companion",
+    "number": "5.15",
+    "label": "lem:cv-credit-disjoint",
+    "kind": "lemma",
+    "title": "Disjointness of the output credits",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.total_discount_pointwise",
+      "CI2ZF.Appendix.CV.retained_root_add_crossCredit_le_outputScore",
+      "CI2ZF.Appendix.CV.crossCreditAt_le_output_vertex"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.16",
+    "label": "def:cv-component-records",
+    "kind": "definition",
+    "title": "Finite component records",
+    "status": "definition",
+    "lean": [
+      "CI2ZF.Appendix.CV.Branch",
+      "CI2ZF.Appendix.CV.branch_state_restrictions",
+      "CI2ZF.Appendix.CV.component_encoding_exists",
+      "CI2ZF.Appendix.CV.mass_cap"
+    ],
+    "note": "The claims inside the definition are proved; the graph-level restriction ξ ≤ χ combines componentBranch_spec with branch_state_restrictions."
+  },
+  {
+    "paper": "companion",
+    "number": "5.17",
+    "label": "lem:cv-record-domination",
+    "kind": "lemma",
+    "title": "Graph-to-record domination",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.selectedRegular_local_charge_le",
+      "CI2ZF.Appendix.CV.singletonColour_local_charge",
+      "CI2ZF.Appendix.CV.canonicalColourCharge"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.18",
+    "label": "lem:cv-balancing-domination",
+    "kind": "lemma",
+    "title": "Balancing-point domination",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.CV.balancing_domination",
+      "CI2ZF.Appendix.CV.low_balancing",
+      "CI2ZF.Appendix.CV.safe_count_budget",
+      "CI2ZF.Appendix.CV.low"
+    ],
+    "note": "The closing facts that each term of the maximum equals 226/125 at the balancing pair and that the pair lies in R_γ are closed rational arithmetic with no separate declaration."
+  },
+  {
+    "paper": "companion",
+    "number": "5.19",
+    "label": "lem:cv-drift-decomposition",
+    "kind": "lemma",
+    "title": "Drift decomposition by colour",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.averaged_geometric_drift_corrected_le",
+      "CI2ZF.Appendix.CV.correctedHardColourCharge"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.20",
+    "label": "lem:cv-certificate",
+    "kind": "lemma",
+    "title": "Finite low-multiplicity estimate",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.recordOne_corrected",
+      "CI2ZF.Appendix.CV.recordTwo_corrected",
+      "CI2ZF.Appendix.CV.one_balancing_equality",
+      "CI2ZF.Appendix.CV.correctedRegularCharge_available_low_le"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.21",
+    "label": "lem:cv-high",
+    "kind": "lemma",
+    "title": "High multiplicity and missing colours",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_high_bulk",
+      "CI2ZF.Appendix.CV.cv_high_missing",
+      "CI2ZF.Appendix.CV.cv_high_missing_corrected"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.22",
+    "label": "lem:cv-special",
+    "kind": "lemma",
+    "title": "The two root colours",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.rootColourCharge_le",
+      "CI2ZF.Appendix.CV.rootColourCharge",
+      "PottsCI.Vigoda.RootLocalPair.symm"
+    ],
+    "note": "The b case is rootColourCharge_le applied to RootLocalPair.symm."
+  },
+  {
+    "paper": "companion",
+    "number": "5.23",
+    "label": "lem:cv-assembly",
+    "kind": "lemma",
+    "title": "The drift envelope",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_assembly_1809",
+      "CI2ZF.Appendix.CV.cv_assembly",
+      "CI2ZF.Appendix.CV.low_eq_rates"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.24",
+    "label": "lem:cv-scalar",
+    "kind": "lemma",
+    "title": "Final numerical inequality",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.scalar_closure",
+      "CI2ZF.Appendix.CV.gammaGain",
+      "CI2ZF.Appendix.CV.gammaLoss",
+      "CI2ZF.Appendix.CV.gap"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "5.25",
+    "label": "thm:cv-contraction",
+    "kind": "theorem",
+    "title": "Geometric soft-CV contraction",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_contraction",
+      "CI2ZF.Appendix.CV.cvKernel",
+      "CI2ZF.Appendix.CV.cv_W_drift",
+      "CI2ZF.Appendix.CV.cv_contraction_of_regime"
+    ],
+    "note": "An explicit coupling of the closed-interval kernel cvKernel for every x ∈ (0,1]."
+  },
+  {
+    "paper": "companion",
+    "number": "5.26",
+    "label": "lem:cv-child-middle",
+    "kind": "lemma",
+    "title": "Soft-CV child–middle row discrepancy",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.CV.cv_child_middle_ham",
+      "CI2ZF.Appendix.CV.cv_child_middle_metric",
+      "CI2ZF.Appendix.CV.cvKernel_addBoundary_W_le"
+    ],
+    "note": "Includes x = 1."
+  },
+  {
+    "paper": "companion",
+    "number": "6.1",
+    "label": "thm:high-girth-soft-ci",
+    "kind": "theorem",
+    "title": "Large-girth coupling independence",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.Girth.high_girth_coupling",
+      "CI2ZF.Appendix.Girth.largeGirthFamily",
+      "CI2ZF.Potts.root_W_le_of_option_relabel",
+      "CI2ZF.Appendix.Girth.closed_root_coupling_of_soft"
+    ],
+    "note": "Stated on boundary-count data; the (G, τ, r) form follows by CI2ZF.Potts.root_W_le_of_option_relabel."
+  },
+  {
+    "paper": "companion",
+    "number": "6.2",
+    "label": "lem:hg-jacobian-factor",
+    "kind": "lemma",
+    "title": "Exact Jacobian factorization",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.blockAction_energy_le",
+      "CI2ZF.Appendix.Girth.transformedBlock",
+      "CI2ZF.Appendix.Girth.hasDerivAt_transformed_message"
+    ],
+    "note": "The squared operator-norm bound is stated as the energy inequality Σ_c (Jh)_c² ≤ F₁F₂‖h‖²."
+  },
+  {
+    "paper": "companion",
+    "number": "6.3",
+    "label": "lem:hg-continuous-marginal",
+    "kind": "lemma",
+    "title": "Pointwise marginal bound",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.sharp_message_marginal",
+      "CI2ZF.Appendix.Girth.messageCap_eq_paper_formula",
+      "CI2ZF.Appendix.Girth.potts_messageDomain_invariant",
+      "CI2ZF.Appendix.Girth.palette_mass_lower"
+    ],
+    "note": "Stated for general weights and palettes; the choice A = A̲_v is admissible by palette_mass_lower and nonroot_four_slack."
+  },
+  {
+    "paper": "companion",
+    "number": "6.4",
+    "label": "lem:hg-continuous-amortized",
+    "kind": "lemma",
+    "title": "Occupancy-factor bound",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.LocalRecursion.law_occupancy_le",
+      "CI2ZF.Appendix.Girth.message_occupancy_bound",
+      "CI2ZF.Appendix.Girth.cap_log_eq_entropy",
+      "CI2ZF.Appendix.Girth.entropyCorrection"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "6.5",
+    "label": "lem:hg-strong-jacobian",
+    "kind": "lemma",
+    "title": "Weighted Jacobian contraction",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.Girth.LocalRecursion.weighted_scaled_matrix_contraction",
+      "CI2ZF.Appendix.Girth.hasDerivAt_scaled_transformed_message",
+      "CI2ZF.Appendix.Girth.CavityTree.weightSquare_lower",
+      "CI2ZF.Appendix.Girth.CavityTree.weightSquare_upper"
+    ],
+    "note": "The weighted-norm form follows by taking T = max_i w_i²‖h_i‖² in weighted_scaled_matrix_contraction."
+  },
+  {
+    "paper": "companion",
+    "number": "6.6",
+    "label": "lem:hg-finite-difference",
+    "kind": "lemma",
+    "title": "From Jacobian contraction to message contraction",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.Girth.LocalRecursion.weighted_finite_difference",
+      "CI2ZF.Appendix.Girth.LocalRecursion.interpolate",
+      "CI2ZF.Appendix.Girth.potential_interpolation_domain"
+    ],
+    "note": "The displayed bound follows by taking T = max_i w_i²‖φ(n_i) − φ(m_i)‖² and square roots."
+  },
+  {
+    "paper": "companion",
+    "number": "6.7",
+    "label": "lem:hg-root-response",
+    "kind": "lemma",
+    "title": "Bounded root response",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.root_factor_cancellation",
+      "CI2ZF.Appendix.Girth.rootInfluenceAction_energy",
+      "CI2ZF.Appendix.Girth.rootInfluenceAction",
+      "CI2ZF.Appendix.Girth.CavityTree.scaled_probability_domain"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "6.8",
+    "label": "lem:hg-tid",
+    "kind": "lemma",
+    "title": "Tree total-influence decay",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.CavityTree.total_influence_decay",
+      "CI2ZF.Appendix.Girth.CavityTree.clmmInfluenceIdentity",
+      "CI2ZF.Appendix.Girth.CavityTree.levelTotalVariation",
+      "CI2ZF.Appendix.Girth.CavityTree.totalInfluenceConstant"
+    ],
+    "note": "Stated on cavity trees, the appendix's own encoding of pinned trees, with ℓ = k+1."
+  },
+  {
+    "paper": "companion",
+    "number": "6.9",
+    "label": "lem:hg-eventual-relative-ssm",
+    "kind": "lemma",
+    "title": "Relative SSM beyond a fixed depth",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.Girth.CavityTree.relative_spatial_decay",
+      "CI2ZF.Appendix.Girth.ratio_error_from_log",
+      "CI2ZF.Appendix.Girth.relativeMixingConstant",
+      "CI2ZF.Appendix.Girth.CavityTree.eventual_ratio_spatial_mixing"
+    ],
+    "note": "The log bound is relative_spatial_decay with K = k+2; the ratio form for K ≥ K₁ follows from ratio_error_from_log."
+  },
+  {
+    "paper": "companion",
+    "number": "6.10",
+    "label": "lem:hg-eventual-transfer",
+    "kind": "lemma",
+    "title": "Large-girth transfer from tree decay",
+    "status": "formalized-narrowed",
+    "lean": [
+      "CI2ZF.Appendix.Girth.potts_eventual_transfer_uniform",
+      "CI2ZF.Appendix.Girth.potts_eventual_transfer",
+      "CI2ZF.Appendix.Girth.potts_eventual_transfer_source",
+      "CI2ZF.Appendix.CLMM.eventual_transfer"
+    ],
+    "note": "The companion now states the lemma for the Potts family at positive activity, its only use, in place of general pairwise spin systems."
+  },
+  {
+    "paper": "companion",
+    "number": "7.1",
+    "label": "lem:bbr-certificate",
+    "kind": "lemma",
+    "title": "BBR contraction certificate",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.BBR.contraction_certificate",
+      "CI2ZF.Appendix.BBR.segmentWeightSquare",
+      "CI2ZF.Appendix.BBR.literature",
+      "CI2ZF.Appendix.BBR.contraction_certificate_of_gap_two"
+    ],
+    "note": "The cited BBR inputs enter as a Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature; the proof's non-exceptional case under q + 2 ≤ Δ is contraction_certificate_of_gap_two."
+  },
+  {
+    "paper": "companion",
+    "number": "7.2",
+    "label": "lem:bbr-differential",
+    "kind": "lemma",
+    "title": "Differential contraction",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.BBR.differential_contraction",
+      "CI2ZF.Appendix.BBR.node_differential",
+      "CI2ZF.Appendix.BBR.point_certificate",
+      "CI2ZF.Appendix.BBR.literature"
+    ],
+    "note": "point_certificate takes the Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature."
+  },
+  {
+    "paper": "companion",
+    "number": "7.3",
+    "label": "lem:bbr-influence-factorization",
+    "kind": "lemma",
+    "title": "Influence–Jacobian identity",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.BBR.level_influence_factorization",
+      "CI2ZF.Appendix.BBR.projected_level_response",
+      "CI2ZF.Appendix.BBR.response",
+      "CI2ZF.Appendix.Girth.CavityTree.influenceBlock"
+    ],
+    "note": "The per-vertex identity is the level identity with h supported on one vertex."
+  },
+  {
+    "paper": "companion",
+    "number": "7.4",
+    "label": "prop:bbr-tree-tid",
+    "kind": "proposition",
+    "title": "Tree total-influence decay",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.BBR.total_influence_decay",
+      "CI2ZF.Appendix.BBR.totalInfluenceConstant_eq",
+      "CI2ZF.Appendix.BBR.contractionRate",
+      "CI2ZF.Appendix.BBR.literature"
+    ],
+    "note": "The cited BBR inputs enter as a Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature."
+  },
+  {
+    "paper": "companion",
+    "number": "7.5",
+    "label": "lem:bbr-tree-ssm",
+    "kind": "lemma",
+    "title": "Uniform relative SSM",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.BBR.root_spatial_energy",
+      "CI2ZF.Appendix.BBR.root_relative_ssm",
+      "CI2ZF.Appendix.BBR.relativeConstant",
+      "CI2ZF.Appendix.BBR.literature"
+    ],
+    "note": "The cited BBR inputs enter as a Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature."
+  },
+  {
+    "paper": "companion",
+    "number": "7.6",
+    "label": "thm:bbr-large-girth-ci",
+    "kind": "theorem",
+    "title": "BBR-certified interval at large girth",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.BBR.high_girth_coupling",
+      "CI2ZF.Potts.root_W_le_of_option_relabel",
+      "CI2ZF.Appendix.Girth.largeGirthFamily",
+      "CI2ZF.Potts.PinningFamily.PositiveRootCouplingBound"
+    ],
+    "note": "Stated on boundary-count data; the (G, τ, r) form follows by CI2ZF.Potts.root_W_le_of_option_relabel."
+  },
+  {
+    "paper": "companion",
+    "number": "8.1",
+    "label": "thm:soft-edge-ci",
+    "kind": "theorem",
+    "title": "Edge-Potts coupling independence",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Edge.root_children_ci",
+      "CI2ZF.Appendix.Edge.root_children_ci_positive",
+      "CI2ZF.Appendix.Edge.root_children_ci_open"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "8.2",
+    "label": "cor:soft-edge-zf",
+    "kind": "corollary",
+    "title": "Edge-Potts zero-freeness",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Edge.edge_potts_zero_free",
+      "CI2ZF.Appendix.Edge.edgeGraphClass"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "8.3",
+    "label": "lem:slot-fact",
+    "kind": "lemma",
+    "title": "Slot representation",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Edge.slot_representation_pnat",
+      "CI2ZF.Appendix.Edge.slot_representation",
+      "CI2ZF.Appendix.Edge.IsSlotLaw",
+      "CI2ZF.Appendix.Edge.exists_isSlotLaw"
+    ],
+    "note": "Proved by compactness from the finite real-rooted approximants instead of the paper's Hadamard-factorization argument."
+  },
+  {
+    "paper": "companion",
+    "number": "8.4",
+    "label": "lem:edge-slot-lift",
+    "kind": "lemma",
+    "title": "Exact lift and inherited bounds",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Edge.lem_edge_slot_lift",
+      "CI2ZF.Appendix.Edge.lem_edge_slot_lift_exists",
+      "CI2ZF.Appendix.Edge.edgeSlotModel",
+      "CI2ZF.Appendix.Edge.SlotModel"
+    ],
+    "note": "The countable lift on C × ℕ × ℕ, with exact colour projection."
+  },
+  {
+    "paper": "companion",
+    "number": "8.5",
+    "label": "lem:edge-one-label",
+    "kind": "lemma",
+    "title": "One-label coupling bound",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Edge.OneLabel.edge_one_label",
+      "CI2ZF.Appendix.Edge.OneLabel.edge_one_label_half",
+      "CI2ZF.Appendix.Edge.OneLabel.edge_one_label_zero",
+      "CI2ZF.Appendix.Edge.OneLabel.edge_one_label_coupling"
+    ],
+    "note": "Stated on the countable slot model; α ≠ β is not required."
+  },
+  {
+    "paper": "companion",
+    "number": "9.1",
+    "label": "lem:girth5-disintegration",
+    "kind": "lemma",
+    "title": "Second-layer disintegration",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.second_layer_disintegration",
+      "CI2ZF.Appendix.Girth.second_layer_disintegration_of_degree",
+      "CI2ZF.Appendix.Girth.assemble_bijective",
+      "CI2ZF.Appendix.Girth.gibbs_conditional_product"
+    ],
+    "note": "Every x ≥ 0, with the vertex v written as none in the library's Option form."
+  },
+  {
+    "paper": "companion",
+    "number": "9.2",
+    "label": "lem:girth5-one-edge",
+    "kind": "lemma",
+    "title": "One-edge colour operator",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.girth5_one_edge",
+      "CI2ZF.Appendix.Girth.one_edge_operator",
+      "CI2ZF.Appendix.Girth.projectedEdgeOperator_norm_le",
+      "CI2ZF.Appendix.Girth.cavityLawNN_atom_le"
+    ],
+    "note": "Includes x = 0."
+  },
+  {
+    "paper": "companion",
+    "number": "9.3",
+    "label": "lem:girth5-color-covariance",
+    "kind": "lemma",
+    "title": "Colour covariance of the insertion residual",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.Girth.GraphTwoLayer.actual_estimates",
+      "CI2ZF.Appendix.Girth.InsertionModel.CovarianceEstimates",
+      "CI2ZF.Appendix.Girth.InsertionGraph.G_coordinate_variance",
+      "CI2ZF.Appendix.Girth.ColourCovarianceBound"
+    ],
+    "note": "The weighted bound follows by substituting z∘√r into ColourCovarianceBound, and the independence of β_{u,c} from σ_{W_u} from beta_congr and pi_shell."
+  },
+  {
+    "paper": "companion",
+    "number": "9.4",
+    "label": "thm:girth5-ci",
+    "kind": "theorem",
+    "title": "Unrestricted girth-five coupling independence",
+    "status": "formalized-equivalent",
+    "lean": [
+      "CI2ZF.Appendix.Girth.girth_five_coupling",
+      "CI2ZF.Appendix.Girth.girthFiveCIThreshold",
+      "CI2ZF.Potts.root_W_le_of_option_relabel",
+      "PottsCI.PartialColouring.degreeBound_of_original"
+    ],
+    "note": "Stated on residual instances; the (G, τ, r) form follows by CI2ZF.Potts.root_W_le_of_option_relabel."
+  },
+  {
+    "paper": "companion",
+    "number": "9.5",
+    "label": "lem:girth5-star-bounds",
+    "kind": "lemma",
+    "title": "Star bounds and singleton complement",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.GraphStar.cavity_scaled_le",
+      "CI2ZF.Appendix.Girth.ConditionalStar.leafDensity_budget",
+      "CI2ZF.Appendix.Girth.ConditionalStar.SchurParameters.zero_bound",
+      "CI2ZF.Appendix.Girth.GraphStar.schurParameters"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "9.6",
+    "label": "lem:girth5-star-incidence",
+    "kind": "lemma",
+    "title": "Unequal-incidence star inequality",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.ConditionalStar.SchurParameters.meanStarDefect_nonneg",
+      "CI2ZF.Appendix.Girth.ConditionalStar.SchurParameters.raw_star_inequality",
+      "CI2ZF.Appendix.Girth.ConditionalStar.meanStarDefect_eq_raw",
+      "CI2ZF.Appendix.Girth.GraphStar.schurParameters"
+    ],
+    "note": ""
+  },
+  {
+    "paper": "companion",
+    "number": "9.7",
+    "label": "thm:potts-gap-girth5",
+    "kind": "theorem",
+    "title": "Uniform spectral gap under the degree budget",
+    "status": "formalized",
+    "lean": [
+      "CI2ZF.Appendix.Girth.OperatorGap.potts_gap_girth5",
+      "CI2ZF.Appendix.Girth.OperatorGap.potts_gap_girth5_functions",
+      "CI2ZF.Appendix.Girth.OperatorGap.glauberLaplacian",
+      "CI2ZF.Appendix.Girth.girth_five_closed_poincare"
+    ],
+    "note": "The operator form 𝓛² ⪰ γ_δ𝓛 on the supported L² space, for every x ∈ [0,1]."
+  }
+]

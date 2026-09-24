@@ -15,8 +15,9 @@ the library, so no regional endpoint takes a literature parameter.
 
 The table records the regional conclusions. None of them takes a literature
 hypothesis; the sections below list the cited results each proof uses and
-where they are proved. The auxiliary and generalization limits are recorded in
-[Scope of the coverage](#scope-of-the-coverage).
+where they are proved, together with the modules that state the companion's
+other numbered lemmas. [Scope of the coverage](#scope-of-the-coverage)
+summarizes the coverage of every numbered statement.
 
 | Region | Coupling independence | Uniform zero-free conclusion |
 | --- | --- | --- |
@@ -37,6 +38,18 @@ slot models, proves their actual conditional Gibbs identities, exposure
 couplings and recursive transport bound, proves real-rooted finite slot
 approximations, projects to the finite colour space and passes to the limit.
 The zero-free corollary uses the already formalized graph-class transfer theorem.
+
+The countable slot lemmas are also proved as stated.
+[`Slots/SlotLift.lean`](../../CI2ZF/Coupling/Edge/Slots/SlotLift.lean) proves
+Lemma 8.3 (`lem:slot-fact`), the countable slot representation
+`Edge.slot_representation` for every `0 < x < 1`, by compactness from the
+finite real-rooted approximants rather than by the paper's
+Hadamard-factorization argument, and Lemma 8.4 (`lem:edge-slot-lift`), the
+exact lift `Edge.lem_edge_slot_lift` on `C × ℕ × ℕ` with exact colour
+projection. [`Slots/OneLabel.lean`](../../CI2ZF/Coupling/Edge/Slots/OneLabel.lean)
+proves Lemma 8.5 (`lem:edge-one-label`), `Edge.OneLabel.edge_one_label`, on
+the countable slot model, by lumping all slots from `N` on into one and
+letting `N → ∞`.
 
 ### Large-girth proof and cited results
 
@@ -72,6 +85,19 @@ its argument `clmm`; `Girth.high_girth_soft_coupling`,
 `Girth.high_girth_original_zero_free` and
 `Girth.high_girth_residual_original_zero_free` pass `CLMM.literature C` and
 take no literature parameter.
+
+Companion Lemma 6.10 (`lem:hg-eventual-transfer`), as the companion now
+states it for the Potts family at positive activity `x ∈ J ⊆ (0,1]`, is
+proved in
+[`Transfer/PottsTransfer.lean`](../../CI2ZF/Potts/Regions/Girth/Transfer/PottsTransfer.lean)
+with no literature parameter: `Girth.potts_eventual_transfer` in the
+library's `Option` form, `Girth.potts_eventual_transfer_source` for an
+arbitrary free source vertex, and `Girth.potts_eventual_transfer_uniform`
+with the girth threshold and constant depending only on
+`(q, Δ, C_INFL, C_SM, δ, K₀)`.
+[`Tree/SingleEdge.lean`](../../CI2ZF/Coupling/Girth/Tree/SingleEdge.lean)
+proves the observation before Lemma 6.9 that ratio-form relative SSM cannot
+start at distance one uniformly in `x` (`Girth.no_uniform_distance_one`).
 
 `Girth.high_girth_residual_original_zero_free` states the original pinned
 polynomial result with girth required only after pinning. For BBR the
@@ -117,10 +143,20 @@ Interval-wide contraction,
 tree influence and relative spatial decay, and the positive zero-free
 transfer are derived from the four cited results. The exceptional
 (q,Δ)=(3,4) interval and all degree-gap-two parameter cases, which lie
-outside the degree range of Proposition 2.6(i), are handled directly in
-the application; this does not extend the published Proposition 2.6(i)
-statement. The ordinary `q ≥ Δ+3` large-girth route uses the separate
-CLMM identity `CavityTree.clmmInfluenceIdentity`.
+outside the printed degree range of Proposition 2.6(i), are handled directly
+in the application. Separately,
+[`BBR/GapTwo.lean`](../../CI2ZF/Coupling/BBR/GapTwo.lean) proves the
+conclusion of Proposition 2.6(i) for `Δ ≥ q + 2`
+(`BBR.proposition_2_6_i_of_gap_two`), the range in which the companion
+asserts that BBR's proof is valid. It uses the library's proof, which
+needs only `q + 2 ≤ Δ`, and does not check BBR's own argument. From it,
+`BBR.contraction_certificate_of_gap_two` derives the certificate of
+Lemma 7.1 (`lem:bbr-certificate`) for every `Δ ≥ q + 2`.
+[`BBR/RoundedInterval.lean`](../../CI2ZF/Coupling/BBR/RoundedInterval.lean)
+proves the comparison after Theorem 4.6: `[x₀, 1]` contains BBR's rounded
+interval, which is empty at `(q,Δ)=(3,4)` (`BBR.rounded_interval_subset`,
+`BBR.rounded_interval_three_four_empty`). The ordinary `q ≥ Δ+3` large-girth
+route uses the separate CLMM identity `CavityTree.clmmInfluenceIdentity`.
 
 ### Carlson–Vigoda proof and cited results
 
@@ -132,6 +168,27 @@ weighted path coupling and a two-metric stationary comparison. Finite-state
 continuity gives x=0, while x=1 is the common product law. The bound and its
 uniform complex corollary do not retain any matching, drift, contraction,
 stationarity, or hard-colouring hypothesis.
+
+The lemmas of the CV appendix are also stated one by one.
+[`CV/ClosedKernel.lean`](../../CI2ZF/Coupling/CV/ClosedKernel.lean) defines the
+closed-interval kernel `CV.cvKernel`, equal to `softCVKernel` on `(0,1)`, and
+proves Theorem 5.25 (`CV.cv_contraction`) and Lemma 5.26
+(`CV.cv_child_middle_ham`, `CV.cv_child_middle_metric`) for every
+`x ∈ (0,1]`, including `x = 1`. For Definition 5.3 it proves the coefficient
+`(P₂ − P₃)/2 = 17/200` (`CV.cv_coefficient`), defines the hard metric
+`CV.hardMetric` and proves `d_x → d_hard` as `x ↓ 0`
+(`CV.geometricMetric_tendsto_hardMetric_cv`). The one-lemma modules are
+[`RootLocalStructure`](../../CI2ZF/Coupling/CV/RootLocalStructure.lean)
+(Lemma 5.6, `CV.cv_root_local_structure`),
+[`MovePartition`](../../CI2ZF/Coupling/CV/MovePartition.lean) (Lemma 5.7,
+`CV.cv_move_partition`), [`FreshGain`](../../CI2ZF/Coupling/CV/FreshGain.lean)
+(Lemma 5.12, `CV.cv_fresh`),
+[`ExpectedLoss`](../../CI2ZF/Coupling/CV/ExpectedLoss.lean) (Lemma 5.14,
+`CV.cv_expected`), [`HighColours`](../../CI2ZF/Coupling/CV/HighColours.lean)
+(Lemma 5.21, `CV.cv_high_bulk`, `CV.cv_high_missing`) and
+[`Assembly`](../../CI2ZF/Coupling/CV/Assembly.lean) (Lemma 5.23,
+`CV.cv_assembly_1809`). `CI2ZF.Potts.softCVKernel_reversible_irreducible`
+gives reversibility and irreducibility of the soft CV kernel.
 
 The contraction is proved on the two-branch regime `CV.Regime Δ q`,
 `(Δ ≥ 125 ∧ q ≥ 1.809Δ) ∨ (Δ ≥ 6 ∧ q ≥ 11Δ/6)`, in
@@ -151,6 +208,18 @@ the Carlson–Vigoda contraction on the critical line,
 proved strict-Vigoda or CV theorem. `near_vigoda_uniform_ci`,
 `near_vigoda_transfer_inputs` and `near_vigoda_zero_free` take no
 critical-pairs or literature hypothesis.
+
+Remark 4.4 (`rem:critical-scope`) is formalized in
+[`CriticalScope.lean`](../../CI2ZF/Potts/Theorems/CriticalScope.lean): every
+critical integer pair is `(6j,11j)` (`CI2ZF.Potts.critical_line_pairs`), the
+list slack is at least `5Δ/6` for arbitrary pinnings
+(`CI2ZF.Potts.hardList_slack_critical`), the `x = 0` law is uniform on proper
+list colourings (`CI2ZF.Potts.gibbs_zero_uniform`), and the `x = 0` coupling
+input holds on original graphs along the whole critical line
+(`CI2ZF.Potts.critical_line_hard_endpoint`). The remark's claim that
+CFFGZZ Theorem 20 and Proposition 22 apply is a statement about the cited
+paper and is not formalized; Lean proves the same bound by the CV
+contraction.
 
 ### Girth-five proof and cited results
 
@@ -191,41 +260,63 @@ The explicit final threshold is the maximum of the spectral threshold
 counts is imposed. The public original-graph result requires girth only
 of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
 
+The Section 9 lemmas are also stated at their written strength.
+[`Covariance/Graph/Disintegration.lean`](../../CI2ZF/Coupling/Girth/Covariance/Graph/Disintegration.lean)
+proves Lemma 9.1 (`Girth.second_layer_disintegration`) for every `x ≥ 0`,
+including the hard-colouring law at `x = 0`.
+[`Covariance/Insertion/OneEdgeOperator.lean`](../../CI2ZF/Coupling/Girth/Covariance/Insertion/OneEdgeOperator.lean)
+proves Lemma 9.2 (`Girth.girth5_one_edge`) for `0 ≤ x ≤ 1`.
+[`Spectral/OperatorGap.lean`](../../CI2ZF/Coupling/Girth/Spectral/OperatorGap.lean)
+proves Theorem 9.7 in operator form, `𝓛² ⪰ γ_δ 𝓛` on the supported `L²`
+space for every `x ∈ [0,1]` (`Girth.OperatorGap.potts_gap_girth5`).
+
+[`Girth/CommonThreshold.lean`](../../CI2ZF/Potts/Regions/Girth/CommonThreshold.lean)
+proves the footnote to main-paper Table A.1: one girth threshold serves both
+the coupling-independence and the zero-free statement, for large girth,
+the BBR interval and girth five (`Girth.high_girth_common_threshold`,
+`Girth.bbr_common_threshold`, `Girth.girth_five_common_threshold`).
+
 ## Scope of the coverage
 
-These statuses concern the seven Potts regional endpoints and the proofs
-used to obtain them. They do not claim a theorem-by-theorem formalization
-of every auxiliary statement or every generalization in the appendix.
+Every numbered theorem, lemma, proposition and corollary of the companion
+has a Lean counterpart; the [coverage table](../coverage.json) gives the status
+and Lean names of each of its 75 numbered statements. Two lemmas are
+formalized in the narrowed form the companion now states:
 
-- The paper's eventual-transfer lemma covers general pinning/subgraph-closed
-  pairwise spin-system families, including hard constraints with separate
-  feasibility assumptions. `CLMM.eventual_transfer` is the positive-activity
-  Potts specialization needed for the regional conclusions here.
-- The edge-Potts proof constructs finite positive slot laws and passes to
-  the finite-colour Gibbs-law limit. It does not separately prove the
-  paper's countable exact-slot representation lemma or its entire-function
-  factorization argument.
+- Lemma 6.10 (`lem:hg-eventual-transfer`) is stated for the Potts family at
+  positive activity `x ∈ J ⊆ (0,1]`, the only case the companion uses, and
+  proved as
+  `Girth.potts_eventual_transfer_uniform` and its two companions.
+- The `k`-fold clause of Lemma 3.6 (`lem:boundary-sensitivity`) counts
+  labelled free–pinned edges, as in the main text, and is proved as
+  `CI2ZF.Potts.lem_boundary_sensitivity`.
 
-The BBR proof also uses independent arithmetic certificates for the small
-degree-gap-two cases. Three cited ingredients are formalized by a route
+Only citation-level claims remain unformalized: that CFFGZZ Theorem 20 and
+Proposition 22 apply in Remark 4.4, that the hard metric of
+Definition 5.3 is literally Eq. (2) of Carlson and Vigoda (2024), and the
+literature attributions of Remarks 4.2 and 4.9. Algorithmic and FPTAS
+claims are outside the scope of a Lean statement.
+
+The regional BBR proof uses independent arithmetic certificates for the
+small degree-gap-two cases; `BBR/GapTwo.lean` also proves Proposition 2.6(i)
+itself at gap two. Three cited ingredients are formalized by a route
 different from the cited proof: the critical-line hard bound by the CV contraction
 rather than the CFFGZZ argument, BBR Proposition 2.6(i) by concavity of
 `log` rather than BBR's Lemmas 4.1 and 4.2(i), and CLMM Lemma 5.13 with
-`1 + log ℓ` rather than harmonic numbers. Thus the regional conclusions can
-be proved by a different internal argument without reproducing each
-intermediate proof path in the paper.
+`1 + log ℓ` rather than harmonic numbers. Where a Lean proof of one of the
+companion's own statements takes a different route, such as the compactness
+proof of Lemma 8.3, the note in the coverage table says so.
 
 ## Recorded verification
 
 The complete single-library check, including the main text and all seven
-appendix regions, passed **4040 build jobs** and the transitive axiom
-audit of **10372 project declarations** on 2026-09-25. Only `propext`,
-`Classical.choice`, and `Quot.sound` were used. This run includes the
-five modules that prove the cited results:
+appendix regions, passes **4066 build jobs** and the transitive axiom
+audit of **11313 project declarations**. Only `propext`,
+`Classical.choice`, and `Quot.sound` are used. The check includes the
+five modules that prove the cited results,
 `Coupling/Girth/Tree/InfluenceIdentity`, `Coupling/CLMM/SphereCoupling`,
 `Coupling/CLMM/SphereEstimate`, `Coupling/BBR/Theorem25` and
-`Coupling/BBR/Proposition26`. See the [verification record](../verification.json)
-for recorded source hashes and the source scan, the
-[previous record](../provenance/pre-near-vigoda-ci-20260924-verification.json),
-the [pre-closure snapshot](../provenance/pre-bbr-influence-20260910-verification.json),
-and [the earlier verification](../provenance/lee-yang-verification.json).
+`Coupling/BBR/Proposition26`, and the modules that state the remaining
+numbered statements, listed in the [module guide](README.md#companion-statements-in-dedicated-modules). See the [verification record](../verification.json)
+for recorded source hashes and the source scan, and the
+[provenance index](../provenance/README.md) for earlier records.

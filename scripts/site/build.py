@@ -276,7 +276,8 @@ RESULTS = [
                "CI2ZF.Appendix.Girth.girthFiveThreshold"],
          notes=["Δ₅(δ) is explicit: the maximum of ⌈4096(1 + δ)e^{2/δ}/δ⁴⌉ and "
                 "⌈covarianceDegreeThreshold δ⌉. The companion's Δ₅ is existential with Δ₅ ≥ Δ₀.",
-                "Theorem 9.7 is stated in Poincaré form; x = 0 follows by continuity.",
+                "girth_five_closed_poincare states Theorem 9.7 in Poincaré form; OperatorGap.potts_gap_girth5 states "
+                "the operator form 𝓛² ⪰ γ_δ𝓛 itself, for every x ∈ [0, 1].",
                 "The coupling theorem is stated on residual instances, which covers every "
                 "(G, τ, r)."]),
 ]
@@ -708,6 +709,26 @@ GLOSSARY = [
      "A symmetric Boolean signature: nonnegative, log-concave, interval support, f(0) > 0."),
 ]
 
+# The status of every numbered statement of both papers, with the Lean names that
+# state it and a note, is recorded in docs/coverage.json. Each status has a text
+# label, a glyph (decoration only), a tone for the glyph, and a meaning.
+COVERAGE = "docs/coverage.json"
+STATUSES = {
+    "formalized": ("Formalized", "✓", "good",
+                   "Lean states and proves it at the paper's strength; the note names any claim about "
+                   "cited work that is left out."),
+    "formalized-equivalent": ("Equivalent form", "≃", "good",
+                              "Lean proves an equivalent form; the note gives the step between the two."),
+    "formalized-narrowed": ("Narrowed in paper", "✎", "good",
+                            "The paper's statement is narrowed to what Lean proves, the only case its proofs "
+                            "use; the note gives the edit."),
+    "definition": ("Definition", "≔", "muted",
+                   "Made in Lean by the declarations listed; the note records any difference."),
+    "remark": ("Remark", "¶", "muted", "A remark that makes no claim of its own."),
+    "not-formalized": ("Not formalized", "✗", "bad", "The paper states it, but no Lean declaration does."),
+}
+PAPER_WORDS = {"main": "Main paper", "companion": "Companion"}
+
 # ---------------------------------------------------------------------------
 # Lean side
 
@@ -760,6 +781,8 @@ def reachedTargets (env : Environment) (start : Name) : Array Name := Id.run do
           stack := stack.push c
   return found
 
+-- One command covers every name on the page, so it gets no heartbeat limit.
+set_option maxHeartbeats 0 in
 #eval show MetaM Unit from do
   let env ← getEnv
   for n in siteNames do
@@ -1264,6 +1287,124 @@ def check_quotes(papers, info):
     return count
 
 
+def paper_environments(tex):
+    """The (kind, label) of every numbered theorem-like environment of a paper, in order.
+    The label counts only if it directly follows \\begin{kind} and its optional title."""
+    tex = re.sub(r"(?<!\\)%.*", "", tex)
+    found = []
+    for match in re.finditer(r"\\begin\{(%s)\}" % "|".join(ENV_WORDS), tex):
+        rest, pos = tex[match.end():], 0
+        if rest.startswith("["):
+            depth, pos = 0, 1
+            while not (rest[pos] == "]" and depth == 0):
+                depth += {"{": 1, "}": -1}.get(rest[pos], 0)
+                pos += 1
+            pos += 1
+        label = re.match(r"\s*\\label\{([^}]*)\}", rest[pos:])
+        found.append((match.group(1), label.group(1) if label else None))
+    return found
+
+
+def check_coverage(papers, coverage):
+    """Each coverage entry must have a known status, and each labelled one the number
+    and kind that the paper's .aux file gives its label. The entries of each paper must
+    be its theorem-like environments, all of them and in order."""
+    problems, seen = [], set()
+    for source, paper in papers.items():
+        found = paper_environments(paper.tex)
+        listed = [(entry["kind"], entry["label"]) for entry in coverage if entry["paper"] == source]
+        if found != listed:
+            first = next((i for i, (a, b) in enumerate(zip(found, listed)) if a != b),
+                         min(len(found), len(listed)))
+            problems.append(f"{source}: {len(found)} numbered statements in the paper, {len(listed)} "
+                            f"listed; the first difference is at position {first + 1}")
+    for entry in coverage:
+        where = "%s %s" % (entry["paper"], entry["number"])
+        if entry["status"] not in STATUSES:
+            problems.append(f"{where}: unknown status {entry['status']}")
+        if entry["paper"] not in papers or entry["kind"] not in ENV_WORDS:
+            problems.append(f"{where}: unknown paper or kind")
+            continue
+        if (entry["paper"], entry["number"]) in seen:
+            problems.append(f"{where}: listed twice")
+        seen.add((entry["paper"], entry["number"]))
+        if entry["label"]:
+            paper = papers[entry["paper"]]
+            env, _, _ = paper.statement(entry["label"])
+            if paper.number(entry["label"]) != entry["number"] or env != entry["kind"]:
+                problems.append(f"{where}: {entry['label']} is {ENV_WORDS[env]} {paper.number(entry['label'])} "
+                                f"in the paper")
+    if problems:
+        sys.exit(COVERAGE + " does not match the papers:\n  " + "\n  ".join(problems))
+
+
+def status_chip(status):
+    label, glyph, tone, _ = STATUSES[status]
+    return ('<span class="status %s"><span class="glyph" aria-hidden="true">%s</span>%s</span>'
+            % (tone, glyph, e(label)))
+
+
+def coverage_name_html(info, commit):
+    path = module_file(info["module"])
+    url = source_url(commit, info["module"], info["start"], info["end"])
+    name = ".<wbr>".join(e(part) for part in short(info["name"]).split("."))
+    link = '<a href="%s" title="%s · lines %d–%d"><code>%s</code></a>' % (
+        e(url), e(path.name), info["start"], info["end"], name)
+    if not set(info["axioms"]) <= {"propext", "Classical.choice", "Quot.sound"}:
+        link += (' <span class="badge bad"><span aria-hidden="true">!</span> Axioms: %s</span>'
+                 % e(", ".join(info["axioms"])))
+    return "<li>%s</li>" % link
+
+
+def coverage_html(coverage, papers, converters, info, commit):
+    """The legend, a live count, and the table of every numbered statement."""
+    cards = {}
+    for result in RESULTS:
+        for source, label in result["paper"]:
+            cards.setdefault((source, label), result["id"])
+    counts = {s: sum(entry["status"] == s for entry in coverage) for s in STATUSES}
+    legend = "".join(
+        '<li>%s<span class="n">%d</span><span class="sr"> statements:</span><span class="m">%s</span></li>'
+        % (status_chip(s), counts[s], e(meaning)) for s, (_, _, _, meaning) in STATUSES.items())
+    groups = []
+    for source, full in (("main", "Coupling Independence Implies Zero-Freeness"),
+                         ("companion", "Further Potts Zero-Free Regions from Coupling Independence")):
+        entries = [entry for entry in coverage if entry["paper"] == source]
+        rows = ['<tr class="cov-group"><th colspan="4" scope="rowgroup">%s · <em>%s</em></th></tr>'
+                % (PAPER_WORDS[source], e(full))]
+        for entry in entries:
+            ref = "%s %s" % (ENV_WORDS[entry["kind"]], entry["number"])
+            title = None
+            if entry["label"]:
+                _, tex_title, _ = papers[source].statement(entry["label"])
+                if tex_title:
+                    title = converters[source].convert(tex_title, block=False)
+            title = title or e(entry["title"])
+            card = cards.get((source, entry["label"]))
+            card_link = ('<div class="cov-card"><a href="#%s">Side by side<span class="sr">: %s, %s</span></a></div>'
+                         % (card, e(ref), e(PAPER_WORDS[source].lower())) if card else "")
+            names = ('<ul>%s</ul>' % "".join(coverage_name_html(info[n], commit) for n in entry["lean"])
+                     if entry["lean"] else '<span class="absent">No Lean statement</span>')
+            group = "main" if source == "main" else "appendix"
+            search = " ".join([PAPER_WORDS[source], ref, entry["title"], entry["label"] or "",
+                               STATUSES[entry["status"]][0], *entry["lean"]]).lower()
+            rows.append('<tr data-group="%s" data-search="%s"><th scope="row"><div class="cov-ref">'
+                        '<span class="rref">%s</span><span class="cov-paper">%s</span></div>'
+                        '<div class="cov-title">%s</div>%s</th><td class="st">%s</td><td class="ln">%s</td>'
+                        '<td class="nt">%s</td></tr>'
+                        % (group, e(search), e(ref), PAPER_WORDS[source], title, card_link,
+                           status_chip(entry["status"]), names, e(entry["note"])))
+        groups.append("<tbody>%s</tbody>" % "".join(rows))
+    table = ('<div class="cov-wrap"><table class="coverage" id="coverage-table"><caption class="sr">Every '
+             'numbered statement of both papers, with its formalization status, the Lean declarations '
+             'that state it, and a note</caption><thead><tr><th scope="col">Statement</th>'
+             '<th scope="col">Status</th><th scope="col">Lean declarations</th><th scope="col">Note</th>'
+             '</tr></thead>%s</table></div>' % "".join(groups))
+    count = ('<p class="cov-count" id="cov-count" aria-live="polite">Showing all %d statements.</p>'
+             % len(coverage))
+    return '<ul class="cov-legend">%s</ul>%s%s' % (legend, count, table)
+
+
 def correspondence_html(result, papers, converters, info, first_label):
     rows = PAIRS.get(result["id"], [])
     if not rows:
@@ -1319,18 +1460,26 @@ def build(args):
     macros = dict(papers["main"].macros)
     macros.update(papers["companion"].macros)
     macros["\\textup"] = "\\textrm{#1}"
+    coverage = json.loads((REPO / COVERAGE).read_text())
+    check_coverage(papers, coverage)
 
     names = []
     for result in RESULTS:
         names += result["lean"] + result.get("defs", [])
     names += [n for c in CITED for n in c["statement"] + c["proof"]] + [g[0] for g in GLOSSARY]
     names += [row["lean"] for rows in PAIRS.values() for row in rows if row["lean"]]
-    names = list(dict.fromkeys(names))
+    covered = list(dict.fromkeys(n for entry in coverage for n in entry["lean"]))
+    names = list(dict.fromkeys(names + covered))
     by_target = {t: c for c in CITED for t in c.get("targets", c["proof"])}
     by_statement = {n: c for c in CITED for n in c["statement"]}
     index = (by_statement, by_target)
     info = lean_extract(names, list(by_target))
+    unplaced = [n for n in covered if not info[n]["start"]]
+    if unplaced:
+        sys.exit("Coverage declarations without a source range: " + ", ".join(unplaced))
     quotes = check_quotes(papers, info)
+    nonstandard = [n for n in covered
+                   if not set(info[n]["axioms"]) <= {"propext", "Classical.choice", "Quot.sound"}]
 
     # matrix and cards
     used_by = {c["id"]: [] for c in CITED}
@@ -1444,14 +1593,18 @@ def build(args):
         "@@VERIFIED@@": e(record["date"]), "@@TILES@@": tiles_html, "@@MATRIX@@": matrix,
         "@@MAIN@@": "".join(cards["main"]), "@@APPENDIX@@": "".join(cards["appendix"]),
         "@@GLOSSARY@@": "".join(glossary), "@@LITERATURE@@": "".join(literature),
+        "@@COVERAGE@@": coverage_html(coverage, papers, converters, info, commit),
+        "@@COVTOTAL@@": str(len(coverage)), "@@COVNAMES@@": f"{len(covered):,}",
+        "@@COVAXIOMS@@": ("all of them use only Lean's standard axioms" if not nonstandard else
+                          "%d that use further axioms carry a badge" % len(nonstandard)),
         "@@MACROS@@": json.dumps(macros).replace("</", "<\\/"), "@@KATEX@@": KATEX,
     }.items():
         page = page.replace(key, value)
     out = REPO / args.out
     out.write_text(page)
     (out.parent / ".nojekyll").write_text("")
-    print(f"Wrote {out.relative_to(REPO)}: {len(RESULTS)} results, {len(names)} declarations, "
-          f"commit {commit}")
+    print(f"Wrote {out.relative_to(REPO)}: {len(RESULTS)} results, {len(coverage)} numbered statements, "
+          f"{len(names)} declarations, commit {commit}")
 
 
 PAGE = r"""<!doctype html>
@@ -1656,6 +1809,60 @@ details.uses ul { list-style: none; margin: 8px 0 0; padding: 0; }
 details.uses li { margin: 5px 0; font-size: 13.5px; line-height: 1.45; }
 details.uses li a { text-decoration: none; }
 details.uses .ud { color: var(--ink-2); }
+.cov-legend { list-style: none; padding: 0; margin: 18px 0 4px; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 10px 30px; }
+.cov-legend li { display: grid; grid-template-columns: 158px 2.4em minmax(0, 1fr); align-items: baseline; gap: 8px;
+  font-size: 13.5px; line-height: 1.45; color: var(--ink-2); }
+.cov-legend .status { justify-self: start; }
+.cov-legend .n { font-weight: 600; color: var(--ink); text-align: right; font-variant-numeric: tabular-nums; }
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; line-height: 1.4; white-space: nowrap;
+  padding: 3px 11px 3px 9px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink); }
+.status .glyph { display: inline-block; min-width: 1em; text-align: center; font-weight: 700; }
+.status.good .glyph { color: var(--good); }
+.status.muted .glyph { color: var(--muted); }
+.status.bad .glyph { color: var(--bad); }
+.cov-count { margin: 18px 0 0; font-size: 13.5px; color: var(--ink-2); }
+.cov-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow-x: auto; margin-top: 10px; }
+table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
+.coverage th, .coverage td { vertical-align: top; text-align: left; }
+.coverage thead th { font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  padding: 16px 16px 10px; }
+.coverage thead th:first-child, .coverage tbody th[scope="row"] { padding-left: 22px; }
+.coverage thead th:last-child, .coverage td.nt { padding-right: 22px; }
+.coverage tbody th[scope="row"], .coverage tbody td { padding: 12px 16px; border-top: 1px solid var(--grid); }
+.coverage tbody th[scope="row"] { font-weight: 400; width: 30%; }
+.coverage tr.cov-group th { background: var(--surface-2); border-top: 1px solid var(--grid); padding: 10px 22px;
+  font: 600 12.5px/1.4 var(--sans); color: var(--ink-2); }
+.coverage tr.cov-group em { font-weight: 500; }
+.coverage .cov-ref { display: flex; flex-wrap: wrap; align-items: baseline; row-gap: 2px; }
+.coverage .cov-ref .rref { margin-right: 5px; }
+.coverage .rref { font: 600 11px/1.5 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.coverage .cov-paper { font: 500 11px/1.5 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.coverage .cov-paper::before { content: "·"; margin-right: 5px; }
+.coverage .cov-card { font-size: 12.5px; margin-top: 4px; }
+.coverage .cov-title { font: 15.5px/1.4 var(--serif); color: var(--ink); margin-top: 3px; }
+.coverage td.st { width: 1%; white-space: nowrap; }
+.coverage td.ln { width: 33%; }
+.coverage td.ln ul { list-style: none; margin: 0; padding: 0; }
+.coverage td.ln li { margin: 0 0 5px; line-height: 1.45; }
+.coverage td.ln li:last-child { margin-bottom: 0; }
+.coverage td.ln a { text-decoration: none; }
+.coverage td.ln a:hover code { text-decoration: underline; text-underline-offset: 3px; }
+.coverage td.ln code { font-size: 12.5px; }
+.coverage td.nt { color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
+.coverage .absent { color: var(--muted); font: italic 13.5px var(--sans); }
+.coverage tbody tr:not(.cov-group):hover { background: var(--accent-wash); }
+@media (max-width: 820px) {
+  .coverage thead { display: none; }
+  .coverage tbody tr, .coverage tbody th[scope="row"], .coverage tbody td { display: block; width: auto !important; }
+  .coverage tbody th[scope="row"], .coverage tbody td { border-top: 0; padding: 4px 18px; }
+  .coverage tbody tr:not(.cov-group) { border-top: 1px solid var(--grid); padding: 10px 0; }
+  .coverage tr.cov-group th { display: block; }
+  .coverage td:empty { display: none; }
+  .cov-legend li { grid-template-columns: auto minmax(0, 1fr); }
+  .cov-legend .n { text-align: left; }
+  .cov-legend .m { grid-column: 1 / -1; }
+}
 .hidden { display: none !important; }
 @media print { .topbar, .filters { display: none; } .card { break-inside: avoid; } }
 </style>
@@ -1663,7 +1870,7 @@ details.uses .ud { color: var(--ink-2); }
 <body>
 <div class="topbar"><div class="wrap">
   <span class="brand"><span class="spark" aria-hidden="true">✻</span>CI2ZF <span class="brand-sub">Lean ↔ paper</span></span>
-  <nav aria-label="Sections"><a href="#status">Status</a><a href="#matrix">Cited results</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#definitions">Definitions</a><a href="#literature">Their proofs</a><a href="#reproduce">Reproduce</a></nav>
+  <nav aria-label="Sections"><a href="#status">Status</a><a href="#matrix">Cited results</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#coverage">Coverage</a><a href="#definitions">Definitions</a><a href="#literature">Their proofs</a><a href="#reproduce">Reproduce</a></nav>
   <span class="spacer"></span>
   <button id="theme" type="button" title="Switch colour theme">Theme: auto</button>
 </div></div>
@@ -1672,7 +1879,7 @@ details.uses .ud { color: var(--ink-2); }
 <header class="hero" id="status">
   <div class="eyebrow">Lean formalization · commit @@COMMIT@@</div>
   <h1>The paper and its Lean formalization, side by side</h1>
-  <p>For each headline result represented by a card on this page, the paper's statement is shown next to its corresponding Lean declaration. A table then matches the two phrase by phrase. The cards list the cited ingredients tracked by the formalization and the library lemmas each proof applies; the cited-results section records the formalized scope of those ingredients.</p>
+  <p>For each headline result represented by a card on this page, the paper's statement is shown next to its corresponding Lean declaration. A table then matches the two phrase by phrase. The cards list the cited ingredients tracked by the formalization and the library lemmas each proof applies; the cited-results section records the formalized scope of those ingredients. The <a href="#coverage">coverage table</a> lists every numbered statement of both papers, all @@COVTOTAL@@ of them, with its formalization status and the Lean declarations, if any, that state it.</p>
   <p>Nothing on the Lean side is written by hand: signatures, axioms and dependencies are read from the compiled library at commit <a href="@@COMMITURL@@"><code>@@COMMIT@@</code></a>, and every source link points to that commit. Every quotation in the correspondence tables is checked verbatim against the paper's LaTeX and the Lean source when the page is built.</p>
 </header>
 
@@ -1696,6 +1903,10 @@ details.uses .ud { color: var(--ink-2); }
 <h2 id="appendix">Appendix A: further Potts regimes</h2>
 <p class="lede">The precise statements are in the companion paper, <em>Further Potts Zero-Free Regions from Coupling Independence</em>, included in the repository as <a href="appendix.pdf">appendix.pdf</a>. Each regime has a coupling-independence theorem and a zero-free theorem.</p>
 @@APPENDIX@@
+
+<h2 id="coverage">Coverage of every numbered statement</h2>
+<p class="lede">Every theorem, lemma, proposition, corollary, definition and remark of the main paper and the companion, in the order of the papers. The statuses and notes are recorded in <a href="coverage.json">coverage.json</a>. When the page is built, the entries are checked against the papers' LaTeX: they must be every theorem-like environment of each paper, in order, and each labelled one must have the number and kind the paper's <code>.aux</code> file gives it. The @@COVNAMES@@ declarations listed are read from the compiled library and link to their source lines at commit <code>@@COMMIT@@</code>; @@COVAXIOMS@@.</p>
+@@COVERAGE@@
 
 <h2 id="definitions">Definitions used in the statements</h2>
 <p class="lede">The Lean objects the statements are written in, next to the paper's notation.</p>
@@ -1729,13 +1940,21 @@ LEAN_NUM_THREADS=2 bash scripts/check-all.sh</code></pre>
   });
   showTheme();
 
-  var group = "all", query = document.getElementById("q");
+  var group = "all", query = document.getElementById("q"), covCount = document.getElementById("cov-count");
   function applyFilters() {
     var q = query.value.trim().toLowerCase();
-    document.querySelectorAll("[data-result]").forEach(function (el) {
+    document.querySelectorAll("[data-search]").forEach(function (el) {
       var show = (group === "all" || el.dataset.group === group) && (!q || el.dataset.search.indexOf(q) >= 0);
       el.classList.toggle("hidden", !show);
     });
+    document.querySelectorAll("#coverage-table tbody").forEach(function (body) {
+      body.classList.toggle("hidden", !body.querySelector("tr[data-search]:not(.hidden)"));
+    });
+    var total = document.querySelectorAll("#coverage-table tr[data-search]").length;
+    var shown = document.querySelectorAll("#coverage-table tr[data-search]:not(.hidden)").length;
+    document.querySelector(".cov-wrap").classList.toggle("hidden", shown === 0);
+    covCount.textContent = shown === total ? "Showing all " + total + " statements." :
+      shown === 0 ? "No statement matches the filter." : "Showing " + shown + " of " + total + " statements.";
   }
   document.querySelectorAll("button[data-filter]").forEach(function (b) {
     b.addEventListener("click", function () {
