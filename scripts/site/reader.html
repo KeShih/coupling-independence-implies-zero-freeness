@@ -78,6 +78,13 @@ code, pre { font-family: var(--mono); }
   border-bottom: 1px solid var(--line); background: var(--page); position: relative; z-index: 20; }
 .icon-btn { width: 36px; height: 36px; border-radius: 10px; display: inline-grid; place-items: center; color: var(--ink-2); flex: none; }
 .icon-btn:hover { background: var(--surface-2); color: var(--ink); }
+/* The contents button: bordered and labelled so a reader finds it. */
+.toc-btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 13px 0 11px; flex: none;
+  border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink);
+  font: 550 13.5px/1 var(--sans); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.toc-btn svg { width: 18px; height: 18px; }
+.toc-btn:hover { border-color: var(--accent); color: var(--accent-ink); }
+.toc-btn[aria-expanded="true"] { background: var(--accent-wash); border-color: color-mix(in srgb, var(--accent) 45%, var(--line-2)); color: var(--accent-ink); }
 .icon-btn svg { width: 19px; height: 19px; }
 .papers { display: inline-flex; padding: 3px; border-radius: 11px; background: var(--surface-2); border: 1px solid var(--line); }
 .papers button { padding: 6px 12px; border-radius: 8px; font-size: 13.5px; font-weight: 550; color: var(--ink-2); white-space: nowrap; }
@@ -327,8 +334,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
   background: var(--page); border-right: 1px solid var(--line); box-shadow: var(--shadow); display: flex; flex-direction: column;
   transform: translateX(-102%); transition: transform .22s ease; visibility: hidden; }
 .toc.open { transform: none; visibility: visible; }
-/* On wide screens the contents stay open beside the paper, in its empty
-   margin; the menu button hides and shows them. */
+/* On wide screens the contents button opens them beside the paper, in its
+   empty margin, and they stay open until it is pressed again. */
 @media (min-width: 1360px) {
   :root { --toc-w: 300px; }
   .toc-docked .toc { transform: none; visibility: visible; box-shadow: none; width: var(--toc-w); transition: none; }
@@ -411,15 +418,15 @@ details.more-box[open] summary::before { content: "\2212  "; }
   .back-btn { bottom: calc(var(--peek) + 16px); }
 }
 
-@media (max-width: 520px) { .papers .full { display: none; } .papers .brief { display: inline; } }
+@media (max-width: 520px) { .papers .full { display: none; } .papers .brief { display: inline; } .toc-btn .lbl { display: none; } .toc-btn { padding: 0 9px; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 <div class="app" id="app">
   <header class="bar">
-    <button class="icon-btn" id="tocBtn" type="button" aria-label="Contents" aria-expanded="false" aria-controls="toc">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg>
+    <button class="toc-btn" id="tocBtn" type="button" aria-expanded="false" aria-controls="toc" title="Contents">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg><span class="lbl">Contents</span>
     </button>
     <div class="papers" role="tablist" aria-label="Paper" id="paperTabs"></div>
     <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false" title="Show only the numbered statements (s)"><span>Statements<span class="long"> only</span></span></button>
@@ -982,12 +989,12 @@ details.more-box[open] summary::before { content: "\2212  "; }
       if (r.top < box.top || r.bottom > box.bottom) list.scrollTop += r.top - box.top - box.height / 3;
     }
   }
-  // Wide screens dock the contents as a sidebar (unless the reader hid it);
+  // Wide screens dock the contents as a sidebar once the reader opens them;
   // narrower ones slide them in as a drawer over the paper.
   var wide = window.matchMedia("(min-width: 1360px)");
   function docked() { return root.classList.contains("toc-docked"); }
   function applyDock() {
-    var on = wide.matches && store.get("zero-freeness-toc") !== "hidden";
+    var on = wide.matches && store.get("zero-freeness-toc") === "shown";
     root.classList.toggle("toc-docked", on);
     if (on) openToc(false);
     $("tocBtn").setAttribute("aria-expanded", String(on));
