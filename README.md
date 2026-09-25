@@ -10,7 +10,8 @@
 
 </div>
 
-[![The reader: Theorem 1.1 of the main paper, with the Lean declarations that state it beside it](docs/assets/reader.jpg)](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+[![The reader: Theorem 1.1 of the main paper, with the Lean declarations that state it beside it](https://github.com/user-attachments/assets/7fa6a483-fe0d-4fed-b555-f7d6861f99a4)](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+
 
 This repository formalizes, in Lean 4 with mathlib, two papers by Shuai Shao
 and Ke Shi: *Coupling Independence Implies Zero-Freeness* (2026) and its
