@@ -575,7 +575,9 @@ class Converter:
         if name in ACCENTS:
             arg, j = read_group(tex, i)
             if arg is None:
-                j = i + (1 if tex[i:i + 1] == " " else 0)
+                j = i  # TeX skips spaces and a line break after a control word
+                while tex[j:j + 1] in (" ", "\t", "\n"):
+                    j += 1
                 arg, j = tex[j], j + 1
             plain.append(accented(arg, name))
             return j
