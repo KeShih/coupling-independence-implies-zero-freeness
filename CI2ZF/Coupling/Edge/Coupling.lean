@@ -7,7 +7,7 @@ This file constructs the four-row coupling table and verifies both marginals
 and its transport cost. It also proves the occurrence-budget arithmetic and
 the closed form of the one-label recursion. These are finite transport
 lemmas; the countable slot representation and its conditional comparison
-estimates are separate mathematical obligations.
+estimates are proved in `Slots.SlotLift` and `Slots.OneLabel`.
 -/
 
 namespace CI2ZF.Appendix.Edge

@@ -3,7 +3,8 @@ import CI2ZF.Coupling.Girth.Five.Response
 
 /-! The fixed-girth Potts conclusion. The source estimates, finite
 response induction, endpoint passage, and complex transfer are proved
-internally. The only literature parameter is CLMM Lemma 5.13. -/
+internally, as is CLMM Lemma 5.13 (`sphere_to_coupling`); no literature
+parameter remains. -/
 namespace CI2ZF.Appendix.Girth
 open scoped BigOperators
 open PottsCI PottsCI.FinDist CI2ZF.Potts CI2ZF.Potts.Separator Set Metric

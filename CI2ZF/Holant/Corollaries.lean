@@ -70,7 +70,8 @@ theorem bmatching_uniform_diagonal (Δ : ℕ) :
           ∀ z ∈ U, matchingPartition graphIncidence G.edgeFinset b (fun _ => z) ≠ 0 :=
   matching_uniform_diagonal (holant_uniform_tubes (capacityFamily Δ) Δ)
 
-/-- Main-text b-edge-cover corollary, obtained through the proved exact
+/-- b-edge-cover corollary in the order `∀ a c, ∃ ε` (`cor_bcover_short` gives
+the main-text order), obtained through the proved exact
 complement identity and a uniform reciprocal-neighborhood estimate. -/
 theorem bcover_uniform_polytube (Δ : ℕ) {a c : ℝ} (ha : 0 < a) (hac : a ≤ c) :
     ∃ ε > 0, ∀ (V : Type u) [Fintype V] [DecidableEq V] (G : SimpleGraph V),

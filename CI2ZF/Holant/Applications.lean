@@ -297,8 +297,8 @@ theorem coverPartition_ne_zero_polytube {Δ : ℕ}
     (by simpa using hb) z hnz
   simpa only [selectedDegree_graph] using hmatch
 
-/-- Corollary `cor:bcover-short`: positive boxes have a graph- and
-capacity-independent width. The upper endpoint is finite because it is real. -/
+/-- Corollary `cor:bcover-short` in the order `∀ a c, ∃ ε`: positive boxes have a graph- and
+capacity-independent width (`cor_bcover_short` chooses `ε` before `c = λ₊`). The upper endpoint is finite because it is real. -/
 theorem cover_uniform_polytube {Δ : ℕ}
     (htube : UniformGraphTubes.{u} Δ (capacityFamily Δ))
     {a c : ℝ} (ha : 0 < a) (_hac : a ≤ c) :

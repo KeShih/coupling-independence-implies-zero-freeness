@@ -17,9 +17,9 @@ near-Vigoda coupling.  In particular it supplies:
 * an exact structural interface for two active instances which agree away
   from their unique disagreement vertex.
 
-The remaining theorem in the paper is the global, cross-proposal allocation
-of root-containing and off-root flip masses.  That allocation is deliberately
-not asserted here as an axiom or an opaque hypothesis.
+The global, cross-proposal allocation of root-containing and off-root flip
+masses is not asserted here; it is proved later, as
+`conditionalHardCouplingEstimate` in `PottsCITheorem`.
 -/
 
 namespace PottsCI

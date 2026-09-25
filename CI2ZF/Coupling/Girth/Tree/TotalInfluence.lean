@@ -3,8 +3,9 @@ import CI2ZF.Coupling.Girth.Tree.Influence
 /-!
 # Total influence from the cited influence/Jacobian identity
 
-The sole external input in this file is the exact general tree
-factorization of CLMM2023, Lemma 8.7. Its interface is an equality between
+The only cited result in this file is the exact general tree
+factorization of CLMM2023, Lemma 8.7, a hypothesis here proved as
+`clmmInfluenceIdentity` in `InfluenceIdentity`. Its interface is an equality between
 the actual conditional Gibbs marginals and the explicit derivative-block
 product. It assumes no decay, coupling bound, or CI conclusion. All norm
 estimates and the total-influence conversion are proved below.
@@ -22,7 +23,7 @@ noncomputable section
 variable {C : Type*} [Fintype C] [DecidableEq C] [Nonempty C]
 
 /-- CLMM2023, Lemma 8.7, in finite-tree configuration coordinates. The row
-and terminal factors were derived in `GirthInfluenceBounds`; this field
+and terminal factors were derived in `Analysis.InfluenceBounds`; this field
 is only the general influence factorization identity. Proved as
 `clmmInfluenceIdentity` in `CI2ZF.Coupling.Girth.Tree.InfluenceIdentity`. -/
 structure CLMMInfluenceIdentity (C : Type*) [Fintype C] [DecidableEq C] [Nonempty C] : Prop where

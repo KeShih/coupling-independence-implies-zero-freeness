@@ -7,7 +7,7 @@ This file proves the palette lower bound and the invariant message domain in
 `appendices/high-girth.tex`, directly for the displayed weighted Potts recursion.
 In particular, the normalization is proved positive from the degree budget;
 it is not supplied as a hypothesis. The analytic contraction is completed
-in `GirthFiniteDifference`; the general graph transfer is a separate step.
+in `Analysis.FiniteDifference`; the general graph transfer is a separate step.
 -/
 
 namespace CI2ZF.Appendix.Girth

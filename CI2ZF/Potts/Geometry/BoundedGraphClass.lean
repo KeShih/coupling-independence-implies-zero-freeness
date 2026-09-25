@@ -1,7 +1,8 @@
 import CI2ZF.Potts.Geometry.GraphClassInputs
 
-/-! The original bounded-degree graph class and the precise external
-hard-colouring input in original graph/partial-colouring notation. -/
+/-! The original bounded-degree graph class and the cited hard-colouring
+statement in original graph/partial-colouring notation, proved for `Δ ≥ 6`,
+`q ≥ 11Δ/6` as `external_critical_hard_colouring_theorem`. -/
 namespace CI2ZF.Potts
 open PottsCI
 noncomputable section

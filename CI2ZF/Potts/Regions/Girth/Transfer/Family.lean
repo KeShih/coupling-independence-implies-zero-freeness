@@ -29,8 +29,9 @@ def largeGirthFamily (C : Type v) [Fintype C] (g : ℕ) : PinningFamily.{u, v} C
 
 variable {C : Type v} [Fintype C] [Nonempty C]
 
-/-- The positive-temperature conclusion expected from the general CLMM
-transfer: actual root-conditioned Gibbs laws on every admissible graph. -/
+/-- The positive-temperature conclusion of the CLMM transfer (companion
+Lemma 6.10, proved as `potts_eventual_transfer`) at `J = (0,1)`: actual
+root-conditioned Gibbs laws on every admissible graph. -/
 def SoftLargeGirthCoupling (C : Type v) [Fintype C] [Nonempty C]
     (Δ g : ℕ) (K : ℝ) : Prop :=
   ∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C), I.DegreeBound Δ →

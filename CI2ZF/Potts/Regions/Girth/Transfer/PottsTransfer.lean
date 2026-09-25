@@ -6,8 +6,8 @@ import CI2ZF.Potts.Geometry.RootOptionRelabel
 # Large-girth transfer from tree decay, Potts form
 (companion Lemma 6.10, `lem:hg-eventual-transfer`, narrowed)
 
-The companion states the transfer for general pinning- and subgraph-closed
-pairwise spin systems with hard constraints and feasibility hypotheses.
+The companion first stated the transfer for general pinning- and subgraph-closed
+pairwise spin systems; it now states it for the Potts family, as here.
 Both of its uses (the proofs of `thm:high-girth-soft-ci` and
 `thm:bbr-large-girth-ci`) apply it to the family of normalized pinned Potts
 systems at a positive activity, where every configuration has positive

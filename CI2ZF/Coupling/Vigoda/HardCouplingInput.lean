@@ -2,7 +2,7 @@ import CI2ZF.Coupling.Vigoda.ActivationAverage
 import CI2ZF.Coupling.Vigoda.CouplingIndependence
 
 /-!
-# The exact remaining conditional hard-coupling input
+# The conditional hard-coupling estimate
 
 The proposition below concerns the concrete hard flip kernels obtained
 from the same activation coins. From it, all activation averaging and
@@ -20,8 +20,8 @@ noncomputable section
 variable {V C : Type*} [Fintype V] [Fintype C] [Nonempty V] [Nonempty C]
 
 /-- The conditional hard one-step estimate at a unique disagreement.
-This is an explicit proposition to be discharged by a hard component
-coupling theorem; its body uses the actual kernels and activation sets. -/
+This is an explicit proposition, discharged by
+`conditionalHardCouplingEstimate` in `PottsCITheorem`; its body uses the actual kernels and activation sets. -/
 def ConditionalHardCouplingEstimate (I : PinningData V C) : Prop :=
   ∀ (X Y : V → C) (v : V), X v ≠ Y v → (∀ u, u ≠ v → X u = Y u) →
   ∀ ω : I.Constraint → Bool,

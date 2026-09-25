@@ -8,8 +8,9 @@ import Mathlib.Topology.Algebra.InfiniteSum.Ring
 The following summation and fibre-removal results apply to any countable
 probability weights. They justify the activity, fibre, and slack calculations
 in the Edge-Potts appendix. Existence of weights whose distinct-slot moments
-are `x ^ (k.choose 2)` is not asserted here: it requires the deformed
-exponential zero and factorization theorems used in the paper.
+are `x ^ (k.choose 2)` is not asserted here: `slot_representation` in
+`Slots.SlotLift` proves it for `0 < x < 1`, without the paper's
+entire-function factorization.
 -/
 
 namespace CI2ZF.Appendix.Edge

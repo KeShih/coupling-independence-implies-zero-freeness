@@ -69,7 +69,7 @@ theorem root_positive_ci (tau : PartialColouring V C) (G : SimpleGraph V)
 
 /-- One graph-independent CI constant throughout `[x₀,1]`, exactly the
 constant used in `cor:intro-high-temperature`. This is a coupling theorem;
-the uniform analytic transfer is a separate proof obligation. -/
+the uniform analytic transfer is applied in `high_temperature_zero_free`. -/
 theorem root_high_temperature_uniform_ci
     (tau : PartialColouring V C) (G : SimpleGraph V) (r : tau.FreeVertex) (a b : C)
     {Δ : ℕ} (hdegree : ∀ v, G.degree v ≤ Δ)

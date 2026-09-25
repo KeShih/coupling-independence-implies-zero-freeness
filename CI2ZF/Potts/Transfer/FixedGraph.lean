@@ -8,7 +8,7 @@ Compactness and real-axis positivity give a complex zero-free neighborhood
 for each fixed graph and partial colouring.  The radius in this module may
 depend on the graph and the pinning.  In particular these results do not
 establish the graph-independent radius asserted by the paper's main theorem:
-that requires the coupling-independence/separator argument still to be proved.
+that requires the coupling-independence/separator argument of the `Transfer` modules.
 -/
 
 namespace CI2ZF.Potts

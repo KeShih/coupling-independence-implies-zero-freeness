@@ -1,10 +1,11 @@
 import CI2ZF.Coupling.Vigoda.OptionCI
 
 /-! The exact real coupling inputs to the Potts transfer. The hard input
-at the critical line is intentionally an explicit theorem parameter.
-Its external source is Chen--Feng--Guo--Zhang--Zou, arXiv:2410.23225v2,
-Theorem 20 (second regime), with the conditional-list convention in its
-proof. No external result is installed as a Lean axiom. -/
+at the critical line is an explicit parameter of `critical_transfer_coupling_inputs`.
+The paper cites Chen--Feng--Guo--Zhang--Zou, arXiv:2410.23225v2, Theorem 20
+(second regime), with the conditional-list convention in its proof; Lean
+proves it as `critical_hard_colouring_input`, by the Carlson--Vigoda
+contraction. No result is installed as a Lean axiom. -/
 namespace CI2ZF.Potts
 open PottsCI PottsCI.FinDist
 noncomputable section

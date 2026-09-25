@@ -41,8 +41,8 @@ theorem critical_potts_zero_free_from_external (C : Type v) [Fintype C] [Nonempt
   exact critical_potts_zero_free C hΔ hq hcolours
     (hExternal.to_normalizedInput (by omega) hcolours)
 
-/-- Original-graph form of the complete main-text Potts theorem.
-External hard CI is requested only in the equality branch. -/
+/-- Cited-route form of the main-text Potts theorem, kept for comparison.
+Its equality-branch premise is proved by `external_critical_hard_colouring_theorem`. -/
 theorem potts_zero_free_from_external (C : Type v) [Fintype C] [Nonempty C]
     {Δ : ℕ} (hΔ : 2 ≤ Δ) (hq : (11 / 6 : ℝ) * Δ ≤ Fintype.card C)
     (hExternal : (Fintype.card C : ℝ) = (11 / 6 : ℝ) * Δ →

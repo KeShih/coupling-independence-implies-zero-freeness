@@ -3,7 +3,7 @@ import CI2ZF.Coupling.Girth.Tree.TotalInfluence
 
 /-! Total influence from actual square-root message derivatives. The
 influence--Jacobian bridge is proved internally from finite Gibbs sums.
-Only the stated BBR literature inputs for the energy contraction remain;
+BBR Proposition 2.6(i) and Theorem 2.5 enter through `Literature`, proved as `literature`;
 the terminal scaling and all influence and norm estimates are explicit. -/
 namespace CI2ZF.Appendix.BBR
 open scoped BigOperators

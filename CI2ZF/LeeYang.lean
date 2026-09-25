@@ -18,6 +18,6 @@ Uniform field radii precede all graph-size, pinning and field quantifiers.
 
 `uniform_curve_transfer` proves the hard-CI-to-field analytic induction;
 `uniform_field_transfer_closed` converts it to the full multivariable
-polydisc. Explicit literature inputs are precisely those already retained
-by the near-Vigoda critical branch and the large-girth CI theorem.
+polydisc. No literature input remains: the near-Vigoda critical branch and
+the large-girth CI theorem are proved without one.
 -/

@@ -17,8 +17,8 @@ boundary counts retained). If `girth(H) ≥ 5`, then
   where `π_u^ξ` and `ν_O^ξ` are the conditional marginals of `σ_u` and
   `σ_O` given `σ_S = ξ`.
 
-The library proves the last item only for `x > 0` (`InsertionGraph.law_eq_model`,
-through strictly positive heat-bath laws), and splits the graph facts over
+`InsertionGraph.law_eq_model` gives the last item only for `x > 0` (through
+strictly positive heat-bath laws), and the graph facts are split over
 several declarations. Here the conditional product decomposition is proved
 for every `x ≥ 0`, in particular for the hard-colouring law at `x = 0`,
 directly from the exact factorization of the Potts weight over the

@@ -147,8 +147,9 @@ theorem W_ham_gibbs_one [Nonempty C] (I J : PinningData V C)
   rw [gibbs_one_eq I J hI hJ]
   exact W_self ham_nonneg ham_self _
 
-/-- The remaining one-step input for the *concrete* soft Vigoda kernels.
-All four fields must be proved by the coupling construction; stationarity
+/-- The one-step input for the *concrete* soft Vigoda kernels.
+For the actual root children all four fields are proved by the coupling
+construction (`option_softVigoda_inputs`); stationarity
 is already a theorem and is not a field of this structure. -/
 structure SoftVigodaCouplingInputs [Nonempty V] [Nonempty C]
     (I J M : PinningData V C) (Δ : ℕ) (x : ℝ) (hx0 : 0 < x) (hx1 : x < 1) : Prop where

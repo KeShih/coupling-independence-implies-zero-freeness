@@ -3,8 +3,8 @@ import CI2ZF.Potts.Transfer.HardUniformTransfer
 import CI2ZF.Potts.Transfer.UniformZeroFreePackaging
 
 /-! The main-text Potts conclusion on all bounded-degree graphs. The
-strict-line theorem has no external coupling hypothesis. At equality,
-the hard colouring theorem is an explicit, documented external input. -/
+strict-line theorem has no coupling hypothesis. At equality, the hard
+colouring bound is a parameter here, proved in `PottsExternalTheorem`. -/
 namespace CI2ZF.Potts
 open PottsCI Set Metric
 noncomputable section
@@ -46,8 +46,9 @@ theorem strict_potts_zero_free (C : Type v) [Fintype C] [Nonempty C]
   exact bounded_degree_potts_transfer C Δ hcolours
     (strict_transfer_coupling_inputs C hΔ hq hcolours)
 
-/-- Critical equality theorem. `hardInput` is the only external result:
-the hard-colouring CI consequence of CFFGZZ Theorem 20. In particular,
+/-- Critical equality theorem. `hardInput` is the only coupling hypothesis:
+the hard-colouring CI bound the paper cites from CFFGZZ Theorem 20, proved
+as `critical_hard_colouring_input`. In particular,
 neither positive-temperature CI nor the CI-to-zero-free transfer is
 assumed here. -/
 theorem critical_potts_zero_free (C : Type v) [Fintype C] [Nonempty C]
@@ -58,8 +59,9 @@ theorem critical_potts_zero_free (C : Type v) [Fintype C] [Nonempty C]
   bounded_degree_potts_transfer C Δ hcolours
     (critical_transfer_coupling_inputs C hΔ hq hcolours hardInput)
 
-/-- The headline weak inequality, with the external hypothesis needed
-only in its equality case. -/
+/-- The headline weak inequality, with the hard-colouring hypothesis needed
+only in its equality case; `critical_hard_colouring_input` proves it
+(see `potts_zero_free_of_vigoda_line`). -/
 theorem potts_zero_free (C : Type v) [Fintype C] [Nonempty C]
     {Δ : ℕ} (hΔ : 2 ≤ Δ) (hq : (11 / 6 : ℝ) * Δ ≤ Fintype.card C)
     (hcolours : Δ + 1 ≤ Fintype.card C)

@@ -9,8 +9,8 @@ import Mathlib.Tactic.Push
 The Hamming metric on configuration spaces `V → C`, the path-coupling
 argument (one-step contraction for adjacent configurations extends to
 arbitrary pairs, and then to arbitrary starting distributions), and the
-maximal-coupling bound `W ≤ B·‖μ − ν‖₁/2` used for the `x → 0` limit in
-Proposition 5.2 of the paper.
+maximal-coupling bound `W ≤ B·‖μ − ν‖₁/2` used for the `x → 0` limit
+(`EndpointContinuity`) and in CLMM Lemma 5.13 (`SphereCoupling`).
 -/
 
 namespace PottsCI

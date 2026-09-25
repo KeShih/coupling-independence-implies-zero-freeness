@@ -77,7 +77,7 @@ theorem actual_root_children_strict_uniform_ci
     (ciBound_le_strict_uniform hΔpos ⟨x.property, hx1⟩ hq)
 
 /-- The compact positive-interval critical bound for actual root laws.
-The critical hard endpoint remains a separate hard-colouring input. -/
+The critical hard endpoint is proved separately (`critical_hard_colouring_input`). -/
 theorem actual_root_children_critical_uniform_ci
     (tau : PartialColouring V C) (G : SimpleGraph V) (r : tau.FreeVertex) (a b : C)
     {Δ : ℕ} (hΔ : 2 ≤ Δ) (hdegree : ∀ v, G.degree v ≤ Δ)

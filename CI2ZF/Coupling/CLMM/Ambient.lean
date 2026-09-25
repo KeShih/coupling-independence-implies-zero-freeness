@@ -32,9 +32,9 @@ def ambientSphereInfluence {A O : Type u} [Fintype O] (G : SimpleGraph A)
   ∑ o, if G.edist (e none) (e (some o)) = (R : ℕ∞) then
     (1 / 2 : ℝ) * ∑ c, |singleSiteMass μ o c - singleSiteMass ν o c| else 0
 
-/-- Uniform current-residual sphere influence, retained only for
-intermediate estimates. The literature interfaces use the stronger
-fixed-ambient, all-pinnings condition below. -/
+/-- Uniform current-residual sphere influence. It is not used: CLMM
+Lemma 5.13 (`sphere_to_coupling`) uses the stronger fixed-ambient,
+all-pinnings condition below. -/
 def SphereDecay (C : Type v) [Fintype C] (Δ g R : ℕ) (x ε : ℝ) : Prop :=
   ∀ {O : Type u} [Fintype O] (I : PinningData (Option O) C),
     I.DegreeBound Δ → (g : ℕ∞) ≤ I.graph.egirth → ∀ (a b : C)

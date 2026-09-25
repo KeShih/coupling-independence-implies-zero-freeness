@@ -1,7 +1,7 @@
 import CI2ZF.Coupling.Vigoda.CouplingIndependence
 
-/-! The integer critical line lies in the degree range of the explicit
-external hard-colouring input cited in the main text. -/
+/-! The integer critical line lies in the degree range `Δ ≥ 6` on which the
+Carlson–Vigoda contraction proves the hard-colouring bound cited in the main text. -/
 namespace CI2ZF.Potts
 
 theorem critical_line_degree_multiple_six {q Δ : ℕ}

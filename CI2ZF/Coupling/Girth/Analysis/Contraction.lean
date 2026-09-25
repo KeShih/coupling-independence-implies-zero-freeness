@@ -7,8 +7,8 @@ import CI2ZF.Coupling.Girth.Analysis.Jacobian
 The parent probability law in this file is computed from the actual weighted
 recursion. Its marginal and occupancy bounds are proved in the imported
 files. This establishes the quantitative matrix estimate underlying
-`hg-strong-jacobian`. The later files `GirthDifferential` and
-`GirthFiniteDifference` complete the derivative and finite-difference steps.
+`hg-strong-jacobian`. The later files `Analysis.Differential` and
+`Analysis.FiniteDifference` complete the derivative and finite-difference steps.
 -/
 
 namespace CI2ZF.Appendix.Girth

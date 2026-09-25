@@ -10,11 +10,11 @@ import Mathlib.Tactic.NormNum
 The finite-family compactness argument below supplies the analytic uniformity
 step in the local-model argument of `main.tex:945`. It does not assert that
 all graph instances are a finite family: the combinatorial reduction to a
-bounded family is a separate proof obligation.
+bounded family is proved separately (`Potts.Transfer.BoundedLocalFamily`).
 
 The final theorem is the endpoint-patching step of `main.tex:1255`. Its two
-nonvanishing inputs remain explicit. In particular this file does not claim
-that coupling independence alone has already been shown to imply them.
+nonvanishing inputs are explicit here; `bounded_degree_potts_transfer`
+derives them from coupling independence.
 -/
 
 namespace CI2ZF

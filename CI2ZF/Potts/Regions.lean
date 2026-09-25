@@ -20,4 +20,4 @@ import CI2ZF.Coupling.BBR.GapTwo
 
 /-! Completed appendix regions. Each imported endpoint proves coupling
 independence for the actual finite Gibbs laws, then the uniform zero-free
-corollary. Explicit literature inputs are documented in docs/appendix/STATUS.md. -/
+corollary. No endpoint takes a literature parameter; docs/appendix/STATUS.md records how the cited results are proved. -/
