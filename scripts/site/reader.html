@@ -99,8 +99,12 @@ code, pre { font-family: var(--mono); }
 .sheet-handle { display: none; }
 
 /* Paper ---------------------------------------------------------------- */
-.doc { max-width: 46rem; margin: 0 auto; padding: 44px clamp(18px, 7cqi, 88px) 45vh;
-  font-family: var(--paper); font-size: 18.5px; line-height: 1.62; color: var(--ink); }
+/* The column is measured in em of the paper's type, about the measure of the
+   printed page, and the type grows with the pane. */
+.doc { box-sizing: content-box; max-width: 44em; margin: 0 auto;
+  padding: 44px clamp(16px, 5cqi, 72px) 45vh;
+  font-family: var(--paper); font-size: clamp(17px, 14.5px + 0.5cqi, 21.5px); line-height: 1.62; color: var(--ink);
+  -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
 .doc .p { margin: 0 0 0.85em; }
 @container (min-width: 640px) { .doc .p { text-align: justify; hyphens: auto; } }
 .title-block { margin: 8px 0 34px; text-align: center; }
@@ -153,10 +157,11 @@ h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
 .lean-mark:hover, .thm.is-selected .lean-mark { border-color: var(--accent); color: var(--accent-ink); }
 .thm.is-selected .lean-mark { background: var(--accent); color: #fff; border-color: var(--accent); }
 .thm.is-selected .lean-mark .n, .thm.is-selected .lean-mark .arrow { color: rgba(255,255,255,.85); }
-@container (max-width: 899px) {
+@container (max-width: 979px) {
   .lean-mark { position: relative; top: auto; right: auto; float: right; margin: 2px -6px 6px 12px; }
 }
-@container (min-width: 900px) {
+@container (min-width: 980px) {
+  .doc { padding-right: clamp(128px, 8cqi, 150px); }
   .lean-mark { left: calc(100% + 14px); right: auto; top: 12px; }
 }
 .proof { margin: 0.2em 0 1.4em; }
