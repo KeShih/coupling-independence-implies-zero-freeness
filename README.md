@@ -29,11 +29,12 @@ Paste this prompt into your coding agent:
 ```text
 Verify that the Lean code in
 https://github.com/KeShih/coupling-independence-implies-zero-freeness
-proves every result of its two papers, using only mathlib and Lean's
-standard axioms. Trust nothing the repository says about itself: list the
-results from the papers yourself, state each one in Lean yourself, prove
-your statement from the repository's theorems, and check its axioms.
-Report every result that is not proved exactly as the paper states it.
+builds with zero sorry and proves every result of its two papers, using
+only mathlib and Lean's standard axioms. Trust nothing the repository
+says about itself: list the results from the papers yourself, state each
+one in Lean yourself, prove your statement from the repository's
+theorems, and check its axioms. Report every result that is not proved
+exactly as the paper states it.
 ```
 
 [The formalization in detail](docs/formalization.md) lists the Lean names of
