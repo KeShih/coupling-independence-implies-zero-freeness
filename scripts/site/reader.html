@@ -235,8 +235,6 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 
 /* Lean panel ---------------------------------------------------------- */
 .panel { padding: 24px 28px 64px; font-size: 15px; }
-.eyebrow { font: 400 13.5px/1.4 var(--sans); color: var(--muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .pv-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; min-height: 30px; }
 .pv-stmt .pv-top { margin-bottom: 0; }
 .pv-head { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px; min-width: 0; }
@@ -304,8 +302,6 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
 .links a, .links button { color: var(--accent-ink); font-weight: 550; display: inline-flex; align-items: center; gap: 4px; }
 .links a:hover, .links button:hover { text-decoration: underline; text-underline-offset: 3px; }
 .empty { color: var(--ink-2); font-size: 15px; margin: 12px 0 0; }
-.ov h2 { font: 400 23px/1.25 var(--paper); margin: 0 0 4px; text-wrap: balance; }
-.ov .by { color: var(--ink-2); margin: 0 0 14px; }
 .lede { color: var(--ink-2); margin: 0 0 20px; line-height: 1.6; }
 .stack { display: flex; height: 6px; border-radius: 99px; overflow: hidden; background: var(--line); margin: 0 0 12px; gap: 2px; }
 .stack span { display: block; height: 100%; }
@@ -903,8 +899,9 @@ details.more-box[open] summary::before { content: "\2212  "; }
       list = p.statements.filter(function (s) { var sec = sectionOf[s.id]; return sec && sec.chapter === info.chapter; });
       scope = "in Section " + info.chapter.num;
     }
-    var html = '<div class="pv"><div class="pv-top"><div class="eyebrow">' + esc(p.short) + (info.num ? " \u00b7 Section " + esc(info.num) : "") + '</div>' + navButtons(null) + '</div>' +
-      '<h2 class="pv-title"><span class="pv-name">' + info.title + '</span></h2>';
+    // The paper shows the heading; the panel names the section in one line.
+    var html = '<div class="pv"><h2 class="sr">' + (info.num ? "Section " + esc(info.num) + ": " : "") + esc(stripTags(info.title)) + '</h2>' +
+      '<div class="pv-top"><span class="pv-ref">' + (info.num ? "Section " + esc(info.num) : esc(stripTags(info.title))) + '</span>' + navButtons(null) + '</div>';
     if (list.length) {
       html += '<div class="sub"><h3>Numbered statements ' + esc(scope) + '</h3><span class="aside">' + list.length + '</span></div><ul class="sec-list">';
       list.forEach(function (s) {
@@ -925,8 +922,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var colors = { formalized: "var(--good)", "formalized-equivalent": "color-mix(in srgb, var(--good) 65%, var(--lean-bg))",
       "formalized-narrowed": "color-mix(in srgb, var(--good) 40%, var(--lean-bg))", definition: "var(--muted)",
       remark: "color-mix(in srgb, var(--muted) 50%, var(--lean-bg))", "not-formalized": "#d03b3b" };
-    var html = '<div class="ov"><div class="pv-top"><div class="eyebrow">' + esc(p.short) + '</div>' + navButtons(null) + '</div>' +
-      '<h2>' + esc(p.title) + '</h2><p class="by">' + esc(p.authors) + '</p>' +
+    var html = '<div class="ov"><h2 class="sr">' + esc(p.title) + '</h2><div class="pv-top"><span class="pv-ref">Overview</span>' + navButtons(null) + '</div>' +
       '<p class="lede">Every numbered statement of this paper is shown with the Lean statement that formalizes it. This panel follows the statement you are reading; click one to keep it here.</p>' +
       '<div class="sub"><h3>' + p.statements.length + ' numbered statements</h3></div>' +
       '<div class="stack" role="img" aria-label="Formalization status of the ' + p.statements.length + ' numbered statements">';
