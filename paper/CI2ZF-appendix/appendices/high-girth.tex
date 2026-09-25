@@ -1,0 +1,985 @@
+\section{\texorpdfstring{Coupling independence for \(q\ge\Deg+3\) at large girth}
+{Coupling independence for q >= Delta + 3 at large girth}}
+\label{sec:high-girth-soft}
+
+\begin{theorem}[Large-girth coupling independence]
+\label{thm:high-girth-soft-ci}
+Let $q,\Deg$ be integers with $\Deg\ge3$ and $q\ge\Deg+3$.  There exist
+$g_*=g_*(q,\Deg)\ge3$ and $C_*=C_*(q,\Deg)<\infty$ such that, for every
+$G\in\Gdeg$ and every pinning $\tau$ with
+\(\operatorname{girth}(G^\tau)\ge g_*\), the bound
+below holds for every $x\in[0,1]$, every $r\in V^\tau$, and all
+$a,b\in\colours$:
+\[
+  \WHam\!\left(
+    \mupin{G}{\tau^{r=a}}{x},
+    \mupin{G}{\tau^{r=b}}{x}
+  \right)\le C_*.
+\]
+The two laws live on the common free set $V^\tau\setminus\{r\}$.  At $x=0$
+they are well defined by \Cref{lem:hard-feas}.
+\end{theorem}
+
+At $x=0$, the estimate is already contained in
+\cite[Theorem~5.10 and Lemma~5.13]{CLMM2023}; it is also recovered below by
+continuity.  To obtain the interval $[0,1]$, we extend the same tree argument
+to positive activities.  For $0<x<1$, the soft recursion is a weighted-colour
+recursion whose scaled cavity messages are subdistributions.  Four units of
+palette slack below the root give a uniform contraction.  The contraction
+implies tree total-influence decay (TID) and relative strong spatial mixing
+(SSM) after a fixed depth; the root factors are handled by two exact
+cancellations.
+The large-girth transfer of~\cite{CLMM2023} then applies, and finite-state
+continuity supplies the value at $x=0$.
+
+\subsection{Weighted tree recursion}
+\label{sec:hg-weighted-recursion}
+
+We first take $0<x<1$ and put $s:=1-x$.  Root the free component of a tree
+of maximum degree at most \(\Deg\) and condition on a fixed pinning, treating
+every pinned neighbour as a boundary constraint.  At a free vertex $v$, let
+$d_v$ be the number of free children and $k_v$ the number of pinned
+neighbours.  As in \Cref{sec:potts-setup}, $\bcount_v^\tau(c)$ counts those of
+colour $c$.  Thus
+\[
+  d_v+k_v\le\Deg-1
+\]
+away from the root, while $d_v+k_v\le\Deg$ at the root.  Define
+\begin{equation}
+  a_v(c)=x^{\bcount_v^\tau(c)},\qquad
+  A_v=\sum_{c=1}^q a_v(c),\qquad
+  \underline A_v=q-sk_v.
+  \label{eq:hg-palette-mass}
+\end{equation}
+Bernoulli's inequality gives
+\begin{equation}
+  A_v\ge\underline A_v.
+  \label{eq:hg-palette-lower}
+\end{equation}
+If $p_i$ is the cavity marginal of free child $i$, put $m_i=sp_i$.
+The parent recursion is
+\begin{equation}
+  p_v(c)=
+  \frac{a_v(c)\prod_{i=1}^{d_v}(1-m_i(c))}
+       {\sum_{b=1}^q a_v(b)\prod_{i=1}^{d_v}(1-m_i(b))},
+  \qquad m_v=sp_v.
+  \label{eq:hg-scaled-recursion}
+\end{equation}
+Every $m_i$ is a subdistribution, meaning a nonnegative vector of total
+mass at most one; here its total mass is exactly $s$.  More importantly,
+for every non-root vertex,
+\begin{equation}
+  \underline A_v-d_v
+    =q-sk_v-d_v
+    \ge q-k_v-d_v\ge4.
+  \label{eq:hg-four-slack}
+\end{equation}
+At the root the same calculation leaves three units of slack.  As in the hard
+proof of~\cite{CLMM2023}, contraction is required only below the root; the
+first step is retained as a bounded, possibly noncontracting map.
+
+To integrate the Jacobian between two finite messages, we need a convex
+domain that contains every genuine non-root message and every interpolation
+point used in potential coordinates.  Put
+\begin{equation}
+ \mathcal D_s
+ :=\left\{m\in[0,1/4]^q:
+              \sum_{c\in\colours}m(c)\le s\right\}.
+ \label{eq:hg-message-domain}
+\end{equation}
+This is a convex down-set.  The pointwise bound below shows that every
+genuine non-root scaled message belongs to \(\mathcal D_s\) and has
+total mass exactly \(s\); the extra points in
+\eqref{eq:hg-message-domain} occur only along a potential-coordinate
+interpolation.
+
+We use the elementary product inequality
+\begin{equation}
+  0<B<1,\quad 0\le y_j\le B,\quad \sum_jy_j\le1
+  \quad\Longrightarrow\quad
+  \prod_j(1-y_j)\ge(1-B)^{1/B}.
+  \label{eq:hg-product-lemma}
+\end{equation}
+Indeed, concavity of $\log(1-y)$ on the chord from $0$ to $B$ gives
+$\log(1-y)\ge y\log(1-B)/B$.  Since the coefficient is negative,
+\[
+ \sum_j\log(1-y_j)
+ \ge\frac{\log(1-B)}B\sum_jy_j
+ \ge\frac{\log(1-B)}B,
+\]
+which proves the claim after exponentiation.
+
+At a non-root vertex, inputs
+\(m_i\in\mathcal D_s\) already give the crude invariant bound
+\begin{equation}
+\begin{aligned}
+ Z_v
+ &:=\sum_b a_v(b)\prod_i(1-m_i(b))\\
+ &\ge A_v-\sum_i\sum_b a_v(b)m_i(b)
+ \ge A_v-d_v\ge\underline A_v-d_v\ge4.
+\end{aligned}
+\label{eq:hg-Z-four}
+\end{equation}
+Consequently \(p_v(c)\le1/4\) and \(m_v=sp_v\) belongs to
+\(\mathcal D_s\).  This proves invariance by induction from the leaves;
+the sharper estimate below will also provide the coordinate bounds used in
+the weighted norm.
+
+\subsection{Uniform contraction below the root}
+\label{sec:hg-nonroot-contraction}
+
+We choose
+\begin{equation}
+  \phi(t)=2\operatorname{arctanh}\sqrt t,
+  \qquad
+  \phi'(t)=\frac1{\sqrt t(1-t)}
+  \label{eq:hg-potential}
+\end{equation}
+because its derivative factorizes the transformed Jacobian into one factor
+depending on the outgoing marginal and one measuring the incoming occupancy
+of a single colour.  In the original probability coordinate the same
+potential is \(\psi_s(p)=\phi(sp)\).  The map \(\phi\) is
+increasing and concave on \([0,1/4]\); write
+\[
+  \boldsymbol\phi(m):=(\phi(m(c)))_{c\in\colours}.
+\]
+For the local map \((m_1,\ldots,m_{d_v})\mapsto p_v\), define
+\[
+ J^p_{v,i}
+ :=D\boldsymbol\phi(p_v)\,
+     \frac{\partial p_v}{\partial m_i}\,
+     \bigl(D\boldsymbol\phi(m_i)\bigr)^{-1},
+ \qquad
+ J^p_v:=(J^p_{v,1}\mid\cdots\mid J^p_{v,d_v}).
+\]
+The superscript \(p\) indicates that this auxiliary Jacobian has the
+unscaled output \(p_v\) and the scaled inputs \(m_i\).
+Let \(\widehat J_{v,i}\) and
+\(\widehat J_v=(\widehat J_{v,1}\mid\cdots\mid\widehat J_{v,d_v})\)
+denote the analogous blocks with the scaled output \(\boldsymbol\phi(m_v)\).  At a zero
+coordinate these matrices mean their continuous extensions from positive
+coordinates.
+
+For a block Jacobian \(J=(J_1,\ldots,J_d)\), a positive parent weight
+\(w\), and positive child weights \(w_i\), put
+\begin{equation}
+ \norm{J}_{\mathbf w}
+ =\sup_{(h_i)\ne0}
+   \frac{w\norm{\sum_iJ_ih_i}_2}
+        {\max_i w_i\norm{h_i}_2}.
+ \label{eq:hg-weighted-norm}
+\end{equation}
+For \(d=0\) this empty block norm is zero.
+Below, \(\norm{J^p_v}_{2\to2}\) denotes the spectral norm of the horizontally
+concatenated \(q\)-by-\(d_vq\) block Jacobian.
+
+\begin{lemma}[Exact Jacobian factorization]\label{lem:hg-jacobian-factor}
+Write \(\Sigma_v(c)=\sum_i m_i(c)\) and
+\[
+  F_{1,v}=\max_{c\in\colours}\bigl(1-p_v(c)\bigr)^{-2},
+  \qquad
+  F_{2,v}=\max_{c\in\colours}p_v(c)\Sigma_v(c).
+\]
+Then \(\norm{J^p_v}_{2\to2}^2\le F_{1,v}F_{2,v}\).
+\end{lemma}
+
+\begin{proof}
+Write \(p=p_v\) and \(\gamma(c)=\sqrt{p(c)}/(1-p(c))\).
+Differentiating the \(\phi\)-transformed recursion gives
+\[
+  (J^p_{v,i})_{c,b}
+   =\gamma(c)\bigl(p(b)-\one{b=c}\bigr)\sqrt{m_i(b)}.
+\]
+Hence, for a unit vector \(h\),
+\[
+  \norm{J^p_v}_{2\to2}^2
+   =\max_{\norm{h}_2=1}\sum_c\Sigma_v(c)
+      \bigl(\gamma(c)h(c)-p(c)\langle\gamma,h\rangle\bigr)^2 .
+\]
+Set \(u(c)=\gamma(c)h(c)\) and
+\(U_1=\sum_cu(c)=\langle\gamma,h\rangle\).  The constraint
+\(\norm h_2=1\) becomes
+\[
+  \sum_c\frac{u(c)^2(1-p(c))^2}{p(c)}=1.
+\]
+Since \(p(c)\Sigma_v(c)\le F_{2,v}\), the identity
+\[
+  \sum_c\frac{(u(c)-p(c)U_1)^2}{p(c)}
+  =\sum_c\frac{u(c)^2}{p(c)}-U_1^2
+\]
+gives
+\[
+\begin{aligned}
+ \sum_c\Sigma_v(c)(u(c)-p(c)U_1)^2
+ &\le F_{2,v}\sum_c\frac{(u(c)-p(c)U_1)^2}{p(c)}\\
+ &\le F_{2,v}\sum_c\frac{u(c)^2}{p(c)}
+ \le F_{1,v}F_{2,v}.
+\end{aligned}
+\]
+\end{proof}
+
+We next bound the two factors.  The quantity \(B_v\) controls each
+coordinate of \(p_v\), while \(\zeta_v\) records the loss in the occupancy
+estimate.
+
+\begin{lemma}[Pointwise marginal bound]
+\label{lem:hg-continuous-marginal}
+Consider \eqref{eq:hg-scaled-recursion} at a non-root vertex \(v\) with
+$m_i\in\mathcal D_s$ for every free child.  With $d=d_v$ and
+\(\underline A=\underline A_v\), define
+\begin{equation}
+  \xi_v=\left(\frac43\right)^{4d/(\underline A-1)},
+  \qquad
+  B_v=\frac{\xi_v}{\underline A-1+\xi_v}.
+  \label{eq:hg-xi-B}
+\end{equation}
+Then
+\begin{equation}
+  \frac{p_v(c)}{1-p_v(c)}
+    \le\frac{\xi_v}{\underline A-1},
+  \qquad p_v(c)\le B_v\le\frac14,
+  \qquad m_v(c)\le\frac14
+  \label{eq:hg-marginal-bound}
+\end{equation}
+for every colour $c$.  In particular,
+\(m_v\in\mathcal D_s\).
+\end{lemma}
+
+\begin{proof}
+The crude estimate \eqref{eq:hg-Z-four} already gives
+\(p_v(c)\le1/4\).  For the sharper recursive estimate, the claim is
+immediate if \(a_v(c)=0\).  Otherwise set
+\(S=A_v-a_v(c)\ge\underline A-1\).  Weighted AM--GM and
+\(a_v(b)\le1\) give
+\begin{align*}
+ \sum_{b\ne c}a_v(b)\prod_i(1-m_i(b))
+ &\ge S\prod_{b\ne c}
+       \left(\prod_i(1-m_i(b))\right)^{a_v(b)/S}\\
+ &\ge S\prod_i
+       \left(\prod_{b\ne c}(1-m_i(b))\right)^{1/S}.
+\end{align*}
+By \eqref{eq:hg-product-lemma} with $B=1/4$, the inner product is at
+least $(3/4)^4$.  The function
+\(S\mapsto S(3/4)^{4d/S}\) is increasing, so
+\[
+  \frac{p_v(c)}{1-p_v(c)}
+  \le \frac1{S(3/4)^{4d/S}}
+  \le \frac{\xi_v}{\underline A-1}.
+\]
+Finally \(\underline A\ge d+4\) implies
+\(\xi_v/(\underline A-1)\le1/3\).  For $d=0$ this is immediate; for $d\ge1$
+it reduces to
+$(4/3)^{4d/(d+3)}\le(d+3)/3$, whose logarithmic derivative is
+nonnegative after equality at $d=1$.  This proves $B_v\le1/4$ and hence all
+of \eqref{eq:hg-marginal-bound}.  The induction starts at a free leaf, where
+the same argument has $d=0$.
+\end{proof}
+
+For every non-root vertex $y$, define its local $\xi_y,B_y$ by
+\eqref{eq:hg-xi-B}, with $v$ replaced by $y$, and put
+\begin{equation}
+  \zeta_y=
+  \left(\frac{\underline A_y-1}{\xi_y}+1\right)
+  \log\left(1+\frac{\xi_y}{\underline A_y-1}\right)-1.
+  \label{eq:hg-zeta}
+\end{equation}
+For a child \(y_i\) indexed by \(i\), abbreviate the corresponding
+quantities by \(B_i:=B_{y_i}\) and \(\zeta_i:=\zeta_{y_i}\).
+
+\begin{lemma}[Occupancy-factor bound]
+\label{lem:hg-continuous-amortized}
+Under the hypotheses of \Cref{lem:hg-continuous-marginal}, suppose in addition
+that each free-child input satisfies $m_i(c)\le B_i$ for all $c$.  Then, for
+every colour $c$,
+\begin{equation}
+  p_v(c)\sum_{i=1}^{d_v}m_i(c)
+  \le \frac1{e\underline A_v}
+       \exp\left\{
+          \frac1{\underline A_v}\sum_{i=1}^{d_v}(\zeta_i+1)
+       \right\}.
+  \label{eq:hg-amortized}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For fixed $c$, the $(d_v+1)$-term AM--GM inequality gives
+\[
+ a_v(c)\prod_i(1-m_i(c))\sum_i m_i(c)\le e^{-1}.
+\]
+The definition gives $B_i>0$, while the same slack calculation as in
+\Cref{lem:hg-continuous-marginal} gives $B_i\le1/4$.
+Writing
+\(Z_v=\sum_b a_v(b)\prod_i(1-m_i(b))\)
+for the recursion denominator, weighted AM--GM, \(a_v(b)\le1\), and
+\eqref{eq:hg-product-lemma} give
+\begin{align*}
+ Z_v
+ &\ge A_v\prod_b
+    \left(\prod_i(1-m_i(b))\right)^{a_v(b)/A_v}\\
+ &\ge A_v\prod_i
+    \left(\prod_b(1-m_i(b))\right)^{1/A_v}\\
+ &\ge A_v\prod_i(1-B_i)^{1/(A_vB_i)}\\
+ &\ge \underline A_v
+       \prod_i(1-B_i)^{1/(\underline A_vB_i)}.
+\end{align*}
+The last step uses that $t\mapsto t\exp(-H/t)$ is increasing for fixed
+$H\ge0$.  Since
+$B_i^{-1}\log(1/(1-B_i))=\zeta_i+1$, division proves
+\eqref{eq:hg-amortized}.
+\end{proof}
+
+\begin{lemma}[Weighted Jacobian contraction]
+\label{lem:hg-strong-jacobian}
+At each non-root vertex set
+$w_v=(1-\zeta_v)^{-1/2}$, and for a child \(y_i\) write
+\(w_i:=w_{y_i}\).  For every $0<x<1$, every fixed pinning, and
+every collection of free-child inputs $m_i\in\mathcal D_s$ satisfying
+$m_i(c)\le B_i$, the transformed recursion in
+\eqref{eq:hg-scaled-recursion} satisfies
+\begin{equation}
+  \norm{\widehat J_v}_{\mathbf w}\le
+  \rho:=\exp\left(-\frac4{81q}\right)<1.
+  \label{eq:hg-rho}
+\end{equation}
+Moreover
+\begin{equation}
+  1\le w_v\le e^{1/12},
+  \label{eq:hg-weight-range}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+First reduce to the unscaled output.  Regard \(p_v\) in
+\eqref{eq:hg-scaled-recursion} as a recursion with weighted colour
+availability \(a_v(c)\) and subdistribution inputs \(m_i\).
+The calculation below is first made in the relative interior of
+$\prod_i\mathcal D_s$; the displayed formulas extend continuously to
+the whole closed domain, including when an input coordinate tends to zero.
+The chain rule with \eqref{eq:hg-potential} gives
+\begin{equation}
+ \widehat J_{v,i}
+ =\operatorname{diag}\left(
+   \frac{\sqrt s(1-p_v(c))}{1-sp_v(c)}
+  \right)_{c=1}^q J^p_{v,i}.
+ \label{eq:hg-scaled-row-factor}
+\end{equation}
+The diagonal factor is at most one because
+\[
+  1-st-\sqrt s(1-t)
+   =(1-\sqrt s)(1+\sqrt s\,t)\ge0
+  \qquad(0\le t\le1).
+\]
+Thus it is enough to bound the unscaled Jacobian with
+\Cref{lem:hg-jacobian-factor}.  That factorization uses only
+\(\sum_cp_v(c)=1\) and \(\Sigma_v(c)\ge0\), not \(\sum_bm_i(b)=1\); the weighted
+colour availability enters only through \(Z_v\), controlled by
+\Cref{lem:hg-continuous-marginal,lem:hg-continuous-amortized}.
+Bounding \(F_{1,v}\le
+\exp\bigl(2\xi_v/(\underline A_v-1)\bigr)\) by
+\Cref{lem:hg-continuous-marginal} and \(F_{2,v}\) by
+\eqref{eq:hg-amortized}, and using
+\(d_v\le\underline A_v-4\) to produce the term
+\(-4/\underline A_v\), yields
+\begin{equation}
+ \norm{J^p_v}_{2\to2}^2
+ \le\frac1{\underline A_v}
+ \exp\left\{
+   \frac{2\xi_v}{\underline A_v-1}-\frac4{\underline A_v}
+   +\frac1{\underline A_v}\sum_i\zeta_i
+ \right\}.
+ \label{eq:hg-euclidean-jacobian}
+\end{equation}
+
+Let \(y_v=\xi_v/(\underline A_v-1)\le1/3\).  The elementary entropy inequality
+\cite[Fact~B.5]{CLMM2023} used in the weighted colouring recursion gives
+\begin{equation}
+ 0<\zeta_v<1,\qquad
+ \frac1{1-\zeta_v}\le e^{y_v/2},
+ \label{eq:hg-entropy-inequality}
+\end{equation}
+and therefore \eqref{eq:hg-weight-range}.  Directly from
+\eqref{eq:hg-weighted-norm},
+\[
+ \norm{J}_{\mathbf w}^2
+ \le \norm{J}_{2\to2}^2 w_v^2\sum_iw_i^{-2}.
+\]
+Here \(w_i^{-2}=1-\zeta_i\), so
+\(\sum_iw_i^{-2}=d_v-\sum_i\zeta_i\).
+Applying this bound to \eqref{eq:hg-euclidean-jacobian} gives
+\begin{align}
+ \norm{\widehat J_v}_{\mathbf w}^2
+ &\le
+ \exp\left\{
+   \frac{5\xi_v}{2(\underline A_v-1)}-\frac8{\underline A_v}
+ \right\}.
+ \label{eq:hg-weighted-jacobian-bound}
+\end{align}
+Indeed, with \(\bar\zeta_v=\underline A_v^{-1}\sum_i\zeta_i\),
+\[
+ \left(\frac{d_v}{\underline A_v}-\bar\zeta_v\right)e^{\bar\zeta_v}
+ \le\frac{d_v}{\underline A_v}
+ \le1-\frac4{\underline A_v}
+ \le e^{-4/\underline A_v}.
+\]
+It remains to retain a strict margin.  Since
+\(d_v\le\underline A_v-4\),
+\[
+ \xi_v\le\frac{256}{81}
+ \exp\left(-\frac{12\log(4/3)}{\underline A_v-1}\right).
+\]
+Writing \(u=(\underline A_v-1)^{-1}\) and using
+$\log(1+u)\le u\le12\log(4/3)u$ shows
+\[
+ \xi_v\frac{\underline A_v}{\underline A_v-1}\le\frac{256}{81}.
+\]
+Consequently the exponent in \eqref{eq:hg-weighted-jacobian-bound} is at
+most \(-8/(81\underline A_v)\le-8/(81q)\).  Taking square roots proves
+\eqref{eq:hg-rho}.  If $d_v=0$, the Jacobian is zero and the conclusion is
+immediate.
+\end{proof}
+
+\begin{lemma}[From Jacobian contraction to message contraction]
+\label{lem:hg-finite-difference}
+Fix the local colour weights at a non-root vertex \(v\) and the child structural
+parameters that determine \(B_i,w_i\).  Let
+$(m_i)_{i=1}^{d_v}$ and $(m'_i)_{i=1}^{d_v}$ be two collections in
+$\mathcal D_s$ such that
+$m_i(c),m'_i(c)\le B_i$ for every $i,c$, and let
+\(m_v,m'_v\) be their respective outputs under
+\eqref{eq:hg-scaled-recursion}.  Then
+\begin{equation}
+ w_v\norm{\boldsymbol\phi(m_v)-\boldsymbol\phi(m'_v)}_2
+ \le
+ \rho\max_i
+ w_i\norm{\boldsymbol\phi(m_i)-\boldsymbol\phi(m'_i)}_2 .
+ \label{eq:hg-finite-difference}
+\end{equation}
+Both sides are interpreted as zero when $d_v=0$.
+\end{lemma}
+
+\begin{proof}
+When $d_v=0$, the two outputs are identical.  Otherwise, for
+$t\in[0,1]$ define the potential-coordinate segment
+\[
+ u_i(t)=(1-t)\boldsymbol\phi(m_i)+t\boldsymbol\phi(m'_i),
+ \qquad
+ m_i(t)=\boldsymbol\phi^{-1}(u_i(t)).
+\]
+Write \(u(t)=(u_i(t))_{i=1}^{d_v}\) and
+\(m(t)=(m_i(t))_{i=1}^{d_v}\); thus
+\(u'(t)=(\boldsymbol\phi(m'_i)-\boldsymbol\phi(m_i))_{i=1}^{d_v}\).
+Since $\phi$ is increasing and concave on $[0,1/4]$, its inverse is
+increasing and convex on $[0,\phi(1/4)]$.  Coordinatewise,
+\[
+ m_i(t,c)
+ \le (1-t)m_i(c)+tm'_i(c)\le B_i,
+ \qquad
+ \sum_c m_i(t,c)
+ \le (1-t)\sum_c m_i(c)+t\sum_c m'_i(c)
+ \le s.
+\]
+Thus the entire segment lies in $\mathcal D_s$ and satisfies the sharper
+coordinate bounds needed in \Cref{lem:hg-strong-jacobian}.  The fundamental
+theorem of calculus and \eqref{eq:hg-rho} now give
+\begin{align*}
+ w_v\norm{\boldsymbol\phi(m_v)-\boldsymbol\phi(m'_v)}_2
+ &\le
+ \int_0^1
+  w_v\norm{\widehat J_v(m(t))
+                \bigl(u'(t)\bigr)}_2\,dt\\
+ &\le
+ \rho\max_iw_i\norm{\boldsymbol\phi(m_i)-\boldsymbol\phi(m'_i)}_2.
+\end{align*}
+If an endpoint has a zero coordinate, approximate it from the relative
+interior and use continuity.
+\end{proof}
+
+\subsection{Total-influence decay and spatial mixing}
+\label{sec:hg-tree-consequences}
+
+We first fix the orientation and the messages used in the factorization.
+Fix a tree \(\mathcal T=(V_{\mathcal T},E_{\mathcal T})\) of maximum
+degree at most \(\Deg\), a set
+\(\Lambda\subseteq V_{\mathcal T}\), a pinning
+\(\tau\colon\Lambda\to\colours\), and a root
+\(r\in V_{\mathcal T}\setminus\Lambda\).
+Let \(\mathcal T_\tau\) be the component of \(r\) in
+\(\mathcal T-\Lambda\), and let
+\(\operatorname{dist}_{\mathcal T_\tau}\) denote its graph distance.
+Root \(\mathcal T_\tau\) at \(r\).  For every
+\(y\in V(\mathcal T_\tau)\setminus\{r\}\), let \(y^-\) be its parent and
+let \(\mathcal T_{y\to y^-}\) be the component containing \(y\) after
+the edge \(yy^-\) is removed from \(\mathcal T_\tau\).  Write
+\[
+  p_{y\to y^-}
+\]
+for the cavity marginal of $y$ in this component, including all fixed
+pinnings incident to vertices of the component, and put
+$m_{y\to y^-}=sp_{y\to y^-}$.  At the root, $p_r$ is instead the
+ordinary marginal in the full rooted component and $m_r=sp_r$.  Thus
+the root object is not being asserted to satisfy the non-root marginal bound.
+By \Cref{lem:hg-continuous-marginal}, every cavity message
+$m_{y\to y^-}$ does satisfy
+\begin{equation}
+  0\le m_{y\to y^-}(c)\le\frac14,
+  \label{eq:hg-cavity-quarter}
+\end{equation}
+because deleting the parent edge leaves at most $\Deg-1$ child and pinned
+constraints at $y$.
+
+For a parent $y$ and its free child $w$, let $J_{y,w}$ denote the block
+Jacobian, in the potential $\psi_s(p)=\phi(sp)$, of the appropriate
+oriented update with respect to the incoming message from $w$: it outputs
+the full marginal $p_r$ when $y=r$, and it outputs the cavity marginal
+$p_{y\to y^-}$ when $y\ne r$.  In the scaled coordinate this is one block
+of \(\widehat J_y\) when $y\ne r$, and is then controlled by
+\Cref{lem:hg-strong-jacobian}; the root block is handled below.  Define,
+with the same distinction between the root and non-root messages,
+\begin{equation}
+  D_r=\operatorname{diag}\bigl(p_r\psi_s'(p_r)\bigr)
+     =\operatorname{diag}\frac{\sqrt{m_r}}{1-m_r},
+  \qquad
+  D_{y\to y^-}
+     =\operatorname{diag}\frac{\sqrt{m_{y\to y^-}}}
+                                  {1-m_{y\to y^-}} .
+  \label{eq:hg-D-matrix}
+\end{equation}
+Products such as \(p_r\psi_s'(p_r)\) are coordinatewise.
+Let \(I_q\) denote the \(q\)-by-\(q\) identity matrix and
+\(\mathbf1_q\in\mathbb R^q\) the all-ones column vector.
+
+\begin{lemma}[Bounded root response]\label{lem:hg-root-response}
+For every free child \(u\) of the root,
+\begin{equation}
+ D_r^{-1}J_{r,u}
+ =-\bigl(I_q-\mathbf1_qp_r^{\mathsf T}\bigr)
+   \operatorname{diag}\bigl(\sqrt{m_{u\to r}}\bigr),
+ \qquad
+ \norm{D_r^{-1}J_{r,u}}_{2\to2}
+ \le K_q:=\frac{1+\sqrt q}{2}.
+ \label{eq:hg-first-jacobian}
+\end{equation}
+Thus the first influence factor is bounded without a lower bound on any
+coordinate of \(p_r\).
+\end{lemma}
+
+\begin{proof}
+The raw derivative of \eqref{eq:hg-scaled-recursion} is
+\[
+ \frac{\partial p_r(c)}{\partial p_{u\to r}(b)}
+ =\frac{s p_r(c)
+        [p_r(b)-\one{b=c}]}{1-m_{u\to r}(b)},
+ \qquad
+ \psi_s'(p_{u\to r}(b))^{-1}
+ =\frac{\sqrt{m_{u\to r}(b)}
+              (1-m_{u\to r}(b))}{s}.
+\]
+The factor \(p_r(c)\) cancels against \(D_r^{-1}\) before any norm is
+taken, giving the displayed identity.  By
+\eqref{eq:hg-cavity-quarter},
+\(\norm{\operatorname{diag}\sqrt{m_{u\to r}}}_{2\to2}\le1/2\), while
+\(\norm{I_q-\mathbf1_qp_r^{\mathsf T}}_{2\to2}\le1+\sqrt q\).
+\end{proof}
+
+For this pinning \(\tau\colon\Lambda\to\colours\), write
+\(\mu_v^\tau\) for the one-site marginal
+at a free vertex \(v\) under the corresponding tree Gibbs law and
+\(\mu_v^{\tau^{r=a}}\) for that marginal after additionally pinning a free
+vertex \(r\) to \(a\).  For distinct free vertices \(r,v\), let
+\(\Psi_{r,v}\) be the \(q\)-by-\(q\) influence block
+\[
+ \Psi_{r,v}(a,c)
+ :=\mu_v^{\tau^{r=a}}(c)-\mu_v^\tau(c);
+\]
+we suppress its dependence on \(\tau\).  If deleting the vertices pinned by
+\(\tau\) separates \(r\) from \(v\), this block is zero.  Define the
+level-\(\ell\) total influence by
+\begin{equation}
+ \mathcal I_\ell(r;\tau)
+ :=\max_{a,b\in\colours}
+   \sum_{\substack{v\in V(\mathcal T_\tau)\\
+                   \operatorname{dist}_{\mathcal T_\tau}(r,v)=\ell}}
+   \norm{\mu_v^{\tau^{r=a}}-\mu_v^{\tau^{r=b}}}_{\rm TV}.
+ \label{eq:hg-tid-definition}
+\end{equation}
+If \(r\) and \(v\) remain connected, let their free path be
+\[
+  r=u_0,u_1,\ldots,u_\ell=v.
+\]
+The influence/Jacobian identity of \cite[Lemma~8.7]{CLMM2023}, applied in
+the successive rooted subtrees, gives
+\begin{equation}
+  \Psi_{r,v}
+   =D_r^{-1}J_{u_0,u_1}
+      \Bigl(\prod_{j=1}^{\ell-1}J_{u_j,u_{j+1}}\Bigr)
+      D_{v\to u_{\ell-1}}
+      \bigl(I_q-\mathbf1_qp_{v\to u_{\ell-1}}^{\mathsf T}\bigr).
+  \label{eq:hg-psi-factorization}
+\end{equation}
+The product is ordered away from the root, is empty when \(\ell=1\), and
+the intermediate diagonal matrices telescope.  The terminal factors use
+the \emph{cavity} law in
+\(\mathcal T_{v\to u_{\ell-1}}\).  The identity is exact, and
+\Cref{lem:hg-root-response} shows that its first factor extends boundedly
+to a zero root coordinate.
+
+\begin{lemma}[Tree total-influence decay]
+\label{lem:hg-tid}
+Uniformly over $0<x<1$, every tree
+\(\mathcal T=(V_{\mathcal T},E_{\mathcal T})\) of maximum degree at most
+\(\Deg\), every pinning \(\tau\colon\Lambda\to\colours\) with
+\(\Lambda\subseteq V_{\mathcal T}\), every root
+\(r\in V_{\mathcal T}\setminus\Lambda\), and every integer $\ell\ge1$ satisfy
+\begin{equation}
+ \mathcal I_\ell(r;\tau)
+ \le C_0\rho^{\ell-1}
+ =C_{\rm TID}\rho^\ell,
+\label{eq:hg-tid}
+\end{equation}
+where one may take
+\begin{equation}
+ C_0=\frac{\Deg e^{1/12}\sqrt q(1+\sqrt q)^2}{3},
+ \qquad
+ C_{\rm TID}=\frac{C_0}{\rho}.
+ \label{eq:hg-tid-constant}
+\end{equation}
+The level sum ranges only over free vertices.
+No positive lower bound on a one-site marginal enters this constant.
+\end{lemma}
+
+\begin{proof}
+The first factor is bounded by \Cref{lem:hg-root-response}; it need not
+contract.  At the terminal end, \eqref{eq:hg-cavity-quarter} applies to
+$m_{v\to u_{\ell-1}}$, and therefore
+\begin{equation}
+ \norm{D_{v\to u_{\ell-1}}
+       (I_q-\mathbf1_qp_{v\to u_{\ell-1}}^{\mathsf T})}_{2\to2}
+ \le\frac{2(1+\sqrt q)}3,
+ \label{eq:hg-terminal-bound}
+\end{equation}
+because $\norm{D_{v\to u_{\ell-1}}}_{2\to2}\le2/3$ and
+$\norm{I_q-\mathbf1_qp_{v\to u_{\ell-1}}^{\mathsf T}}_{2\to2}\le1+\sqrt q$.
+
+We now use \eqref{eq:hg-psi-factorization} simultaneously over a level.
+If the level contains no free vertex, the claimed influence bound is
+immediate.  Otherwise, group the terminals by their first child of $r$,
+keep the corresponding
+first factor \eqref{eq:hg-first-jacobian} intact, and peel the remaining
+$\ell-1$ levels with the block norm of
+\Cref{lem:hg-strong-jacobian}.  Every update peeled in this way is a
+non-root cavity update.  Iterating the weighted inequality gives
+$\rho^{\ell-1}$; the ratio between its terminal and initial weights is at
+most $e^{1/12}$ by \eqref{eq:hg-weight-range}.  Finally sum the at most
+$\Deg$ first-child blocks by the triangle inequality.  Thus, for arbitrary
+terminal block vectors $h_v\in\mathbb R^q$,
+\[
+ \frac{
+  \norm{\sum_{\operatorname{dist}_{\mathcal T_\tau}(r,v)=\ell}
+              \Psi_{r,v}h_v}_2}
+  {\max_v\norm{h_v}_2}
+ \le
+ \Deg e^{1/12}K_q\frac{2(1+\sqrt q)}3\rho^{\ell-1}.
+\]
+Here the product and the contraction exponent are interpreted as empty and
+$1$, respectively, when $\ell=1$.  The standard block
+$L^2$-to-$L^\infty$ duality conversion costs at most $\sqrt q$.  Indeed, if
+\[
+ \mathcal A(h):=
+ \sum_{\operatorname{dist}_{\mathcal T_\tau}(r,v)=\ell}
+       \Psi_{r,v}h_v ,
+\]
+the triangle
+inequality through the unconditioned law makes the two factors \(1/2\) in
+total variation cancel, and hence
+\[
+ \mathcal I_\ell(r;\tau)
+ \le \max_a
+       \sum_{\operatorname{dist}_{\mathcal T_\tau}(r,v)=\ell}\sum_c
+       \abs{\Psi_{r,v}(a,c)}
+ \le
+ \sup_{\max_v\norm{h_v}_\infty\le1}\norm{\mathcal A(h)}_\infty
+ \le
+ \sqrt q\,
+ \sup_{\max_v\norm{h_v}_2\le1}\norm{\mathcal A(h)}_2 .
+\]
+Using the definition of $K_q$ and writing
+$\rho^{\ell-1}=\rho^{-1}\rho^\ell$ gives exactly
+\eqref{eq:hg-tid}--\eqref{eq:hg-tid-constant}.
+\end{proof}
+
+Uniform relative SSM cannot start at distance one. Indeed, on a single
+edge, compare boundary colours \(a\) and \(b\ne a\).  The probability that
+the free endpoint has colour \(a\) is respectively
+\[
+  \frac{x}{q-1+x}
+  \qquad\text{and}\qquad
+  \frac1{q-1+x},
+\]
+so the ratio is \(x\) (or \(1/x\) in the reverse comparison).  The
+large-girth transfer only needs a relative estimate beyond a fixed depth.
+
+\begin{lemma}[Relative SSM beyond a fixed depth]
+\label{lem:hg-eventual-relative-ssm}
+For
+\begin{equation}
+ C_{\rm rel}:=\frac58\Deg q\,e^{1/12}\log3,
+ \label{eq:hg-relative-constant}
+\end{equation}
+the following holds for every $0<x<1$ on every tree
+\(\mathcal T=(V_{\mathcal T},E_{\mathcal T})\) of maximum degree at
+most $\Deg$.  Fix \(\Lambda\subseteq V_{\mathcal T}\), a pinning
+\(\tau\colon\Lambda\to\colours\), and a root
+\(v\in V_{\mathcal T}\setminus\Lambda\).  For an integer \(K\ge2\), let
+\[
+  S_K(v):=
+  \{u\in V_{\mathcal T}:
+       \operatorname{dist}_{\mathcal T}(u,v)=K\},
+\]
+and let
+\[
+ \omega,\omega'\colon S_K(v)\setminus\Lambda\longrightarrow
+ \colours
+\]
+be two assignments of all unpinned shell vertices.  Thus
+\(\tau\cup\omega\) and \(\tau\cup\omega'\) are the unions of partial maps with
+disjoint domains.  The two systems have the same fixed pinning \(\tau\) and
+differ only on the shell.  Write
+\[
+ p_v:=\mu_v^{\tau\cup\omega},
+ \qquad
+ p'_v:=\mu_v^{\tau\cup\omega'}.
+\]
+Here each right-hand side denotes the one-site marginal at \(v\) under the
+indicated pinning.
+Then, for every root colour $c$,
+\begin{equation}
+ \left|\log\frac{p_v(c)}{p'_v(c)}\right|
+ \le C_{\rm rel}\rho^{K-2}.
+ \label{eq:hg-eventual-relative-ssm}
+\end{equation}
+Define
+\[
+ K_1:=\min\{K\in\mathbb Z_{\ge2}:C_{\rm rel}\rho^{K-2}\le1\}.
+\]
+For every integer \(K\ge K_1\), the ratio-form relative-SSM error is at most
+\(2C_{\rm rel}\rho^{K-2}\).
+The case \(x=0\) will be added after the final coupling bound by
+finite-state continuity; at \(x=1\) the left side is zero.
+\end{lemma}
+
+\begin{proof}
+The pinned children adjacent to the root belong to the fixed pinning $\tau$,
+so their colour weights \(a_v(c)\) agree.  Write
+\[
+ P_c=\prod_i(1-m_i(c)),\qquad
+ p_v(c)=\frac{a_v(c)P_c}{Z},\qquad
+ Z=\sum_b a_v(b)P_b,
+\]
+and use primes for the second condition.  The potentially tiny root colour
+weight cancels exactly:
+\begin{equation}
+ \log\frac{p_v(c)}{p'_v(c)}
+ =\log\frac{P_c}{P'_c}+\log\frac{Z'}Z.
+ \label{eq:hg-palette-cancellation}
+\end{equation}
+Because $K\ge2$, every message entering the root is the output of a non-root
+recursion and hence is bounded by $1/4$.  Therefore
+\[
+ \left|\log\frac{P_c}{P'_c}\right|
+ \le\frac43\sum_i|m_i(c)-m'_i(c)|.
+\]
+Moreover telescoping the products gives
+$|Z-Z'|\le\sum_i\norm{m_i-m'_i}_1$, while the root version of
+\eqref{eq:hg-Z-four} gives $Z,Z'\ge3$.  Consequently
+\begin{equation}
+ \left|\log\frac{p_v(c)}{p'_v(c)}\right|
+ \le\frac53\sum_i\norm{m_i-m'_i}_1.
+ \label{eq:hg-relative-to-messages}
+\end{equation}
+
+The update adjacent to the shell is not compared by a Jacobian, because its
+local colour weights may change with the shell assignment.  Its two output
+messages nevertheless obey \Cref{lem:hg-continuous-marginal}.  For
+\(1\le j\le K-1\), let \(\mathcal F_j\) be the free vertices at distance
+\(j\) from \(v\) in the same component after the vertices pinned by
+\(\tau\) are deleted.  Orient this component toward \(v\), and write
+\(y^-\) for the parent of \(y\).  Let
+\[
+ E_j:=
+ \max_{y\in\mathcal F_j}
+ w_y\norm{\boldsymbol\phi(m_{y\to y^-})
+             -\boldsymbol\phi(m'_{y\to y^-})}_2 .
+\]
+We set the maximum over an empty set to zero.
+The potential diameter and \eqref{eq:hg-weight-range} give
+\[
+ E_{K-1}\le e^{1/12}\sqrt q\,\phi(1/4)
+ =e^{1/12}\sqrt q\log3.
+\]
+The two boundary assignments pin the same set of shell vertices, so the two
+recursions have the same \(d_y,k_y,B_y,w_y\).  Every update strictly inside
+that shell has the same local colour weights on both sides.  Thus
+\Cref{lem:hg-finite-difference} gives
+\[
+ E_j\le\rho E_{j+1}
+ \qquad(1\le j\le K-2).
+\]
+These are exactly \(K-2\) contracting levels.  Since \(w_i\ge1\) and
+\(\inf_{[0,1/4]}\phi'=8/3\), Cauchy--Schwarz gives, for each message entering
+the root,
+\[
+ \norm{m_i-m'_i}_1
+ \le\frac38\sqrt q\,
+       \norm{\boldsymbol\phi(m_i)-\boldsymbol\phi(m'_i)}_2
+ \le\frac38q\,e^{1/12}\log3\,\rho^{K-2}.
+\]
+Summing over at most \(\Deg\) root children in
+\eqref{eq:hg-relative-to-messages} proves
+\eqref{eq:hg-eventual-relative-ssm} with
+\eqref{eq:hg-relative-constant}.
+
+To convert this logarithmic estimate to the relative-error form of
+\cite[Definition~5.7]{CLMM2023}, put
+\(\varepsilon_K:=C_{\rm rel}\rho^{K-2}\).  By the definition of \(K_1\), for
+\(K\ge K_1\),
+\[
+ \left|\frac{p_v(c)}{p'_v(c)}-1\right|
+ \le e^{\varepsilon_K}-1\le2\varepsilon_K .
+\]
+Thus the usual relative-SSM estimate holds uniformly at every
+$K\ge K_1$; no assertion is made at distance one.
+\end{proof}
+
+\subsection{Transfer to large-girth graphs}
+
+The transfer of~\cite{CLMM2023} still applies when relative SSM begins at a
+fixed depth \(K_0\).
+
+\begin{lemma}[Large-girth transfer from tree decay]
+\label{lem:hg-eventual-transfer}
+Let \(q\ge1\) and \(\Deg\ge3\) be integers, and let \(J\subseteq(0,1]\).
+Suppose there are
+$0<C_{\mathsf{INFL}},C_{\mathsf{SM}}<\infty$, $\delta\in(0,1)$, and a fixed
+positive integer $K_0$ such that, for every \(x\in J\) and uniformly over all
+trees \(T\in\Gdeg\), all pinnings \(\tau\) of \(T\), and all free roots, the
+Potts law \(\mupin{T}{\tau}{x}\) has level-\(\ell\) tree total influence at
+most $C_{\mathsf{INFL}}(1-\delta)^\ell$ for every integer $\ell\ge1$, and
+relative SSM in the ratio sense of \cite[Definition~5.7]{CLMM2023} at
+distance $K$ at most $C_{\mathsf{SM}}(1-\delta)^K$ for every integer
+$K\ge K_0$.  Then there are constants \(g_{\mathsf{tr}}\in\mathbb Z_{\ge3}\)
+and \(C_{\mathsf{tr}}\ge0\), depending only on
+\(q,\Deg,C_{\mathsf{INFL}},C_{\mathsf{SM}},\delta,K_0\), and in particular
+not on \(x\) or \(J\), with the following property.  For every \(x\in J\),
+every \(G\in\Gdeg\), every pinning \(\tau\) with
+\(\operatorname{girth}(G^\tau)\ge g_{\mathsf{tr}}\), every free source vertex
+\(u\in V^\tau\), and all \(b,c\in\colours\),
+\begin{equation}
+ \WHam\!\left(
+   \mupin{G}{\tau^{u=b}}{x},
+   \mupin{G}{\tau^{u=c}}{x}
+ \right)\le C_{\mathsf{tr}}.
+ \label{eq:hg-transfer-W1}
+\end{equation}
+Both laws live on the common free set \(V^\tau\setminus\{u\}\).
+\end{lemma}
+
+\begin{proof}
+Fix \(x\in J\), and regard each pinned pair \((G,\tau)\) with \(G\in\Gdeg\) as
+a pairwise spin system on its free graph \(G^\tau\), with spin set
+\(\colours\), the Potts edge factors, and external fields
+\[
+  \lambda_{v,c}=x^{\bcount_v^\tau(c)}.
+\]
+The family of these systems is closed under further pinnings and deletion of
+free vertices.  Pinning a free vertex $r$ to $c$ removes one free incidence at
+each neighbour and adds $c$ to its boundary count.  Hence, for every remaining
+vertex $v$,
+\[
+  \deg_{G^{\tau^{r=c}}}(v)
+    +\sum_d\bcount_v^{\tau^{r=c}}(d)
+  =\deg_{G^\tau}(v)+\sum_d\bcount_v^\tau(d)
+  \le\Deg,
+\]
+whereas taking a subgraph only lowers this budget.  Since \(x>0\), every
+configuration has positive weight, so every spin is globally feasible after
+every pinning and the feasibility requirements of the pairwise transfer hold
+trivially.  Conditioning the source \(u\) fixes the scalar
+\(\lambda_{u,c}\), which disappears on normalization, and turns each incident
+edge into the boundary factor in \(\tau^{u=c}\).  Thus the conditional
+exterior laws supplied by the transfer are exactly the two laws in
+\eqref{eq:hg-transfer-W1}.
+
+The pairwise extension follows from \cite[Remark~5.11]{CLMM2023}, and the
+relative input is the ratio form in
+\cite[Definition~5.7]{CLMM2023}.  It remains to check that the proof tolerates
+the restriction \(K\ge K_0\).  The radius, the cutting depth, and the girth
+bound chosen below depend only on
+\(q,\Deg,C_{\mathsf{INFL}},C_{\mathsf{SM}},\delta,K_0\), so they serve every
+\(x\in J\) at once.
+
+The cutting depth \(K\) is chosen after the influence radius \(R\).  The error
+in the proof of \cite[Lemma~5.14]{CLMM2023} is
+\begin{equation}
+  2C_{\mathsf{SM}}(1-\delta)^K\Deg^R
+  +C_{\mathsf{INFL}}(1-\delta)^R.
+  \label{eq:hg-transfer-error}
+\end{equation}
+First choose $R$, subject to all lower bounds on $R$ in the cited proof, so
+large that
+\[
+ C_{\mathsf{INFL}}(1-\delta)^R
+ \le\frac1{16R\log\Deg}.
+\]
+After this $R$ is fixed, choose $K$ subject to \emph{all} lower bounds on the
+cutting depth in \cite[Lemmas~5.14 and~5.20]{CLMM2023}, and also
+\[
+ K\ge K_0,\qquad K>R,\qquad
+ K\ge\left\lceil\frac{\log C_{\mathsf{SM}}}{\delta}\right\rceil,\qquad
+ 2C_{\mathsf{SM}}(1-\delta)^K\Deg^R
+ \le\frac1{16R\log\Deg}.
+\]
+Such a $K$ exists; with this choice \eqref{eq:hg-transfer-error} is at most
+$1/(8R\log\Deg)$, which is the intermediate influence-decay threshold in
+\cite[Lemma~5.14]{CLMM2023}.
+Finally take the girth bound to be the maximum of every girth lower bound in
+the cited lemmas and $2K+2$.  Relative SSM is invoked only at this chosen
+cutting depth, so the restriction \(K\ge K_0\) causes no change later in the
+argument.  Lemmas~5.14 and~5.20 of~\cite{CLMM2023} therefore supply the
+intermediate decay condition, and their Lemma~5.13 gives
+\eqref{eq:hg-transfer-W1} with
+\[
+ C_{\mathsf{tr}}=2\Deg^R.
+\]
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:high-girth-soft-ci}]
+\Cref{lem:hg-tid,lem:hg-eventual-relative-ssm} give, for every \(0<x<1\),
+tree TID and relative SSM beyond a fixed depth, with constants and rate
+uniform in \(x\).  Apply \Cref{lem:hg-eventual-transfer} with
+\[
+ J=(0,1),\qquad
+ C_{\mathsf{INFL}}=C_{\rm TID},\qquad
+ C_{\mathsf{SM}}=2C_{\rm rel}\rho^{-2},\qquad
+ \delta=1-\rho,\qquad K_0=K_1.
+\]
+It supplies \(g_{\mathsf{tr}}\) and \(C_{\mathsf{tr}}\), depending only on
+\((\Deg,q)\), such that, for every \(0<x<1\), whenever $G^\tau$ has girth at
+least $g_{\mathsf{tr}}$,
+\begin{equation}
+  \WHam\!\left(
+    \mupin{G}{\tau^{r=a}}{x},
+    \mupin{G}{\tau^{r=b}}{x}
+  \right)\le C_{\mathsf{tr}}.
+  \label{eq:hg-potts-transfer-W1}
+\end{equation}
+
+They live on the common finite state space
+$\colours^{V^\tau\setminus\{r\}}$.  At \(x=0\), the hypothesis
+\(q\ge\Deg+3\) implies hard feasibility for every normalized child by
+\Cref{lem:hard-feas}, so both limiting normalizing constants are positive.
+Their weights are polynomials in \(x\), and
+\Cref{lem:finite-endpoint-closure} passes the same bound to \(x=0\).  At
+\(x=1\) all remaining spins are independent and the distance is zero.
+Taking \(g_*=\max\{3,g_{\mathsf{tr}}\}\) and
+\(C_*=C_{\mathsf{tr}}\) proves the theorem.
+\end{proof}

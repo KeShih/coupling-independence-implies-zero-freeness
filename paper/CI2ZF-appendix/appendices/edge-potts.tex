@@ -1,0 +1,658 @@
+\section{\texorpdfstring{Coupling independence for Edge-Potts at \(q\ge3\Deg\)}
+{Coupling independence for Edge-Potts at q >= 3 Delta}}
+\label{sec:soft-edge}
+\label{app:soft-edge-ci}
+
+For a finite simple graph \(G=(V,E)\), edge-colour assignments are vertex
+colourings of the line graph \(L(G)\).  An edge-colour pinning
+\(\tau:\Lambda\to\colours\), with \(\Lambda\subseteq E\), is likewise a
+vertex-colour pinning of \(L(G)\).  We write
+\[
+  (\edgegibbs{G}{x})^\tau:=\mupin{L(G)}{\tau}{x}.
+\]
+The Fisher polynomial of this edge-Potts model is simply the vertex-Potts
+polynomial on \(L(G)\); in particular,
+\begin{equation}\label{eq:edge-normalization}
+  \Zpin{L(G)}{\tau}(z)
+  =z^{m_{L(G)}(\tau)}\nZpin{L(G)}{\tau}(z).
+\end{equation}
+The analytic argument is the vertex-Potts transfer on line graphs; the
+additional input is the following coupling bound.
+
+\begin{theorem}[Edge-Potts coupling independence]
+\label{thm:soft-edge-ci}
+Let \(q,\Deg\) be positive integers with \(q\ge3\Deg\).  For every finite simple graph \(G\)
+of maximum degree at most \(\Deg\), every edge-colour pinning \(\tau\),
+every \(x\in[0,1]\), every free edge
+\(i\in E\setminus\operatorname{dom}\tau\), and all
+\(a,b\in\colours\), put, for \(c\in\colours\),
+\[
+  \tau^{i=c}:=\tau\cup\{i\mapsto c\},
+  \qquad
+  (\edgegibbs{G}{x})^{\tau,i=c}
+  :=(\edgegibbs{G}{x})^{\tau^{i=c}}.
+\]
+Then, on the common free edge set \(E\setminus(\operatorname{dom}\tau\cup\{i\})\),
+\begin{equation}\label{eq:soft-edge-ci}
+  \WHam\!\left(
+    (\edgegibbs{G}{x})^{\tau,i=a},
+    (\edgegibbs{G}{x})^{\tau,i=b}
+  \right)
+  \le\Deg-1.
+\end{equation}
+\end{theorem}
+
+\begin{corollary}[Edge-Potts zero-freeness]
+\label{cor:soft-edge-zf}
+Let \(q,\Deg\) be positive integers with \(\Deg\ge2\) and
+\(q\ge3\Deg\).  There exists
+\(\eps=\eps(q,\Deg)>0\) such that, for every finite simple graph \(G\) of
+maximum degree at most \(\Deg\) and every edge-colour pinning \(\tau\),
+\[
+  \nZpin{L(G)}{\tau}(z)\ne0
+  \qquad\text{whenever }\dist(z,[0,1])<\eps.
+\]
+Thus the unnormalized pinned polynomial has no zero in this neighbourhood
+except possibly at \(z=0\); its order of vanishing there is
+\(m_{L(G)}(\tau)\).  In particular,
+\(Z_{L(G)}(z)\ne0\) throughout the same neighbourhood.
+\end{corollary}
+
+\begin{proof}
+The line graph has maximum degree at most
+\(\Deg_L:=2\Deg-2\).  The class of line graphs of simple graphs of maximum
+degree at most \(\Deg\) is closed under taking induced subgraphs, since an
+induced subgraph on an edge set \(S\) is the line graph of \((V,S)\).
+Vertex pinnings in this class are exactly edge-colour pinnings, with the
+normalization in \eqref{eq:edge-normalization}.
+Moreover, \(q\ge3\Deg\) implies \(q\ge\Deg_L+1\), and
+\Cref{thm:soft-edge-ci} supplies one coupling-independence constant on
+\([0,1]\).  Apply
+\Cref{thm:potts-transfer} with degree bound \(\Deg_L\).  The statement for
+the unnormalized polynomial follows from \eqref{eq:edge-normalization}.
+\end{proof}
+
+\paragraph{Proof overview.}
+
+For \(0<x<1\), hidden endpoint slots represent the edge-Potts weight by a
+hard distinct-label constraint.  Replacing one occupied endpoint label
+admits a coupling with expected Hamming distance at most \((\Deg-1)/2\);
+conditioning \(i\) requires one replacement at each endpoint.  The resulting
+coupling is a countable weighted adaptation of the list-edge-colouring
+coupling in~\cite{CWZZ2025}.
+
+\subsection{Exact slot lift}
+
+Fix a finite simple graph \(G=(V,E)\) of maximum degree at most
+\(\Deg\), and \(q\ge3\Deg\).  Fix \(0<x<1\), a subset
+\(\Lambda\subseteq E\), and an edge-colour pinning
+\(\tau\colon\Lambda\to\colours\).  Thus
+\(\operatorname{dom}\tau=\Lambda\), and
+\(F_0=E\setminus\Lambda\) is the initial set of free edges.  Fix once and for all an
+ordering \(e=(e^-,e^+)\) of the two endpoints of every \(e\in E\).  When
+using slot notation for \(e\), we always write
+\((u,v)=(e^-,e^+)\), so that \(e=uv\) has this fixed ordered meaning.
+For a vertex
+\(v\) and colour \(c\), write
+\[
+  \bcount_v^\tau(c)
+  :=\abs{\set{e\in\operatorname{dom}\tau:e\ni v,\ \tau(e)=c}},
+\]
+so here $\bcount_v^\tau(c)$ counts pinned edges incident to the base-graph
+vertex $v$.  For \(\phi\colon F_0\to\colours\), put
+\[
+  k_{v,c}(\phi)
+  :=\abs{\set{e\in F_0:e\ni v,\ \phi(e)=c}}.
+\]
+For an edge colouring \(\psi:D\to\colours\), where \(D\subseteq E\), put
+\[
+  \Nconf(\psi)
+  :=\abs{\set{\{e,f\}\subseteq D:
+        e\ne f,\ e\cap f\ne\varnothing,\ \psi(e)=\psi(f)}}.
+\]
+Then \(m_{L(G)}(\tau)=\Nconf(\tau)\).
+Because \(G\) is simple, two distinct edges share at most one endpoint.
+Consequently,
+\begin{equation}\label{eq:edge-conflict-split}
+  \Nconf(\tau\cup\phi)-m_{L(G)}(\tau)
+  =
+  \sum_{v,c}
+  \left[
+    \bcount_v^\tau(c)\,k_{v,c}(\phi)
+    +\binom{k_{v,c}(\phi)}2
+  \right].
+\end{equation}
+The two terms count pinned--free and free--free conflicts, respectively;
+the pinned--pinned conflicts are precisely the subtracted normalization.
+
+The second term in \eqref{eq:edge-conflict-split} has the following
+probabilistic representation.
+
+\begin{lemma}[Slot representation]\label{lem:slot-fact}
+For every \(0<x<1\), there is a probability distribution
+\((\kappa_r)_{r\ge1}\), with every \(\kappa_r>0\), such that for every integer
+\(k\ge0\),
+\begin{equation}\label{eq:slot-identity}
+  \sum_{\substack{r_1,\ldots,r_k\ge1\\
+                  r_1,\ldots,r_k\ {\rm all\ distinct}}}
+       \prod_{j=1}^k \kappa_{r_j}
+  =x^{\binom k2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Define the deformed exponential
+
+\[
+  \mathcal E_x(t):=\sum_{k\ge0}x^{\binom k2}\frac{t^k}{k!}.
+\]
+
+By~\cite{MFB1972,Iserles1993}, all zeros of \(\mathcal E_x\) are real and
+negative; see also~\cite[\S1, pp.~312--313]{WangZhang2018}.  Write them,
+with multiplicity, as \(-1/\kappa_r\), where \(\kappa_r>0\).  If \(a_k\)
+is the coefficient of \(t^k\), then
+
+\[
+  \log\frac1{\abs{a_k}}
+  =\abs{\log x}\binom k2+\log k!,
+\]
+
+so \(\mathcal E_x\) is entire of order zero.  Its genus-zero Hadamard
+factorization is
+
+\[
+  \mathcal E_x(t)
+  =\prod_{r\ge1}(1+\kappa_r t).
+\]
+
+There is no exponential factor, and the constant is fixed by
+\(\mathcal E_x(0)=1\).  In particular,
+\(\sum_r\kappa_r<\infty\), so the product and its coefficient
+expansions converge absolutely.
+Comparison of the linear coefficients gives \(\sum_r\kappa_r=1\), and
+comparison at degree \(k\) gives
+
+\[
+  \sum_{1\le r_1<\cdots<r_k}
+       \kappa_{r_1}\cdots\kappa_{r_k}
+  =\frac{x^{\binom k2}}{k!}.
+\]
+
+Multiplication by \(k!\) gives \eqref{eq:slot-identity}.
+\end{proof}
+
+Thus \(k\) independent slots with law \((\kappa_r)\) are all distinct with
+probability \(x^{\binom k2}\).  Apply this identity separately at every
+vertex--colour pair.
+
+For a free edge \(e=uv\), use the lifted state
+\[
+  \xi=(c,r,s)\in\colours\times\mathbb N_{\ge1}^2
+\]
+with activity
+\begin{equation}\label{eq:edge-slot-activity}
+  w_e(c,r,s)
+  :=x^{\bcount_u^\tau(c)+\bcount_v^\tau(c)}\kappa_r\kappa_s.
+\end{equation}
+These activities always use the original colour pinning $\tau$ and remain
+fixed during later lifted-state pinnings; the latter are recorded only in
+the occupied-label sets defined below.
+At \(u\) this state exposes the endpoint label
+\(\ell_{e,u}(\xi)=(c,r)\), and at \(v\) it exposes
+\(\ell_{e,v}(\xi)=(c,s)\).  A lifted assignment is admissible when all
+labels exposed at any one vertex are distinct.
+
+After some lifted edge states have been pinned, let \(F\subseteq F_0\)
+denote the current free-edge set and let \(B_v\subseteq
+\colours\times\mathbb N_{\ge1}\) be a finite \emph{set} of occupied labels
+at \(v\), write \(B=(B_v)_{v\in V}\), and put
+\[
+  \deg_F(v):=\abs{\set{e\in F:v\in e}}.
+\]
+An assignment
+\[
+  \omega=(\omega_e)_{e\in F}
+  \in\bigl(\colours\times\mathbb N_{\ge1}^2\bigr)^F
+\]
+on the current free-edge set is admissible when
+the labels in \(B_v\), together with those exposed by the incident free
+edges, are pairwise distinct at every \(v\).  Its weight is
+\[
+  W_{F,B}(\omega):=\prod_{e\in F}w_e(\omega_e),
+\]
+and \(\nu_{F,B}\) denotes the corresponding normalized law on admissible
+assignments whenever its partition sum is positive.
+
+For a current free edge \(e=uv\), define
+\[
+  d_F(e)
+  :=\abs{\set{f\in F\setminus\set e:f\cap e\ne\varnothing}}
+\]
+and let
+\[
+  M_e(B)
+  :=
+  \sum_{\substack{\xi=(c,r,s)\\
+       \ell_{e,u}(\xi)\notin B_u,\;
+       \ell_{e,v}(\xi)\notin B_v}}
+       w_e(\xi)
+\]
+be the activity compatible with the occupied boundary labels.  The
+required bounds, for every \(v\in V\) and \(e\in F\) as applicable, are
+\begin{align}
+  \deg_F(v)+\abs{B_v}&\le\Deg,
+  \label{eq:slot-load}\\
+  \sum_{\xi:\,\ell_{e,y}(\xi)=\zeta}w_e(\xi)&\le1
+  \quad
+  (y\in e,\ \zeta\in\colours\times\mathbb N_{\ge1}),
+  \label{eq:slot-fibre}\\
+  M_e(B)-d_F(e)&\ge\Deg+2.
+  \label{eq:slot-slack}
+\end{align}
+Pinning an admissible positive-activity state \(\xi\) on \(e=uv\) produces
+\(F'=F\setminus\set e\) and the occupied-label family \(B'\) given by
+\[
+ B'_u=B_u\cup\set{\ell_{e,u}(\xi)},\qquad
+ B'_v=B_v\cup\set{\ell_{e,v}(\xi)},\qquad
+ B'_y=B_y\quad(y\notin\{u,v\}).
+\]
+\begin{lemma}[Exact lift and inherited bounds]\label{lem:edge-slot-lift}
+Assume \(q\ge3\Deg\).  For the initial data
+\((F_0,\varnothing)\), where $\varnothing$ denotes the family of empty
+occupied-label sets, colour projection
+\((c,r,s)\mapsto c\) sends the lifted law exactly to the normalized pinned
+edge-Potts law \((\edgegibbs{G}{x})^\tau\).
+
+The initial slot instance and every boundary obtained by successively
+pinning admissible positive-activity states satisfy
+\eqref{eq:slot-load}--\eqref{eq:slot-slack}.  More generally, any instance
+\((F,B)\) with finite occupied-label sets that uses the endpoint-label maps
+and activities in \eqref{eq:edge-slot-activity} and satisfies these three
+bounds has a finite, positive partition sum.
+\end{lemma}
+
+\begin{proof}
+Fix a colour assignment \(\phi\colon F_0\to\colours\) and sum over its slot
+fibre.  The sum factorizes over the pairs \((v,c)\).  If
+\(k=k_{v,c}(\phi)\), the activities contribute
+\(x^{\bcount_v^\tau(c)k}\), while admissibility requires the \(k\) endpoint
+slots to be distinct.  By \eqref{eq:slot-identity}, their total slot weight
+is \(x^{\binom k2}\).  Hence the fibre weight is
+\[
+  \prod_{v,c}
+    x^{\bcount_v^\tau(c)k_{v,c}(\phi)+
+       \binom{k_{v,c}(\phi)}2}
+  =
+  x^{\Nconf(\tau\cup\phi)-m_{L(G)}(\tau)}
+\]
+by \eqref{eq:edge-conflict-split}.  This proves exact projection.
+
+Initially, \eqref{eq:slot-load} follows from
+\(\deg_{F_0}(v)\le\Deg\).  For a fixed endpoint label, say \((c,r)\) at \(u\),
+\[
+  \sum_s w_e(c,r,s)
+  =
+  x^{\bcount_u^\tau(c)+\bcount_v^\tau(c)}\kappa_r\sum_s \kappa_s
+  \le1,
+\]
+and the other endpoint is symmetric.  This proves
+\eqref{eq:slot-fibre}.
+
+For the slack, let
+\[
+  \bcount_e:=\sum_c\bigl(\bcount_u^\tau(c)+\bcount_v^\tau(c)\bigr),
+\]
+the number of pinned edges adjacent to \(e=uv\).  Since
+\(\sum_r\kappa_r=1\),
+\[
+  M_e(\varnothing)
+  =\sum_c x^{\bcount_u^\tau(c)+\bcount_v^\tau(c)}
+  \ge q-\bcount_e.
+\]
+Here we used \(x^m\ge1-m\) for nonnegative integers \(m\) and \(0<x<1\).
+Simplicity gives
+\[
+  d_{F_0}(e)+\bcount_e
+  =
+  \abs{\set{f\in E\setminus\set e:f\cap e\ne\varnothing}}
+  \le2\Deg-2,
+\]
+and therefore
+\[
+  M_e(\varnothing)-d_{F_0}(e)
+  \ge q-d_{F_0}(e)-\bcount_e
+  \ge3\Deg-(2\Deg-2)=\Deg+2.
+\]
+
+It remains to check one pinning step for current data \((F,B)\).
+Suppose \(e\) is pinned and a
+remaining edge \(f\) meets \(e\).  Simplicity makes the common endpoint
+unique.  The new occupied label removes from \(M_f\) at most one endpoint
+fibre, whose activity is at most one by \eqref{eq:slot-fibre}; deleting
+\(e\) decreases \(d_F(f)\) by exactly one.  Thus
+\[
+  M_f(B')-d_{F\setminus\set e}(f)
+  \ge (M_f(B)-1)-(d_F(f)-1)
+  \ge\Deg+2.
+\]
+Nonadjacent edges are unchanged.  At each endpoint of \(e\), the free
+degree drops by one and one genuinely new occupied label is added, so
+\eqref{eq:slot-load} is preserved.  The activities, and hence
+\eqref{eq:slot-fibre}, do not change.
+
+Finally, the three bounds imply feasibility by greedy exposure.  At every
+step an unassigned edge has at least
+\(M_e(B)-d_F(e)\ge\Deg+2>0\) compatible activity, and the preceding
+pinning argument preserves the same conclusion.  The partition sum is
+finite because there are finitely many edges and
+\(\sum_\xi w_e(\xi)\le q\) for each edge.
+\end{proof}
+
+\subsection{Coupling under a boundary-label replacement}
+
+Consider two occupied-label systems with the same free graph,
+endpoint-label maps, and edge activities.  Fix a vertex \(v\), a finite
+\(C_v\subseteq\colours\times\mathbb N_{\ge1}\) and distinct
+\(\alpha,\beta\in
+(\colours\times\mathbb N_{\ge1})\setminus C_v\).
+Their occupied-label families satisfy
+\(B_y^\alpha=B_y^\beta\) for \(y\ne v\), while at \(v\),
+\[
+  B_v^\alpha=C_v\cup\set\alpha,
+  \qquad
+  B_v^\beta=C_v\cup\set\beta.
+\]
+Both systems satisfy \eqref{eq:slot-load}--\eqref{eq:slot-slack}.  These
+three bounds, rather than derivation from the initial lift, are the
+hypotheses because the two-step comparison uses mixed endpoint boundaries.
+
+For two lifted assignments on \(F\), let
+\[
+  \Ham_F(\omega,\omega')
+  :=\bigl|\{e\in F:\omega_e\ne\omega'_e\}\bigr|,
+\]
+and write \(W_{1,F}\) for the infimum of the expected \(\Ham_F\)-cost
+over couplings of two laws on the resulting countable state space.
+
+For each integer \(n\ge0\), let \(\mathsf T_n\) be the supremum of
+\(W_{1,F}(\nu_{F,B^\alpha},\nu_{F,B^\beta})\) over all data described in
+the preceding paragraph that satisfy the three displayed bounds and have
+at most \(n\) free edges.  The laws exist by \Cref{lem:edge-slot-lift},
+\(0\le\mathsf T_n\le n\), and \(\mathsf T_0=0\).
+
+\begin{lemma}[One-label coupling bound]\label{lem:edge-one-label}
+One has \(\mathsf T_0=0\), and for every integer \(n\ge1\),
+\begin{equation}\label{eq:edge-one-label-bound}
+  \mathsf T_n
+  \le
+  \frac{\Deg-1}{2}
+  \left[
+    1-\left(\frac{\Deg-1}{\Deg}\right)^n
+  \right]
+  \le\frac{\Deg-1}{2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Only \(n\ge1\) requires proof.  Fix an admissible comparison with
+$1\le |F|\le n$; the case $F=\varnothing$ has zero cost.  Write
+\(\mu_\alpha:=\nu_{F,B^\alpha}\),
+\(\mu_\beta:=\nu_{F,B^\beta}\), and let
+\(N=\set{j\in F:j\ni v}\).  Under \(\mu_\alpha\), define
+\[
+  E_j^\beta
+  :=\set{\omega:\ell_{j,v}(\omega_j)=\beta},
+  \qquad
+  E_0^\beta
+  :=\set{\omega:\text{no edge of \(N\) exposes \(\beta\) at \(v\)}}.
+\]
+Define \(E_j^\alpha,E_0^\alpha\) symmetrically under \(\mu_\beta\).
+Distinctness of endpoint labels makes the label-exposure events
+\((E_j^\beta)_{j\in N}\) disjoint, and together with \(E_0^\beta\) they
+partition the \(\alpha\)-side state space; the same holds on the other
+side.
+
+The avoidance events have positive probability.  Fix either current
+boundary \(B\in\{B^\alpha,B^\beta\}\).  For that side, greedily expose
+the free edges while additionally forbidding the missing label at \(v\).
+For an incident edge this removes at most one further endpoint fibre, so
+the available activity is at least
+\[
+  M_e(B)-d_F(e)-1\ge\Deg+1>0.
+\]
+At each exposure, deleting the chosen edge lowers the remaining free
+edge-degrees by the same amount as the new occupied endpoint labels can
+lower their allowed activities, so this positive margin persists at every
+later step.
+Set
+\[
+  \rho_j
+  :=\frac{\mu_\alpha(E_j^\beta)}{\mu_\alpha(E_0^\beta)},
+  \qquad
+  \sigma_j
+  :=\frac{\mu_\beta(E_j^\alpha)}{\mu_\beta(E_0^\alpha)},
+\]
+with a zero numerator interpreted as zero.
+
+To bound these label-exposure odds, start from a configuration in
+\(E_j^\beta\), keep every state off \(j\) and replace the state of \(j\)
+by a compatible state that does not expose \(\beta\) at \(v\).  The other
+adjacent free edges exclude at most \(d_F(j)\) endpoint fibres, and
+avoiding \(\beta\) excludes one more.  Thus the replacement activity is at
+least \(\Deg+1\).  Route the source weight among the replacements
+proportionally to their activities.  Conversely, for a fixed target, summing
+all source states whose endpoint colour is \(\beta\) gives total activity
+\(x^{\bcount_u^\tau(\beta)+\bcount_v^\tau(\beta)}\le1\),
+which is also the bound supplied by \eqref{eq:slot-fibre}.  Summing this flow gives
+\[
+  \sum_{\omega\in E_j^\beta}W_{F,B^\alpha}(\omega)
+  \le\frac1{\Deg+1}
+       \sum_{\omega\in E_0^\beta}W_{F,B^\alpha}(\omega),
+\]
+and hence
+\[
+  \rho_j\le\frac1{\Deg+1}.
+\]
+The same argument gives \(\sigma_j\le1/(\Deg+1)\).  Since one boundary
+label is already occupied at \(v\), \eqref{eq:slot-load} implies
+\(\abs N\le\Deg-1\).  Hence
+\begin{equation}\label{eq:edge-occurrence-budget}
+  R:=\sum_{j\in N}\max\{\rho_j,\sigma_j\}
+  \le\frac{\Deg-1}{\Deg+1}.
+\end{equation}
+
+Write
+\[
+  \nu_0^\alpha:=\mu_\alpha(\,\cdot\mid E_0^\beta),
+  \qquad
+  \nu_j^\alpha:=\mu_\alpha(\,\cdot\mid E_j^\beta),
+\]
+and define \(\nu_0^\beta,\nu_j^\beta\) symmetrically.  A conditional law
+with zero coefficient below is omitted.  We next record the three
+conditional comparisons:
+\begin{align}
+  W_{1,F}(\nu_0^\alpha,\nu_0^\beta)&=0,
+  \label{eq:edge-avoidance-cost}\\
+  W_{1,F}(\nu_j^\alpha,\nu_j^\beta)&\le1+\mathsf T_{n-1},
+  \label{eq:edge-matched-cost}\\
+  \max\!\left\{
+    W_{1,F}(\nu_j^\alpha,\mu_\beta),
+    W_{1,F}(\mu_\alpha,\nu_j^\beta)
+  \right\}&\le1+2\mathsf T_{n-1}.
+  \label{eq:edge-unmatched-cost}
+\end{align}
+For \eqref{eq:edge-avoidance-cost}, the two avoidance events produce the
+same boundary \(C_v\cup\set{\alpha,\beta}\), so the conditional laws are
+identical.
+
+For the other two bounds, condition further on the complete state of
+\(j=vw\), remove \(j\), and put its endpoint labels into the boundary.
+For each pair of conditioned states, the remaining-edge laws are compared
+through the corresponding residual boundary; mixing these conditional
+couplings over the state of $j$ preserves the stated uniform cost.
+For \eqref{eq:edge-matched-cost}, the boundaries at \(v\) then agree, and
+the two systems differ by at most one label replacement at \(w\).  The
+residual cost is at most \(\mathsf T_{n-1}\), and restoring \(j\) costs at
+most one.
+
+For \eqref{eq:edge-unmatched-cost}, compare the two residual laws through
+the boundary that uses the first conditioned system's labels at \(v\) and
+the second conditioned system's labels at \(w\).  This requires at most
+one label replacement at each endpoint.  After \(j\) is removed, simplicity ensures
+that no remaining edge meets both \(v\) and \(w\).  Every remaining edge
+therefore sees exactly the endpoint restrictions of one of the two
+conditioned systems, so the intermediate boundary satisfies
+\eqref{eq:slot-load}--\eqref{eq:slot-slack} and is feasible.  Its residual
+cost is at most \(2\mathsf T_{n-1}\), and restoring \(j\) again costs at
+most one.
+The conditioning mixtures are countable, but all these costs are uniform.
+For each \(\eta>0\), choose every conditional coupling with expected cost
+within \(\eta\) of its Wasserstein infimum.  Tonelli's theorem, followed by
+\(\eta\downarrow0\), gives
+\eqref{eq:edge-matched-cost}--\eqref{eq:edge-unmatched-cost}.
+
+It remains to couple the exposure blocks.  The following table specifies
+a nonnegative mixture of couplings.  Every displayed mass is divided by
+\(1+R\); the first row is used once and the other rows once for each
+$j\in N$.  Zero-mass rows are omitted, and $(t)_+:=\max\{t,0\}$:
+\[
+\begin{array}{c|c|c}
+ \text{numerator}&\alpha\text{-side}&\beta\text{-side}\\ \hline
+ 1&\nu_0^\alpha&\nu_0^\beta\\
+ \min\{\rho_j,\sigma_j\}&\nu_j^\alpha&\nu_j^\beta\\
+ (\rho_j-\sigma_j)_+&\nu_j^\alpha&\mu_\beta\\
+ (\sigma_j-\rho_j)_+&\mu_\alpha&\nu_j^\beta
+\end{array}
+\qquad(j\in N).
+\]
+To check the first marginal, note that
+\[
+  \nu_0^\alpha+\sum_j\rho_j\nu_j^\alpha
+  =\left(1+\sum_j\rho_j\right)\mu_\alpha
+\]
+and
+\[
+  R=\sum_j\rho_j+\sum_j(\sigma_j-\rho_j)_+.
+\]
+Thus the rows on the \(\alpha\)-side sum to
+\((1+R)\mu_\alpha\); the other marginal is symmetric.  Combining the table
+with \eqref{eq:edge-avoidance-cost}--\eqref{eq:edge-unmatched-cost} gives
+\[
+\begin{aligned}
+  W_{1,F}(\mu_\alpha,\mu_\beta)
+  &\le
+  \frac{
+    \sum_j\min\{\rho_j,\sigma_j\}(1+\mathsf T_{n-1})
+    +\sum_j\abs{\rho_j-\sigma_j}(1+2\mathsf T_{n-1})
+  }{1+R}\\
+  &\le
+  \frac{R}{1+R}(1+2\mathsf T_{n-1})
+  \le
+  \frac{\Deg-1}{2\Deg}(1+2\mathsf T_{n-1}),
+\end{aligned}
+\]
+where the last step uses \eqref{eq:edge-occurrence-budget}.  Taking the
+supremum over all such comparisons gives
+\[
+ \mathsf T_n\le\frac{\Deg-1}{2\Deg}(1+2\mathsf T_{n-1}).
+\]
+Solving this affine recursion from \(\mathsf T_0=0\) yields
+\eqref{eq:edge-one-label-bound}.
+\end{proof}
+
+\subsection{From slot couplings to coupling independence}
+
+\begin{proof}[Proof of \Cref{thm:soft-edge-ci}]
+If \(a=b\), the two normalized children are identical.  Assume
+\(a\ne b\), and write the root edge as \(i=uv\).
+
+\emph{Case \(x=1\).}
+Under every pinning, the remaining edge colours are independent and
+uniform, so the root-excluded distance is zero.
+
+\emph{Case \(0<x<1\).}
+Construct the single slot lift associated with the original pinning
+\(\tau\).  By \Cref{lem:edge-slot-lift}, its colour projection is exactly
+\((\edgegibbs{G}{x})^\tau\).  Conditioning the root edge \(i\) to
+colour \(a\) disintegrates the lifted child over the positive-mass root
+states \((a,r,s)\); the \(b\)-child is the analogous mixture over
+\((b,r',s')\).  Both are conditionals of this same lift.
+
+For \(c\in\{a,b\}\), let \(\Pi_c\) denote the law of \(\omega_i\) under
+\(\nu_{F_0,\varnothing}\), conditional on the colour coordinate of
+\(\omega_i\) being \(c\).  Thus every
+\(\xi\in\operatorname{supp}\Pi_c\) has the form \((c,r,s)\).  For such a
+state \(\xi\), delete \(i\) and define the occupied-label family on the
+remaining system by
+\[
+  B_y^\xi:=
+  \begin{cases}
+    \set{\ell_{i,y}(\xi)},&y\in i,\\
+    \varnothing,&y\notin i.
+  \end{cases}
+\]
+Set
+\[
+  \nu^\xi:=\nu_{F_0\setminus\{i\},B^\xi}.
+\]
+Thus the root-excluded lifted \(c\)-child is the \(\Pi_c\)-mixture of the
+laws \(\nu^\xi\).
+
+Fix \(\xi\in\operatorname{supp}\Pi_a\) and
+\(\xi'\in\operatorname{supp}\Pi_b\), and delete \(i\).  Each conditioned
+law satisfies
+\eqref{eq:slot-load}--\eqref{eq:slot-slack}.  Compare the two laws through
+the boundary that takes the first root state's label at \(u\) and the
+second root state's label at \(v\).  Since \(G\) is simple, no remaining
+edge meets both \(u\) and \(v\); hence this intermediate boundary inherits
+the three bounds from the two conditioned systems.  The two comparisons
+change at most one occupied label each.  Therefore
+\[
+  W_{1,F_0\setminus\{i\}}(\nu^\xi,\nu^{\xi'})
+  \le2\mathsf T_{\abs{F_0}-1}\le\Deg-1
+\]
+by \Cref{lem:edge-one-label}.
+
+Couple the two countable root-state laws by the product law
+\(\Pi_a\otimes\Pi_b\).  For each \(\eta>0\) and every positive-mass pair
+\((\xi,\xi')\), choose a coupling of \(\nu^\xi\) and \(\nu^{\xi'}\) whose
+expected cost is within \(\eta\) of the corresponding Wasserstein infimum,
+and then let \(\eta\downarrow0\).  Tonelli's theorem preserves the same
+uniform bound.  Colour projection cannot increase Hamming distance, so the
+two edge-Potts children have root-excluded distance at most \(\Deg-1\).
+
+\emph{Case \(x=0\).}
+Work in the finite colour space.  Every normalized hard child exists:
+after fixing \(i\), greedily colour the remaining vertices of
+the line graph, equivalently the remaining free edges of \(G\).  Each sees
+at most \(2\Deg-2\) already coloured neighbours,
+whereas \(q\ge3\Deg\).
+
+For \(c\in\set{a,b}\), put
+\[
+  t_c:=\bcount_u^\tau(c)+\bcount_v^\tau(c).
+\]
+Then
+\[
+  m_{L(G)}(\tau^{i=c})
+  =m_{L(G)}(\tau)+t_c,
+\]
+and for every colouring \(\phi\) of the remaining edges and \(x>0\),
+\[
+\begin{aligned}
+  &x^{\Nconf(\tau^{i=c}\cup\phi)
+       -m_{L(G)}(\tau)}\\
+  &\qquad
+  =
+  x^{t_c}\,
+  x^{\Nconf(\tau^{i=c}\cup\phi)
+       -m_{L(G)}(\tau^{i=c})}.
+\end{aligned}
+\]
+The first factor is independent of \(\phi\), so ordinary conditioning for
+\(x>0\) is exactly the normalized child.  After this scalar is removed,
+the two families of weights are finite polynomials in \(x\), and their
+partition sums are positive at \(x=0\) by the preceding greedy argument.
+\Cref{lem:finite-endpoint-closure} therefore passes the bound
+\(\Deg-1\) to the normalized hard children.
+\end{proof}

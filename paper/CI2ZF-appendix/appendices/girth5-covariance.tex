@@ -1,0 +1,561 @@
+\section{\texorpdfstring{Coupling independence at girth five for $q\ge(1+\delta)\Deg$}{Coupling independence at girth five for q >= (1+delta) Delta}}
+\label{app:girth5-covariance}\label{sec:girth5-ci}
+
+\subsection{Proof of coupling independence}
+
+The proof combines a two-layer disintegration, a covariance bound for the
+insertion residual, and a weighted response recursion.  The spectral-gap
+input is proved in \Cref{sec:fixed-girth-ci}.
+
+Throughout this section, $q,\Deg$ are positive integers,
+$0<\delta\le1$, $x\in[0,1]$, and $s:=1-x$.
+In this subsection, assume $q\ge(1+\delta)\Deg$.
+A residual instance $I=(H,\mathbf b)$ consists of a finite simple free
+graph $H$ and nonnegative integer boundary counts $b_v(c)$ satisfying
+\begin{equation}\label{eq:girth5-degree-budget}
+ \deg_H(v)+k_H(v)\le\Deg,
+ \qquad k_H(v):=\sum_{c\in\colours}b_v(c).
+\end{equation}
+These counts agree with $\bcount_v^\tau(c)$ from \Cref{sec:potts-setup}.  Write
+$\mu_I$ for the normalized Gibbs law at the fixed activity $x$,
+$\mathbb E_I$ for its expectation, and $p_{I,v}$ for its marginal at $v$.
+The instance $I-v$ deletes $v$ and its incident edges but retains the
+boundary counts at the remaining vertices; pinning a vertex instead adds
+the corresponding boundary counts at its free neighbours.
+For $x>0$, $\mu_{I,w}^{v=c}$ denotes the marginal at $w$ after conditioning
+$v$ to colour $c$.  At $x=0$ it denotes the $w$-marginal of the
+normalized child law from \Cref{sec:potts-setup}, even when $c$ has zero probability
+in the parent law.  All distances and spheres refer to the stated free
+graph; in particular, $S_2^H(v):=\{w:\dist_H(v,w)=2\}$.
+In colour space, $I_q$ is the identity matrix and
+$\mathbf1\in\mathbb R^q$ is the all-ones vector.
+
+Set
+\begin{equation}\label{eq:girth5-basic-constants}
+ m:=q-\Deg,\qquad B:=m^{-1},\qquad
+ L_\Deg:=\frac{1+\sqrt{q/(m+1)}}{m}.
+\end{equation}
+The colour hypothesis gives $m\ge\delta\Deg$; the estimates below include
+equality throughout.
+We use the threshold and gap constant
+\begin{equation}\label{eq:girth5-gap-constants}
+ \Deg_0(\delta):=\left\lceil
+ \frac{4096(1+\delta)e^{2/\delta}}{\delta^4}\right\rceil,
+ \qquad \gamma_\delta:=\frac{\delta}{4(2+\delta)}.
+\end{equation}
+We assume $\Deg\ge\Deg_0(\delta)$, so in particular $B<1$.
+For a free site $w$, write
+$\operatorname{Var}_w f:=\operatorname{Var}(f\mid
+\sigma_{V(H)\setminus\{w\}})$ under the current Gibbs law.
+The spectral-gap input, proved in \Cref{thm:potts-gap-girth5}, is
+\begin{equation}\label{eq:girth5-poincare}
+ \operatorname{Var}_{\mu_I}(f)
+ \le\frac1{\gamma_\delta}\sum_{w\in V(H)}
+       \mathbb E_{\mu_I}[\operatorname{Var}_w f].
+\end{equation}
+It applies after every further pinning and deletion that preserves
+\eqref{eq:girth5-degree-budget} and girth at least five.
+
+\paragraph{Local geometry.}
+
+\begin{lemma}[Second-layer disintegration]
+\label{lem:girth5-disintegration}
+Let $I=(H,\mathbf b)$ be a residual instance, let $v$ be free, and put
+$U=N_H(v)$, $S=S_2^H(v)$, and $\nu=\mu_{I-v}$.  If $\operatorname{girth}(H)\ge5$, then $U$ is independent,
+each $w\in S$ has a unique neighbour in $U$, and, with
+$O=V(H)\setminus(\{v\}\cup U\cup S)$, the following holds for every
+$\xi$ with $\nu(\sigma_S=\xi)>0$:
+\begin{equation}\label{eq:girth5-disintegration}
+ \nu(d\sigma_U,d\sigma_O\mid\sigma_S=\xi)
+ =\left(\bigotimes_{u\in U}\pi_u^\xi(d\sigma_u)\right)
+   \otimes\nu_O^\xi(d\sigma_O).
+\end{equation}
+Here $\pi_u^\xi$ and $\nu_O^\xi$ are the conditional marginals of
+$\sigma_u$ and $\sigma_O$, respectively, under $\nu$ given $\sigma_S=\xi$.
+In particular, all edges inside $S$ and all edges inside $O$ are retained;
+the marginal law on $S$ is not assumed to be a product law.
+\end{lemma}
+
+\begin{proof}
+There are no edges inside $U$ by the absence of triangles.  Every neighbour
+of $u\in U$ other than $v$ lies in $S$, and uniqueness follows because two
+neighbours in $U$ would give a four-cycle through $v$.  After $S$ is fixed, all
+factors incident with $S$ become unary factors and the remaining Gibbs weight
+separates into the isolated vertices $U$ and the induced exterior graph $O$.
+Normalization gives \eqref{eq:girth5-disintegration}.
+\end{proof}
+
+The disintegration isolates the neighbours of the root once the second layer is
+revealed.  We next control how changing one second-layer coordinate changes
+that root-neighbour contribution in the colour direction.
+
+\begin{lemma}[One-edge colour operator]
+\label{lem:girth5-one-edge}
+Assume $m\ge\delta\Deg$ and let $r$ be a cavity colour law obtained after
+deleting one incident constraint.  For $h\in\mathbb R^q$, define
+\[
+ (T_r h)(t)=\frac{\langle r,h\rangle-sr(t)h(t)}{1-sr(t)},
+ \qquad t\in\colours.
+\]
+Then $r(c)\le(m+1)^{-1}$ and, for the Euclidean projection
+$\Pi:=I_q-q^{-1}\mathbf1\mathbf1^{\mathsf T}$ onto the subspace
+orthogonal to constants,
+\[
+ \|\Pi T_r\Pi\|_{2\to2}\le L_\Deg.
+\]
+If the updated one-site law $\varrho$ has atoms at most $B$, then
+\begin{equation}\label{eq:girth5-one-edge-variance}
+ \operatorname{Var}_{t\sim\varrho}\bigl((T_rh)(t)\bigr)
+ \le BL_\Deg^2\|h\|_2^2.
+\end{equation}
+The estimate remains valid when $h$ depends on all other coordinates but not
+on the colour currently updated.
+\end{lemma}
+
+\begin{proof}
+Writing $\vartheta_c:=sr(c)/(1-sr(c))$ and
+$\vartheta=(\vartheta_c)_{c\in\colours}$ gives
+\[
+ T_r=\mathbf1r^{\mathsf T}-\operatorname{diag}(\vartheta)
+ (I_q-\mathbf1r^{\mathsf T}).
+\]
+The first term vanishes after projection, while
+$\max_c\vartheta_c\le m^{-1}$ and
+$\|I_q-\mathbf1r^{\mathsf T}\|_{2\to2}\le1+\sqrt{q/(m+1)}$.  This proves the quotient
+bound.  Finally
+$\operatorname{Var}_{\varrho}(g)=\min_{a\in\mathbb R}
+\sum_j\varrho_j(g_j-a)^2\le B\|\Pi g\|_2^2$, which gives \eqref{eq:girth5-one-edge-variance}.
+\end{proof}
+
+\paragraph{Colour covariance defect.}
+For the quantitative bounds below set
+\[
+ a_B=(1-B)^{-1},\quad V_\pi=\frac{\Deg B L_\Deg^2}{\gamma_\delta},\quad
+ V_M=\Deg V_\pi,
+\]
+\[
+ D_\Deg=\frac{\Deg B^2a_B}{2},\quad
+ E_\Deg=D_\Deg+\tfrac12e^{\Deg B}V_M,\quad
+ b_\Deg=a_B^2\sqrt{V_\pi}+a_Be^{\Deg B+2D_\Deg}
+ (\sqrt{V_M}+D_\Deg),
+\]
+\begin{equation}\label{eq:girth5-defect-constants}
+ g_\Deg=\sqrt{V_M}\,b_\Deg,\qquad
+ \ell_\Deg=2\Deg B b_\Deg,\qquad K_\Deg=\Deg g_\Deg,\qquad
+ \widetilde\epsilon_\Deg=\sqrt B\,K_\Deg.
+\end{equation}
+For fixed $\delta$, these satisfy
+$b_\Deg=O_\delta(\Deg^{-1/2})$, $g_\Deg=O_\delta(\Deg^{-1})$,
+$K_\Deg=O_\delta(1)$, and
+$\widetilde\epsilon_\Deg=O_\delta(\Deg^{-1/2})$.
+
+The next lemma is the key girth-five estimate: the insertion residual has
+only a small colour-direction covariance, even though the second layer itself
+need not be a product measure.
+
+\begin{lemma}[Colour covariance of the insertion residual]
+\label{lem:girth5-color-covariance}
+Assume $0<\delta\le1$, $\Deg\ge\Deg_0(\delta)$,
+$q\ge(1+\delta)\Deg$, and $0<x<1$.  Suppose that every residual instance
+used below satisfies the degree budget, so that \eqref{eq:girth5-poincare}
+applies.  Under the hypotheses of
+Lemma~\ref{lem:girth5-disintegration}, sums and products over neighbours
+range over $U$ unless stated otherwise.  Fix a colour $c$ and put
+$X_{u,c}=\mathbf1_{\{\sigma_u=c\}}$,
+$p_{u,c}=\mathbb E_\nu X_{u,c}$,
+\[
+ F_c=\prod_{u\in U}(1-sX_{u,c}),\quad T_c=\mathbb E_\nu F_c,\quad
+ Q_c=\prod_{u\in U}(1-sp_{u,c}),\quad
+ \alpha_{u,c}=\frac{s}{1-sp_{u,c}}.
+\]
+Let
+\[
+ R_c=F_c/T_c-1+\sum_u\alpha_{u,c}(X_{u,c}-p_{u,c}),
+ \qquad G_c=\mathbb E_\nu[R_c\mid\sigma_S].
+\]
+For $\beta_{u,c}$ defined by
+\[
+ \beta_{u,c}=\alpha_{u,c}-\frac{s}{T_c}
+ \prod_{j\ne u}(1-s\pi_{j,c}),
+ \qquad
+ \pi_{u,c}=\mathbb E_\nu[X_{u,c}\mid\sigma_S],
+\]
+the coefficient $\beta_{u,c}$ does not depend on the configuration
+$\sigma_{W_u}$, where $W_u=N_H(u)\setminus\{v\}$.  Moreover, for every deterministic
+$z\in\mathbb R^q$,
+\begin{equation}\label{eq:girth5-coordinate-variance}
+ \operatorname{Var}_w\!\left(\sum_cz_cG_c\right)
+ \le BL_\Deg^2\sum_cz_c^2\beta_{u,c}^2\qquad(w\in W_u).
+\end{equation}
+The insertion-quotient expansion proved below gives
+$\|\beta_{u,c}\|_{L^2(\nu)}\le b_\Deg$ uniformly in $u,c$, where
+$b_\Deg=O_\delta(\Deg^{-1/2})$.  Consequently,
+\begin{equation}\label{eq:girth5-colour-covariance}
+ \|\operatorname{Cov}_\nu(G_1,\ldots,G_q)\|_{2\to2}
+ \le V_M b_\Deg^2=:g_\Deg^2,
+ \qquad g_\Deg=O_\delta(\Deg^{-1}).
+\end{equation}
+Write $G=(G_c)_{c\in\colours}$ as a column vector; its covariance matrix
+has entries $\operatorname{Cov}_\nu(G_c,G_d)$.  For every probability
+vector $r$ with $r_c\le B$, it follows that
+\begin{equation}\label{eq:girth5-weighted-covariance}
+ \operatorname{Cov}_\nu(\operatorname{diag}(\sqrt r)G)
+ =\operatorname{diag}(\sqrt r)\operatorname{Cov}_\nu(G)\operatorname{diag}(\sqrt r),
+ \qquad
+ \|\operatorname{Cov}_\nu(\operatorname{diag}(\sqrt r)G)\|_{2\to2}
+ \le Bg_\Deg^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The affine formula for $G_c$ gives the stated expression for $\beta_{u,c}$.
+Changing $\sigma_w$ changes only $\pi_u$, so \eqref{eq:girth5-one-edge-variance}, applied to the vector
+$(z_c\beta_{u,c})_c$, gives \eqref{eq:girth5-coordinate-variance}.
+
+We now record the insertion estimates used below.  For a fixed colour $c$, set
+\begin{equation}\label{eq:girth5-insertion-variables}
+ M_c=\sum_{u\in U}(\pi_{u,c}-p_{u,c}),\qquad
+ Y_c(\xi)=\prod_{u\in U}(1-s\pi_{u,c}(\xi)).
+\end{equation}
+Conditional independence gives $T_c=\mathbb E_\nu Y_c$.  Applying
+\eqref{eq:girth5-one-edge-variance} in each disjoint set $W_u$ and then \eqref{eq:girth5-poincare} gives
+\begin{equation}\label{eq:girth5-insertion-variances}
+ \operatorname{Var}_\nu(\pi_{u,c})\le V_\pi,\qquad
+ \operatorname{Var}_\nu(M_c)\le V_M.
+\end{equation}
+For $0\le y\le B$, set $\mathfrak r(y):=-\log(1-y)-y$.
+The bound $0\le\mathfrak r(y)\le y^2/[2(1-B)]$ gives
+\begin{equation}\label{eq:girth5-log-remainder}
+ \zeta_c:=\sum_{u\in U}
+   \bigl(\mathfrak r(sp_{u,c})-\mathfrak r(s\pi_{u,c})\bigr),
+ \qquad
+ \log\frac{Y_c}{Q_c}=-sM_c+\zeta_c,
+ \qquad |\zeta_c|\le D_\Deg.
+\end{equation}
+Indeed, each of the two remainder sums lies in $[0,D_\Deg]$.
+Since $\mathbb E_\nu M_c=0$ and $|M_c|\le\Deg B$, the exponential
+Taylor bound gives
+$1\le\mathbb E_\nu e^{-sM_c}\le
+1+\tfrac12e^{\Deg B}V_M$.  It follows that
+\begin{equation}\label{eq:girth5-insertion-quotient}
+ \left|\log\frac{T_c}{Q_c}\right|\le E_\Deg,\qquad
+ T_c\ge e^{-\Deg B-D_\Deg}.
+\end{equation}
+Finally,
+\begin{equation}\label{eq:girth5-beta-decomposition}
+ \beta_{u,c}=s\left(\frac1{1-sp_{u,c}}-\frac1{1-s\pi_{u,c}}\right)
+ +\frac{s}{1-s\pi_{u,c}}\left(1-\frac{Y_c}{T_c}\right).
+\end{equation}
+To bound the variance, put
+\[
+ \Phi_c:=\exp\!\left(-s\sum_{u\in U}\pi_{u,c}\right)
+ =\exp\!\left(-s\sum_{u\in U}p_{u,c}\right)e^{-sM_c}.
+\]
+Then $Y_c=\Phi_c\exp(-\sum_u\mathfrak r(s\pi_{u,c}))$, so
+$0\le Y_c\le\Phi_c\le1$ and $|Y_c-\Phi_c|\le D_\Deg$.
+As a function of $M_c$ on its range, $\Phi_c$ is $s$-Lipschitz.
+Thus \eqref{eq:girth5-insertion-variances} gives
+$\operatorname{Var}_\nu(\Phi_c)\le s^2\operatorname{Var}_\nu(M_c)\le V_M$.
+Minkowski therefore gives
+$\sqrt{\operatorname{Var}_\nu(Y_c)}\le\sqrt{V_M}+D_\Deg$.
+Together with
+$1/(1-s\pi_{u,c})\le a_B$, we obtain
+\begin{equation}\label{eq:girth5-beta-bound}
+ \|\beta_{u,c}\|_{L^2(\nu)}\le a_B^2\sqrt{V_\pi}
+ +a_Be^{\Deg B+D_\Deg}(\sqrt{V_M}+D_\Deg)\le b_\Deg.
+\end{equation}
+Since the coordinate blocks $W_u$ are disjoint (we do not assume that the
+corresponding spins are mutually independent) and $\sum_u|W_u|\le\Deg^2$,
+\eqref{eq:girth5-poincare} now gives
+\[
+ \operatorname{Var}_\nu\left(\sum_cz_cG_c\right)\le V_Mb_\Deg^2\|z\|_2^2.
+\]
+This is \eqref{eq:girth5-colour-covariance}, and the weighted covariance estimate \eqref{eq:girth5-weighted-covariance} follows by
+conjugation.
+\end{proof}
+
+We now use these estimates to bound the response to a root-colour change
+uniformly over residual instances.
+
+\begin{theorem}[Unrestricted girth-five coupling independence]
+\label{thm:girth5-ci}
+For every fixed $0<\delta\le1$ there is a threshold
+$\Deg_5(\delta)\ge\Deg_0(\delta)$ such that, whenever
+$\Deg\ge\Deg_5(\delta)$ and
+$q\ge(1+\delta)\Deg$, every graph $G\in\Gdeg$ and pinning $\tau$ with
+$\operatorname{girth}(G^\tau)\ge5$ satisfies
+\[
+ \WHam\!\left(
+   \mupin{G}{\tau^{r=c}}{x},
+   \mupin{G}{\tau^{r=d}}{x}
+ \right)\le C_5(q,\Deg,\delta)<\infty
+\]
+for every $r\in V^\tau$, all $c,d\in\colours$, and every $x\in[0,1]$.
+The same constant applies to all graphs and pinnings in this class, and
+both laws are on $V^\tau\setminus\{r\}$.
+\end{theorem}
+
+\begin{proof}
+For the response estimates, let $I=(H,\mathbf b)$ be a residual instance
+of girth at least five satisfying the degree budget, and fix $\chi\ge1$.
+Choose a positive weight vector $\mathbf a=(a_w)_{w\in V(H)}$ with
+$\chi^{-1}\le a_u/a_w\le\chi$ on every free edge.  Let
+$f_I=\sum_w f_w(\sigma_w)$, where $f_w:\colours\to\mathbb R$ and
+$|f_w(c)|\le a_w$ for every colour $c$.  In a smaller residual instance
+$J$, $f_J$ denotes the sum of the remaining source terms.  All bounds below
+are uniform over further pinnings, deletions, and $x\in(0,1)$.
+We first derive the exact response identity, then prove uniform weighted
+$2$- and $\infty$-norm bounds by induction, and finally convert those bounds
+into a root-colour Hamming coupling.
+
+\paragraph{Response recursion.}
+For a free vertex $v$, put $U=N_H(v)$, $S=S_2^H(v)$,
+$O=V(H)\setminus(\{v\}\cup U\cup S)$, and $\nu=\mu_{I-v}$.
+Use $F_c,R_c,G_c$ from \Cref{lem:girth5-color-covariance} for this instance.
+Put $d=|U|$ and enumerate $U$ as $u_1,\ldots,u_d$.  Write
+\begin{equation}\label{eq:girth5-score}
+ h_{I,v}(c)=\frac{\sqrt{p_{I,v}(c)}}{1-sp_{I,v}(c)}
+ \left(\mathbb E_I[f_I\mid\sigma_v=c]-\mathbb E_I f_I\right).
+\end{equation}
+For $n\ge1$, let $U_n$ and $V_n$ be the suprema of
+$\|h_{I,v}\|_2/a_v$ and $\|h_{I,v}\|_\infty/(\sqrt B a_v)$ over all
+such instances with at most $n$ free vertices, all admissible weights and
+sources, all free roots, and all $x\in(0,1)$.  Set $U_0=V_0=0$.
+These suprema are finite at each fixed $n$: components not containing $v$
+cancel from the centred response, and weights in the root component differ
+from $a_v$ by at most $\chi^{n-1}$.  When analysing a particular $I$, write
+$n=|V(H)|$.
+
+For a real parameter $t$, define the tilted law and its marginals by
+\[
+ d\mu_{J,t}:=\frac{e^{tf_J}}{\mathbb E_J[e^{tf_J}]}\,d\mu_J,
+ \qquad p_{J,w}(c;t):=\mu_{J,t}(\sigma_w=c).
+\]
+Thus $p_{J,w}(c;0)=p_{J,w}(c)$.  Set $\nu_t:=\mu_{I-v,t}$.
+Under this perturbation, the exact marginal identity is
+\[
+ p_{I,v}(c;t)\propto x^{b_v(c)}e^{tf_v(c)}
+ \prod_{u\sim v}(1-sp_{I-v,u}(c;t))e^{e_{v,c}(t)},
+\]
+where
+\[
+ e_{v,c}(t)=\log\mathbb E_{\nu_t}F_c
+ -\sum_{u\sim v}\log(1-s\mathbb E_{\nu_t}X_{u,c}),
+ \qquad e'_{v,c}(0)=\operatorname{Cov}_\nu(f_{I-v},R_c).
+\]
+Set $D_v=\operatorname{diag}(\sqrt{p_{I,v}}/(1-sp_{I,v}))$ and
+$e'_v=(e'_{v,c}(0))_{c\in\colours}$, with coordinatewise operations
+inside the diagonal.  Write $f:=f_{I-v}$ and
+$f_A:=\sum_{w\in A}f_w(\sigma_w)$ for $A\in\{U,S,O\}$.
+Then $f=f_U+f_S+f_O$.  Setting
+$F_S=\mathbb E_\nu[f\mid\sigma_S]$, the disintegration gives the exact
+source decomposition
+\begin{equation}\label{eq:girth5-source-decomposition}
+ e'_{v,c}(0)=
+ \underbrace{\mathbb E_\nu[\operatorname{Cov}_\nu(f_U,R_c\mid\sigma_S)]}_{A_c}
+ +\underbrace{\operatorname{Cov}_\nu(F_S,G_c)}_{C_c}.
+\end{equation}
+The local term satisfies
+\begin{equation}\label{eq:girth5-local-source}
+ |A_c|\le 2\Deg B b_\Deg\chi a_v
+ =\ell_\Deg\chi a_v,
+\end{equation}
+using $|f_u|\le a_u\le\chi a_v$.  To control the second term, reveal
+$S$ one spin at a time.  At one step, in the resulting smaller conditional
+instance $J$, let
+\[
+ g(c)=\mathbb E_J[f_J\mid\sigma_w=c]-\mathbb E_J f_J.
+\]
+The conditional variance of this Doob increment is
+\begin{equation}\label{eq:girth5-doob-increment}
+ \sum_c p_{J,w}(c)g(c)^2
+ =\sum_c(1-sp_{J,w}(c))^2h_{J,w}(c)^2
+ \le\|h_{J,w}\|_2^2
+ \le a_w^2U_{n-1}^2.
+\end{equation}
+The Doob increments are orthogonal, so summing over $w\in S$ gives
+\begin{equation}\label{eq:girth5-revealed-variance}
+ \operatorname{Var}_\nu(F_S)
+ \le\sum_{w\in S}a_w^2U_{n-1}^2
+ \le\Deg^2\chi^4a_v^2U_{n-1}^2.
+\end{equation}
+Differentiating the marginal identity at $t=0$ gives
+\begin{equation}\label{eq:girth5-response-recursion}
+ h_{I,v}=\sum_{u\sim v}J_{v,u}h_{I-v,u}
+ +D_v(I_q-\mathbf1p_{I,v}^{\mathsf T})(f_v+e'_v),\quad
+ J_{v,u}=-sD_v(I_q-\mathbf1p_{I,v}^{\mathsf T})
+ \operatorname{diag}\sqrt{p_{I-v,u}}.
+\end{equation}
+Set $t_\delta=(1+\delta)^{-1}$ and
+$\ell_B=-\log(1-B)/B$.  Here is the weighted AM--GM calculation used
+below.  Put $k_v=\sum_cb_v(c)$ and let
+$C_0=\{c:b_v(c)=0\}$, so that
+$Q:=|C_0|\ge q-k_v\ge m+d$.  Write
+$y_i(c)=s p_{I-v,u_i}(c)\in[0,B]$ and
+$A_c=\prod_i(1-y_i(c))$.  Define the reference root marginal
+\[
+  \bar p(c):=\frac{x^{b_v(c)}A_c}{\sum_d x^{b_v(d)}A_d}.
+\]
+The insertion quotient bound above gives
+\[
+ p_{I,v}(c)=
+ \frac{\bar p(c)e^{e_{v,c}(0)}}
+      {\sum_d\bar p(d)e^{e_{v,d}(0)}}.
+\]
+Thus \(e^{-2E_\Deg}\le p_{I,v}(c)/\bar p(c)\le e^{2E_\Deg}\).
+Since the factors $x^{b_v(c)}$ are at most one,
+the normalizing denominator of $\bar p$ is at least
+$\sum_{c\in C_0}A_c$.  For each $i$,
+$-\log(1-y_i(c))\le\ell_B y_i(c)$; hence AM--GM over $C_0$ gives
+\[
+ \sum_{c\in C_0}A_c
+ \ge Q\left(\prod_{c\in C_0}A_c\right)^{1/Q}
+ \ge Q\exp\!\left(-\frac{d\ell_B}{Q}\right).
+\]
+For a fixed colour $c$ and $S_c=\sum_i y_i(c)$, ordinary AM--GM gives
+$A_c\le(1-S_c/d)^d$ (the case $d=0$ is void), while
+$S(1-S/d)^d\le (d/(d+1))^{d+1}=d^{d+1}/(d+1)^{d+1}\le e^{-1}$ for $0\le S\le d$, with equality at $S=d/(d+1)$.
+Therefore, with $\theta=d/Q$,
+\[
+ \bar p(c)S_c\le Q^{-1}e^{\theta\ell_B-1},\qquad
+ d\max_c\bar p(c)S_c
+ \le\theta e^{\theta\ell_B-1}
+ \le t_\delta e^{t_\delta\ell_B-1},
+\]
+because $Q\ge m+d$, $m\ge\delta d$, and
+$\theta\le(1+\delta)^{-1}=t_\delta$.  Together with the insertion
+defect bound this yields
+\[
+ r_\Deg=e^{E_\Deg}
+ \frac{\sqrt{t_\delta\exp(t_\delta\ell_B-1)}}{1-B},
+\]
+which tends to $e^{-\lambda_\delta}<1$, where
+$\lambda_\delta=\tfrac12(\log(1+\delta)+\delta/(1+\delta))$.
+For completeness, write $p=p_{I,v}$, $r_i=p_{I-v,u_i}$,
+$\mathbf z=\sqrt p$, and
+$\Lambda=\max_c p(c)\sum_i r_i(c)$.  Then
+\[
+ J_i=-s\,\operatorname{diag}\!\left(\frac1{1-sp}\right)
+ (I_q-\mathbf z\mathbf z^{\mathsf T})\operatorname{diag}\!\left(\sqrt{p\,r_i}\right),
+\]
+so the projection identity and Cauchy--Schwarz give
+\[
+ \left\|\sum_iJ_ih_i\right\|_2
+ \le\frac{s\sqrt{d\Lambda}}{1-B}\max_i\|h_i\|_2.
+\]
+The weighted AM--GM bound above and
+$e^{-2E_\Deg}\le p(c)/\bar p(c)\le e^{2E_\Deg}$
+turn this coefficient into $r_\Deg$: indeed, if
+$\Lambda=\max_c p(c)\sum_i r_i(c)$, then
+\[
+ s^2d\Lambda\le e^{2E_\Deg}
+ \bigl(d\max_c\bar p(c)\,s\sum_i r_i(c)\bigr)
+ \le e^{2E_\Deg}t_\delta e^{t_\delta\ell_B-1},
+\]
+using $s\le1$.  Taking the square root is why the insertion loss is
+$e^{E_\Deg}$ rather than $e^{2E_\Deg}$.  For the infinity norm, write
+coordinatewise
+\[
+ \left(\sum_iJ_ih_i\right)_c
+ =-\frac{s\sqrt{p(c)}}{1-sp(c)}
+ \left[\sum_i\sqrt{r_i(c)}h_i(c)
+ -\sum_d p(d)\sum_i\sqrt{r_i(d)}h_i(d)\right].
+\]
+The first (diagonal) term is bounded by
+$s\sqrt{d\Lambda}(1-B)^{-1}\max_i\|h_i\|_\infty$.
+For the second term, Cauchy--Schwarz in the joint indices $(i,d)$ gives
+\[
+ \sum_{i,d}p(d)\sqrt{r_i(d)}|h_i(d)|
+ \le \sqrt{d\Lambda}\max_i\|h_i\|_2,
+ \qquad \sum_{i,d}p(d)^2r_i(d)\le\Lambda,
+\]
+and multiplying by $\sqrt{p(c)}\le\sqrt B$ yields
+\[
+ \sqrt{p(c)}\sum_d p(d)\sum_i\sqrt{r_i(d)}|h_i(d)|
+ \le\sqrt B\,\sqrt{d\Lambda}\max_i\|h_i\|_2.
+\]
+Multiplying by $s/(1-B)$ and applying the preceding coefficient bound
+gives the analogous infinity-norm estimate.  These Jacobian blocks consequently satisfy
+\begin{equation}\label{eq:girth5-jacobian-bounds}
+ \left\|\sum_iJ_{v,u_i}h_i\right\|_2
+ \le r_\Deg\max_i\|h_i\|_2,\qquad
+ \left\|\sum_iJ_{v,u_i}h_i\right\|_\infty
+ \le r_\Deg\max_i\|h_i\|_\infty
+ +r_\Deg\sqrt B\max_i\|h_i\|_2.
+\end{equation}
+When $d=0$, the empty block sums and their norms are zero; maxima of
+nonnegative quantities over an empty neighbour set are also taken to be
+zero.  The source term is controlled by the elementary bounds
+\begin{equation}\label{eq:girth5-source-bounds}
+ \|D_v(I_q-\mathbf1p_{I,v}^{\mathsf T})g\|_2
+ \le a_B\sqrt{\operatorname{Var}_{p_{I,v}}(g)},
+ \qquad
+ \|D_v(I_q-\mathbf1p_{I,v}^{\mathsf T})g\|_\infty
+ \le 2a_B\sqrt B\|g\|_\infty.
+\end{equation}
+\paragraph{Contractive induction.}
+We now bound the previously defined $U_n,V_n$ by induction on $n$.
+The full source $f_U+f_S+f_O$ is retained, including the terms outside
+the second layer.  Revealing the spins in $S$ one at a time gives
+Doob increments which are exactly scores in successively pinned instances
+satisfying the degree budget; hence the induction only uses smaller instances.  Lemma
+\ref{lem:girth5-color-covariance}, the two source bounds, and \eqref{eq:girth5-jacobian-bounds} give
+\begin{equation}\label{eq:girth5-U-recursion}
+ U_n\le (r_\Deg\chi+a_B\widetilde\epsilon_\Deg\chi^2)U_{n-1}
+       +a_B(1+\ell_\Deg\chi),
+\end{equation}
+\begin{equation}\label{eq:girth5-V-recursion}
+ V_n\le r_\Deg\chi V_{n-1}
+ +(r_\Deg\chi+2a_BK_\Deg\chi^2)U_{n-1}
+ +2a_B(1+\ell_\Deg\chi).
+\end{equation}
+Choose $\chi=e^{\lambda_\delta/4}$.  For sufficiently large $\Deg$,
+$A_V=r_\Deg\chi<1$ and
+$A_U=r_\Deg\chi+a_B\widetilde\epsilon_\Deg\chi^2<1$.  Thus
+\begin{equation}\label{eq:girth5-supersolutions}
+ U^*=\frac{a_B(1+\ell_\Deg\chi)}{1-A_U},\qquad
+ V^*=\frac{(A_V+2a_BK_\Deg\chi^2)U^*
+ +2a_B(1+\ell_\Deg\chi)}{1-A_V}
+\end{equation}
+are finite supersolutions, and $U_n\le U^*$, $V_n\le V^*$ for all $n$.
+
+\paragraph{From response bounds to coupling independence.}
+Define $M_n$ as the supremum, over the same instances, pinnings, weights,
+sources, free roots, and $n$-vertex size range used for $U_n,V_n$, of
+\begin{equation}\label{eq:girth5-oscillation-definition}
+ \frac{\left|\mathbb E_I[f_I\mid\sigma_v=c]
+ -\mathbb E_I[f_I\mid\sigma_v=d]\right|}{a_v},
+ \qquad c,d\in\colours.
+\end{equation}
+To recover this unweighted root-colour response, take differences of two logarithmic
+coordinates in \eqref{eq:girth5-response-recursion} before dividing by a root marginal.  This gives
+\[
+ M_n\le2\bigl(1+\ell_\Deg\chi+K_\Deg\chi^2U_{n-1}\bigr)
+      +2\Deg B\chi V_{n-1},
+\]
+so
+\begin{equation}\label{eq:girth5-oscillation-bound}
+ M^*=2\bigl(1+\ell_\Deg\chi+K_\Deg\chi^2U^*\bigr)
+      +2\Deg B\chi V^*<\infty.
+\end{equation}
+Choosing source signs at the fixed real base point and applying \eqref{eq:girth5-oscillation-bound} yields,
+for every admissible $\mathbf a$ and every pair of root colours,
+\begin{equation}\label{eq:girth5-weighted-influence}
+ \sum_{w\ne v}a_w\,
+ \|\mu_{I,w}^{v=c}-\mu_{I,w}^{v=d}\|_{\rm TV}
+ \le \frac{M^*}{2}a_v.
+\end{equation}
+
+It remains only to perform the standard coupling conversion.  Work in the connected component of the root, since other components have
+identical laws under both root pinnings.  For a current residual graph $H$,
+first take $a_w=\chi^{\operatorname{dist}_H(v,w)}$.  For the fixed-ambient condition
+in \cite[Lemma~5.13]{CLMM2023}, apply \eqref{eq:girth5-weighted-influence} after every further pinning, using the
+restriction of $a_w=\chi^{\operatorname{dist}_{H_0}(v,w)}$ from the original
+free graph $H_0$.  These are separate applications; no comparison of the two
+distance functions is used.  Choose $R$ so that
+$M^*\chi^{-R}/2\le(8R\log\Deg)^{-1}$.  Restricting \eqref{eq:girth5-weighted-influence} to the fixed-ambient
+sphere and applying \cite[Lemma~5.13]{CLMM2023} gives a graph-size-independent Hamming
+coupling.  The endpoint $x=0$ follows by finite-state continuity for the
+normalized child laws (proper list colourings exist because $q\ge\Deg+1$);
+at $x=1$ the root-excluded laws coincide directly.
+\end{proof}

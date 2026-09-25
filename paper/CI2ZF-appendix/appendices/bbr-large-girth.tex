@@ -1,0 +1,562 @@
+\section{Coupling independence at high temperature and large girth}
+\label{sec:bbr-large-girth}
+
+This section turns the tree contraction of
+Bencs, Berrekkal, and Regts~\cite{BencsBerrekkalRegts2025Trees} into a
+coupling bound on sufficiently large-girth graphs.  The
+extra step is tree total-influence decay: strong spatial mixing alone does
+not provide this input to the large-girth transfer of Chen, Liu, Mani, and
+Moitra~\cite{CLMM2023}.
+
+Fix integers \(q,\Deg\) such that
+\begin{equation}
+ q\ge3,\qquad
+ \frac{\Deg}{q}\ge\frac{e-\frac12}{e-1}.
+ \label{eq:bbr-parameters}
+\end{equation}
+For \((q,\Deg)\ne(3,4)\), put
+\begin{equation}
+ k:=e\frac{\Deg-q/2}{\Deg-q},
+ \qquad
+ x_0:=1-\frac q\Deg
+       \left(1-\frac k\Deg\right)^2
+       \frac{\Deg-k}{\Deg-k/2}.
+ \label{eq:bbr-x0}
+\end{equation}
+For \((q,\Deg)=(3,4)\), put \(x_0:=3/4\).
+The proof of \Cref{thm:intro-bbr-interval} shows that \(0<x_0<1\), and
+that \(0<k<\Deg\) outside the exceptional case.
+Throughout this section, \(x\in[x_0,1]\), and
+\begin{equation}
+ \kappa:=\frac{\Deg-1}{\Deg},
+ \qquad
+ \theta:=\sqrt\kappa<1.
+ \label{eq:bbr-kappa}
+\end{equation}
+Write \(I_q\) for the \(q\)-by-\(q\) identity matrix,
+\(\mathbf1_q\) for the all-ones vector in \(\mathbb R^q\), and \(e_i\)
+for the \(i\)-th standard basis vector.
+
+\subsection{Square-root cavity messages and the BBR certificate}
+
+Consider a rooted tree of maximum degree at most \(\Deg\) with a fixed
+pinning \(\tau\).  We work in one component of
+the free graph and represent each free--pinned edge by an individually
+labelled pinned leaf.  Thus the pinning contributes only unary factors at
+free vertices.  For a free non-root vertex \(v\), let \(T_v\) be its
+descendant cavity tree.  The numerator \(Z_{T_v,v=i}\) below is the
+restricted partition-function contribution with \(v=i\), retaining the
+unary factor at \(v\); it is not the normalized child partition function
+obtained by dropping that scalar.  The denominator \(Z_{T_v-v}\) deletes
+\(v\) and its incident edges, retaining the unary factors at the remaining
+vertices.  Define
+\begin{equation}
+ R_v(i):=\left(
+   \frac{Z_{T_v,v=i}(x)}{Z_{T_v-v}(x)}
+ \right)^{1/2},
+ \qquad i\in\colours.
+ \label{eq:bbr-message}
+\end{equation}
+We use the same ratio at the global root.
+All entries are positive because \(x\ge x_0>0\).  For
+\(y\in\mathbb R_{>0}^q\), write
+\begin{equation}
+ S(y):=\sum_i y_i^2,\qquad
+ S_i(y):=S(y)-(1-x)y_i^2,\qquad
+ F_x(y)_i:=\sqrt{\frac{S_i(y)}{S(y)}}.
+ \label{eq:bbr-local-map}
+\end{equation}
+If \(\mathcal F_u\) is the set of free children of \(u\), put
+\(f_u:=|\mathcal F_u|\).  The recursion is
+\begin{equation}
+ R_u=B_u\odot\prod_{v\in\mathcal F_u}F_x(R_v),
+ \label{eq:bbr-recursion}
+\end{equation}
+where \(B_u(i)=x^{\bcount_u^\tau(i)/2}\) is the product of the
+square-root unary factors from pinned children.  The symbol
+$\odot$ denotes coordinatewise multiplication, and all products and
+quotients of vectors in this recursion are coordinatewise.
+
+For two positive messages \(R,R'\), let \(R_t=tR+(1-t)R'\) and set
+\begin{equation}
+ L_x(R,R'):=
+ \max_{\substack{0\le t\le1\\ i\in\colours}}
+ \frac{\sqrt{S(R_t)}}{S_i(R_t)}.
+ \label{eq:bbr-segment-weight}
+\end{equation}
+A pair is called \emph{jointly realizable} when its two messages arise at
+the same cavity vertex of the same rooted tree, with the same pinned
+domain, after assigning possibly different colours on that domain.  This
+same-tree, same-domain restriction is part of the statement below; no
+claim is made for arbitrary positive vectors.
+
+\begin{lemma}[BBR contraction certificate]
+\label{lem:bbr-certificate}
+Let \(u\) be a free non-root cavity vertex with
+\(f\le\Deg-1\) free child branches.  For every \(x\in[x_0,1]\) and every
+jointly realizable pair \(R,R'\) at \(u\) at activity \(x\) whose two
+boundary assignments agree on all pinned vertices at distance at most one
+from \(u\),
+\begin{equation}
+ f\,\frac{1-x}{e}\,L_x(R,R')^2\le\kappa.
+ \label{eq:bbr-certificate}
+\end{equation}
+The empty disagreement set is interpreted as having distance \(+\infty\).
+Equivalently, the hypothesis is that the nearest changed pin has distance
+strictly larger than one from \(u\).  This is the distance condition in the
+BBR lower-bound lemma used below.  In particular, at a vertex whose nearest
+changed pin is at distance at least two, the local pinned factor \(B_u\) is
+the same on the two sides, so the finite-difference recursion may use this
+certificate there.
+\end{lemma}
+
+\begin{proof}
+Set \(d=\Deg-1\).  If \(x=1\), then the left side of
+\eqref{eq:bbr-certificate} is zero, so the claim is immediate; hence assume
+\(x<1\) in the remainder.  First suppose \((q,\Deg)\ne(3,4)\).  The ratio
+hypothesis and integrality then imply \(\Deg\ge q+2\), and hence
+\(d\ge q+1\).  Although Proposition~2.6 of
+Bencs, Berrekkal, and Regts~\cite{BencsBerrekkalRegts2025Trees} states the
+stronger hypothesis \(d\ge q+2\) for its two conclusions together, the
+estimate in part~\textup{(i)} only invokes their Lemmas~4.3, 4.4, and~4.6
+and Corollary~4.5\textup{(i)}.  The hypotheses printed with those results
+are respectively \(x\in(0,1)\), \(q\ge3\) and \(d\ge q+1\) (for
+Lemma~4.4), the distance condition in Lemma~4.6, and \(q\ge3\),
+\(d\ge q+1\) (for Corollary~4.5\textup{(i)}); part~\textup{(ii)} of the
+corollary, which is the place where BBR require \(d\ge q+2\), is not used
+here.  Thus the following extraction of the proof of
+Proposition~2.6\textup{(i)} is valid for \(d\ge q+1\).  In the
+notation of their (2.13), put
+\[
+  \alpha:=\frac{(1-x)\Deg}{q},
+  \qquad\text{so that}\qquad x=1-\alpha q/\Deg.
+\]
+Their calculation then gives, for \(0\le f\le d\), the upper bound
+\[
+ \frac{\alpha f}{e\Deg}
+ \left(1-\frac k\Deg\right)^{-2}
+ k^{(d-f)/d}
+ \left(e\frac{\Deg-k/2}{\Deg-k}\right)^{f/d}.
+\]
+For completeness, this expression is at most its value at \(f=d\).  Indeed,
+writing \(t=f/d\) and \(B=e(\Deg-k/2)/(\Deg-k)\), the ratio to the \(f=d\)
+value is \(t(k/B)^{1-t}\).  The ratio assumption gives \(k\le e^2\) (the
+function \(a\mapsto e(a-1/2)/(a-1)\) is decreasing and equals \(e^2\) at
+\(a=(e-1/2)/(e-1)\)).  Therefore
+\[
+  \frac{B}{k}=\frac{e}{k}\,\frac{\Deg-k/2}{\Deg-k}
+  \ge \frac{e}{k}\ge e^{-1}.
+\]
+Since
+\(\log t\le t-1\) for \(0<t\le1\), we have
+\(t(k/B)^{1-t}\le t e^{1-t}\le1\) (the case \(f=0\) is immediate).
+Consequently the preceding bound is at most
+\[
+ \frac{\alpha d}{\Deg}
+ \left(1-\frac k\Deg\right)^{-2}
+ \frac{\Deg-k/2}{\Deg-k}.
+\]
+For \(x\ge x_0\), \eqref{eq:bbr-x0} gives
+\[
+ \alpha\le
+ \left(1-\frac k\Deg\right)^2
+ \frac{\Deg-k}{\Deg-k/2}.
+\]
+The preceding bound is therefore at most
+\(d/\Deg=(\Deg-1)/\Deg=\kappa\).
+
+It remains to treat \((q,\Deg)=(3,4)\), so \(d=3\) and
+\(\kappa=3/4\).  Every coordinate of a cavity message is a product of at
+most three factors from \([\sqrt{x},1]\).  Hence, along the segment
+between two realizable messages,
+\[
+ S(R_t)\ge3x^3,
+ \qquad
+ S_i(R_t)\ge xS(R_t),
+ \qquad
+ L_x(R,R')^2\le\frac1{3x^5}.
+\]
+Consequently, for \(x\ge x_0=3/4\) and \(f\le3\),
+\[
+ f\frac{1-x}{e}L_x(R,R')^2
+ \le\frac{1-x}{ex^5}
+ \le\frac{256}{243e}<\frac34=\kappa.
+\]
+
+The cited BBR bounds, as well as the direct exceptional-case estimate,
+apply to messages produced by the same cavity tree under two boundary
+assignments on the same domain, which is exactly the realizability
+convention above.
+\end{proof}
+
+\subsection{Differential contraction}
+
+Let \(H_u\) denote the local map in \eqref{eq:bbr-recursion}, and let
+\(J_{u\leftarrow v}\) be its Jacobian block with respect to the message of
+the free child \(v\).  Define the pointwise weight
+\begin{equation}
+ \ell_x(R):=L_x(R,R)
+   =\max_i\frac{\sqrt{S(R)}}{S_i(R)},
+ \qquad
+ a_v:=\frac{1-x}{e}\ell_x(R_v)^2.
+ \label{eq:bbr-point-weight}
+\end{equation}
+
+\begin{lemma}[Differential contraction]
+\label{lem:bbr-differential}
+At every collection of child messages arising at a vertex \(u\) of a pinned
+rooted tree at activity \(x\), and for arbitrary vectors
+\(z_v\in\mathbb R^q\),
+\begin{equation}
+ \left\|\sum_{v\in\mathcal F_u}J_{u\leftarrow v}z_v\right\|_2^2
+ \le\sum_{v\in\mathcal F_u}a_v\norm{z_v}_2^2.
+ \label{eq:bbr-differential}
+\end{equation}
+In particular, if \(R_v\) arises as a non-root cavity message and \(f_v\) is
+the number of free children of \(v\), then
+\begin{equation}
+ f_va_v\le\kappa.
+ \label{eq:bbr-point-certificate}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put
+\[
+ P_v:=I_q-\frac{R_vR_v^{\mathsf T}}{S(R_v)}.
+\]
+Differentiating \eqref{eq:bbr-local-map} gives
+\[
+ DF_x(y)=
+ \operatorname{diag}\!\left(
+   \frac{x-1}{F_x(y)}\odot\frac{y}{S(y)}
+ \right)
+ \left(I_q-\frac{yy^{\mathsf T}}{S(y)}\right).
+\]
+Writing \(Y=H_u((R_v)_v)\), the product rule therefore gives
+\begin{equation}
+ \left(\sum_vJ_{u\leftarrow v}z_v\right)_i
+ =Y_i\sum_v(x-1)\frac{R_v(i)}{S_i(R_v)}(P_vz_v)_i.
+ \label{eq:bbr-jacobian-coordinate}
+\end{equation}
+Set
+\[
+ \xi_v=\ell_x(R_v)P_vz_v,
+ \qquad
+ h_v(i)=Y_i(1-x)
+   \frac{R_v(i)}{\ell_x(R_v)S_i(R_v)}.
+\]
+Since \(\ell_x(R_v)S_i(R_v)\ge\sqrt{S(R_v)}\) and every coordinate of
+\(B_u\) is at most one,
+\[
+ \sum_vh_v(i)^2
+ \le
+ \left[\prod_vF_x(R_v)_i^2\right](1-x)^2
+ \sum_v\frac{R_v(i)^2}{S(R_v)}.
+\]
+With \(t_v=(1-x)R_v(i)^2/S(R_v)\), the right side is
+\((1-x)\prod_v(1-t_v)\sum_vt_v\le(1-x)/e\).  Coordinatewise
+Cauchy--Schwarz in \eqref{eq:bbr-jacobian-coordinate}, followed by
+\(\norm{P_v}_{2\to2}\le1\), now yields
+\[
+ \left\|\sum_vJ_{u\leftarrow v}z_v\right\|_2^2
+ \le\frac{1-x}{e}\sum_v\norm{\xi_v}_2^2
+ \le\sum_va_v\norm{z_v}_2^2.
+\]
+Finally, apply \Cref{lem:bbr-certificate} to the identical pair
+\((R_v,R_v)\) to obtain \eqref{eq:bbr-point-certificate}.
+\end{proof}
+
+\subsection{Cavity derivatives and influence}
+
+Fix a tree of maximum degree at most \(\Deg\) with pinning \(\tau\), and
+let \(\mu_v^\tau\) denote the one-site marginal at a free vertex \(v\).
+Root the free component containing a free vertex \(r\), and, for every
+other free vertex \(v\) in that component, write
+\[
+ \Psi_{r,v}(b,j)
+ :=\mu_v^{\tau^{r=b}}(j)-\mu_v^\tau(j)
+\]
+for the \(q\)-by-\(q\) influence block.  In this and the next subsection,
+distances are measured in the underlying tree.  A vertex separated from
+$r$ by the fixed pinning has zero influence.  For every free \(v\) in the
+rooted component, let \(D_v:=\operatorname{diag}(R_v)\), and let
+\begin{equation}
+ Q_r:=D_r^{-1}-\mathbf1_q\frac{R_r^{\mathsf T}}{S(R_r)}.
+ \label{eq:bbr-D-Q}
+\end{equation}
+For a free path from \(v\) to \(r\), let
+\(\mathcal J_{r\leftarrow v}\) be the ordered product of the Jacobian
+blocks along that path.  For a free vertex \(v\) outside the component of
+\(r\), set \(\Psi_{r,v}=0\).
+
+\begin{lemma}[Influence--Jacobian identity]
+\label{lem:bbr-influence-factorization}
+For every free vertex \(v\ne r\) in the component of \(r\),
+\begin{equation}
+ \Psi_{r,v}=Q_r\mathcal J_{r\leftarrow v}D_v.
+ \label{eq:bbr-influence-factorization}
+\end{equation}
+Consequently, for every integer \(\ell\ge1\), if vectors
+\(z_v\in\mathbb R^q\) are placed on the free vertices in this component
+at distance \(\ell\) from \(r\), set \(y_v=D_vz_v\) there and
+propagate upward by
+\begin{equation}
+ y_u=\sum_{v\in\mathcal F_u}J_{u\leftarrow v}y_v.
+ \label{eq:bbr-upward-derivative}
+\end{equation}
+At each preceding level, take this sum over the branches meeting the
+sphere; an empty sum is zero.
+Then
+\begin{equation}
+ \sum_{\substack{\dist(r,v)=\ell\\v\text{ in the component of }r}}
+ \Psi_{r,v}z_v=Q_ry_r.
+ \label{eq:bbr-level-factorization}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Multiply the weight of a configuration by
+\[
+ \exp\!\left(
+   t\sum_{\substack{\dist(r,v)=\ell\\v\text{ in the component of }r}}
+   z_v(\sigma_v)\right).
+\]
+Write $R_v(t)$ and $p_r(\cdot;t)$ for the cavity messages and root
+marginal under this reweighted law, and use a dot for differentiation
+with respect to $t$ at zero.  No two vertices on this sphere are ancestors
+of one another.  Hence, at a
+sphere vertex \(v\),
+\[
+ \dot R_v(0)=\tfrac12D_vz_v.
+\]
+The chain rule through \eqref{eq:bbr-recursion} gives
+\(\dot R_r(0)=y_r/2\).  Since the root marginal is
+\(p_r(i)=R_r(i)^2/S(R_r)\),
+\[
+ d\log p_r=2Q_r\,dR_r.
+\]
+Thus
+\begin{equation}
+ \left.\frac d{dt}\log p_r(b;t)\right|_{t=0}=(Q_ry_r)_b.
+ \label{eq:bbr-field-derivative-message}
+\end{equation}
+Differentiating the Gibbs law directly gives the covariance identity
+\[
+ \left.\frac d{dt}\log p_r(b;t)\right|_{t=0}
+ =\sum_{\substack{\dist(r,v)=\ell\\v\text{ in the component of }r}}\sum_j
+   \bigl(\mu_v^{\tau^{r=b}}(j)-\mu_v^\tau(j)\bigr)z_v(j).
+\]
+Comparison with \eqref{eq:bbr-field-derivative-message}, for arbitrary
+\((z_v)_v\), proves both displayed identities.
+\end{proof}
+
+\subsection{Tree total-influence decay}
+
+Every non-root message contains at most \(\Deg-1\) child factors, each in
+\([\sqrt{x},1]\).  Uniformly for \(x\in[x_0,1]\),
+\begin{equation}
+ x_0^{\Deg-1}\le R_v(i)^2\le1,\qquad
+ S_i(R_v)\ge x_0S(R_v),\qquad
+ S(R_v)\ge qx_0^{\Deg-1}.
+ \label{eq:bbr-message-bounds}
+\end{equation}
+It follows that
+\begin{equation}
+ a_v\le A:=\frac{1-x_0}{e\,q\,x_0^{\Deg+1}}.
+ \label{eq:bbr-A}
+\end{equation}
+At the global root there are at most \(\Deg\) factors, so
+\begin{equation}
+ \norm{Q_r}_{2\to2}
+ \le\norm{D_r^{-1}}_{2\to2}
+   +\frac{\sqrt q}{\sqrt{S(R_r)}}
+ \le2x_0^{-\Deg/2}.
+ \label{eq:bbr-Q-bound}
+\end{equation}
+
+\begin{proposition}[Tree total-influence decay]
+\label{prop:bbr-tree-tid}
+For every tree of maximum degree at most \(\Deg\), every pinning \(\tau\),
+every free root \(r\), all \(b,c\in\colours\), every \(x\in[x_0,1]\), and every
+integer \(\ell\ge1\),
+\begin{equation}
+ \sum_{\substack{v:\,\dist(r,v)=\ell\\v\text{ free}}}
+ \norm{\mu_v^{\tau^{r=b}}-\mu_v^{\tau^{r=c}}}_{\rm TV}
+ \le C_0\theta^{\ell-1},
+ \label{eq:bbr-tree-tid}
+\end{equation}
+where
+\begin{equation}
+ C_0:=\sqrt{\frac{2\Deg(1-x_0)}e}\,
+       x_0^{-(\Deg+1/2)}.
+ \label{eq:bbr-C0}
+\end{equation}
+Thus the tree TID hypothesis of \Cref{lem:hg-eventual-transfer} holds with
+\(C_{\mathsf{INFL}}=C_0/\theta\) and decay factor \(\theta\).
+\end{proposition}
+
+\begin{proof}
+If the level contains no free vertex, the claim is immediate.  Otherwise,
+fix vectors \(z_v\) on the free part of the
+level and put
+\(M=\max_v\norm{z_v}_2\).  Propagate the vectors \(y\) by
+\eqref{eq:bbr-upward-derivative}.  At distance \(\ell-1\) from the root,
+\Cref{lem:bbr-differential}, \eqref{eq:bbr-A}, and
+\(\norm{D_v}_{2\to2}\le1\) give
+\begin{equation}
+ \frac{\norm{y_u}_2^2}{f_u}\le AM^2
+ \label{eq:bbr-first-level}
+\end{equation}
+whenever the subtree below \(u\) meets the perturbed sphere.  At each higher non-root vertex,
+every child \(v\) carrying a nonzero perturbation has \(f_v\ge1\), and
+\eqref{eq:bbr-differential}--\eqref{eq:bbr-point-certificate} give
+\[
+ \frac{\norm{y_u}_2^2}{f_u}
+ \le\kappa
+ \max_{v:\,y_v\ne0}\frac{\norm{y_v}_2^2}{f_v}.
+\]
+At the root we do not divide by its number of children; there are at most
+\(\Deg\) of them.  Hence
+\begin{equation}
+ \norm{y_r}_2\le\sqrt{\Deg A}\,\theta^{\ell-1}M.
+ \label{eq:bbr-root-derivative}
+\end{equation}
+For \(\ell=1\), this is the direct estimate from
+\eqref{eq:bbr-differential} and \eqref{eq:bbr-A}.
+
+Combining \eqref{eq:bbr-level-factorization},
+\eqref{eq:bbr-Q-bound}, and \eqref{eq:bbr-root-derivative} yields
+\begin{equation}
+ \left\|\sum_{\substack{\dist(r,v)=\ell\\v\text{ free}}}
+   \Psi_{r,v}z_v\right\|_2
+ \le2\sqrt{\frac{\Deg(1-x_0)}{e\,q}}\,
+ x_0^{-(\Deg+1/2)}\theta^{\ell-1}M.
+ \label{eq:bbr-level-operator-bound}
+\end{equation}
+For \(b=c\) the claim is immediate.  Otherwise fix \(b\ne c\) and take
+\[
+ z_v(j)=\operatorname{sgn}\!\left(
+   \mu_v^{\tau^{r=b}}(j)-\mu_v^{\tau^{r=c}}(j)
+ \right).
+\]
+Then \(\norm{z_v}_2\le\sqrt q\), while
+\[
+ \sum_{\substack{v:\,\dist(r,v)=\ell\\v\text{ free}}}
+   \norm{\mu_v^{\tau^{r=b}}-\mu_v^{\tau^{r=c}}}_1
+ =(e_b-e_c)^{\mathsf T}
+   \sum_{\substack{v:\,\dist(r,v)=\ell\\v\text{ free}}}
+     \Psi_{r,v}z_v.
+\]
+Use \(\norm{e_b-e_c}_2=\sqrt2\), apply
+\eqref{eq:bbr-level-operator-bound}, and divide by two to obtain
+\eqref{eq:bbr-tree-tid}.
+\end{proof}
+
+\subsection{Spatial mixing and transfer to large-girth graphs}
+
+The same BBR certificate was designed to control finite differences.  We
+record the precise uniform consequence needed below.
+
+\begin{lemma}[Uniform relative SSM]
+\label{lem:bbr-tree-ssm}
+Fix \(x\in[x_0,1]\).  Let two boundary assignments on a tree of maximum
+degree at most \(\Deg\) have the same pinned domain, and
+suppose their first possible disagreement from a free root \(r\) is at
+integer distance \(K\ge2\).  If \(p_r,p'_r\) are the two root marginals and
+\(R_r,R'_r\) their corresponding messages, then
+\begin{equation}
+ \norm{R_r-R'_r}_2^2\le\Deg q\,\kappa^{K-2}.
+ \label{eq:bbr-message-ssm}
+\end{equation}
+Consequently, for every \(i\in\colours\),
+\begin{equation}
+ \left|\frac{p_r(i)}{p'_r(i)}-1\right|
+ \le C_{\mathsf{SM}}\theta^K,
+ \qquad
+ C_{\mathsf{SM}}
+ :=4q\sqrt{\Deg q}\,x_0^{-3\Deg/2}\kappa^{-1}.
+ \label{eq:bbr-relative-ssm}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The finite-difference inequality of
+\cite[Theorem~2.5]{BencsBerrekkalRegts2025Trees} is the analogue of
+\eqref{eq:bbr-differential} with
+\(\ell_x(R_v)\) replaced by the segment weight \(L_x(R_v,R'_v)\).
+For \(K=2\), the crude bound \(\norm{R_r-R'_r}_2^2\le q\) is already at
+most the right side of \eqref{eq:bbr-message-ssm}.  Now let \(K\ge3\).
+At distance \(K-2\) from the root, initialize with
+\[
+  \frac{\norm{R_u-R'_u}_2^2}{f_u}\le q.
+\]
+Indeed, every message that differs there has a free child branch carrying
+the disagreement, so \(f_u\ge1\).  At every vertex contracted above this
+level, the nearest changed pin is at distance at least two; hence its local
+pinned factor \(B_u\) agrees on the two sides.  The branch-normalized
+finite-difference induction gives a factor \(\kappa\) at each of the
+\(K-3\) non-root levels, and the final root estimate contributes at most
+\(\Deg\kappa\).  This proves
+\eqref{eq:bbr-message-ssm}.  The same-tree, same-domain quantifiers are
+exactly those of \Cref{lem:bbr-certificate}.
+
+For completeness, every coordinate of a root message satisfies
+\(R_r(i)^2\ge x_0^\Deg\), and \(S(R_r)\le q\).  Thus
+\(p_r(i)\ge x_0^\Deg/q\).  Along the segment between \(R_r\) and \(R'_r\),
+\[
+ \left\|\nabla\log\frac{y_i^2}{S(y)}\right\|_2
+ \le\frac2{y_i}+\frac2{\sqrt{S(y)}}
+ \le4x_0^{-\Deg/2}.
+\]
+It follows from \eqref{eq:bbr-message-ssm} that
+\[
+ \left|\log\frac{p_r(i)}{p'_r(i)}\right|
+ \le4\sqrt{\Deg q}\,x_0^{-\Deg/2}\kappa^{-1}\theta^K.
+\]
+If this last bound is at most one, use \(e^t-1\le2t\).  Otherwise its
+being larger than one implies
+\(C_{\mathsf{SM}}\theta^K\ge qx_0^{-\Deg}\), which covers the crude bound
+\(\abs{p_r(i)/p'_r(i)-1}\le qx_0^{-\Deg}\).  This proves
+\eqref{eq:bbr-relative-ssm}.
+\end{proof}
+
+\begin{theorem}[BBR-certified interval at large girth]
+\label{thm:bbr-large-girth-ci}
+Under \eqref{eq:bbr-parameters}, there exist
+\(g_{\rm BBR}=g_{\rm BBR}(q,\Deg)\ge3\) and
+\(C_{\rm BBR}=C_{\rm BBR}(q,\Deg)<\infty\) with the following property.
+For every \(G\in\Gdeg\), every pinning \(\tau\) for which
+\(\operatorname{girth}(G^\tau)\ge g_{\rm BBR}\), every free vertex
+\(r\in V^\tau\), all \(b,c\in\colours\), and every \(x\in[x_0,1]\),
+\begin{equation}
+ \WHam\!\left(
+   \mupin{G}{\tau^{r=b}}{x},
+   \mupin{G}{\tau^{r=c}}{x}
+ \right)\le C_{\rm BBR}.
+ \label{eq:bbr-large-girth-ci}
+\end{equation}
+The two laws are on the common free set \(V^\tau\setminus\{r\}\).
+\end{theorem}
+
+\begin{proof}
+Consider all normalized pinned Potts systems with
+activity \(x\in[x_0,1]\) and degree budget at most \(\Deg\).  On the free
+graph, a boundary multiplicity \(\bcount_v^\tau(i)\) contributes the
+positive unary factor \(x^{\bcount_v^\tau(i)}\); equivalently, these are
+the pinned-leaf factors used in \eqref{eq:bbr-recursion}.  Since \(x_0>0\), this is the family of pinned Potts laws in
+\Cref{lem:hg-eventual-transfer} with \(J=[x_0,1]\).
+
+\Cref{prop:bbr-tree-tid,lem:bbr-tree-ssm} give the two tree inputs to
+\Cref{lem:hg-eventual-transfer}, uniformly over the whole interval, with
+\[
+ C_{\mathsf{INFL}}=C_0/\theta,\qquad
+ \delta=1-\theta,\qquad K_0=2,
+\]
+and \(C_{\mathsf{SM}}\) as in \eqref{eq:bbr-relative-ssm}.  That lemma,
+which incorporates all cutting-depth requirements from the cited
+large-girth transfer, supplies constants
+\(g_{\rm BBR}\) and \(C_{\rm BBR}\).  Its conditional exterior laws are
+exactly the two normalized child laws in
+\eqref{eq:bbr-large-girth-ci}, proving the theorem.
+\end{proof}

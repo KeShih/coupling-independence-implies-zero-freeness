@@ -1,0 +1,440 @@
+{
+  "status": "all exact checks for the soft-CV certificate passed",
+  "result_I_geometric_soft_CV": {
+    "parameters": {
+      "P2": {
+        "exact": "81/250",
+        "decimal": 0.324
+      },
+      "P3": {
+        "exact": "77/500",
+        "decimal": 0.154
+      },
+      "P4": {
+        "exact": "11/125",
+        "decimal": 0.088
+      },
+      "eta_formula": "17/(200r)",
+      "eta_at_r0": {
+        "exact": "85/1809",
+        "decimal": 0.046987285793255944
+      },
+      "kappa": {
+        "exact": "1331/750",
+        "decimal": 1.7746666666666666
+      },
+      "gamma_alpha_min": {
+        "exact": "13481/361800",
+        "decimal": 0.03726091763405196
+      },
+      "gamma_alpha_max": {
+        "exact": "17/200",
+        "decimal": 0.085
+      },
+      "gamma_beta_plus_max": {
+        "exact": "799/5400",
+        "decimal": 0.14796296296296296
+      },
+      "gamma_beta_plus_le_P2": true
+    },
+    "boundary_effective_low_mass": {
+      "definition": "L_x=sum_{c:m_c in {1,2}} m_c*x^{b_v(c)}",
+      "root_event_saving": "q-P2*(1-x)*L_x",
+      "resource_inequality": "(L-L_x)+H+B_v <= Delta-L_x",
+      "grid_maximum_excess": {
+        "exact": "0/1",
+        "decimal": 0.0
+      },
+      "bookkeeping": "root-missing low mass is moved from the P2-saving branch into the kappa budget; no second factor (1-x) is inserted"
+    },
+    "repaired_G2_plus": {
+      "beta": "q-P2*(1-x)*L_x+(1+P2)*Delta+2",
+      "self_port_addition": {
+        "exact": "2/1",
+        "decimal": 2.0
+      },
+      "ordered_incidence": {
+        "symbolic": "(1-x)[C+(1-P2)(x^m-x^(2m))] <= C; use x^m-x^(2m)<=x",
+        "grid_maximum_excess": {
+          "exact": "0/1",
+          "decimal": 0.0
+        },
+        "grid_m": 64,
+        "grid_x": {
+          "exact": "0/1",
+          "decimal": 0.0
+        }
+      }
+    },
+    "regular_available_colour_scans": [
+      {
+        "d": 1,
+        "structural_states": 400,
+        "coefficient_vertices": 11,
+        "permitted_maximum_branch_choices": 400,
+        "multi_tie_structural_states": 0,
+        "maximum_excess_over_full_rectangle": {
+          "exact": "0/1",
+          "decimal": 0.0
+        },
+        "witness": {
+          "corrected": {
+            "exact": "22247/27000",
+            "decimal": 0.823962962962963
+          },
+          "gamma_alpha": {
+            "exact": "17/200",
+            "decimal": 0.085
+          },
+          "gamma_beta": {
+            "exact": "799/5400",
+            "decimal": 0.14796296296296296
+          },
+          "lambda": {
+            "exact": "49247/27000",
+            "decimal": 1.823962962962963
+          },
+          "left_sizes": [
+            1
+          ],
+          "right_sizes": [
+            1
+          ],
+          "available_left": [
+            true
+          ],
+          "available_right": [
+            true
+          ],
+          "feasible_left": [
+            true
+          ],
+          "feasible_right": [
+            true
+          ],
+          "safe_d0": 1,
+          "safe_d1": 0,
+          "raw": {
+            "exact": "169/250",
+            "decimal": 0.676
+          }
+        }
+      },
+      {
+        "d": 2,
+        "structural_states": 193600,
+        "coefficient_vertices": 11,
+        "permitted_maximum_branch_choices": 196964,
+        "multi_tie_structural_states": 3364,
+        "maximum_excess_over_full_rectangle": {
+          "exact": "0/1",
+          "decimal": 0.0
+        },
+        "witness": {
+          "corrected": {
+            "exact": "2367509/904500",
+            "decimal": 2.617478164731896
+          },
+          "gamma_alpha": {
+            "exact": "13481/361800",
+            "decimal": 0.03726091763405196
+          },
+          "gamma_beta": {
+            "exact": "1921/14472",
+            "decimal": 0.13273908236594803
+          },
+          "lambda": {
+            "exact": "3272009/1809000",
+            "decimal": 1.808739082365948
+          },
+          "left_sizes": [
+            2,
+            2
+          ],
+          "right_sizes": [
+            1,
+            1
+          ],
+          "available_left": [
+            true,
+            true
+          ],
+          "available_right": [
+            true,
+            true
+          ],
+          "feasible_left": [
+            true,
+            true
+          ],
+          "feasible_right": [
+            true,
+            true
+          ],
+          "safe_d0": 0,
+          "safe_d1": 2,
+          "raw": {
+            "exact": "673/250",
+            "decimal": 2.692
+          }
+        }
+      }
+    ],
+    "duplicate_component_convention": {
+      "marker": "a_i=0 or b_i=0 for a component already represented at an earlier port",
+      "metric_treatment": "zero-marked ports receive no positive unblocked correction; any omitted singly-blocked negative correction is conservative"
+    },
+    "regular_dc_ge_3_samples": [
+      {
+        "d": 3,
+        "slack": {
+          "exact": "0/1",
+          "decimal": 0.0
+        }
+      },
+      {
+        "d": 4,
+        "slack": {
+          "exact": "169/375",
+          "decimal": 0.45066666666666666
+        }
+      },
+      {
+        "d": 125,
+        "slack": {
+          "exact": "20618/375",
+          "decimal": 54.98133333333333
+        }
+      }
+    ],
+    "physical_high_multiplicity_thinning": {
+      "bar_lambda": {
+        "exact": "49247/27000",
+        "decimal": 1.823962962962963
+      },
+      "analytic_envelope": "theta*x^(m-3)*(1+(m-2)theta) <= 2 for m>=3",
+      "grid_maximum": {
+        "exact": "2/1",
+        "decimal": 2.0
+      },
+      "grid_m": 3,
+      "grid_x": {
+        "exact": "0/1",
+        "decimal": 0.0
+      },
+      "slack_kappa_minus_2_times_excess": {
+        "exact": "22627/13500",
+        "decimal": 1.676074074074074
+      }
+    },
+    "missing_ordinary_colour": {
+      "branch_max": {
+        "exact": "331/250",
+        "decimal": 1.324
+      },
+      "witness": {
+        "a": 2,
+        "b": 1,
+        "fa": 1,
+        "fb": 1
+      },
+      "duplicate_markers_included": true,
+      "with_metric": {
+        "exact": "39743/27000",
+        "decimal": 1.471962962962963
+      },
+      "slack_to_kappa": {
+        "exact": "8173/27000",
+        "decimal": 0.3027037037037037
+      }
+    },
+    "special_side": {
+      "max_jPj": {
+        "exact": "1/1",
+        "decimal": 1.0
+      },
+      "max_(j-2)Pj": {
+        "exact": "22/125",
+        "decimal": 0.176
+      },
+      "max_one_port_paired": {
+        "exact": "44/125",
+        "decimal": 0.352
+      },
+      "max_one_port_central": {
+        "exact": "22/125",
+        "decimal": 0.176
+      },
+      "m1_slack": {
+        "exact": "317/750",
+        "decimal": 0.4226666666666667
+      },
+      "m2_central_on_slack": {
+        "exact": "28/75",
+        "decimal": 0.37333333333333335
+      },
+      "m2_remote_zero_slack": {
+        "exact": "206/375",
+        "decimal": 0.5493333333333333
+      },
+      "bound": "C_t <= -1_{target available} + kappa*m_t"
+    },
+    "virtual_port": {
+      "token_cost": {
+        "exact": "1/1",
+        "decimal": 1.0
+      },
+      "token_cost_le_kappa": true,
+      "bookkeeping": "distinct missing root colour -> distinct active physical boundary copy"
+    },
+    "scalar_closure": {
+      "lambda1_plus": {
+        "exact": "3272009/1809000",
+        "decimal": 1.808739082365948
+      },
+      "lambda2": {
+        "exact": "3272009/1809000",
+        "decimal": 1.808739082365948
+      },
+      "lambda3": {
+        "exact": "226/125",
+        "decimal": 1.808
+      },
+      "eta_at_r0": {
+        "exact": "85/1809",
+        "decimal": 0.046987285793255944
+      },
+      "branch1_t_derivative_at_worst_corner": {
+        "exact": "34097/1809000",
+        "decimal": 0.018848535102266445
+      },
+      "branch2_lambda_minus_kappa_at_worst_r": {
+        "exact": "61637/1809000",
+        "decimal": 0.03407241569928137
+      },
+      "gaps": [
+        {
+          "exact": "59/226125",
+          "decimal": 0.0002609176340519624
+        },
+        {
+          "exact": "59/226125",
+          "decimal": 0.0002609176340519624
+        },
+        {
+          "exact": "1/1000",
+          "decimal": 0.001
+        }
+      ],
+      "worst_gap": {
+        "exact": "59/226125",
+        "decimal": 0.0002609176340519624
+      },
+      "reserve_beyond_1e-5": {
+        "exact": "45391/180900000",
+        "decimal": 0.00025091763405196243
+      }
+    }
+  },
+  "result_II_near_11_over_6": {
+    "epsilon0": {
+      "exact": "1/84000",
+      "decimal": 1.1904761904761905e-05
+    },
+    "alpha": {
+      "exact": "51333/28000",
+      "decimal": 1.8333214285714285
+    },
+    "alpha_minus_1_809": {
+      "exact": "681/28000",
+      "decimal": 0.02432142857142857
+    },
+    "small_degree_exceptional_pairs": [
+      {
+        "Delta": 6,
+        "q": 11
+      },
+      {
+        "Delta": 12,
+        "q": 22
+      },
+      {
+        "Delta": 18,
+        "q": 33
+      },
+      {
+        "Delta": 24,
+        "q": 44
+      },
+      {
+        "Delta": 30,
+        "q": 55
+      },
+      {
+        "Delta": 36,
+        "q": 66
+      },
+      {
+        "Delta": 42,
+        "q": 77
+      },
+      {
+        "Delta": 48,
+        "q": 88
+      },
+      {
+        "Delta": 54,
+        "q": 99
+      },
+      {
+        "Delta": 60,
+        "q": 110
+      },
+      {
+        "Delta": 66,
+        "q": 121
+      },
+      {
+        "Delta": 72,
+        "q": 132
+      },
+      {
+        "Delta": 78,
+        "q": 143
+      },
+      {
+        "Delta": 84,
+        "q": 154
+      },
+      {
+        "Delta": 90,
+        "q": 165
+      },
+      {
+        "Delta": 96,
+        "q": 176
+      },
+      {
+        "Delta": 102,
+        "q": 187
+      },
+      {
+        "Delta": 108,
+        "q": 198
+      },
+      {
+        "Delta": 114,
+        "q": 209
+      },
+      {
+        "Delta": 120,
+        "q": 220
+      }
+    ],
+    "critical_line": "q=11 Delta/6",
+    "adjacent_contraction": "W_Ham(K sigma,K tau) <= 1-x/n",
+    "child_middle_CI": "6/(11x)",
+    "child_child_CI": "12/(11x)"
+  },
+  "scope": "exact finite/scalar certificate; the graph-theoretic coupling and coupling-independence arguments are proved in the paper"
+}

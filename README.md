@@ -6,10 +6,13 @@ A Lean 4 and mathlib formalization of
 - its companion, *Further Potts Zero-Free Regions from Coupling Independence*,
   included as [docs/appendix.pdf](docs/appendix.pdf).
 
+Both papers are included as PDFs (`docs/main.pdf` and the companion) and as
+LaTeX sources in `paper/`.
+
 Every numbered theorem, lemma, proposition and corollary of both papers
 has a Lean counterpart. [docs/coverage.json](docs/coverage.json) lists all
 107 numbered statements, definitions and remarks included, with their
-status and Lean names; the side-by-side page shows the same table.
+status and Lean names; the statement checker shows the same table.
 
 The headline statements concern actual finite partition functions. Potts pinnings
 are arbitrary partial colourings, improper ones included, and every
@@ -21,14 +24,25 @@ theorem takes a literature hypothesis, and the whole library depends only
 on Lean's standard axioms `propext`,
 `Classical.choice` and `Quot.sound`.
 
-The [side-by-side page](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+The [paper reader](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+sets both papers, rendered from their LaTeX sources, beside the Lean
+declarations of the numbered statement being read, with source links pinned
+to the commit. `scripts/site/build_reader.py` generates it into
+`docs/index.html`; it needs PyMuPDF but no Lean build. It numbers the
+statements, equations and sections as LaTeX does, stops if a statement
+differs from `docs/coverage.json` or a number differs from the hyperref
+destinations in the PDFs, and cuts the figures from the PDFs. To publish a
+new version of a paper, replace its folder in `paper/` and its PDF in
+`docs/`, then rerun the script.
+
+The [statement checker](https://keshih.github.io/coupling-independence-implies-zero-freeness/checker.html)
 sets the headline paper statements represented by the generated cards beside
 their Lean declarations and matches those cards phrase by phrase. It also
 shows each card's axioms and the library lemmas it applies, a coverage table of
 every numbered statement of both papers, and the Lean proofs of the results the
-papers cite, with source links pinned to the commit.
-`scripts/site/build.py` generates it into `docs/index.html` and checks every
-quotation against the sources.
+papers cite. `scripts/site/build.py` generates it into `docs/checker.html` from
+the built library and the LaTeX sources, and checks every quotation against
+them.
 
 ## The main theorem
 
@@ -204,7 +218,8 @@ the checked sources, their SHA-256 hashes and the last full run.
 | `CI2ZF/LeeYang/` | colour-field partition functions and zero-free polydiscs |
 | `CI2ZF/Holant/` | log-concave Holant models and their applications |
 | `audit/` | axiom audits, kept outside the library |
-| `docs/` | proof guides, per-result status, the verification record and the companion paper |
+| `docs/` | proof guides, per-result status, the verification record, both papers as PDFs and the generated pages |
+| `paper/` | LaTeX sources of both papers, with their ancillary verifier scripts |
 
 `CI2ZF.lean` imports the whole library. To read the proofs, start with the
 [documentation index](docs/README.md) or the [proof overview](docs/overview.md).
