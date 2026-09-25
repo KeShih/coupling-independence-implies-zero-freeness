@@ -27,14 +27,20 @@ cited papers, the algorithmic claims, and the effective choice of ε.
 Paste this prompt into your coding agent:
 
 ```text
-Verify that the Lean code in
-https://github.com/KeShih/coupling-independence-implies-zero-freeness
-builds with 0 sorry/admit and proves every result of its two papers,
-using only mathlib and Lean's standard axioms. Trust nothing the
-repository says about itself: list the results from the papers yourself,
-state each one in Lean yourself, prove your statement from the
-repository's theorems, and check its axioms. Report every result that is
-not proved exactly as the paper states it.
+Verify the Lean formalization at
+https://github.com/KeShih/coupling-independence-implies-zero-freeness.
+
+1. Build it and confirm that it compiles without errors, contains no
+   sorry or admit, and depends only on mathlib and Lean's standard axioms
+   (propext, Classical.choice, Quot.sound).
+2. Read the main results of both papers yourself, without relying on the
+   repository's descriptions, and compare each with the Lean declaration
+   that states it, following its definitions. The Lean statement must
+   claim what the paper claims: no extra assumptions, no weaker
+   conclusion, no narrower range of parameters.
+
+Report any build or trust-base problem, and every main result whose Lean
+statement does not match the paper.
 ```
 
 [The formalization in detail](docs/formalization.md) lists the Lean names of
