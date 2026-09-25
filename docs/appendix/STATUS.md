@@ -4,7 +4,7 @@ The [module guide](README.md) lists the seven regional entry points. The
 [documentation index](../README.md) covers the main-text Potts, Holant, and
 Lee–Yang proofs.
 
-The regional entry point is `CI2ZF/Potts/Regions.lean`.
+The regional entry point is `ZeroFreeness/Potts/Regions.lean`.
 Run `bash scripts/check-appendix.sh` to compile its full dependency closure
 with warnings treated as errors and audit every imported project declaration.
 Only Lean's standard `propext`, `Classical.choice`, and `Quot.sound` are allowed.
@@ -29,7 +29,7 @@ summarizes the coverage of every numbered statement.
 | Near-Vigoda, Δ≥2 and q≥(11/6−1/84000)Δ | `near_vigoda_uniform_ci`: one constant on [0,1], via the exact integer reduction `nearVigoda_regime_cases` to the proved strict-Vigoda and CV regimes and twenty critical pairs, which use the CV contraction on the critical line; `near_vigoda_transfer_inputs` gives the hard-endpoint and every-[δ,1] coupling inputs | `near_vigoda_zero_free`: the full uniform original-graph statement on [0,1] |
 | Girth 5, 0<δ≤1, Δ≥`Girth.girthFiveCIThreshold δ`, and q≥(1+δ)Δ | `Girth.girth_five_coupling`: one finite constant for every size, pinning, and x in [0,1] | `Girth.girth_five_zero_free` and `Girth.girth_five_residual_original_zero_free`, with girth required only of the free residual graph |
 
-Names in the table are relative to `CI2ZF.Appendix`.
+Names in the table are relative to `ZeroFreeness.Appendix`.
 
 ### Edge-Potts proof and cited results
 
@@ -40,13 +40,13 @@ approximations, projects to the finite colour space and passes to the limit.
 The zero-free corollary uses the already formalized graph-class transfer theorem.
 
 The countable slot lemmas are also proved as stated.
-[`Slots/SlotLift.lean`](../../CI2ZF/Coupling/Edge/Slots/SlotLift.lean) proves
+[`Slots/SlotLift.lean`](../../ZeroFreeness/Coupling/Edge/Slots/SlotLift.lean) proves
 Lemma 8.3 (`lem:slot-fact`), the countable slot representation
 `Edge.slot_representation` for every `0 < x < 1`, by compactness from the
 finite real-rooted approximants rather than by the paper's
 Hadamard-factorization argument, and Lemma 8.4 (`lem:edge-slot-lift`), the
 exact lift `Edge.lem_edge_slot_lift` on `C × ℕ × ℕ` with exact colour
-projection. [`Slots/OneLabel.lean`](../../CI2ZF/Coupling/Edge/Slots/OneLabel.lean)
+projection. [`Slots/OneLabel.lean`](../../ZeroFreeness/Coupling/Edge/Slots/OneLabel.lean)
 proves Lemma 8.5 (`lem:edge-one-label`), `Edge.OneLabel.edge_one_label`, on
 the countable slot model, by lumping all slots from `N` on into one and
 letting `N → ∞`.
@@ -59,18 +59,18 @@ version:
 - Lemma 8.7, the exact tree influence–Jacobian factorization, stated as
   `CavityTree.CLMMInfluenceIdentity` and proved as
   `CavityTree.clmmInfluenceIdentity` in
-  [`Tree/InfluenceIdentity.lean`](../../CI2ZF/Coupling/Girth/Tree/InfluenceIdentity.lean)
+  [`Tree/InfluenceIdentity.lean`](../../ZeroFreeness/Coupling/Girth/Tree/InfluenceIdentity.lean)
   from the actual finite-tree Gibbs law.
 - Equation (10), derived from Lemmas 5.19/5.20, giving the graph sphere
   influence estimate. It is the single field `sphere_estimate` of
   `CLMM.Literature`, proved as `CLMM.Eq10.sphere_estimate_proof` in
-  [`CLMM/SphereEstimate.lean`](../../CI2ZF/Coupling/CLMM/SphereEstimate.lean)
+  [`CLMM/SphereEstimate.lean`](../../ZeroFreeness/Coupling/CLMM/SphereEstimate.lean)
   and packaged as `CLMM.literature`. The ball–tree correspondence uses
   girth only to exclude edges inside a distance layer and to make parents
   unique.
 - Lemma 5.13, converting sphere decay to the Hamming coupling bound
   `2Δ^R`, proved as `CLMM.Lemma513.sphere_to_coupling` in
-  [`CLMM/SphereCoupling.lean`](../../CI2ZF/Coupling/CLMM/SphereCoupling.lean).
+  [`CLMM/SphereCoupling.lean`](../../ZeroFreeness/Coupling/CLMM/SphereCoupling.lean).
   `CLMM.FixedAmbientSphereDecay` fixes the base graph before quantifying
   over all further pinnings: every sphere is measured in that same base
   graph, as required by Condition 5.12.
@@ -89,13 +89,13 @@ take no literature parameter.
 Companion Lemma 6.10 (`lem:hg-eventual-transfer`), as the companion now
 states it for the Potts family at positive activity `x ∈ J ⊆ (0,1]`, is
 proved in
-[`Transfer/PottsTransfer.lean`](../../CI2ZF/Potts/Regions/Girth/Transfer/PottsTransfer.lean)
+[`Transfer/PottsTransfer.lean`](../../ZeroFreeness/Potts/Regions/Girth/Transfer/PottsTransfer.lean)
 with no literature parameter: `Girth.potts_eventual_transfer` in the
 library's `Option` form, `Girth.potts_eventual_transfer_source` for an
 arbitrary free source vertex, and `Girth.potts_eventual_transfer_uniform`
 with the girth threshold and constant depending only on
 `(q, Δ, C_INFL, C_SM, δ, K₀)`.
-[`Tree/SingleEdge.lean`](../../CI2ZF/Coupling/Girth/Tree/SingleEdge.lean)
+[`Tree/SingleEdge.lean`](../../ZeroFreeness/Coupling/Girth/Tree/SingleEdge.lean)
 proves the observation before Lemma 6.9 that ratio-form relative SSM cannot
 start at distance one uniformly in `x` (`Girth.no_uniform_distance_one`).
 
@@ -119,11 +119,11 @@ Proposition 2.6(i) and Theorem 2.5, stated in `BBR.Literature` with their
 published hypotheses, and CLMM Equation (10) and Lemma 5.13 as above.
 
 - `BBR.theorem_2_5_holds`, in
-  [`BBR/Theorem25.lean`](../../CI2ZF/Coupling/BBR/Theorem25.lean), follows
+  [`BBR/Theorem25.lean`](../../ZeroFreeness/Coupling/BBR/Theorem25.lean), follows
   BBR Section 3: the mean value theorem along the segment `sR + (1−s)R'`,
   Cauchy–Schwarz, and the pointwise Jacobian bound `differential_contraction`.
 - `BBR.proposition_2_6_i_holds`, in
-  [`BBR/Proposition26.lean`](../../CI2ZF/Coupling/BBR/Proposition26.lean),
+  [`BBR/Proposition26.lean`](../../ZeroFreeness/Coupling/BBR/Proposition26.lean),
   follows BBR Section 4, except that two uses of the concavity of `log`, a
   chord bound and Jensen's inequality in AM–GM form, replace BBR's Lemma 4.1
   (smoothing) and Lemma 4.2(i). Lemma 4.3 is proved by a derivative argument.
@@ -138,21 +138,21 @@ The square-root influence–Jacobian identity is proved from actual finite
 Gibbs conditional expectations and the explicit local projection/Jacobian
 algebra. This connects the message/Gibbs correspondence and exact
 derivatives to the response at every tree level; see
-[`BBR/InfluenceIdentity.lean`](../../CI2ZF/Coupling/BBR/InfluenceIdentity.lean).
+[`BBR/InfluenceIdentity.lean`](../../ZeroFreeness/Coupling/BBR/InfluenceIdentity.lean).
 Interval-wide contraction,
 tree influence and relative spatial decay, and the positive zero-free
 transfer are derived from the four cited results. The exceptional
 (q,Δ)=(3,4) interval and all degree-gap-two parameter cases, which lie
 outside the printed degree range of Proposition 2.6(i), are handled directly
 in the application. Separately,
-[`BBR/GapTwo.lean`](../../CI2ZF/Coupling/BBR/GapTwo.lean) proves the
+[`BBR/GapTwo.lean`](../../ZeroFreeness/Coupling/BBR/GapTwo.lean) proves the
 conclusion of Proposition 2.6(i) for `Δ ≥ q + 2`
 (`BBR.proposition_2_6_i_of_gap_two`), the range in which the companion
 asserts that BBR's proof is valid. It uses the library's proof, which
 needs only `q + 2 ≤ Δ`, and does not check BBR's own argument. From it,
 `BBR.contraction_certificate_of_gap_two` derives the certificate of
 Lemma 7.1 (`lem:bbr-certificate`) for every `Δ ≥ q + 2`.
-[`BBR/RoundedInterval.lean`](../../CI2ZF/Coupling/BBR/RoundedInterval.lean)
+[`BBR/RoundedInterval.lean`](../../ZeroFreeness/Coupling/BBR/RoundedInterval.lean)
 proves the comparison after Theorem 4.6: `[x₀, 1]` contains BBR's rounded
 interval, which is empty at `(q,Δ)=(3,4)` (`BBR.rounded_interval_subset`,
 `BBR.rounded_interval_three_four_empty`). The ordinary `q ≥ Δ+3` large-girth
@@ -170,7 +170,7 @@ uniform complex corollary do not retain any matching, drift, contraction,
 stationarity, or hard-colouring hypothesis.
 
 The lemmas of the CV appendix are also stated one by one.
-[`CV/ClosedKernel.lean`](../../CI2ZF/Coupling/CV/ClosedKernel.lean) defines the
+[`CV/ClosedKernel.lean`](../../ZeroFreeness/Coupling/CV/ClosedKernel.lean) defines the
 closed-interval kernel `CV.cvKernel`, equal to `softCVKernel` on `(0,1)`, and
 proves Theorem 5.25 (`CV.cv_contraction`) and Lemma 5.26
 (`CV.cv_child_middle_ham`, `CV.cv_child_middle_metric`) for every
@@ -178,25 +178,25 @@ proves Theorem 5.25 (`CV.cv_contraction`) and Lemma 5.26
 `(P₂ − P₃)/2 = 17/200` (`CV.cv_coefficient`), defines the hard metric
 `CV.hardMetric` and proves `d_x → d_hard` as `x ↓ 0`
 (`CV.geometricMetric_tendsto_hardMetric_cv`). The one-lemma modules are
-[`RootLocalStructure`](../../CI2ZF/Coupling/CV/RootLocalStructure.lean)
+[`RootLocalStructure`](../../ZeroFreeness/Coupling/CV/RootLocalStructure.lean)
 (Lemma 5.6, `CV.cv_root_local_structure`),
-[`MovePartition`](../../CI2ZF/Coupling/CV/MovePartition.lean) (Lemma 5.7,
-`CV.cv_move_partition`), [`FreshGain`](../../CI2ZF/Coupling/CV/FreshGain.lean)
+[`MovePartition`](../../ZeroFreeness/Coupling/CV/MovePartition.lean) (Lemma 5.7,
+`CV.cv_move_partition`), [`FreshGain`](../../ZeroFreeness/Coupling/CV/FreshGain.lean)
 (Lemma 5.12, `CV.cv_fresh`),
-[`ExpectedLoss`](../../CI2ZF/Coupling/CV/ExpectedLoss.lean) (Lemma 5.14,
-`CV.cv_expected`), [`HighColours`](../../CI2ZF/Coupling/CV/HighColours.lean)
+[`ExpectedLoss`](../../ZeroFreeness/Coupling/CV/ExpectedLoss.lean) (Lemma 5.14,
+`CV.cv_expected`), [`HighColours`](../../ZeroFreeness/Coupling/CV/HighColours.lean)
 (Lemma 5.21, `CV.cv_high_bulk`, `CV.cv_high_missing`) and
-[`Assembly`](../../CI2ZF/Coupling/CV/Assembly.lean) (Lemma 5.23,
-`CV.cv_assembly_1809`). `CI2ZF.Potts.softCVKernel_reversible_irreducible`
+[`Assembly`](../../ZeroFreeness/Coupling/CV/Assembly.lean) (Lemma 5.23,
+`CV.cv_assembly_1809`). `ZeroFreeness.Potts.softCVKernel_reversible_irreducible`
 gives reversibility and irreducibility of the soft CV kernel.
 
 The contraction is proved on the two-branch regime `CV.Regime Δ q`,
 `(Δ ≥ 125 ∧ q ≥ 1.809Δ) ∨ (Δ ≥ 6 ∧ q ≥ 11Δ/6)`, in
-[`CV/Scalar.lean`](../../CI2ZF/Coupling/CV/Scalar.lean). On the critical
+[`CV/Scalar.lean`](../../ZeroFreeness/Coupling/CV/Scalar.lean). On the critical
 branch the scalar closure holds with the same gap 59/226125, so the
 constant 409060125/50858 is unchanged. `CV.option_root_ci_critical` states
 the critical branch. The main theorem uses it on the line `q = 11Δ/6`
-through `CI2ZF.Potts.critical_hard_colouring_input`, and near-Vigoda uses it
+through `ZeroFreeness.Potts.critical_hard_colouring_input`, and near-Vigoda uses it
 directly at its critical pairs.
 
 ### Near-Vigoda proof and cited results
@@ -210,13 +210,13 @@ proved strict-Vigoda or CV theorem. `near_vigoda_uniform_ci`,
 critical-pairs or literature hypothesis.
 
 Remark 4.4 (`rem:critical-scope`) is formalized in
-[`CriticalScope.lean`](../../CI2ZF/Potts/Theorems/CriticalScope.lean): every
-critical integer pair is `(6j,11j)` (`CI2ZF.Potts.critical_line_pairs`), the
+[`CriticalScope.lean`](../../ZeroFreeness/Potts/Theorems/CriticalScope.lean): every
+critical integer pair is `(6j,11j)` (`ZeroFreeness.Potts.critical_line_pairs`), the
 list slack is at least `5Δ/6` for arbitrary pinnings
-(`CI2ZF.Potts.hardList_slack_critical`), the `x = 0` law is uniform on proper
-list colourings (`CI2ZF.Potts.gibbs_zero_uniform`), and the `x = 0` coupling
+(`ZeroFreeness.Potts.hardList_slack_critical`), the `x = 0` law is uniform on proper
+list colourings (`ZeroFreeness.Potts.gibbs_zero_uniform`), and the `x = 0` coupling
 input holds on original graphs along the whole critical line
-(`CI2ZF.Potts.critical_line_hard_endpoint`). The remark's claim that
+(`ZeroFreeness.Potts.critical_line_hard_endpoint`). The remark's claim that
 CFFGZZ Theorem 20 and Proposition 22 apply is a statement about the cited
 paper and is not formalized; Lean proves the same bound by the CV
 contraction.
@@ -261,16 +261,16 @@ counts is imposed. The public original-graph result requires girth only
 of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
 
 The Section 9 lemmas are also stated at their written strength.
-[`Covariance/Graph/Disintegration.lean`](../../CI2ZF/Coupling/Girth/Covariance/Graph/Disintegration.lean)
+[`Covariance/Graph/Disintegration.lean`](../../ZeroFreeness/Coupling/Girth/Covariance/Graph/Disintegration.lean)
 proves Lemma 9.1 (`Girth.second_layer_disintegration`) for every `x ≥ 0`,
 including the hard-colouring law at `x = 0`.
-[`Covariance/Insertion/OneEdgeOperator.lean`](../../CI2ZF/Coupling/Girth/Covariance/Insertion/OneEdgeOperator.lean)
+[`Covariance/Insertion/OneEdgeOperator.lean`](../../ZeroFreeness/Coupling/Girth/Covariance/Insertion/OneEdgeOperator.lean)
 proves Lemma 9.2 (`Girth.girth5_one_edge`) for `0 ≤ x ≤ 1`.
-[`Spectral/OperatorGap.lean`](../../CI2ZF/Coupling/Girth/Spectral/OperatorGap.lean)
+[`Spectral/OperatorGap.lean`](../../ZeroFreeness/Coupling/Girth/Spectral/OperatorGap.lean)
 proves Theorem 9.7 in operator form, `𝓛² ⪰ γ_δ 𝓛` on the supported `L²`
 space for every `x ∈ [0,1]` (`Girth.OperatorGap.potts_gap_girth5`).
 
-[`Girth/CommonThreshold.lean`](../../CI2ZF/Potts/Regions/Girth/CommonThreshold.lean)
+[`Girth/CommonThreshold.lean`](../../ZeroFreeness/Potts/Regions/Girth/CommonThreshold.lean)
 proves the footnote to main-paper Table A.1: one girth threshold serves both
 the coupling-independence and the zero-free statement, for large girth,
 the BBR interval and girth five (`Girth.high_girth_common_threshold`,
@@ -289,7 +289,7 @@ formalized in the narrowed form the companion now states:
   `Girth.potts_eventual_transfer_uniform` and its two companions.
 - The `k`-fold clause of Lemma 3.6 (`lem:boundary-sensitivity`) counts
   labelled free–pinned edges, as in the main text, and is proved as
-  `CI2ZF.Potts.lem_boundary_sensitivity`.
+  `ZeroFreeness.Potts.lem_boundary_sensitivity`.
 
 Only citation-level claims remain unformalized: that CFFGZZ Theorem 20 and
 Proposition 22 apply in Remark 4.4, that the hard metric of

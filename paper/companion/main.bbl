@@ -1,0 +1,106 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{CLMM23}
+
+\bibitem[Bar16]{Barvinok2016}
+Alexander Barvinok.
+\newblock {\em Combinatorics and Complexity of Partition Functions}, volume~30
+  of {\em Algorithms and Combinatorics}.
+\newblock Springer, 2016.
+
+\bibitem[BBR25]{BencsBerrekkalRegts2025Trees}
+Ferenc Bencs, Khallil Berrekkal, and Guus Regts.
+\newblock Near optimal bounds for weak and strong spatial mixing for the
+  anti-ferromagnetic {Potts} model on trees.
+\newblock {\em Electronic Journal of Probability}, 30:Paper No. 65, 1--25,
+  2025.
+
+\bibitem[BCC{\etalchar{+}}22]{BlancaEtAl2022Coupling}
+Antonio Blanca, Pietro Caputo, Zongchen Chen, Daniel Parisi, Daniel {\v
+  S}tefankovi{\v c}, and Eric Vigoda.
+\newblock On mixing of {Markov} chains: Coupling, spectral independence, and
+  entropy factorization.
+\newblock {\em Electronic Journal of Probability}, 27:Paper No. 142, 1--42,
+  2022.
+\newblock arXiv:2103.07459v1.
+
+\bibitem[CDM{\etalchar{+}}19]{CDMPP2019}
+Sitan Chen, Michelle Delcourt, Ankur Moitra, Guillem Perarnau, and Luke Postle.
+\newblock Improved bounds for randomly sampling colorings via linear
+  programming.
+\newblock In {\em Proceedings of SODA 2019}, pages 2216--2234, 2019.
+\newblock Full version: arXiv:1810.12980v1; theorem numbering refers to this
+  version.
+
+\bibitem[CFG{\etalchar{+}}25]{CFFGZZ2024}
+Xiaoyu Chen, Weiming Feng, Heng Guo, Xinyuan Zhang, and Zongrui Zou.
+\newblock Deterministic counting from coupling independence.
+\newblock In {\em Proceedings of FOCS 2025}, pages 667--683, 2025.
+\newblock Full version: arXiv:2410.23225v2; theorem numbering refers to this
+  version.
+
+\bibitem[CL26]{ChenLiu2026LocalGlobal}
+Xiaoyu Chen and Kuikui Liu.
+\newblock A spectral local-to-global principle for spin systems on graphs with
+  girth at least five, 2026.
+\newblock arXiv:2608.25491.
+
+\bibitem[CLMM23]{CLMM2023}
+Zongchen Chen, Kuikui Liu, Nitya Mani, and Ankur Moitra.
+\newblock Strong spatial mixing for colorings on trees and its algorithmic
+  applications.
+\newblock In {\em Proceedings of FOCS 2023}, pages 810--845, 2023.
+\newblock Full version: arXiv:2304.01954v3; theorem numbering refers to this
+  version; journal version: J. ACM, 2026, doi:10.1145/3837755.
+
+\bibitem[CV25]{CarlsonVigoda2024}
+Charlie Carlson and Eric Vigoda.
+\newblock Flip dynamics for sampling colorings: Improving $(11/6-\epsilon)$
+  using a simple metric.
+\newblock In {\em Proceedings of SODA 2025}, pages 2194--2212, 2025.
+\newblock Full version: arXiv:2407.04870v2.
+
+\bibitem[CWZZ25]{CWZZ2025}
+Zejia Chen, Yulin Wang, Chihao Zhang, and Zihan Zhang.
+\newblock Decay of correlation for edge colorings when {$q>3\Delta$}.
+\newblock In {\em Proceedings of ICALP 2025}, volume 334 of {\em Leibniz
+  International Proceedings in Informatics (LIPIcs)}, pages 54:1--54:18, 2025.
+\newblock Full version: arXiv:2502.06586v2; theorem numbering refers to this
+  version.
+
+\bibitem[Ise93]{Iserles1993}
+Arieh Iserles.
+\newblock On the generalized pantograph functional-differential equation.
+\newblock {\em European Journal of Applied Mathematics}, 4(1):1--38, 1993.
+
+\bibitem[MFB72]{MFB1972}
+Grainger~R. Morris, Alan Feldstein, and Ernie~W. Bowen.
+\newblock The {Phragm{\'e}n--Lindel{\"o}f} principle and a class of functional
+  differential equations.
+\newblock In Leonard Weiss, editor, {\em Ordinary Differential Equations: 1971
+  {NRL--MRC} Conference}, pages 513--540. Academic Press, 1972.
+
+\bibitem[PR17]{PatelRegts2017}
+Viresh Patel and Guus Regts.
+\newblock Deterministic polynomial-time approximation algorithms for partition
+  functions and graph polynomials.
+\newblock {\em SIAM Journal on Computing}, 46(6):1893--1919, 2017.
+
+\bibitem[Shi26]{Shi2026Formalization}
+Ke~Shi.
+\newblock Coupling independence implies zero-freeness: {Lean} formalization.
+\newblock Source code and verification records, commit c388cfa,
+  \url{https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/c388cfa},
+  2026.
+
+\bibitem[SS26]{ShaoShi2026ZeroFreeness}
+Shuai Shao and Ke~Shi.
+\newblock Coupling independence implies zero-freeness, 2026.
+\newblock Preprint.
+
+\bibitem[WZ18]{WangZhang2018}
+Liuquan Wang and Cheng Zhang.
+\newblock Zeros of the deformed exponential function.
+\newblock {\em Advances in Mathematics}, 332:311--348, 2018.
+\newblock arXiv:1709.04357.
+
+\end{thebibliography}
