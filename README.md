@@ -6,7 +6,7 @@
 
 ### [Read the papers with their Lean →](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
 
-[Main paper (PDF)](docs/main.pdf) · [Companion (PDF)](docs/appendix.pdf) · [Statement checker](https://keshih.github.io/coupling-independence-implies-zero-freeness/checker.html) · [Proof overview](docs/overview.md)
+[Main paper (PDF)](docs/main.pdf) · [Companion (PDF)](docs/appendix.pdf) · [Proof overview](docs/overview.md)
 
 </div>
 
@@ -33,15 +33,11 @@ companion, *Further Potts Zero-Free Regions from Coupling Independence*.
 ## The website
 
 The [**paper reader**](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
-shows both papers, rendered from their LaTeX, beside the Lean declarations
-of the statement you are reading, with links to the exact source lines.
-Search the contents by number, title or Lean name, or switch to
-*Statements only* to skim every numbered result with its Lean status.
-
-The [**statement checker**](https://keshih.github.io/coupling-independence-implies-zero-freeness/checker.html)
-matches the headline statements with their Lean versions phrase by phrase,
-and lists the axioms and library lemmas each proof applies and the Lean
-proofs of the results the papers cite.
+shows both papers, rendered from their LaTeX, beside the Lean statement of
+the result you are reading, the definitions it uses, and links to the exact
+source lines. On wide screens the contents stay open beside the paper;
+switch to *Statements only* to skim every numbered result with its Lean
+status.
 
 ## The main theorem
 
@@ -111,8 +107,9 @@ Lean proof differs from the written one.
 
 [docs/coverage.json](docs/coverage.json) has one entry for each of the 107
 numbered statements of the two papers, 32 in the main paper and 75 in the
-companion, with its status, its Lean names and a note on any difference of
-form. All Lean names elaborate. Each of the 92 theorems, lemmas,
+companion, with its status, the Lean declarations that state it, the
+definitions needed to read them, and a note on any difference of form.
+All Lean names elaborate. Each of the 92 theorems, lemmas,
 propositions and corollaries has one of the three `formalized` statuses:
 
 | Status | Entries | Meaning |
@@ -235,10 +232,6 @@ number differs from the hyperref destinations in the PDFs. Figures and
 commutative diagrams are drawn from their TikZ source; one it cannot read
 is cut from the PDF instead. To publish a new version of a paper, replace
 its folder in `paper/` and its PDF in `docs/`, then rerun the script.
-
-The statement checker, `docs/checker.html`, is built by
-`scripts/site/build.py` from the built library and the LaTeX sources with
-their `.aux` files, and checks every quotation against them.
 
 ## Layout
 

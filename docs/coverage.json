@@ -7,12 +7,12 @@
     "title": "Potts zero-freeness near [0,1]",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.potts_main_theorem",
-      "ZeroFreeness.Potts.UniformPottsZeroFree",
-      "ZeroFreeness.Potts.fullPolynomial_eq",
-      "ZeroFreeness.pottsInterval"
+      "ZeroFreeness.Potts.potts_main_theorem"
     ],
-    "note": "The algorithmic consequences drawn in the introduction, the FPTAS for Z_G(q; x) and the effective choice of ε, are not formalized."
+    "defs": [
+      "ZeroFreeness.Potts.UniformPottsZeroFree"
+    ],
+    "note": "At 6q = 11Δ, where the paper cites CFFGZZ Theorem 20 for the x = 0 coupling bound, Lean proves it by the Carlson–Vigoda contraction. The introduction's FPTAS for Z_G(q; x) and effective choice of ε are not formalized."
   },
   {
     "paper": "main",
@@ -22,12 +22,15 @@
     "title": "Coupling independence implies zero-freeness",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.graph_class_potts_transfer_of_bounded",
-      "ZeroFreeness.Potts.GraphClassTransferInputs",
-      "ZeroFreeness.Potts.GraphClass",
-      "ZeroFreeness.Potts.GraphClassRootCouplingBound"
+      "ZeroFreeness.Potts.graph_class_potts_transfer_of_bounded"
     ],
-    "note": "Lean classes are closed under relabelled induced subgraphs, and the coupling inputs are required only when both child laws exist."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.GraphClassTransferInputs",
+      "ZeroFreeness.pottsInterval",
+      "PottsCI.PartialColouring.pinnedConflictCount"
+    ],
+    "note": "Lean classes are closed under relabelled induced subgraphs. The coupling bounds are required only when both child laws exist, which q ≥ Δ+1 guarantees. Lean does not need Δ ≥ 2."
   },
   {
     "paper": "main",
@@ -37,7 +40,8 @@
     "title": "Beyond Potts",
     "status": "remark",
     "lean": [],
-    "note": "Describes the ingredients of the transfer proof; it makes no claim of its own."
+    "defs": [],
+    "note": ""
   },
   {
     "paper": "main",
@@ -48,11 +52,14 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Potts.card_hardList_of_succ_le",
-      "PottsCI.PartialColouring.degreeBound_of_original",
-      "ZeroFreeness.Potts.normalizedPartition_zero_ne_zero",
       "ZeroFreeness.Potts.partition_zero_pos_of_succ_le"
     ],
-    "note": "The list bound is card_hardList_of_succ_le at I = τ.toPinningData G, with the degree hypothesis supplied by degreeBound_of_original."
+    "defs": [
+      "PottsCI.PinningData",
+      "PottsCI.PinningData.DegreeBound",
+      "PottsCI.PinningData.hardList"
+    ],
+    "note": "Lean states both claims for residual instances whose free degree plus pinned-neighbour count is at most Δ at every vertex. For G ∈ 𝒢_Δ, the residual instance of τ is one, and its partition function at 0 is Ẑ^τ_G(0)."
   },
   {
     "paper": "main",
@@ -62,11 +69,15 @@
     "title": "Potts coupling independence",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Potts.GraphClassRootCouplingBound",
-      "ZeroFreeness.Potts.GraphClassTransferInputs",
-      "ZeroFreeness.Potts.rootChildData"
+      "ZeroFreeness.Potts.GraphClassRootCouplingBound"
     ],
-    "note": "Lean requires the bound only when both child partitions are positive, which holds for q ≥ Δ+1."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.rootChildData",
+      "PottsCI.FinDist.W",
+      "PottsCI.ham"
+    ],
+    "note": "Lean defines the bound at one activity x, and only for classes closed under induced subgraphs; coupling independence on J is the bound at every x ∈ J. It is required only when both child partitions are positive, which holds for q ≥ Δ+1."
   },
   {
     "paper": "main",
@@ -76,12 +87,13 @@
     "title": "Complex averages under nearby laws",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.paper_complex_average_with_anchor",
-      "ZeroFreeness.centeredAverageLogRatio",
-      "ZeroFreeness.exp_scaledCenteredAverageLogRatio",
-      "ZeroFreeness.continued_average_log_bound"
+      "ZeroFreeness.paper_complex_average_with_anchor"
     ],
-    "note": "That the explicit logarithm is the paper's continuous branch follows from the scaling-path lemmas and uniqueness of continuous logarithms."
+    "defs": [
+      "ZeroFreeness.centeredAverageLogRatio",
+      "PottsCI.FinDist.W"
+    ],
+    "note": "Lean bounds an explicit logarithm, centeredAverageLogRatio, for any anchor point. It is continuous along the path t(h, η, η'), t ∈ [0, 1], and zero at t = 0, so by uniqueness of continuous logarithms it is the paper's branch. The cost d need not be a metric."
   },
   {
     "paper": "main",
@@ -91,12 +103,15 @@
     "title": "Positive-activity Potts induction",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.lem_potts_positive_response",
-      "ZeroFreeness.Potts.uniform_positive_response",
-      "ZeroFreeness.Potts.HasSmallResponseLog",
-      "ZeroFreeness.Potts.GraphClass.positive_interval_zero_free_and_responses"
+      "ZeroFreeness.Potts.lem_potts_positive_response"
     ],
-    "note": "ε and α are chosen from (q, Δ, δ, C) before the class, through the union class ZeroFreeness.Potts.unionClass."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.PositiveIntervalCI",
+      "ZeroFreeness.Potts.HasSmallResponseLog",
+      "ZeroFreeness.Potts.pinVertex"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -106,10 +121,12 @@
     "title": "One-vertex comparison at z=0",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.rootChildData_partition_zero_comparison",
       "ZeroFreeness.Potts.normalizedPartition_pinVertex_zero_comparison"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Potts.pinVertex"
+    ],
+    "note": "The values at z = 0 are real; Lean compares their real parts."
   },
   {
     "paper": "main",
@@ -119,12 +136,14 @@
     "title": "Potts disc around z=0",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.prop_ep_disc",
-      "ZeroFreeness.Potts.uniform_hard_disc",
-      "ZeroFreeness.Potts.unionClass",
-      "ZeroFreeness.Potts.PinningFamily.hard_uniform_transfer"
+      "ZeroFreeness.Potts.prop_ep_disc"
     ],
-    "note": "ρ₀ is chosen from (q, Δ, C₀) before the class."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.GraphClassRootCouplingBound",
+      "PottsCI.PinningData.hardParameter"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -135,9 +154,13 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.root_strict_ci",
-      "ZeroFreeness.Potts.root_strict_uniform_ci",
+      "ZeroFreeness.Potts.root_strict_uniform_ci"
+    ],
+    "defs": [
+      "PottsCI.PartialColouring",
+      "ZeroFreeness.Potts.actualRootChildGibbs",
       "ZeroFreeness.ciBound",
-      "ZeroFreeness.Potts.actualRootChildGibbs"
+      "ZeroFreeness.ciGap"
     ],
     "note": ""
   },
@@ -149,12 +172,12 @@
     "title": "Stationary comparison",
     "status": "formalized",
     "lean": [
-      "PottsCI.stationary_comparison_graphPathMetric",
-      "PottsCI.graphPathMetric",
-      "PottsCI.stationary_comparison_graphPathMetric_of_nonneg",
-      "PottsCI.stationary_comparison_ham"
+      "PottsCI.stationary_comparison_graphPathMetric"
     ],
-    "note": "Contraction is assumed only on adjacent states of the path metric and the disagreement bound only as a ν_Q-average, as in the paper."
+    "defs": [
+      "PottsCI.graphPathMetric"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -164,12 +187,13 @@
     "title": "Finite-state continuity of normalized laws",
     "status": "formalized",
     "lean": [
-      "PottsCI.finite_endpoint_closure",
-      "PottsCI.finite_endpoint_closure_dist",
-      "PottsCI.W_endpoint_le_liminf",
-      "PottsCI.W_endpoint_le_of_const"
+      "PottsCI.finite_endpoint_closure"
     ],
-    "note": "Includes the two-family W_d limit and the liminf closure for a varying bound B(x)."
+    "defs": [
+      "PottsCI.WeightAdmissible",
+      "PottsCI.normLaw"
+    ],
+    "note": "Lean needs the weights nonnegative only near 0 and right-continuous at 0, allows any nonnegative cost d with d(a,a) = 0 and the triangle inequality, and takes the liminf in the extended reals."
   },
   {
     "paper": "main",
@@ -179,12 +203,15 @@
     "title": "Soft Potts as a random hard-colouring model",
     "status": "formalized-equivalent",
     "lean": [
-      "PottsCI.PinningData.spinLawGivenActive_eq_uniformHardFibre",
-      "PottsCI.PinningData.sum_jointActiveWeight_eq_weight",
-      "ZeroFreeness.Potts.activatedSet_law_le",
-      "PottsCI.Vigoda.activeHardListInstance_isProper_iff"
+      "PottsCI.PinningData.spinLawGivenActive_eq_uniformHardFibre"
     ],
-    "note": "Stated in joint-weight form; that the sampling process has joint law J(A,σ)/Z is a definitional unfolding."
+    "defs": [
+      "PottsCI.PinningData.Constraint",
+      "PottsCI.PinningData.activeMass",
+      "PottsCI.PinningData.spinLawGivenActive",
+      "PottsCI.PinningData.uniformHardFibre"
+    ],
+    "note": "Stated in joint-weight form: Lean conditions J(A,σ) on an active set A of positive mass. That sampling σ ∼ μ and then A has joint law J(A,σ)/Z is a definitional unfolding."
   },
   {
     "paper": "main",
@@ -194,12 +221,14 @@
     "title": "Hard list-flip transition",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Potts.FlipProfile",
-      "ZeroFreeness.Potts.profileStep",
-      "ZeroFreeness.Potts.flipKernel",
-      "ZeroFreeness.Potts.flipKernel_vigoda"
+      "ZeroFreeness.Potts.flipKernel"
     ],
-    "note": "Defined for an arbitrary profile; flipSet is the alternating component, which equals the paper's induced component on proper colourings."
+    "defs": [
+      "ZeroFreeness.Potts.FlipProfile",
+      "PottsCI.Vigoda.HardListInstance",
+      "ZeroFreeness.Potts.profileStep"
+    ],
+    "note": "The swapped set is the alternating {X_u, c}-component of u, which equals the paper's induced component on proper colourings."
   },
   {
     "paper": "main",
@@ -209,12 +238,15 @@
     "title": "Soft flip kernel",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Potts.softFlipKernel",
-      "ZeroFreeness.Potts.Soft.activeLaw",
-      "ZeroFreeness.Potts.softFlipKernel_eq_coin_mixture",
-      "ZeroFreeness.Potts.softFlipKernel_vigoda"
+      "ZeroFreeness.Potts.softFlipKernel"
     ],
-    "note": "Defined for an arbitrary profile and every x ∈ (0,1]."
+    "defs": [
+      "ZeroFreeness.Potts.FlipProfile",
+      "PottsCI.PinningData",
+      "ZeroFreeness.Potts.Soft.softKernelOf",
+      "ZeroFreeness.Potts.flipFibreKernel"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -224,12 +256,13 @@
     "title": "Soft flip kernels",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.lem_soft_stationary",
-      "ZeroFreeness.Potts.softFlipKernel_reversible",
-      "ZeroFreeness.Potts.softFlipKernel_irreducible",
-      "ZeroFreeness.Potts.softFlipKernel_stationary"
+      "ZeroFreeness.Potts.lem_soft_stationary"
     ],
-    "note": "Every profile and every x ∈ (0,1], with reversibility, stationarity, and irreducibility when ρ₁ > 0."
+    "defs": [
+      "ZeroFreeness.Potts.softFlipKernel",
+      "PottsCI.PinningData.gibbs"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -239,12 +272,15 @@
     "title": "The two hard instances differ only near v",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.coupled_activation_root_local",
-      "ZeroFreeness.activationLaw",
-      "ZeroFreeness.coinActivation_law",
-      "PottsCI.Vigoda.RootLocalPair"
+      "ZeroFreeness.coupled_activation_root_local"
     ],
-    "note": "One declaration for every 0 < x ≤ 1."
+    "defs": [
+      "ZeroFreeness.activatedSet",
+      "ZeroFreeness.activationLaw",
+      "PottsCI.Vigoda.RootLocalPair",
+      "PottsCI.Vigoda.activeHardListInstance"
+    ],
+    "note": "Lean adds that both colourings are proper for their instances and that the two active sets form a coupling of the activation laws supported on root-local pairs."
   },
   {
     "paper": "main",
@@ -254,12 +290,14 @@
     "title": "Effect of adding one labelled free–pinned edge",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.lem_boundary_sensitivity",
-      "ZeroFreeness.Potts.softFlipKernel_addBoundaries_W_le",
-      "ZeroFreeness.Potts.flipKernel_sublists_W_le",
-      "ZeroFreeness.Potts.rootChild_softVigoda_boundary_W_le"
+      "ZeroFreeness.Potts.lem_boundary_sensitivity"
     ],
-    "note": "A general profile with R_ρ < ∞, every x ∈ (0,1], k added free–pinned edges counted with multiplicity, and k deleted colours."
+    "defs": [
+      "ZeroFreeness.Potts.addBoundary",
+      "ZeroFreeness.Potts.FlipProfile.R",
+      "ZeroFreeness.Potts.boundaryExcess"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -270,11 +308,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.conditionalHardCouplingEstimate",
-      "ZeroFreeness.hardStep_W_drift_le",
-      "ZeroFreeness.fullHardCoupling_cost_drift_le",
-      "ZeroFreeness.activatedSet_rootLocal"
+      "ZeroFreeness.ConditionalHardCouplingEstimate"
     ],
-    "note": "Stated for every root-local pair and every coin outcome, with no degree bound."
+    "defs": [
+      "PottsCI.Vigoda.hardStep",
+      "ZeroFreeness.activatedSet",
+      "ZeroFreeness.rootFreeCoinCount",
+      "ZeroFreeness.rootCommonListCount"
+    ],
+    "note": "Stated for every coin outcome, with no degree bound, as a bound on W_Ham between the two hard steps; a coupling meeting the bound is constructed in Lean."
   },
   {
     "paper": "main",
@@ -284,12 +326,14 @@
     "title": "Soft path contraction",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.lem_soft_contraction",
-      "ZeroFreeness.Potts.softVigoda_adjacent_coupling",
-      "ZeroFreeness.Potts.softVigoda_contraction",
-      "ZeroFreeness.Potts.softVigoda_eq_library"
+      "ZeroFreeness.Potts.lem_soft_contraction"
     ],
-    "note": "Includes x = 1, an explicit adjacent coupling, and the all-pairs contraction by 1 − κ_x/n."
+    "defs": [
+      "PottsCI.PinningData.DegreeBound",
+      "ZeroFreeness.Potts.softVigoda",
+      "ZeroFreeness.Potts.kappa"
+    ],
+    "note": ""
   },
   {
     "paper": "main",
@@ -300,11 +344,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.root_positive_ci",
-      "ZeroFreeness.Potts.root_strict_ci",
-      "ZeroFreeness.Potts.positiveRootChildGibbs",
-      "ZeroFreeness.ciBound"
+      "ZeroFreeness.Potts.root_strict_ci"
     ],
-    "note": ""
+    "defs": [
+      "PottsCI.PartialColouring",
+      "ZeroFreeness.Potts.positiveRootChildGibbs",
+      "ZeroFreeness.ciBound",
+      "ZeroFreeness.Potts.actualRootChildGibbs"
+    ],
+    "note": "The bound for x ∈ (0,1] does not need Δ ≥ 2. The claim at x = 0 is the case x = 0 of root_strict_ci, which covers all x ∈ [0,1]."
   },
   {
     "paper": "main",
@@ -315,8 +363,12 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.critical_line_hard_endpoint",
-      "ZeroFreeness.Potts.ExternalCriticalHardColouringTheorem",
       "ZeroFreeness.Potts.root_critical_uniform_ci"
+    ],
+    "defs": [
+      "ZeroFreeness.Potts.ExternalCriticalHardColouringTheorem",
+      "PottsCI.PartialColouring",
+      "ZeroFreeness.Potts.actualRootChildGibbs"
     ],
     "note": "The x = 0 bound is proved by extending the Carlson–Vigoda contraction, not from CFFGZZ Theorem 20 as in the paper's proof."
   },
@@ -328,12 +380,15 @@
     "title": "Field transfer",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.LeeYang.prop_field_transfer",
-      "ZeroFreeness.LeeYang.uniform_graph_class_normalized_field_transfer",
-      "ZeroFreeness.LeeYang.uniform_graph_class_field_transfer",
+      "ZeroFreeness.LeeYang.prop_field_transfer"
+    ],
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.GraphClassRootCouplingBound",
+      "PottsCI.PinningData.hardParameter",
       "ZeroFreeness.LeeYang.normalizedFieldPartition"
     ],
-    "note": "θ is chosen from (q, Δ, C₀) before the class. prop_field_transfer has the paper's open polydisc; the uniform_graph_class versions use the closed polydisc, which is stronger."
+    "note": "θ is quantified before the class 𝒢, so it depends only on (q, Δ, C₀)."
   },
   {
     "paper": "main",
@@ -345,10 +400,14 @@
     "lean": [
       "ZeroFreeness.LeeYang.near_vigoda_vertex_field_zero_free",
       "ZeroFreeness.LeeYang.cv_vertex_field_zero_free",
-      "ZeroFreeness.LeeYang.high_girth_original_field_transfer",
-      "ZeroFreeness.LeeYang.UniformVertexFieldZeroFree"
+      "ZeroFreeness.LeeYang.high_girth_original_field_transfer"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.LeeYang.UniformVertexFieldZeroFree",
+      "ZeroFreeness.LeeYang.normalizedFieldPartition",
+      "ZeroFreeness.LeeYang.fullFieldPartition"
+    ],
+    "note": "Regimes (i) and (ii) use the closed polydisc |λ_{u,c} − 1| ≤ θ, which is stronger."
   },
   {
     "paper": "main",
@@ -358,6 +417,7 @@
     "title": "Related results",
     "status": "remark",
     "lean": [],
+    "defs": [],
     "note": "Compares Theorem 5.2 with cited results."
   },
   {
@@ -368,10 +428,13 @@
     "title": "Edge-colour Lee–Yang polydisc",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.LeeYang.edge_lee_yang",
-      "ZeroFreeness.LeeYang.edge_lee_yang_all_fields"
+      "ZeroFreeness.LeeYang.edge_lee_yang"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.LeeYang.normalizedFieldPartition",
+      "ZeroFreeness.LeeYang.fullFieldPartition"
+    ],
+    "note": "The polydisc is closed, |λ_{e,c} − 1| ≤ θ, which is stronger. For the full polynomial, Lean needs only λ_{e,τ_e} ≠ 0 on pinned edges, and proves it is nonzero exactly when τ is proper."
   },
   {
     "paper": "main",
@@ -382,11 +445,18 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.HolantCoupling.residual_family_sharp_child_W_le",
-      "ZeroFreeness.Holant.residualFamily_closed",
+      "ZeroFreeness.Holant.NormalizedInstance.zeroChild_family",
+      "ZeroFreeness.Holant.NormalizedInstance.oneChild_family",
       "ZeroFreeness.Holant.NormalizedInstance.child_partition_le",
       "ZeroFreeness.Holant.NormalizedInstance.shifted_partition_zero"
     ],
-    "note": "The clauses are stated in several declarations."
+    "defs": [
+      "ZeroFreeness.Holant.Signature",
+      "ZeroFreeness.Holant.NormalizedInstance",
+      "ZeroFreeness.Holant.residualFamily",
+      "ZeroFreeness.Holant.NormalizedInstance.OneSurvives"
+    ],
+    "note": "Each clause is a separate declaration. Lean allows any Δ, R ≥ 0 and parallel edges, gives C = 2((1 + A²R)^Δ − 1) with A the largest g(1) over 𝓕_res, and gets the properties of 𝓕_res from its definition."
   },
   {
     "paper": "main",
@@ -398,10 +468,15 @@
     "lean": [
       "ZeroFreeness.Holant.exists_uniform_holant_polytube",
       "ZeroFreeness.Holant.holant_orthant",
-      "ZeroFreeness.Holant.holant_uniform_diagonal",
-      "ZeroFreeness.Holant.graphPartition"
+      "ZeroFreeness.Holant.holant_uniform_diagonal"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Holant.Signature",
+      "ZeroFreeness.Holant.graphPartition",
+      "ZeroFreeness.Holant.edgeOrthantNeighborhood",
+      "ZeroFreeness.Holant.holantWidth"
+    ],
+    "note": "Lean allows any Δ and any R ≥ 0. The diagonal claim is stated for some open U ⊇ [0, ∞) chosen before the graph and the signatures."
   },
   {
     "paper": "main",
@@ -412,11 +487,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Holant.bmatching_uniform_polytube",
-      "ZeroFreeness.Holant.bmatching_orthant",
-      "ZeroFreeness.Holant.matchingPartition",
-      "ZeroFreeness.Holant.mem_edgePolytube_iff"
+      "ZeroFreeness.Holant.bmatching_orthant"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Holant.edgePolytube",
+      "ZeroFreeness.Holant.matchingPartition",
+      "ZeroFreeness.Holant.edgeOrthantNeighborhood",
+      "ZeroFreeness.Holant.holantWidth"
+    ],
+    "note": "Lean does not need Δ ≥ 2."
   },
   {
     "paper": "main",
@@ -428,10 +507,14 @@
     "lean": [
       "ZeroFreeness.Holant.star_matchingPartition_diagonal",
       "ZeroFreeness.Holant.bmatching_width_le_inv",
-      "ZeroFreeness.Holant.no_degree_free_width",
-      "ZeroFreeness.Holant.star"
+      "ZeroFreeness.Holant.no_degree_free_width"
     ],
-    "note": "The Heilmann–Lieb and Wagner sentences are cited background."
+    "defs": [
+      "ZeroFreeness.Holant.matchingPartition",
+      "ZeroFreeness.Holant.star",
+      "ZeroFreeness.Holant.edgePolytube"
+    ],
+    "note": "The Heilmann–Lieb and Wagner sentences are cited background and are not formalized."
   },
   {
     "paper": "main",
@@ -441,12 +524,13 @@
     "title": "b-edge covers",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Holant.cor_bcover_short",
-      "ZeroFreeness.Holant.cor_bcover_short_intrinsic",
-      "ZeroFreeness.Holant.coverWidth",
-      "ZeroFreeness.Holant.coverPartition_ne_zero_coverWidth"
+      "ZeroFreeness.Holant.cor_bcover_short"
     ],
-    "note": "The width depends only on (Δ, λ₋)."
+    "defs": [
+      "ZeroFreeness.Holant.edgePolytube",
+      "ZeroFreeness.Holant.coverPartition"
+    ],
+    "note": "The width is one function ε of λ₋ = a, chosen before λ₊ = c, the graph and b. Lean does not need Δ ≥ 2, and also states the diagonal remark that follows the corollary."
   },
   {
     "paper": "main",
@@ -456,12 +540,15 @@
     "title": "Transfer and the hard endpoint",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.pinned_leaf_realization_girth_class",
-      "ZeroFreeness.Potts.zero_free_of_girth_class",
-      "ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree",
-      "ZeroFreeness.Appendix.high_temperature_zero_free"
+      "ZeroFreeness.Potts.pinned_leaf_realization",
+      "ZeroFreeness.Potts.zero_free_of_girth_class"
     ],
-    "note": "The library's girth rows are proved through the residual-instance transfer; zero_free_of_girth_class formalizes the leaf-realization route described here."
+    "defs": [
+      "PottsCI.PartialColouring",
+      "ZeroFreeness.Potts.normalizedPolynomial",
+      "PottsCI.PartialColouring.freeGraph"
+    ],
+    "note": "Lean proves the girth rows by transferring on residual instances directly; zero_free_of_girth_class formalizes the leaf-realization route described here. The unnormalized conclusions are stated in each row's zero-free theorem."
   },
   {
     "paper": "companion",
@@ -471,12 +558,14 @@
     "title": "Pinned-leaf realization",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.pinned_leaf_realization",
-      "ZeroFreeness.Potts.pinned_leaf_realization_girth_class",
-      "ZeroFreeness.Potts.leafPinning_polynomial",
-      "ZeroFreeness.Potts.leafGraph_egirth"
+      "ZeroFreeness.Potts.pinned_leaf_realization"
     ],
-    "note": "The new leaves are indexed by (u, c, k < b_u(c)), in bijection with the edges up of the paper."
+    "defs": [
+      "PottsCI.PartialColouring",
+      "ZeroFreeness.Potts.normalizedPolynomial",
+      "PottsCI.PartialColouring.freeGraph"
+    ],
+    "note": "Lean also gives an isomorphism of the free graphs that keeps each free vertex's degree in G. Girth is compared both as extended girth (⊤ for forests, the paper's convention) and as mathlib's ℕ-valued girth."
   },
   {
     "paper": "companion",
@@ -487,11 +576,15 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Potts.card_hardList_of_succ_le",
-      "PottsCI.PartialColouring.degreeBound_of_original",
-      "ZeroFreeness.Potts.normalizedPartition_zero_ne_zero",
       "ZeroFreeness.Potts.partition_zero_pos_of_succ_le"
     ],
-    "note": "The list bound is card_hardList_of_succ_le at I = τ.toPinningData G, with the degree hypothesis supplied by degreeBound_of_original."
+    "defs": [
+      "PottsCI.PinningData",
+      "PottsCI.PinningData.DegreeBound",
+      "PottsCI.PinningData.hardList",
+      "PottsCI.PinningData.partition"
+    ],
+    "note": "Both are stated for any boundary-count instance I with I.DegreeBound Δ. The paper's case is I = (G^τ, b^τ), where a degree bound Δ on G gives I.DegreeBound Δ."
   },
   {
     "paper": "companion",
@@ -501,11 +594,15 @@
     "title": "Potts coupling independence",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Potts.GraphClassRootCouplingBound",
-      "ZeroFreeness.Potts.GraphClassTransferInputs",
-      "ZeroFreeness.Potts.rootChildData"
+      "ZeroFreeness.Potts.GraphClassRootCouplingBound"
     ],
-    "note": "Lean requires the bound only when both child partitions are positive, which holds for q ≥ Δ+1."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.rootChildData",
+      "PottsCI.FinDist.W",
+      "PottsCI.ham"
+    ],
+    "note": "Lean states the bound at one activity x; coupling independence on J is the bound at every x ∈ J. It is required only when both child partition functions are positive, which holds for q ≥ Δ+1."
   },
   {
     "paper": "companion",
@@ -515,12 +612,15 @@
     "title": "Potts transfer",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.graph_class_potts_transfer_of_bounded",
-      "ZeroFreeness.Potts.graph_class_potts_transfer",
-      "ZeroFreeness.Potts.GraphClassTransferInputs",
-      "ZeroFreeness.Potts.GraphClass"
+      "ZeroFreeness.Potts.graph_class_potts_transfer_of_bounded"
     ],
-    "note": "Lean classes are closed under relabelled induced subgraphs, and the coupling inputs are required only when both child laws exist."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.GraphClassTransferInputs",
+      "ZeroFreeness.pottsInterval",
+      "PottsCI.PartialColouring.pinnedConflictCount"
+    ],
+    "note": "Classes are closed under relabelled induced subgraphs, and the coupling inputs are required only when both child laws exist. Lean does not need Δ ≥ 2 and also gives the multiplicity m_G(τ) of the zero at 0."
   },
   {
     "paper": "companion",
@@ -530,12 +630,15 @@
     "title": "Positive-base Potts induction",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.lem_potts_positive_response",
-      "ZeroFreeness.Potts.uniform_positive_response",
-      "ZeroFreeness.Potts.HasSmallResponseLog",
-      "ZeroFreeness.Potts.GraphClass.positive_interval_zero_free_and_responses"
+      "ZeroFreeness.Potts.lem_potts_positive_response"
     ],
-    "note": "ε and α are chosen from (q, Δ, δ, C) before the class, through the union class ZeroFreeness.Potts.unionClass."
+    "defs": [
+      "ZeroFreeness.Potts.GraphClass",
+      "ZeroFreeness.Potts.PositiveIntervalCI",
+      "ZeroFreeness.Potts.HasSmallResponseLog",
+      "ZeroFreeness.Potts.pinVertex"
+    ],
+    "note": "Lean assumes q ≥ 1, which the paper leaves implicit."
   },
   {
     "paper": "companion",
@@ -546,9 +649,12 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.root_strict_ci",
-      "ZeroFreeness.Potts.root_strict_uniform_ci",
+      "ZeroFreeness.Potts.root_strict_uniform_ci"
+    ],
+    "defs": [
+      "ZeroFreeness.Potts.actualRootChildGibbs",
       "ZeroFreeness.ciBound",
-      "ZeroFreeness.Potts.actualRootChildGibbs"
+      "ZeroFreeness.ciGap"
     ],
     "note": ""
   },
@@ -561,11 +667,14 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.root_positive_ci",
-      "ZeroFreeness.Potts.root_strict_ci",
-      "ZeroFreeness.Potts.positiveRootChildGibbs",
-      "ZeroFreeness.ciBound"
+      "ZeroFreeness.Potts.root_strict_ci"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Potts.positiveRootChildGibbs",
+      "ZeroFreeness.ciBound",
+      "ZeroFreeness.Potts.actualRootChildGibbs"
+    ],
+    "note": "Lean does not need Δ ≥ 2 for x ∈ (0, 1]. The x = 0 claim is root_strict_ci, stated for every x ∈ [0, 1] when q > 11Δ/6."
   },
   {
     "paper": "companion",
@@ -576,8 +685,11 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.critical_line_hard_endpoint",
-      "ZeroFreeness.Potts.ExternalCriticalHardColouringTheorem",
       "ZeroFreeness.Potts.root_critical_uniform_ci"
+    ],
+    "defs": [
+      "ZeroFreeness.Potts.ExternalCriticalHardColouringTheorem",
+      "ZeroFreeness.Potts.actualRootChildGibbs"
     ],
     "note": "The x = 0 bound is proved by extending the Carlson–Vigoda contraction, not from CFFGZZ Theorem 20 as in the paper's proof."
   },
@@ -589,12 +701,13 @@
     "title": "Soft flip kernels",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.lem_soft_stationary",
-      "ZeroFreeness.Potts.softFlipKernel_cv",
-      "ZeroFreeness.Potts.softCVKernel_reversible_irreducible",
-      "ZeroFreeness.Potts.cvProfile_rho_one"
+      "ZeroFreeness.Potts.lem_soft_stationary"
     ],
-    "note": "Every profile and every x ∈ (0,1], with reversibility, stationarity, and irreducibility when ρ₁ > 0."
+    "defs": [
+      "ZeroFreeness.Potts.softFlipKernel",
+      "PottsCI.PinningData"
+    ],
+    "note": "Stated for any boundary-count instance I, which covers every (G, τ)."
   },
   {
     "paper": "companion",
@@ -604,12 +717,15 @@
     "title": "The two hard instances differ only near v",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.coupled_activation_root_local",
-      "ZeroFreeness.activationLaw_one",
-      "ZeroFreeness.activationLaw_w_eq_prod",
-      "ZeroFreeness.coinActivation_law"
+      "ZeroFreeness.coupled_activation_root_local"
     ],
-    "note": "One declaration for every 0 < x ≤ 1, including the empty activation at x = 1."
+    "defs": [
+      "ZeroFreeness.commonCoinLaw",
+      "ZeroFreeness.activatedSet",
+      "ZeroFreeness.activationLaw",
+      "PottsCI.Vigoda.RootLocalPair"
+    ],
+    "note": "Stated for every x ∈ (0, 1] on a boundary-count instance I, including x = 1, where no constraint is activated. Lean also packages the common coins as a coupling of the two activation laws."
   },
   {
     "paper": "companion",
@@ -619,12 +735,15 @@
     "title": "Effect of adding one labelled free–pinned edge",
     "status": "formalized-narrowed",
     "lean": [
-      "ZeroFreeness.Potts.lem_boundary_sensitivity",
-      "ZeroFreeness.Potts.softFlipKernel_addBoundaries_W_le_R",
-      "ZeroFreeness.Potts.flipKernel_sublists_W_le_R",
-      "ZeroFreeness.Potts.rootChild_softCV_boundary_W_le"
+      "ZeroFreeness.Potts.lem_boundary_sensitivity"
     ],
-    "note": "The companion now says 'k labelled free–pinned edges', as in the main text, in place of 'k labelled constraints'."
+    "defs": [
+      "ZeroFreeness.Potts.softFlipKernel",
+      "ZeroFreeness.Potts.addBoundary",
+      "ZeroFreeness.Potts.flipKernel",
+      "ZeroFreeness.Potts.boundaryExcess"
+    ],
+    "note": "The companion now says ‘k labelled free–pinned edges’, as in the main text, in place of ‘k labelled constraints’."
   },
   {
     "paper": "companion",
@@ -634,11 +753,14 @@
     "title": "Finite-state continuity of normalized laws",
     "status": "formalized",
     "lean": [
-      "PottsCI.finite_endpoint_closure",
-      "PottsCI.W_endpoint_le_of_const",
-      "PottsCI.finite_endpoint_closure_dist"
+      "PottsCI.finite_endpoint_closure"
     ],
-    "note": ""
+    "defs": [
+      "PottsCI.WeightAdmissible",
+      "PottsCI.normLaw",
+      "PottsCI.FinDist.W"
+    ],
+    "note": "Lean needs the weights nonnegative only near 0 and right-continuous at 0, and allows any cost d that is nonnegative, zero on the diagonal and satisfies the triangle inequality. The last clause, W_d ≤ liminf_{x↓0} B(x), is the extension to x = 0."
   },
   {
     "paper": "companion",
@@ -650,8 +772,11 @@
     "lean": [
       "ZeroFreeness.Appendix.near_vigoda_zero_free",
       "ZeroFreeness.Appendix.CV.zero_free",
-      "ZeroFreeness.Appendix.Girth.high_girth_residual_original_zero_free",
-      "ZeroFreeness.Potts.UniformPottsZeroFree"
+      "ZeroFreeness.Appendix.Girth.high_girth_residual_original_zero_free"
+    ],
+    "defs": [
+      "ZeroFreeness.Potts.UniformPottsZeroFree",
+      "ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree"
     ],
     "note": ""
   },
@@ -663,6 +788,7 @@
     "title": "Literature and algorithmic use of the three [0,1] regimes",
     "status": "remark",
     "lean": [],
+    "defs": [],
     "note": "Literature attribution for the three regimes."
   },
   {
@@ -673,9 +799,9 @@
     "title": "Integer reduction",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.integer_reduction",
-      "ZeroFreeness.Appendix.nearVigoda_regime_cases"
+      "ZeroFreeness.Appendix.integer_reduction"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -686,12 +812,13 @@
     "title": "The hard endpoint on the critical line",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Potts.critical_line_pairs",
-      "ZeroFreeness.Potts.hardList_slack_critical",
-      "ZeroFreeness.Potts.gibbs_zero_uniform",
-      "ZeroFreeness.Potts.critical_line_hard_endpoint"
+      "ZeroFreeness.Potts.critical_line_hard_endpoint",
+      "ZeroFreeness.Potts.critical_line_pairs"
     ],
-    "note": "That CFFGZZ Theorem 20 and Proposition 22 apply is a claim about the cited papers and is not formalized; Lean proves the same x = 0 bound through the Carlson–Vigoda contraction."
+    "defs": [
+      "ZeroFreeness.Potts.ExternalCriticalHardColouringTheorem"
+    ],
+    "note": "That CFFGZZ Theorem 20 and Proposition 22 apply, a claim about the cited papers, is not formalized; Lean proves the same x = 0 bound by the Carlson–Vigoda contraction. The list slack and the uniform law at x = 0 are proved too."
   },
   {
     "paper": "companion",
@@ -704,9 +831,15 @@
       "ZeroFreeness.Appendix.near_vigoda_uniform_ci",
       "ZeroFreeness.Appendix.CV.root_coupling",
       "ZeroFreeness.Appendix.Girth.high_girth_coupling",
-      "ZeroFreeness.Potts.root_W_le_of_option_relabel"
+      "ZeroFreeness.Potts.root_critical_uniform_ci"
     ],
-    "note": "Stated on boundary-count data; the (G, τ, r) form follows by ZeroFreeness.Potts.root_W_le_of_option_relabel."
+    "defs": [
+      "ZeroFreeness.Potts.RootCouplingBound",
+      "ZeroFreeness.Appendix.Girth.largeGirthFamily",
+      "PottsCI.FinDist.W",
+      "ZeroFreeness.Potts.actualRootChildGibbs"
+    ],
+    "note": "The three regimes are stated on root-conditioned residual instances; relabelling gives every (G, τ, r) of 𝒢. In regime (i) one constant serves all of [0, 1], the critical pairs included, which the paper does not assert."
   },
   {
     "paper": "companion",
@@ -717,9 +850,12 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.BBR.high_girth_residual_original_zero_free",
+      "ZeroFreeness.Appendix.BBR.start_mem"
+    ],
+    "defs": [
       "ZeroFreeness.Appendix.BBR.start",
-      "ZeroFreeness.Appendix.BBR.start_mem",
-      "ZeroFreeness.Appendix.BBR.intervalStart"
+      "ZeroFreeness.Appendix.BBR.intervalStart",
+      "ZeroFreeness.Appendix.BBR.parameter"
     ],
     "note": ""
   },
@@ -731,10 +867,10 @@
     "title": "General-graph high-temperature intervals",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.high_temperature_zero_free",
-      "ZeroFreeness.Appendix.high_temperature_graph_coupling"
+      "ZeroFreeness.Appendix.high_temperature_zero_free"
     ],
-    "note": ""
+    "defs": [],
+    "note": "Lean needs neither Δ ≥ 2 nor x_* ≤ 1."
   },
   {
     "paper": "companion",
@@ -744,12 +880,13 @@
     "title": "Unrestricted girth-five zero-freeness",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.girth_five_residual_original_zero_free",
-      "ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree",
-      "ZeroFreeness.Appendix.Girth.girthFiveCIThreshold",
-      "ZeroFreeness.Appendix.Girth.girth_five_common_threshold"
+      "ZeroFreeness.Appendix.Girth.girth_five_residual_original_zero_free"
     ],
-    "note": "The existential threshold Δ₅(δ) is fixed as girthFiveCIThreshold δ, shared with the coupling theorem."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.girthFiveCIThreshold",
+      "ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree"
+    ],
+    "note": "The existential threshold Δ₅(δ) is fixed as girthFiveCIThreshold δ, shared with the girth-five coupling theorem."
   },
   {
     "paper": "companion",
@@ -759,6 +896,7 @@
     "title": "Scope and relation to the spectral-gap input",
     "status": "remark",
     "lean": [],
+    "defs": [],
     "note": "Attributes the ingredients; the gap itself is Theorem 9.7."
   },
   {
@@ -770,11 +908,15 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Appendix.CV.option_root_ci",
-      "ZeroFreeness.Appendix.CV.ciConstant_bounds",
-      "ZeroFreeness.Potts.root_W_le_of_option_relabel",
-      "ZeroFreeness.Potts.rootOptionData_degreeBound"
+      "ZeroFreeness.Appendix.CV.ciConstant_bounds"
     ],
-    "note": "Stated on boundary-count data; the (G, τ, r) form follows by ZeroFreeness.Potts.root_W_le_of_option_relabel."
+    "defs": [
+      "PottsCI.PinningData",
+      "PottsCI.PinningData.DegreeBound",
+      "ZeroFreeness.Potts.optionChildData",
+      "PottsCI.PinningData.nonnegativeGibbs"
+    ],
+    "note": "Stated for residual instances on Option O with root none; the (G, τ, r) form follows by relabelling V^τ as Option O with r ↦ none."
   },
   {
     "paper": "companion",
@@ -784,12 +926,15 @@
     "title": "Soft-CV kernel",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cvKernel",
-      "ZeroFreeness.Appendix.CV.cvKernel_eq_softCVKernel",
-      "ZeroFreeness.Appendix.CV.softCVKernel",
-      "ZeroFreeness.Potts.softFlipKernel_cv"
+      "ZeroFreeness.Appendix.CV.cvKernel"
     ],
-    "note": "cvKernel covers every x ∈ [0,1] and agrees with softCVKernel on (0,1)."
+    "defs": [
+      "ZeroFreeness.Appendix.CV.activityCoins",
+      "ZeroFreeness.Appendix.CV.hardStep",
+      "PottsCI.Vigoda.activeHardListInstance",
+      "ZeroFreeness.activatedSet"
+    ],
+    "note": "Defined for every x ∈ [0,1] (at x = 1 no constraint is active); on (0,1) it is proved equal to the profile kernel K_{x,P}."
   },
   {
     "paper": "companion",
@@ -799,12 +944,14 @@
     "title": "Geometric soft-CV metric",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Appendix.CV.geometricMetric",
-      "ZeroFreeness.Appendix.CV.cv_coefficient",
-      "ZeroFreeness.Appendix.CV.hardMetric",
-      "ZeroFreeness.Appendix.CV.geometricMetric_tendsto_hardMetric_cv"
+      "ZeroFreeness.Appendix.CV.edgeLength",
+      "ZeroFreeness.Appendix.CV.geometricMetric"
     ],
-    "note": "The coefficient (P₂−P₃)/2 and the limit x ↓ 0 are proved; identifying hardMetric with [CV24, Eq. (2)] is a citation and is not formalized."
+    "defs": [
+      "ZeroFreeness.Appendix.CV.outputScore",
+      "ZeroFreeness.Appendix.CV.pathMetric"
+    ],
+    "note": "The coefficient identity (P₂ − P₃)/2 = 17/200 and the limit d_x → hard metric as x ↓ 0 (for q ≥ 1.809Δ) are proved; that this hard metric is [CV24, Eq. (2)] is a citation, not formalized."
   },
   {
     "paper": "companion",
@@ -815,10 +962,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.geometricMetric_comparison",
-      "ZeroFreeness.Appendix.CV.geometricMetric_adjacent",
-      "ZeroFreeness.Appendix.CV.edgeLength_bounds"
+      "ZeroFreeness.Appendix.CV.geometricMetric_adjacent"
     ],
-    "note": ""
+    "defs": [
+      "PottsCI.PinningData",
+      "ZeroFreeness.Appendix.CV.metricLower",
+      "ZeroFreeness.Appendix.CV.geometricMetric",
+      "ZeroFreeness.Appendix.CV.edgeLength"
+    ],
+    "note": "Lean covers x ∈ [0,1] and needs only 0 < Δ and free degrees at most Δ."
   },
   {
     "paper": "companion",
@@ -828,11 +980,14 @@
     "title": "A path upper bound for the geometric metric",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.geometricMetric_path_upper",
-      "ZeroFreeness.Appendix.CV.outputScore",
-      "ZeroFreeness.Appendix.CV.blockerCount"
+      "ZeroFreeness.Appendix.CV.geometricMetric_path_upper"
     ],
-    "note": ""
+    "defs": [
+      "PottsCI.PinningData",
+      "ZeroFreeness.Appendix.CV.geometricMetric",
+      "ZeroFreeness.Appendix.CV.outputScore"
+    ],
+    "note": "Lean covers x ∈ [0,1] and assumes, as the section does, q ≥ 1.809Δ, 0 < Δ and free degrees at most Δ."
   },
   {
     "paper": "companion",
@@ -842,12 +997,15 @@
     "title": "Components near the disagreement vertex",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_root_local_structure",
-      "ZeroFreeness.Appendix.CV.cv_root_local_structure_part1",
-      "ZeroFreeness.Appendix.CV.cv_root_local_structure_part1_symm",
-      "ZeroFreeness.Appendix.CV.cv_root_local_structure_part2"
+      "ZeroFreeness.Appendix.CV.cv_root_local_structure"
     ],
-    "note": ""
+    "defs": [
+      "PottsCI.Vigoda.RootLocalPair",
+      "ZeroFreeness.Appendix.CV.gammaSet",
+      "PottsCI.Vigoda.flipSet",
+      "ZeroFreeness.RootComponentGeometry.rootFamily"
+    ],
+    "note": "Stated for any two hard instances related by RootLocalPair, which every coupled activation outcome satisfies."
   },
   {
     "paper": "companion",
@@ -857,12 +1015,15 @@
     "title": "Partition of the aggregate moves",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_move_partition",
-      "ZeroFreeness.Appendix.CV.xFamily_exists_unique",
-      "ZeroFreeness.Appendix.CV.yFamily_exists_unique",
-      "ZeroFreeness.Appendix.CV.xFamilyRows_disjoint"
+      "ZeroFreeness.Appendix.CV.cv_move_partition"
     ],
-    "note": ""
+    "defs": [
+      "PottsCI.Vigoda.RootLocalPair",
+      "ZeroFreeness.Appendix.CV.hardCommonOffRootPartial",
+      "ZeroFreeness.Appendix.CV.xFamilyRows",
+      "ZeroFreeness.Appendix.CV.MeetsRoot"
+    ],
+    "note": "Stated for any pair related by RootLocalPair. Moves are identified with their outputs; a move remains when it has positive residual mass after the synchronous coupling."
   },
   {
     "paper": "companion",
@@ -872,12 +1033,15 @@
     "title": "Conditional coupling matrix",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Appendix.CV.fullHardPartial",
-      "ZeroFreeness.Appendix.CV.CanonicalMatching.extend",
-      "ZeroFreeness.Appendix.CV.regular_root_mass_le_piece_mass",
-      "ZeroFreeness.Appendix.CV.canonical_incidence_cost"
+      "ZeroFreeness.Appendix.CV.fullHardPartial"
     ],
-    "note": "The claims inside the definition (full singleton matching, no overfilling, the one-unit saving, root-colour capacities) are proved."
+    "defs": [
+      "PottsCI.Vigoda.RootLocalPair",
+      "ZeroFreeness.Appendix.CV.GlobalChoice",
+      "ZeroFreeness.PartialCoupling",
+      "ZeroFreeness.Appendix.CV.hardStep"
+    ],
+    "note": "Built for any choice of one root neighbour per colour and side (GlobalChoice), the paper's largest-component choice included. The claims inside the definition (full singleton matching, no overfilling, the one-unit saving, root-colour capacities) are proved."
   },
   {
     "paper": "companion",
@@ -888,7 +1052,12 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Appendix.CV.fullHardCoupling",
-      "ZeroFreeness.Appendix.CV.fullHardCoupling_dominate_partial",
+      "ZeroFreeness.Appendix.CV.fullHardCoupling_dominate_partial"
+    ],
+    "defs": [
+      "PottsCI.FinDist.Coupling",
+      "ZeroFreeness.Appendix.CV.hardStep",
+      "ZeroFreeness.Appendix.CV.fullHardPartial",
       "ZeroFreeness.PartialCoupling.complete"
     ],
     "note": "Lean indexes the matrix by output configurations; distinct feasible moves have distinct outputs, so this matches the paper's indexing by moves."
@@ -902,11 +1071,16 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.PartialCoupling.complete_cost_le_separable",
-      "ZeroFreeness.hamDrift_le_moves",
       "ZeroFreeness.Appendix.CV.hardCommonOffRoot_cost_hamDrift",
       "ZeroFreeness.root_colour_holding_ham"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.PartialCoupling",
+      "ZeroFreeness.PartialCoupling.complete",
+      "ZeroFreeness.hamDrift",
+      "ZeroFreeness.Appendix.CV.hardCommonOffRootPartial"
+    ],
+    "note": "The completion bound is proved for any cost d with d(U,Z) ≤ a(U) + b(Z); it applies to d = hamDrift with the move sizes a = Ham(X,·), b = Ham(Y,·). The last claim is Lemma 5.7."
   },
   {
     "paper": "companion",
@@ -921,7 +1095,13 @@
       "ZeroFreeness.Appendix.CV.fullHardCoupling_safe_cross_lower",
       "ZeroFreeness.Appendix.CV.retained_root_add_crossCredit_le_outputScore"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.CV.rootEventMass",
+      "ZeroFreeness.Appendix.CV.rootFixedBadMass",
+      "ZeroFreeness.Appendix.CV.safeActivation",
+      "ZeroFreeness.Appendix.CV.crossCredit"
+    ],
+    "note": "Part 1 is proved for any set of regular colours with k_c ≤ 2, which covers 𝒞_low. The last assertion is stated as: the root's own score plus all cross credits is at most 𝒮_out."
   },
   {
     "paper": "companion",
@@ -931,12 +1111,15 @@
     "title": "Fresh-colour gain",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_fresh",
-      "ZeroFreeness.Appendix.CV.singleBlocker_probability",
-      "ZeroFreeness.Appendix.CV.singleBlockerEvent",
-      "ZeroFreeness.Appendix.CV.sum_freshGainAt_eq_freshGainCost"
+      "ZeroFreeness.Appendix.CV.cv_fresh"
     ],
-    "note": "Stated per regular neighbour u, with Pr(SB_u) = Rθ²x^{R+e−1}."
+    "defs": [
+      "ZeroFreeness.Appendix.CV.activityCoins",
+      "ZeroFreeness.Appendix.CV.singleBlockerEvent",
+      "ZeroFreeness.Appendix.CV.adjacentHardCoupling",
+      "ZeroFreeness.Appendix.CV.freshIncrementAt"
+    ],
+    "note": "Lean also proves the bound for every activation outcome, before averaging."
   },
   {
     "paper": "companion",
@@ -946,11 +1129,15 @@
     "title": "Ordered-incidence discount bound",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.ordered_incidence_average_le",
-      "ZeroFreeness.Appendix.CV.targetConstraints",
-      "ZeroFreeness.Appendix.CV.incidenceDiscount_cross"
+      "ZeroFreeness.Appendix.CV.ordered_incidence_average_le"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.CV.blockerCount",
+      "ZeroFreeness.Appendix.CV.rootFixedBadMass",
+      "ZeroFreeness.Appendix.CV.adjacentHardCoupling",
+      "ZeroFreeness.Appendix.CV.targetConstraints"
+    ],
+    "note": "Lean writes the contribution as θs_u times the root-kept mass disturbing w, minus θx^{t_w} times the same-neighbour entry, averaged over the coins; w need not be adjacent to u."
   },
   {
     "paper": "companion",
@@ -960,11 +1147,9 @@
     "title": "Expected loss of the geometric discount",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_expected",
-      "ZeroFreeness.Appendix.CV.betaPlus",
-      "ZeroFreeness.Appendix.CV.rootEvent_rate",
-      "ZeroFreeness.Appendix.CV.discountLoss_dominates"
+      "ZeroFreeness.Appendix.CV.cv_expected"
     ],
+    "defs": [],
     "note": "Lean's Loss_u is the first-cause charge, an upper bound on the paper's."
   },
   {
@@ -975,10 +1160,9 @@
     "title": "Disjointness of the output credits",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.total_discount_pointwise",
-      "ZeroFreeness.Appendix.CV.retained_root_add_crossCredit_le_outputScore",
-      "ZeroFreeness.Appendix.CV.crossCreditAt_le_output_vertex"
+      "ZeroFreeness.Appendix.CV.total_discount_pointwise"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -989,12 +1173,10 @@
     "title": "Finite component records",
     "status": "definition",
     "lean": [
-      "ZeroFreeness.Appendix.CV.Branch",
-      "ZeroFreeness.Appendix.CV.branch_state_restrictions",
-      "ZeroFreeness.Appendix.CV.component_encoding_exists",
-      "ZeroFreeness.Appendix.CV.mass_cap"
+      "ZeroFreeness.Appendix.CV.Branch"
     ],
-    "note": "The claims inside the definition are proved; the graph-level restriction ξ ≤ χ combines componentBranch_spec with branch_state_restrictions."
+    "defs": [],
+    "note": "The claims made inside the definition are proved in Lean."
   },
   {
     "paper": "companion",
@@ -1005,9 +1187,9 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.selectedRegular_local_charge_le",
-      "ZeroFreeness.Appendix.CV.singletonColour_local_charge",
-      "ZeroFreeness.Appendix.CV.canonicalColourCharge"
+      "ZeroFreeness.Appendix.CV.singletonColour_local_charge"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -1018,11 +1200,9 @@
     "title": "Balancing-point domination",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.Appendix.CV.balancing_domination",
-      "ZeroFreeness.Appendix.CV.low_balancing",
-      "ZeroFreeness.Appendix.CV.safe_count_budget",
-      "ZeroFreeness.Appendix.CV.low"
+      "ZeroFreeness.Appendix.CV.balancing_domination"
     ],
+    "defs": [],
     "note": "The closing facts that each term of the maximum equals 226/125 at the balancing pair and that the pair lies in R_γ are closed rational arithmetic with no separate declaration."
   },
   {
@@ -1033,9 +1213,9 @@
     "title": "Drift decomposition by colour",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.averaged_geometric_drift_corrected_le",
-      "ZeroFreeness.Appendix.CV.correctedHardColourCharge"
+      "ZeroFreeness.Appendix.CV.averaged_geometric_drift_corrected_le"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -1047,10 +1227,9 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.recordOne_corrected",
-      "ZeroFreeness.Appendix.CV.recordTwo_corrected",
-      "ZeroFreeness.Appendix.CV.one_balancing_equality",
-      "ZeroFreeness.Appendix.CV.correctedRegularCharge_available_low_le"
+      "ZeroFreeness.Appendix.CV.recordTwo_corrected"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -1062,9 +1241,9 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_high_bulk",
-      "ZeroFreeness.Appendix.CV.cv_high_missing",
-      "ZeroFreeness.Appendix.CV.cv_high_missing_corrected"
+      "ZeroFreeness.Appendix.CV.cv_high_missing"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -1075,11 +1254,10 @@
     "title": "The two root colours",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.rootColourCharge_le",
-      "ZeroFreeness.Appendix.CV.rootColourCharge",
-      "PottsCI.Vigoda.RootLocalPair.symm"
+      "ZeroFreeness.Appendix.CV.rootColourCharge_le"
     ],
-    "note": "The b case is rootColourCharge_le applied to RootLocalPair.symm."
+    "defs": [],
+    "note": "Lean states the bound for the colour a; the colour b follows by swapping the two sides."
   },
   {
     "paper": "companion",
@@ -1089,10 +1267,9 @@
     "title": "The drift envelope",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_assembly_1809",
-      "ZeroFreeness.Appendix.CV.cv_assembly",
-      "ZeroFreeness.Appendix.CV.low_eq_rates"
+      "ZeroFreeness.Appendix.CV.cv_assembly_1809"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -1103,11 +1280,9 @@
     "title": "Final numerical inequality",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.scalar_closure",
-      "ZeroFreeness.Appendix.CV.gammaGain",
-      "ZeroFreeness.Appendix.CV.gammaLoss",
-      "ZeroFreeness.Appendix.CV.gap"
+      "ZeroFreeness.Appendix.CV.scalar_closure"
     ],
+    "defs": [],
     "note": ""
   },
   {
@@ -1118,12 +1293,10 @@
     "title": "Geometric soft-CV contraction",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_contraction",
-      "ZeroFreeness.Appendix.CV.cvKernel",
-      "ZeroFreeness.Appendix.CV.cv_W_drift",
-      "ZeroFreeness.Appendix.CV.cv_contraction_of_regime"
+      "ZeroFreeness.Appendix.CV.cv_contraction"
     ],
-    "note": "An explicit coupling of the closed-interval kernel cvKernel for every x ∈ (0,1]."
+    "defs": [],
+    "note": "Lean constructs the coupling explicitly, for every x ∈ (0,1]."
   },
   {
     "paper": "companion",
@@ -1133,10 +1306,9 @@
     "title": "Soft-CV child–middle row discrepancy",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_child_middle_ham",
-      "ZeroFreeness.Appendix.CV.cv_child_middle_metric",
-      "ZeroFreeness.Appendix.CV.cvKernel_addBoundary_W_le"
+      "ZeroFreeness.Appendix.CV.cv_child_middle_ham"
     ],
+    "defs": [],
     "note": "Includes x = 1."
   },
   {
@@ -1147,12 +1319,13 @@
     "title": "Large-girth coupling independence",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.high_girth_coupling",
-      "ZeroFreeness.Appendix.Girth.largeGirthFamily",
-      "ZeroFreeness.Potts.root_W_le_of_option_relabel",
-      "ZeroFreeness.Appendix.Girth.closed_root_coupling_of_soft"
+      "ZeroFreeness.Appendix.Girth.high_girth_coupling"
     ],
-    "note": "Stated on boundary-count data; the (G, τ, r) form follows by ZeroFreeness.Potts.root_W_le_of_option_relabel."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.largeGirthFamily",
+      "ZeroFreeness.Potts.PinningFamily.RootCouplingBound"
+    ],
+    "note": "Stated on residual instances with a distinguished free root; the (G, τ, r) form follows by relabelling the free vertices so that r becomes the root."
   },
   {
     "paper": "companion",
@@ -1162,11 +1335,12 @@
     "title": "Exact Jacobian factorization",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.blockAction_energy_le",
-      "ZeroFreeness.Appendix.Girth.transformedBlock",
-      "ZeroFreeness.Appendix.Girth.hasDerivAt_transformed_message"
+      "ZeroFreeness.Appendix.Girth.blockAction_energy_le"
     ],
-    "note": "The squared operator-norm bound is stated as the energy inequality Σ_c (Jh)_c² ≤ F₁F₂‖h‖²."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.blockAction"
+    ],
+    "note": "The squared operator-norm bound is stated as the energy inequality Σ_c (J^p_v h)_c² ≤ F₁F₂‖h‖², assuming every p_v(c) > 0 (true for x > 0). J^p_v is given by its explicit entries, which Lean proves are the derivative of the φ-transformed recursion."
   },
   {
     "paper": "companion",
@@ -1177,11 +1351,16 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.Girth.sharp_message_marginal",
-      "ZeroFreeness.Appendix.Girth.messageCap_eq_paper_formula",
-      "ZeroFreeness.Appendix.Girth.potts_messageDomain_invariant",
-      "ZeroFreeness.Appendix.Girth.palette_mass_lower"
+      "ZeroFreeness.Appendix.Girth.messageCap_bounds",
+      "ZeroFreeness.Appendix.Girth.potts_messageDomain_invariant"
     ],
-    "note": "Stated for general weights and palettes; the choice A = A̲_v is admissible by palette_mass_lower and nonroot_four_slack."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.messageMarginal",
+      "ZeroFreeness.Appendix.Girth.messageOddsBound",
+      "ZeroFreeness.Appendix.Girth.messageCap",
+      "ZeroFreeness.Appendix.Girth.MessageDomain"
+    ],
+    "note": "The marginal bounds are stated for any weights a ∈ [0,1]^q and any A ≤ Σ_c a(c) with d + 4 ≤ A; the paper's A̲_v qualifies by Bernoulli's inequality and the four units of slack."
   },
   {
     "paper": "companion",
@@ -1191,12 +1370,14 @@
     "title": "Occupancy-factor bound",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.LocalRecursion.law_occupancy_le",
-      "ZeroFreeness.Appendix.Girth.message_occupancy_bound",
-      "ZeroFreeness.Appendix.Girth.cap_log_eq_entropy",
-      "ZeroFreeness.Appendix.Girth.entropyCorrection"
+      "ZeroFreeness.Appendix.Girth.LocalRecursion.law_occupancy_le"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.LocalRecursion",
+      "ZeroFreeness.Appendix.Girth.LocalRecursion.law",
+      "ZeroFreeness.Appendix.Girth.LocalRecursion.childEntropy"
+    ],
+    "note": "LocalRecursion allows any palette bound A ≤ Σ_c a_v(c) with d_v + 4 ≤ A in place of A̲_v, and likewise for each child; the paper's choice qualifies."
   },
   {
     "paper": "companion",
@@ -1207,11 +1388,16 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Appendix.Girth.LocalRecursion.weighted_scaled_matrix_contraction",
-      "ZeroFreeness.Appendix.Girth.hasDerivAt_scaled_transformed_message",
       "ZeroFreeness.Appendix.Girth.CavityTree.weightSquare_lower",
       "ZeroFreeness.Appendix.Girth.CavityTree.weightSquare_upper"
     ],
-    "note": "The weighted-norm form follows by taking T = max_i w_i²‖h_i‖² in weighted_scaled_matrix_contraction."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.LocalRecursion",
+      "ZeroFreeness.Appendix.Girth.LocalRecursion.childEntropy",
+      "ZeroFreeness.Appendix.Girth.scaledRowFactor",
+      "ZeroFreeness.Appendix.Girth.blockAction"
+    ],
+    "note": "Stated in squared form: with T = max_i w_i²‖h_i‖², it reads w_v²‖Ĵ_v h‖² ≤ ρ²T, the weighted-norm bound. The weight range is stated as 1 ≤ w_v² ≤ e^{1/6} on cavity trees."
   },
   {
     "paper": "companion",
@@ -1221,11 +1407,15 @@
     "title": "From Jacobian contraction to message contraction",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.LocalRecursion.weighted_finite_difference",
-      "ZeroFreeness.Appendix.Girth.LocalRecursion.interpolate",
-      "ZeroFreeness.Appendix.Girth.potential_interpolation_domain"
+      "ZeroFreeness.Appendix.Girth.LocalRecursion.weighted_finite_difference"
     ],
-    "note": "The displayed bound follows by taking T = max_i w_i²‖φ(n_i) − φ(m_i)‖² and square roots."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.LocalRecursion",
+      "ZeroFreeness.Appendix.Girth.messagePotential",
+      "ZeroFreeness.Appendix.Girth.LocalRecursion.childEntropy",
+      "ZeroFreeness.Appendix.Girth.messageMarginal"
+    ],
+    "note": "Stated in squared form with w² = 1/(1 − ζ) and ρ² = e^{−8/(81q)}, for inputs m_i and n_i ≤ B_i: taking T = max_i w_i²‖φ(n_i) − φ(m_i)‖² and square roots gives the displayed bound."
   },
   {
     "paper": "companion",
@@ -1236,11 +1426,14 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.Girth.root_factor_cancellation",
-      "ZeroFreeness.Appendix.Girth.rootInfluenceAction_energy",
-      "ZeroFreeness.Appendix.Girth.rootInfluenceAction",
-      "ZeroFreeness.Appendix.Girth.CavityTree.scaled_probability_domain"
+      "ZeroFreeness.Appendix.Girth.rootInfluenceAction_energy"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.scaledRowFactor",
+      "ZeroFreeness.Appendix.Girth.transformedBlock",
+      "ZeroFreeness.Appendix.Girth.rootInfluenceAction"
+    ],
+    "note": "The identity is stated entry by entry where 0 < p_r(c) < 1. The norm bound is the energy inequality for rootInfluenceAction, the right-hand side, whenever every m_{u→r}(c) ∈ [0, 1/4]."
   },
   {
     "paper": "companion",
@@ -1250,11 +1443,15 @@
     "title": "Tree total-influence decay",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.CavityTree.total_influence_decay_unconditional",
-      "ZeroFreeness.Appendix.Girth.CavityTree.levelTotalVariation",
-      "ZeroFreeness.Appendix.Girth.CavityTree.totalInfluenceConstant"
+      "ZeroFreeness.Appendix.Girth.CavityTree.total_influence_decay_unconditional"
     ],
-    "note": "Stated on cavity trees, the appendix's own encoding of pinned trees, with ℓ = k+1."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.CavityTree",
+      "ZeroFreeness.Appendix.Girth.CavityTree.levelTotalVariation",
+      "ZeroFreeness.Appendix.Girth.CavityTree.totalInfluenceConstant",
+      "ZeroFreeness.Appendix.Girth.decayRate"
+    ],
+    "note": "Stated on cavity trees, which record a pinned tree by its free component and pinned-neighbour colour counts, for each pair of root colours, with ℓ = k + 1."
   },
   {
     "paper": "companion",
@@ -1265,11 +1462,15 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Appendix.Girth.CavityTree.relative_spatial_decay",
-      "ZeroFreeness.Appendix.Girth.ratio_error_from_log",
-      "ZeroFreeness.Appendix.Girth.relativeMixingConstant",
       "ZeroFreeness.Appendix.Girth.CavityTree.eventual_ratio_spatial_mixing"
     ],
-    "note": "The log bound is relative_spatial_decay with K = k+2; the ratio form for K ≥ K₁ follows from ratio_error_from_log."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.CavityTree",
+      "ZeroFreeness.Appendix.Girth.CavityTree.Agreement",
+      "ZeroFreeness.Appendix.Girth.CavityTree.probability",
+      "ZeroFreeness.Appendix.Girth.decayRate"
+    ],
+    "note": "Stated with K = k + 2 on cavity trees agreeing up to the shell. The ratio form has an existential threshold; at every K ≥ K₁ it follows from the log bound, as |log r| ≤ ε ≤ 1 gives |r − 1| ≤ 2ε."
   },
   {
     "paper": "companion",
@@ -1279,12 +1480,15 @@
     "title": "Large-girth transfer from tree decay",
     "status": "formalized-narrowed",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.potts_eventual_transfer_uniform",
-      "ZeroFreeness.Appendix.Girth.potts_eventual_transfer",
-      "ZeroFreeness.Appendix.Girth.potts_eventual_transfer_source",
-      "ZeroFreeness.Appendix.CLMM.eventual_transfer_unconditional"
+      "ZeroFreeness.Appendix.Girth.potts_eventual_transfer_uniform"
     ],
-    "note": "The companion now states the lemma for the Potts family at positive activity, its only use, in place of general pairwise spin systems."
+    "defs": [
+      "ZeroFreeness.Appendix.CLMM.TreeTID",
+      "ZeroFreeness.Appendix.CLMM.TreeRelative",
+      "PottsCI.PinningData",
+      "ZeroFreeness.Potts.rootDeletedData"
+    ],
+    "note": "The companion now states the lemma for the Potts family at positive activity, its only use, in place of general pairwise spin systems. Lean fixes g and the cost before x, so no set J appears; A = C_INFL, B = C_SM, ρ = 1 − δ."
   },
   {
     "paper": "companion",
@@ -1294,11 +1498,15 @@
     "title": "BBR contraction certificate",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.BBR.contraction_certificate_unconditional",
-      "ZeroFreeness.Appendix.BBR.segmentWeightSquare",
-      "ZeroFreeness.Appendix.BBR.contraction_certificate_of_gap_two"
+      "ZeroFreeness.Appendix.BBR.contraction_certificate_unconditional"
     ],
-    "note": "The proof's non-exceptional case under q + 2 ≤ Δ is contraction_certificate_of_gap_two."
+    "defs": [
+      "ZeroFreeness.Appendix.BBR.start",
+      "ZeroFreeness.Appendix.CLMM.SameDomain",
+      "ZeroFreeness.Appendix.BBR.segmentWeightSquare",
+      "ZeroFreeness.Appendix.BBR.contractionSquare"
+    ],
+    "note": "Jointly realizable pairs are cavity trees related by SameDomain; the distance-one condition is stated as equal boundary counts at u, which agreeing pins imply."
   },
   {
     "paper": "companion",
@@ -1308,11 +1516,16 @@
     "title": "Differential contraction",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.BBR.differential_contraction",
       "ZeroFreeness.Appendix.BBR.node_differential",
       "ZeroFreeness.Appendix.BBR.point_certificate_unconditional"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.BBR.jacobianBlock",
+      "ZeroFreeness.Appendix.BBR.pointCoefficient",
+      "ZeroFreeness.Appendix.BBR.start",
+      "ZeroFreeness.Appendix.BBR.contractionSquare"
+    ],
+    "note": "The inequality is proved for every x ∈ (0, 1]. jacobianBlock is the closed-form block of the paper's proof; Lean proves separately that it is the derivative of the recursion."
   },
   {
     "paper": "companion",
@@ -1322,12 +1535,15 @@
     "title": "Influence–Jacobian identity",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.Appendix.BBR.level_influence_factorization",
-      "ZeroFreeness.Appendix.BBR.projected_level_response",
-      "ZeroFreeness.Appendix.BBR.response",
-      "ZeroFreeness.Appendix.Girth.CavityTree.influenceBlock"
+      "ZeroFreeness.Appendix.BBR.level_influence_factorization"
     ],
-    "note": "The per-vertex identity is the level identity with h supported on one vertex."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.CavityTree.Level",
+      "ZeroFreeness.Appendix.Girth.CavityTree.influenceBlock",
+      "ZeroFreeness.Appendix.BBR.projection",
+      "ZeroFreeness.Appendix.BBR.response"
+    ],
+    "note": "Lean proves the level identity at every depth k; the per-vertex identity is its case with h supported on one vertex."
   },
   {
     "paper": "companion",
@@ -1338,10 +1554,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.BBR.total_influence_decay_unconditional",
-      "ZeroFreeness.Appendix.BBR.totalInfluenceConstant_eq",
+      "ZeroFreeness.Appendix.BBR.totalInfluenceConstant_eq"
+    ],
+    "defs": [
+      "ZeroFreeness.Appendix.BBR.start",
+      "ZeroFreeness.Appendix.Girth.CavityTree.levelTotalVariation",
+      "ZeroFreeness.Appendix.BBR.totalInfluenceConstant",
       "ZeroFreeness.Appendix.BBR.contractionRate"
     ],
-    "note": ""
+    "note": "Level k + 1 of the tree rooted at r is the sphere ℓ = k + 1, so contractionRate Δ ^ k is θ^{ℓ−1}."
   },
   {
     "paper": "companion",
@@ -1352,10 +1573,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.BBR.root_spatial_energy_unconditional",
-      "ZeroFreeness.Appendix.BBR.root_relative_ssm_unconditional",
+      "ZeroFreeness.Appendix.BBR.root_relative_ssm_unconditional"
+    ],
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.CavityTree.Agreement",
+      "ZeroFreeness.Appendix.BBR.messageDistance",
+      "ZeroFreeness.Appendix.BBR.contractionSquare",
       "ZeroFreeness.Appendix.BBR.relativeConstant"
     ],
-    "note": ""
+    "note": "The children agree to depth k, so the first possible disagreement is at distance K = k + 2 from r: the bounds read Δqκ^{K−2} and C_SM θ^K."
   },
   {
     "paper": "companion",
@@ -1365,12 +1591,14 @@
     "title": "BBR-certified interval at large girth",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.Appendix.BBR.high_girth_coupling",
-      "ZeroFreeness.Potts.root_W_le_of_option_relabel",
+      "ZeroFreeness.Appendix.BBR.high_girth_coupling"
+    ],
+    "defs": [
+      "ZeroFreeness.Appendix.BBR.start",
       "ZeroFreeness.Appendix.Girth.largeGirthFamily",
       "ZeroFreeness.Potts.PinningFamily.PositiveRootCouplingBound"
     ],
-    "note": "Stated on boundary-count data; the (G, τ, r) form follows by ZeroFreeness.Potts.root_W_le_of_option_relabel."
+    "note": "Stated on residual instances (free graph with boundary counts) with a distinguished root; the (G, τ, r) form follows by relabelling the free vertices of G^τ so that r is the root."
   },
   {
     "paper": "companion",
@@ -1380,9 +1608,10 @@
     "title": "Edge-Potts coupling independence",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Edge.root_children_ci",
-      "ZeroFreeness.Appendix.Edge.root_children_ci_positive",
-      "ZeroFreeness.Appendix.Edge.root_children_ci_open"
+      "ZeroFreeness.Appendix.Edge.root_children_ci"
+    ],
+    "defs": [
+      "ZeroFreeness.Potts.rootChildData"
     ],
     "note": ""
   },
@@ -1394,8 +1623,13 @@
     "title": "Edge-Potts zero-freeness",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Edge.edge_potts_zero_free",
-      "ZeroFreeness.Appendix.Edge.edgeGraphClass"
+      "ZeroFreeness.Appendix.Edge.edge_potts_zero_free"
+    ],
+    "defs": [
+      "ZeroFreeness.pottsInterval",
+      "ZeroFreeness.Potts.normalizedPartition",
+      "ZeroFreeness.Potts.fullPartition",
+      "PottsCI.PartialColouring.pinnedConflictCount"
     ],
     "note": ""
   },
@@ -1407,12 +1641,10 @@
     "title": "Slot representation",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Edge.slot_representation_pnat",
-      "ZeroFreeness.Appendix.Edge.slot_representation",
-      "ZeroFreeness.Appendix.Edge.IsSlotLaw",
-      "ZeroFreeness.Appendix.Edge.exists_isSlotLaw"
+      "ZeroFreeness.Appendix.Edge.slot_representation_pnat"
     ],
-    "note": "Proved by compactness from the finite real-rooted approximants instead of the paper's Hadamard-factorization argument."
+    "defs": [],
+    "note": "Proved by compactness from finite real-rooted approximants instead of the paper's Hadamard-factorization argument."
   },
   {
     "paper": "companion",
@@ -1422,12 +1654,15 @@
     "title": "Exact lift and inherited bounds",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Edge.lem_edge_slot_lift",
-      "ZeroFreeness.Appendix.Edge.lem_edge_slot_lift_exists",
-      "ZeroFreeness.Appendix.Edge.edgeSlotModel",
-      "ZeroFreeness.Appendix.Edge.SlotModel"
+      "ZeroFreeness.Appendix.Edge.lem_edge_slot_lift"
     ],
-    "note": "The countable lift on C × ℕ × ℕ, with exact colour projection."
+    "defs": [
+      "ZeroFreeness.Appendix.Edge.edgeSlotModel",
+      "ZeroFreeness.Appendix.Edge.SlotModel.colourFibreLaw",
+      "ZeroFreeness.Appendix.Edge.SlotModel.Reachable",
+      "ZeroFreeness.Appendix.Edge.SlotModel.Bounds"
+    ],
+    "note": "Slot labels are ℕ rather than r ≥ 1, so lifted states lie in C × ℕ × ℕ. Lean proves it for every slot law κ of the slot representation and every ordering of the free edges' endpoints."
   },
   {
     "paper": "companion",
@@ -1438,11 +1673,15 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.Edge.OneLabel.edge_one_label",
-      "ZeroFreeness.Appendix.Edge.OneLabel.edge_one_label_half",
-      "ZeroFreeness.Appendix.Edge.OneLabel.edge_one_label_zero",
-      "ZeroFreeness.Appendix.Edge.OneLabel.edge_one_label_coupling"
+      "ZeroFreeness.Appendix.Edge.OneLabel.edge_one_label_half"
     ],
-    "note": "Stated on the countable slot model; α ≠ β is not required."
+    "defs": [
+      "ZeroFreeness.Appendix.Edge.OneLabel.addB",
+      "ZeroFreeness.Appendix.Edge.SlotModel.Bounds",
+      "ZeroFreeness.Appendix.Edge.OneLabel.CW",
+      "ZeroFreeness.Appendix.Edge.oneLabelBound"
+    ],
+    "note": "Lean bounds W_{1,F} for each comparison with |F| ≤ n in every countable slot model, which bounds the supremum T_n; T_0 = 0 is the case n = 0. α ≠ β is not required."
   },
   {
     "paper": "companion",
@@ -1452,12 +1691,15 @@
     "title": "Second-layer disintegration",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.second_layer_disintegration",
-      "ZeroFreeness.Appendix.Girth.second_layer_disintegration_of_degree",
-      "ZeroFreeness.Appendix.Girth.assemble_bijective",
-      "ZeroFreeness.Appendix.Girth.gibbs_conditional_product"
+      "ZeroFreeness.Appendix.Girth.second_layer_disintegration_of_degree"
     ],
-    "note": "Every x ≥ 0, with the vertex v written as none in the library's Option form."
+    "defs": [
+      "ZeroFreeness.Potts.optionMiddleData",
+      "ZeroFreeness.Appendix.Girth.GraphTwoLayer.First",
+      "ZeroFreeness.Appendix.Girth.GraphTwoLayer.Second",
+      "ZeroFreeness.Appendix.Girth.neighbourConditional"
+    ],
+    "note": "Here v is the vertex none of a residual instance on Option V. Every x ≥ 0 is covered."
   },
   {
     "paper": "companion",
@@ -1467,12 +1709,15 @@
     "title": "One-edge colour operator",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.girth5_one_edge",
-      "ZeroFreeness.Appendix.Girth.one_edge_operator",
-      "ZeroFreeness.Appendix.Girth.projectedEdgeOperator_norm_le",
-      "ZeroFreeness.Appendix.Girth.cavityLawNN_atom_le"
+      "ZeroFreeness.Appendix.Girth.girth5_one_edge"
     ],
-    "note": "Includes x = 0."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.cavityLawNN",
+      "ZeroFreeness.Appendix.Girth.projectedEdgeOperator",
+      "ZeroFreeness.Appendix.Girth.oneEdgeConstant",
+      "ZeroFreeness.Appendix.Girth.edgeResponse"
+    ],
+    "note": "Every x ∈ [0,1], including x = 0."
   },
   {
     "paper": "companion",
@@ -1483,11 +1728,15 @@
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Appendix.Girth.GraphTwoLayer.actual_estimates",
-      "ZeroFreeness.Appendix.Girth.InsertionModel.CovarianceEstimates",
-      "ZeroFreeness.Appendix.Girth.InsertionGraph.G_coordinate_variance",
-      "ZeroFreeness.Appendix.Girth.ColourCovarianceBound"
+      "ZeroFreeness.Appendix.Girth.InsertionGraph.G_coordinate_variance"
     ],
-    "note": "The weighted bound follows by substituting z∘√r into ColourCovarianceBound, and the independence of β_{u,c} from σ_{W_u} from beta_congr and pi_shell."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.CovarianceScale",
+      "ZeroFreeness.Appendix.Girth.girthFiveThreshold",
+      "ZeroFreeness.Appendix.Girth.GraphTwoLayer.model",
+      "ZeroFreeness.Appendix.Girth.InsertionModel.CovarianceEstimates"
+    ],
+    "note": "The covariance bounds are stated as Var(Σ_c z_c G_c) ≤ g_Δ²‖z‖₂²; the weighted bound follows with z_c√r_c. β_{u,c} ignores σ_{W_u} because it involves only π_{j,c} for j ≠ u, each a function of σ_{W_j}."
   },
   {
     "paper": "companion",
@@ -1497,12 +1746,15 @@
     "title": "Unrestricted girth-five coupling independence",
     "status": "formalized-equivalent",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.girth_five_coupling",
-      "ZeroFreeness.Appendix.Girth.girthFiveCIThreshold",
-      "ZeroFreeness.Potts.root_W_le_of_option_relabel",
-      "PottsCI.PartialColouring.degreeBound_of_original"
+      "ZeroFreeness.Appendix.Girth.girth_five_coupling"
     ],
-    "note": "Stated on residual instances; the (G, τ, r) form follows by ZeroFreeness.Potts.root_W_le_of_option_relabel."
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.girthFiveCIThreshold",
+      "PottsCI.PinningData",
+      "ZeroFreeness.Potts.optionChildData",
+      "PottsCI.FinDist.W"
+    ],
+    "note": "Stated on residual instances with degree budget Δ and root none. The (G, τ, r) form follows by relabelling V^τ as Option O, since maximum degree Δ in G gives the budget."
   },
   {
     "paper": "companion",
@@ -1513,11 +1765,19 @@
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.Girth.GraphStar.cavity_scaled_le",
+      "ZeroFreeness.Appendix.Girth.GraphStar.centre_scaled_le",
       "ZeroFreeness.Appendix.Girth.ConditionalStar.leafDensity_budget",
       "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.zero_bound",
-      "ZeroFreeness.Appendix.Girth.GraphStar.schurParameters"
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.singleton_residual_lower",
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.correction_additive_bound"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.GraphStar.model",
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters",
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.bound",
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.singletonError"
+    ],
+    "note": "R ≥ c_δ and the operator bounds are proved for every star with SchurParameters, which every star of a residual instance satisfies under the lemma's hypotheses. ‖P_00‖ ≤ r_* and the additive compression are stated as quadratic-form bounds."
   },
   {
     "paper": "companion",
@@ -1527,12 +1787,14 @@
     "title": "Unequal-incidence star inequality",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.meanStarDefect_nonneg",
-      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.raw_star_inequality",
-      "ZeroFreeness.Appendix.Girth.ConditionalStar.meanStarDefect_eq_raw",
-      "ZeroFreeness.Appendix.Girth.GraphStar.schurParameters"
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters.raw_star_inequality"
     ],
-    "note": ""
+    "defs": [
+      "ZeroFreeness.Appendix.Girth.ConditionalStar",
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.SchurParameters",
+      "ZeroFreeness.Appendix.Girth.ConditionalStar.rawStarDefect"
+    ],
+    "note": "Proved for every star with SchurParameters, which includes every star of a residual instance under the hypotheses. The operator inequality is stated through its quadratic form at every function f; d = 0 is included."
   },
   {
     "paper": "companion",
@@ -1542,11 +1804,14 @@
     "title": "Uniform spectral gap under the degree budget",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.Girth.OperatorGap.potts_gap_girth5",
-      "ZeroFreeness.Appendix.Girth.OperatorGap.potts_gap_girth5_functions",
-      "ZeroFreeness.Appendix.Girth.OperatorGap.glauberLaplacian",
-      "ZeroFreeness.Appendix.Girth.girth_five_closed_poincare"
+      "ZeroFreeness.Appendix.Girth.OperatorGap.potts_gap_girth5"
     ],
-    "note": "The operator form 𝓛² ⪰ γ_δ𝓛 on the supported L² space, for every x ∈ [0,1]."
+    "defs": [
+      "PottsCI.PinningData",
+      "ZeroFreeness.Appendix.Girth.girthFiveThreshold",
+      "PottsCI.PinningData.DegreeBound",
+      "ZeroFreeness.Appendix.Girth.OperatorGap.glauberLaplacian"
+    ],
+    "note": ""
   }
 ]

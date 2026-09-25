@@ -20,7 +20,7 @@ import sys
 import unicodedata
 from pathlib import Path
 
-import build as checker
+import common
 import tikz_html
 
 ROMAN = [(1000, "m"), (900, "cm"), (500, "d"), (400, "cd"), (100, "c"), (90, "xc"),
@@ -91,7 +91,7 @@ def read_group(text, i):
 def group_at(text, i):
     """The brace group at text[i], or None when it is not closed."""
     try:
-        return checker.read_group(text, i)
+        return common.read_group(text, i)
     except IndexError:
         return None, i + 1
 
@@ -449,7 +449,7 @@ class Converter:
         for label in labels:
             label = label.strip()
             num, kind = self.num.labels.get(label, "??"), self.num.kinds.get(label, "")
-            words = checker.KIND_WORDS.get(kind, ("", ""))
+            words = common.KIND_WORDS.get(kind, ("", ""))
             if kind == "enumi":
                 words = ("item", "items")
             elif kind == "equation":
@@ -465,8 +465,8 @@ class Converter:
         for (single, plural), refs in self.ref_groups(labels):
             nums = ["(%s)" % n if k == "equation" else n for _, n, k in refs]
             word = single if len(nums) == 1 else plural
-            parts.append((word + " " if word else "") + checker.and_join(nums))
-        return checker.and_join(parts)
+            parts.append((word + " " if word else "") + common.and_join(nums))
+        return common.and_join(parts)
 
     def ref_html(self, labels, style="cref"):
         parts = []
@@ -476,7 +476,7 @@ class Converter:
                 shown = "(%s)" % num if kind == "equation" or style == "eqref" else num
                 links.append((label, shown))
             if style != "cref":
-                parts.append(checker.and_join('<a class="ref" href="#%s">%s</a>' % (html.escape(l), s)
+                parts.append(common.and_join('<a class="ref" href="#%s">%s</a>' % (html.escape(l), s)
                                               for l, s in links))
                 continue
             word = single if len(links) == 1 else plural
@@ -484,10 +484,10 @@ class Converter:
                 parts.append('<a class="ref" href="#%s">%s%s</a>'
                              % (html.escape(links[0][0]), word + "\u00a0" if word else "", links[0][1]))
             else:
-                joined = checker.and_join('<a class="ref" href="#%s">%s</a>' % (html.escape(l), s)
+                joined = common.and_join('<a class="ref" href="#%s">%s</a>' % (html.escape(l), s)
                                           for l, s in links)
                 parts.append((word + "\u00a0" if word else "") + joined)
-        return checker.and_join(parts)
+        return common.and_join(parts)
 
     def cite_html(self, keys, note):
         links = ['<a class="cite" href="#bib-%s">%s</a>' % (html.escape(k.strip()),
@@ -1056,7 +1056,7 @@ def convert(tex_path, entries, key, pdf_path=None, figure_dir=None):
     preamble, _, body = source.partition("\\begin{document}")
     body = body.split("\\end{document}")[0]
     theorems = theorem_styles(preamble)
-    macros = checker.parse_macros(source)
+    macros = common.parse_macros(source)
     macros["\\textup"] = "\\textrm{#1}"
     bbl = tex_path.with_suffix(".bbl")
     bib = bibliography(bbl.read_text()) if bbl.exists() else []
@@ -1105,9 +1105,9 @@ def convert(tex_path, entries, key, pdf_path=None, figure_dir=None):
     annotated = conv.protect_math(annotated)
 
     title = re.search(r"\\title\{", preamble)
-    title_tex, _ = checker.read_group(preamble, title.end() - 1) if title else ("", 0)
+    title_tex, _ = common.read_group(preamble, title.end() - 1) if title else ("", 0)
     author = re.search(r"\\author\{", preamble)
-    author_tex, _ = checker.read_group(preamble, author.end() - 1) if author else ("", 0)
+    author_tex, _ = common.read_group(preamble, author.end() - 1) if author else ("", 0)
     affiliations = [conv.inline(conv.protect_math(t)) for t in re.findall(r"\\thanks\{([^}]*)\}", author_tex)]
     authors = []
     for part in author_tex.split("\\and"):
