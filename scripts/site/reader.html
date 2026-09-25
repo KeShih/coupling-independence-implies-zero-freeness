@@ -258,18 +258,8 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 .sub h3 { margin: 0; font: 600 15px/1.4 var(--sans); color: var(--ink); }
 .sub .aside { font-size: 14px; color: var(--muted); }
 .note code { font-size: 13px; background: var(--code-bg); border-radius: 4px; padding: 1px 4px; overflow-wrap: anywhere; }
-/* A Lean declaration: its statement as code. The declared name links to the
-   source; copy and GitHub buttons appear on hover in the bottom corner, clear
-   of the name, and sit below the code on touch screens. */
+/* A Lean declaration: its statement as code; the declared name links to the source. */
 .decls { display: grid; gap: 12px; margin-top: 22px; }
-.decl .code { position: relative; }
-.tools { position: absolute; bottom: 5px; right: 5px; display: flex; gap: 2px; padding: 2px; border-radius: 8px;
-  background: var(--code-bg); opacity: 0; transition: opacity .15s; }
-.decl .code:hover .tools, .tools:focus-within { opacity: 1; }
-@media (hover: none) { .tools { position: static; opacity: 1; justify-content: flex-end; background: none; padding: 2px 0 0; } }
-.tool { width: 28px; height: 28px; border-radius: 6px; display: inline-grid; place-items: center; color: var(--muted); }
-.tool:hover { color: var(--ink); background: var(--surface); text-decoration: none; }
-.tool svg { width: 15px; height: 15px; }
 pre.lean a.d { color: inherit; text-decoration: none; }
 pre.lean a.d:hover { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 /* Definitions a statement uses: the Lean name, the paper's symbol and a gloss;
@@ -385,9 +375,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
   border: 1px solid var(--line-2); padding: 8px 14px 8px 10px; border-radius: 999px; box-shadow: var(--shadow); }
 .back-btn:hover { color: var(--accent-ink); border-color: var(--accent); }
 .back-btn svg { width: 15px; height: 15px; }
-.toast { position: fixed; z-index: 70; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
-  background: var(--ink); color: var(--page); font: 550 13px/1 var(--sans); padding: 10px 14px; border-radius: 999px; transition: opacity .2s, transform .2s; }
-.toast.on { opacity: 1; transform: translate(-50%, 0); }
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: transparent; overflow: hidden; }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 
@@ -462,7 +449,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
 </aside>
 <div class="scrim" id="scrim"></div>
 <div class="peek" id="peek" role="tooltip" hidden></div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script id="data" type="application/json">@@DATA@@</script>
 <script>
@@ -486,7 +472,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
     prev: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>',
     next: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5 10.5 8 6 12.5"/></svg>',
     ext: '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9"/></svg>',
-    copy: '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h.5"/></svg>',
     chev: '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10 8 5.5l4.5 4.5"/></svg>',
     check: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.4 6.6 11.4 12.5 4.8"/></svg>',
     dot: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.6" fill="currentColor"/></svg>',
@@ -842,8 +827,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
       return '<a class="d" href="' + url + '" target="_blank" rel="noopener" title="' + where + '">' + n + '</a>';
     });
     return '<article class="decl" aria-label="' + esc(d.short) + '"><div class="code"><pre class="lean"><code>' + code + '</code></pre>' +
-      '<div class="tools"><button class="tool" type="button" data-copy="' + esc(name) + '" aria-label="Copy the full name ' + esc(name) + '" title="Copy the full name">' + ICON.copy + '</button>' +
-      '<a class="tool" href="' + url + '" target="_blank" rel="noopener" aria-label="' + where + '" title="' + where + '">' + ICON.ext + '</a></div></div>' +
+      '</div>' +
       (d.more ? '<a class="more" href="' + url + '" target="_blank" rel="noopener">' + d.more + ' more lines on GitHub ' + ICON.ext + '</a>' : "") +
       '</article>';
   }
@@ -952,29 +936,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   panel.addEventListener("click", function (e) {
     var go = e.target.closest("[data-go]");
     if (go && go.dataset.go) { goTo(go.dataset.go, { select: true, remember: false }); return; }
-    var copy = e.target.closest("[data-copy]");
-    if (copy) copyText(copy.dataset.copy, "Copied " + copy.dataset.copy.split(".").pop());
   });
-
-  function copyText(text, message) {
-    var done = function () { toast(message); };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
-    } else { fallbackCopy(text); done(); }
-  }
-  function fallbackCopy(text) {
-    var t = document.createElement("textarea");
-    t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
-    document.body.appendChild(t); t.select();
-    try { document.execCommand("copy"); } catch (e) {}
-    t.remove();
-  }
-  var toastTimer;
-  function toast(message) {
-    var t = $("toast");
-    t.textContent = message; t.classList.add("on");
-    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove("on"); }, 1600);
-  }
 
   // ---- Bottom sheet on phones ------------------------------------------------------
   function updateHandle() {
