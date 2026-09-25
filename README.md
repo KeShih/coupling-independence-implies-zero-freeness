@@ -209,5 +209,5 @@ the checked sources, their SHA-256 hashes and the last full run.
 `CI2ZF.lean` imports the whole library. To read the proofs, start with the
 [documentation index](docs/README.md) or the [proof overview](docs/overview.md).
 
-The formalization was developed with assistance from GPT-5.6 Sol, GPT-6
-Astra and Claude Opus 5.5, as disclosed in both papers.
+The formalization was developed with assistance from GPT-6 Astra and Claude
+Opus 5.5, as disclosed in both papers.

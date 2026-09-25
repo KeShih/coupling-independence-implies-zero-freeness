@@ -50,7 +50,7 @@
     "broken_local_links": [],
     "link_check_scope": "Local target file existence; external URLs not fetched by this script.",
     "document_sha256": {
-      "README.md": "5b63208e5c55e48e064ccdd7a29a4bf6d7cfe2736142613ea963bc7f78d4b284",
+      "README.md": "8b92ad7f35ccf55f46e9a3a87619b9bc1f908b3ed66e629cc7791e72362bd334",
       "docs/README.md": "05adaf74db3ad43a8437a6f15a3f8a37b79e9c5d7396a9996e319d00f65a49c1",
       "docs/appendix/README.md": "72ca82a0428195e57df77766d8502de2781789f814c9a7846cf5898980b81ad8",
       "docs/appendix/STATUS.md": "1a751cbb11bc18db39d5f5d5f5cc3b7fbd338f53f6589e91c7303065724814a4",
@@ -81,7 +81,7 @@
     "missing_imports": [],
     "lexer_issues": [],
     "scanner_sha256": "cebfb9f2b8c57f9fb2ab32d91612b1bf0f04f6b1aa7f52525ae21e744a8e3529",
-    "closure_manifest_sha256": "27f4c5ba9a39dc1e702baa330f3b0da99973aa3df933c96876aaa5538c46d8f8"
+    "closure_manifest_sha256": "2141510e64c739c00a30c87d61078fcfbd8731cc08efb24479209c55bb4eb1d3"
   },
   "literature_input_register": "external-inputs.md",
   "region_statements_and_inputs": "appendix/STATUS.md",
@@ -701,7 +701,7 @@
       "CI2ZF.Potts.Theorems.UniformClassConstants"
     ],
     "retained_mathematical_inputs": [],
-    "companion_pdf_sha256": "3cca379931e770f15c4e08f2ae7b46639eada70fafbf749dc569b8542e530967",
+    "companion_pdf_sha256": "3567c7ce79711a7f894c36d6885b9b788323c7b896998fc8fd13c6516e90711d",
     "signature_and_axiom_check_sha256": "2532f8b3ee4f097be2bc01844748235a995dfdc58ea3b4a69b0ae0dbd235ced5",
     "signature_and_axiom_log_sha256": "0db2fb865f27254e6a7a8b5fc5fdec3ec2450c667a6b8e441db218fb428d4223",
     "build_mode": "Incremental build with cached unchanged dependencies; changed modules compiled and whole-library transitive axiom audit rerun."
