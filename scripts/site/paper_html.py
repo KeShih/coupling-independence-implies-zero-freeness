@@ -387,6 +387,7 @@ class Converter:
         self.cites = {key: label for key, label, _ in bib}
         self.verbatim, self.figure_images = verbatim, figure_images
         self.in_figure = False
+        self.titles = {}
         self.math = []
         self.sections = []
         self.statement_ids = {}
@@ -804,7 +805,9 @@ class Converter:
         self.statement_ids[ident] = anchor
         head = '<span class="thm-name">%s %s</span>' % (word, number)
         if title:
-            head += ' <span class="thm-title">(%s)</span>' % self.inline(title)
+            title_html = self.inline(title)
+            self.titles[ident] = title_html
+            head += ' <span class="thm-title">(%s)</span>' % title_html
         head = '<span class="thm-head">%s.</span>' % head
         return ('<section class="thm thm-%s" id="%s" data-stmt="%s" data-kind="%s">%s</section>'
                 % (style, html.escape(anchor), ident, env, self.blocks(body[j:], lead=head)))
@@ -1130,7 +1133,8 @@ def convert(tex_path, entries, key, pdf_path=None, figure_dir=None):
     missing = [e for e in entries if "%s-%s-%s" % (key, e["kind"], e["number"]) not in conv.statement_ids]
     fail(["%s %s" % (e["kind"], e["number"]) for e in missing], "%s: statements not rendered" % tex_path)
     return dict(html=html_out, sections=conv.sections, macros=macros,
-                anchors=conv.statement_ids, figures=sorted(name for name, _, _ in made.values()))
+                anchors=conv.statement_ids, titles=conv.titles,
+                figures=sorted(name for name, _, _ in made.values()))
 
 
 def bibliography_html(conv, bib):

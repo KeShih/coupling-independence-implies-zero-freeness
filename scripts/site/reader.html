@@ -71,17 +71,14 @@ code, pre { font-family: var(--mono); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* App frame ------------------------------------------------------------ */
-.app { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr);
+.app { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr);
   padding-top: env(safe-area-inset-top, 0px); }
-.bar { height: var(--bar-h); display: flex; align-items: center; gap: 14px; padding: 0 14px 0 10px;
+.papers .brief { display: none; }
+.bar { min-width: 0; height: var(--bar-h); display: flex; align-items: center; gap: 14px; padding: 0 14px 0 10px;
   border-bottom: 1px solid var(--line); background: var(--page); position: relative; z-index: 20; }
 .icon-btn { width: 36px; height: 36px; border-radius: 10px; display: inline-grid; place-items: center; color: var(--ink-2); flex: none; }
 .icon-btn:hover { background: var(--surface-2); color: var(--ink); }
 .icon-btn svg { width: 19px; height: 19px; }
-.brand { display: flex; align-items: baseline; gap: 8px; color: var(--ink); font-weight: 650; letter-spacing: -0.01em; white-space: nowrap; }
-.brand:hover { text-decoration: none; }
-.brand .spark { color: var(--accent); font-size: 18px; line-height: 1; align-self: center; }
-.brand-sub { color: var(--muted); font-weight: 500; font-size: 13.5px; }
 .papers { display: inline-flex; padding: 3px; border-radius: 11px; background: var(--surface-2); border: 1px solid var(--line); }
 .papers button { padding: 6px 12px; border-radius: 8px; font-size: 13.5px; font-weight: 550; color: var(--ink-2); white-space: nowrap; }
 .papers button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
@@ -234,7 +231,7 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 .flash { animation: flash 1.6s ease-out; }
 @keyframes flash { 0%, 30% { background: var(--accent-wash-2); } 100% { background: transparent; } }
 .thm.flash { animation: none; }
-.doc.stmt-only .chapter > :not(.h):not(.thm), .doc.stmt-only .chapter > .abstract { display: none; }
+.doc.stmt-only .chapter > :not(.h):not(.thm), .doc.stmt-only .chapter > .abstract, .doc.stmt-only .h.no-stmt { display: none; }
 .doc.stmt-only .title-block { margin-bottom: 10px; }
 .fallback-note { font: 14px/1.55 var(--sans); color: var(--ink-2); background: var(--surface); border: 1px solid var(--line);
   border-radius: 12px; padding: 12px 16px; margin: 0 0 24px; }
@@ -270,7 +267,8 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 @media (hover: none) { .copy { opacity: 1; } }
 .copy:hover { color: var(--ink); background: var(--surface); }
 .decl-doc { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
-.decl-doc code { font-size: 11.5px; background: var(--code-bg); border-radius: 4px; padding: 1px 4px; }
+.decl-doc code, .note code { font-size: 11.5px; background: var(--code-bg); border-radius: 4px; padding: 1px 4px; overflow-wrap: anywhere; }
+.m-raw { font-family: var(--mono); font-size: 0.9em; }
 pre.lean { margin: 10px 0 0; padding: 11px 13px; background: var(--code-bg); border-radius: 10px; font-size: 12px; line-height: 1.6;
   overflow: auto; max-height: 26em; tab-size: 2; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
 pre.lean .ln { display: block; text-indent: -3ch; }
@@ -329,7 +327,10 @@ details.more-box[open] summary::before { content: "\2212  "; }
 .toc-head input:focus { outline: 2px solid var(--accent-wash-2); border-color: var(--accent); }
 .toc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .toc-count { font-size: 12.5px; color: var(--muted); }
-.switch { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px/1 var(--sans); color: var(--ink-2); flex: none; }
+.switch { display: inline-flex; align-items: center; gap: 8px; font: 500 13.5px/1 var(--sans); color: var(--ink-2); flex: none;
+  padding: 7px 10px; border-radius: 8px; white-space: nowrap; }
+.switch:hover { background: var(--surface-2); color: var(--ink); }
+.switch[aria-checked="true"] { color: var(--ink); }
 .switch::before { content: ""; width: 26px; height: 15px; border-radius: 99px; background: var(--line-2); transition: background .15s;
   box-shadow: inset 0 0 0 2px var(--line-2); background-image: radial-gradient(circle at 7.5px 50%, var(--surface) 5px, transparent 5.5px); }
 .switch[aria-checked="true"]::before { background-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent);
@@ -375,13 +376,14 @@ details.more-box[open] summary::before { content: "\2212  "; }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 
 /* Narrow screens ---------------------------------------------------------- */
-@media (max-width: 1100px) { .brand-sub, #pdfLink, #checkerLink { display: none; } }
+@media (max-width: 1100px) { #githubLink { display: none; } }
 @media (max-width: 860px) {
   :root { --bar-h: 50px; }
   .bar { gap: 8px; padding: 0 8px; }
-  .brand { display: none; }
   .papers button { padding: 6px 9px; font-size: 13px; }
-  .toggle .long, #githubLink { display: none; }
+  #pdfLink { display: none; }
+  .switch .long { display: none; }
+  .switch { padding: 7px 6px; gap: 6px; }
   .main { grid-template-columns: minmax(0, 1fr); }
   .splitter { display: none; }
   .paper-pane { padding-bottom: calc(var(--peek) + env(safe-area-inset-bottom, 0px)); }
@@ -402,7 +404,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
   .panel { padding: 6px 18px 40px; }
   .back-btn { bottom: calc(var(--peek) + 16px); }
 }
-@media (max-width: 420px) { .toggle { display: none; } }
+
+@media (max-width: 520px) { .papers .full { display: none; } .papers .brief { display: inline; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -412,8 +415,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
     <button class="icon-btn" id="tocBtn" type="button" aria-label="Contents and search" aria-expanded="false" aria-controls="toc">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg>
     </button>
-    <a class="brand" href="#" id="brand"><span class="spark" aria-hidden="true">&#10035;</span>CI2ZF</a>
     <div class="papers" role="tablist" aria-label="Paper" id="paperTabs"></div>
+    <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false" title="Show only the numbered statements (s)"><span>Statements<span class="long"> only</span></span></button>
     <div class="bar-end">
       <a class="bar-link" id="pdfLink" href="#" target="_blank" rel="noopener">PDF</a>
       <a class="bar-link" id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
@@ -438,10 +441,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
 <aside class="toc" id="toc" aria-label="Contents">
   <div class="toc-head">
     <input type="search" id="filter" placeholder="Find a statement, title or Lean name" autocomplete="off" aria-label="Find a statement, title or Lean name">
-    <div class="toc-row">
-      <span class="toc-count" id="tocCount"></span>
-      <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false">Statements only</button>
-    </div>
+    <div class="toc-count" id="tocCount"></div>
   </div>
   <nav class="toc-list" id="tocList"></nav>
   <div class="toc-foot"><a href="checker.html">Statement checker</a><a id="readmeLink" href="#" target="_blank" rel="noopener">README</a></div>
@@ -491,6 +491,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
   function tone(s) { return DATA.statuses[s.status].tone === "muted" ? "muted" : "good"; }
   function glyph(s) { return DATA.statuses[s.status].glyph; }
   function label(s) { return s.word + " " + s.number; }
+  // The statement's title as the paper sets it (with math), else the coverage title.
+  function titleHtml(s) { return s.title_html || esc(s.title); }
 
   // ---- Theme ----------------------------------------------------------------
   var root = document.documentElement;
@@ -519,7 +521,10 @@ details.more-box[open] summary::before { content: "\2212  "; }
     if (el.classList && (el.classList.contains("m") || el.classList.contains("md")) && !el.classList.contains("katex-done")) typeset(el);
   }
   function typeset(node) {
-    try { katex.render(node.textContent, node, katexOptions(node.classList.contains("md"))); } catch (e) {}
+    var src = node.getAttribute("data-src"), opts = katexOptions(node.classList.contains("md"));
+    if (src !== null) opts.throwOnError = true;  // formulas found in notes: show the original text on failure
+    try { katex.render(node.textContent, node, opts); }
+    catch (e) { if (src !== null) { node.textContent = src; node.classList.add("m-raw"); } }
     node.classList.add("katex-done");
   }
   function scheduleMath() {
@@ -569,7 +574,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   Object.keys(DATA.papers).forEach(function (key) {
     var b = document.createElement("button");
     b.type = "button"; b.setAttribute("role", "tab"); b.dataset.paper = key;
-    b.textContent = DATA.papers[key].short;
+    b.innerHTML = '<span class="full">' + esc(DATA.papers[key].short) + '</span><span class="brief">' + esc(DATA.papers[key].short.split(" ")[0]) + '</span>';
     b.addEventListener("click", function () { if (state.paper !== key) openPaper(key); });
     tabs.appendChild(b);
   });
@@ -613,19 +618,22 @@ details.more-box[open] summary::before { content: "\2212  "; }
 
   function indexDoc(p) {
     sectionOf = {}; headings = []; thms = [];
-    var h2 = null, h3 = null;
+    var h2 = null, h3 = null, h4 = null;
     doc.querySelectorAll("h2.h, h3.h, h4.h, .thm[data-stmt]").forEach(function (el) {
       if (el.classList.contains("h")) {
         var info = { el: el, id: el.id, num: (el.querySelector(".h-num") || {}).textContent || "",
           title: (el.querySelector(".h-text") || el).innerHTML, level: el.tagName === "H2" ? 1 : el.tagName === "H3" ? 2 : 3 };
-        if (info.level === 1) { h2 = info; h3 = null; } else if (info.level === 2) { h3 = info; }
+        if (info.level === 1) { h2 = info; h3 = h4 = null; } else if (info.level === 2) { h3 = info; h4 = null; } else { h4 = info; }
         info.chapter = h2;
         headings.push(info);
       } else {
         sectionOf[el.dataset.stmt] = { chapter: h2, section: h3 || h2 };
+        [h2, h3, h4].forEach(function (h) { if (h) h.has = true; });
         thms.push(el);
       }
     });
+    // In statements-only mode, headings of sections without statements are hidden.
+    headings.forEach(function (h) { h.el.classList.toggle("no-stmt", !h.has); });
   }
 
   function decorate() {
@@ -800,10 +808,10 @@ details.more-box[open] summary::before { content: "\2212  "; }
   function stmtView(s) {
     var st = DATA.statuses[s.status], p = DATA.papers[s.paper];
     var html = '<div class="pv"><div class="pv-top"><div class="eyebrow">' + esc(where(s)) + '</div>' + navButtons(s) + '</div>' +
-      '<h2 class="pv-title"><span class="pv-ref">' + esc(label(s)) + '</span><span class="pv-name">' + esc(s.title) + '</span></h2>' +
+      '<h2 class="pv-title"><span class="pv-ref">' + esc(label(s)) + '</span><span class="pv-name">' + titleHtml(s) + '</span></h2>' +
       '<div class="status" data-tone="' + tone(s) + '" title="' + esc(st.meaning) + '"><span class="g" aria-hidden="true">' + esc(st.glyph) + '</span>' + esc(st.label) +
       '<span class="sr">. ' + esc(st.meaning) + '</span></div>';
-    if (s.note) html += '<p class="note">' + esc(s.note) + '</p>';
+    if (s.note) html += '<p class="note">' + s.note + '</p>';
     html += '<div class="sub"><h3>Lean</h3><span class="aside">' + (s.lean.length || "") + '</span></div>';
     if (!s.lean.length) html += '<p class="empty">No Lean declaration: this ' + esc(s.kind) + ' makes no claim of its own.</p>';
     s.lean.forEach(function (name) { html += declCard(name); });
@@ -819,16 +827,12 @@ details.more-box[open] summary::before { content: "\2212  "; }
     if (!d) return "";
     return '<article class="decl"><div class="decl-head"><code class="decl-name">' + esc(d.short).replace(/\./g, ".<wbr>") + '</code>' +
       '<span class="kind">' + esc(d.kind) + '</span><button class="copy" type="button" data-copy="' + esc(name) + '" aria-label="Copy the full name ' + esc(name) + '">Copy</button></div>' +
-      (d.doc ? '<p class="decl-doc">' + docHtml(d.doc) + '</p>' : "") +
+      (d.doc ? '<p class="decl-doc">' + d.doc + '</p>' : "") +
       '<pre class="lean"><code>' + highlight(d.code) + '</code></pre>' +
       '<div class="decl-foot"><a href="' + esc(sourceUrl(d)) + '" target="_blank" rel="noopener">' + esc(d.path.split("/").pop()) + ', lines ' + d.start + '\u2013' + d.end + ' ' + ICON.ext + '</a>' +
       (d.more ? '<span class="more">' + d.more + ' more lines on GitHub</span>' : "") + '</div></article>';
   }
-  function docHtml(text) {
-    return text.split("`").map(function (part, i) {
-      return i % 2 ? "<code>" + esc(part) + "</code>" : esc(part).replace(/\*\*/g, "\u0001");
-    }).join("").replace(/\u0001([\s\S]*?)\u0001/g, "<strong>$1</strong>").replace(/\u0001/g, "");
-  }
+
 
   var KW = new Set(("theorem lemma def abbrev structure class inductive instance where fun let have show by at with match if then else do " +
     "return open namespace section end variable universe noncomputable private protected extends deriving Type Prop Sort " +
@@ -876,7 +880,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
       html += '<div class="sub"><h3>Numbered statements ' + esc(scope) + '</h3><span class="aside">' + list.length + '</span></div><ul class="sec-list">';
       list.forEach(function (s) {
         html += '<li><button class="row-btn" type="button" data-go="' + esc(s.id) + '"><span class="g" data-tone="' + tone(s) + '" aria-hidden="true">' + esc(glyph(s)) +
-          '</span><span><b>' + esc(label(s)) + '</b><span class="t">' + esc(s.title) + '</span></span></button></li>';
+          '</span><span><b>' + esc(label(s)) + '</b><span class="t">' + titleHtml(s) + '</span></span></button></li>';
       });
       html += "</ul>";
     } else {
@@ -976,7 +980,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     p.statements.forEach(function (s) { var sec = sectionOf[s.id]; var k = sec && sec.section ? sec.section.id : ""; (bySection[k] = bySection[k] || []).push(s); });
     var stmtRow = function (s) {
       return '<button class="toc-stmt" type="button" data-go="' + esc(s.id) + '" data-search="' + esc([label(s), s.title, s.lean.join(" "), s.label || ""].join(" ").toLowerCase()) +
-        '"><span class="g" data-tone="' + tone(s) + '">' + esc(glyph(s)) + '</span><b>' + esc(label(s)) + '</b><span class="t">' + esc(s.title) + '</span></button>';
+        '"><span class="g" data-tone="' + tone(s) + '">' + esc(glyph(s)) + '</span><b>' + esc(label(s)) + '</b><span class="t">' + titleHtml(s) + '</span></button>';
     };
     (bySection[""] || []).forEach(function (s) { out += stmtRow(s); });
     headings.forEach(function (h) {
@@ -1112,7 +1116,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
     if (keep) scrollToEl(keep, true);
     refreshFollow(true);
   });
-  $("brand").addEventListener("click", function (e) { e.preventDefault(); pane.scrollTo({ top: 0 }); state.pinned = false; state.hold = null; refreshFollow(true); });
 
   document.addEventListener("keydown", function (e) {
     if (e.target.closest("input, textarea") || e.metaKey || e.ctrlKey || e.altKey) {
@@ -1126,6 +1129,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
       if (next) goTo(next.id, { select: true });
       e.preventDefault();
     } else if (e.key === "/") { openToc(true); e.preventDefault(); }
+    else if (e.key === "s") { $("stmtOnly").click(); }
     else if (e.key === "Escape") { openToc(false); hidePeek(); openSheet(false); }
     else if (e.key === "p" && cur) { state.pinned = !state.pinned; show(state.view, true); }
   });

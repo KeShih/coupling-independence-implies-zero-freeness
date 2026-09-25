@@ -34,6 +34,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build as checker  # noqa: E402  (statuses, headline cards, cited results)
+import richtext  # noqa: E402
 
 REPO = checker.REPO
 TEMPLATE = Path(__file__).resolve().parent / "reader.html"
@@ -169,7 +170,7 @@ def build_data(args):
         decl = index[name]
         doc, code, more = lean_excerpt(decl)
         decls[name] = dict(short=checker.short(name), kind=decl["kind"], path=decl["path"],
-                           start=decl["start"], end=decl["end"], doc=doc, code=code, more=more)
+                           start=decl["start"], end=decl["end"], doc=richtext.rich(doc), code=code, more=more)
 
     papers = {}
     for key, meta in PAPERS.items():
@@ -187,7 +188,9 @@ def build_data(args):
                 id="%s-%s-%s" % (key, entry["kind"], entry["number"]),
                 kind=entry["kind"], word=checker.ENV_WORDS[entry["kind"]], number=entry["number"],
                 title=entry["title"], label=entry["label"], status=entry["status"],
-                note=entry["note"], lean=entry["lean"], card=cards.get((key, entry["label"]))))
+                note=richtext.rich(entry["note"]), lean=entry["lean"], card=cards.get((key, entry["label"]))))
+            if body and statements[-1]["id"] in body.get("titles", {}):
+                statements[-1]["title_html"] = body["titles"][statements[-1]["id"]]
         papers[key] = dict(key=key, title=meta["title"], short=meta["short"], authors=AUTHORS,
                            pdf=pdf.relative_to(REPO / "docs").as_posix() if pdf.exists() else None,
                            statements=statements, **(body or {}))

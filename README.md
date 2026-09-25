@@ -1,49 +1,47 @@
+<div align="center">
+
 # Coupling Independence Implies Zero-Freeness
 
-A Lean 4 and mathlib formalization of
+**A Lean 4 formalization of both papers, readable side by side with its proofs**
 
-- Shuai Shao and Ke Shi, *Coupling Independence Implies Zero-Freeness* (2026), and
-- its companion, *Further Potts Zero-Free Regions from Coupling Independence*,
-  included as [docs/appendix.pdf](docs/appendix.pdf).
+### [Read the papers with their Lean →](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
 
-Both papers are included as PDFs (`docs/main.pdf` and the companion) and as
-LaTeX sources in `paper/`.
+[Main paper (PDF)](docs/main.pdf) · [Companion (PDF)](docs/appendix.pdf) · [Statement checker](https://keshih.github.io/coupling-independence-implies-zero-freeness/checker.html) · [Proof overview](docs/overview.md)
 
-Every numbered theorem, lemma, proposition and corollary of both papers
-has a Lean counterpart. [docs/coverage.json](docs/coverage.json) lists all
-107 numbered statements, definitions and remarks included, with their
-status and Lean names; the statement checker shows the same table.
+</div>
 
-The headline statements concern actual finite partition functions. Potts pinnings
-are arbitrary partial colourings, improper ones included, and every
-zero-free radius is chosen before the graph, its size and the pinning.
-The six cited ingredients that have standalone Lean statements are proved
-in the library. Their formalized scopes and route differences are recorded
-in [docs/external-inputs.md](docs/external-inputs.md). No paper-facing
-theorem takes a literature hypothesis, and the whole library depends only
-on Lean's standard axioms `propext`,
-`Classical.choice` and `Quot.sound`.
+[![The reader: Theorem 1.1 of the main paper, with the Lean declarations that state it beside it](docs/assets/reader.jpg)](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
 
-The [paper reader](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
-sets both papers, rendered from their LaTeX sources, beside the Lean
-declarations of the numbered statement being read, with source links pinned
-to the commit. `scripts/site/build_reader.py` generates it into
-`docs/index.html`; it needs PyMuPDF but no Lean build. It numbers the
-statements, equations and sections as LaTeX does, stops if a statement
-differs from `docs/coverage.json` or a number differs from the hyperref
-destinations in the PDFs. Figures and commutative diagrams are drawn from
-their TikZ source; one it cannot read is cut from the PDF instead. To publish a
-new version of a paper, replace its folder in `paper/` and its PDF in
-`docs/`, then rerun the script.
+This repository formalizes, in Lean 4 with mathlib, two papers by Shuai Shao
+and Ke Shi: *Coupling Independence Implies Zero-Freeness* (2026) and its
+companion, *Further Potts Zero-Free Regions from Coupling Independence*.
 
-The [statement checker](https://keshih.github.io/coupling-independence-implies-zero-freeness/checker.html)
-sets the headline paper statements represented by the generated cards beside
-their Lean declarations and matches those cards phrase by phrase. It also
-shows each card's axioms and the library lemmas it applies, a coverage table of
-every numbered statement of both papers, and the Lean proofs of the results the
-papers cite. `scripts/site/build.py` generates it into `docs/checker.html` from
-the built library and the LaTeX sources, and checks every quotation against
-them.
+- **Every numbered result.** Every numbered theorem, lemma, proposition and
+  corollary of both papers has a Lean counterpart.
+  [docs/coverage.json](docs/coverage.json) lists all 107 numbered statements,
+  definitions and remarks included, with their status and Lean names.
+- **No assumed literature.** The six cited ingredients that have standalone
+  Lean statements are proved in the library, and no paper-facing theorem
+  takes a literature hypothesis.
+- **Standard axioms only.** The whole library depends only on Lean's
+  `propext`, `Classical.choice` and `Quot.sound`.
+- **Actual partition functions.** The headline statements concern finite
+  partition functions. Potts pinnings are arbitrary partial colourings,
+  improper ones included, and every zero-free radius is chosen before the
+  graph, its size and the pinning.
+
+## The website
+
+The [**paper reader**](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
+shows both papers, rendered from their LaTeX, beside the Lean declarations
+of the statement you are reading, with links to the exact source lines.
+Search the contents by number, title or Lean name, or switch to
+*Statements only* to skim every numbered result with its Lean status.
+
+The [**statement checker**](https://keshih.github.io/coupling-independence-implies-zero-freeness/checker.html)
+matches the headline statements with their Lean versions phrase by phrase,
+and lists the axioms and library lemmas each proof applies and the Lean
+proofs of the results the papers cite.
 
 ## The main theorem
 
@@ -90,7 +88,7 @@ names are relative to `CI2ZF`.
 | Cor 5.4: edge-colour fields for `q ≥ 3Δ` | `LeeYang.edge_lee_yang` |
 | Thm 5.6, Cors 5.7 and 5.9: log-concave Holant problems, b-matchings and b-edge-covers | `Holant.exists_uniform_holant_polytube`, `Holant.bmatching_uniform_polytube`, `Holant.cor_bcover_short` |
 
-### Appendix A: further Potts regimes
+### Companion: further Potts regimes
 
 Each regime has a coupling-independence theorem and a zero-free theorem.
 Girth conditions apply only to the free graph left after pinning.
@@ -109,9 +107,8 @@ Girth conditions apply only to the free graph left after pinning.
 hypotheses, constants and proof route of each regime, including where the
 Lean proof differs from the written one.
 
-### Coverage of the numbered statements
+### Every numbered statement
 
-The tables above list the headline results.
 [docs/coverage.json](docs/coverage.json) has one entry for each of the 107
 numbered statements of the two papers, 32 in the main paper and 75 in the
 companion, with its status, its Lean names and a note on any difference of
@@ -125,6 +122,9 @@ propositions and corollaries has one of the three `formalized` statuses:
 | `formalized-narrowed` | 2 | companion Lemmas 3.6 and 6.10, in the narrowed form the companion now states |
 | `definition` | 8 | a Lean definition; the claims made inside the definition are proved, except the citation noted below |
 | `remark` | 4 | a remark that makes no claim of its own: it describes the proof, or attributes or compares cited work |
+
+<details>
+<summary><b>What remains unformalized</b> (citation-level claims only)</summary>
 
 Companion Lemma 6.10 is stated for the Potts family at positive activity
 `x ∈ J ⊆ (0,1]`, the only case the companion uses, and the `k`-fold clause
@@ -144,14 +144,19 @@ is citation-level:
   theorem and Wagner's method in Remark 5.8 of the main paper
   (`rem:matching-degree-dependence`, whose star bound is proved), and the
   attributions and comparisons in the four `remark` entries.
-- Algorithmic and FPTAS claims are outside the scope of a Lean statement, and the claim that `ε` can be chosen effectively is not formalized.
+- Algorithmic and FPTAS claims are outside the scope of a Lean statement,
+  and the claim that `ε` can be chosen effectively is not formalized.
+
+</details>
 
 ## Cited results proved in Lean
 
 Six of the ingredients cited by the written proofs have standalone Lean
-statements about actual finite Potts models. Each formalized statement is
-proved in the library; the scope and route of each statement are recorded
-below.
+statements about actual finite Potts models, and each is proved in the
+library. No paper-facing theorem takes one as a hypothesis.
+
+<details>
+<summary><b>The six results, their sources and their Lean proofs</b></summary>
 
 | Cited result | Source | Lean theorem | File |
 | --- | --- | --- | --- |
@@ -173,16 +178,20 @@ The statements remain as named propositions,
 `Potts.ExternalCriticalHardColouringTheorem`,
 `Appendix.Girth.CavityTree.CLMMInfluenceIdentity`, `Appendix.CLMM.Literature`
 and `Appendix.BBR.Literature`, but no paper-facing theorem takes one as a
-hypothesis. Only the conversion `Potts.ExternalCriticalHardColouringTheorem.to_normalizedInput`, `Potts.potts_zero_free_from_external` and
+hypothesis. Only the conversion
+`Potts.ExternalCriticalHardColouringTheorem.to_normalizedInput`,
+`Potts.potts_zero_free_from_external` and
 `Potts.critical_potts_zero_free_from_external`, which keep the paper's
 cited route for comparison, take `ExternalCriticalHardColouringTheorem` as
 a premise, and that premise is proved. Three Lean proofs take a different
-route from the cited one. The critical line uses the Carlson–Vigoda contraction, extended to
-`Δ ≥ 6`, `q ≥ 11Δ/6`, instead of the CFFGZZ proof. Proposition 2.6(i)
-replaces BBR's Lemmas 4.1 and 4.2(i) by two uses of the concavity of `log`.
-The induction for Lemma 5.13 uses `1 + log ℓ` in place of harmonic
-numbers. [docs/external-inputs.md](docs/external-inputs.md) records each
-statement and its proof.
+route from the cited one. The critical line uses the Carlson–Vigoda
+contraction, extended to `Δ ≥ 6`, `q ≥ 11Δ/6`, instead of the CFFGZZ proof.
+Proposition 2.6(i) replaces BBR's Lemmas 4.1 and 4.2(i) by two uses of the
+concavity of `log`. The induction for Lemma 5.13 uses `1 + log ℓ` in place
+of harmonic numbers. [docs/external-inputs.md](docs/external-inputs.md)
+records each statement and its proof.
+
+</details>
 
 ## Build and verify
 
@@ -206,8 +215,30 @@ Complete-library axiom audit passed: 11313 declarations; allowed dependencies us
 ```
 
 `scripts/check.sh` checks only the main paper and `scripts/check-appendix.sh`
-only Appendix A. [docs/verification.json](docs/verification.json) records
+only the companion. [docs/verification.json](docs/verification.json) records
 the checked sources, their SHA-256 hashes and the last full run.
+
+## Updating the website
+
+The site is served from `docs/` by GitHub Pages. The reader needs no Lean
+build:
+
+```bash
+pip install pymupdf
+python3 scripts/site/build_reader.py
+```
+
+`scripts/site/build_reader.py` renders the LaTeX in `paper/` into
+`docs/index.html`. It numbers statements, equations and sections as LaTeX
+does, and stops if a statement differs from `docs/coverage.json` or a
+number differs from the hyperref destinations in the PDFs. Figures and
+commutative diagrams are drawn from their TikZ source; one it cannot read
+is cut from the PDF instead. To publish a new version of a paper, replace
+its folder in `paper/` and its PDF in `docs/`, then rerun the script.
+
+The statement checker, `docs/checker.html`, is built by
+`scripts/site/build.py` from the built library and the LaTeX sources with
+their `.aux` files, and checks every quotation against them.
 
 ## Layout
 
@@ -215,11 +246,11 @@ the checked sources, their SHA-256 hashes and the last full run.
 | --- | --- |
 | `CI2ZF/Analysis/` | complex averages, analytic logarithms, local stability |
 | `CI2ZF/Coupling/` | the couplings: Vigoda flips, Carlson–Vigoda, edge-Potts, high temperature, large girth, BBR, girth five; the proofs of the cited CLMM and BBR results |
-| `CI2ZF/Potts/` | Potts models, pinnings and separators, the transfer theorem, the main theorems and the Appendix A regimes |
+| `CI2ZF/Potts/` | Potts models, pinnings and separators, the transfer theorem, the main theorems and the companion's regimes |
 | `CI2ZF/LeeYang/` | colour-field partition functions and zero-free polydiscs |
 | `CI2ZF/Holant/` | log-concave Holant models and their applications |
 | `audit/` | axiom audits, kept outside the library |
-| `docs/` | proof guides, per-result status, the verification record, both papers as PDFs and the generated pages |
+| `docs/` | the website, both papers as PDFs, proof guides, per-result status and the verification record |
 | `paper/` | LaTeX sources of both papers, with their ancillary verifier scripts |
 
 `CI2ZF.lean` imports the whole library. To read the proofs, start with the
