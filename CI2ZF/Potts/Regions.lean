@@ -17,6 +17,9 @@ import CI2ZF.Coupling.Edge.Slots.OneLabel
 import CI2ZF.Potts.Theorems.CriticalScope
 import CI2ZF.Coupling.BBR.RoundedInterval
 import CI2ZF.Coupling.BBR.GapTwo
+import CI2ZF.Coupling.BBR.Unconditional
+import CI2ZF.Coupling.Girth.Tree.TotalInfluenceUnconditional
+import CI2ZF.Coupling.CLMM.TransferUnconditional
 
 /-! Completed appendix regions. Each imported endpoint proves coupling
 independence for the actual finite Gibbs laws, then the uniform zero-free
