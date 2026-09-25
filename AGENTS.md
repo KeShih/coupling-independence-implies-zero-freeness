@@ -134,8 +134,8 @@ python3 scripts/site/build_reader.py --out /tmp/preview.html  # every check, pag
 - **Headline statements.** Theorem 1.1 is `ZeroFreeness.Potts.potts_main_theorem`
   in `Potts/Theorems/PottsExternalTheorem.lean`. `potts_zero_free` in
   `PottsMainTheorem.lean` still takes a `CriticalHardColouringInput`. The
-  companion's regimes live in `Potts/Regions/*`. The README tables map
-  the other results to Lean names.
+  companion's regimes live in `Potts/Regions/*`. `docs/formalization.md`
+  maps the other results to Lean names.
 - **Naming conventions:**
   - `_unconditional`: the literature bundle is discharged.
   - `_from_external`: the paper's cited route, kept for comparison.
@@ -175,7 +175,7 @@ python3 scripts/site/build_reader.py --out /tmp/preview.html  # every check, pag
 - **Scope changes propagate.** When a statement's status or scope
   changes, update:
   - its coverage note;
-  - the counts and the unformalized list in `README.md`;
+  - the counts and the unformalized list in `docs/formalization.md`;
   - `docs/README.md`, `docs/overview.md`, `docs/appendix/README.md`,
     `docs/appendix/STATUS.md` and `docs/external-inputs.md`;
   - any docstring that states the scope.

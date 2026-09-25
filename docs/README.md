@@ -1,9 +1,10 @@
 # Documentation
 
-This library formalizes the paper's coupling-independence and zero-free results for Potts, Holant, and independent colour fields, and the companion's further Potts regimes. Every numbered theorem, lemma, proposition and corollary of both papers has a Lean counterpart, listed in the [coverage table](coverage.json) and on the side-by-side page. Only citation-level claims remain unformalized; the [repository README](../README.md#coverage-of-the-numbered-statements) lists them. Start with the [project overview](overview.md) for the theorem scope and proof architecture.
+This library formalizes the paper's coupling-independence and zero-free results for Potts, Holant, and independent colour fields, and the companion's further Potts regimes. Every numbered theorem, lemma, proposition and corollary of both papers has a Lean counterpart, listed in the [coverage table](coverage.json) and on the side-by-side page. Only citation-level claims remain unformalized; [the formalization in detail](formalization.md#what-remains-unformalized) lists them. Start with the [project overview](overview.md) for the theorem scope and proof architecture.
 
 | Guide | Contents |
 | --- | --- |
+| [The formalization in detail](formalization.md) | Lean names of the main results, statuses, what remains unformalized, cited results, build and site instructions |
 | [Potts](potts.md) | Models, concrete Vigoda coupling, uniform complex transfer, and the main theorem |
 | [Potts appendix](appendix/README.md) | Module navigation for all seven additional parameter regions and for the companion statements proved in dedicated modules |
 | [Appendix theorem status](appendix/STATUS.md) | Regional hypotheses, proved conclusions, and the cited results each region uses |
@@ -41,4 +42,4 @@ Run `./scripts/check-all.sh` from the repository root to build the whole library
 
 The audits allow only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`. The standalone Lean statements for the cited ingredients tracked in [external-inputs.md](external-inputs.md) are proved in the library, so no paper-facing theorem takes a literature hypothesis. The [verification record](verification.json) records the checked scope and source hashes. The [module migration record](module-moves.tsv) maps renamed source modules.
 
-Return to the [repository README](../README.md) for setup and the main imports.
+Setup and build instructions are in [the formalization in detail](formalization.md#build-and-verify); the [repository README](../README.md) has the short version.
