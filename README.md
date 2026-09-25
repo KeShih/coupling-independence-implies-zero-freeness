@@ -43,9 +43,28 @@ Report any build or trust-base problem, and every zero-freeness result
 whose Lean statement does not match the paper.
 ```
 
-For a full check, replace "every zero-freeness result" with "every numbered
-statement"; [docs/coverage.json](docs/coverage.json) lists all 107 with their
-Lean declarations.
+> [!WARNING]
+> **Full check.** This prompt compares every numbered statement of both
+> papers (107 in all) with its Lean. It is thorough but costs a great many
+> tokens.
+
+```text
+Verify the Lean formalization at
+https://github.com/KeShih/coupling-independence-implies-zero-freeness.
+
+1. Build it and confirm that it compiles without errors, contains no
+   sorry or admit, and depends only on mathlib and Lean's standard axioms
+   (propext, Classical.choice, Quot.sound).
+2. List every numbered theorem, lemma, proposition, corollary and
+   definition of both papers yourself, and compare each with the Lean
+   declarations that state it, following their definitions, without
+   relying on the repository's descriptions. The Lean must claim what the
+   paper claims: no extra assumptions, no weaker conclusion, no narrower
+   range of parameters.
+
+Report any build or trust-base problem, and every statement whose Lean
+does not match the paper.
+```
 
 [The formalization in detail](docs/formalization.md) lists the Lean names of
 the main results, the cited results proved in Lean, and how to build the
