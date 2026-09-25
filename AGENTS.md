@@ -13,11 +13,11 @@ mathlib from source. There is no CI: every check below runs locally.
 
 ```bash
 lake exe cache get                               # prebuilt mathlib oleans
-LEAN_NUM_THREADS=2 bash scripts/check-all.sh     # build CI2ZF, then audit/All.lean
+LEAN_NUM_THREADS=2 bash scripts/check-all.sh     # build ZeroFreeness, then audit/All.lean
 bash scripts/check.sh                            # main paper: Potts.Main, LeeYang, Holant + audit/Main.lean
 bash scripts/check-appendix.sh                   # companion: Potts.Regions + audit/Appendix.lean
-bash scripts/lake.sh build CI2ZF.Potts.Theorems.PottsMainTheorem         # one module and its imports
-bash scripts/lake.sh env lean -DwarningAsError=true CI2ZF/Path/File.lean # re-check one file
+bash scripts/lake.sh build ZeroFreeness.Potts.Theorems.PottsMainTheorem  # one module and its imports
+bash scripts/lake.sh env lean -DwarningAsError=true ZeroFreeness/Path/File.lean  # re-check one file
 ```
 
 - Run lake through `scripts/lake.sh`. It runs from the repository root,
@@ -32,7 +32,7 @@ bash scripts/lake.sh env lean -DwarningAsError=true CI2ZF/Path/File.lean # re-ch
   dependencies used: [propext, Classical.choice, Quot.sound]`. The current
   N and M are in `docs/verification.json` (`build_jobs`,
   `audited_project_declarations`).
-- `audit/CV.lean` is a standalone audit of `CI2ZF.Appendix.CV` that no
+- `audit/CV.lean` is a standalone audit of `ZeroFreeness.Appendix.CV` that no
   script runs.
 
 Website builds (see *Website* below):
@@ -51,14 +51,15 @@ python3 scripts/site/build.py --paper <main.tex> --companion <dir>   # docs/chec
   allowed. No `sorry`, `admit`, `axiom`, `native_decide`, `unsafe` or
   `implemented_by`. The audits check transitive axioms, and a source scan
   recorded in `docs/verification.json` lists the forbidden constructs.
-- **Namespaces:** the audits inspect only names starting with `CI2ZF` or
+- **Namespaces:** the audits inspect only names starting with `ZeroFreeness` or
   `PottsCI`. A declaration outside those namespaces escapes the audit.
 - **New modules:** a new module must be imported, directly or
   transitively, from an aggregate. The aggregates are
-  `CI2ZF/Potts/Main.lean` (main-text Potts), `CI2ZF/Potts/Regions.lean` or
-  `CI2ZF/Potts/Regions/CV.lean` (companion), `CI2ZF/LeeYang.lean` and
-  `CI2ZF/Holant.lean`. An unimported file is neither built nor audited. Do
-  not add import-only wrapper modules; ten were removed on purpose.
+  `ZeroFreeness/Potts/Main.lean` (main-text Potts),
+  `ZeroFreeness/Potts/Regions.lean` or `ZeroFreeness/Potts/Regions/CV.lean`
+  (companion), `ZeroFreeness/LeeYang.lean` and `ZeroFreeness/Holant.lean`.
+  An unimported file is neither built nor audited. Do not add import-only
+  wrapper modules; ten were removed on purpose.
 - **Literature hypotheses:** paper-facing theorems take none. Cited
   results are Prop-valued bundles (`Appendix.CLMM.Literature`,
   `Appendix.BBR.Literature`, `Appendix.Girth.CavityTree.CLMMInfluenceIdentity`,
@@ -81,19 +82,26 @@ python3 scripts/site/build.py --paper <main.tex> --companion <dir>   # docs/chec
 
 ## Architecture
 
-- **One library, `CI2ZF`.** `CI2ZF.lean` imports `CI2ZF.Potts` (`Potts.Main`
-  and `Potts.Regions`), `CI2ZF.LeeYang` and `CI2ZF.Holant`. The main-paper
+- **One library, `ZeroFreeness`.** `ZeroFreeness.lean` imports
+  `ZeroFreeness.Potts` (`Potts.Main` and `Potts.Regions`),
+  `ZeroFreeness.LeeYang` and `ZeroFreeness.Holant`. The main-paper
   build also compiles companion code: the `q = 11Δ/6` case of Theorem 1.1
-  uses `CI2ZF.Appendix.CV.option_root_ci_critical`, and Lee–Yang imports
+  uses `ZeroFreeness.Appendix.CV.option_root_ci_critical`, and Lee–Yang imports
   the regime endpoints.
 - **Namespaces do not follow directories.** Files were moved on 2026-09-09
   and the namespaces were kept (`docs/module-moves.tsv` maps old paths to
   new):
   - Companion code in `Coupling/{CV,Girth,Edge,BBR,CLMM}` and
-    `Potts/Regions` is `CI2ZF.Appendix.*`.
+    `Potts/Regions` is `ZeroFreeness.Appendix.*`.
   - The legacy foundations are `PottsCI.*`: `FinDist` and `FinDist.W`,
     `ham`, `PinningData`, `PartialColouring`.
-  - `Coupling/Vigoda` mixes `CI2ZF`, `CI2ZF.Potts` and `PottsCI.Vigoda`.
+  - `Coupling/Vigoda` mixes `ZeroFreeness`, `ZeroFreeness.Potts` and
+    `PottsCI.Vigoda`.
+
+  On 2026-09-25 the library, its folder, its root namespace and the paper
+  folders were renamed from `CI2ZF` to `ZeroFreeness` (`paper/main`,
+  `paper/companion`). Older commits, `docs/provenance/` and
+  `docs/verification.json` keep the old name.
 
   Find declarations with grep, not by path, since file names repeat
   (`RootCI.lean`, `ZeroFree.lean`). Do not rename namespaces to match
@@ -121,10 +129,10 @@ python3 scripts/site/build.py --paper <main.tex> --companion <dir>   # docs/chec
     names for restriction-closed families.
 - **Lee–Yang** runs `uniform_curve_transfer` → `uniform_field_transfer_closed`
   → `all_vertex_field_transfer`. **Holant** has its own pipeline in
-  `CI2ZF/Holant` (`CouplingTheorem` → `UniformResponse` → `StrongInduction` →
-  `Theorem` → polytube corollaries), namespaces `CI2ZF.Holant` and
-  `CI2ZF.HolantCoupling`.
-- **Headline statements.** Theorem 1.1 is `CI2ZF.Potts.potts_main_theorem`
+  `ZeroFreeness/Holant` (`CouplingTheorem` → `UniformResponse` → `StrongInduction` →
+  `Theorem` → polytube corollaries), namespaces `ZeroFreeness.Holant` and
+  `ZeroFreeness.HolantCoupling`.
+- **Headline statements.** Theorem 1.1 is `ZeroFreeness.Potts.potts_main_theorem`
   in `Potts/Theorems/PottsExternalTheorem.lean`. `potts_zero_free` in
   `PottsMainTheorem.lean` still takes a `CriticalHardColouringInput`. The
   companion's regimes live in `Potts/Regions/*`. The README tables map
@@ -150,7 +158,7 @@ python3 scripts/site/build.py --paper <main.tex> --companion <dir>   # docs/chec
   107 in all, in source order. Each entry has `paper`, `kind`, `number`,
   `label`, `status`, `lean`, `note` and `title`:
   - `paper` is `main` or `companion`; the companion is `appendix` in paths
-    and in the `CI2ZF.Appendix` namespace.
+    and in the `ZeroFreeness.Appendix` namespace.
   - `label` is `null` for the two unlabelled companion remarks.
   - `status` is one of the keys of `STATUSES` in `scripts/site/build.py`.
 
@@ -174,7 +182,7 @@ python3 scripts/site/build.py --paper <main.tex> --companion <dir>   # docs/chec
   `README.md` and `docs/appendix.pdf`, so do not assume a mismatch you find
   is yours.
 - **Pinned history.** The papers cite this repository at pinned commits
-  (`paper/CI2ZF-main/main.bib`, `paper/CI2ZF-appendix/anc/README.md`), so
+  (`paper/main/main.bib`, `paper/companion/anc/README.md`), so
   never rewrite the history of `main`.
 
 ## Website
@@ -206,13 +214,13 @@ GitHub Pages serves `docs/` from `main` as committed. Keep `docs/.nojekyll`.
 - **Do not hand-edit the generated pages.** Change the generator and
   rebuild. The checker can only be rebuilt with a Lean build; without one,
   make the same edit in `build.py` and in the page.
-- **Commit Lean first.** Both builders refuse to run while `CI2ZF/` or
-  `CI2ZF.lean` has uncommitted changes. They pin GitHub source links to
+- **Commit Lean first.** Both builders refuse to run while `ZeroFreeness/` or
+  `ZeroFreeness.lean` has uncommitted changes. They pin GitHub source links to
   the last commit that touched the Lean sources, and that commit must be
   pushed. Commit Lean changes first, then rebuild the pages in a follow-up
   commit.
-- **New paper version:** replace `paper/CI2ZF-main` or
-  `paper/CI2ZF-appendix` (`.tex`, `.bib`, a fresh `.bbl`, `appendices/`)
+- **New paper version:** replace `paper/main` or
+  `paper/companion` (`.tex`, `.bib`, a fresh `.bbl`, `appendices/`)
   together with `docs/main.pdf` or `docs/appendix.pdf`. Update
   `coverage.json` if the numbering changed, then rerun `build_reader.py`.
   The PDF check needs every theorem-like environment to get a hyperref

@@ -50,10 +50,10 @@ maximum degree at most `Δ` (Theorem 1.1 of the paper; universe annotations
 omitted):
 
 ```lean
-theorem CI2ZF.Potts.potts_main_theorem (q Δ : ℕ) (hΔ : 2 ≤ Δ) (hq : 11 * Δ ≤ 6 * q) :
+theorem ZeroFreeness.Potts.potts_main_theorem (q Δ : ℕ) (hΔ : 2 ≤ Δ) (hq : 11 * Δ ≤ 6 * q) :
     ∃ eps > 0, UniformPottsZeroFree (Fin q) Δ eps
 
-def CI2ZF.Potts.UniformPottsZeroFree (C : Type v) [Fintype C] (Δ : ℕ) (eps : ℝ) : Prop :=
+def ZeroFreeness.Potts.UniformPottsZeroFree (C : Type v) [Fintype C] (Δ : ℕ) (eps : ℝ) : Prop :=
   ∀ {V : Type u} [Fintype V] (G : SimpleGraph V),
     (∀ w, G.degree w ≤ Δ) → ∀ tau : PartialColouring V C,
     (∀ z ∈ thickening eps pottsInterval, normalizedPartition tau G z ≠ 0) ∧
@@ -75,7 +75,7 @@ coupling alone.
 ## What is formalized
 
 Theorem numbers follow the September 2026 versions of the two papers. Lean
-names are relative to `CI2ZF`.
+names are relative to `ZeroFreeness`.
 
 ### Main paper
 
@@ -160,12 +160,12 @@ library. No paper-facing theorem takes one as a hypothesis.
 
 | Cited result | Source | Lean theorem | File |
 | --- | --- | --- | --- |
-| Hard-colouring CI at `q = 11Δ/6` (Theorem 20) | Chen, Feng, Guo, Zhang, Zou, *Deterministic counting from coupling independence*, arXiv:2410.23225v2 | `Potts.critical_hard_colouring_input`, `Potts.external_critical_hard_colouring_theorem`, from `Appendix.CV.option_root_ci_critical` | `CI2ZF/Potts/Theorems/PottsExternalTheorem.lean`, `CI2ZF/Coupling/CV/RootCI.lean` |
-| Tree influence–Jacobian identity (Lemma 8.7) | Chen, Liu, Mani, Moitra, *Strong spatial mixing for colorings on trees and its algorithmic applications*, arXiv:2304.01954v3 | `Appendix.Girth.CavityTree.clmmInfluenceIdentity` | `CI2ZF/Coupling/Girth/Tree/InfluenceIdentity.lean` |
-| Sphere decay implies the coupling bound `2Δ^R` (Lemma 5.13) | same | `Appendix.CLMM.Lemma513.sphere_to_coupling` | `CI2ZF/Coupling/CLMM/SphereCoupling.lean` |
-| Graph sphere estimate (Equation (10), from Lemmas 5.19 and 5.20) | same | `Appendix.CLMM.Eq10.sphere_estimate_proof`, packaged as `Appendix.CLMM.literature` | `CI2ZF/Coupling/CLMM/SphereEstimate.lean` |
-| Squared-norm contraction of the square-root recursion (Theorem 2.5) | Bencs, Berrekkal, Regts, *Near optimal bounds for weak and strong spatial mixing for the anti-ferromagnetic Potts model on trees*, Electron. J. Probab. 30 (2025) | `Appendix.BBR.theorem_2_5_holds` | `CI2ZF/Coupling/BBR/Theorem25.lean` |
-| Segment-weight bound (Proposition 2.6(i)) | same | `Appendix.BBR.proposition_2_6_i_holds`, packaged with Theorem 2.5 as `Appendix.BBR.literature` | `CI2ZF/Coupling/BBR/Proposition26.lean` |
+| Hard-colouring CI at `q = 11Δ/6` (Theorem 20) | Chen, Feng, Guo, Zhang, Zou, *Deterministic counting from coupling independence*, arXiv:2410.23225v2 | `Potts.critical_hard_colouring_input`, `Potts.external_critical_hard_colouring_theorem`, from `Appendix.CV.option_root_ci_critical` | `ZeroFreeness/Potts/Theorems/PottsExternalTheorem.lean`, `ZeroFreeness/Coupling/CV/RootCI.lean` |
+| Tree influence–Jacobian identity (Lemma 8.7) | Chen, Liu, Mani, Moitra, *Strong spatial mixing for colorings on trees and its algorithmic applications*, arXiv:2304.01954v3 | `Appendix.Girth.CavityTree.clmmInfluenceIdentity` | `ZeroFreeness/Coupling/Girth/Tree/InfluenceIdentity.lean` |
+| Sphere decay implies the coupling bound `2Δ^R` (Lemma 5.13) | same | `Appendix.CLMM.Lemma513.sphere_to_coupling` | `ZeroFreeness/Coupling/CLMM/SphereCoupling.lean` |
+| Graph sphere estimate (Equation (10), from Lemmas 5.19 and 5.20) | same | `Appendix.CLMM.Eq10.sphere_estimate_proof`, packaged as `Appendix.CLMM.literature` | `ZeroFreeness/Coupling/CLMM/SphereEstimate.lean` |
+| Squared-norm contraction of the square-root recursion (Theorem 2.5) | Bencs, Berrekkal, Regts, *Near optimal bounds for weak and strong spatial mixing for the anti-ferromagnetic Potts model on trees*, Electron. J. Probab. 30 (2025) | `Appendix.BBR.theorem_2_5_holds` | `ZeroFreeness/Coupling/BBR/Theorem25.lean` |
+| Segment-weight bound (Proposition 2.6(i)) | same | `Appendix.BBR.proposition_2_6_i_holds`, packaged with Theorem 2.5 as `Appendix.BBR.literature` | `ZeroFreeness/Coupling/BBR/Proposition26.lean` |
 
 The main theorem uses the first result at `q = 11Δ/6`, and near-Vigoda
 uses it at the twenty pairs `(Δ,q) = (6j,11j)`, `j ≤ 20`. The large-girth
@@ -244,16 +244,16 @@ their `.aux` files, and checks every quotation against them.
 
 | Path | Contents |
 | --- | --- |
-| `CI2ZF/Analysis/` | complex averages, analytic logarithms, local stability |
-| `CI2ZF/Coupling/` | the couplings: Vigoda flips, Carlson–Vigoda, edge-Potts, high temperature, large girth, BBR, girth five; the proofs of the cited CLMM and BBR results |
-| `CI2ZF/Potts/` | Potts models, pinnings and separators, the transfer theorem, the main theorems and the companion's regimes |
-| `CI2ZF/LeeYang/` | colour-field partition functions and zero-free polydiscs |
-| `CI2ZF/Holant/` | log-concave Holant models and their applications |
+| `ZeroFreeness/Analysis/` | complex averages, analytic logarithms, local stability |
+| `ZeroFreeness/Coupling/` | the couplings: Vigoda flips, Carlson–Vigoda, edge-Potts, high temperature, large girth, BBR, girth five; the proofs of the cited CLMM and BBR results |
+| `ZeroFreeness/Potts/` | Potts models, pinnings and separators, the transfer theorem, the main theorems and the companion's regimes |
+| `ZeroFreeness/LeeYang/` | colour-field partition functions and zero-free polydiscs |
+| `ZeroFreeness/Holant/` | log-concave Holant models and their applications |
 | `audit/` | axiom audits, kept outside the library |
 | `docs/` | the website, both papers as PDFs, proof guides, per-result status and the verification record |
 | `paper/` | LaTeX sources of both papers, with their ancillary verifier scripts |
 
-`CI2ZF.lean` imports the whole library. To read the proofs, start with the
+`ZeroFreeness.lean` imports the whole library. To read the proofs, start with the
 [documentation index](docs/README.md) or the [proof overview](docs/overview.md).
 
 The formalization was developed with assistance from GPT-6 Astra and Claude

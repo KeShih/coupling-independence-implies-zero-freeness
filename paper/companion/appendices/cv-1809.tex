@@ -1,0 +1,1581 @@
+\section{\texorpdfstring{Coupling independence for \(q\ge1.809\,\Deg\), \(\Deg\ge125\)}
+{Coupling independence for q >= 1.809 Delta, Delta >= 125}}
+\label{sec:below-vigoda}
+
+Set
+\begin{equation}\label{eq:cv-main-constants}
+  m_0:=\frac{1724}{1809},
+  \qquad
+  \delta_{\rm CV}:=\frac{59}{226125}.
+\end{equation}
+
+\begin{theorem}[Hamming coupling independence at $1.809\,\Deg$]
+\label{thm:cv-ci}
+Let \(q,\Deg\) be positive integers with \(\Deg\ge125\) and
+\(q\ge1.809\,\Deg\).  For every \(G\in\Gdeg\), every pinning \(\tau\),
+every \(x\in[0,1]\), every \(r\in V^\tau\), and all
+\(a,b\in\colours\),
+\begin{equation}\label{eq:cv-ci}
+  \WHam\!\left(
+    \mupin{G}{\tau^{r=a}}{x},
+    \mupin{G}{\tau^{r=b}}{x}
+  \right)
+  \le \frac{2}{m_0\delta_{\rm CV}}
+  =\frac{409060125}{50858}<8043.19.
+\end{equation}
+The laws live on \(V^\tau\setminus\{r\}\).  At \(x=0\), they are the
+normalized hard pinned laws.
+\end{theorem}
+
+At \(x=0\), the underlying list-colouring contraction is due to Carlson and
+Vigoda~\cite[Theorem~4.12 and the proof of Corollary~1.2]{CarlsonVigoda2024}.
+Combined with the stationary-law comparison of
+\cite[Lemma~4.3]{BlancaEtAl2022Coupling}, it already yields the corresponding
+bounded conditional Hamming couplings; the explicit coupling-independence
+formulation appears in \cite[Theorem~20 and Proposition~21]{CFFGZZ2024}.
+This section extends that input to positive activities.
+
+The proof has three stages.  Random active constraints first turn the soft
+Potts law into a mixture of hard list-colouring laws, on which we use the
+Carlson--Vigoda profile.  A coupling matrix for adjacent configurations
+then combines the Carlson--Vigoda component matches with a product
+completion, and a geometric path metric gives uniform contraction.
+Finally, stationary comparison through the root-deleted instance proves
+\Cref{thm:cv-ci}; the low-multiplicity estimate is certified exactly in
+\Cref{lem:cv-certificate}.
+
+\subsection{Soft Carlson--Vigoda kernel}
+
+The aggregate flip parameters of~\cite[Eq.~(1)]{CarlsonVigoda2024} are
+\begin{equation}\label{eq:cv-params}
+\begin{aligned}
+  &P_0=0,\quad P_1=1,\quad P_2=\frac{81}{250},\quad
+    P_3=\frac{77}{500},\\
+  &P_4=\frac{11}{125},\quad P_5=\frac{11}{250},\quad
+    P_6=\frac{11}{1000},\quad P_j=0\quad(j\ge7),
+\end{aligned}
+\end{equation}
+and we write \(\boldsymbol P:=(P_j)_{j\ge0}\).  A feasible alternating
+component of size \(j\) is accepted with probability \(P_j/j\) from each
+of its \(j\) proposal vertices, so the aggregate move has transition
+probability \(P_j/(nq)\) on an \(n\)-vertex instance.  We shall use
+\[
+  \max_j jP_j=1,
+  \qquad
+  \max_j(j-2)P_j=\frac{22}{125}.
+\]
+
+Throughout the contraction proof, fix \(G\in\Gdeg\), a pinning
+\(\tau\), \(x\in(0,1]\), and \(n:=\lvert V^\tau\rvert\ge1\); assume
+\(\Deg\ge125\), \(q\ge(1809/1000)\Deg\), and set \(\theta:=1-x\).
+We use the free graph \(G^\tau\) and boundary counts \(\bcount_u^\tau(c)\)
+from \Cref{sec:potts-setup}, which satisfy
+\[
+  \deg_{G^\tau}(u)+\sum_{c\in\colours}\bcount_u^\tau(c)
+  =\deg_G(u)\le\Deg.
+\]
+The free--pinned constraints retain their individual edge labels, as in
+\Cref{sec:soft-flip-interface}, so repeated boundary colours are counted
+with multiplicity.
+
+\begin{definition}[Soft-CV kernel]\label{def:cv-kernel}
+For \(G\in\Gdeg\), a pinning \(\tau\), and \(x\in(0,1]\), define
+\[
+  K_{x,\mathrm{CV}}^{G,\tau}:=K_{x,\boldsymbol P}^{G,\tau}.
+\]
+This is the soft profile kernel of \Cref{sec:soft-flip-interface}
+specialized to \eqref{eq:cv-params}.
+\end{definition}
+
+The endpoint $x=0$ is added in \Cref{thm:cv-ci} by convergence of the
+finite-state child laws.
+
+Because component flips are involutions and $P_j/j$ compensates the $j$
+proposal vertices, the profile-parametrized argument of
+\Cref{lem:soft-stationary} shows that \(K_{x,\mathrm{CV}}^{G,\tau}\) is irreducible and
+reversible with stationary law $\mupin{G}{\tau}{x}$.  For adjacent
+configurations we use the coupled activations of
+\Cref{lem:coupled-activation-root-local}; in each marginal the subsequent
+move is the ordinary hard list-colouring flip transition.
+
+\subsection{Geometric path metric}
+
+Let \(X,Y\in\colours^{V^\tau}\) be adjacent with disagreement root \(v\),
+\(X_v=a\), \(Y_v=b\),
+$T=\set{a,b}$. A neighbour $u\in N_{G^\tau}(v)$ is \emph{regular} if
+$X_u=Y_u\notin T$. For regular $u$ define
+\begin{equation}\label{eq:cv-scores}
+  r_u:=\abs{\set{y\in N_{G^\tau}(u)\setminus\set v:X_y\in T}},\qquad
+  e_u:=\bcount_u^\tau(a)+\bcount_u^\tau(b),\qquad
+  s_u:=\theta\,x^{\,r_u+e_u}.
+\end{equation}
+The survival probability $s_u$ is exactly the probability that, in the
+active instance,
+the root edge $vu$ is active, every free $T$-blocker at $u$ is inactive,
+and neither target colour is deleted at $u$.  Thus $s_u$ is a
+deterministic function of the input pair; the probability is
+over the subsequently sampled active set. Expectations below average both the
+active-set draw and the flip transition.
+Write \(\mathcal U_u\) for this activation event, so that
+\(\Pr(\mathcal U_u)=s_u\).
+
+\begin{definition}[Geometric soft-CV metric]\label{def:cv-metric}
+For adjacent $X,Y$ as above set
+\begin{equation}\label{eq:cv-edge-length}
+  \ell_x^{G,\tau}(X,Y):=1-\frac{17}{200\,q}\sum_{u\ \text{regular}}s_u ,
+\end{equation}
+and let $d_x^{G,\tau}$ be the shortest-path metric generated by these
+one-coordinate edge lengths on the graph with vertex set
+\(\colours^{V^\tau}\), in which two configurations are adjacent exactly when
+they differ at one vertex. The
+coefficient is $(P_2-P_3)/2$ per unit of $q$, matching the hard metric
+of~\cite[Eq.~(2)]{CarlsonVigoda2024}. Its limit as $x\downarrow0$ is the
+hard metric: a neighbour has limiting survival probability one exactly when it has no blocker
+and no target deletion, and otherwise has limiting survival probability zero.
+\end{definition}
+
+\begin{lemma}[Metric comparison; adjacent geodesics]\label{lem:cv-metric}
+If $q\ge1.809\,\Deg$, then
+$m_0\Ham(\sigma,\sigma')\le d_x^{G,\tau}(\sigma,\sigma')\le\Ham(\sigma,\sigma')$ for
+all \(\sigma,\sigma'\in\colours^{V^\tau}\), where \(m_0\) is given in
+\eqref{eq:cv-main-constants}; for adjacent pairs the direct edge is a geodesic.
+\end{lemma}
+
+\begin{proof}
+There are at most $\Deg$ regular neighbours and each survival probability is at most $1$,
+so every edge length lies in
+$[1-17\Deg/(200q),1]\subseteq[1724/1809,1]$. Any path makes at least
+$\Ham(\sigma,\sigma')$ coordinate changes, and changing disagreements one at a
+time costs at most $1$ each. A path avoiding the direct adjacent edge uses
+at least two edges, of cost at least $2m_0>1$.
+\end{proof}
+
+For \(\sigma,\sigma'\in\colours^{V^\tau}\) and a disagreement \(y\), put
+\(T_y=\set{\sigma_y,\sigma'_y}\).  Call \(w\) an
+\emph{endpoint-common neighbour} of \(y\) when
+\[
+ w\in N_{G^\tau}(y),\qquad \sigma_w=\sigma'_w\notin T_y.
+\]
+For such \(y,w\), define the union blocker count
+\[
+\begin{aligned}
+b_{\sigma,\sigma'}(y,w)
+ :={}&\abs{\set{s\in N_{G^\tau}(w)\setminus\set y:
+          \sigma_s\in T_y\ \text{or}\ \sigma'_s\in T_y}}\\
+ &+\sum_{c\in T_y}\bcount_w^\tau(c).
+\end{aligned}
+\]
+Thus each free-edge factor is counted once even if it is a blocker in
+both endpoint configurations, and the edge \(yw\) is excluded.  Define
+\begin{equation}\label{eq:cv-output-score}
+ \mathcal S_{\rm out}(\sigma,\sigma')
+ :=\sum_{y:\sigma_y\ne\sigma'_y}
+      \theta\!\!\sum_{\substack{w\in N_{G^\tau}(y)\\
+                 \sigma_w=\sigma'_w\notin T_y}}
+        x^{b_{\sigma,\sigma'}(y,w)} .
+\end{equation}
+
+\begin{lemma}[A path upper bound for the geometric metric]\label{lem:cv-path}
+For all \(\sigma,\sigma'\in\colours^{V^\tau}\),
+\begin{equation}\label{eq:cv-path}
+  d_x^{G,\tau}(\sigma,\sigma')\le\Ham(\sigma,\sigma')
+   -\frac{17}{200q}\mathcal S_{\rm out}(\sigma,\sigma').
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Change the disagreements in a fixed order. At the step changing $y$, every
+blocker present in the intermediate configuration carries a colour taken
+from $\sigma$ or from $\sigma'$, so its blocker count at $w$ is at most
+$b_{\sigma,\sigma'}(y,w)$.  Since $m\mapsto x^m$ is nonincreasing for
+$x\in(0,1]$, each step's edge length is at most
+$1-\tfrac{17}{200q}\theta\sum_wx^{b_{\sigma,\sigma'}(y,w)}$. Sum along the
+path.
+\end{proof}
+
+\subsection{Conditional coupling under fixed activations}
+
+\subsubsection{Common off-root components}
+Fix adjacent \(X,Y\in\colours^{V^\tau}\) and an outcome of the coupled activations from
+\Cref{lem:coupled-activation-root-local}.  Write the two active hard
+instances as
+\[
+  F_X=(V^\tau,E_X,L_X),\qquad F_Y=(V^\tau,E_Y,L_Y).
+\]
+Here \(E_X,E_Y\) are the active free-edge sets, and
+\(L_X=(L_{X,u})_{u\in V^\tau}\), \(L_Y=(L_{Y,u})_{u\in V^\tau}\)
+are the corresponding effective-list families.  The two instances agree
+away from $v$.  Call every \(c\notin T\) a
+\emph{regular colour}, and put
+\[
+  \Gamma_c:=\set{u\in N_{G^\tau}(v):
+      X_u=Y_u=c,\ vu\in E_X\cap E_Y},\qquad k_c:=\abs{\Gamma_c}.
+\]
+Lemma~\ref{lem:coupled-activation-root-local} implies that an edge $vu$ with common colour
+$c\notin T$ is active on one side if and only if it is active on the other.
+For such a regular colour, say that \(c\) is \emph{root-allowed} when
+\[
+  c\in L_{X,v}\cap L_{Y,v}.
+\]
+The two membership tests are equivalent because the root lists can differ
+only in the colours \(a,b\).  Write
+\[
+  \mathsf A_c:=\one{c\text{ is root-allowed}}.
+\]
+For a root target \(c_0\in T\), root-allowed
+means \(a\in L_{Y,v}\) when \(c_0=a\), and \(b\in L_{X,v}\) when \(c_0=b\).
+Equivalently it again means \(c_0\in L_{X,v}\cap L_{Y,v}\), since the other
+starting configuration already uses \(c_0\).
+
+\begin{lemma}[Components near the disagreement vertex]\label{lem:cv-root-local-structure}
+For each regular colour $c\notin T$:
+\begin{enumerate}
+\item Deleting $v$ from the root-containing $\set{a,c}$-component in
+  $F_X$ gives exactly the off-root $\set{a,c}$-components in $F_Y$ that
+  meet $\Gamma_c$, with the same post-swap assignments.  The analogous
+  statement holds with $a,X,Y$ replaced by $b,Y,X$.  Consequently a
+  root-containing move is feasible exactly when $c$ is root-allowed
+  and all the corresponding off-root moves are feasible.
+\item For a fixed off-root proposal vertex and a fixed unordered colour
+  pair, the components grown on the two sides have the same vertex set and
+  the same post-swap feasibility whenever both avoid $v$.  If they differ,
+  at least one contains $v$, and its flip recolours $v$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By \Cref{lem:coupled-activation-root-local}, every off-root edge and list
+is the same in $F_X$ and $F_Y$.  A one-sided root edge has neighbour
+colour $a$ or $b$, and a one-sided root deletion deletes $a$ or $b$.
+Thus all edges and lists relevant to a colour $c\notin T$ are common away
+from the root.
+
+Hence the $\set{a,c}$-component through $v$ on the
+$X$-side is $v$ together with exactly the off-root
+$\set{a,c}$-components attached through $\Gamma_c$. These are the same
+components on the $Y$-side, because changing the colour at $v$
+from $a$ to $b$ does not change the induced $\set{a,c}$ graph away from
+$v$. The post-swap assignments agree at every off-root vertex. At $v$ the
+root-containing swap assigns $c$; the possible extra deletion of the old
+colour $a$ is therefore harmless. Thus the only additional root list check
+is that $c$ is root-allowed, proving part~1. The same off-root identity
+proves part~2: the component grown from an off-root proposal vertex can first differ
+only when one growth reaches $v$, and any nontrivial two-colour flip
+containing $v$ changes its colour.
+\end{proof}
+
+\begin{lemma}[Partition of the aggregate moves]\label{lem:cv-move-partition}
+After common off-root aggregate flips are coupled synchronously, every
+remaining nonidentity aggregate move belongs
+uniquely to one of the regular-colour families \(c\notin T\) or to one of
+the two root-colour families \(a,b\).
+
+More explicitly, delete \(v\) and consider the common off-root
+\(\{a,b\}\)-components.  Let \(\mathcal B_a\) be those containing an
+active \(a\)-coloured neighbour joined to \(v\) on the \(Y\)-side, and let
+\(\mathcal B_b\) be those containing an active \(b\)-coloured neighbour
+joined to \(v\) on the \(X\)-side.  Then
+\[
+\begin{array}{c|c}
+\text{block class}&\text{assigned moves}\\ \hline
+\mathcal B_a\setminus\mathcal B_b&
+  \text{\(a\)-family: \(Y\)-root and \(X\)-off-root}\\
+\mathcal B_b\setminus\mathcal B_a&
+  \text{\(b\)-family: \(X\)-root and \(Y\)-off-root}\\
+\mathcal B_a\cap\mathcal B_b&
+  \text{contained in the two root moves, with no off-root copy}\\
+\text{neither}&\text{synchronously coupled}.
+\end{array}
+\]
+\end{lemma}
+
+\begin{proof}
+When the corresponding components on both sides avoid \(v\), they have
+the same flipped set, feasibility, and post-swap assignments on that set
+by \Cref{lem:cv-root-local-structure}; these moves are coupled synchronously.
+Every remaining move either contains \(v\) or is an off-root counterpart
+of a component that contains \(v\).  The root-containing component has
+colour pair \(\{a,c\}\) on the \(X\)-side or \(\{b,c\}\) on the
+\(Y\)-side.  If \(c\notin T\), this determines the regular \(c\)-family
+uniquely.
+
+It remains to consider the pair \(\{a,b\}\).  Away from \(v\), its
+components are common to \(F_X\) and \(F_Y\).  A block reaches \(v\) on
+the \(Y\)-side exactly when it belongs to \(\mathcal B_a\), and reaches
+\(v\) on the \(X\)-side exactly when it belongs to \(\mathcal B_b\).
+The four cases in the table follow.  In particular, a block meeting both
+types of root neighbour is part of both root-containing components and is
+not also counted as an off-root move.  This proves both exhaustion and
+uniqueness.
+\end{proof}
+
+\subsubsection{Component matching and coupling completion}
+
+\begin{definition}[Conditional coupling matrix]
+\label{def:cv-component-matching}
+Let \(\mathcal M_X\) and \(\mathcal M_Y\) be the side-labelled feasible
+component moves from \(X\) and \(Y\), each augmented by a holding move
+\(\varnothing\).  For \(M\in\mathcal M_X\) and
+\(N\in\mathcal M_Y\), write \(X^M,Y^N\) for the outputs and
+\(\abs M,\abs N\) for the numbers of flipped vertices, with
+\(X^\varnothing=X\), \(Y^\varnothing=Y\), and
+\(\abs\varnothing=0\).  Denote the two move probabilities by
+\(\kappa_X(M)\) and \(\kappa_Y(N)\).  In particular, a feasible
+nonholding move of size \(j\) has probability \(P_j/(nq)\).
+
+A partial coupling matrix is a nonnegative array
+\(\boldsymbol\pi=(\pi_{M,N})\) satisfying
+\[
+  \sum_N\pi_{M,N}\le\kappa_X(M),
+  \qquad
+  \sum_M\pi_{M,N}\le\kappa_Y(N).
+\]
+Initialize it at zero.  Match every common off-root move with its
+counterpart, with the full probability on that entry: the flipped sets
+and their post-swap assignments agree, but the full configurations still
+differ at \(v\).  Leave the holding row and column unassigned.  The remaining entries are the
+aggregate-parameter greedy
+matches of~\cite[\S5.1]{CarlsonVigoda2024}, specified as follows.
+
+Fix \(c\notin T\).  If \(k_c=0\) and \(c\) is root-allowed, put the full
+probability \(1/(nq)\) of the two singleton root moves in their common
+entry; their outputs agree at \(v\).  If \(c\) is not root-allowed,
+neither move is feasible.  For \(k_c\ge1\), fix an order of
+\(\Gamma_c\) and assign every distinct off-root component to the first
+vertex of \(\Gamma_c\) that it contains.
+
+If the \(X\)-side root-containing \(\{a,c\}\)-move is feasible, put its
+full probability in the entry joining it to a largest opposite off-root
+\(\{a,c\}\)-move.  Do the same for the \(Y\)-side root-containing
+\(\{b,c\}\)-move.  For each family, let its maximum-index set consist of
+the indices to which a largest component is assigned.  If the two sets
+intersect, choose both entries at one common index; otherwise choose any
+maximizer in each family.  Root feasibility implies feasibility of every
+constituent off-root move by \Cref{lem:cv-root-local-structure}, and the
+profile is nonincreasing on positive component sizes, so neither entry
+overfills its opposite row or
+column.
+
+Subtract these entries, scan \(\Gamma_c\) in the fixed order, and at each
+vertex put the largest possible entry between the two current residual
+component probabilities assigned there.  Each subtraction is made from the
+component's global residual, so a component meeting several vertices is
+never reused.  The two flipped sets in such an entry share the indexing
+vertex and therefore save at least one unit relative to their separate size
+bounds.
+
+For root colour \(a\), the root-containing move is the \(Y\)-side
+\(\{a,b\}\)-move through \(v\), and its possible opposite moves are the
+\(X\)-side off-root \(\{a,b\}\)-components meeting an active
+\(a\)-coloured root neighbour but not \(v\); interchange \(X,Y\) for
+root colour \(b\).  If there is exactly one such neighbour and both moves
+are feasible, put the full root-move probability in the root/off-root
+entry.  Otherwise put a feasible root move in the entry with holding on the
+opposite side.  That entry removes the original root disagreement.
+\end{definition}
+
+\begin{lemma}[Component matching and product completion]
+\label{lem:cv-completion}
+The entries in \Cref{def:cv-component-matching} extend to a coupling matrix
+with row sums \(\kappa_X\) and column sums \(\kappa_Y\).
+\end{lemma}
+
+\begin{proof}
+The regular-colour capacity checks are part of the construction.  In
+particular, a component is recorded at its first, or canonical, vertex of
+\(\Gamma_c\), and every later match subtracts from its global residual.
+This covers the case in which one component meets several vertices while
+the components on the other side are distinct.  When the construction uses
+a root/off-root entry for a root colour with one active neighbour, its
+eligible partner \(C\) satisfies that the root component is
+\(\{v\}\cup C\).  Root feasibility implies feasibility of the
+off-root move and \(P_{\abs C+1}\le P_{\abs C}\), so the root/off-root
+entry fits.  In every other root-colour case, at most one root move on each
+side is joined to holding.  The proposals whose proposed colour is the
+current colour give each side holding probability at least \(1/q\), while
+a root move has probability at most \(1/(nq)\).  Hence the holding entries
+also fit.
+
+Let the residual row and column probabilities be
+\begin{equation}\label{eq:cv-residual-masses}
+  \alpha_M:=\kappa_X(M)-\sum_N\pi_{M,N},
+  \qquad
+  \beta_N:=\kappa_Y(N)-\sum_M\pi_{M,N}.
+\end{equation}
+They are nonnegative by the preceding checks.  Both move distributions
+have total mass one, and each specified entry removes the same mass from a
+row and a column, so
+\[
+  \sum_M\alpha_M
+  =1-\sum_{M,N}\pi_{M,N}
+  =\sum_N\beta_N
+  =:R.
+\]
+If \(R>0\), add
+\[
+  \frac{\alpha_M\beta_N}{R}
+\]
+to every entry \((M,N)\); if \(R=0\), nothing remains.  This product
+completion has residual row sums \(\alpha_M\) and column sums
+\(\beta_N\), and therefore gives the required coupling matrix.
+\end{proof}
+
+\begin{lemma}[Cost of the completed coupling]
+\label{lem:cv-completion-cost}
+For the residual masses in \eqref{eq:cv-residual-masses}, the
+product-completion entries have total Hamming increment at most
+\[
+  \sum_M\alpha_M\abs M+\sum_N\beta_N\abs N.
+\]
+An entry matching a common off-root move has zero increment.  An explicit
+root-colour move paired with holding saves two units relative to the
+flipped-set-size bound.
+Every nonidentity move occurs in exactly one component family.
+\end{lemma}
+
+\begin{proof}
+For every pair of moves,
+\[
+  \Ham(X^M,Y^N)-1\le\abs M+\abs N,
+\]
+because away from the two flipped sets only the original disagreement can
+remain.  Consequently the product-completion cost is at most
+\[
+  \sum_M\alpha_M\abs M+\sum_N\beta_N\abs N.
+\]
+This proves the displayed residual bound.  A common off-root match leaves
+only the original disagreement and hence has zero increment.  An explicit
+root-colour move paired with holding changes the root to its colour on the
+opposite side.  For such an $X$-side move $M$,
+\(\Ham(X^M,Y)-1\le |M|-2\), and symmetrically on the other side.
+This is the stated two-unit saving relative to the size bound.  Finally,
+\Cref{lem:cv-move-partition} ensures that every nonidentity move occurs in
+exactly one family.  Thus, even when a product-completion entry joins moves
+from different families, its two size terms are charged separately to the
+unique families of its row move and column move; no residual mass is omitted
+or counted twice.
+\end{proof}
+
+For the rest of this section, let \((X_1,Y_1)\) denote the outputs drawn
+from the completed coupling matrix.
+
+For every \(c\notin T\), define its physical root multiplicity by
+\[
+ m_c:=\abs{\set{u\in N_{G^\tau}(v):X_u=Y_u=c}},
+\]
+and recall that \(k_c=\abs{\Gamma_c}\) is its active root multiplicity.
+For the current active outcome, put
+\[
+ \mathcal C_{\rm low}:=
+    \set{c\notin T:c\text{ is root-allowed},\
+                      m_c\in\set{1,2}},
+\]
+and let \(E_v\) be the event that at least one selected component move
+recolours \(v\).
+
+\begin{lemma}[Conditional component budgets]\label{lem:cv-component-budgets}
+Fix a coupled active outcome for adjacent $X,Y$, with disagreement root
+$v$, $X_v=a$, $Y_v=b$, and put $T=\set{a,b}$. The following facts hold
+for the component coupling above.
+\begin{enumerate}
+\item \emph{Root-event budget.}
+  Conditionally on the active outcome,
+  \begin{equation}\label{eq:cv-root-recolour-budget}
+    nq\,\Pr(E_v\mid F_X,F_Y)
+       \le q-P_2\sum_{c\in\mathcal C_{\rm low}}k_c .
+  \end{equation}
+\item \emph{Output-discount bound.}
+  Fix a regular neighbour $u$ and
+  $w\in N_{G^\tau}(u)\setminus\set v$ which is not initially
+  $T$-coloured. For each $t\in T$, collect the active free edges from
+  $w$ to a $t$-coloured vertex and the active pinned-neighbour constraints at $w$
+  deleting $t$. After root-recolouring moves have been charged to
+  $E_v$, the total transition probability that can recolour $w$ into a colour
+  of $T$ is at most $(1+P_2)/(nq)$ whenever at least one collected constraint is
+  active. If none is active and the root edge $vu$ is active while all
+  off-root $T$-blockers and target deletions at $u$ are inactive, the
+  same-neighbour matrix entry is at least $(1-P_2)/(nq)$ and flips only $u$ on
+  either side. Credits obtained this way for different ordered pairs
+  $(u,w)$ refer to different summands of \eqref{eq:cv-path}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For part~1, assign the \(X\)-side \(\{a,c\}\) and \(Y\)-side
+\(\{b,c\}\) root-containing flips to the regular colour \(c\notin T\);
+the two remaining \(\{a,b\}\) root flips form the \(a\)- and
+\(b\)-families.  These assignments are disjoint.  A
+colour that is not root-allowed contributes no root-changing move, except possibly
+$a$ or $b$; for those exceptional colours the extra proposal is the
+current colour on its witness side and hence is a stay proposal, while it
+is forbidden on the other side. Thus it contributes zero. For
+$c\notin T$ with $k_c=0$, the two root-containing components are both the
+singleton $\set v$ and are coupled together with probability $1/(nq)$.
+If $k_c\ge1$, each root-containing component has size at least
+$k_c+1$, so their combined probability is at most $2P_{k_c+1}/(nq)$. When
+$k_c=1$,
+\[
+  2P_2\le1-P_2
+  \qquad\text{because}\qquad 3P_2=\frac{243}{250}\le1,
+\]
+and when $k_c=2$,
+\[
+  2P_3\le1-2P_2
+  \qquad\text{because}\qquad
+  2P_3+2P_2=\frac{239}{250}\le1 .
+\]
+Hence every $c\in\mathcal C_{\rm low}$ saves at least $P_2k_c$ from its
+unit baseline. All other regular colours cost at most their unit
+baseline. Assign the $X$-side root-containing $\set{a,b}$-move to the
+$b$-baseline and the $Y$-side root-containing move to the $a$-baseline.
+Each has probability at most
+$P_1/(nq)=1/(nq)$, so summing the $q$ baselines and multiplying by $nq$ proves
+\eqref{eq:cv-root-recolour-budget}.
+
+For part~2, fix a target $t\in T$ and compare the two
+$\set{X_w,t}$-components from $w$. If both avoid $v$,
+by \Cref{lem:cv-root-local-structure} they are identical and hence
+synchronously coupled, so they contribute only one copy of their component
+probability. If a component contains $v$, its move is already charged to
+$E_v$; after removing all such moves, again at most one off-root component
+remains. Its probability is at most $\max_jP_j/(nq)=1/(nq)$. If an active free edge
+joins $w$ to an off-root $t$-coloured vertex, that component has size at
+least two and its probability is at most $P_2/(nq)$; if an active pinned-neighbour constraint deletes
+$t$ at $w$, the component is infeasible. In either case one target
+contributes at most $P_2/(nq)$ and the other at most $1/(nq)$.
+The remaining possibility is that the active constraint is the edge
+$wv$. Then $w$ is itself a regular root neighbour. After the two
+root-containing moves are assigned to $E_v$, the possible off-root moves
+are the two opposite-target components through $w$. If both are
+singletons, let $r_1,r_2$ be their remaining probabilities multiplied by
+$nq$, after the root/off-root entries have been assigned, taking zero for
+an infeasible move. Since each original move has probability at most
+$1/(nq)$, we have $0\le r_1,r_2\le1$.
+The same-neighbour rule couples residual mass $\min\{r_1,r_2\}/(nq)$.
+Hence, outside $E_v$, the probability that at least one of these moves
+occurs is at most
+\[
+ \frac{r_1+r_2-\min\{r_1,r_2\}}{nq}
+ =\frac{\max\{r_1,r_2\}}{nq}\le\frac1{nq}.
+\]
+If either is not a singleton, its probability is
+at most $P_2/(nq)$, while the other is at most $1/(nq)$. Thus this case also
+has total probability at most $(1+P_2)/(nq)$, proving the assertion for every active
+collected constraint.
+
+Under the safe event in the last assertion, the two target components at
+$u$ are feasible singletons. Each has probability $P_1/(nq)=1/(nq)$. A
+root-containing component meeting the active edge $vu$ has size at least two and consumes
+at most $P_2/(nq)$ of the corresponding singleton in the root/off-root
+entry. The same-neighbour entry therefore has probability at least $(1-P_2)/(nq)$ on both
+sides. It flips only $u$, to opposite colours in $T$, and leaves every
+other vertex unchanged. Thus its output correction in
+\eqref{eq:cv-path} is indexed by the ordered pair $(u,w)$. Different
+ordered pairs are different terms of the double sum there (even if they
+share one endpoint), so summing these credits cannot reuse one metric
+summand. The same coupled move may realize several such savings
+simultaneously, in which case its path-metric correction is exactly the sum
+of the corresponding $(u,w)$-summands.
+\end{proof}
+
+\subsection{Geometric discount estimates}
+
+Recolouring a unique blocker to a fresh colour creates discount; recolouring
+the root, the regular neighbour, or an off-root neighbour can destroy it.  The following
+three lemmas bound these effects.
+
+Put
+\begin{equation}\label{eq:cv-alpha}
+  \alpha_{\mathrm{fr}}:=q-\Deg-2 .
+\end{equation}
+For a regular neighbour \(u\), let \(\mathsf{SB}_u\) be the activation
+event that \(vu\) is active, exactly one of the \(r_u\) other free
+\(T\)-blocker edges at \(u\) is active, and every remaining \(T\)-blocker
+edge and \(T\)-coloured pinned-neighbour constraint at \(u\) is inactive.
+Write
+\[
+  b_u^{\rm SB}:=\Pr(\mathsf{SB}_u),
+\]
+where the probability is over the active-constraint draw.
+
+\begin{lemma}[Fresh-colour gain]\label{lem:cv-fresh}
+Fix a regular neighbour $u$ with $R=r_u$ free target blockers and \(e=e_u\) target
+pinned-neighbour constraints. The expected increase of the output $u$-discount relative
+to its deterministic input value $s_u$, caused by singleton recolourings of
+its blockers, is at least
+\[
+  \frac{\alpha_{\mathrm{fr}}}{nq}\,
+  b_u^{\rm SB},
+\]
+and
+\[
+  b_u^{\rm SB}=
+  \begin{cases}
+    R\,\theta^2x^{R+e-1},&R\ge1,\\
+    0,&R=0.
+  \end{cases}
+\]
+\end{lemma}
+
+\begin{proof}
+The displayed probability is over the active-set draw: the root edge is
+active, exactly one blocker edge is active, and all other blockers and all
+\(e\) target-deleting pinned-neighbour constraints are inactive --- independent activation bits
+of distinct constraints.  Equivalently, the factor
+\(R\theta^2x^{R+e-1}\) is the sum, over the \(R\) possible unique blocker
+incidences, of the deterministic discount increment available on the
+corresponding activation event; it is not an additional probability factor
+for the singleton flip below.  Fix a blocker incidence $(u,s)$. At $s$, exclude the
+two target colours, every colour of
+its full free neighbourhood, and every colour forbidden by one of its
+pinned-neighbour constraints: at least
+\[
+  q-2-\left(\deg_{G^\tau}(s)+\sum_{c\in\colours}\bcount_s^\tau(c)\right)
+  \ge\alpha_{\mathrm{fr}}
+\]
+colours remain, and for each the alternating component of $s$ is a list-feasible
+singleton in \emph{every} active outcome, accepted with probability $P_1=1$
+and transition mass $1/(nq)$. The flip removes one blocker incidence and raises the
+corresponding output $u$-discount relative to $s_u$ by
+$\theta x^{R+e-1}-\theta x^{R+e}=\theta^2x^{R+e-1}$. Summing over
+the $\alpha_{\mathrm{fr}}$ colours and $R$ incidences gives the claim; if one blocker
+vertex serves several regular neighbours, the single flip increases the total
+discount by the sum of the individual increments. Incidence summation
+therefore counts each discount contribution, while the flip probability
+is counted once.
+\end{proof}
+
+For a regular root-neighbour colour \(c\), recall that \(m_c\) is its
+physical multiplicity, and recall that \(\bcount_v^\tau(c)\) counts the root
+pinned-neighbour constraints forbidding \(c\). Define
+\begin{equation}\label{eq:cv-Lx}
+  L_x:=\sum_{\substack{c\notin T:\\m_c\in\set{1,2}}}
+      m_c\,x^{\bcount_v^\tau(c)},\qquad
+  \phi_x:=\frac{L_x}{\Deg} .
+\end{equation}
+Since $L_x$ is a weighted subcount of the physical root neighbours,
+$0\le \phi_x\le1$.
+The factor $x^{\bcount_v^\tau(c)}$ is the probability that $c$ survives in the
+active root list, and root-edge activation is independent of root boundary
+activation, so the expected value of
+$\sum_{c\in\mathcal C_{\rm low}}k_c$ is exactly $\theta L_x$.
+Averaging \eqref{eq:cv-root-recolour-budget} from
+\Cref{lem:cv-component-budgets} therefore gives
+\begin{equation}\label{eq:cv-root-event}
+  nq\,\Pr(E_v)\;\le\;q-P_2\,\theta L_x ,
+\end{equation}
+where $E_v$ is the root-recolouring event. This is the soft analogue
+of~\cite[Eq.~(18)]{CarlsonVigoda2024}, proved directly for the two active
+hard instances.
+
+\begin{lemma}[Ordered-incidence discount bound]\label{lem:cv-incidence}
+Fix a regular neighbour $u$ and $w\in N_{G^\tau}(u)\setminus\set v$ not initially
+a target blocker, so \(X_w=Y_w\notin T\).  Let \(\mathcal O_w\) be the
+following disjoint set of physical constraint factors:
+\[
+ \mathcal O_w:=
+ \set{wy\in E(G^\tau):y\ne u,\
+       X_y\in T\ \text{or}\ Y_y\in T}
+ \ \sqcup\
+ \set{(w,t,j):t\in T,\ 1\le j\le\bcount_w^\tau(t)} ,
+\]
+and put \(t_w=\abs{\mathcal O_w}\). The contribution of the
+ordered incidence $(u,w)$ to input discount loss minus certified output discount
+is at most $(1+P_2)\,s_u/(nq)$.
+\end{lemma}
+
+\begin{proof}
+Let \(\mathcal E_w\) be the event that all of \(\mathcal O_w\) is inactive. Given the
+active outcome, for each target $c\in T$ the operations recolouring $w$
+into $c$ flip the unique active $\set{X_w,c}$-component of $w$ in one
+marginal, with transition probability at most $\max_jP_j/(nq)=1/(nq)$,
+so their total probability is at most $2/(nq)$
+always. When \(\mathcal E_w\) fails, some constraint of \(\mathcal O_w\) is active at
+$w$: an active edge to a $c$-coloured vertex forces the
+$\set{X_w,c}$-component to have size at least two, capping its transition
+probability at $P_2/(nq)$, and an active pinned-neighbour constraint
+forbidding $c$ makes the swap list-infeasible. Part~2 of
+\Cref{lem:cv-component-budgets} shows directly that root-containing moves
+are already charged to $E_v$ and common off-root components are coupled synchronously,
+so the remaining probability is at most $(1+P_2)/(nq)$. This proves in the
+two-instance setting the case-(i) estimate corresponding
+to~\cite[\S4.3]{CarlsonVigoda2024}. The averaged probability is thus at most
+\(\bigl((1+P_2)+(1-P_2)x^{t_w}\bigr)/(nq)\), and each new blocker incidence costs at most
+$s_u-s_ux=\theta s_u$ of discount.
+
+The activation bits of \(\mathcal U_u\) are disjoint from those of
+\(\mathcal E_w\), so
+\(\Pr(\mathcal U_u\cap\mathcal E_w)=s_u x^{t_w}\). On this event both target
+components at $u$ --- the $\set{X_u,a}$-move on one side and the
+$\set{X_u,b}$-move on the other --- are feasible singletons; root-containing
+components meeting the active root edge have transition probability at most
+$P_2/(nq)$, so after the root/off-root entry each side retains probability
+at least $(1-P_2)/(nq)$, and the same-neighbour entry pairs the two moves: the coupled flip
+recolours $u$ to $a$ on one side and to $b$ on the other, creating a new
+disagreement at $u$ with pair $\set{a,b}$. Its blocker incidences at $w$
+are exactly the \(t_w\) constraints of $\mathcal O_w$ (no other vertex
+changes), so the $(u,w)$ output discount in \eqref{eq:cv-path} is
+\(\theta x^{t_w}\). The certified credit is at least
+\((1-P_2)\,s_u\theta x^{2t_w}/(nq)\). The net cost
+is at most
+\[
+  \frac{s_u\,\theta}{nq}\Bigl[(1+P_2)
+    +(1-P_2)\bigl(x^{t_w}-x^{2t_w}\bigr)\Bigr]
+  \le\frac{(1+P_2)\,s_u}{nq},
+\]
+since for \(t_w\ge1\), \(x^{t_w}-x^{2t_w}\le x\) and
+$(1-x)[(1+P_2)+(1-P_2)x]\le1+P_2$, with slack $x[2P_2+(1-P_2)x]\ge0$; for
+\(t_w=0\) the extra term vanishes. Distinct ordered incidences certify distinct
+summands of \eqref{eq:cv-path}, so no credit is reused.
+\end{proof}
+
+\begin{lemma}[Expected loss of the geometric discount]\label{lem:cv-expected}
+Fix the adjacent input pair and a deterministic order of the off-root
+neighbours of each regular \(u\).  For each coupled outcome, process in order
+the root recolouring, a recolouring of \(u\) into \(T\), and then the
+off-root neighbours in the fixed order.  Let \(\mathsf{Loss}_u\) be the
+telescoping decrease of the input \(u\)-discount caused by these operations,
+charging each decrease at its first cause.  Let \(\mathsf{Credit}_u\) be the
+sum of the distinct \((u,w)\)-indexed output-score summands certified by the
+same-neighbour matches in \Cref{lem:cv-component-budgets,lem:cv-incidence}.
+Thus every input loss is charged once and every output summand is credited at
+most once.  Expectations are over both the coupled activation draw and the
+coupled hard update.  For every regular neighbour \(u\),
+\begin{gather*}
+  \E[\mathsf{Loss}_u]-\E[\mathsf{Credit}_u]
+  \;\le\;\frac{\beta^{+}_x}{nq}\,s_u ,\\
+  \beta^{+}_x:=q-P_2\theta L_x+(1+P_2)\Deg+2 .
+\end{gather*}
+\end{lemma}
+
+\begin{proof}
+The discount at $u$ can disappear in three ways: the root is recoloured ---
+probability bounded by \eqref{eq:cv-root-event}; the root survives but $u$
+is recoloured into a target colour --- by
+\Cref{lem:cv-root-local-structure}, common off-root components are coupled synchronously,
+whereas every non-common component meeting the root is already charged to
+$E_v$; after those moves are removed, each target contributes probability
+at most $1/(nq)$, hence at most $2/(nq)$ in total; or a neighbour $w$ creates a new
+blocker --- at most $\Deg$ ordered incidences, each bounded by
+\Cref{lem:cv-incidence}. The three types can overlap on a single
+operation, but each charge separately upper-bounds the part of the discount
+loss it names and the total loss telescopes over the triggered types, so
+summing the three expected charges is conservative.
+\end{proof}
+
+\begin{lemma}[Disjointness of the output credits]\label{lem:cv-credit-disjoint}
+For every coupled outcome, the sum of all output-score summands retained as
+credits in \Cref{lem:cv-fresh,lem:cv-incidence,lem:cv-expected} is at most
+\(\mathcal S_{\rm out}(X_1,Y_1)\).
+\end{lemma}
+
+\begin{proof}
+The ordered-incidence credit associated with \((u,w)\) is the summand of
+\eqref{eq:cv-output-score} indexed by the output disagreement at \(u\) and
+its endpoint-common neighbour \(w\).  The deterministic ordering in
+\Cref{lem:cv-expected} retains each such ordered pair at most once.
+The fresh-colour credit at a regular root neighbour \(u\) is instead the
+summand indexed by the surviving root disagreement \((v,u)\).  These
+summands have first coordinate \(v\), whereas every ordered-incidence
+summand has first coordinate \(u\ne v\); the two collections are therefore
+disjoint.  If a single coupled flip realizes several credits, they are
+distinct summands in the defining double sum for
+\(\mathcal S_{\rm out}\).  Their total is consequently bounded by the full
+output score, outcome by outcome.
+\end{proof}
+
+\subsection{Per-colour charge estimates}
+
+Set $\varrho=q/\Deg$, $\eta(\varrho)=\frac{P_2-P_3}{2\varrho}=\frac{17}{200\varrho}$, and
+\begin{equation}\label{eq:cv-gammas}
+  \gamma_{\rm gain}:=\eta(\varrho)
+     \Bigl(\varrho-1-\frac2\Deg\Bigr),\qquad
+  \gamma_{\rm loss}:=\eta(\varrho)
+     \Bigl(\varrho-P_2\theta\phi_x+1+P_2+\frac2\Deg\Bigr),
+\end{equation}
+the per-$\Deg$ metric corrections supplied by
+\Cref{lem:cv-fresh,lem:cv-expected}. On $\varrho\ge1809/1000$, $\Deg\ge125$,
+these coefficients lie in the half-open range
+\[
+  (\gamma_{\rm gain},\gamma_{\rm loss})\in
+  \left[\frac{13481}{361800},\frac{17}{200}\right)
+  \times\left[0,\frac{799}{5400}\right],
+  \qquad \frac{799}{5400}<P_2.
+\]
+Indeed,
+\[
+ \gamma_{\rm gain}=\frac{17}{200}
+   \left(1-\frac{1+2/\Deg}{\varrho}\right),\qquad
+ \gamma_{\rm loss}=\frac{17}{200}
+   \left(1+\frac{1+P_2+2/\Deg-P_2\theta\phi_x}{\varrho}\right).
+\]
+Over the displayed continuous parameter domain, the first expression has
+its minimum at
+$(\varrho,\Deg)=(1809/1000,125)$ and approaches $17/200$ without reaching
+it; the second has its maximum at
+$(\varrho,\Deg,\theta\phi_x)=(1809/1000,125,0)$.  For the finite
+maximization, close the open endpoint and use the
+closed bounding rectangle
+\begin{equation}\label{eq:cv-gamma-box}
+  \mathcal R_\gamma:=
+  \left[\frac{13481}{361800},\frac{17}{200}\right]
+  \times\left[0,\frac{799}{5400}\right].
+\end{equation}
+For any coefficient pair in this rectangle, set
+\begin{equation}\label{eq:cv-lambda-rates}
+\begin{aligned}
+ \Lambda_1&:=2-P_2+\gamma_{\rm loss},&
+ \Lambda_2&:=2-P_3-\gamma_{\rm gain},\\
+ \Lambda_3&:=2-P_2+2P_3-2P_4,&
+ \Lambda_{\rm low}&:=\max\set{\Lambda_1,\Lambda_2,\Lambda_3}.
+\end{aligned}
+\end{equation}
+
+\subsubsection{Finite component encoding}
+
+\begin{definition}[Finite component records]\label{def:cv-component-records}
+Fix a regular colour $c$ with $k_c\ge1$, order
+$\Gamma_c=\set{u_1,\ldots,u_{k_c}}$.  At $u_i$, record the size
+of the $Y$-side off-root $\set{a,c}$-component and the size of the
+$X$-side off-root $\set{b,c}$-component.  A component meeting several
+$u_i$ is recorded at its first listed incidence; its later appearances receive
+the marker $0$, which represents no move and has $P_0=0$.
+
+Replace every positive recorded size at least $7$ by $7$, and denote the
+resulting record sizes by $a_i,b_i$.  These are truncated sizes, not
+necessarily the physical sizes.  The truncation changes no transition mass:
+such an off-root component has mass zero, and a root-containing component
+containing it has size at least $8$ and also has mass zero.  Put
+\[
+  R_X=1+\sum_i a_i,\qquad R_Y=1+\sum_i b_i.
+\]
+ Let $\chi_i,\upsilon_i$ be the available flags of the \(a\)- and
+\(b\)-records, respectively.  Let
+\[
+ \xi_i:=\one{\text{the \(Y\)-side \(\{a,c\}\)-flip recorded by \(a_i\)
+                         is feasible}},\qquad
+ \zeta_i:=\one{\text{the \(X\)-side \(\{b,c\}\)-flip recorded by \(b_i\)
+                         is feasible}} .
+\]
+For a positive record, the availability flags are explicitly
+\[
+  \chi_i=\one{a\in L_{X,u_i}}=\one{a\in L_{Y,u_i}},
+  \qquad
+  \upsilon_i=\one{b\in L_{X,u_i}}=\one{b\in L_{Y,u_i}},
+\]
+where the equalities use the common off-root lists.  If \(a_i=0\), set
+\(\chi_i=\xi_i=0\); if \(b_i=0\), set
+\(\upsilon_i=\zeta_i=0\).  Moreover,
+\[
+  \xi_i\le\chi_i,\qquad \zeta_i\le\upsilon_i,\qquad
+  a_i=1\Longrightarrow\xi_i=\chi_i,\qquad
+  b_i=1\Longrightarrow\zeta_i=\upsilon_i.
+\]
+Indeed, a feasible swap must place its target colour legally at the
+recording neighbour, while for a singleton this is its only post-swap list
+check.  Thus every realized record satisfies these restrictions.
+
+Let
+$w_X=\mathsf A_c\prod_{i:a_i>0}\xi_i$ and
+$w_Y=\mathsf A_c\prod_{i:b_i>0}\zeta_i$ be the root-component
+feasibility weights.  Following \Cref{def:cv-component-matching}, choose
+\[
+ i_X\in\arg\max_{i:a_i>0}a_i,
+ \qquad
+ i_Y\in\arg\max_{i:b_i>0}b_i,
+\]
+using the same index whenever a common maximizer exists.  Among the
+permitted pairs, choose one that maximizes the right-hand side of
+\eqref{eq:cv-charge} below.  All move masses in this record are multiplied
+by \(nq\); thus a feasible size-\(j\) move has scaled mass \(P_j\).
+Define the \emph{record upper charge} for this arbitrary multiplicity:
+\begin{equation}\label{eq:cv-charge}
+  \mathcal H_c=
+    w_X(R_X-a_{i_X}-1)P_{R_X}
+    +w_Y(R_Y-b_{i_Y}-1)P_{R_Y}
+   +\sum_i\bigl(a_i\alpha_i+b_i\beta_i-\min\set{\alpha_i,\beta_i}\bigr),
+\end{equation}
+where
+\[
+ \alpha_i=\xi_iP_{a_i}-w_X\one{i=i_X}P_{R_X},\qquad
+ \beta_i=\zeta_iP_{b_i}-w_Y\one{i=i_Y}P_{R_Y}
+\]
+are the remaining scaled off-root masses.  The first
+two terms are the root/off-root matches; after
+their masses are subtracted, the sum is the residual match through the
+same $u_i$.  Thus \eqref{eq:cv-charge} is the conservative record used to
+bound the coupling above.  It is defined for every
+$k_c\ge1$ and both values of $\mathsf A_c$.  The cases
+$\mathsf A_c=1$, $k_c\in\set{1,2}$ are handled by
+\Cref{lem:cv-certificate}.  Finally, define
+\[
+  N_{11}(c):=\abs{\set{i:a_i=b_i=1,\ \chi_i=\upsilon_i=1}},
+  \qquad
+  N_{12}(c):=\abs{\set{i:\set{a_i,b_i}=\set{1,2},\
+                              \chi_i=\upsilon_i=1}} .
+\]
+The first index set uses the ordered pair $(1,1)$, whereas the second uses
+$(1,2)$ or $(2,1)$.  They are therefore disjoint, and hence
+\begin{equation}\label{eq:cv-small-count-budget}
+  N_{11}(c)+N_{12}(c)\le k_c.
+\end{equation}
+A repeated appearance is never counted by $N_{11}(c)$.  Omitting a
+possible $N_{12}(c)$ credit at such an appearance is conservative because
+that term enters with a minus sign.
+\end{definition}
+
+For a regular colour \(c\) with \(k_c=0\), set
+\[
+  \mathcal H_c:=-\mathsf A_c,
+  \qquad N_{11}(c):=N_{12}(c):=0.
+\]
+
+\begin{lemma}[Graph-to-record domination]\label{lem:cv-record-domination}
+For every regular colour \(c\), its contribution to the conditional
+expected Hamming increment, after multiplication by \(nq\), is at most
+\(\mathcal H_c\).  When \(k_c=0\), this means that the contribution is at
+most \(-\mathsf A_c\), which is the convention used below.
+\end{lemma}
+
+\begin{proof}
+Suppose first that \(k_c\ge1\).  A root-containing component consists of
+the root and its disjoint off-root components.  Matching it to the
+opposite component indexed by \(i_X\), or by \(i_Y\), therefore leaves at
+most \(R_X-a_{i_X}-1\), or \(R_Y-b_{i_Y}-1\), new disagreements per unit
+of matched mass.  These give the first two terms of
+\eqref{eq:cv-charge}.
+
+After those masses are subtracted, the two residual moves recorded at
+\(u_i\) have masses \(\alpha_i,\beta_i\) and flipped-set sizes
+\(a_i,b_i\).  Their maximal match has mass
+\(\min\{\alpha_i,\beta_i\}\).  Both flipped sets contain \(u_i\), so its
+Hamming increment is at most
+\[
+ a_i\alpha_i+b_i\beta_i-\min\{\alpha_i,\beta_i\}.
+\]
+If the components share additional vertices, the actual increment is
+smaller; this is why \(\mathcal H_c\) is an upper charge rather than an
+exact cost.  Every remaining one-sided probability is passed to the
+product completion and bounded by its flipped-set size.  Summing over the
+canonical indices gives \eqref{eq:cv-charge}; a repeated appearance has
+the zero marker and contributes no second copy.
+
+If \(k_c=0\) and \(c\) is root-allowed, the two singleton root
+moves are coupled and remove the sole input disagreement, giving
+increment \(-1\).  If \(c\) is unavailable, there is no move in this
+family and its contribution is \(0\).  These are exactly the two values
+of \(-\mathsf A_c\).
+\end{proof}
+
+The geometric coefficients range over the rectangle
+\eqref{eq:cv-gamma-box}, but the finite verification need not inspect a
+subdivision of that rectangle.  The following elementary observation
+reduces it to one coefficient pair.
+
+\begin{lemma}[Balancing-point domination]\label{lem:cv-balancing-domination}
+For real numbers $g_{\rm gain},g_{\rm loss}$, put
+\[
+ \mathcal L(g_{\rm gain},g_{\rm loss}):=
+ \max\set{2-P_2+g_{\rm loss},\ 2-P_3-g_{\rm gain},\ \Lambda_3}
+\]
+and, for a fixed component record of a regular colour \(c\), define its
+excess by
+\[
+ \mathcal E_c(g_{\rm gain},g_{\rm loss}):=
+ \mathcal H_c+g_{\rm loss}N_{11}(c)-g_{\rm gain}N_{12}(c)
+       +1-k_c\mathcal L(g_{\rm gain},g_{\rm loss}).
+\]
+Then
+\[
+ \mathcal E_c(g_{\rm gain},g_{\rm loss})
+ \le \mathcal E_c\!\left(\frac{19}{500},\frac{33}{250}\right).
+\]
+At this balancing pair, all three terms in the maximum defining
+$\mathcal L$ equal $226/125$; the pair belongs to
+$\mathcal R_\gamma$ in \eqref{eq:cv-gamma-box}.
+\end{lemma}
+
+\begin{proof}
+Set
+\[
+ u_{\rm loss}:=g_{\rm loss}-\frac{33}{250},\qquad
+ u_{\rm gain}:=\frac{19}{500}-g_{\rm gain},\qquad
+ M:=\max\set{0,u_{\rm loss},u_{\rm gain}}.
+\]
+The identities
+\[
+ 2-P_2+\frac{33}{250}
+ =2-P_3-\frac{19}{500}
+ =\Lambda_3=\frac{226}{125}
+\]
+give
+\[
+ \mathcal L(g_{\rm gain},g_{\rm loss})=\frac{226}{125}+M.
+\]
+Consequently,
+\begin{align*}
+ \mathcal E_c(g_{\rm gain},g_{\rm loss})
+ -\mathcal E_c\!\left(\frac{19}{500},\frac{33}{250}\right)
+ &=u_{\rm loss}N_{11}(c)+u_{\rm gain}N_{12}(c)-k_cM\\
+ &\le M\bigl(N_{11}(c)+N_{12}(c)-k_c\bigr)\le0,
+\end{align*}
+where the last inequality is \eqref{eq:cv-small-count-budget}.
+\end{proof}
+
+Two observations connect the finite expression to the geometric estimates.
+
+\smallskip\noindent\emph{Loss charge.}
+The geometric charge $\gamma_{\rm loss}$
+is levied only at the $N_{11}(c)$ locations. This covers the discount
+budget of \Cref{lem:cv-expected}: a location with a record of size at least two
+carries an \emph{active} \(T\)-blocker, hence lies outside
+\(\mathcal U_u\), the safe event defining \(s_u\), and no discount is
+at risk there; and across the
+availability split,
+$\theta\bigl[x^{\bcount_v^\tau(c)}x^{r_u+e_u}+(1-x^{\bcount_v^\tau(c)})\bigr]\ge
+\theta x^{r_u+e_u}=s_u$.  The unavailable contribution appears
+separately as $(1-\mathsf A_c)k_c$ below.
+
+\smallskip\noindent\emph{Gain credit.}
+The $N_{12}(c)$ credit $\gamma_{\rm gain}$ is claimed
+only at locations with exactly one active blocker edge and both targets
+surviving --- an event contained in the fresh-gain event of
+\Cref{lem:cv-fresh}; distinct colours claim disjoint incidences, so
+the credited mass never exceeds the gain supplied.
+
+For \(c_0\in T=\{a,b\}\), let \(C_{c_0}(F_X,F_Y)\) denote \(nq\) times
+the charged Hamming increment, including the coalescence saving,
+to the \(\{a,b\}\)-component family assigned to target \(c_0\) by
+\Cref{def:cv-component-matching,lem:cv-completion-cost}.  Put
+\[
+  \mathcal H_T(F_X,F_Y):=C_a(F_X,F_Y)+C_b(F_X,F_Y).
+\]
+
+\begin{lemma}[Drift decomposition by colour]\label{lem:cv-drift-decomposition}
+For coupled active instances $F_X,F_Y$ and each \(c\notin T\), retain
+$\mathsf A_c=\one{c\text{ is root-allowed}}$.  Let
+$\mathcal H_c(F_X,F_Y)$ be the record upper charge
+\eqref{eq:cv-charge} when $k_c\ge1$, with root-containing masses set to
+zero when $\mathsf A_c=0$; for $k_c=0$ put
+$\mathcal H_c=-\mathsf A_c$.  With \(\mathcal H_T(F_X,F_Y)\) as defined
+above, put
+\[
+  \mathcal D:=\E[d_x^{G,\tau}(X_1,Y_1)]-d_x^{G,\tau}(X,Y).
+\]
+All expectations in this statement are over the coupled activation draw
+and the coupled hard transition from the fixed adjacent input pair.
+Then the one-step metric drift satisfies
+\begin{equation}\label{eq:cv-drift-by-colour}
+\begin{aligned}
+ nq\,\mathcal D\le
+ \E\Bigg[\,\mathcal H_T(F_X,F_Y)
+  +\sum_{c\notin T}
+    \Bigl\{\mathcal H_c+
+      \gamma_{\rm loss}\bigl(\mathsf A_c N_{11}(c)+
+                         (1-\mathsf A_c)k_c\bigr)
+      -\gamma_{\rm gain}\mathsf A_c N_{12}(c)\Bigr\}\,\Bigg].
+\end{aligned}
+\end{equation}
+Here $N_{11}(c)=N_{12}(c)=0$ when $k_c=0$.
+\end{lemma}
+
+\begin{proof}
+Put $\omega=17/(200q)$.
+\Cref{lem:cv-move-partition,lem:cv-completion,lem:cv-completion-cost}
+partition, complete, and bound the cost of all
+aggregate moves, while \Cref{lem:cv-record-domination} bounds the actual
+regular-colour Hamming contribution by its record upper charge.
+Write
+\[
+  S_{\rm in}:=\sum_{u\ {\rm regular}}s_u,
+  \qquad
+  S_{\rm out}:=\mathcal S_{\rm out}(X_1,Y_1).
+\]
+Thus
+\Cref{lem:cv-path} first gives
+\begin{equation}\label{eq:cv-drift-decomp}
+ nq\,\mathcal D
+ \le \E\!\left[\mathcal H_T(F_X,F_Y)+
+                  \sum_{c\notin T}\mathcal H_c\right]
+   +nq\,\omega\bigl(S_{\rm in}-\E[S_{\rm out}]\bigr).
+\end{equation}
+Fix the output-discount allocation as
+follows. The root, target-recolouring, and
+ordered-incidence terms used in \Cref{lem:cv-expected} are allocated
+first; they do not use the fresh increments of
+\Cref{lem:cv-fresh}.  Allocate those fresh increments next, and discard any
+remaining output discount.  This is legitimate outcome by outcome by
+\Cref{lem:cv-credit-disjoint}. With
+\(b_u^{\rm SB}=\Pr(\mathsf{SB}_u)\) as defined above, the two lemmas then give
+\[
+ S_{\rm in}-\E[S_{\rm out}]
+ \le \frac{\beta_x^+}{nq}\sum_{u\ {\rm regular}}s_u
+    -\frac{\alpha_{\mathrm{fr}}}{nq}\sum_{u\ {\rm regular}}b_u^{\rm SB} .
+\]
+By \eqref{eq:cv-gammas},
+\[
+ \omega\beta_x^+=\gamma_{\rm loss},\qquad
+ \omega\alpha_{\mathrm{fr}}=\gamma_{\rm gain}.
+\]
+
+It remains to turn these two averaged discount bounds into the
+pointwise colour terms in \eqref{eq:cv-drift-by-colour}. For a physical regular neighbour
+$u$ of colour $c$, let $\iota_u$ indicate that $vu$ is active, and let
+\(N^j_{c,u}\) be one exactly when \(u\) is the first recorded incidence
+of its component and is counted by \(N_{1j}(c)\), and zero otherwise,
+for \(j=1,2\).  Thus \(N^1_{c,u}\) contributes to \(N_{11}(c)\) and
+\(N^2_{c,u}\) contributes to \(N_{12}(c)\). Root-list
+survival is independent of all root-edge and blocker bits, and
+\[
+ \E\!\left[\mathsf A_c N^1_{c,u}
+            +(1-\mathsf A_c)\iota_u\right]
+ =x^{\bcount_v^\tau(c)}s_u+
+   \bigl(1-x^{\bcount_v^\tau(c)}\bigr)\theta
+ \ge s_u .
+\]
+Moreover, $\mathsf A_c N^2_{c,u}=1$ entails exactly one active target
+blocker at $u$ and survival of both targets, so
+  $\E[\mathsf A_c N^2_{c,u}]\le b_u^{\rm SB}$. Summing over neighbours, using
+\(k_c=\sum_{u:X_u=Y_u=c}\iota_u\), and applying the two coefficient identities proves
+\eqref{eq:cv-drift-by-colour}.
+
+There is no duplicated charge or credit:
+\Cref{lem:cv-move-partition} partitions the hard moves;
+$\mathsf A_c$ and $1-\mathsf A_c$ are disjoint;
+$N_{11}(c)$ and $N_{12}(c)$ are disjoint; and each $N_{12}(c)$ credit is
+attached to its own blocker incidence. If one flip improves
+several such incidences, \Cref{lem:cv-fresh} counts the corresponding sum
+of distinct metric-discount increments.
+\end{proof}
+
+\subsubsection{Small multiplicities: exact finite verification}
+
+\begin{lemma}[Finite low-multiplicity estimate]\label{lem:cv-certificate}
+For every regular colour \(c\) with
+\(\mathsf A_c=1\) and \(k_c\in\set{1,2}\), every component state encoded
+above and every $(\gamma_{\rm gain},\gamma_{\rm loss})$ in the rectangle
+\eqref{eq:cv-gamma-box}
+satisfy
+\begin{equation}\label{eq:cv-certificate}
+\mathcal H_c+\gamma_{\rm loss}N_{11}(c)
+       -\gamma_{\rm gain}N_{12}(c)
+ \le-1+k_c\Lambda_{\rm low}.
+\end{equation}
+The maximum excess of the left-hand side over the right-hand side of
+\eqref{eq:cv-certificate}, over the stated records and coefficient pairs,
+is $0$, attained at the balancing pair.
+\end{lemma}
+
+\begin{proof}[Computer-assisted proof]
+By \Cref{lem:cv-balancing-domination}, it is enough to check the single
+coefficient pair
+\[
+ (\gamma_{\rm gain},\gamma_{\rm loss})
+   =\left(\frac{19}{500},\frac{33}{250}\right),
+ \qquad \Lambda_{\rm low}=\frac{226}{125}.
+\]
+Exact rational enumeration gives maximum excess zero over all $400$
+structural states and $400$ permitted maximizer choices for $k_c=1$, and
+all $193600$ structural states and $196964$ permitted maximizer choices for
+$k_c=2$.  These include every admissible availability and feasibility
+pattern, repeated-component marker, truncated size, and choice among tied
+maximum components.
+For example, equality at the balancing pair is attained by the one-index
+record $a_1=2$, $b_1=1$ with all four availability and feasibility flags
+equal to $1$: then $\mathcal H_c=423/500$, $N_{11}(c)=0$, and
+$N_{12}(c)=1$.
+
+Every component configuration maps to one of these records: order its listed
+neighbour incidences as in \Cref{def:cv-component-records}, write $0$ after the
+first listed incidence of a repeated component, truncate every size at $7$, and retain
+its actual availability and feasibility flags.  The permitted records use
+one state at size $0$, two at size $1$, and three at each size
+$2,\ldots,7$, exactly as justified in that definition.  The enumeration
+also allows some records that no graph realizes; this only enlarges the
+maximum and is therefore conservative.
+
+The companion Lean development proves this finite estimate and the
+encoding of the actual component configurations in
+\nolinkurl{ZeroFreeness/Coupling/CV/Certificate.lean} and its dependent modules;
+the finite arithmetic is checked by Lean's kernel without importing
+Python output~\cite{Shi2026Formalization}.
+As an independent check, the Python verifier
+\nolinkurl{anc/python/soft_cv_certificate_verifier.py} checks the larger
+eleven-pair test specified in \texttt{anc/CERTIFICATE\_SPEC.md}.
+This includes the balancing pair above, every permitted maximum-component
+tie, and an equality witness.  The Python source and
+frozen certificate are covered by \texttt{anc/SHA256SUMS}.
+For reproducibility, the exhaustive checks are run from the repository root with
+\begin{verbatim}
+python3 anc/python/soft_cv_certificate_verifier.py --check
+\end{verbatim}
+and the reported state counts are part of the certificate specification.
+\end{proof}
+
+\begin{lemma}[High multiplicity and missing colours]\label{lem:cv-high}
+Set
+\[
+ \Lambda_{\rm bulk}:=\tfrac43+P_2+\tfrac43P_4=\tfrac{1331}{750}.
+\]
+For a root-allowed regular colour \(c\) with $k_c\ge3$ active neighbours,
+\[
+ \mathcal H_c+\gamma_{\rm loss}N_{11}(c)
+ \le-1+\Lambda_{\rm bulk}k_c.
+\]
+For a regular colour \(c\) absent from the active root list,
+\[
+ \mathcal H_c+\gamma_{\rm loss}k_c
+ \le \frac{39743}{27000}k_c\le\Lambda_{\rm bulk}k_c.
+\]
+The second inequality is strict when $k_c>0$.
+\end{lemma}
+
+\begin{proof}
+The root-containing components have size at least $k_c+1\ge4$, so in
+\eqref{eq:cv-charge} each root/off-root term is at most
+\(\max_{r\ge4}(r-2)P_r=2P_4\), giving \(4P_4\) for the two sides. For the
+contribution at one regular neighbour,
+\(\max_{1\le r,s\le7}
+  \bigl(rP_r+sP_s-\min\set{P_r,P_s}\bigr)=1+P_2\).
+Indeed, $\max_j jP_j=1$ and $\max_j(j-1)P_j=P_2$; subtracting the smaller
+of \(P_r,P_s\) leaves one term of each type.  Equality occurs at
+\((r,s)=(2,1)\).  A location receives the geometric charge
+$\gamma_{\rm loss}\le P_2$ only when both records are singletons, in
+which case its component term is at most $1$. Either way the location
+contributes at most $1+P_2$. Hence the total is at most
+$4P_4+k_c(1+P_2)$, and
+\[
+ 4P_4+k_c(1+P_2)\le-1+\Lambda_{\rm bulk}k_c,
+\]
+with slack $(k_c-3)(1+4P_4)/3\ge0$; the
+same bound in the aggregate-parameter hard setting is
+\cite[Lemma~4.6]{CarlsonVigoda2024}. If the colour is missing from the
+active root list there are no root-containing moves, and the exact
+per-neighbour maximum is $1+P_2$ by the same calculation, matching
+\cite[Lemma~4.7]{CarlsonVigoda2024}; adding the largest geometric
+correction $\gamma_{\rm loss}\le799/5400$ gives
+$39743/27000<\Lambda_{\rm bulk}$.
+\end{proof}
+
+\begin{lemma}[The two root colours]\label{lem:cv-special}
+Fix $c_0\in\set{a,b}$.  For the two root colours, define
+\[
+\begin{aligned}
+ k_a&:=\bigl|\{u\in N_{G^\tau}(v):X_u=Y_u=a,\ vu\in E_Y\}\bigr|,\\
+ k_b&:=\bigl|\{u\in N_{G^\tau}(v):X_u=Y_u=b,\ vu\in E_X\}\bigr|.
+\end{aligned}
+\]
+Thus each multiplicity is counted on the side where the corresponding
+root-containing move starts.  The cost \(C_{c_0}(F_X,F_Y)\) defined above for the corresponding
+$\set{a,b}$-component moves satisfies
+\[
+ C_{c_0}(F_X,F_Y)\le-\one{c_0\text{ is root-allowed}}
+              +\Lambda_{\rm bulk}k_{c_0}.
+\]
+\end{lemma}
+
+\begin{proof}
+If $c_0$ is unavailable there is no root-containing move and the off-root
+components meet disjoint sets of the \(k_{c_0}\) neighbours.  After the
+common denominator \(nq\) is cleared, each contributes at most one, so
+\(C_{c_0}(F_X,F_Y)\le k_{c_0}\le\Lambda_{\rm bulk}k_{c_0}\). Let \(c_0\) be
+available. If \(k_{c_0}=0\), the singleton root move paired with holding
+probability contributes \(-1\). If \(k_{c_0}\ge2\), an infeasible root move leaves
+cost at most \(k_{c_0}\le\Lambda_{\rm bulk}k_{c_0}-1\); a feasible one paired with
+holding probability has total cost at most
+\[
+  k_{c_0}+\max_j(j-2)P_j=k_{c_0}+\tfrac{22}{125},
+\]
+including the off-root component moves, and
+$2\Lambda_{\rm bulk}-1-(2+\tfrac{22}{125})
+=\tfrac{28}{75}>0$ settles the weakest case \(k_{c_0}=2\). If \(k_{c_0}=1\), let the unique
+component left after deleting $v$ from the root-containing component have
+size $s$.  By the block classification in
+\Cref{lem:cv-move-partition}, on the opposite side it either avoids \(v\)
+and is the unique off-root partner in this family, or it also reaches \(v\)
+and belongs to the other root-colour move, leaving no off-root copy here.
+In the first case, because the target colour is root-allowed, the
+root-containing flip is feasible exactly when its sole off-root component
+is feasible.  Thus an infeasible root move contributes $0$. A feasible root move with no
+feasible off-root partner is paired with holding probability at cost
+$\max_s(s-1)P_{s+1}=\tfrac{22}{125}$; and a feasible pair costs
+$sP_s-(s+1)P_{s+1}\le\tfrac{44}{125}$. All are below
+$\Lambda_{\rm bulk}-1$, with slack at least $\tfrac{317}{750}$.
+\end{proof}
+
+\subsection{Averaging and degree bounds}
+
+\subsubsection{Averaging over active multiplicities}
+A physical regular root colour \(c\) of multiplicity \(m_c\ge3\) has random
+active multiplicity \(K_c\sim\mathrm{Bin}(m_c,\theta)\).  Thus \(K_c\)
+denotes the random multiplicity before the activations are exposed, whereas
+\(k_c=\abs{\Gamma_c}\) denotes its value for a fixed active outcome.  In the
+root-allowed case, the corrected per-colour contribution for
+\(1\le K_c\le2\) is
+bounded by \eqref{eq:cv-certificate}, whose positive coefficient is at most
+\[
+ \overline\Lambda_{\rm low}:=
+ 2-P_2+\tfrac{799}{5400}=\tfrac{49247}{27000};
+\]
+for \(K_c\ge3\) use $\Lambda_{\rm bulk}$ from \Cref{lem:cv-high} and discard
+the negative credit. In the root-missing case the rate is
+\(39743/27000<\Lambda_{\rm bulk}\) for every \(K_c\). After the allowed case's
+$-1$ baseline is separated,
+the expected positive charge per
+\emph{physical} neighbour is therefore at most
+\[
+ \Lambda_{\rm bulk}\theta+
+ (\overline\Lambda_{\rm low}-\Lambda_{\rm bulk})
+ \theta x^{m_c-2}\bigl(1+(m_c-2)\theta\bigr)
+ \le\Lambda_{\rm bulk},
+\]
+since \(\theta x^{m_c-3}(1+(m_c-2)\theta)\le2\) and
+$3\Lambda_{\rm bulk}-2\overline\Lambda_{\rm low}
+=22627/13500>0$.  Thus both availability cases cost at most
+$\Lambda_{\rm bulk}$ per physical neighbour after the baseline is
+separated. The baseline is accounted for in
+\Cref{lem:cv-assembly}.
+
+\subsubsection{Degree budget}
+Let
+\[
+ L:=\sum_{\substack{c\notin T\\m_c\in\set{1,2}}}m_c,\qquad
+ H:=\deg_{G^\tau}(v)-L,\qquad
+ B_v^{\partial}:=\sum_{c\in\colours}\bcount_v^\tau(c).
+\]
+Then $L+H+B_v^{\partial}\le\Deg$ and, because $L_x\le L$,
+\begin{equation}\label{eq:cv-resource}
+ (L-L_x)+H+B_v^{\partial}\le\Deg-L_x.
+\end{equation}
+Every distinct colour missing from the active root list is witnessed by an
+active pinned-neighbour constraint forbidding that colour.  Choosing one witness
+for each missing colour is injective, so their number is at most the number
+of active root pinned-neighbour constraints, and hence at most \(B_v^{\partial}\).
+
+\begin{lemma}[The drift envelope]\label{lem:cv-assembly}
+Let $\mathcal D$ be the expected one-step drift of $d_x^{G,\tau}$ under the coupling
+above. Then
+\begin{equation}\label{eq:cv-envelope}
+  nq\,\mathcal D\;\le\;-q
+      +\theta\Lambda_{\rm low}L_x
+      +\Lambda_{\rm bulk}(\Deg-L_x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Apply the drift decomposition \eqref{eq:cv-drift-by-colour}.  Its regular-colour
+summand is exactly the expression controlled by
+\Cref{lem:cv-certificate,lem:cv-high}; the root-colour summand has no
+geometric correction because the input metric discounts only regular
+neighbours.
+
+Condition on the root pinned-neighbour constraint coins; they determine the active
+root list and are independent of all root-edge and blocker bits.
+Every colour \(c\) contributes a baseline: an available colour contributes $-1$
+--- through \Cref{lem:cv-completion-cost} when
+it has no active neighbour, through \eqref{eq:cv-certificate}
+when $1\le k_c\le2$, through \Cref{lem:cv-high} when $k_c\ge3$, and
+through \Cref{lem:cv-special} for the two target colours --- while a
+missing colour contributes $0$.  The witness injection above charges each
+missing baseline to a distinct root pinned-neighbour constraint.
+
+For each allowed low-multiplicity colour \(c\), root availability is independent of
+the root-edge bits, so
+$\E[k_c\one{\text{allowed}}]=\theta m_cx^{\bcount_v^\tau(c)}$, and each active
+neighbour carries at most $\Lambda_{\rm low}$ by
+\eqref{eq:cv-certificate}.  Their total is at most
+$\theta\Lambda_{\rm low}L_x$. Neighbours of \emph{unavailable} low colours have expected
+count
+\[
+ \theta\sum_{\substack{c\notin T\\m_c\in\set{1,2}}}
+      m_c(1-x^{\bcount_v^\tau(c)})\le L-L_x
+\]
+and rate at
+most $39743/27000<\Lambda_{\rm bulk}$ each.  Physical
+high-multiplicity regular neighbours are charged at most
+$\Lambda_{\rm bulk}$ each by the binomial averaging above, in both
+availability cases; root-colour neighbours at most $\Lambda_{\rm bulk}$
+each by \Cref{lem:cv-special}.  Finally, missing baselines cost at most one
+per pinned-neighbour constraint, and $1<\Lambda_{\rm bulk}$. Hence
+\[
+  nq\,\mathcal D\le-q+\theta\Lambda_{\rm low}L_x
+    +\Lambda_{\rm bulk}\bigl[(L-L_x)+H+B_v^{\partial}\bigr],
+\]
+and \eqref{eq:cv-resource} proves \eqref{eq:cv-envelope}.
+\end{proof}
+
+\subsection{Numerical bound and contraction}
+\begin{lemma}[Final numerical inequality]\label{lem:cv-scalar}
+For $\varrho\ge1809/1000$, $\Deg\ge125$, and
+$\theta,\phi\in[0,1]$, interpret $\phi_x=\phi$ in
+\eqref{eq:cv-gammas}. Then
+\[
+  -\varrho+\Lambda_{\rm bulk}(1-\phi)
+    +\theta\phi\,\max\set{\Lambda_1,\Lambda_2,\Lambda_3}
+  \;\le\;-\frac{59}{226125},
+\]
+where the rates in \eqref{eq:cv-lambda-rates} are evaluated at the actual
+coefficients \eqref{eq:cv-gammas}; in particular
+\(\Lambda_3=226/125\).
+\end{lemma}
+
+\begin{proof}
+Write $\eta_0=17/200$, $y=\theta\phi$, and
+$C_\Deg=1+P_2+2/\Deg$.  For \(j=1,2,3\), set
+\[
+ F_j:=-\varrho+\Lambda_{\rm bulk}(1-\phi)+y\Lambda_j.
+\]
+For the first case this expression is
+\[
+ F_1=-\varrho+\Lambda_{\rm bulk}(1-\phi)
+       +y(2-P_2+\eta_0)
+       +\frac{\eta_0}{\varrho}y(C_\Deg-P_2y).
+\]
+For fixed $y$ we have $y\le\phi$, so $\phi=y$ maximizes $F_1$. The resulting
+function decreases in $\varrho$ and as $\Deg$ grows. At
+$(\varrho,\Deg)=(1809/1000,125)$ its derivative in $y$ is decreasing in
+$y$ and at $y=1$ equals $\tfrac{34097}{1809000}>0$. Thus the first case
+is maximized at that corner and $y=\phi=\theta=1$.
+
+For the second case,
+\[
+ \Lambda_2=2-P_3-\eta_0+
+    \frac{\eta_0}{\varrho}\left(1+\frac2\Deg\right)>0.
+\]
+First maximize in $\theta$, and then in the affine variable $\phi$, to obtain
+\[
+ F_2\le-\varrho+\max\set{\Lambda_{\rm bulk},\Lambda_2}.
+\]
+Both $-\varrho+\Lambda_{\rm bulk}$ and $-\varrho+\Lambda_2$ decrease in $\varrho$,
+and the latter also decreases as $\Deg$ grows. Hence their maximum occurs
+at $(\varrho,\Deg)=(1809/1000,125)$; there
+$\Lambda_2-\Lambda_{\rm bulk}=\tfrac{61637}{1809000}>0$, so
+$\phi=\theta=1$ is the
+maximizer at the worst corner. Finally
+$\Lambda_3=226/125>\Lambda_{\rm bulk}$, and the same affine maximization
+gives $F_3\le-\varrho+\Lambda_3$.
+
+Exact evaluation gives the three gaps
+\[
+ \frac{59}{226125},\qquad\frac{59}{226125},\qquad\frac1{1000},
+\]
+whose minimum is \(\delta_{\rm CV}\).  The \texttt{scalar\_closure} certificate in
+\nolinkurl{anc/python/soft_cv_certificate_verifier.py} verifies all three
+corner values.
+\end{proof}
+
+\begin{theorem}[Geometric soft-CV contraction]\label{thm:cv-contraction}
+Let \(q,\Deg\) be positive integers with \(\Deg\ge125\) and
+\(q\ge1.809\,\Deg\). For every \(G\in\Gdeg\) and pinning \(\tau\) with
+\(n=\lvert V^\tau\rvert\ge1\), every \(x\in(0,1]\), and every adjacent pair
+\(X,Y\in\colours^{V^\tau}\),
+there is a coupling \((X_1,Y_1)\) of
+\(K_{x,\mathrm{CV}}^{G,\tau}(X)\) and \(K_{x,\mathrm{CV}}^{G,\tau}(Y)\) such that
+\begin{equation}\label{eq:cv-contraction}
+  nq\Bigl(\E[d_x^{G,\tau}(X_1,Y_1)]-d_x^{G,\tau}(X,Y)\Bigr)
+  \le-\delta_{\rm CV}\Deg.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Use the common-coin coupling of
+\Cref{lem:coupled-activation-root-local} and the conditional component
+coupling of \Cref{def:cv-component-matching,lem:cv-completion}.
+The drift envelope \eqref{eq:cv-envelope}, which combines the component
+charges and geometric-discount estimates, applies to this coupling.
+\Cref{lem:cv-scalar} bounds its right-hand side by
+$-\delta_{\rm CV}\Deg$.  At $x=1$ the metric is Hamming and the active
+graph is empty.  The endpoint $x=0$ is handled below by continuity of the
+normalized child laws, not by assigning values to $0^0$ in the active
+representation.
+\end{proof}
+
+\subsection{From contraction to coupling independence}
+
+It remains to compare each child kernel with the common middle kernel and
+apply stationary comparison in the child metric.
+
+\begin{lemma}[Soft-CV child--middle row discrepancy]
+\label{lem:cv-child-middle}
+Let \(G\in\Gdeg\), let \(\tau\) be a pinning, let \(r\in V^\tau\),
+let \(c\in\colours\), and fix \(x\in(0,1]\). Define the middle kernel by
+\[
+  K_{{\rm mid},x}:=K_{x,\mathrm{CV}}^{G-r,\tau}.
+\]
+Its free graph is \(G^\tau-r\), with the original boundary counts restricted
+to \(V^\tau\setminus\{r\}\). Thus \(r\) and all its incident interactions
+are deleted without adding the pinned-neighbour constraints created by
+pinning \(r=c\). If the common vertex set
+\(V^\tau\setminus\{r\}\) has \(n_0\ge1\) vertices, then for every configuration
+\(\sigma\in\colours^{V^\tau\setminus\{r\}}\),
+\[
+  \WHam\bigl(K_{x,\mathrm{CV}}^{G,\tau^{r=c}}(\sigma),
+             K_{{\rm mid},x}(\sigma)\bigr)
+       \le\frac{(1-x)\Deg}{n_0q}
+       \le\frac{\Deg}{n_0q}.
+\]
+If $q\ge1.809\,\Deg$, the same bound holds in the child metric
+$d_x^{G,\tau^{r=c}}\le\Ham$.
+\end{lemma}
+
+\begin{proof}
+The child differs from the middle instance by at most \(\Deg\) pinned-neighbour
+constraints.  Apply the common one-boundary estimate
+\Cref{lem:boundary-sensitivity} with \(\rho_j=P_j\).  The CV parameters
+satisfy \(\sup_j jP_j=1\), so the Hamming bound is
+\((1-x)\Deg/(n_0q)\le\Deg/(n_0q)\).  Under the additional parameter
+assumption, \Cref{lem:cv-metric} gives
+\(d_x^{G,\tau^{r=c}}\le\Ham\), so the same coupling gives the
+metric bound.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:cv-ci}]
+Fix \(G\in\Gdeg\), a pinning \(\tau\), a root \(r\in V^\tau\), and
+colours \(a,b\). If
+\(a=b\), the laws coincide.  Let \(n_0=\abs{V^\tau\setminus\{r\}}\).  If
+\(n_0=0\), both children are the empty point mass, so assume \(n_0\ge1\)
+and first take \(x>0\).
+
+Let \(K_{\rm mid}:=K_{x,\mathrm{CV}}^{G-r,\tau}\), whose stationary law is
+\(\mu_{\rm mid}:=\mupin{G-r}{\tau}{x}\). For \(c\in\{a,b\}\), put
+\[
+  \mu_c:=\mupin{G}{\tau^{r=c}}{x}.
+\]
+Fix such a \(c\), and write \(d_c:=d_x^{G,\tau^{r=c}}\) for the child metric.
+Then
+\Cref{thm:cv-contraction,lem:cv-metric} gives, for adjacent \(X,Y\),
+\[
+\begin{aligned}
+  W_{1,d_c}\!\left(
+      K_{x,\mathrm{CV}}^{G,\tau^{r=c}}(X),
+      K_{x,\mathrm{CV}}^{G,\tau^{r=c}}(Y)\right)
+  &\le d_c(X,Y)-\frac{\delta_{\rm CV}\Deg}{n_0q}\\
+  &\le\left(1-\frac{\delta_{\rm CV}\Deg}{n_0q}\right)
+       d_c(X,Y).
+\end{aligned}
+\]
+By \Cref{lem:cv-child-middle}, the child--middle row discrepancy is at most
+\((1-x)\Deg/(n_0q)\) in this metric.  Stationary comparison with
+contraction gap \(\delta_{\rm CV}\Deg/(n_0q)\) therefore yields
+\[
+  W_{1,d_c}(\mu_c,\mu_{\rm mid})
+  \le\frac{1-x}{\delta_{\rm CV}}.
+\]
+Since \(d_c\ge m_0\Ham\),
+\[
+  \WHam(\mu_c,\mu_{\rm mid})
+  \le\frac{1-x}{m_0\delta_{\rm CV}}.
+\]
+Applying this for \(c=a,b\) and using the triangle inequality through
+\(\mu_{\rm mid}\) gives
+\[
+  \WHam(\mu_a,\mu_b)
+  \le\frac{2(1-x)}{m_0\delta_{\rm CV}}
+  \le\frac{2}{m_0\delta_{\rm CV}}.
+\]
+
+At \(x=0\), hard feasibility (\Cref{lem:hard-feas}, \(q\ge\Deg+1\))
+makes both hard child partition sums positive, and
+\Cref{lem:finite-endpoint-closure} passes the uniform bound to their
+normalized hard limits. This proves \eqref{eq:cv-ci} also at \(x=0\).
+\end{proof}

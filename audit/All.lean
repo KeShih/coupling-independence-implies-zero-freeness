@@ -1,4 +1,4 @@
-import CI2ZF
+import ZeroFreeness
 import Lean.Util.CollectAxioms
 import Lean.Elab.Command
 
@@ -6,7 +6,7 @@ open Lean Elab Command in
 run_elab do
   let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
   let names := (← getEnv).constants.fold (init := #[]) fun acc name _ =>
-    if (`CI2ZF).isPrefixOf name || (`PottsCI).isPrefixOf name then acc.push name else acc
+    if (`ZeroFreeness).isPrefixOf name || (`PottsCI).isPrefixOf name then acc.push name else acc
   let mut used : Array Name := #[]
   for name in names do
     let axioms ← Lean.collectAxioms name

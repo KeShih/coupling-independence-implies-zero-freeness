@@ -2,9 +2,9 @@
 
 The three vertex-coloring regimes of the main-text `thm:lee-yang`, together
 with `cor:edge-lee-yang`, are formalized using the actual multivariable
-color-field partition functions in `CI2ZF/LeeYang/`. The aggregate entry
-point is `CI2ZF.LeeYang`. Lean file names below are relative to
-`CI2ZF/LeeYang/`.
+color-field partition functions in `ZeroFreeness/LeeYang/`. The aggregate entry
+point is `ZeroFreeness.LeeYang`. Lean file names below are relative to
+`ZeroFreeness/LeeYang/`.
 
 ## Partition functions and quantifiers
 
@@ -65,7 +65,7 @@ used by regimes (i) and (iii) and their Lean proofs are described in
 
 ## Verification
 
-`bash scripts/check-all.sh` builds the complete `CI2ZF` library, including
+`bash scripts/check-all.sh` builds the complete `ZeroFreeness` library, including
 all seven Appendix regions, then audits the transitive axiom dependencies
 of every imported project declaration. Only `propext`,
 `Classical.choice`, and `Quot.sound` are allowed. The latest build results,

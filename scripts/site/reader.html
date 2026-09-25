@@ -13,7 +13,7 @@
 <script>
   (function () {
     try {
-      var t = localStorage.getItem("ci2zf-theme");
+      var t = localStorage.getItem("zero-freeness-theme");
       if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
     } catch (e) {}
   })();
@@ -505,7 +505,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   $("themeBtn").addEventListener("click", function () {
     var next = effectiveDark() ? "light" : "dark";
     root.dataset.theme = next;
-    store.set("ci2zf-theme", next);
+    store.set("zero-freeness-theme", next);
   });
 
   // ---- Math -----------------------------------------------------------------
@@ -1090,7 +1090,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
 
   // ---- Splitter ---------------------------------------------------------------------
   (function () {
-    var saved = parseInt(store.get("ci2zf-lean-w"), 10);
+    var saved = parseInt(store.get("zero-freeness-lean-w"), 10);
     if (saved > 300) root.style.setProperty("--lean-w", saved + "px");
     var sp = $("splitter"), dragging = false;
     function setW(x) {
@@ -1103,13 +1103,13 @@ details.more-box[open] summary::before { content: "\2212  "; }
     sp.addEventListener("pointerup", function (e) {
       if (!dragging) return;
       dragging = false; sp.classList.remove("dragging");
-      store.set("ci2zf-lean-w", String(setW(e.clientX)));
+      store.set("zero-freeness-lean-w", String(setW(e.clientX)));
     });
     sp.addEventListener("keydown", function (e) {
       var cur = parseInt(getComputedStyle(root).getPropertyValue("--lean-w"), 10) || 460;
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         var w = setW(window.innerWidth - cur + (e.key === "ArrowLeft" ? -24 : 24));
-        store.set("ci2zf-lean-w", String(w)); e.preventDefault();
+        store.set("zero-freeness-lean-w", String(w)); e.preventDefault();
       }
     });
   })();

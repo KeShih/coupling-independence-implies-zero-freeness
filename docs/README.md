@@ -14,22 +14,22 @@ This library formalizes the paper's coupling-independence and zero-free results 
 
 ## Source layout
 
-The project has one Lean library and one complete entry point, `CI2ZF.lean`.
+The project has one Lean library and one complete entry point, `ZeroFreeness.lean`.
 
 | Directory | Contents |
 | --- | --- |
-| `CI2ZF/Analysis/` | Complex averages, normalized logarithms, and local stability |
-| `CI2ZF/Coupling/Foundations/` | Finite distributions, transport, partial couplings, and shared random coins |
-| `CI2ZF/Coupling/` | Concrete Vigoda, CV, edge-Potts, high-temperature, BBR, and girth coupling proofs; proofs of the cited CLMM and BBR results |
-| `CI2ZF/Potts/Model/` and `Geometry/` | Real and complex partition models, pinning, graph restrictions, and separators |
-| `CI2ZF/Potts/Transfer/` | Uniform CI-to-zero-free induction and response estimates |
-| `CI2ZF/Potts/Theorems/` and `Regions/` | Main-text statements and all seven regional applications |
-| `CI2ZF/LeeYang/` | Independent color-field partition functions and zero-free polydiscs |
-| `CI2ZF/Holant/` | Symmetric log-concave Holant models, coupling, zero-free transfer, and applications |
+| `ZeroFreeness/Analysis/` | Complex averages, normalized logarithms, and local stability |
+| `ZeroFreeness/Coupling/Foundations/` | Finite distributions, transport, partial couplings, and shared random coins |
+| `ZeroFreeness/Coupling/` | Concrete Vigoda, CV, edge-Potts, high-temperature, BBR, and girth coupling proofs; proofs of the cited CLMM and BBR results |
+| `ZeroFreeness/Potts/Model/` and `Geometry/` | Real and complex partition models, pinning, graph restrictions, and separators |
+| `ZeroFreeness/Potts/Transfer/` | Uniform CI-to-zero-free induction and response estimates |
+| `ZeroFreeness/Potts/Theorems/` and `Regions/` | Main-text statements and all seven regional applications |
+| `ZeroFreeness/LeeYang/` | Independent color-field partition functions and zero-free polydiscs |
+| `ZeroFreeness/Holant/` | Symmetric log-concave Holant models, coupling, zero-free transfer, and applications |
 | `audit/` | Independent kernel-axiom checks, outside the proof library |
 
 Module paths follow this layout. Mathematical declaration names, including
-`PottsCI` and `CI2ZF.Appendix`, are preserved so the reorganization does not
+`PottsCI` and `ZeroFreeness.Appendix`, are preserved so the reorganization does not
 change theorem statements or proofs. The ten former import-only wrappers
 have been removed; use the [module map](module-moves.tsv) when updating imports.
 The detailed files retain their existing dependency graph; the directory

@@ -9,7 +9,7 @@ Run from the repository root:
 
 Nothing needs to be compiled. The script reads docs/coverage.json, the Lean
 sources and, for each paper, its LaTeX source with the .bbl of a pdflatex
-run (paper/CI2ZF-main and paper/CI2ZF-appendix) and the compiled PDF
+run (paper/main and paper/companion) and the compiled PDF
 (docs/main.pdf and docs/appendix.pdf). paper_html.py renders the source,
 numbers it as LaTeX does, and stops the build if a numbered statement differs
 from coverage.json or a theorem, equation or section number differs from the
@@ -40,9 +40,9 @@ REPO = checker.REPO
 TEMPLATE = Path(__file__).resolve().parent / "reader.html"
 PAPERS = {
     "main": dict(title="Coupling Independence Implies Zero-Freeness", short="Main paper",
-                 tex="paper/CI2ZF-main/main.tex", pdf="docs/main.pdf"),
+                 tex="paper/main/main.tex", pdf="docs/main.pdf"),
     "companion": dict(title="Further Potts Zero-Free Regions from Coupling Independence",
-                      short="Companion", tex="paper/CI2ZF-appendix/main.tex", pdf="docs/appendix.pdf"),
+                      short="Companion", tex="paper/companion/main.tex", pdf="docs/appendix.pdf"),
 }
 AUTHORS = "Shuai Shao and Ke Shi"
 SIGNATURE_LINES = 40
@@ -117,7 +117,7 @@ def index_file(path):
 
 def lean_index():
     found = {}
-    for path in sorted((REPO / "CI2ZF").rglob("*.lean")):
+    for path in sorted((REPO / "ZeroFreeness").rglob("*.lean")):
         rel = path.relative_to(REPO).as_posix()
         for decl in index_file(path):
             decl["path"] = rel
@@ -148,9 +148,9 @@ def lean_excerpt(decl):
 # Data
 
 def build_data(args):
-    if checker.git("status", "--porcelain", "--", "CI2ZF", "CI2ZF.lean"):
+    if checker.git("status", "--porcelain", "--", "ZeroFreeness", "ZeroFreeness.lean"):
         sys.exit("Commit the Lean sources first, so that source links are pinned.")
-    commit = checker.git("log", "-1", "--format=%h", "--abbrev=7", "--", "CI2ZF", "CI2ZF.lean",
+    commit = checker.git("log", "-1", "--format=%h", "--abbrev=7", "--", "ZeroFreeness", "ZeroFreeness.lean",
                          "lakefile.toml", "lean-toolchain", "lake-manifest.json")
     coverage = json.loads((REPO / checker.COVERAGE).read_text())
     record = json.loads((REPO / "docs/verification.json").read_text())

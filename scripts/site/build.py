@@ -36,12 +36,12 @@ KATEX = "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist"
 # whose use marks a result as depending on the citation (default: "proof").
 CITED = [
     dict(id="cffgzz", short="CFFGZZ Thm 20",
-         statement=["CI2ZF.Potts.ExternalCriticalHardColouringTheorem",
-                    "CI2ZF.Potts.CriticalHardColouringInput"],
-         proof=["CI2ZF.Potts.external_critical_hard_colouring_theorem",
-                "CI2ZF.Potts.critical_hard_colouring_input",
-                "CI2ZF.Appendix.CV.option_root_ci_critical"],
-         targets=["CI2ZF.Appendix.CV.option_root_ci_critical"],
+         statement=["ZeroFreeness.Potts.ExternalCriticalHardColouringTheorem",
+                    "ZeroFreeness.Potts.CriticalHardColouringInput"],
+         proof=["ZeroFreeness.Potts.external_critical_hard_colouring_theorem",
+                "ZeroFreeness.Potts.critical_hard_colouring_input",
+                "ZeroFreeness.Appendix.CV.option_root_ci_critical"],
+         targets=["ZeroFreeness.Appendix.CV.option_root_ci_critical"],
          source="Chen, Feng, Guo, Zhang, Zou, Deterministic counting from coupling "
                 "independence, arXiv:2410.23225v2, Theorem 20",
          url="https://arxiv.org/abs/2410.23225v2",
@@ -53,9 +53,9 @@ CITED = [
                "409060125/50858 (option_root_ci_critical). Integer equality 6q = 11Δ forces "
                "Δ ≥ 6, so this covers every critical case."),
     dict(id="clmm-10", short="CLMM Eq. (10)",
-         statement=["CI2ZF.Appendix.CLMM.Literature"],
-         proof=["CI2ZF.Appendix.CLMM.Eq10.sphere_estimate_proof", "CI2ZF.Appendix.CLMM.literature"],
-         targets=["CI2ZF.Appendix.CLMM.Eq10.sphere_estimate_proof"],
+         statement=["ZeroFreeness.Appendix.CLMM.Literature"],
+         proof=["ZeroFreeness.Appendix.CLMM.Eq10.sphere_estimate_proof", "ZeroFreeness.Appendix.CLMM.literature"],
+         targets=["ZeroFreeness.Appendix.CLMM.Eq10.sphere_estimate_proof"],
          source="Chen, Liu, Mani, Moitra, Strong spatial mixing for colorings on trees and "
                 "its algorithmic applications, arXiv:2304.01954v3, Equation (10), from "
                 "Lemmas 5.19 and 5.20",
@@ -69,7 +69,7 @@ CITED = [
                "is used for two facts only: no edge inside a distance layer, and unique parents."),
     dict(id="clmm-513", short="CLMM Lemma 5.13",
          statement=[],
-         proof=["CI2ZF.Appendix.CLMM.Lemma513.sphere_to_coupling"],
+         proof=["ZeroFreeness.Appendix.CLMM.Lemma513.sphere_to_coupling"],
          source="Chen, Liu, Mani, Moitra, arXiv:2304.01954v3, Condition 5.12 and Lemma 5.13",
          url="https://arxiv.org/abs/2304.01954v3",
          meaning="In the positive-activity branch (x > 0, Δ ≥ 3, R ≥ 2), sphere influence "
@@ -82,16 +82,16 @@ CITED = [
                "number H_ℓ. The separate zero-temperature colouring endpoint is outside this "
                "formalized proposition."),
     dict(id="clmm-87", short="CLMM Lemma 8.7",
-         statement=["CI2ZF.Appendix.Girth.CavityTree.CLMMInfluenceIdentity"],
-         proof=["CI2ZF.Appendix.Girth.CavityTree.clmmInfluenceIdentity"],
+         statement=["ZeroFreeness.Appendix.Girth.CavityTree.CLMMInfluenceIdentity"],
+         proof=["ZeroFreeness.Appendix.Girth.CavityTree.clmmInfluenceIdentity"],
          source="Chen, Liu, Mani, Moitra, arXiv:2304.01954v3, Lemma 8.7",
          url="https://arxiv.org/abs/2304.01954v3",
          meaning="The tree influence–Jacobian factorization, summed over a whole tree level.",
          route="Proved from the actual finite-tree Gibbs law, one level at a time."),
     dict(id="bbr-26", short="BBR Prop 2.6(i)",
-         statement=["CI2ZF.Appendix.BBR.Literature"],
-         proof=["CI2ZF.Appendix.BBR.proposition_2_6_i_holds", "CI2ZF.Appendix.BBR.literature"],
-         targets=["CI2ZF.Appendix.BBR.proposition_2_6_i_holds"],
+         statement=["ZeroFreeness.Appendix.BBR.Literature"],
+         proof=["ZeroFreeness.Appendix.BBR.proposition_2_6_i_holds", "ZeroFreeness.Appendix.BBR.literature"],
+         targets=["ZeroFreeness.Appendix.BBR.proposition_2_6_i_holds"],
          source="Bencs, Berrekkal, Regts, Near optimal bounds for weak and strong spatial "
                 "mixing for the anti-ferromagnetic Potts model on trees, Electron. J. Probab. "
                 "30 (2025), paper 65, Proposition 2.6(i)",
@@ -106,7 +106,7 @@ CITED = [
                "under Δ ≥ q + 2 (proposition_2_6_i_of_gap_two)."),
     dict(id="bbr-25", short="BBR Thm 2.5",
          statement=[],
-         proof=["CI2ZF.Appendix.BBR.theorem_2_5_holds"],
+         proof=["ZeroFreeness.Appendix.BBR.theorem_2_5_holds"],
          source="Bencs, Berrekkal, Regts, Electron. J. Probab. 30 (2025), paper 65, Theorem 2.5",
          url="https://doi.org/10.1214/25-EJP1327",
          meaning="The squared-norm contraction of the square-root message recursion; the "
@@ -117,8 +117,8 @@ CITED = [
 
 RESULTS = [
     dict(id="thm-intro-main", group="main", paper=[("main", "thm:intro-main")],
-         lean=["CI2ZF.Potts.potts_main_theorem", "CI2ZF.Potts.potts_main_strict"],
-         defs=["CI2ZF.Potts.UniformPottsZeroFree"],
+         lean=["ZeroFreeness.Potts.potts_main_theorem", "ZeroFreeness.Potts.potts_main_strict"],
+         defs=["ZeroFreeness.Potts.UniformPottsZeroFree"],
          notes=["On the line 6q = 11Δ, where the paper cites CFFGZZ Theorem 20, Lean uses the "
                 "Carlson–Vigoda contraction on the critical line instead; the theorem has no "
                 "hypothesis beyond the paper's.",
@@ -128,58 +128,58 @@ RESULTS = [
                 "no zeros, the full polynomial vanishes only at 0, and its multiplicity there is "
                 "m_G(τ)."]),
     dict(id="thm-potts-transfer", group="main", paper=[("main", "thm:potts-transfer")],
-         lean=["CI2ZF.Potts.graph_class_potts_transfer_of_bounded"],
-         defs=["CI2ZF.Potts.GraphClass", "CI2ZF.Potts.GraphClassTransferInputs"],
+         lean=["ZeroFreeness.Potts.graph_class_potts_transfer_of_bounded"],
+         defs=["ZeroFreeness.Potts.GraphClass", "ZeroFreeness.Potts.GraphClassTransferInputs"],
          notes=["GraphClass asks for closure under pullback along embeddings: induced subgraphs, "
                 "relabelled copies included.",
                 "The coupling bounds are required only when both child laws are well defined, "
                 "which q ≥ Δ + 1 guarantees.",
                 "Lean does not need Δ ≥ 2."]),
     dict(id="def-potts-ci", group="main", paper=[("main", "def:potts-ci")],
-         lean=["CI2ZF.Potts.GraphClassRootCouplingBound", "CI2ZF.Potts.RootCouplingBound"],
-         defs=["CI2ZF.Potts.rootChildData", "PottsCI.FinDist.W", "PottsCI.ham"],
+         lean=["ZeroFreeness.Potts.GraphClassRootCouplingBound", "ZeroFreeness.Potts.RootCouplingBound"],
+         defs=["ZeroFreeness.Potts.rootChildData", "PottsCI.FinDist.W", "PottsCI.ham"],
          notes=["GraphClassRootCouplingBound is the definition on original graphs and pinnings; "
                 "RootCouplingBound states the same bound on boundary-count data and is what the "
                 "proofs use.",
                 "Both laws are normalized child Gibbs laws on V^τ ∖ {r}, compared in the Hamming "
                 "Wasserstein distance."]),
     dict(id="thm-strict-ci", group="main", paper=[("main", "thm:strict-ci")],
-         lean=["CI2ZF.Potts.root_strict_ci", "CI2ZF.Potts.root_strict_uniform_ci"],
-         defs=["CI2ZF.ciBound", "CI2ZF.ciGap"],
+         lean=["ZeroFreeness.Potts.root_strict_ci", "ZeroFreeness.Potts.root_strict_uniform_ci"],
+         defs=["ZeroFreeness.ciBound", "ZeroFreeness.ciGap"],
          notes=["ciBound q Δ x is 2(1−x)Δ / (q − (11/6)(1−x)Δ) and ciGap q Δ is q/Δ − 11/6, "
                 "as in the paper."]),
     dict(id="prop-hard-one-step", group="main", paper=[("main", "prop:hard-one-step")],
-         lean=["CI2ZF.conditionalHardCouplingEstimate"],
-         defs=["CI2ZF.ConditionalHardCouplingEstimate"],
+         lean=["ZeroFreeness.conditionalHardCouplingEstimate"],
+         defs=["ZeroFreeness.ConditionalHardCouplingEstimate"],
          notes=["rootFreeCoinCount counts the edges at v that are active on at least one side, "
                 "which is Σ_c |N_c|; rootCommonListCount is ℓ = |L_{X,v} ∩ L_{Y,v}|.",
                 "The coupling itself is constructed in Lean; nothing about it is assumed."]),
     dict(id="prop-full-interval-hci", group="main", paper=[("main", "prop:full-interval-hci")],
-         lean=["CI2ZF.Potts.root_positive_ci"],
+         lean=["ZeroFreeness.Potts.root_positive_ci"],
          notes=["Lean does not need Δ ≥ 2."]),
     dict(id="cor-critical-line-input", group="main", paper=[("main", "cor:critical-line-input")],
-         lean=["CI2ZF.Potts.critical_line_transfer_coupling_inputs",
-               "CI2ZF.Potts.root_critical_uniform_ci"],
-         defs=["CI2ZF.Potts.CriticalHardColouringInput"],
+         lean=["ZeroFreeness.Potts.critical_line_transfer_coupling_inputs",
+               "ZeroFreeness.Potts.root_critical_uniform_ci"],
+         defs=["ZeroFreeness.Potts.CriticalHardColouringInput"],
          notes=["The x = 0 bound, for which the paper cites CFFGZZ Theorem 20, is "
                 "critical_hard_colouring_input, proved by the Carlson–Vigoda contraction on the "
                 "critical line.",
                 "root_critical_uniform_ci gives the constant 12/(11δ) on [δ, 1]."]),
     dict(id="prop-field-transfer", group="main", paper=[("main", "prop:field-transfer")],
-         lean=["CI2ZF.LeeYang.prop_field_transfer",
-               "CI2ZF.LeeYang.graph_class_normalized_field_transfer"],
-         defs=["CI2ZF.LeeYang.normalizedFieldPartition"],
+         lean=["ZeroFreeness.LeeYang.prop_field_transfer",
+               "ZeroFreeness.LeeYang.graph_class_normalized_field_transfer"],
+         defs=["ZeroFreeness.LeeYang.normalizedFieldPartition"],
          notes=["prop_field_transfer is the paper's statement: θ = θ(q, Δ, C₀) is chosen before the "
                 "class. It applies graph_class_normalized_field_transfer, which chooses θ for one class, "
                 "to the union of all classes with constant C₀.",
                 "graph_class_normalized_field_transfer uses the closed polydisc ‖λ − 1‖ ≤ θ and does not "
                 "need Δ ≥ 2."]),
     dict(id="thm-lee-yang", group="main", paper=[("main", "thm:lee-yang")],
-         lean=["CI2ZF.LeeYang.near_vigoda_vertex_field_zero_free",
-               "CI2ZF.LeeYang.cv_vertex_field_zero_free",
-               "CI2ZF.LeeYang.high_girth_original_field_transfer",
-               "CI2ZF.LeeYang.high_girth_residual_original_field_transfer"],
-         defs=["CI2ZF.LeeYang.UniformVertexFieldZeroFree"],
+         lean=["ZeroFreeness.LeeYang.near_vigoda_vertex_field_zero_free",
+               "ZeroFreeness.LeeYang.cv_vertex_field_zero_free",
+               "ZeroFreeness.LeeYang.high_girth_original_field_transfer",
+               "ZeroFreeness.LeeYang.high_girth_residual_original_field_transfer"],
+         defs=["ZeroFreeness.LeeYang.UniformVertexFieldZeroFree"],
          notes=["No regime takes a hypothesis. Where the paper's proof cites CFFGZZ Theorem 20, in "
                 "regime (ii) and at the critical pairs (Δ, q) = (6j, 11j) of regime (i), the x = 0 "
                 "bound comes from the Carlson–Vigoda contraction proved in Lean, extended to the "
@@ -189,18 +189,18 @@ RESULTS = [
                 "results cited in the paper's proof. The residual version needs girth only of "
                 "G^τ."]),
     dict(id="cor-edge-lee-yang", group="main", paper=[("main", "cor:edge-lee-yang")],
-         lean=["CI2ZF.LeeYang.edge_lee_yang"],
+         lean=["ZeroFreeness.LeeYang.edge_lee_yang"],
          notes=["No CWZZ input: the line-graph coupling bound Δ − 1 at x = 0 is proved in Lean."]),
     dict(id="thm-holant-box", group="main", paper=[("main", "thm:holant-box")],
-         lean=["CI2ZF.Holant.exists_uniform_holant_polytube"],
-         defs=["CI2ZF.Holant.Signature", "CI2ZF.Holant.graphPartition"],
+         lean=["ZeroFreeness.Holant.exists_uniform_holant_polytube"],
+         defs=["ZeroFreeness.Holant.Signature", "ZeroFreeness.Holant.graphPartition"],
          notes=["Lean allows any Δ and any R ≥ 0.",
                 "The Chen–Gu coupling bound used in the proof is proved with the paper's constant."]),
     dict(id="cor-bmatching", group="main", paper=[("main", "cor:bmatching-short")],
-         lean=["CI2ZF.Holant.bmatching_uniform_polytube", "CI2ZF.Holant.bmatching_orthant"]),
+         lean=["ZeroFreeness.Holant.bmatching_uniform_polytube", "ZeroFreeness.Holant.bmatching_orthant"]),
     dict(id="cor-bcover", group="main", paper=[("main", "cor:bcover-short")],
-         lean=["CI2ZF.Holant.bcover_uniform_polytube_lower", "CI2ZF.Holant.cor_bcover_short"],
-         defs=["CI2ZF.Holant.coverWidth"],
+         lean=["ZeroFreeness.Holant.bcover_uniform_polytube_lower", "ZeroFreeness.Holant.cor_bcover_short"],
+         defs=["ZeroFreeness.Holant.coverWidth"],
          notes=["bcover_uniform_polytube_lower has the paper's quantifier order: ε depends only on Δ "
                 "and λ₋. cor_bcover_short gives one width function of λ₋ for all λ₊ at once, and the "
                 "open neighbourhood of the positive orthant.",
@@ -211,9 +211,9 @@ RESULTS = [
          table="Δ ≥ 2, q ≥ (11/6 − 1/84000)Δ; zero-free near [0, 1]",
          paper=[("companion", "thm:potts-ci-regimes"), ("companion", "lem:int-reduction"),
                 ("companion", "thm:additional-potts-zf")],
-         lean=["CI2ZF.Appendix.near_vigoda_transfer_inputs",
-               "CI2ZF.Appendix.near_vigoda_uniform_ci",
-               "CI2ZF.Appendix.near_vigoda_zero_free", "CI2ZF.Appendix.integer_reduction"],
+         lean=["ZeroFreeness.Appendix.near_vigoda_transfer_inputs",
+               "ZeroFreeness.Appendix.near_vigoda_uniform_ci",
+               "ZeroFreeness.Appendix.near_vigoda_zero_free", "ZeroFreeness.Appendix.integer_reduction"],
          notes=["At the critical pairs (Δ, q) = (6j, 11j), j ≤ 20, where the companion cites "
                 "CFFGZZ Theorem 20, Lean uses the Carlson–Vigoda contraction on the critical "
                 "line; for Δ ≥ 125 it uses the companion's Theorem 5.1, proved in Lean (CV.root_coupling).",
@@ -223,9 +223,9 @@ RESULTS = [
     dict(id="cv", group="appendix", title="Carlson–Vigoda regime",
          table="Δ ≥ 125, q ≥ 1.809Δ; zero-free near [0, 1]",
          paper=[("companion", "thm:cv-ci"), ("companion", "thm:additional-potts-zf")],
-         lean=["CI2ZF.Appendix.CV.root_coupling", "CI2ZF.Appendix.CV.option_root_ci",
-               "CI2ZF.Appendix.CV.zero_free"],
-         defs=["CI2ZF.Appendix.CV.ciConstant"],
+         lean=["ZeroFreeness.Appendix.CV.root_coupling", "ZeroFreeness.Appendix.CV.option_root_ci",
+               "ZeroFreeness.Appendix.CV.zero_free"],
+         defs=["ZeroFreeness.Appendix.CV.ciConstant"],
          notes=["The constant is ciConstant = 409060125/50858 < 8043.19, as in the companion.",
                 "No literature input: the contraction is proved in Lean and x = 0 follows by "
                 "finite-state continuity, so neither CV2024 nor CFFGZZ is assumed.",
@@ -236,9 +236,9 @@ RESULTS = [
     dict(id="large-girth", group="appendix", title="Large-girth regime",
          table="Δ ≥ 3, q ≥ Δ + 3, girth(G^τ) ≥ g*(q, Δ); zero-free near [0, 1]",
          paper=[("companion", "thm:high-girth-soft-ci"), ("companion", "thm:additional-potts-zf")],
-         lean=["CI2ZF.Appendix.Girth.high_girth_coupling",
-               "CI2ZF.Appendix.Girth.high_girth_residual_original_zero_free"],
-         defs=["CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree"],
+         lean=["ZeroFreeness.Appendix.Girth.high_girth_coupling",
+               "ZeroFreeness.Appendix.Girth.high_girth_residual_original_zero_free"],
+         defs=["ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree"],
          notes=["CLMM Lemma 8.7, Equation (10) and Lemma 5.13 are proved in Lean. Lemma 8.7 is "
                 "used in its level-summed form, and Equation (10) needs strong spatial mixing only "
                 "beyond a fixed depth K₀; the companion justifies both in the proof of its "
@@ -248,18 +248,18 @@ RESULTS = [
     dict(id="high-temperature", group="appendix", title="High-temperature regime",
          table="Δ ≥ 2, q > (11/6)(1 − x*)Δ, x* ∈ (0, 1]; zero-free near [x*, 1]",
          paper=[("companion", "cor:intro-high-temperature")],
-         lean=["CI2ZF.Appendix.high_temperature_graph_coupling",
-               "CI2ZF.Appendix.high_temperature_zero_free"],
+         lean=["ZeroFreeness.Appendix.high_temperature_graph_coupling",
+               "ZeroFreeness.Appendix.high_temperature_zero_free"],
          notes=["Lean needs neither Δ ≥ 2 nor x* ≤ 1, and one ε serves the normalized and the "
                 "full polynomial.",
                 "The coupling constant is the companion's C* = 2(1 − x*)Δ / (q − (11/6)(1 − x*)Δ)."]),
     dict(id="bbr", group="appendix", title="BBR interval",
          table="q ≥ 3, Δ/q ≥ (e − 1/2)/(e − 1), girth(G^τ) ≥ g_BBR(q, Δ); zero-free near [x₀, 1]",
          paper=[("companion", "thm:intro-bbr-interval"), ("companion", "thm:bbr-large-girth-ci")],
-         lean=["CI2ZF.Appendix.BBR.high_girth_coupling",
-               "CI2ZF.Appendix.BBR.high_girth_residual_original_zero_free"],
-         defs=["CI2ZF.Appendix.BBR.start", "CI2ZF.Appendix.BBR.intervalStart",
-               "CI2ZF.Appendix.BBR.parameter"],
+         lean=["ZeroFreeness.Appendix.BBR.high_girth_coupling",
+               "ZeroFreeness.Appendix.BBR.high_girth_residual_original_zero_free"],
+         defs=["ZeroFreeness.Appendix.BBR.start", "ZeroFreeness.Appendix.BBR.intervalStart",
+               "ZeroFreeness.Appendix.BBR.parameter"],
          notes=["BBR Proposition 2.6(i) is used only at its printed hypothesis Δ ≥ q + 3. The four "
                 "pairs with Δ = q + 2, and (q, Δ) = (3, 4), are handled by internal arithmetic; "
                 "the companion's route, extending BBR's proof to Δ = q + 2, is proved as well "
@@ -268,8 +268,8 @@ RESULTS = [
     dict(id="edge-potts", group="appendix", title="Edge-Potts regime",
          table="Δ ≥ 2, q ≥ 3Δ; the polynomial of the line graph L(G); zero-free near [0, 1]",
          paper=[("companion", "thm:soft-edge-ci"), ("companion", "cor:soft-edge-zf")],
-         lean=["CI2ZF.Appendix.Edge.root_children_ci", "CI2ZF.Appendix.Edge.edge_potts_zero_free"],
-         defs=["CI2ZF.Appendix.Edge.edgeGraphClass"],
+         lean=["ZeroFreeness.Appendix.Edge.root_children_ci", "ZeroFreeness.Appendix.Edge.edge_potts_zero_free"],
+         defs=["ZeroFreeness.Appendix.Edge.edgeGraphClass"],
          notes=["The regional proof uses finite slot approximations and a limit, and x = 0 follows by "
                 "continuity. The countable exact-slot representation and lift of Lemmas 8.3 and 8.4 "
                 "(SlotLift) and the countable one-label bound of Lemma 8.5 (OneLabel) are proved as well.",
@@ -278,11 +278,11 @@ RESULTS = [
          table="0 < δ ≤ 1, Δ ≥ Δ₅(δ), q ≥ (1 + δ)Δ, girth(G^τ) ≥ 5; zero-free near [0, 1]",
          paper=[("companion", "thm:girth5-ci"), ("companion", "thm:unrestricted-girth5"),
                 ("companion", "thm:potts-gap-girth5")],
-         lean=["CI2ZF.Appendix.Girth.girth_five_coupling",
-               "CI2ZF.Appendix.Girth.girth_five_residual_original_zero_free",
-               "CI2ZF.Appendix.Girth.OperatorGap.potts_gap_girth5"],
-         defs=["CI2ZF.Appendix.Girth.girthFiveCIThreshold",
-               "CI2ZF.Appendix.Girth.girthFiveThreshold"],
+         lean=["ZeroFreeness.Appendix.Girth.girth_five_coupling",
+               "ZeroFreeness.Appendix.Girth.girth_five_residual_original_zero_free",
+               "ZeroFreeness.Appendix.Girth.OperatorGap.potts_gap_girth5"],
+         defs=["ZeroFreeness.Appendix.Girth.girthFiveCIThreshold",
+               "ZeroFreeness.Appendix.Girth.girthFiveThreshold"],
          notes=["Δ₅(δ) is explicit: the maximum of ⌈4096(1 + δ)e^{2/δ}/δ⁴⌉ and "
                 "⌈covarianceDegreeThreshold δ⌉. The companion's Δ₅ is existential with Δ₅ ≥ Δ₀.",
                 "potts_gap_girth5 states Theorem 9.7 in the paper's operator form 𝓛² ⪰ γ_δ𝓛 for every "
@@ -302,32 +302,32 @@ def pair(label, paper, lean, code, note=""):
                 note=note)
 
 
-MAIN = "CI2ZF.Potts.potts_main_theorem"
-UZF = "CI2ZF.Potts.UniformPottsZeroFree"
-TRANSFER = "CI2ZF.Potts.graph_class_potts_transfer_of_bounded"
-INPUTS = "CI2ZF.Potts.GraphClassTransferInputs"
-RCB = "CI2ZF.Potts.GraphClassRootCouplingBound"
-STRICT = "CI2ZF.Potts.root_strict_ci"
-HARD = "CI2ZF.ConditionalHardCouplingEstimate"
-POS = "CI2ZF.Potts.root_positive_ci"
-CRIT = "CI2ZF.Potts.critical_line_transfer_coupling_inputs"
-FIELD = "CI2ZF.LeeYang.prop_field_transfer"
-LYNV = "CI2ZF.LeeYang.near_vigoda_vertex_field_zero_free"
-LYHG = "CI2ZF.LeeYang.high_girth_original_field_transfer"
-UVF = "CI2ZF.LeeYang.UniformVertexFieldZeroFree"
-EDGELY = "CI2ZF.LeeYang.edge_lee_yang"
-HOLANT = "CI2ZF.Holant.exists_uniform_holant_polytube"
-BMATCH = "CI2ZF.Holant.bmatching_uniform_polytube"
-BCOVER = "CI2ZF.Holant.bcover_uniform_polytube_lower"
-NVZF = "CI2ZF.Appendix.near_vigoda_zero_free"
-NVCI = "CI2ZF.Appendix.near_vigoda_transfer_inputs"
-CVCI = "CI2ZF.Appendix.CV.option_root_ci"
-HGCI = "CI2ZF.Appendix.Girth.high_girth_coupling"
-HTZF = "CI2ZF.Appendix.high_temperature_zero_free"
-BBRZF = "CI2ZF.Appendix.BBR.high_girth_residual_original_zero_free"
-EDGECI = "CI2ZF.Appendix.Edge.root_children_ci"
-EDGEZF = "CI2ZF.Appendix.Edge.edge_potts_zero_free"
-G5CI = "CI2ZF.Appendix.Girth.girth_five_coupling"
+MAIN = "ZeroFreeness.Potts.potts_main_theorem"
+UZF = "ZeroFreeness.Potts.UniformPottsZeroFree"
+TRANSFER = "ZeroFreeness.Potts.graph_class_potts_transfer_of_bounded"
+INPUTS = "ZeroFreeness.Potts.GraphClassTransferInputs"
+RCB = "ZeroFreeness.Potts.GraphClassRootCouplingBound"
+STRICT = "ZeroFreeness.Potts.root_strict_ci"
+HARD = "ZeroFreeness.ConditionalHardCouplingEstimate"
+POS = "ZeroFreeness.Potts.root_positive_ci"
+CRIT = "ZeroFreeness.Potts.critical_line_transfer_coupling_inputs"
+FIELD = "ZeroFreeness.LeeYang.prop_field_transfer"
+LYNV = "ZeroFreeness.LeeYang.near_vigoda_vertex_field_zero_free"
+LYHG = "ZeroFreeness.LeeYang.high_girth_original_field_transfer"
+UVF = "ZeroFreeness.LeeYang.UniformVertexFieldZeroFree"
+EDGELY = "ZeroFreeness.LeeYang.edge_lee_yang"
+HOLANT = "ZeroFreeness.Holant.exists_uniform_holant_polytube"
+BMATCH = "ZeroFreeness.Holant.bmatching_uniform_polytube"
+BCOVER = "ZeroFreeness.Holant.bcover_uniform_polytube_lower"
+NVZF = "ZeroFreeness.Appendix.near_vigoda_zero_free"
+NVCI = "ZeroFreeness.Appendix.near_vigoda_transfer_inputs"
+CVCI = "ZeroFreeness.Appendix.CV.option_root_ci"
+HGCI = "ZeroFreeness.Appendix.Girth.high_girth_coupling"
+HTZF = "ZeroFreeness.Appendix.high_temperature_zero_free"
+BBRZF = "ZeroFreeness.Appendix.BBR.high_girth_residual_original_zero_free"
+EDGECI = "ZeroFreeness.Appendix.Edge.root_children_ci"
+EDGEZF = "ZeroFreeness.Appendix.Edge.edge_potts_zero_free"
+G5CI = "ZeroFreeness.Appendix.Girth.girth_five_coupling"
 ZERO_FREE_MATH = r"math:\nZpin{G}{\tau}(z)\ne0 \qquad\text{for every }z\in\mathcal U_\eps([0,1])."
 CONSEQUENTLY = (r"Consequently, \(\Zpin{G}{\tau}(z)=z^{m_G(\tau)}\nZpin{G}{\tau}(z)\) has no zeros in the same "
                 r"neighbourhood except, when \(m_G(\tau)\ge1\), a zero of multiplicity \(m_G(\tau)\) at \(z=0\).")
@@ -388,7 +388,7 @@ PAIRS = {
              RCB, "W ham ((rootChildData tau G r a).gibbs x x.property ha) ((rootChildData tau G r b).gibbs x x.property hb) ≤ cost",
              "W ham is the Hamming Wasserstein distance."),
         pair("def:potts-ci", r"Both laws live on the common free set \(V^\tau\setminus\{r\}\)",
-             "CI2ZF.Potts.rootChildData", "PinningData (RootRemaining tau r) C",
+             "ZeroFreeness.Potts.rootChildData", "PinningData (RootRemaining tau r) C",
              "Both child instances live on RootRemaining tau r, the free vertices other than r."),
     ],
     "thm-strict-ci": [
@@ -400,7 +400,7 @@ PAIRS = {
               "(hdegree : ∀ v, G.degree v ≤ Δ)", "(x : PinningData.NonnegativeParameter) (hx1 : (x : ℝ) ≤ 1)"]),
         pair("thm:strict-ci", r"math:\le \frac{2(1-x)\Deg}{q-(11/6)(1-x)\Deg}", STRICT, "≤ ciBound (Fintype.card C) Δ x",
              "ciBound q Δ x is this fraction; see the definitions."),
-        pair("thm:strict-ci", r"math:\le\frac2{\gapq}", "CI2ZF.Potts.root_strict_uniform_ci",
+        pair("thm:strict-ci", r"math:\le\frac2{\gapq}", "ZeroFreeness.Potts.root_strict_uniform_ci",
              "≤ 2 / ciGap (Fintype.card C) Δ", "ciGap q Δ is γ₀ = q/Δ − 11/6."),
     ],
     "prop-hard-one-step": [
@@ -421,7 +421,7 @@ PAIRS = {
              "≤ (11 / 6 : ℝ) * rootFreeCoinCount I v ω - rootCommonListCount I X Y v ω",
              "rootFreeCoinCount counts the edges at v active on at least one side, which is Σ_c |N_c|; "
              "rootCommonListCount is ℓ."),
-        pair(None, None, "CI2ZF.conditionalHardCouplingEstimate",
+        pair(None, None, "ZeroFreeness.conditionalHardCouplingEstimate",
              "(I : PinningData V C) : ConditionalHardCouplingEstimate I",
              "Proved for every instance; the coupling is constructed in the proof."),
     ],
@@ -444,11 +444,11 @@ PAIRS = {
         pair("cor:critical-line-input", r"\(\Deg\ge2\) and \(q=11\Deg/6\)", CRIT,
              "(hΔ : 2 ≤ Δ) (hq : (Fintype.card C : ℝ) = (11 / 6 : ℝ) * Δ)"),
         pair("cor:critical-line-input", r"Then \(\Gdeg\) satisfies coupling independence at \(x=0\) with a finite constant",
-             "CI2ZF.Potts.critical_hard_colouring_input", "CriticalHardColouringInput.{u, v} C Δ hcolours",
+             "ZeroFreeness.Potts.critical_hard_colouring_input", "CriticalHardColouringInput.{u, v} C Δ hcolours",
              "The paper's proof cites CFFGZZ Theorem 20 here. Lean proves the bound with the Carlson–Vigoda "
              "contraction on the critical line; Δ ≥ 6 holds there by critical_line_degree_ge_six."),
         pair("cor:critical-line-input", r"for every \(\delta\in(0,1]\) it satisfies coupling independence on "
-             r"\([\delta,1]\) with constant \(12/(11\delta)\)", "CI2ZF.Potts.root_critical_uniform_ci",
+             r"\([\delta,1]\) with constant \(12/(11\delta)\)", "ZeroFreeness.Potts.root_critical_uniform_ci",
              ["(hx : (x : ℝ) ∈ Set.Icc δ 1)", "≤ 12 / (11 * δ)"]),
         pair(None, None, CRIT, "TransferCouplingInputs.{u, v} C Δ hcolours",
              "The conclusion packages both bounds as the inputs of the transfer theorem."),
@@ -474,7 +474,7 @@ PAIRS = {
     "thm-lee-yang": [
         pair("thm:lee-yang", r"\(q\ge(11/6-1/84000)\Deg\)", LYNV,
              "(hq : ((11 / 6 : ℝ) - 1 / 84000) * Δ ≤ Fintype.card C)", "Regime (i)."),
-        pair("thm:lee-yang", r"\(\Deg\ge125\) and \(q\ge1.809\Deg\)", "CI2ZF.LeeYang.cv_vertex_field_zero_free",
+        pair("thm:lee-yang", r"\(\Deg\ge125\) and \(q\ge1.809\Deg\)", "ZeroFreeness.LeeYang.cv_vertex_field_zero_free",
              "(hΔ : 125 ≤ Δ) (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C)", "Regime (ii)."),
         pair("thm:lee-yang", r"\(\Deg\ge3\) and \(q\ge\Deg+3\)", LYHG,
              "(hΔ : 3 ≤ Δ) (hq : Δ + 3 ≤ Fintype.card C)", "Regime (iii)."),
@@ -536,7 +536,7 @@ PAIRS = {
              "Here a = λ₋ and c = λ₊. ε is chosen before λ₊, so it depends only on Δ and λ₋; Lean does not need Δ ≥ 2."),
         pair("cor:bcover-short", r"whenever \(\mathbf z\in\mathcal U_\eps([\lambda_-,\lambda_+])^E\)", BCOVER,
              "∀ z ∈ edgePolytube G.edgeFinset ε a c, coverPartition graphIncidence G.edgeFinset b z ≠ 0"),
-        pair(None, None, "CI2ZF.Holant.cor_bcover_short", "∃ ε : ℝ → ℝ, (∀ a > 0, 0 < ε a) ∧",
+        pair(None, None, "ZeroFreeness.Holant.cor_bcover_short", "∃ ε : ℝ → ℝ, (∀ a > 0, 0 < ε a) ∧",
              "One width function of λ₋ alone serves every λ₊, and also gives the open zero-free neighbourhood of "
              "the positive orthant."),
     ],
@@ -550,18 +550,18 @@ PAIRS = {
              r"\(C_\delta=C_\delta(q,\Deg)<\infty\) such that it satisfies \(C_\delta\)-coupling independence on "
              r"\([\delta,1]\).", NVCI, "∃ hcolours : Δ + 1 ≤ Fintype.card C, TransferCouplingInputs.{u,v} C Δ hcolours"),
         pair("thm:potts-ci-regimes", r"The same is true in the noncritical cases of regime~\textup{(i)}.",
-             "CI2ZF.Appendix.near_vigoda_uniform_ci",
+             "ZeroFreeness.Appendix.near_vigoda_uniform_ci",
              "∀ x : PinningData.NonnegativeParameter, (x : ℝ) ≤ 1 → RootCouplingBound.{u,v} C Δ hcolours x cost",
              "One constant for every x ∈ [0, 1], and Lean proves it in every case of regime (i), the critical "
              "pairs included."),
         pair("thm:potts-ci-regimes", r"the endpoint bound is supplied independently by the hard-colouring coupling theorem",
-             "CI2ZF.Potts.critical_hard_colouring_input", "CriticalHardColouringInput.{u, v} C Δ hcolours",
+             "ZeroFreeness.Potts.critical_hard_colouring_input", "CriticalHardColouringInput.{u, v} C Δ hcolours",
              "The companion cites CFFGZZ Theorem 20 for this endpoint bound; Lean proves it with the "
              "Carlson–Vigoda contraction on the critical line."),
         pair("lem:int-reduction", r"Let \(\Deg\) and \(q\) be integers with \(3\le\Deg\le124\)",
-             "CI2ZF.Appendix.integer_reduction", "{Δ q : ℕ} (hΔ : 3 ≤ Δ) (hΔmax : Δ ≤ 124)"),
+             "ZeroFreeness.Appendix.integer_reduction", "{Δ q : ℕ} (hΔ : 3 ≤ Δ) (hΔmax : Δ ≤ 124)"),
         pair("lem:int-reduction", r"Then either \(q>11\Deg/6\), or \((\Deg,q)=(6j,11j)\) for some integer \(1\le j\le20\).",
-             "CI2ZF.Appendix.integer_reduction",
+             "ZeroFreeness.Appendix.integer_reduction",
              "(11 / 6 : ℝ) * Δ < q ∨ ∃ j : ℕ, 1 ≤ j ∧ j ≤ 20 ∧ Δ = 6 * j ∧ q = 11 * j"),
     ],
     "cv": [
@@ -574,7 +574,7 @@ PAIRS = {
              "this covers every (G, τ, r)."),
         pair("thm:cv-ci", r"math:\le \frac{2}{m_0\delta_{\rm CV}} =\frac{409060125}{50858}<8043.19.", CVCI, "≤ ciConstant",
              "ciConstant is 409060125/50858; ciConstant_bounds proves that it is below 8043.19."),
-        pair("thm:additional-potts-zf", r"\(\Deg\ge125\) and \(q\ge1.809\Deg\)", "CI2ZF.Appendix.CV.zero_free",
+        pair("thm:additional-potts-zf", r"\(\Deg\ge125\) and \(q\ge1.809\Deg\)", "ZeroFreeness.Appendix.CV.zero_free",
              "(hΔ : 125 ≤ Δ) (hq : (1809 / 1000 : ℝ) * Δ ≤ Fintype.card C) : ∃ eps > 0, UniformPottsZeroFree.{u,v} C Δ eps",
              "Regime (ii) of Theorem 4.1, with no literature hypothesis."),
     ],
@@ -590,7 +590,7 @@ PAIRS = {
              "(largeGirthFamily.{u,v} C g).RootCouplingBound Δ (by omega) x K",
              "largeGirthFamily C g consists of the residual instances whose free graph has girth at least g."),
         pair("thm:additional-potts-zf", r"with the additional condition \(\operatorname{girth}(G^\tau)\ge g_*\) in "
-             r"regime~\textup{(iii)}", "CI2ZF.Appendix.Girth.high_girth_residual_original_zero_free",
+             r"regime~\textup{(iii)}", "ZeroFreeness.Appendix.Girth.high_girth_residual_original_zero_free",
              "∃ g : ℕ, 3 ≤ g ∧ ∃ eps > 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ g eps",
              "The girth condition is on the free graph only; see UniformResidualGirthPottsZeroFree."),
     ],
@@ -607,17 +607,17 @@ PAIRS = {
              HTZF, "∀ z ∈ thickening eps (Complex.ofReal '' Icc x₀ 1), normalizedPartition tau G z ≠ 0 ∧ "
              "fullPartition tau G z ≠ 0",
              "One ε serves the normalized and the full polynomial; the companion shrinks ε below x* for the latter."),
-        pair(None, None, "CI2ZF.Appendix.high_temperature_graph_coupling",
+        pair(None, None, "ZeroFreeness.Appendix.high_temperature_graph_coupling",
              "(2 * (1 - x₀) * Δ / ((Fintype.card C : ℝ) - (11 / 6 : ℝ) * (1 - x₀) * Δ))",
              "The coupling constant C* of the companion's proof, valid on [x*, 1]."),
     ],
     "bbr": [
         pair("thm:intro-bbr-interval", r"math:q\ge3, \qquad \frac{\Deg}{q}\ge\frac{e-1/2}{e-1}.", BBRZF,
              "(hq : 3 ≤ Fintype.card C) (hr : (Real.exp 1 - 1 / 2) / (Real.exp 1 - 1) ≤ (Δ : ℝ) / Fintype.card C)"),
-        pair("thm:intro-bbr-interval", r"If \((q,\Deg)=(3,4)\), put \(x_0:=3/4\).", "CI2ZF.Appendix.BBR.start",
+        pair("thm:intro-bbr-interval", r"If \((q,\Deg)=(3,4)\), put \(x_0:=3/4\).", "ZeroFreeness.Appendix.BBR.start",
              "if q = 3 ∧ Δ = 4 then 3 / 4 else intervalStart q Δ"),
         pair("thm:intro-bbr-interval", r"math:k:=e\frac{\Deg-q/2}{\Deg-q}, \qquad x_0:=1-\frac q\Deg "
-             r"\left(1-\frac{k}{\Deg}\right)^2 \frac{\Deg-k}{\Deg-k/2}.", "CI2ZF.Appendix.BBR.intervalStart",
+             r"\left(1-\frac{k}{\Deg}\right)^2 \frac{\Deg-k}{\Deg-k/2}.", "ZeroFreeness.Appendix.BBR.intervalStart",
              "1 - q / Δ * (1 - parameter q Δ / Δ) ^ 2 * (Δ - parameter q Δ) / (Δ - parameter q Δ / 2)",
              "parameter q Δ is k = e(Δ − q/2)/(Δ − q)."),
         pair("thm:intro-bbr-interval", r"there are \(g_{\rm BBR}=g_{\rm BBR}(q,\Deg)\ge3\) and \(\eps=\eps(q,\Deg)>0\)",
@@ -628,7 +628,7 @@ PAIRS = {
         pair("thm:intro-bbr-interval", r"math:\nZpin{G}{\tau}(z)\ne0 \qquad\text{for every }z\in\mathcal U_\eps([x_0,1]).",
              BBRZF, "∀ z ∈ thickening eps (Complex.ofReal '' Icc (start (Fintype.card C) Δ) 1), normalizedPartition "
              "tau G z ≠ 0 ∧ fullPartition tau G z ≠ 0", "One ε serves the normalized and the full polynomial."),
-        pair("thm:bbr-large-girth-ci", r"every \(x\in[x_0,1]\)", "CI2ZF.Appendix.BBR.high_girth_coupling",
+        pair("thm:bbr-large-girth-ci", r"every \(x\in[x_0,1]\)", "ZeroFreeness.Appendix.BBR.high_girth_coupling",
              "∀ (x : ℝ) (hx : 0 < x), x ∈ Icc (start (Fintype.card C) Δ) 1 →"),
     ],
     "edge-potts": [
@@ -662,15 +662,15 @@ PAIRS = {
              ["∃ cost : ℝ, 0 ≤ cost ∧", "W ham ((optionChildData I a).gibbs x hx ha) ((optionChildData I b).gibbs x hx hb) ≤ cost"],
              "One constant for all graphs, pinnings and activities."),
         pair("thm:unrestricted-girth5", r"There exists $\eps_5=\eps_5(q,\Deg,\delta)>0$",
-             "CI2ZF.Appendix.Girth.girth_five_residual_original_zero_free",
+             "ZeroFreeness.Appendix.Girth.girth_five_residual_original_zero_free",
              "∃ eps > 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ 5 eps",
              "Girth at least five of the free graph; no short-cycle counts are assumed."),
         pair("thm:potts-gap-girth5", r"math:\mathcal L^2\succeq\gamma_\delta \mathcal L, \qquad "
-             r"\gamma_\delta=\frac{\delta}{4(2+\delta)}.", "CI2ZF.Appendix.Girth.OperatorGap.potts_gap_girth5",
+             r"\gamma_\delta=\frac{\delta}{4(2+\delta)}.", "ZeroFreeness.Appendix.Girth.OperatorGap.potts_gap_girth5",
              ["((𝓛 ^ 2 - (δ / (4 * (2 + δ))) • 𝓛).IsSymmetric ∧", "∀ z, 0 ≤ ⟪(𝓛 ^ 2 - (δ / (4 * (2 + δ))) • 𝓛) z, z⟫_ℝ)"],
              "𝓛² ⪰ γ_δ𝓛 written out: 𝓛² − γ_δ𝓛 is symmetric and positive semidefinite on L²(μ), where "
              "𝓛 = glauberLaplacian = Σ_v (id − P_v) is the heat-bath generator."),
-        pair(None, None, "CI2ZF.Appendix.Girth.girth_five_closed_poincare",
+        pair(None, None, "ZeroFreeness.Appendix.Girth.girth_five_closed_poincare",
              "GraphProjections.spectralGap δ * variance (I.gibbs x hx hZ) f ≤ ∑ v, expectReal (I.gibbs x hx hZ) "
              "(fun σ => (f σ - GraphHeatBath.projection I x hx hlocal v f σ) ^ 2)",
              "The equivalent Poincaré form, used in the proof: spectralGap δ is γ_δ, and the right side is the "
@@ -679,50 +679,50 @@ PAIRS = {
 }
 
 GLOSSARY = [
-    ("CI2ZF.Potts.normalizedPolynomial", r"\widehat Z^{\tau}_{G}",
+    ("ZeroFreeness.Potts.normalizedPolynomial", r"\widehat Z^{\tau}_{G}",
      "The normalized pinned polynomial: one monomial per colouring of the free vertices, "
      "counting free–pinned and free–free monochromatic edges."),
-    ("CI2ZF.Potts.normalizedPartition", r"\widehat Z^{\tau}_{G}(z)", "Its value at z ∈ ℂ."),
-    ("CI2ZF.Potts.fullPolynomial", r"Z^{\tau}_{G}",
+    ("ZeroFreeness.Potts.normalizedPartition", r"\widehat Z^{\tau}_{G}(z)", "Its value at z ∈ ℂ."),
+    ("ZeroFreeness.Potts.fullPolynomial", r"Z^{\tau}_{G}",
      "The ordinary pinned polynomial, which also counts monochromatic edges inside the pinned set."),
-    ("CI2ZF.Potts.fullPartition", r"Z^{\tau}_{G}(z)", "Its value at z ∈ ℂ."),
+    ("ZeroFreeness.Potts.fullPartition", r"Z^{\tau}_{G}(z)", "Its value at z ∈ ℂ."),
     ("PottsCI.PartialColouring", r"\tau\colon\Lambda\to[q]",
      "A pinning: a finite domain and a colour for each of its vertices. No properness is required."),
     ("PottsCI.PartialColouring.pinnedConflictCount", r"m_G(\tau)",
      "The number of monochromatic edges with both ends pinned."),
-    ("CI2ZF.pottsInterval", r"[0,1]\subset\mathbb C",
+    ("ZeroFreeness.pottsInterval", r"[0,1]\subset\mathbb C",
      "Its open ε-neighbourhood Metric.thickening ε pottsInterval is the paper's U_ε([0, 1])."),
-    ("CI2ZF.Potts.UniformPottsZeroFree", r"\forall G\in\mathcal G_\Delta\ \forall\tau",
+    ("ZeroFreeness.Potts.UniformPottsZeroFree", r"\forall G\in\mathcal G_\Delta\ \forall\tau",
      "The conclusion of Theorem 1.1 for one radius ε, uniformly over graphs and pinnings."),
     ("PottsCI.PinningData", r"(G^{\tau},\,b^{\tau})",
      "A residual instance: the free graph together with the boundary counts b^τ_u(c)."),
     ("PottsCI.PartialColouring.toPinningData", r"(G^{\tau},\,b^{\tau})",
      "The residual instance of an original graph and pinning; its graph is G[V ∖ Λ]."),
-    ("CI2ZF.Potts.rootChildData", r"\tau^{r=a}",
+    ("ZeroFreeness.Potts.rootChildData", r"\tau^{r=a}",
      "The child instance obtained by pinning the free root r to a; it lives on V^τ ∖ {r}."),
-    ("CI2ZF.Potts.GraphClassRootCouplingBound", r"\text{Definition 2.2 at one } x",
+    ("ZeroFreeness.Potts.GraphClassRootCouplingBound", r"\text{Definition 2.2 at one } x",
      "Coupling independence with constant cost at activity x, over every graph of the class."),
     ("PottsCI.FinDist.W", r"W_{1,d}", "The transport (Wasserstein-1) distance between finite laws."),
     ("PottsCI.ham", r"\mathrm{Ham}", "The Hamming distance between configurations."),
-    ("CI2ZF.Potts.GraphClass", r"\mathcal G",
+    ("ZeroFreeness.Potts.GraphClass", r"\mathcal G",
      "A class of finite simple graphs closed under induced subgraphs."),
-    ("CI2ZF.Potts.GraphClassTransferInputs", r"\text{(i), (ii) of Theorem 1.2}",
+    ("ZeroFreeness.Potts.GraphClassTransferInputs", r"\text{(i), (ii) of Theorem 1.2}",
      "Coupling independence at x = 0 and on every [δ, 1]."),
-    ("CI2ZF.Appendix.Girth.UniformResidualGirthPottsZeroFree", r"\operatorname{girth}(G^\tau)\ge g",
+    ("ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree", r"\operatorname{girth}(G^\tau)\ge g",
      "The conclusion of the girth rows, with girth required only of the free graph."),
-    ("CI2ZF.Appendix.BBR.start", r"x_0", "The left end of the BBR interval, 3/4 at (q, Δ) = (3, 4)."),
-    ("CI2ZF.Appendix.BBR.intervalStart", r"x_0",
+    ("ZeroFreeness.Appendix.BBR.start", r"x_0", "The left end of the BBR interval, 3/4 at (q, Δ) = (3, 4)."),
+    ("ZeroFreeness.Appendix.BBR.intervalStart", r"x_0",
      "1 − (q/Δ)(1 − k/Δ)² (Δ − k)/(Δ − k/2)."),
-    ("CI2ZF.Appendix.BBR.parameter", r"k", "k = e(Δ − q/2)/(Δ − q)."),
-    ("CI2ZF.Appendix.Girth.girthFiveCIThreshold", r"\Delta_5(\delta)",
+    ("ZeroFreeness.Appendix.BBR.parameter", r"k", "k = e(Δ − q/2)/(Δ − q)."),
+    ("ZeroFreeness.Appendix.Girth.girthFiveCIThreshold", r"\Delta_5(\delta)",
      "The girth-five degree threshold, explicit in Lean."),
-    ("CI2ZF.Appendix.Girth.girthFiveThreshold", r"\Delta_0(\delta)",
+    ("ZeroFreeness.Appendix.Girth.girthFiveThreshold", r"\Delta_0(\delta)",
      "⌈4096(1 + δ)e^{2/δ}/δ⁴⌉, as in the companion."),
-    ("CI2ZF.LeeYang.normalizedFieldPartition", r"\widehat Z^{\tau}_{G}(\lambda)",
+    ("ZeroFreeness.LeeYang.normalizedFieldPartition", r"\widehat Z^{\tau}_{G}(\lambda)",
      "The normalized pinned partition function with one field per free vertex and colour."),
-    ("CI2ZF.LeeYang.UniformVertexFieldZeroFree", r"|\lambda_{u,c}-1|\le\theta",
+    ("ZeroFreeness.LeeYang.UniformVertexFieldZeroFree", r"|\lambda_{u,c}-1|\le\theta",
      "The Lee–Yang polydisc conclusion, uniform over graphs and pinnings."),
-    ("CI2ZF.Holant.Signature", r"f",
+    ("ZeroFreeness.Holant.Signature", r"f",
      "A symmetric Boolean signature: nonnegative, log-concave, interval support, f(0) > 0."),
 ]
 
@@ -749,7 +749,7 @@ PAPER_WORDS = {"main": "Main paper", "companion": "Companion"}
 # ---------------------------------------------------------------------------
 # Lean side
 
-LEAN_TEMPLATE = r"""import CI2ZF
+LEAN_TEMPLATE = r"""import ZeroFreeness
 import Lean
 open Lean Meta
 
@@ -758,7 +758,7 @@ def siteNames : Array Name := #[@@NAMES@@]
 def libraryResult (env : Environment) (self d : Name) : MetaM Bool := do
   if d == self || d.isInternal || isPrivateName d then return false
   let s := d.toString
-  unless s.startsWith "CI2ZF." || s.startsWith "PottsCI." do return false
+  unless s.startsWith "ZeroFreeness." || s.startsWith "PottsCI." do return false
   let last := match d with
     | .str _ l => l
     | _ => ""
@@ -794,7 +794,7 @@ def reachedTargets (env : Environment) (start : Name) : Array Name := Id.run do
       let cs := ci.type.getUsedConstants ++ ((ci.value? (allowOpaque := true)).map (·.getUsedConstants)).getD #[]
       for c in cs do
         let s := c.toString
-        if (s.startsWith "CI2ZF." || s.startsWith "PottsCI.") && !seen.contains c then
+        if (s.startsWith "ZeroFreeness." || s.startsWith "PottsCI.") && !seen.contains c then
           stack := stack.push c
   return found
 
@@ -892,7 +892,7 @@ def doc_html(doc):
 
 
 def short(name):
-    for prefix in ("CI2ZF.", "PottsCI."):
+    for prefix in ("ZeroFreeness.", "PottsCI."):
         if name.startswith(prefix):
             return name[len(prefix):]
     return name
@@ -1407,7 +1407,7 @@ def coverage_html(coverage, papers, converters, info, commit):
                         '<div class="cov-title">%s</div>%s</th><td class="st">%s</td><td class="ln">%s</td>'
                         '<td class="nt">%s</td></tr>'
                         % (group, e(search), e(ref), PAPER_WORDS[source], title, card_link,
-                           status_chip(entry["status"]), names, e(re.sub(r"\bCI2ZF\.", "", entry["note"]))))
+                           status_chip(entry["status"]), names, e(re.sub(r"\bZeroFreeness\.", "", entry["note"]))))
         groups.append("<tbody>%s</tbody>" % "".join(rows))
     table = ('<div class="cov-wrap"><table class="coverage" id="coverage-table"><caption class="sr">Every '
              'numbered statement of both papers, with its formalization status, the Lean declarations '
@@ -1451,9 +1451,9 @@ def correspondence_html(result, papers, converters, info, first_label):
 
 
 def build(args):
-    if git("status", "--porcelain", "--", "CI2ZF", "CI2ZF.lean"):
+    if git("status", "--porcelain", "--", "ZeroFreeness", "ZeroFreeness.lean"):
         sys.exit("Commit the Lean sources first, so that source links are pinned.")
-    commit = git("log", "-1", "--format=%h", "--abbrev=7", "--", "CI2ZF", "CI2ZF.lean",
+    commit = git("log", "-1", "--format=%h", "--abbrev=7", "--", "ZeroFreeness", "ZeroFreeness.lean",
                  "lakefile.toml", "lean-toolchain", "lake-manifest.json")
     record = json.loads((REPO / "docs/verification.json").read_text())
 
@@ -1631,7 +1631,7 @@ PAGE = r"""<!doctype html>
 <script defer src="@@KATEX@@/contrib/auto-render.min.js"></script>
 <script>
   (function () {
-    var t = localStorage.getItem("ci2zf-theme");
+    var t = localStorage.getItem("zero-freeness-theme");
     if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
   })();
 </script>
@@ -1943,8 +1943,8 @@ LEAN_NUM_THREADS=2 bash scripts/check-all.sh</code></pre>
   function showTheme() { themeButton.textContent = "Theme: " + (root.dataset.theme || "auto"); }
   themeButton.addEventListener("click", function () {
     var next = { "": "light", light: "dark", dark: "" }[root.dataset.theme || ""];
-    if (next) { root.dataset.theme = next; localStorage.setItem("ci2zf-theme", next); }
-    else { delete root.dataset.theme; localStorage.removeItem("ci2zf-theme"); }
+    if (next) { root.dataset.theme = next; localStorage.setItem("zero-freeness-theme", next); }
+    else { delete root.dataset.theme; localStorage.removeItem("zero-freeness-theme"); }
     showTheme();
   });
   showTheme();
