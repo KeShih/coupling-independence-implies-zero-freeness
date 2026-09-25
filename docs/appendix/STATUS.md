@@ -313,10 +313,10 @@ The complete single-library check, including the main text and all seven
 appendix regions, passes **4066 build jobs** and the transitive axiom
 audit of **11313 project declarations**. Only `propext`,
 `Classical.choice`, and `Quot.sound` are used. The check includes the
-five modules that prove the cited results,
+modules that prove the six cited results, `Coupling/CV/Scalar`, `Coupling/CV/RootCI`,
 `Coupling/Girth/Tree/InfluenceIdentity`, `Coupling/CLMM/SphereCoupling`,
 `Coupling/CLMM/SphereEstimate`, `Coupling/BBR/Theorem25` and
 `Coupling/BBR/Proposition26`, and the modules that state the remaining
-numbered statements, listed in the [module guide](README.md#companion-statements-in-dedicated-modules). See the [verification record](../verification.json)
+numbered statements. The [module guide](README.md#companion-statements-in-dedicated-modules) lists the companion's dedicated modules, and the [coverage table](../coverage.json) gives the Lean names of every numbered statement of both papers. See the [verification record](../verification.json)
 for recorded source hashes and the source scan, and the
 [provenance index](../provenance/README.md) for earlier records.

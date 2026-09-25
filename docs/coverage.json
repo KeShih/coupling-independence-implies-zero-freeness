@@ -12,7 +12,7 @@
       "CI2ZF.Potts.fullPolynomial_eq",
       "CI2ZF.pottsInterval"
     ],
-    "note": ""
+    "note": "The algorithmic consequences drawn in the introduction, the FPTAS for Z_G(q; x) and the effective choice of ε, are not formalized."
   },
   {
     "paper": "main",
@@ -333,7 +333,7 @@
       "CI2ZF.LeeYang.uniform_graph_class_field_transfer",
       "CI2ZF.LeeYang.normalizedFieldPartition"
     ],
-    "note": "θ is chosen from (q, Δ, C₀) before the class, and the Lean polydisc is closed."
+    "note": "θ is chosen from (q, Δ, C₀) before the class. prop_field_transfer has the paper's open polydisc; the uniform_graph_class versions use the closed polydisc, which is stronger."
   },
   {
     "paper": "main",

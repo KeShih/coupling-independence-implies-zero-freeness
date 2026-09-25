@@ -11,7 +11,7 @@ has a Lean counterpart. [docs/coverage.json](docs/coverage.json) lists all
 107 numbered statements, definitions and remarks included, with their
 status and Lean names; the side-by-side page shows the same table.
 
-Every statement concerns actual finite partition functions. Potts pinnings
+The headline statements concern actual finite partition functions. Potts pinnings
 are arbitrary partial colourings, improper ones included, and every
 zero-free radius is chosen before the graph, its size and the pinning.
 The six cited ingredients that have standalone Lean statements are proved
@@ -128,7 +128,7 @@ is citation-level:
   theorem and Wagner's method in Remark 5.8 of the main paper
   (`rem:matching-degree-dependence`, whose star bound is proved), and the
   attributions and comparisons in the four `remark` entries.
-- Algorithmic and FPTAS claims are outside the scope of a Lean statement.
+- Algorithmic and FPTAS claims are outside the scope of a Lean statement, and the claim that `ε` can be chosen effectively is not formalized.
 
 ## Cited results proved in Lean
 
@@ -157,7 +157,7 @@ The statements remain as named propositions,
 `Potts.ExternalCriticalHardColouringTheorem`,
 `Appendix.Girth.CavityTree.CLMMInfluenceIdentity`, `Appendix.CLMM.Literature`
 and `Appendix.BBR.Literature`, but no paper-facing theorem takes one as a
-hypothesis. Only `Potts.potts_zero_free_from_external` and
+hypothesis. Only the conversion `Potts.ExternalCriticalHardColouringTheorem.to_normalizedInput`, `Potts.potts_zero_free_from_external` and
 `Potts.critical_potts_zero_free_from_external`, which keep the paper's
 cited route for comparison, take `ExternalCriticalHardColouringTheorem` as
 a premise, and that premise is proved. Three Lean proofs take a different

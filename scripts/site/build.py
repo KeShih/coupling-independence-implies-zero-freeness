@@ -96,13 +96,14 @@ CITED = [
                 "mixing for the anti-ferromagnetic Potts model on trees, Electron. J. Probab. "
                 "30 (2025), paper 65, Proposition 2.6(i)",
          url="https://doi.org/10.1214/25-EJP1327",
-         meaning="The segment-weight bound for cavity messages, used only at its printed "
-                 "hypothesis Δ ≥ q + 3. BBR.Literature bundles it with Theorem 2.5.",
+         meaning="The segment-weight bound for cavity messages, at BBR's printed hypothesis "
+                 "Δ ≥ q + 3 and, as the companion extends it, at Δ ≥ q + 2. BBR.Literature "
+                 "bundles the printed form with Theorem 2.5.",
          route="Follows BBR Section 4 under the printed hypotheses, but two uses of the "
                "concavity of log, a chord bound and Jensen's inequality, replace their Lemma "
                "4.1 and Lemma 4.2(i); Lemma 4.3 is proved from a derivative. The application "
-               "handles separate degree-gap-two cases arithmetically rather than extending "
-               "the published proposition."),
+               "handles the degree-gap-two cases arithmetically; GapTwo reruns the same proof "
+               "under Δ ≥ q + 2 (proposition_2_6_i_of_gap_two)."),
     dict(id="bbr-25", short="BBR Thm 2.5",
          statement=[],
          proof=["CI2ZF.Appendix.BBR.theorem_2_5_holds"],
@@ -165,20 +166,24 @@ RESULTS = [
                 "critical line.",
                 "root_critical_uniform_ci gives the constant 12/(11δ) on [δ, 1]."]),
     dict(id="prop-field-transfer", group="main", paper=[("main", "prop:field-transfer")],
-         lean=["CI2ZF.LeeYang.graph_class_normalized_field_transfer"],
+         lean=["CI2ZF.LeeYang.prop_field_transfer",
+               "CI2ZF.LeeYang.graph_class_normalized_field_transfer"],
          defs=["CI2ZF.LeeYang.normalizedFieldPartition"],
-         notes=["θ is chosen after the class F. The paper's θ(q, Δ, C₀) follows by applying the "
-                "theorem to the union of all classes with constant C₀.",
-                "Lean uses the closed polydisc ‖λ − 1‖ ≤ θ and does not need Δ ≥ 2."]),
+         notes=["prop_field_transfer is the paper's statement: θ = θ(q, Δ, C₀) is chosen before the "
+                "class. It applies graph_class_normalized_field_transfer, which chooses θ for one class, "
+                "to the union of all classes with constant C₀.",
+                "graph_class_normalized_field_transfer uses the closed polydisc ‖λ − 1‖ ≤ θ and does not "
+                "need Δ ≥ 2."]),
     dict(id="thm-lee-yang", group="main", paper=[("main", "thm:lee-yang")],
          lean=["CI2ZF.LeeYang.near_vigoda_vertex_field_zero_free",
                "CI2ZF.LeeYang.cv_vertex_field_zero_free",
                "CI2ZF.LeeYang.high_girth_original_field_transfer",
                "CI2ZF.LeeYang.high_girth_residual_original_field_transfer"],
          defs=["CI2ZF.LeeYang.UniformVertexFieldZeroFree"],
-         notes=["No regime takes a hypothesis. At the critical pairs (Δ, q) = (6j, 11j) of "
-                "regime (i), the x = 0 bound comes from the Carlson–Vigoda contraction on the "
-                "critical line.",
+         notes=["No regime takes a hypothesis. Where the paper's proof cites CFFGZZ Theorem 20, in "
+                "regime (ii) and at the critical pairs (Δ, q) = (6j, 11j) of regime (i), the x = 0 "
+                "bound comes from the Carlson–Vigoda contraction proved in Lean, extended to the "
+                "critical line for the critical pairs.",
                 "Regime (iii) uses the large-girth coupling theorem, with its CLMM results "
                 "(Lemma 8.7, Equation (10), Lemma 5.13) proved in Lean, instead of the x = 0 "
                 "results cited in the paper's proof. The residual version needs girth only of "
@@ -194,11 +199,13 @@ RESULTS = [
     dict(id="cor-bmatching", group="main", paper=[("main", "cor:bmatching-short")],
          lean=["CI2ZF.Holant.bmatching_uniform_polytube", "CI2ZF.Holant.bmatching_orthant"]),
     dict(id="cor-bcover", group="main", paper=[("main", "cor:bcover-short")],
-         lean=["CI2ZF.Holant.bcover_uniform_polytube", "CI2ZF.Holant.bcover_orthant"],
-         defs=["CI2ZF.Holant.bcoverWidth"],
-         notes=["bcover_uniform_polytube is stated as ∀ λ₋ λ₊ ∃ ε. That the width does not depend "
-                "on λ₊ is true (bcoverWidth ignores its upper argument, and bcover_orthant uses "
-                "this) but is not part of that theorem's type."]),
+         lean=["CI2ZF.Holant.bcover_uniform_polytube_lower", "CI2ZF.Holant.cor_bcover_short"],
+         defs=["CI2ZF.Holant.coverWidth"],
+         notes=["bcover_uniform_polytube_lower has the paper's quantifier order: ε depends only on Δ "
+                "and λ₋. cor_bcover_short gives one width function of λ₋ for all λ₊ at once, and the "
+                "open neighbourhood of the positive orthant.",
+                "The older bcover_uniform_polytube (∀ λ₋ λ₊ ∃ ε) is kept; it does not record the "
+                "independence from λ₊."]),
 
     dict(id="near-vigoda", group="appendix", title="Near-Vigoda regime",
          table="Δ ≥ 2, q ≥ (11/6 − 1/84000)Δ; zero-free near [0, 1]",
@@ -209,7 +216,7 @@ RESULTS = [
                "CI2ZF.Appendix.near_vigoda_zero_free", "CI2ZF.Appendix.integer_reduction"],
          notes=["At the critical pairs (Δ, q) = (6j, 11j), j ≤ 20, where the companion cites "
                 "CFFGZZ Theorem 20, Lean uses the Carlson–Vigoda contraction on the critical "
-                "line; for Δ ≥ 125 it uses the Carlson–Vigoda theorem.",
+                "line; for Δ ≥ 125 it uses the companion's Theorem 5.1, proved in Lean (CV.root_coupling).",
                 "integer_reduction is Lemma 4.3 of the companion, word for word.",
                 "At the critical pairs the constant on [δ, 1] is 12/(11δ) "
                 "(root_critical_uniform_ci)."]),
@@ -237,7 +244,7 @@ RESULTS = [
                 "beyond a fixed depth K₀; the companion justifies both in the proof of its "
                 "Lemma 6.10.",
                 "Girth is required only of the free graph. Lean transfers on residual instances "
-                "directly instead of using the pinned-leaf realization."]),
+                "directly; the pinned-leaf route is formalized as well (zero_free_of_girth_class)."]),
     dict(id="high-temperature", group="appendix", title="High-temperature regime",
          table="Δ ≥ 2, q > (11/6)(1 − x*)Δ, x* ∈ (0, 1]; zero-free near [x*, 1]",
          paper=[("companion", "cor:intro-high-temperature")],
@@ -255,15 +262,17 @@ RESULTS = [
                "CI2ZF.Appendix.BBR.parameter"],
          notes=["BBR Proposition 2.6(i) is used only at its printed hypothesis Δ ≥ q + 3. The four "
                 "pairs with Δ = q + 2, and (q, Δ) = (3, 4), are handled by internal arithmetic; "
-                "the companion instead extends BBR's proof to Δ = q + 2.",
+                "the companion's route, extending BBR's proof to Δ = q + 2, is proved as well "
+                "(proposition_2_6_i_of_gap_two, contraction_certificate_of_gap_two).",
                 "The BBR influence identity (companion Lemma 7.3) is proved in Lean."]),
     dict(id="edge-potts", group="appendix", title="Edge-Potts regime",
          table="Δ ≥ 2, q ≥ 3Δ; the polynomial of the line graph L(G); zero-free near [0, 1]",
          paper=[("companion", "thm:soft-edge-ci"), ("companion", "cor:soft-edge-zf")],
          lean=["CI2ZF.Appendix.Edge.root_children_ci", "CI2ZF.Appendix.Edge.edge_potts_zero_free"],
          defs=["CI2ZF.Appendix.Edge.edgeGraphClass"],
-         notes=["Lean uses finite slot approximations and a limit instead of the countable "
-                "exact-slot representation (companion Lemma 8.3); x = 0 follows by continuity.",
+         notes=["The regional proof uses finite slot approximations and a limit, and x = 0 follows by "
+                "continuity. The countable exact-slot representation and lift of Lemmas 8.3 and 8.4 "
+                "(SlotLift) and the countable one-label bound of Lemma 8.5 (OneLabel) are proved as well.",
                 "The transfer runs on line graphs with degree bound 2Δ − 2."]),
     dict(id="girth-five", group="appendix", title="Girth-five regime",
          table="0 < δ ≤ 1, Δ ≥ Δ₅(δ), q ≥ (1 + δ)Δ, girth(G^τ) ≥ 5; zero-free near [0, 1]",
@@ -271,13 +280,13 @@ RESULTS = [
                 ("companion", "thm:potts-gap-girth5")],
          lean=["CI2ZF.Appendix.Girth.girth_five_coupling",
                "CI2ZF.Appendix.Girth.girth_five_residual_original_zero_free",
-               "CI2ZF.Appendix.Girth.girth_five_closed_poincare"],
+               "CI2ZF.Appendix.Girth.OperatorGap.potts_gap_girth5"],
          defs=["CI2ZF.Appendix.Girth.girthFiveCIThreshold",
                "CI2ZF.Appendix.Girth.girthFiveThreshold"],
          notes=["Δ₅(δ) is explicit: the maximum of ⌈4096(1 + δ)e^{2/δ}/δ⁴⌉ and "
                 "⌈covarianceDegreeThreshold δ⌉. The companion's Δ₅ is existential with Δ₅ ≥ Δ₀.",
-                "girth_five_closed_poincare states Theorem 9.7 in Poincaré form; OperatorGap.potts_gap_girth5 states "
-                "the operator form 𝓛² ⪰ γ_δ𝓛 itself, for every x ∈ [0, 1].",
+                "potts_gap_girth5 states Theorem 9.7 in the paper's operator form 𝓛² ⪰ γ_δ𝓛 for every "
+                "x ∈ [0, 1]; girth_five_closed_poincare gives the equivalent Poincaré form used in the proof.",
                 "The coupling theorem is stated on residual instances, which covers every "
                 "(G, τ, r)."]),
 ]
@@ -302,14 +311,14 @@ STRICT = "CI2ZF.Potts.root_strict_ci"
 HARD = "CI2ZF.ConditionalHardCouplingEstimate"
 POS = "CI2ZF.Potts.root_positive_ci"
 CRIT = "CI2ZF.Potts.critical_line_transfer_coupling_inputs"
-FIELD = "CI2ZF.LeeYang.graph_class_normalized_field_transfer"
+FIELD = "CI2ZF.LeeYang.prop_field_transfer"
 LYNV = "CI2ZF.LeeYang.near_vigoda_vertex_field_zero_free"
 LYHG = "CI2ZF.LeeYang.high_girth_original_field_transfer"
 UVF = "CI2ZF.LeeYang.UniformVertexFieldZeroFree"
 EDGELY = "CI2ZF.LeeYang.edge_lee_yang"
 HOLANT = "CI2ZF.Holant.exists_uniform_holant_polytube"
 BMATCH = "CI2ZF.Holant.bmatching_uniform_polytube"
-BCOVER = "CI2ZF.Holant.bcover_uniform_polytube"
+BCOVER = "CI2ZF.Holant.bcover_uniform_polytube_lower"
 NVZF = "CI2ZF.Appendix.near_vigoda_zero_free"
 NVCI = "CI2ZF.Appendix.near_vigoda_transfer_inputs"
 CVCI = "CI2ZF.Appendix.CV.option_root_ci"
@@ -445,21 +454,22 @@ PAIRS = {
              "The conclusion packages both bounds as the inputs of the transfer theorem."),
     ],
     "prop-field-transfer": [
-        pair("prop:field-transfer", r"\(q\ge\Deg+1\)", FIELD, "(hq : Δ + 1 ≤ Fintype.card C)",
-             "Lean does not need Δ ≥ 2."),
+        pair("prop:field-transfer", r"\(q\ge\Deg+1\)", FIELD, "(hq : Δ + 1 ≤ q)", "The colours are Fin q."),
         pair("prop:field-transfer", r"let \(\mathcal G\subseteq\Gdeg\) be closed under taking induced subgraphs and "
              r"satisfy \(C_0\)-coupling independence at \(x=0\)", FIELD,
-             ["(F : GraphClass.{u})", "(cost : ℝ) (hCI : GraphClassRootCouplingBound F C PinningData.hardParameter cost)"],
-             "The degree bound is imposed on each graph in the conclusion rather than on the class."),
+             ["∀ 𝒢 : GraphClass.{u}, (∀ {V : Type u} [Fintype V] (G : SimpleGraph V), 𝒢.contains G → ∀ v, G.degree v ≤ Δ) →",
+              "GraphClassRootCouplingBound 𝒢 (Fin q) PinningData.hardParameter C₀ →"],
+             "GraphClass is closed under induced subgraphs up to relabelling; 𝒢 ⊆ 𝒢_Δ is the degree hypothesis."),
         pair("prop:field-transfer", r"There is \(\theta=\theta(q,\Deg,C_0)\in(0,1/2]\)", FIELD,
-             "∃ θ > 0, θ ≤ (1 / 2 : ℝ)", "θ is chosen after the class F."),
+             "∃ θ : ℝ, 0 < θ ∧ θ ≤ 1 / 2 ∧",
+             "θ is chosen before the class, so it depends only on q, Δ and C₀."),
         pair("prop:field-transfer", r"for every \(G\in\mathcal G\) and every pinning \(\tau\)", FIELD,
-             "F.contains G → (∀ v, G.degree v ≤ Δ) → ∀ (tau : PartialColouring V C) (ℓ : V → C → ℂ)",
+             "∀ {V : Type u} [Fintype V] (G : SimpleGraph V), 𝒢.contains G → ∀ (tau : PartialColouring V (Fin q)) (ℓ : V → Fin q → ℂ),",
              "ℓ is the field λ."),
         pair("prop:field-transfer", r"math:\nZpin{G}{\tau}(\lambda)\ne0 \qquad\text{whenever }|\lambda_{u,c}-1|<\theta "
              r"\quad(u\in V^\tau,\ c\in\colours).", FIELD,
-             "(∀ (v : tau.FreeVertex) c, ‖ℓ v.val c - 1‖ ≤ θ) → normalizedFieldPartition tau G ℓ ≠ 0",
-             "Lean uses the closed polydisc, which is stronger."),
+             "(∀ (u : tau.FreeVertex) (c : Fin q), ‖ℓ u.val c - 1‖ < θ) → normalizedFieldPartition tau G ℓ ≠ 0",
+             "The paper's open polydisc."),
     ],
     "thm-lee-yang": [
         pair("thm:lee-yang", r"\(q\ge(11/6-1/84000)\Deg\)", LYNV,
@@ -522,10 +532,13 @@ PAIRS = {
     ],
     "cor-bcover": [
         pair("cor:bcover-short", r"Fix an integer \(\Deg\ge2\) and \(0<\lambda_-\le\lambda_+<\infty\). There is "
-             r"\(\eps=\eps(\Deg,\lambda_-)>0\)", BCOVER, "(Δ : ℕ) {a c : ℝ} (ha : 0 < a) (hac : a ≤ c) : ∃ ε > 0,",
-             "Here a = λ₋ and c = λ₊. The remarks explain how the width depends on λ₊."),
+             r"\(\eps=\eps(\Deg,\lambda_-)>0\)", BCOVER, "(Δ : ℕ) {a : ℝ} (ha : 0 < a) : ∃ ε > 0, ∀ c : ℝ, a ≤ c →",
+             "Here a = λ₋ and c = λ₊. ε is chosen before λ₊, so it depends only on Δ and λ₋; Lean does not need Δ ≥ 2."),
         pair("cor:bcover-short", r"whenever \(\mathbf z\in\mathcal U_\eps([\lambda_-,\lambda_+])^E\)", BCOVER,
              "∀ z ∈ edgePolytube G.edgeFinset ε a c, coverPartition graphIncidence G.edgeFinset b z ≠ 0"),
+        pair(None, None, "CI2ZF.Holant.cor_bcover_short", "∃ ε : ℝ → ℝ, (∀ a > 0, 0 < ε a) ∧",
+             "One width function of λ₋ alone serves every λ₊, and also gives the open zero-free neighbourhood of "
+             "the positive orthant."),
     ],
     "near-vigoda": [
         pair("thm:additional-potts-zf", r"\(q\ge(11/6-1/84000)\Deg\)", NVZF,
@@ -653,11 +666,15 @@ PAIRS = {
              "∃ eps > 0, UniformResidualGirthPottsZeroFree.{u,v} C Δ 5 eps",
              "Girth at least five of the free graph; no short-cycle counts are assumed."),
         pair("thm:potts-gap-girth5", r"math:\mathcal L^2\succeq\gamma_\delta \mathcal L, \qquad "
-             r"\gamma_\delta=\frac{\delta}{4(2+\delta)}.", "CI2ZF.Appendix.Girth.girth_five_closed_poincare",
+             r"\gamma_\delta=\frac{\delta}{4(2+\delta)}.", "CI2ZF.Appendix.Girth.OperatorGap.potts_gap_girth5",
+             ["((𝓛 ^ 2 - (δ / (4 * (2 + δ))) • 𝓛).IsSymmetric ∧", "∀ z, 0 ≤ ⟪(𝓛 ^ 2 - (δ / (4 * (2 + δ))) • 𝓛) z, z⟫_ℝ)"],
+             "𝓛² ⪰ γ_δ𝓛 written out: 𝓛² − γ_δ𝓛 is symmetric and positive semidefinite on L²(μ), where "
+             "𝓛 = glauberLaplacian = Σ_v (id − P_v) is the heat-bath generator."),
+        pair(None, None, "CI2ZF.Appendix.Girth.girth_five_closed_poincare",
              "GraphProjections.spectralGap δ * variance (I.gibbs x hx hZ) f ≤ ∑ v, expectReal (I.gibbs x hx hZ) "
              "(fun σ => (f σ - GraphHeatBath.projection I x hx hlocal v f σ) ^ 2)",
-             "The equivalent Poincaré form: spectralGap δ is γ_δ, and the right side is the Dirichlet form of the "
-             "rate-one Glauber dynamics."),
+             "The equivalent Poincaré form, used in the proof: spectralGap δ is γ_δ, and the right side is the "
+             "Dirichlet form of the rate-one Glauber dynamics."),
     ],
 }
 
@@ -1893,7 +1910,7 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
 </div>
 
 <h2 id="matrix">Cited results used by each proof</h2>
-<p class="lede">A dot means that the Lean proof of the result depends, through the library, on the Lean proof of that cited ingredient. No paper-facing theorem takes a cited ingredient as a hypothesis; internal helper bundles may retain the formalized ingredient as a parameter. The axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
+<p class="lede">A dot means that the Lean proof of the result depends, through the library, on the Lean proof of that cited ingredient. No result in this table takes a cited ingredient as a hypothesis. Some lemmas take a proved Literature bundle as a parameter instead, among them the Lean forms of companion Lemmas 7.1, 7.2, 7.4 and 7.5, as their coverage notes say. The axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
 <div class="matrix-wrap">@@MATRIX@@</div>
 
 <h2 id="main">Main paper</h2>

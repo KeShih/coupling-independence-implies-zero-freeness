@@ -16,7 +16,7 @@ The Lean proof does not follow the cited one. It extends the Carlson–Vigoda co
 
 The paper's cited route is kept for comparison. The declarations
 `ExternalCriticalHardColouringTheorem.to_normalizedInput`,
-`GraphClassCoupling`, and the `PinningLeaf*` modules formalize the
+`GraphClassCoupling`, and `PinningLeafRealization` formalize the
 boundary-count conversion used by the comparison theorem. Their scope is the
 Lean statements linked above; they should not be read as a theorem-by-theorem
 reproduction of every construction in the cited proof. The comparison
@@ -94,4 +94,4 @@ countable slot lift and the one-label bound on it, are proved as stated
 that CFFGZZ Theorem 20 and Proposition 22 apply in companion Remark 4.4,
 that the hard CV metric is literally Eq. (2) of Carlson and Vigoda
 (2024), and the cited background in remarks, such as the Heilmann–Lieb
-theorem in main-paper Remark 5.8. See the [Appendix coverage notes](appendix/STATUS.md#scope-of-the-coverage).
+theorem in main-paper Remark 5.8. Algorithmic, FPTAS and effective-`ε` claims are not formalized either. See the [Appendix coverage notes](appendix/STATUS.md#scope-of-the-coverage).
