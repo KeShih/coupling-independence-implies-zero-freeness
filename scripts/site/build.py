@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build docs/index.html, a visual guide for checking the Lean statements
+"""Build docs/checker.html, a visual guide for checking the Lean statements
 against the two papers.
 
 Run from the repository root after the library is built:
@@ -1883,7 +1883,7 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
 <body>
 <div class="topbar"><div class="wrap">
   <span class="brand"><span class="spark" aria-hidden="true">✻</span>CI2ZF <span class="brand-sub">Lean ↔ paper</span></span>
-  <nav aria-label="Sections"><a href="#status">Status</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#coverage">Coverage</a><a href="#definitions">Definitions</a><a href="#literature">Cited results</a><a href="#reproduce">Reproduce</a></nav>
+  <nav aria-label="Sections"><a href="index.html">Read the papers</a><a href="#status">Status</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#coverage">Coverage</a><a href="#definitions">Definitions</a><a href="#literature">Cited results</a><a href="#reproduce">Reproduce</a></nav>
   <span class="spacer"></span>
   <button id="theme" type="button" title="Switch colour theme">Theme: auto</button>
 </div></div>
@@ -2018,7 +2018,7 @@ def main():
                         help="main.tex of the paper (its .aux and .bbl must sit beside it)")
     parser.add_argument("--companion", default=str(REPO.parent / "companion"),
                         help="directory of the companion paper (with main.tex, main.aux, main.bbl)")
-    parser.add_argument("--out", default="docs/index.html", help="output path, relative to the repository")
+    parser.add_argument("--out", default="docs/checker.html", help="output path, relative to the repository")
     build(parser.parse_args())
 
 

@@ -1,0 +1,318 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{CLMM23}
+
+\bibitem[ALOG20]{AnariLiuOveisGharan2020}
+Nima Anari, Kuikui Liu, and Shayan Oveis~Gharan.
+\newblock Spectral independence in high-dimensional expanders and applications
+  to the hardcore model.
+\newblock In {\em Proceedings of FOCS 2020}, pages 1319--1330, 2020.
+\newblock Journal version: SIAM J. Comput. 53(6), 2024, doi:10.1137/20M1367696;
+  arXiv:2001.00303.
+
+\bibitem[Bar16]{Barvinok2016}
+Alexander Barvinok.
+\newblock {\em Combinatorics and Complexity of Partition Functions}, volume~30
+  of {\em Algorithms and Combinatorics}.
+\newblock Springer, 2016.
+
+\bibitem[BBR25]{BencsBerrekkalRegts2025Trees}
+Ferenc Bencs, Khallil Berrekkal, and Guus Regts.
+\newblock Near optimal bounds for weak and strong spatial mixing for the
+  anti-ferromagnetic {Potts} model on trees.
+\newblock {\em Electronic Journal of Probability}, 30:Paper No. 65, 1--25,
+  2025.
+
+\bibitem[BBR26]{BencsBerrekkalRegts2026}
+Ferenc Bencs, Khallil Berrekkal, and Guus Regts.
+\newblock Deterministic approximate counting of colorings with fewer than
+  {$2\Delta$} colors via absence of zeros.
+\newblock {\em TheoretiCS}, 5:Article 1, 1--41, 2026.
+\newblock arXiv:2408.04727.
+
+\bibitem[BCC{\etalchar{+}}22]{BlancaEtAl2022Coupling}
+Antonio Blanca, Pietro Caputo, Zongchen Chen, Daniel Parisi, Daniel {\v
+  S}tefankovi{\v c}, and Eric Vigoda.
+\newblock On mixing of {Markov} chains: Coupling, spectral independence, and
+  entropy factorization.
+\newblock {\em Electronic Journal of Probability}, 27:Paper No. 142, 1--42,
+  2022.
+\newblock arXiv:2103.07459v1.
+
+\bibitem[BD97]{BubleyDyer1997}
+Russ Bubley and Martin Dyer.
+\newblock Path coupling: A technique for proving rapid mixing in {Markov}
+  chains.
+\newblock In {\em Proceedings of FOCS 1997}, pages 223--231, 1997.
+
+\bibitem[BDPR21]{BencsDaviesPatelRegts2021}
+Ferenc Bencs, Ewan Davies, Viresh Patel, and Guus Regts.
+\newblock On zero-free regions for the anti-ferromagnetic {Potts} model on
+  bounded-degree graphs.
+\newblock {\em Annales de l'Institut Henri Poincar{\'e} D}, 8(3):459--489,
+  2021.
+\newblock arXiv:1812.07532.
+
+\bibitem[CCZ26]{ChenChenZhang2026}
+Xiaoyu Chen, Zejia Chen, and Xinyuan Zhang.
+\newblock Degree-free spectral independence for log-concave {Holant} measures,
+  2026.
+\newblock arXiv:2609.18835v1.
+
+\bibitem[CDM{\etalchar{+}}19]{CDMPP2019}
+Sitan Chen, Michelle Delcourt, Ankur Moitra, Guillem Perarnau, and Luke Postle.
+\newblock Improved bounds for randomly sampling colorings via linear
+  programming.
+\newblock In {\em Proceedings of SODA 2019}, pages 2216--2234, 2019.
+\newblock Full version: arXiv:1810.12980v1; theorem numbering refers to this
+  version.
+
+\bibitem[CF24]{ChenFeng2024}
+Xiaoyu Chen and Weiming Feng.
+\newblock Rapid mixing via coupling independence for spin systems with
+  unbounded degree, 2024.
+\newblock arXiv:2407.04672v1.
+
+\bibitem[CFF{\etalchar{+}}22]{Casel2019}
+Katrin Casel, Philipp Fischbeck, Tobias Friedrich, Andreas G{\"o}bel, and
+  J.~A.~Gregor Lagodzinski.
+\newblock Zeros and approximations of {Holant} polynomials on the complex
+  plane.
+\newblock {\em Computational Complexity}, 31:Article 11, 1--52, 2022.
+\newblock arXiv:1905.03194.
+
+\bibitem[CFG{\etalchar{+}}25]{CFFGZZ2024}
+Xiaoyu Chen, Weiming Feng, Heng Guo, Xinyuan Zhang, and Zongrui Zou.
+\newblock Deterministic counting from coupling independence.
+\newblock In {\em Proceedings of FOCS 2025}, pages 667--683, 2025.
+\newblock Full version: arXiv:2410.23225v2; theorem numbering refers to this
+  version.
+
+\bibitem[CG24]{ChenGu2023}
+Zongchen Chen and Yuzhou Gu.
+\newblock Fast sampling of $b$-matchings and $b$-edge covers.
+\newblock In {\em Proceedings of SODA 2024}, pages 4972--4987, 2024.
+\newblock Full version: arXiv:2304.14289v2; theorem numbering refers to this
+  version.
+
+\bibitem[CL26]{ChenLiu2026LocalGlobal}
+Xiaoyu Chen and Kuikui Liu.
+\newblock A spectral local-to-global principle for spin systems on graphs with
+  girth at least five, 2026.
+\newblock arXiv:2608.25491.
+
+\bibitem[CLMM23]{CLMM2023}
+Zongchen Chen, Kuikui Liu, Nitya Mani, and Ankur Moitra.
+\newblock Strong spatial mixing for colorings on trees and its algorithmic
+  applications.
+\newblock In {\em Proceedings of FOCS 2023}, pages 810--845, 2023.
+\newblock Full version: arXiv:2304.01954v3; theorem numbering refers to this
+  version; journal version: J. ACM, 2026, doi:10.1145/3837755.
+
+\bibitem[CLV24]{ChenLiuVigoda2024}
+Zongchen Chen, Kuikui Liu, and Eric Vigoda.
+\newblock Spectral independence via stability and applications to {Holant}-type
+  problems.
+\newblock {\em TheoretiCS}, 3:Article 16, 1--49, 2024.
+\newblock arXiv:2106.03366.
+
+\bibitem[CSS26]{ChenShaoShi2026}
+Yuan Chen, Shuai Shao, and Ke~Shi.
+\newblock Zero-freeness of the hard-core model with bounded connective
+  constant, 2026.
+\newblock arXiv:2604.02746v1.
+
+\bibitem[CV25]{CarlsonVigoda2024}
+Charlie Carlson and Eric Vigoda.
+\newblock Flip dynamics for sampling colorings: Improving $(11/6-\epsilon)$
+  using a simple metric.
+\newblock In {\em Proceedings of SODA 2025}, pages 2194--2212, 2025.
+\newblock Full version: arXiv:2407.04870v2.
+
+\bibitem[CWZZ25]{CWZZ2025}
+Zejia Chen, Yulin Wang, Chihao Zhang, and Zihan Zhang.
+\newblock Decay of correlation for edge colorings when {$q>3\Delta$}.
+\newblock In {\em Proceedings of ICALP 2025}, volume 334 of {\em Leibniz
+  International Proceedings in Informatics (LIPIcs)}, pages 54:1--54:18, 2025.
+\newblock Full version: arXiv:2502.06586v2; theorem numbering refers to this
+  version.
+
+\bibitem[CZ23]{ChenZhang2023}
+Xiaoyu Chen and Xinyuan Zhang.
+\newblock A near-linear time sampler for the {Ising} model with external field.
+\newblock In {\em Proceedings of SODA 2023}, pages 4478--4503, 2023.
+\newblock Full version: arXiv:2207.09391.
+
+\bibitem[DS85]{DobrushinShlosman1985}
+R.~L. Dobrushin and S.~B. Shlosman.
+\newblock Completely analytical {Gibbs} fields.
+\newblock In {\em Statistical Physics and Dynamical Systems}, pages 371--403.
+  Birkh{\"a}user Boston, 1985.
+
+\bibitem[DS87]{DobrushinShlosman1987}
+R.~L. Dobrushin and S.~B. Shlosman.
+\newblock Completely analytical interactions: Constructive description.
+\newblock {\em Journal of Statistical Physics}, 46(5--6):983--1014, 1987.
+
+\bibitem[Fis65]{Fisher1965}
+Michael~E. Fisher.
+\newblock The nature of critical points.
+\newblock In W.~E. Brittin, editor, {\em Lectures in Theoretical Physics},
+  volume VII C, pages 1--159. University of Colorado Press, 1965.
+
+\bibitem[Gam23]{Gamarnik2023}
+David Gamarnik.
+\newblock Correlation decay and the absence of zeros property of partition
+  functions.
+\newblock {\em Random Structures \& Algorithms}, 62(1):155--180, 2023.
+\newblock arXiv:2011.04915.
+
+\bibitem[GKM15]{GamarnikKatzMisra2015}
+David Gamarnik, Dmitriy Katz, and Sidhant Misra.
+\newblock Strong spatial mixing of list coloring of graphs.
+\newblock {\em Random Structures \& Algorithms}, 46(4):599--613, 2015.
+
+\bibitem[GLLZ19]{GLLZ2019}
+Heng Guo, Chao Liao, Pinyan Lu, and Chihao Zhang.
+\newblock Zeros of {Holant} problems: Locations and algorithms.
+\newblock In {\em Proceedings of SODA 2019}, pages 2262--2278, 2019.
+\newblock arXiv:1807.09129.
+
+\bibitem[HL72]{HeilmannLieb1972}
+Ole~J. Heilmann and Elliott~H. Lieb.
+\newblock Theory of monomer-dimer systems.
+\newblock {\em Communications in Mathematical Physics}, 25(3):190--232, 1972.
+
+\bibitem[HLQZ25]{HLQZ2025}
+Kun He, Zhidan Li, Guoliang Qiu, and Chihao Zhang.
+\newblock {FPTAS} for {Holant} problems with log-concave signatures.
+\newblock In {\em Proceedings of SODA 2025}, pages 5468--5503, 2025.
+\newblock arXiv:2407.04989.
+
+\bibitem[KPP26]{KuchukovaPerkinsPovill2026}
+Aiya Kuchukova, Will Perkins, and Xavier Povill.
+\newblock Sampling colorings with fixed color class sizes, 2026.
+\newblock arXiv:2603.08259v1.
+
+\bibitem[Liu21]{Liu2021Coupling}
+Kuikui Liu.
+\newblock From coupling to spectral independence and blackbox comparison with
+  the down-up walk.
+\newblock In {\em Proceedings of APPROX/RANDOM 2021}, volume 207 of {\em
+  Leibniz International Proceedings in Informatics (LIPIcs)}, pages
+  32:1--32:21, 2021.
+\newblock arXiv:2103.11609v2.
+
+\bibitem[LSS19]{LiuSinclairSrivastava2019}
+Jingcheng Liu, Alistair Sinclair, and Piyush Srivastava.
+\newblock Fisher zeros and correlation decay in the {Ising} model.
+\newblock {\em Journal of Mathematical Physics}, 60(10):103304, 2019.
+\newblock arXiv:1807.06577.
+
+\bibitem[LSS25]{LiuSinclairSrivastava2025}
+Jingcheng Liu, Alistair Sinclair, and Piyush Srivastava.
+\newblock Correlation decay and partition function zeros: Algorithms and phase
+  transitions.
+\newblock {\em SIAM Journal on Computing},
+  54(4):FOCS19{\char45}200--FOCS19{\char45}252, 2025.
+\newblock arXiv:1906.01228v6; preliminary version in FOCS 2019.
+
+\bibitem[LWYY25]{LiuWangYinYu2025}
+Jingcheng Liu, Chunyang Wang, Yitong Yin, and Yixiao Yu.
+\newblock Phase transitions via complex extensions of {Markov} chains.
+\newblock In {\em Proceedings of STOC 2025}, pages 903--914, 2025.
+\newblock arXiv:2411.06857.
+
+\bibitem[LY52]{LeeYang1952}
+T.-D. Lee and C.-N. Yang.
+\newblock Statistical theory of equations of state and phase transitions. {II}.
+  {Lattice} gas and {Ising} model.
+\newblock {\em Physical Review}, 87(3):410--419, 1952.
+
+\bibitem[LY26]{LiuYu2026}
+Jingcheng Liu and Yixiao Yu.
+\newblock Zero-free regions and concentration inequalities for hypergraph
+  colorings in the local lemma regime.
+\newblock In {\em Proceedings of STOC 2026}, pages 991--1002, 2026.
+\newblock Full version: arXiv:2601.13796v1.
+
+\bibitem[PR17]{PatelRegts2017}
+Viresh Patel and Guus Regts.
+\newblock Deterministic polynomial-time approximation algorithms for partition
+  functions and graph polynomials.
+\newblock {\em SIAM Journal on Computing}, 46(6):1893--1919, 2017.
+
+\bibitem[PR19]{PetersRegts2019}
+Han Peters and Guus Regts.
+\newblock On a conjecture of {Sokal} concerning roots of the independence
+  polynomial.
+\newblock {\em Michigan Mathematical Journal}, 68(1):33--55, 2019.
+\newblock arXiv:1701.08049.
+
+\bibitem[PR20]{PetersRegts2020}
+Han Peters and Guus Regts.
+\newblock Location of zeros for the partition function of the {Ising} model on
+  bounded degree graphs.
+\newblock {\em Journal of the London Mathematical Society}, 101(2):765--785,
+  2020.
+\newblock arXiv:1810.01699.
+
+\bibitem[PRR26]{PetersRegtsReppekus2026}
+Han Peters, Guus Regts, and Josias Reppekus.
+\newblock Decay of correlations and zeros for the hard-core model, 2026.
+\newblock arXiv:2603.17858.
+
+\bibitem[Reg23]{Regts2023}
+Guus Regts.
+\newblock Absence of zeros implies strong spatial mixing.
+\newblock {\em Probability Theory and Related Fields}, 186(1--2):621--641,
+  2023.
+\newblock arXiv:2111.04809.
+
+\bibitem[Shi26]{Shi2026Formalization}
+Ke~Shi.
+\newblock Coupling independence implies zero-freeness: {Lean} formalization.
+\newblock Source code and verification records, commit c388cfa,
+  \url{https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/c388cfa},
+  2026.
+
+\bibitem[SS21]{ShaoSun2021}
+Shuai Shao and Yuxin Sun.
+\newblock Contraction: A unified perspective of correlation decay and
+  zero-freeness of 2-spin systems.
+\newblock {\em Journal of Statistical Physics}, 185(2):Article 12, 1--25, 2021.
+\newblock arXiv:1909.04244.
+
+\bibitem[SS26a]{ShaoShi2026FurtherPotts}
+Shuai Shao and Ke~Shi.
+\newblock Further {Potts} zero-free regions from coupling independence.
+\newblock Companion preprint, version of 24~September 2026,
+  \url{https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/c388cfa/docs/appendix.pdf},
+  2026.
+
+\bibitem[SS26b]{ShaoShi2026}
+Shuai Shao and Ke~Shi.
+\newblock Zero-freeness is all you need: A {Weitz}-type {FPTAS} for the entire
+  {Lee--Yang} zero-free region.
+\newblock In {\em Proceedings of ITCS 2026}, volume 362 of {\em Leibniz
+  International Proceedings in Informatics (LIPIcs)}, pages 114:1--114:17,
+  2026.
+\newblock Full version: arXiv:2509.06623v2.
+
+\bibitem[SY24]{ShaoYe2024}
+Shuai Shao and Xiaowei Ye.
+\newblock Strong spatial mixing for general 2-spin systems: A unified approach
+  from zero-freeness, 2024.
+\newblock arXiv:2401.09317v4.
+
+\bibitem[Vig00]{Vigoda2000}
+Eric Vigoda.
+\newblock Improved bounds for sampling colorings.
+\newblock {\em Journal of Mathematical Physics}, 41(3):1555--1569, 2000.
+
+\bibitem[Wag09]{Wagner2009}
+David~G. Wagner.
+\newblock Weighted enumeration of spanning subgraphs with degree constraints.
+\newblock {\em Journal of Combinatorial Theory, Series B}, 99(2):347--357,
+  2009.
+
+\end{thebibliography}
