@@ -107,7 +107,7 @@ Girth conditions apply only to the free graph left after pinning.
 hypotheses, constants and proof route of each regime, including where the
 Lean proof differs from the written one.
 
-### Every numbered statement
+### Coverage of the numbered statements
 
 [docs/coverage.json](docs/coverage.json) has one entry for each of the 107
 numbered statements of the two papers, 32 in the main paper and 75 in the
