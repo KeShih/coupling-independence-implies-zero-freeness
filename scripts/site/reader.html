@@ -28,6 +28,7 @@
   --ink: #141413; --ink-2: #57564f; --muted: #87867f; --line: #e3e1d7; --line-2: #d6d3c6;
   --accent: #c96442; --accent-ink: #a64d2d; --accent-wash: rgba(201, 100, 66, 0.075); --accent-wash-2: rgba(201, 100, 66, 0.15);
   --good: #1f8a3b; --good-wash: rgba(31, 138, 59, 0.10); --muted-wash: rgba(135, 134, 127, 0.14);
+  --link: #93482c;
   --lean-kw: #a64d2d; --lean-type: #2f5f9e; --lean-num: #7a4fb0; --lean-com: #8d8a80; --lean-name: #141413;
   --fig-filter: none; --shadow: 0 1px 2px rgba(20, 20, 19, 0.06), 0 12px 32px rgba(20, 20, 19, 0.10);
   --bar-h: 52px; --lean-w: 460px; --peek: 64px;
@@ -39,7 +40,9 @@
     --ink: #f0eee6; --ink-2: #c2c0b6; --muted: #9c9a92; --line: rgba(240, 238, 230, 0.10); --line-2: rgba(240, 238, 230, 0.18);
     --accent: #d97757; --accent-ink: #eba48b; --accent-wash: rgba(217, 119, 87, 0.10); --accent-wash-2: rgba(217, 119, 87, 0.20);
     --good: #5cc27a; --good-wash: rgba(92, 194, 122, 0.12); --muted-wash: rgba(156, 154, 146, 0.16);
-    --lean-kw: #eba48b; --lean-type: #8fb8ea; --lean-num: #c9a4f0; --lean-com: #8e8c84; --lean-name: #f0eee6;
+    --link: #e6a086;
+    --link: #e6a086;
+  --lean-kw: #eba48b; --lean-type: #8fb8ea; --lean-num: #c9a4f0; --lean-com: #8e8c84; --lean-name: #f0eee6;
     --fig-filter: invert(0.88) hue-rotate(180deg);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.4);
   }
@@ -50,6 +53,7 @@
   --ink: #f0eee6; --ink-2: #c2c0b6; --muted: #9c9a92; --line: rgba(240, 238, 230, 0.10); --line-2: rgba(240, 238, 230, 0.18);
   --accent: #d97757; --accent-ink: #eba48b; --accent-wash: rgba(217, 119, 87, 0.10); --accent-wash-2: rgba(217, 119, 87, 0.20);
   --good: #5cc27a; --good-wash: rgba(92, 194, 122, 0.12); --muted-wash: rgba(156, 154, 146, 0.16);
+  --link: #e6a086;
   --lean-kw: #eba48b; --lean-type: #8fb8ea; --lean-num: #c9a4f0; --lean-com: #8e8c84; --lean-name: #f0eee6;
   --fig-filter: invert(0.88) hue-rotate(180deg);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.4);
@@ -101,12 +105,11 @@ code, pre { font-family: var(--mono); }
 /* Paper ---------------------------------------------------------------- */
 /* The column is measured in em of the paper's type, about the measure of the
    printed page, and the type grows with the pane. */
-.doc { box-sizing: content-box; max-width: 44em; margin: 0 auto;
-  padding: 44px clamp(16px, 5cqi, 72px) 45vh;
-  font-family: var(--paper); font-size: clamp(17px, 14.5px + 0.5cqi, 21.5px); line-height: 1.62; color: var(--ink);
+.doc { box-sizing: content-box; max-width: 38em; margin: 0 auto;
+  padding: 48px clamp(16px, 5cqi, 72px) 45vh;
+  font-family: var(--paper); font-size: clamp(17px, 15px + 0.4cqi, 20.5px); line-height: 1.68; color: var(--ink);
   -webkit-font-smoothing: auto; -moz-osx-font-smoothing: auto; }
-.doc .p { margin: 0 0 0.85em; }
-@container (min-width: 640px) { .doc .p { text-align: justify; hyphens: auto; } }
+.doc .p { margin: 0 0 0.9em; }
 .title-block { margin: 8px 0 34px; text-align: center; }
 .doc-title { font: 600 clamp(28px, 4.2cqi, 38px)/1.18 var(--paper); letter-spacing: -0.01em; margin: 0 0 18px; text-wrap: balance; }
 .authors { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 40px; }
@@ -114,13 +117,13 @@ code, pre { font-family: var(--mono); }
 .author-name { font-size: 1.08em; }
 .author-mail code { font-size: 13px; color: var(--ink-2); background: none; }
 .affil { font-size: 0.8em; color: var(--muted); margin: 12px 0 0; }
-.abstract { margin: 0 0 22px; padding: 18px 22px 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; font-size: 0.93em; }
-.abstract-head { font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.abstract { margin: 0 0 1.6em; padding: 0 clamp(0px, 3cqi, 2em); font-size: 0.94em; }
+.abstract-head { font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; text-align: center; }
 .h { font-family: var(--paper); font-weight: 600; letter-spacing: -0.005em; text-wrap: balance; scroll-margin-top: 20px; display: flex; gap: 0.7em; }
 h2.h { font-size: 1.42em; line-height: 1.25; margin: 2.2em 0 0.7em; }
 h3.h { font-size: 1.14em; line-height: 1.3; margin: 1.7em 0 0.55em; }
 h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
-.h-num { color: var(--accent-ink); font-variant-numeric: tabular-nums; flex: none; }
+.h-num { color: var(--muted); font-variant-numeric: tabular-nums; flex: none; }
 .runin { font-weight: 600; margin-right: 0.35em; }
 .eq { margin: 0.55em 0; overflow-x: auto; overflow-y: hidden; padding: 2px 0; scroll-margin-top: 90px; }
 .eq .katex-display { margin: 0; }
@@ -142,18 +145,17 @@ h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
 .thm-name { font-weight: 700; }
 .thm-remark .thm-name { font-weight: 400; font-style: italic; }
 .thm-plain .thm-title, .thm-definition .thm-title { font-weight: 400; }
-.thm:hover { background: var(--accent-wash); }
-.thm.is-current { background: var(--accent-wash); }
-.thm.is-selected { background: var(--accent-wash); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent) 45%, transparent); }
+.thm.is-selected { background: var(--accent-wash); }
 .lean-mark { position: absolute; top: 11px; right: 12px; display: inline-flex; align-items: center; gap: 5px;
-  font: 600 12px/1 var(--sans); letter-spacing: 0.01em; padding: 5px 9px 5px 7px; border-radius: 999px;
-  background: var(--surface); border: 1px solid var(--line-2); color: var(--ink-2); font-style: normal;
-  box-shadow: 0 1px 1px rgba(0,0,0,.04); transition: background .15s, color .15s, border-color .15s; }
+  font: 600 11.5px/1 var(--sans); letter-spacing: 0.01em; padding: 5px 8px 5px 6px; border-radius: 999px;
+  background: transparent; border: 1px solid var(--line); color: var(--muted); font-style: normal;
+  transition: background .15s, color .15s, border-color .15s; }
+.thm.is-current .lean-mark { color: var(--accent-ink); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
 .lean-mark .g { width: 17px; height: 17px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 11px;
   background: var(--good-wash); color: var(--good); }
 .lean-mark[data-tone="muted"] .g { background: var(--muted-wash); color: var(--muted); }
 .lean-mark .n { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
-.lean-mark .arrow { color: var(--muted); margin-left: 1px; }
+.lean-mark .arrow { display: none; }
 .lean-mark:hover, .thm.is-selected .lean-mark { border-color: var(--accent); color: var(--accent-ink); }
 .thm.is-selected .lean-mark { background: var(--accent); color: #fff; border-color: var(--accent); }
 .thm.is-selected .lean-mark .n, .thm.is-selected .lean-mark .arrow { color: rgba(255,255,255,.85); }
@@ -179,6 +181,41 @@ h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
 .cap-num { font-weight: 600; color: var(--ink); margin-right: 0.25em; }
 .float.table .p { font-size: 0.8em; color: var(--ink-2); text-align: left; margin-top: 8px; }
 .fig-img { display: block; max-width: 100%; height: auto; margin: 0 auto; filter: var(--fig-filter); }
+/* Figures drawn from their TikZ source: SVG strokes with HTML labels, scaled
+   with the text (TikZ points against the paper's 10.95pt body size). */
+.fig-body { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1em 1.2em; }
+.minipage { flex: 1 1 calc(var(--mp, 100%) - 1.2em); min-width: min(100%, 13em); max-width: 100%; text-align: center; }
+.minipage > .p, .fig-body > .p { text-align: center !important; hyphens: manual; margin: 0 0 0.5em; font-size: 0.9em; }
+.minipage .table-scroll { display: flex; justify-content: center; }
+.minipage .eq { font-size: 0.9em; }
+.tz { position: relative; width: min(100%, calc(var(--tz-w) * 1em / 10.95)); margin: 0 auto; container-type: inline-size; filter: var(--fig-filter); }
+.tz-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tz-label { position: absolute; white-space: nowrap; line-height: 1; font-style: normal; color: #000; }
+.doc .tz-label .katex { font-size: 1em; }
+/* tikz-cd diagrams */
+.cd-wrap { display: flex; justify-content: center; }
+.cd { display: inline-grid; align-items: center; justify-items: center; margin: 0.3em auto; padding-top: 0.7em; }
+.cd-node { padding: 0.2em 0.35em; white-space: nowrap; }
+.cd-arrow { position: relative; align-self: stretch; justify-self: stretch; min-width: 1em; min-height: 1em; }
+.cd-shaft { position: absolute; }
+.cd-arrow.cd-h .cd-shaft { left: 0.15em; right: 0.15em; top: 50%; border-top: 0.06em solid currentColor; }
+.cd-arrow.cd-v .cd-shaft { top: 0.05em; bottom: 0.05em; left: 50%; border-left: 0.06em solid currentColor; }
+.cd-arrow.cd-h.dashed .cd-shaft { border-top-style: dashed; }
+.cd-arrow.cd-v.dashed .cd-shaft { border-left-style: dashed; }
+.cd-head { position: absolute; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
+.cd-head path { vector-effect: non-scaling-stroke; }
+.cd-arrow.cd-h .cd-head { width: 0.34em; height: 0.46em; top: calc(-0.23em - 0.03em); }
+.cd-arrow.cd-v .cd-head { width: 0.46em; height: 0.34em; left: calc(-0.23em - 0.03em); }
+.cd-arrow[data-dir="l"] .cd-head { left: -0.01em; }
+.cd-arrow[data-dir="r"] .cd-head { right: -0.01em; }
+.cd-arrow[data-dir="u"] .cd-head { top: -0.01em; }
+.cd-arrow[data-dir="d"] .cd-head { bottom: -0.01em; }
+.cd-label { position: absolute; white-space: nowrap; line-height: 1; width: max-content; }
+.cd-label .katex, .cd-node .katex { white-space: nowrap; }
+.cd-label.above { bottom: 50%; left: 50%; transform: translate(-50%, -0.35em); }
+.cd-label.below { top: 50%; left: 50%; transform: translate(-50%, 0.35em); }
+.cd-label.right { left: 50%; top: 50%; transform: translate(0.4em, -50%); }
+.cd-label.left { right: 50%; top: 50%; transform: translate(-0.4em, -50%); }
 .table-scroll { overflow-x: auto; }
 table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-variant-numeric: tabular-nums;
   border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
@@ -188,8 +225,8 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 .tab .ar { text-align: right; } .tab .ac { text-align: center; }
 .verbatim { font-size: 13px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; overflow-x: auto; }
 .doc code { font-size: 0.78em; }
-.doc a.ref, .doc a.cite, .doc .katex a { color: var(--accent-ink); }
-.doc a.ref:hover, .doc a.cite:hover { text-decoration: underline dotted; }
+.doc a.ref, .doc a.cite, .doc .katex a { color: var(--link); }
+.doc a.ref:hover, .doc a.cite:hover { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); }
 .bib { list-style: none; padding: 0; margin: 0; font-size: 0.86em; }
 .bib li { display: grid; grid-template-columns: 5.8em 1fr; gap: 0.6em; margin: 0 0 0.7em; scroll-margin-top: 90px; }
 .bib-label { color: var(--ink-2); }
@@ -203,82 +240,83 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
   border-radius: 12px; padding: 12px 16px; margin: 0 0 24px; }
 
 /* Lean panel ---------------------------------------------------------- */
-.panel { padding: 22px 24px 60px; }
-.eyebrow { font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.pv-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; min-height: 32px; }
-.pv-nav { display: flex; gap: 4px; align-items: center; flex: none; }
-.nav-btn { width: 30px; height: 30px; border-radius: 8px; display: inline-grid; place-items: center; color: var(--ink-2); border: 1px solid var(--line); background: var(--surface); }
-.nav-btn:hover:not(:disabled) { color: var(--ink); border-color: var(--line-2); }
-.nav-btn:disabled { opacity: .4; cursor: default; }
+.panel { padding: 22px 26px 64px; font-size: 14px; }
+.eyebrow { font: 600 11px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pv-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; min-height: 28px; }
+.pv-nav { display: flex; gap: 2px; align-items: center; flex: none; }
+.nav-btn { width: 28px; height: 28px; border-radius: 7px; display: inline-grid; place-items: center; color: var(--muted); }
+.nav-btn:hover:not(:disabled) { color: var(--ink); background: var(--surface); }
+.nav-btn:disabled { opacity: .35; cursor: default; }
+.nav-btn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent-wash); }
 .nav-btn svg { width: 15px; height: 15px; }
-.follow { font: 550 12px/1 var(--sans); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
-.follow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
-.follow[aria-pressed="false"] .dot { background: var(--good); box-shadow: 0 0 0 3px var(--good-wash); }
-.pv-title { margin: 2px 0 12px; font-weight: 400; }
-.pv-ref { display: block; font: 600 13px/1.3 var(--sans); color: var(--accent-ink); margin-bottom: 4px; letter-spacing: 0.01em; }
-.pv-name { display: block; font: 600 23px/1.22 var(--paper); letter-spacing: -0.01em; text-wrap: balance; }
-.status { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px 5px 6px; border-radius: 999px; font: 600 12.5px/1 var(--sans);
-  background: var(--good-wash); color: var(--good); }
-.status .g { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--surface); font-size: 11px; }
-.status[data-tone="muted"] { background: var(--muted-wash); color: var(--ink-2); }
-.status-meaning { color: var(--ink-2); font-size: 13.5px; margin: 8px 0 0; }
-.note { margin: 16px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; color: var(--ink); }
-.note .eyebrow { margin-bottom: 4px; }
-.sub { display: flex; align-items: baseline; justify-content: space-between; margin: 24px 0 10px; }
-.sub h3 { margin: 0; font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.sub .aside { font-size: 12.5px; color: var(--muted); }
-.decl { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; overflow: hidden; }
-.decl-head { display: flex; align-items: flex-start; gap: 8px; padding: 11px 12px 0 14px; }
-.decl-name { font: 600 13px/1.45 var(--mono); color: var(--ink); overflow-wrap: anywhere; flex: 1; }
-.kind { font: 600 10.5px/1 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; margin-top: 1px; flex: none; }
-.copy { font: 500 11.5px/1 var(--sans); color: var(--muted); padding: 5px 7px; border-radius: 6px; flex: none; }
-.copy:hover { color: var(--ink); background: var(--surface-2); }
-.decl-doc { margin: 6px 14px 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
-.decl-doc code { font-size: 12px; background: var(--code-bg); border-radius: 4px; padding: 1px 4px; }
-pre.lean { margin: 10px 0 0; padding: 12px 14px; background: var(--code-bg); border-top: 1px solid var(--line); font-size: 12.5px; line-height: 1.6;
-  overflow: auto; max-height: 28em; tab-size: 2; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.pv-title { margin: 0 0 10px; font-weight: 400; }
+.pv-ref { display: block; font: 600 12.5px/1.3 var(--sans); color: var(--accent-ink); margin-bottom: 4px; }
+.pv-name { display: block; font: 400 22px/1.25 var(--paper); letter-spacing: -0.005em; text-wrap: balance; color: var(--ink); }
+.status { display: inline-flex; align-items: center; gap: 6px; font: 600 12.5px/1 var(--sans); color: var(--good); cursor: help; }
+.status .g { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--good-wash); font-size: 11px; }
+.status[data-tone="muted"] { color: var(--ink-2); }
+.status[data-tone="muted"] .g { background: var(--muted-wash); color: var(--muted); }
+.note { margin: 12px 0 0; color: var(--ink-2); line-height: 1.55; }
+.sub { display: flex; align-items: baseline; gap: 8px; margin: 26px 0 4px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.sub h3 { margin: 0; font: 600 11px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.sub .aside { font-size: 12px; color: var(--muted); }
+.decl { padding: 14px 0 16px; border-bottom: 1px solid var(--line); }
+.decl-head { display: flex; align-items: baseline; gap: 8px; }
+.decl-name { font: 600 12.5px/1.45 var(--mono); color: var(--ink); overflow-wrap: anywhere; flex: 1; }
+.kind { font: 500 11px/1 var(--sans); color: var(--muted); flex: none; }
+.copy { font: 500 11px/1 var(--sans); color: var(--muted); padding: 4px 6px; border-radius: 6px; flex: none; opacity: 0; transition: opacity .15s; }
+.decl:hover .copy, .copy:focus-visible { opacity: 1; }
+@media (hover: none) { .copy { opacity: 1; } }
+.copy:hover { color: var(--ink); background: var(--surface); }
+.decl-doc { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+.decl-doc code { font-size: 11.5px; background: var(--code-bg); border-radius: 4px; padding: 1px 4px; }
+pre.lean { margin: 10px 0 0; padding: 11px 13px; background: var(--code-bg); border-radius: 10px; font-size: 12px; line-height: 1.6;
+  overflow: auto; max-height: 26em; tab-size: 2; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
 pre.lean .ln { display: block; text-indent: -3ch; }
 pre.lean .k { color: var(--lean-kw); font-weight: 600; }
 pre.lean .t { color: var(--lean-type); }
 pre.lean .u { color: var(--lean-num); }
 pre.lean .c { color: var(--lean-com); font-style: italic; }
 pre.lean .d { color: var(--lean-name); font-weight: 600; }
-.decl-foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; justify-content: space-between; padding: 9px 14px; border-top: 1px solid var(--line); font-size: 12.5px; }
-.decl-foot a { font-weight: 550; }
+.decl-foot { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; margin-top: 8px; font-size: 12px; }
+.decl-foot a { color: var(--ink-2); }
+.decl-foot a:hover { color: var(--accent-ink); }
 .decl-foot .more { color: var(--muted); }
-.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-.link-btn { display: inline-flex; align-items: center; gap: 6px; font: 550 13px/1 var(--sans); padding: 9px 12px; border-radius: 10px;
-  border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
-.link-btn:hover { border-color: var(--line-2); text-decoration: none; }
-.link-btn.primary { background: var(--ink); color: var(--page); border-color: var(--ink); }
-.empty { color: var(--ink-2); font-size: 14px; background: var(--surface); border: 1px dashed var(--line-2); border-radius: 12px; padding: 12px 14px; }
-.ov h2 { font: 600 24px/1.2 var(--paper); margin: 6px 0 4px; text-wrap: balance; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 18px; font-size: 13px; }
+.links a, .links button { color: var(--accent-ink); font-weight: 550; display: inline-flex; align-items: center; gap: 4px; }
+.links a:hover, .links button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.empty { color: var(--ink-2); font-size: 13.5px; margin: 10px 0 0; }
+.ov h2 { font: 400 23px/1.25 var(--paper); margin: 0 0 4px; text-wrap: balance; }
 .ov .by { color: var(--ink-2); margin: 0 0 14px; }
-.lede { font-size: 14.5px; color: var(--ink); margin: 0 0 18px; }
-.stack { display: flex; height: 10px; border-radius: 99px; overflow: hidden; background: var(--line); margin: 6px 0 12px; gap: 2px; }
+.lede { color: var(--ink-2); margin: 0 0 20px; line-height: 1.55; }
+.stack { display: flex; height: 6px; border-radius: 99px; overflow: hidden; background: var(--line); margin: 0 0 12px; gap: 2px; }
 .stack span { display: block; height: 100%; }
-.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13.5px; }
-.legend li { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; }
-.legend .g { width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 11px; background: var(--good-wash); color: var(--good); }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 13px; }
+.legend li { display: grid; grid-template-columns: 20px 1fr auto; gap: 8px; align-items: center; cursor: help; }
+.legend .g { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 10.5px; background: var(--good-wash); color: var(--good); }
 .legend .g[data-tone="muted"] { background: var(--muted-wash); color: var(--muted); }
-.legend .n { font-variant-numeric: tabular-nums; color: var(--ink-2); }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 18px 0 0; }
-.card h3 { margin: 0 0 10px; font: 600 11.5px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 13.5px; }
+.legend .n { font-variant-numeric: tabular-nums; color: var(--muted); }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 5px 14px; margin: 0; font-size: 13px; }
 .facts dt { color: var(--muted); }
-.facts dd { margin: 0; font-variant-numeric: tabular-nums; }
-.facts code { font-size: 12px; }
-.cited { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 13.5px; }
+.facts dd { margin: 0; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.facts code { font-size: 11.5px; }
+details.more-box { margin-top: 18px; }
+details.more-box summary { cursor: pointer; font: 600 11px/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); list-style: none; }
+details.more-box summary::-webkit-details-marker { display: none; }
+details.more-box summary::before { content: "+ "; }
+details.more-box[open] summary::before { content: "\2212  "; }
+.cited { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 9px; font-size: 13px; }
 .cited a { font-weight: 600; }
-.cited .src { color: var(--ink-2); font-size: 12.5px; display: block; }
-.sec-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.row-btn { width: 100%; text-align: left; display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start;
-  padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
-.row-btn:hover { border-color: var(--line-2); }
-.row-btn .g { width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 11px; background: var(--good-wash); color: var(--good); margin-top: 1px; }
+.cited .src { color: var(--muted); font-size: 12px; display: block; }
+.sec-list { list-style: none; margin: 0; padding: 0; }
+.row-btn { width: 100%; text-align: left; display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start;
+  padding: 9px 4px; border-bottom: 1px solid var(--line); }
+.row-btn:hover b { color: var(--accent-ink); }
+.row-btn .g { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 10.5px; background: var(--good-wash); color: var(--good); margin-top: 1px; }
 .row-btn .g[data-tone="muted"] { background: var(--muted-wash); color: var(--muted); }
-.row-btn b { font-weight: 600; font-size: 13.5px; display: block; }
-.row-btn span.t { color: var(--ink-2); font-size: 13.5px; }
+.row-btn b { font-weight: 600; font-size: 13px; display: block; }
+.row-btn span.t { color: var(--ink-2); font-size: 13px; }
 
 /* Contents drawer ----------------------------------------------------- */
 .toc { position: fixed; z-index: 40; left: 0; top: calc(var(--bar-h) + env(safe-area-inset-top, 0px)); bottom: 0; width: min(380px, 90vw);
@@ -289,7 +327,16 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
 .toc-head input { width: 100%; font: 14px var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line-2);
   border-radius: 10px; padding: 9px 12px; }
 .toc-head input:focus { outline: 2px solid var(--accent-wash-2); border-color: var(--accent); }
+.toc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .toc-count { font-size: 12.5px; color: var(--muted); }
+.switch { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px/1 var(--sans); color: var(--ink-2); flex: none; }
+.switch::before { content: ""; width: 26px; height: 15px; border-radius: 99px; background: var(--line-2); transition: background .15s;
+  box-shadow: inset 0 0 0 2px var(--line-2); background-image: radial-gradient(circle at 7.5px 50%, var(--surface) 5px, transparent 5.5px); }
+.switch[aria-checked="true"]::before { background-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent);
+  background-image: radial-gradient(circle at 18.5px 50%, #fff 5px, transparent 5.5px); }
+.toc-foot { display: flex; gap: 16px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); font-size: 13px; }
+.toc-foot a { color: var(--ink-2); }
+.toc-foot a:hover { color: var(--accent-ink); }
 .toc-list { overflow-y: auto; flex: 1; padding: 8px 8px 40px; }
 .toc-sec { display: flex; gap: 8px; width: 100%; text-align: left; padding: 7px 8px; border-radius: 8px; font-size: 13.5px; font-weight: 600; color: var(--ink); }
 .toc-sec.l2 { font-weight: 500; color: var(--ink-2); padding-left: 20px; }
@@ -365,12 +412,10 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     <button class="icon-btn" id="tocBtn" type="button" aria-label="Contents and search" aria-expanded="false" aria-controls="toc">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg>
     </button>
-    <a class="brand" href="#" id="brand"><span class="spark" aria-hidden="true">&#10035;</span>CI2ZF<span class="brand-sub">paper beside Lean</span></a>
+    <a class="brand" href="#" id="brand"><span class="spark" aria-hidden="true">&#10035;</span>CI2ZF</a>
     <div class="papers" role="tablist" aria-label="Paper" id="paperTabs"></div>
     <div class="bar-end">
-      <button class="toggle" id="stmtOnly" type="button" aria-pressed="false"><span class="long">Statements </span>only</button>
       <a class="bar-link" id="pdfLink" href="#" target="_blank" rel="noopener">PDF</a>
-      <a class="bar-link" id="checkerLink" href="checker.html">Checker</a>
       <a class="bar-link" id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch colour theme">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="6.5"/><path d="M10 3.5a6.5 6.5 0 0 0 0 13z" fill="currentColor"/></svg>
@@ -393,9 +438,13 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
 <aside class="toc" id="toc" aria-label="Contents">
   <div class="toc-head">
     <input type="search" id="filter" placeholder="Find a statement, title or Lean name" autocomplete="off" aria-label="Find a statement, title or Lean name">
-    <div class="toc-count" id="tocCount"></div>
+    <div class="toc-row">
+      <span class="toc-count" id="tocCount"></span>
+      <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false">Statements only</button>
+    </div>
   </div>
   <nav class="toc-list" id="tocList"></nav>
+  <div class="toc-foot"><a href="checker.html">Statement checker</a><a id="readmeLink" href="#" target="_blank" rel="noopener">README</a></div>
 </aside>
 <div class="scrim" id="scrim"></div>
 <div class="peek" id="peek" role="tooltip" hidden></div>
@@ -423,6 +472,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     prev: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>',
     next: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5 10.5 8 6 12.5"/></svg>',
     ext: '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9"/></svg>',
+    pin: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h4M7 2.5v3.8L4.8 8.8v1h6.4v-1L9 6.3V2.5M8 9.8v3.7"/></svg>',
     chev: '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10 8 5.5l4.5 4.5"/></svg>'
   };
 
@@ -433,6 +483,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
   });
   var state = { paper: null, view: null, selected: null, pinned: false, hold: null, back: [], positions: {} };
   $("githubLink").href = DATA.github;
+  $("readmeLink").href = DATA.github + "#readme";
 
   function sourceUrl(d) {
     return DATA.github + "/blob/" + DATA.commit + "/" + d.path + "#L" + d.start + "-L" + d.end;
@@ -563,7 +614,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
   function indexDoc(p) {
     sectionOf = {}; headings = []; thms = [];
     var h2 = null, h3 = null;
-    doc.querySelectorAll(".h, .thm[data-stmt]").forEach(function (el) {
+    doc.querySelectorAll("h2.h, h3.h, h4.h, .thm[data-stmt]").forEach(function (el) {
       if (el.classList.contains("h")) {
         var info = { el: el, id: el.id, num: (el.querySelector(".h-num") || {}).textContent || "",
           title: (el.querySelector(".h-text") || el).innerHTML, level: el.tagName === "H2" ? 1 : el.tagName === "H3" ? 2 : 3 };
@@ -617,7 +668,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     scrollToEl(el, opts.instant);
     var thm = el.closest(".thm[data-stmt]");
     if (thm && (opts.select || el === thm)) select(byId[thm.dataset.stmt], { hold: true, noScroll: true });
-    if (!thm || el !== thm) flash(el.closest(".eq, li, .bib li, .float, .h, .thm") || el);
+    if (!thm || el !== thm) flash(el.closest(".eq, li, .bib li, .float, h2.h, h3.h, h4.h, .thm") || el);
   }
   function pushBack() {
     var near = currentContext();
@@ -731,11 +782,11 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     var list = DATA.papers[state.paper].statements;
     var prev = s ? list[s.index - 1] : null, next = s ? list[s.index + 1] : list[0];
     return '<div class="pv-nav">' +
-      '<button class="nav-btn" type="button" data-go="' + (prev ? esc(prev.id) : "") + '" aria-label="Previous statement"' + (prev ? "" : " disabled") + '>' + ICON.prev + '</button>' +
-      '<button class="nav-btn" type="button" data-go="' + (next ? esc(next.id) : "") + '" aria-label="Next statement"' + (next ? "" : " disabled") + '>' + ICON.next + '</button>' +
-      (s ? '<button class="follow" type="button" data-pin aria-pressed="' + state.pinned + '" title="' +
-        (state.pinned ? "The panel stays on this statement. Click to follow the paper again." : "The panel follows the statement you are reading. Click to keep this one.") +
-        '"><span class="dot"></span>' + (state.pinned ? "Pinned" : "Following") + '</button>' : "") + '</div>';
+      (s ? '<button class="nav-btn" type="button" data-pin aria-pressed="' + state.pinned + '" aria-label="' +
+        (state.pinned ? "Unpin: follow the paper again" : "Pin this statement") + '" title="' +
+        (state.pinned ? "Pinned. Click to follow the paper again." : "Following the paper. Click to keep this statement here.") + '">' + ICON.pin + '</button>' : "") +
+      '<button class="nav-btn" type="button" data-go="' + (prev ? esc(prev.id) : "") + '" aria-label="Previous statement" title="Previous statement (k)"' + (prev ? "" : " disabled") + '>' + ICON.prev + '</button>' +
+      '<button class="nav-btn" type="button" data-go="' + (next ? esc(next.id) : "") + '" aria-label="Next statement" title="Next statement (j)"' + (next ? "" : " disabled") + '>' + ICON.next + '</button></div>';
   }
 
   function where(s) {
@@ -750,16 +801,16 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     var st = DATA.statuses[s.status], p = DATA.papers[s.paper];
     var html = '<div class="pv"><div class="pv-top"><div class="eyebrow">' + esc(where(s)) + '</div>' + navButtons(s) + '</div>' +
       '<h2 class="pv-title"><span class="pv-ref">' + esc(label(s)) + '</span><span class="pv-name">' + esc(s.title) + '</span></h2>' +
-      '<div class="status" data-tone="' + tone(s) + '"><span class="g" aria-hidden="true">' + esc(st.glyph) + '</span>' + esc(st.label) + '</div>' +
-      '<p class="status-meaning">' + esc(st.meaning) + '</p>';
-    if (s.note) html += '<div class="note"><div class="eyebrow">Note</div>' + esc(s.note) + '</div>';
-    html += '<div class="sub"><h3>Lean</h3><span class="aside">' + (s.lean.length ? s.lean.length + (s.lean.length === 1 ? " declaration" : " declarations") : "") + '</span></div>';
+      '<div class="status" data-tone="' + tone(s) + '" title="' + esc(st.meaning) + '"><span class="g" aria-hidden="true">' + esc(st.glyph) + '</span>' + esc(st.label) +
+      '<span class="sr">. ' + esc(st.meaning) + '</span></div>';
+    if (s.note) html += '<p class="note">' + esc(s.note) + '</p>';
+    html += '<div class="sub"><h3>Lean</h3><span class="aside">' + (s.lean.length || "") + '</span></div>';
     if (!s.lean.length) html += '<p class="empty">No Lean declaration: this ' + esc(s.kind) + ' makes no claim of its own.</p>';
     s.lean.forEach(function (name) { html += declCard(name); });
     html += '<div class="links">';
-    if (s.card) html += '<a class="link-btn primary" href="checker.html#' + esc(s.card) + '">Compare phrase by phrase ' + ICON.ext + '</a>';
-    if (p.pdf) html += '<a class="link-btn" href="' + esc(p.pdf) + '#nameddest=' + esc(s.kind + "." + s.number) + '" target="_blank" rel="noopener">Open in PDF ' + ICON.ext + '</a>';
-    html += '<button class="link-btn" type="button" data-copy-link="' + esc(s.id) + '">Copy link</button></div></div>';
+    if (s.card) html += '<a href="checker.html#' + esc(s.card) + '">Compare phrase by phrase ' + ICON.ext + '</a>';
+    if (p.pdf) html += '<a href="' + esc(p.pdf) + '#nameddest=' + esc(s.kind + "." + s.number) + '" target="_blank" rel="noopener">Open in PDF ' + ICON.ext + '</a>';
+    html += '<button type="button" data-copy-link="' + esc(s.id) + '">Copy link</button></div></div>';
     return html;
   }
 
@@ -770,7 +821,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
       '<span class="kind">' + esc(d.kind) + '</span><button class="copy" type="button" data-copy="' + esc(name) + '" aria-label="Copy the full name ' + esc(name) + '">Copy</button></div>' +
       (d.doc ? '<p class="decl-doc">' + docHtml(d.doc) + '</p>' : "") +
       '<pre class="lean"><code>' + highlight(d.code) + '</code></pre>' +
-      '<div class="decl-foot"><a href="' + esc(sourceUrl(d)) + '" target="_blank" rel="noopener">' + esc(d.path.split("/").pop()) + ' · lines ' + d.start + '–' + d.end + ' ' + ICON.ext + '</a>' +
+      '<div class="decl-foot"><a href="' + esc(sourceUrl(d)) + '" target="_blank" rel="noopener">' + esc(d.path.split("/").pop()) + ', lines ' + d.start + '\u2013' + d.end + ' ' + ICON.ext + '</a>' +
       (d.more ? '<span class="more">' + d.more + ' more lines on GitHub</span>' : "") + '</div></article>';
   }
   function docHtml(text) {
@@ -810,25 +861,26 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
 
   function sectionView(info) {
     var p = DATA.papers[state.paper];
-    var list = p.statements.filter(function (s) {
+    var inSection = function (s) {
       var sec = sectionOf[s.id];
       return sec && (info.level === 1 ? sec.chapter === info : sec.section === info || sec.chapter === info);
-    });
-    var html = '<div class="pv"><div class="pv-top"><div class="eyebrow">' + esc(p.short) + (info.num ? " · Section " + esc(info.num) : "") + '</div>' + navButtons(null) + '</div>' +
-      '<h2 class="pv-title"><span class="pv-name">' + info.title + '</span></h2>';
+    };
+    var list = p.statements.filter(inSection), scope = "here";
     if (!list.length && info.level > 1 && info.chapter) {
-      var chap = info.chapter;
-      list = p.statements.filter(function (s) { var sec = sectionOf[s.id]; return sec && sec.chapter === chap; });
+      list = p.statements.filter(function (s) { var sec = sectionOf[s.id]; return sec && sec.chapter === info.chapter; });
+      scope = "in Section " + info.chapter.num;
     }
+    var html = '<div class="pv"><div class="pv-top"><div class="eyebrow">' + esc(p.short) + (info.num ? " \u00b7 Section " + esc(info.num) : "") + '</div>' + navButtons(null) + '</div>' +
+      '<h2 class="pv-title"><span class="pv-name">' + info.title + '</span></h2>';
     if (list.length) {
-      html += '<div class="sub"><h3>Numbered statements here</h3><span class="aside">' + list.length + '</span></div><ul class="sec-list">';
+      html += '<div class="sub"><h3>Numbered statements ' + esc(scope) + '</h3><span class="aside">' + list.length + '</span></div><ul class="sec-list">';
       list.forEach(function (s) {
-        html += '<li><button class="row-btn" type="button" data-go="' + esc(s.id) + '"><span class="g" data-tone="' + tone(s) + '">' + esc(glyph(s)) +
-          '</span><span><b>' + esc(label(s)) + '</b><span class="t">' + esc(s.title) + ' · ' + s.lean.length + ' Lean</span></span></button></li>';
+        html += '<li><button class="row-btn" type="button" data-go="' + esc(s.id) + '"><span class="g" data-tone="' + tone(s) + '" aria-hidden="true">' + esc(glyph(s)) +
+          '</span><span><b>' + esc(label(s)) + '</b><span class="t">' + esc(s.title) + '</span></span></button></li>';
       });
       html += "</ul>";
     } else {
-      html += '<p class="empty">This section has no numbered statements. Keep reading; the panel switches to the next one when it reaches the reading line.</p>';
+      html += '<p class="empty">No numbered statements in this section.</p>';
     }
     return html + "</div>";
   }
@@ -837,32 +889,34 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     var p = DATA.papers[state.paper], v = DATA.verification;
     var counts = {}, order = Object.keys(DATA.statuses);
     p.statements.forEach(function (s) { counts[s.status] = (counts[s.status] || 0) + 1; });
-    var colors = { formalized: "var(--good)", "formalized-equivalent": "color-mix(in srgb, var(--good) 70%, var(--surface))",
-      "formalized-narrowed": "color-mix(in srgb, var(--good) 45%, var(--surface))", definition: "var(--muted)", remark: "color-mix(in srgb, var(--muted) 55%, var(--surface))", "not-formalized": "#d03b3b" };
+    var colors = { formalized: "var(--good)", "formalized-equivalent": "color-mix(in srgb, var(--good) 65%, var(--lean-bg))",
+      "formalized-narrowed": "color-mix(in srgb, var(--good) 40%, var(--lean-bg))", definition: "var(--muted)",
+      remark: "color-mix(in srgb, var(--muted) 50%, var(--lean-bg))", "not-formalized": "#d03b3b" };
     var html = '<div class="ov"><div class="pv-top"><div class="eyebrow">' + esc(p.short) + '</div>' + navButtons(null) + '</div>' +
       '<h2>' + esc(p.title) + '</h2><p class="by">' + esc(p.authors) + '</p>' +
-      '<p class="lede">Every numbered statement of this paper is linked to the Lean 4 declarations that state it. Scroll the paper and this panel follows the statement you are reading; click a statement to keep it here.</p>' +
+      '<p class="lede">Every numbered statement of this paper is linked to the Lean 4 declarations that state it. This panel follows the statement you are reading; click one to keep it here.</p>' +
+      '<div class="sub"><h3>' + p.statements.length + ' numbered statements</h3></div>' +
       '<div class="stack" role="img" aria-label="Formalization status of the ' + p.statements.length + ' numbered statements">';
     order.forEach(function (k) { if (counts[k]) html += '<span style="flex:' + counts[k] + ';background:' + colors[k] + '"></span>'; });
     html += '</div><ul class="legend">';
     order.forEach(function (k) {
       if (!counts[k]) return;
       var st = DATA.statuses[k];
-      html += '<li title="' + esc(st.meaning) + '"><span class="g" data-tone="' + (st.tone === "muted" ? "muted" : "good") + '">' + esc(st.glyph) + '</span><span>' + esc(st.label) + '</span><span class="n">' + counts[k] + '</span></li>';
+      html += '<li title="' + esc(st.meaning) + '"><span class="g" data-tone="' + (st.tone === "muted" ? "muted" : "good") + '" aria-hidden="true">' + esc(st.glyph) + '</span><span>' + esc(st.label) + '</span><span class="n">' + counts[k] + '</span></li>';
     });
-    html += '</ul><div class="card"><h3>Checked build</h3><dl class="facts">' +
+    html += '</ul><div class="sub"><h3>Checked build</h3></div><dl class="facts">' +
       '<dt>Toolchain</dt><dd>Lean ' + esc(v.lean) + ', mathlib ' + esc(v.mathlib) + '</dd>' +
-      '<dt>Declarations</dt><dd>' + Number(v.declarations).toLocaleString("en") + ' audited in ' + v.modules + ' modules</dd>' +
+      '<dt>Audited</dt><dd>' + Number(v.declarations).toLocaleString("en") + ' declarations, ' + v.modules + ' modules</dd>' +
       '<dt>Axioms</dt><dd>' + v.axioms.map(function (a) { return "<code>" + esc(a) + "</code>"; }).join(", ") + '</dd>' +
       '<dt>Last run</dt><dd>' + esc(v.date) + (v.passed ? ", passed" : "") + '</dd>' +
-      '<dt>Sources</dt><dd><a href="' + esc(DATA.github + "/tree/" + DATA.commit) + '" target="_blank" rel="noopener">commit ' + esc(DATA.commit) + '</a></dd></dl></div>' +
-      '<div class="card"><h3>Cited results proved in Lean</h3><ul class="cited">';
+      '<dt>Source</dt><dd><a href="' + esc(DATA.github + "/tree/" + DATA.commit) + '" target="_blank" rel="noopener">commit ' + esc(DATA.commit) + '</a></dd></dl>' +
+      '<details class="more-box"><summary>Cited results proved in Lean (' + DATA.cited.length + ')</summary><ul class="cited">';
     DATA.cited.forEach(function (c) {
       html += '<li><a href="checker.html#lit-' + esc(c.id) + '">' + esc(c.short) + '</a><span class="src">' + esc(c.source) + '</span></li>';
     });
-    html += '</ul></div><div class="links">';
-    if (p.pdf) html += '<a class="link-btn" href="' + esc(p.pdf) + '" target="_blank" rel="noopener">PDF ' + ICON.ext + '</a>';
-    html += '<a class="link-btn" href="checker.html">Statement checker ' + ICON.ext + '</a><a class="link-btn" href="' + esc(DATA.github) + '#readme" target="_blank" rel="noopener">README ' + ICON.ext + '</a></div></div>';
+    html += '</ul></details><div class="links">';
+    if (p.pdf) html += '<a href="' + esc(p.pdf) + '" target="_blank" rel="noopener">PDF ' + ICON.ext + '</a>';
+    html += '<a href="checker.html">Statement checker ' + ICON.ext + '</a><a href="' + esc(DATA.github) + '#readme" target="_blank" rel="noopener">README ' + ICON.ext + '</a></div></div>';
     return html;
   }
 
@@ -959,7 +1013,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
     $("tocList").querySelectorAll("[data-other]").forEach(function (g) { g.hidden = !other; });
     $("tocEmpty").hidden = !q || shown + other > 0;
     $("tocCount").textContent = q ? shown + " of " + total + " in this paper" + (other ? ", " + other + " in the other" : "")
-      : total + " numbered statements · " + DATA.papers[state.paper].short.toLowerCase();
+      : total + " numbered statements";
   }
   $("filter").addEventListener("input", filterToc);
   $("filter").addEventListener("keydown", function (e) {
@@ -1001,7 +1055,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
   function showPeek(a) {
     var id = decodeURIComponent(a.getAttribute("href").slice(1)), el = document.getElementById(id);
     if (!el) return;
-    var box = el.closest(".thm, .eq, li, .float, .h") || el;
+    var box = el.closest(".thm, .eq, li, .float, h2.h, h3.h, h4.h") || el;
     if (box.classList.contains("anchor")) box = box.parentElement;
     renderMath(box);
     var clone = box.cloneNode(true);
@@ -1052,6 +1106,7 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
   $("stmtOnly").addEventListener("click", function () {
     var on = this.getAttribute("aria-pressed") !== "true";
     this.setAttribute("aria-pressed", String(on));
+    this.setAttribute("aria-checked", String(on));
     var keep = state.view && state.view.type === "stmt" ? targetEl(state.view.id) : null;
     doc.classList.toggle("stmt-only", on);
     if (keep) scrollToEl(keep, true);

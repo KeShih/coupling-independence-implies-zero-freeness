@@ -10,8 +10,9 @@ share one counter within sections, equations are numbered through the
 document until \\numberwithin{equation}{section}, and appendix sections are
 lettered. convert() checks the numbered statements against coverage.json;
 check_pdf() checks theorem, equation and section numbers against the named
-destinations hyperref wrote into the compiled PDF. Figures are cut from that
-PDF as images.
+destinations hyperref wrote into the compiled PDF. Figures and tikz-cd
+diagrams are drawn from their TikZ source by tikz_html.py; one it cannot read
+is cut from the PDF as an image instead, with a warning.
 """
 import html
 import re
@@ -20,6 +21,7 @@ import unicodedata
 from pathlib import Path
 
 import build as checker
+import tikz_html
 
 ROMAN = [(1000, "m"), (900, "cm"), (500, "d"), (400, "cd"), (100, "c"), (90, "xc"),
          (50, "l"), (40, "xl"), (10, "x"), (9, "ix"), (5, "v"), (4, "iv"), (1, "i")]
@@ -48,6 +50,10 @@ IGNORE = {"smallskip", "medskip", "bigskip", "noindent", "indent", "centering", 
           "bottomrule", "hline", "unskip", "ignorespaces", "strut", "null", "break", "displaystyle"}
 STYLES = {"em": "em", "it": "em", "itshape": "em", "bf": "strong", "bfseries": "strong",
           "tt": "code", "ttfamily": "code", "sc": "span class=\"sc\"", "scshape": "span class=\"sc\""}
+
+
+def warn(message):
+    print("warning: " + message, file=sys.stderr)
 
 
 def fail(problems, what):
@@ -380,6 +386,7 @@ class Converter:
         self.paper, self.num, self.theorems = paper, numbering, theorems
         self.cites = {key: label for key, label, _ in bib}
         self.verbatim, self.figure_images = verbatim, figure_images
+        self.in_figure = False
         self.math = []
         self.sections = []
         self.statement_ids = {}
@@ -703,7 +710,7 @@ class Converter:
                     text("")
                 body = tex[i:end]
                 if "\\begin{tikzcd}" in body:
-                    para.append(self.figure_image("diagram", len(self.paper["diagrams"]), None))
+                    para.append(self.diagram(body, len(self.paper["diagrams"])))
                     self.paper["diagrams"].append(body)
                 else:
                     para.append(self.display("\\[", body, None))
@@ -745,6 +752,14 @@ class Converter:
                     block(self.figure(body))
                 elif env == "center":
                     block('<div class="center">%s</div>' % self.blocks(body))
+                elif env == "minipage":
+                    _, k = read_optional(body, 0)
+                    width, k = read_group(body, k)
+                    frac = re.match(r"\s*([\d.]+)\\(?:textwidth|linewidth|columnwidth)", width or "")
+                    basis = "%.0f%%" % (100 * float(frac.group(1))) if frac else "100%"
+                    block('<div class="minipage" style="--mp:%s">%s</div>' % (basis, self.blocks(body[k:])))
+                elif env == "tikzpicture":
+                    block(self.tikz(body))
                 elif env == "tabular":
                     block(self.tabular(body))
                 elif env in ("quote", "quotation"):
@@ -881,10 +896,39 @@ class Converter:
         return '<figure class="float table"%s>%s%s</figure>' % (ident, inner, cap)
 
     def figure(self, body):
-        number, (text, label), _ = self.caption(body)
+        _, j = read_optional(body, 0)
+        number, (text, label), rest = self.caption(body[j:])
         cap = '<figcaption><span class="cap-num">Figure %s.</span> %s</figcaption>' % (number, self.inline(text))
         ident = ' id="%s"' % html.escape(label) if label else ""
-        return '<figure class="float fig"%s>%s%s</figure>' % (ident, self.figure_image("figure", number, text), cap)
+        self.in_figure = True
+        try:
+            inner = '<div class="fig-body">%s</div>' % self.blocks(rest)
+        except tikz_html.Unsupported as error:
+            warn("Figure %s: %s; using the image cut from the PDF instead" % (number, error))
+            inner = self.figure_image("figure", number, text)
+        finally:
+            self.in_figure = False
+        return '<figure class="float fig"%s>%s%s</figure>' % (ident, inner, cap)
+
+    def tikz(self, body):
+        """A tikzpicture drawn as SVG with HTML labels. Inside a figure an
+        unsupported picture makes the whole figure fall back to the PDF."""
+        try:
+            return tikz_html.picture(body, self.inline)
+        except tikz_html.Unsupported as error:
+            if self.in_figure:
+                raise
+            warn("A picture outside a figure: %s; it is left out" % error)
+            return '<div class="fig-missing">This picture is in the PDF.</div>'
+
+    def diagram(self, body, k):
+        """A displayed tikz-cd diagram as a grid, or the image cut from the PDF."""
+        match = re.search(r"\\begin\{tikzcd\}(.*)\\end\{tikzcd\}", body, re.S)
+        try:
+            return '<div class="eq cd-wrap">%s</div>' % tikz_html.cd_matrix(match.group(1), self.math_tex)
+        except tikz_html.Unsupported as error:
+            warn("Diagram %d: %s; using the image cut from the PDF instead" % (k + 1, error))
+            return self.figure_image("diagram", k, None)
 
     def figure_image(self, kind, number, caption):
         found = self.figure_images(kind, number)
@@ -947,7 +991,7 @@ def crop_figures(pdf_path, figures, diagrams, out_dir, prefix):
             continue
         made[("figure", number)] = save(dest["page"], box + (-6, -6, 6, 4),
                                         "%s-figure-%s.png" % (prefix, number))
-    for k, (before, after) in enumerate(diagrams):
+    for k, (before, after) in diagrams.items():
         for pno in range(doc.page_count):
             page = doc[pno]
             hits = page.search_for(before)
@@ -1034,8 +1078,6 @@ def convert(tex_path, entries, key, pdf_path=None, figure_dir=None):
     annotated = numbering.annotate(body)
     paper = dict(key=key, diagrams=[])
 
-    figure_numbers = [m.group(1) for m in re.finditer(
-        r"\\begin\{figure\}(?:(?!\\end\{figure\}).)*?\\caption\x03num=([^\x03]*)\x03", annotated, re.S)]
     diagram_anchors = []
     for match in re.finditer(r"\\\[\s*\\begin\{tikzcd\}", annotated):
         before = plain_title(annotated[max(0, match.start() - 400):match.start()])
@@ -1044,11 +1086,14 @@ def convert(tex_path, entries, key, pdf_path=None, figure_dir=None):
         after = " ".join(re.sub(r"^\\\]|[^\w\s-]", " ", after).split()[:2])
         diagram_anchors.append((before, after))
     made = {}
-    if pdf_path and Path(pdf_path).exists() and figure_dir is not None and (figure_numbers or diagram_anchors):
-        figure_dir.mkdir(parents=True, exist_ok=True)
-        made = crop_figures(pdf_path, figure_numbers, diagram_anchors, figure_dir, key)
 
     def figure_images(kind, number):
+        """Cut a figure or diagram from the PDF, only when it cannot be drawn."""
+        if (kind, number) not in made and pdf_path and Path(pdf_path).exists() and figure_dir is not None:
+            figure_dir.mkdir(parents=True, exist_ok=True)
+            made.update(crop_figures(pdf_path, [number] if kind == "figure" else [],
+                                     {number: diagram_anchors[number]} if kind == "diagram" else {},
+                                     figure_dir, key))
         found = made.get((kind, number))
         return (figure_dir.name + "/" + found[0], found[1], found[2]) if found else None
 

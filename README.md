@@ -31,7 +31,8 @@ to the commit. `scripts/site/build_reader.py` generates it into
 `docs/index.html`; it needs PyMuPDF but no Lean build. It numbers the
 statements, equations and sections as LaTeX does, stops if a statement
 differs from `docs/coverage.json` or a number differs from the hyperref
-destinations in the PDFs, and cuts the figures from the PDFs. To publish a
+destinations in the PDFs. Figures and commutative diagrams are drawn from
+their TikZ source; one it cannot read is cut from the PDF instead. To publish a
 new version of a paper, replace its folder in `paper/` and its PDF in
 `docs/`, then rerun the script.
 

@@ -13,7 +13,9 @@ run (paper/CI2ZF-main and paper/CI2ZF-appendix) and the compiled PDF
 (docs/main.pdf and docs/appendix.pdf). paper_html.py renders the source,
 numbers it as LaTeX does, and stops the build if a numbered statement differs
 from coverage.json or a theorem, equation or section number differs from the
-PDF's hyperref destinations. Figures are cut from the PDF into docs/figures.
+PDF's hyperref destinations. Figures and tikz-cd diagrams are drawn from
+their TikZ source by tikz_html.py; one it cannot read is cut from the PDF into
+docs/figures instead.
 A paper whose source is absent is listed statement by statement. Lean
 declarations are located by scanning the sources for their namespaces and
 declaration keywords. Source links are pinned to the last commit that
