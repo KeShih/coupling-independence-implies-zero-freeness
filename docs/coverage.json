@@ -1149,7 +1149,11 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_expected"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.betaPlus",
+      "ZeroFreeness.Appendix.CV.lowAvailabilityMass",
+      "ZeroFreeness.Appendix.CV.incidenceDiscount"
+    ],
     "note": "Lean's Loss_u is the first-cause charge, an upper bound on the paper's."
   },
   {
@@ -1162,7 +1166,9 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.total_discount_pointwise"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.outputScore"
+    ],
     "note": ""
   },
   {
@@ -1189,7 +1195,9 @@
       "ZeroFreeness.Appendix.CV.selectedRegular_local_charge_le",
       "ZeroFreeness.Appendix.CV.singletonColour_local_charge"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.canonicalColourCharge"
+    ],
     "note": ""
   },
   {
@@ -1202,7 +1210,9 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.balancing_domination"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.low"
+    ],
     "note": "The closing facts that each term of the maximum equals 226/125 at the balancing pair and that the pair lies in R_γ are closed rational arithmetic with no separate declaration."
   },
   {
@@ -1215,7 +1225,12 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.averaged_geometric_drift_corrected_le"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.gammaGain",
+      "ZeroFreeness.Appendix.CV.gammaLoss",
+      "ZeroFreeness.Appendix.CV.geometricMetric",
+      "ZeroFreeness.Appendix.CV.correctedHardColourCharge"
+    ],
     "note": ""
   },
   {
@@ -1229,7 +1244,9 @@
       "ZeroFreeness.Appendix.CV.recordOne_corrected",
       "ZeroFreeness.Appendix.CV.recordTwo_corrected"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.low"
+    ],
     "note": ""
   },
   {
@@ -1243,7 +1260,11 @@
       "ZeroFreeness.Appendix.CV.cv_high_bulk",
       "ZeroFreeness.Appendix.CV.cv_high_missing"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.canonicalColourCharge",
+      "ZeroFreeness.Appendix.CV.gammaLoss",
+      "ZeroFreeness.Appendix.CV.bulk"
+    ],
     "note": ""
   },
   {
@@ -1256,7 +1277,10 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.rootColourCharge_le"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.rootColourCharge",
+      "ZeroFreeness.Appendix.CV.bulk"
+    ],
     "note": "Lean states the bound for the colour a; the colour b follows by swapping the two sides."
   },
   {
@@ -1269,7 +1293,12 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_assembly_1809"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.geometricMetric",
+      "ZeroFreeness.Appendix.CV.lowAvailabilityMass",
+      "ZeroFreeness.Appendix.CV.low",
+      "ZeroFreeness.Appendix.CV.bulk"
+    ],
     "note": ""
   },
   {
@@ -1282,7 +1311,13 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.scalar_closure"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.bulk",
+      "ZeroFreeness.Appendix.CV.low",
+      "ZeroFreeness.Appendix.CV.gammaGain",
+      "ZeroFreeness.Appendix.CV.gammaLoss",
+      "ZeroFreeness.Appendix.CV.gap"
+    ],
     "note": ""
   },
   {
@@ -1295,7 +1330,11 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_contraction"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.cvKernel",
+      "ZeroFreeness.Appendix.CV.geometricMetric",
+      "ZeroFreeness.Appendix.CV.gap"
+    ],
     "note": "Lean constructs the coupling explicitly, for every x ∈ (0,1]."
   },
   {
@@ -1308,7 +1347,9 @@
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_child_middle_ham"
     ],
-    "defs": [],
+    "defs": [
+      "ZeroFreeness.Appendix.CV.cvKernel"
+    ],
     "note": "Includes x = 1."
   },
   {
