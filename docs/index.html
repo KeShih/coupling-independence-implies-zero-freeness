@@ -78,8 +78,8 @@ code, pre { font-family: var(--mono); }
   border-bottom: 1px solid var(--line); background: var(--page); position: relative; z-index: 20; }
 .icon-btn { width: 36px; height: 36px; border-radius: 10px; display: inline-grid; place-items: center; color: var(--ink-2); flex: none; }
 .icon-btn:hover { background: var(--surface-2); color: var(--ink); }
-/* The contents button: bordered and labelled so a reader finds it. */
-.toc-btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 13px 0 11px; flex: none;
+/* The contents button: bordered so a reader finds it. */
+.toc-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 36px; flex: none;
   border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink);
   font: 550 13.5px/1 var(--sans); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
 .toc-btn svg { width: 18px; height: 18px; }
@@ -418,15 +418,15 @@ details.more-box[open] summary::before { content: "\2212  "; }
   .back-btn { bottom: calc(var(--peek) + 16px); }
 }
 
-@media (max-width: 520px) { .papers .full { display: none; } .papers .brief { display: inline; } .toc-btn .lbl { display: none; } .toc-btn { padding: 0 9px; } }
+@media (max-width: 520px) { .papers .full { display: none; } .papers .brief { display: inline; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 <div class="app" id="app">
   <header class="bar">
-    <button class="toc-btn" id="tocBtn" type="button" aria-expanded="false" aria-controls="toc" title="Contents">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg><span class="lbl">Contents</span>
+    <button class="toc-btn" id="tocBtn" type="button" aria-expanded="false" aria-controls="toc" aria-label="Contents" title="Contents">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg>
     </button>
     <div class="papers" role="tablist" aria-label="Paper" id="paperTabs"></div>
     <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false" title="Show only the numbered statements (s)"><span>Statements<span class="long"> only</span></span></button>

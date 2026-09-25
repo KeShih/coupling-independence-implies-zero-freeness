@@ -35,8 +35,8 @@ companion, *Further Potts Zero-Free Regions from Coupling Independence*.
 The [**paper reader**](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
 shows both papers, rendered from their LaTeX, beside the Lean statement of
 the result you are reading, the definitions it uses, and links to the exact
-source lines. The *Contents* button lists every section and statement (on
-wide screens, beside the paper); switch to *Statements only* to skim every
+source lines. The ☰ button lists every section and statement (on wide
+screens, beside the paper); switch to *Statements only* to skim every
 numbered result with its Lean status.
 
 ## The main theorem
