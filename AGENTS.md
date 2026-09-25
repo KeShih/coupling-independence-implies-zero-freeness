@@ -1,0 +1,227 @@
+# AGENTS.md
+
+Guidance for coding agents working in this repository: a Lean 4 + mathlib
+formalization of *Coupling Independence Implies Zero-Freeness* and its
+companion, *Further Potts Zero-Free Regions from Coupling Independence*, with
+their LaTeX sources, documentation and a generated website under `docs/`.
+
+## Commands
+
+Lean 4.33.1 and mathlib v4.33.1 are pinned (`lean-toolchain`,
+`lake-manifest.json`). Use elan, and fetch prebuilt mathlib; never build
+mathlib from source. There is no CI: every check below runs locally.
+
+```bash
+lake exe cache get                               # prebuilt mathlib oleans
+LEAN_NUM_THREADS=2 bash scripts/check-all.sh     # build CI2ZF, then audit/All.lean
+bash scripts/check.sh                            # main paper: Potts.Main, LeeYang, Holant + audit/Main.lean
+bash scripts/check-appendix.sh                   # companion: Potts.Regions + audit/Appendix.lean
+bash scripts/lake.sh build CI2ZF.Potts.Theorems.PottsMainTheorem         # one module and its imports
+bash scripts/lake.sh env lean -DwarningAsError=true CI2ZF/Path/File.lean # re-check one file
+```
+
+- Run lake through `scripts/lake.sh`. It runs from the repository root,
+  sets `MATHLIB_CACHE_DIR=.cache/mathlib`, and uses the author's local
+  toolchain in `.tools/` when that directory exists.
+- `lake env lean` builds nothing and ignores the lakefile's
+  `moreLeanArgs`. Build the file's imports first, and pass
+  `-DwarningAsError=true` yourself.
+- Call the scripts with `bash`: `check-appendix.sh` is not executable.
+- A passing full check ends with `Build completed successfully (N jobs).`
+  and `Complete-library axiom audit passed: M declarations; allowed
+  dependencies used: [propext, Classical.choice, Quot.sound]`. The current
+  N and M are in `docs/verification.json` (`build_jobs`,
+  `audited_project_declarations`).
+- `audit/CV.lean` is a standalone audit of `CI2ZF.Appendix.CV` that no
+  script runs.
+
+Website builds (see *Website* below):
+
+```bash
+pip install pymupdf && python3 scripts/site/build_reader.py   # docs/index.html, no Lean build needed
+python3 scripts/site/build_reader.py --out /tmp/preview.html  # every check, page written elsewhere
+python3 scripts/site/build.py --paper <main.tex> --companion <dir>   # docs/checker.html; needs a built library
+```
+
+## Rules the build and audits enforce
+
+- **Warnings are errors** (`lakefile.toml`). Prefix unused hypotheses with
+  `_`. Many files set `set_option linter.unusedSectionVars false`.
+- **Axioms:** only `propext`, `Classical.choice` and `Quot.sound` are
+  allowed. No `sorry`, `admit`, `axiom`, `native_decide`, `unsafe` or
+  `implemented_by`. The audits check transitive axioms, and a source scan
+  recorded in `docs/verification.json` lists the forbidden constructs.
+- **Namespaces:** the audits inspect only names starting with `CI2ZF` or
+  `PottsCI`. A declaration outside those namespaces escapes the audit.
+- **New modules:** a new module must be imported, directly or
+  transitively, from an aggregate. The aggregates are
+  `CI2ZF/Potts/Main.lean` (main-text Potts), `CI2ZF/Potts/Regions.lean` or
+  `CI2ZF/Potts/Regions/CV.lean` (companion), `CI2ZF/LeeYang.lean` and
+  `CI2ZF/Holant.lean`. An unimported file is neither built nor audited. Do
+  not add import-only wrapper modules; ten were removed on purpose.
+- **Literature hypotheses:** paper-facing theorems take none. Cited
+  results are Prop-valued bundles (`Appendix.CLMM.Literature`,
+  `Appendix.BBR.Literature`, `Appendix.Girth.CavityTree.CLMMInfluenceIdentity`,
+  `Potts.ExternalCriticalHardColouringTheorem`), each proved in the library
+  (`CLMM.literature`, `BBR.literature`, `clmmInfluenceIdentity`,
+  `external_critical_hard_colouring_theorem`). Pass the proof, or use an
+  `_unconditional` variant. Only the `_from_external` comparison theorems
+  keep the cited premise.
+- **Quantifier order is part of the claims.** Radii and constants come
+  before the vertex type, graph, pinning and class (`∃ eps > 0, ∀ …`).
+  Paper-form wrappers get the paper's order through `unionClass` and
+  `ciUnionClass`, not by adding hypotheses.
+- **Classical preamble:** match the preamble of neighbouring files
+  (`attribute [local instance] Classical.propDecidable`, local
+  `DecidableEq` instances). Otherwise statements about existing definitions
+  elaborate with different instances.
+- **Mathlib imports:** check that a mathlib module is available as a
+  prebuilt olean before importing it. `Coupling/Girth/Spectral/OperatorGap.lean`
+  writes out positive semidefiniteness itself for that reason.
+
+## Architecture
+
+- **One library, `CI2ZF`.** `CI2ZF.lean` imports `CI2ZF.Potts` (`Potts.Main`
+  and `Potts.Regions`), `CI2ZF.LeeYang` and `CI2ZF.Holant`. The main-paper
+  build also compiles companion code: the `q = 11Δ/6` case of Theorem 1.1
+  uses `CI2ZF.Appendix.CV.option_root_ci_critical`, and Lee–Yang imports
+  the regime endpoints.
+- **Namespaces do not follow directories.** Files were moved on 2026-09-09
+  and the namespaces were kept (`docs/module-moves.tsv` maps old paths to
+  new):
+  - Companion code in `Coupling/{CV,Girth,Edge,BBR,CLMM}` and
+    `Potts/Regions` is `CI2ZF.Appendix.*`.
+  - The legacy foundations are `PottsCI.*`: `FinDist` and `FinDist.W`,
+    `ham`, `PinningData`, `PartialColouring`.
+  - `Coupling/Vigoda` mixes `CI2ZF`, `CI2ZF.Potts` and `PottsCI.Vigoda`.
+
+  Find declarations with grep, not by path, since file names repeat
+  (`RootCI.lean`, `ZeroFree.lean`). Do not rename namespaces to match
+  directories: full names are hard-coded in `docs/coverage.json`,
+  `scripts/site/build.py` and the docs.
+- **Two instance representations.** Paper-facing statements use
+  `G : SimpleGraph V` with `tau : PartialColouring V C`, and the pinning may
+  be improper. The machinery works on `PinningData V C` (free graph plus
+  boundary counts), reached through `tau.toPinningData G`. Root-conditioned
+  instances are `PinningData (Option O) C`, with `none` as the root and
+  children `optionChildData I a`.
+- **Potts pipeline:**
+  1. A regime proves coupling independence (`Coupling/*`).
+  2. It packages that as `TransferCouplingInputs`: a hard constant at
+     `x = 0` and a constant on every `[δ,1]`.
+  3. `bounded_degree_potts_transfer` (separator-shell transfer,
+     `Potts/Transfer`, `Potts/Geometry`) turns the inputs into
+     `∃ eps > 0, UniformPottsZeroFree C Δ eps`.
+
+  Variants:
+  - The graph-class form is `GraphClassTransferInputs` →
+    `graph_class_potts_transfer_of_bounded` (`thm:potts-transfer`).
+  - High temperature, BBR and girth five use positive-interval transfers.
+  - `PinningFamily.*` repeats the transfer lemmas under the same short
+    names for restriction-closed families.
+- **Lee–Yang** runs `uniform_curve_transfer` → `uniform_field_transfer_closed`
+  → `all_vertex_field_transfer`. **Holant** has its own pipeline in
+  `CI2ZF/Holant` (`CouplingTheorem` → `UniformResponse` → `StrongInduction` →
+  `Theorem` → polytube corollaries), namespaces `CI2ZF.Holant` and
+  `CI2ZF.HolantCoupling`.
+- **Headline statements.** Theorem 1.1 is `CI2ZF.Potts.potts_main_theorem`
+  in `Potts/Theorems/PottsExternalTheorem.lean`. `potts_zero_free` in
+  `PottsMainTheorem.lean` still takes a `CriticalHardColouringInput`. The
+  companion's regimes live in `Potts/Regions/*`. The README tables map
+  the other results to Lean names.
+- **Naming conventions:**
+  - `_unconditional`: the literature bundle is discharged.
+  - `_from_external`: the paper's cited route, kept for comparison.
+  - `_of_bounded`: the class-wide degree premise.
+  - `_original_`: the original graph with `PartialColouring` semantics.
+  - `_residual_original_`: girth is required only of the free graph.
+
+  Paper-form wrappers take colours `Fin q` and keep hypotheses the proof
+  does not need as `_`-named arguments.
+- **Docstrings** cite LaTeX labels in backticks (`` `lem:soft-stationary` ``),
+  often with a bold lead: ``**`lem:x`, the paper's statement.**``. Cite
+  labels, not numbers, because theorem numbers drift between paper
+  versions. "Actual" marks concrete objects, such as actual Gibbs laws, as
+  opposed to hypotheses.
+
+## Coverage, docs and the verification record
+
+- **`docs/coverage.json`** lists every numbered statement of both papers,
+  107 in all, in source order. Each entry has `paper`, `kind`, `number`,
+  `label`, `status`, `lean`, `note` and `title`:
+  - `paper` is `main` or `companion`; the companion is `appendix` in paths
+    and in the `CI2ZF.Appendix` namespace.
+  - `label` is `null` for the two unlabelled companion remarks.
+  - `status` is one of the keys of `STATUSES` in `scripts/site/build.py`.
+
+  Both site builds stop if an entry disagrees with the LaTeX (order, kind,
+  number, label) or names a missing Lean declaration. Renaming a listed
+  declaration means updating `coverage.json` and the tables in the docs.
+- **Scope changes propagate.** When a statement's status or scope
+  changes, update:
+  - its coverage note;
+  - the counts and the unformalized list in `README.md`;
+  - `docs/README.md`, `docs/overview.md`, `docs/appendix/README.md`,
+    `docs/appendix/STATUS.md` and `docs/external-inputs.md`;
+  - any docstring that states the scope.
+- **`docs/verification.json`** is a hand-maintained record of the last full
+  run; no script here regenerates it. It stores plain SHA-256 hashes: every
+  module, the audit files and check scripts, the ten tracked Markdown files,
+  `coverage.json` with its counts, and the companion PDF. Any Lean or doc change makes it stale. The history
+  refreshes it in a separate "refresh docs and record" commit after a full
+  check. `closure_manifest_sha256` and `verification_log_sha256` come from
+  tooling that is not in the repository. It is already stale for
+  `README.md` and `docs/appendix.pdf`, so do not assume a mismatch you find
+  is yours.
+- **Pinned history.** The papers cite this repository at pinned commits
+  (`paper/CI2ZF-main/main.bib`, `paper/CI2ZF-appendix/anc/README.md`), so
+  never rewrite the history of `main`.
+
+## Website
+
+GitHub Pages serves `docs/` from `main` as committed. Keep `docs/.nojekyll`.
+
+- **`docs/index.html` (the reader)** is generated by
+  `scripts/site/build_reader.py` from `paper/*/` (LaTeX with its `.bbl`),
+  `docs/main.pdf` and `docs/appendix.pdf`, `docs/coverage.json`,
+  `docs/verification.json` and the Lean sources. Its modules:
+  - `paper_html.py` renders the LaTeX and numbers statements, equations
+    and sections as LaTeX does. It checks them against `coverage.json` and
+    against the PDFs' hyperref destinations (`lemma.3.6`, `equation.12`).
+  - `tikz_html.py` draws TikZ figures and tikz-cd diagrams. When it cannot
+    read one, it warns and cuts a PNG into `docs/figures/`; commit that PNG.
+  - `richtext.py` typesets the formulas in notes and docstrings.
+  - `reader.html` is the template and holds all the CSS and JS.
+
+  Lean declarations are located by a regex scan, so they must start in
+  column 0 inside `namespace`/`section` blocks.
+- **`docs/checker.html` (the statement checker)** is generated by
+  `scripts/site/build.py`. It needs the compiled library, because it
+  elaborates a generated file with `lake env lean`, and LaTeX compiled
+  with `.aux` and `.bbl`. The defaults are `../main.tex` and `../companion`;
+  `paper/` has no `.aux`. It checks the verbatim quotations in its `PAIRS`
+  table against the LaTeX and the Lean sources. `build_reader.py` imports
+  `build.py` (`STATUSES`, `RESULTS`, `CITED`, `ENV_WORDS` and helpers), so
+  keep those names stable.
+- **Do not hand-edit the generated pages.** Change the generator and
+  rebuild. The checker can only be rebuilt with a Lean build; without one,
+  make the same edit in `build.py` and in the page.
+- **Commit Lean first.** Both builders refuse to run while `CI2ZF/` or
+  `CI2ZF.lean` has uncommitted changes. They pin GitHub source links to
+  the last commit that touched the Lean sources, and that commit must be
+  pushed. Commit Lean changes first, then rebuild the pages in a follow-up
+  commit.
+- **New paper version:** replace `paper/CI2ZF-main` or
+  `paper/CI2ZF-appendix` (`.tex`, `.bib`, a fresh `.bbl`, `appendices/`)
+  together with `docs/main.pdf` or `docs/appendix.pdf`. Update
+  `coverage.json` if the numbering changed, then rerun `build_reader.py`.
+  The PDF check needs every theorem-like environment to get a hyperref
+  destination named `<env>.<number>`, which the papers' `aliascnt` setup
+  provides.
+
+## Workflow
+
+Work on a branch and merge into `main` through a pull request. The history
+uses merge commits titled `<subject> (#N)`. Fetch `origin/main` before
+starting, because a local `main` may be stale. Commit messages have an
+imperative subject and a body that explains what changed and why.
