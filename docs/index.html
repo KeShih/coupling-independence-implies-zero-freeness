@@ -256,8 +256,6 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 .pv-ref { font: 600 14px/1.3 var(--sans); color: var(--accent-ink); }
 .pv-name { display: block; font: 400 25px/1.25 var(--paper); letter-spacing: -0.005em; text-wrap: balance; color: var(--ink); }
 .status { display: inline-flex; align-items: center; gap: 7px; font: 600 14px/1 var(--sans); color: var(--good); cursor: help; }
-.status .g { width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--good-wash); font-size: 12px; }
-.g svg { width: 62%; height: 62%; }
 .status[data-tone="muted"] { color: var(--ink-2); }
 .status[data-tone="muted"] .g { background: var(--muted-wash); color: var(--muted); }
 .note { margin: 14px 0 0; color: var(--ink-2); line-height: 1.6; }
@@ -303,10 +301,9 @@ pre.lean .d { color: var(--lean-name); font-weight: 600; }
 .stack { display: flex; height: 6px; border-radius: 99px; overflow: hidden; background: var(--line); margin: 0 0 12px; gap: 2px; }
 .stack span { display: block; height: 100%; }
 .legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 14.5px; }
-.legend li { display: grid; grid-template-columns: 20px 1fr auto; gap: 8px; align-items: center; cursor: help; }
-.legend .g { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 10.5px; background: var(--good-wash); color: var(--good); }
-.legend .g[data-tone="bad"], .row-btn .g[data-tone="bad"], .status[data-tone="bad"] .g, .sheet-handle .g[data-tone="bad"] { background: var(--muted-wash); color: #d03b3b; }
-.legend .g[data-tone="muted"] { background: var(--muted-wash); color: var(--muted); }
+.legend li { display: grid; grid-template-columns: 10px 1fr auto; gap: 10px; align-items: center; cursor: help; }
+.legend .sw { width: 10px; height: 10px; border-radius: 3px; }
+.status[data-tone="bad"] { color: #d03b3b; }
 .legend .n { font-variant-numeric: tabular-nums; color: var(--muted); }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 7px 16px; margin: 0; font-size: 14.5px; }
 .facts dt { color: var(--muted); }
@@ -321,11 +318,9 @@ details.more-box[open] summary::before { content: "\2212  "; }
 .cited a { font-weight: 600; }
 .cited .src { color: var(--muted); font-size: 13.5px; display: block; }
 .sec-list { list-style: none; margin: 0; padding: 0; }
-.row-btn { width: 100%; text-align: left; display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start;
+.row-btn { width: 100%; text-align: left; display: block;
   padding: 9px 4px; border-bottom: 1px solid var(--line); }
 .row-btn:hover b { color: var(--accent-ink); }
-.row-btn .g { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 10.5px; background: var(--good-wash); color: var(--good); margin-top: 1px; }
-.row-btn .g[data-tone="muted"] { background: var(--muted-wash); color: var(--muted); }
 .row-btn b { font-weight: 600; font-size: 14.5px; display: block; }
 .row-btn span.t { color: var(--ink-2); font-size: 14.5px; }
 
@@ -404,8 +399,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
   .lean-pane.open { transform: none; }
   .sheet-handle { display: flex; align-items: center; gap: 10px; width: 100%; min-height: var(--peek); padding: 8px 16px 8px; text-align: left; flex: none; position: relative; }
   .sheet-handle::before { content: ""; position: absolute; top: 6px; left: 50%; width: 36px; height: 4px; margin-left: -18px; border-radius: 4px; background: var(--line-2); }
-  .sheet-handle .g { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 12px; background: var(--good-wash); color: var(--good); flex: none; }
-  .sheet-handle .g[data-tone="muted"] { background: var(--muted-wash); color: var(--muted); }
   .sheet-handle .txt { display: grid; min-width: 0; }
   .sheet-handle b { font: 600 14px/1.3 var(--sans); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sheet-handle small { font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -413,7 +406,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   .lean-pane.open .sheet-handle .chev { transform: rotate(180deg); }
   /* Open, the panel shows the statement itself: the handle keeps only its grabber and chevron. */
   .lean-pane.open .sheet-handle { min-height: 34px; padding: 10px 16px 0; }
-  .lean-pane.open .sheet-handle .g, .lean-pane.open .sheet-handle .txt { display: none; }
+  .lean-pane.open .sheet-handle .txt { display: none; }
   .panel { padding: 6px 18px 40px; }
   .back-btn { bottom: calc(var(--peek) + 16px); }
 }
@@ -812,7 +805,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     // panel names the statement in one line with its status.
     var html = '<div class="pv pv-stmt"><h2 class="sr">' + esc(label(s)) + ': ' + esc(s.title) + '</h2>' +
       '<div class="pv-top"><div class="pv-head"><span class="pv-ref">' + esc(label(s)) + '</span>' +
-      '<span class="status" data-tone="' + tone(s) + '" title="' + esc(st.meaning) + '"><span class="g" aria-hidden="true">' + statusIcon(s) + '</span>' + esc(st.label) +
+      '<span class="status" data-tone="' + tone(s) + '" title="' + esc(st.meaning) + '">' + esc(st.label) +
       '<span class="sr">. ' + esc(st.meaning) + '</span></span></div>' + navButtons(s) + '</div>';
     if (s.note) html += '<p class="note">' + s.note + '</p>';
     else if (!s.lean.length) html += '<p class="empty">No Lean declaration.</p>';
@@ -896,8 +889,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
     if (list.length) {
       html += '<div class="sub"><h3>Numbered statements ' + esc(scope) + '</h3><span class="aside">' + list.length + '</span></div><ul class="sec-list">';
       list.forEach(function (s) {
-        html += '<li><button class="row-btn" type="button" data-go="' + esc(s.id) + '"><span class="g" data-tone="' + tone(s) + '" aria-hidden="true">' + statusIcon(s) +
-          '</span><span><b>' + esc(label(s)) + '</b><span class="t">' + titleHtml(s) + '</span></span></button></li>';
+        html += '<li><button class="row-btn" type="button" data-go="' + esc(s.id) + '">' +
+          '<b>' + esc(label(s)) + '</b><span class="t">' + titleHtml(s) + '</span></button></li>';
       });
       html += "</ul>";
     } else {
@@ -922,7 +915,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     order.forEach(function (k) {
       if (!counts[k]) return;
       var st = DATA.statuses[k];
-      html += '<li title="' + esc(st.meaning) + '"><span class="g" data-tone="' + st.tone + '" aria-hidden="true">' + toneIcon(st.tone) + '</span><span>' + esc(st.label) + '</span><span class="n">' + counts[k] + '</span></li>';
+      html += '<li title="' + esc(st.meaning) + '"><span class="sw" style="background:' + colors[k] + '" aria-hidden="true"></span><span>' + esc(st.label) + '</span><span class="n">' + counts[k] + '</span></li>';
     });
     html += '</ul><div class="sub"><h3>Checked build</h3></div><dl class="facts">' +
       '<dt>Toolchain</dt><dd>Lean ' + esc(v.lean) + ', mathlib ' + esc(v.mathlib) + '</dd>' +
@@ -948,7 +941,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   // ---- Bottom sheet on phones ------------------------------------------------------
   function updateHandle() {
     var v = state.view, h = $("sheetHandle"), s = v && v.type === "stmt" ? byId[v.id] : null;
-    var head = s ? '<span class="g" data-tone="' + tone(s) + '">' + statusIcon(s) + '</span><span class="txt"><b>' + esc(label(s)) + " · " + esc(s.title) +
+    var head = s ? '<span class="txt"><b>' + esc(label(s)) + " · " + esc(s.title) +
       '</b><small>' + esc(DATA.statuses[s.status].label) + '</small></span>'
       : '<span class="txt"><b>Lean formalization</b><small>' + (v && v.type === "section" ? esc(stripTags(v.info.title)) : "Tap a statement to see its Lean") + '</small></span>';
     h.innerHTML = head + '<span class="chev">' + ICON.chev + '</span>';
