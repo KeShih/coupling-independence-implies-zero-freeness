@@ -8,16 +8,16 @@
   "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
   "command": "LEAN_NUM_THREADS=2 bash scripts/check-all.sh",
   "passed": true,
-  "build_jobs": 4066,
-  "audited_project_declarations": 11313,
+  "build_jobs": 4069,
+  "audited_project_declarations": 11320,
   "allowed_axioms": [
     "propext",
     "Classical.choice",
     "Quot.sound"
   ],
-  "joint_import_closure_files": 531,
+  "joint_import_closure_files": 534,
   "all_library_modules_reachable": true,
-  "verification_log_sha256": "c6bcfd66c5fe2d95b532741de55a81661db36782d22e7e82b085a889e69811c0",
+  "verification_log_sha256": "08751f84f29fa3f2b45bfa517846af459b7e17081ff987264f84d392fb950020",
   "organization": {
     "library": "CI2ZF",
     "previous_published_commit": "1161126c2262e963c8042dd7f45423f65cdf3f81",
@@ -45,12 +45,12 @@
   "documentation": {
     "language": "English",
     "markdown_files": 10,
-    "readme_lines": 212,
+    "readme_lines": 213,
     "local_markdown_links_checked": 178,
     "broken_local_links": [],
     "link_check_scope": "Local target file existence; external URLs not fetched by this script.",
     "document_sha256": {
-      "README.md": "e3721c3ea9cda201a91e81dcbb12a29166d584a322021d7b49e3f735a15181d5",
+      "README.md": "5b63208e5c55e48e064ccdd7a29a4bf6d7cfe2736142613ea963bc7f78d4b284",
       "docs/README.md": "05adaf74db3ad43a8437a6f15a3f8a37b79e9c5d7396a9996e319d00f65a49c1",
       "docs/appendix/README.md": "72ca82a0428195e57df77766d8502de2781789f814c9a7846cf5898980b81ad8",
       "docs/appendix/STATUS.md": "1a751cbb11bc18db39d5f5d5f5cc3b7fbd338f53f6589e91c7303065724814a4",
@@ -63,7 +63,7 @@
     }
   },
   "source_scan": {
-    "scope": "All 531 library modules; comments and strings masked by a nested-comment-aware lexer before scanning.",
+    "scope": "All 534 library modules; comments and strings masked by a nested-comment-aware lexer before scanning.",
     "forbidden_constructs": [
       "sorry",
       "admit",
@@ -81,7 +81,7 @@
     "missing_imports": [],
     "lexer_issues": [],
     "scanner_sha256": "cebfb9f2b8c57f9fb2ab32d91612b1bf0f04f6b1aa7f52525ae21e744a8e3529",
-    "closure_manifest_sha256": "5bdbafc36dc59dc285dddd84176dcdf08d56b2d1e31c05473034b4bd6e179001"
+    "closure_manifest_sha256": "27f4c5ba9a39dc1e702baa330f3b0da99973aa3df933c96876aaa5538c46d8f8"
   },
   "literature_input_register": "external-inputs.md",
   "region_statements_and_inputs": "appendix/STATUS.md",
@@ -109,12 +109,14 @@
     "CI2ZF.Coupling.BBR.Spatial": "99c17b2833b6369296c60c1a85c548553daf9b535e483ece38357ba7b005f2d7",
     "CI2ZF.Coupling.BBR.Theorem25": "4843e8a84b4826ae62a674143ecd647306cd1fd9c68671d7cae2147be36c9836",
     "CI2ZF.Coupling.BBR.TotalInfluence": "4b54757dcd23bfcab1479f70c21d2e98bbd266c5015001d5b2dbbfe32ef23d9c",
+    "CI2ZF.Coupling.BBR.Unconditional": "0b3615582063ad17567649f84328bfe4d067ed9ed847b4666f877583ab8d41c0",
     "CI2ZF.Coupling.BBR.Weights": "b6b920fb0a87a236f67da17555282983445ebe63cd3b5bb919fa0ff90b82701b",
     "CI2ZF.Coupling.CLMM.Ambient": "b82e70d1e716dfaeeb6bfd7b4354af5087da91290960d4bf35d65b6dc0b7ecd4",
     "CI2ZF.Coupling.CLMM.AmbientDegree": "39664116aa43a62d24fbd852d07eb459f25ef0a9292c88053c4ae7797f972868",
     "CI2ZF.Coupling.CLMM.SphereCoupling": "1b8e0ebd7706906de31670aa58401d2e286374065a8983819e01e7d3692cfce1",
     "CI2ZF.Coupling.CLMM.SphereEstimate": "cfd963dff5c96f46ceb7444718f0342d680d553d54b7b1b7a8a3ca0b747e4081",
     "CI2ZF.Coupling.CLMM.Transfer": "9dd21dc1e0b8ba9e58149f09d81adf7ea479234fd2a446de8d2f9c3abdbd4986",
+    "CI2ZF.Coupling.CLMM.TransferUnconditional": "213cda397291ad520188d0d003d65d486d9ddff5725d157473da0410bbc008c4",
     "CI2ZF.Coupling.CV.ActivationEnvelope": "658464f3c5a0e4b52d18723b66d78a18119581422aeea1d4e7c779f116f00e7a",
     "CI2ZF.Coupling.CV.ActualOne": "abb19a6adb59a153b5c47fd5f8d011825f970caa7a70921f7e581b1329a37898",
     "CI2ZF.Coupling.CV.ActualTwo": "162f2bcf50b3e1b9f1a2d5a1dfc1b822fcd7eecb229d9ba07915e3a283ff54f1",
@@ -382,6 +384,7 @@
     "CI2ZF.Coupling.Girth.Tree.SingleEdge": "ee655178284384543582821e7acd286ffcf37174a254d015279c79b59a5cbae6",
     "CI2ZF.Coupling.Girth.Tree.Spatial": "c9a218bd72989d362ae73dfb00161e83e7ddc8e064b661c955d8bed278f027ef",
     "CI2ZF.Coupling.Girth.Tree.TotalInfluence": "4164795e3dd638a694faee35f0cf79ebae21a684f3143accb70d4f9ff755ff89",
+    "CI2ZF.Coupling.Girth.Tree.TotalInfluenceUnconditional": "fdff8650c1181f238c87f1adc771f82a2050805cb365af71759f62eec84636d2",
     "CI2ZF.Coupling.HighTemperature.Coupling": "581c92196683264417c820c4f68e81b39ae6e18660a3af8fc76e87a620908ed9",
     "CI2ZF.Coupling.Vigoda.ActivationAverage": "d677df276736001d4675cd62013227548f16f12aecf65d073b3d0a23571b12f0",
     "CI2ZF.Coupling.Vigoda.ActivationCharge": "edb0d3984e72f89fdb2d8a283d6ccaca5ada946fd411488b690cefc73ece7bfc",
@@ -568,7 +571,7 @@
     "CI2ZF.Potts.Regions.Girth.Transfer.ResidualOriginal": "1f1da45dfd58817c83ee3c85512c3714c45ab0a3a45cbbfa534e6cb4bddc00de",
     "CI2ZF.Potts.Regions.HighTemperature.ZeroFree": "2ccf30b61aaab9ec91df6f52ae64894a996c2b36725d5baab85699a76a643cc4",
     "CI2ZF.Potts.Regions.NearVigoda.Theorem": "391ab07dd3e43eeb57fdb0986d07270898a3bdcc4875720cf0b87be1f60927b8",
-    "CI2ZF.Potts.Regions": "2a5ba09d23d002076aeca75175be5b91d25640d2a382fdf7bfd355780a076637",
+    "CI2ZF.Potts.Regions": "74746839764cf3c1b2efafebefd1b741b0332aa0ef2beda028b5a7e388f2f014",
     "CI2ZF.Potts.Theorems.CriticalScope": "d4d6b61d0e143c278cc2f78a01ab9eb6024675d0a166b2027351a9b8ae6c449d",
     "CI2ZF.Potts.Theorems.GraphClassPottsTransfer": "dd32a69138e41aec8ebb968a4d19789a44b47ff2f8d0217816e0087ef4d2cff5",
     "CI2ZF.Potts.Theorems.PositiveGraphClassTransfer": "9d51c060ba256b5856797eceb377bd6993474f3172f9a3dc8b1570d9064de4e8",
@@ -669,6 +672,8 @@
     "new_modules": [
       "CI2ZF.Coupling.BBR.GapTwo",
       "CI2ZF.Coupling.BBR.RoundedInterval",
+      "CI2ZF.Coupling.BBR.Unconditional",
+      "CI2ZF.Coupling.CLMM.TransferUnconditional",
       "CI2ZF.Coupling.CV.Assembly",
       "CI2ZF.Coupling.CV.ClosedKernel",
       "CI2ZF.Coupling.CV.ExpectedLoss",
@@ -681,6 +686,7 @@
       "CI2ZF.Coupling.Girth.Covariance.Graph.Disintegration",
       "CI2ZF.Coupling.Girth.Covariance.Insertion.OneEdgeOperator",
       "CI2ZF.Coupling.Girth.Tree.SingleEdge",
+      "CI2ZF.Coupling.Girth.Tree.TotalInfluenceUnconditional",
       "CI2ZF.Coupling.Vigoda.CoupledActivation",
       "CI2ZF.Coupling.Vigoda.RegularColourTable",
       "CI2ZF.Coupling.Vigoda.SoftFlipKernel",
@@ -696,13 +702,13 @@
     ],
     "retained_mathematical_inputs": [],
     "companion_pdf_sha256": "3cca379931e770f15c4e08f2ae7b46639eada70fafbf749dc569b8542e530967",
-    "signature_and_axiom_check_sha256": "56623923e7ae6b2a97eabe6df403c4db6269d4609e1ab8c9a030a3d0f69f7804",
-    "signature_and_axiom_log_sha256": "5389d67798578d843b8022ff2a3d2ebf4012a583b8918ddd9db434e292c29e57",
+    "signature_and_axiom_check_sha256": "2532f8b3ee4f097be2bc01844748235a995dfdc58ea3b4a69b0ae0dbd235ced5",
+    "signature_and_axiom_log_sha256": "0db2fb865f27254e6a7a8b5fc5fdec3ec2450c667a6b8e441db218fb428d4223",
     "build_mode": "Incremental build with cached unchanged dependencies; changed modules compiled and whole-library transitive axiom audit rerun."
   },
   "statement_coverage": {
     "file": "coverage.json",
-    "sha256": "ce676dbf69c5bfcbf79c33d15d428ea71ee4ef614bdcd0f7d782235fcf893acf",
+    "sha256": "58b3064635ae0b0daac6247fd125c0ce35c37307e53f1dbbc0055dfb1a1af0ca",
     "entries": 107,
     "status_counts": {
       "formalized": 77,
@@ -711,6 +717,6 @@
       "definition": 8,
       "formalized-narrowed": 2
     },
-    "lean_names_checked": 326
+    "lean_names_checked": 324
   }
 }

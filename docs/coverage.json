@@ -1250,8 +1250,7 @@
     "title": "Tree total-influence decay",
     "status": "formalized",
     "lean": [
-      "CI2ZF.Appendix.Girth.CavityTree.total_influence_decay",
-      "CI2ZF.Appendix.Girth.CavityTree.clmmInfluenceIdentity",
+      "CI2ZF.Appendix.Girth.CavityTree.total_influence_decay_unconditional",
       "CI2ZF.Appendix.Girth.CavityTree.levelTotalVariation",
       "CI2ZF.Appendix.Girth.CavityTree.totalInfluenceConstant"
     ],
@@ -1283,7 +1282,7 @@
       "CI2ZF.Appendix.Girth.potts_eventual_transfer_uniform",
       "CI2ZF.Appendix.Girth.potts_eventual_transfer",
       "CI2ZF.Appendix.Girth.potts_eventual_transfer_source",
-      "CI2ZF.Appendix.CLMM.eventual_transfer"
+      "CI2ZF.Appendix.CLMM.eventual_transfer_unconditional"
     ],
     "note": "The companion now states the lemma for the Potts family at positive activity, its only use, in place of general pairwise spin systems."
   },
@@ -1295,12 +1294,11 @@
     "title": "BBR contraction certificate",
     "status": "formalized",
     "lean": [
-      "CI2ZF.Appendix.BBR.contraction_certificate",
+      "CI2ZF.Appendix.BBR.contraction_certificate_unconditional",
       "CI2ZF.Appendix.BBR.segmentWeightSquare",
-      "CI2ZF.Appendix.BBR.literature",
       "CI2ZF.Appendix.BBR.contraction_certificate_of_gap_two"
     ],
-    "note": "The cited BBR inputs enter as a Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature; the proof's non-exceptional case under q + 2 ≤ Δ is contraction_certificate_of_gap_two."
+    "note": "The proof's non-exceptional case under q + 2 ≤ Δ is contraction_certificate_of_gap_two."
   },
   {
     "paper": "companion",
@@ -1312,10 +1310,9 @@
     "lean": [
       "CI2ZF.Appendix.BBR.differential_contraction",
       "CI2ZF.Appendix.BBR.node_differential",
-      "CI2ZF.Appendix.BBR.point_certificate",
-      "CI2ZF.Appendix.BBR.literature"
+      "CI2ZF.Appendix.BBR.point_certificate_unconditional"
     ],
-    "note": "point_certificate takes the Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature."
+    "note": ""
   },
   {
     "paper": "companion",
@@ -1340,12 +1337,11 @@
     "title": "Tree total-influence decay",
     "status": "formalized",
     "lean": [
-      "CI2ZF.Appendix.BBR.total_influence_decay",
+      "CI2ZF.Appendix.BBR.total_influence_decay_unconditional",
       "CI2ZF.Appendix.BBR.totalInfluenceConstant_eq",
-      "CI2ZF.Appendix.BBR.contractionRate",
-      "CI2ZF.Appendix.BBR.literature"
+      "CI2ZF.Appendix.BBR.contractionRate"
     ],
-    "note": "The cited BBR inputs enter as a Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature."
+    "note": ""
   },
   {
     "paper": "companion",
@@ -1355,12 +1351,11 @@
     "title": "Uniform relative SSM",
     "status": "formalized",
     "lean": [
-      "CI2ZF.Appendix.BBR.root_spatial_energy",
-      "CI2ZF.Appendix.BBR.root_relative_ssm",
-      "CI2ZF.Appendix.BBR.relativeConstant",
-      "CI2ZF.Appendix.BBR.literature"
+      "CI2ZF.Appendix.BBR.root_spatial_energy_unconditional",
+      "CI2ZF.Appendix.BBR.root_relative_ssm_unconditional",
+      "CI2ZF.Appendix.BBR.relativeConstant"
     ],
-    "note": "The cited BBR inputs enter as a Literature hypothesis, discharged by the proved CI2ZF.Appendix.BBR.literature."
+    "note": ""
   },
   {
     "paper": "companion",

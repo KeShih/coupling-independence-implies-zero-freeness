@@ -24,8 +24,9 @@ on Lean's standard axioms `propext`,
 The [side-by-side page](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
 sets the headline paper statements represented by the generated cards beside
 their Lean declarations and matches those cards phrase by phrase. It also
-shows each card's axioms, the cited ingredients tracked by the formalization,
-and the library lemmas it applies, with source links pinned to the commit.
+shows each card's axioms and the library lemmas it applies, a coverage table of
+every numbered statement of both papers, and the Lean proofs of the results the
+papers cite, with source links pinned to the commit.
 `scripts/site/build.py` generates it into `docs/index.html` and checks every
 quotation against the sources.
 

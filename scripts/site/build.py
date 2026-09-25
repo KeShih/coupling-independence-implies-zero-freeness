@@ -1245,9 +1245,6 @@ def decl_html(info, commit, index, show_cited=True):
         for c in cited_in_type(info, by_statement):
             badges.append('<a class="badge bad" href="#lit-%s"><span aria-hidden="true">!</span>'
                           'Assumes %s</a>' % (c["id"], e(c["short"])))
-        for c in cited_in_proof(info, by_target):
-            badges.append('<a class="badge hyp" href="#lit-%s"><span class="dot" aria-hidden="true"></span>'
-                          'Uses %s, proved in Lean</a>' % (c["id"], e(c["short"])))
     return f"""
 <div class="decl">
   <div class="decl-head"><code class="decl-name">{e(short(info["name"]))}</code>
@@ -1588,7 +1585,6 @@ def build(args):
   <p class="source"><a href="{e(c['url'])}">{e(c['source'])}</a></p>
   <p>{e(c['meaning'])}</p>
   <p class="route"><strong>Lean proof.</strong> {e(c['route'])}</p>
-  <p class="users">Used by the proofs of: {user_links or 'no result shown on this page'}</p>
   {'<h4 class="sub">Lean statement</h4>' + statement if statement else ''}
   <h4 class="sub">Lean proof</h4>{proof}
 </article>""")
@@ -1887,7 +1883,7 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
 <body>
 <div class="topbar"><div class="wrap">
   <span class="brand"><span class="spark" aria-hidden="true">✻</span>CI2ZF <span class="brand-sub">Lean ↔ paper</span></span>
-  <nav aria-label="Sections"><a href="#status">Status</a><a href="#matrix">Cited results</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#coverage">Coverage</a><a href="#definitions">Definitions</a><a href="#literature">Their proofs</a><a href="#reproduce">Reproduce</a></nav>
+  <nav aria-label="Sections"><a href="#status">Status</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#coverage">Coverage</a><a href="#definitions">Definitions</a><a href="#literature">Cited results</a><a href="#reproduce">Reproduce</a></nav>
   <span class="spacer"></span>
   <button id="theme" type="button" title="Switch colour theme">Theme: auto</button>
 </div></div>
@@ -1896,7 +1892,7 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
 <header class="hero" id="status">
   <div class="eyebrow">Lean formalization · commit @@COMMIT@@</div>
   <h1>The paper and its Lean formalization, side by side</h1>
-  <p>For each headline result represented by a card on this page, the paper's statement is shown next to its corresponding Lean declaration. A table then matches the two phrase by phrase. The cards list the cited ingredients tracked by the formalization and the library lemmas each proof applies; the cited-results section records the formalized scope of those ingredients. The <a href="#coverage">coverage table</a> lists every numbered statement of both papers, all @@COVTOTAL@@ of them, with its formalization status and the Lean declarations, if any, that state it.</p>
+  <p>For each headline result represented by a card on this page, the paper's statement is shown next to its corresponding Lean declaration. A table then matches the two phrase by phrase. The cards list the library lemmas each proof applies. The results the papers cite from the literature are proved in the library too; the last section lists each one with the Lean theorem that proves it. The <a href="#coverage">coverage table</a> lists every numbered statement of both papers, all @@COVTOTAL@@ of them, with its formalization status and the Lean declarations, if any, that state it.</p>
   <p>Nothing on the Lean side is written by hand: signatures, axioms and dependencies are read from the compiled library at commit <a href="@@COMMITURL@@"><code>@@COMMIT@@</code></a>, and every source link points to that commit. Every quotation in the correspondence tables is checked verbatim against the paper's LaTeX and the Lean source when the page is built.</p>
 </header>
 
@@ -1908,10 +1904,6 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
   <button type="button" class="chip" data-filter="appendix" aria-pressed="false">Appendix A</button>
   <input type="search" id="q" placeholder="Filter by result or Lean name" aria-label="Filter by result or Lean name">
 </div>
-
-<h2 id="matrix">Cited results used by each proof</h2>
-<p class="lede">A dot means that the Lean proof of the result depends, through the library, on the Lean proof of that cited ingredient. No result in this table takes a cited ingredient as a hypothesis. Some lemmas take a proved Literature bundle as a parameter instead, among them the Lean forms of companion Lemmas 7.1, 7.2, 7.4 and 7.5, as their coverage notes say. The axiom audit allows only Lean's standard axioms. Hover or focus a dot for the declarations involved.</p>
-<div class="matrix-wrap">@@MATRIX@@</div>
 
 <h2 id="main">Main paper</h2>
 <p class="lede">Theorem numbers follow the current version of <em>Coupling Independence Implies Zero-Freeness</em>.</p>
@@ -1930,7 +1922,7 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
 <div class="card glossary">@@GLOSSARY@@</div>
 
 <h2 id="literature">Cited results and their Lean proofs</h2>
-<p class="lede">Each cited ingredient tracked by this formalization, the Lean proposition that expresses its formalized scope, and the Lean theorem that proves it. Where the Lean proof takes a different route from the cited paper, the card says so.</p>
+<p class="lede">The results the papers cite from the literature, each with the Lean proposition that states it in the form the proofs use and the Lean theorem that proves it. No theorem on this page assumes any of them. Where the Lean proof takes a different route from the cited paper, the card says so.</p>
 @@LITERATURE@@
 
 <h2 id="reproduce">Reproduce</h2>
