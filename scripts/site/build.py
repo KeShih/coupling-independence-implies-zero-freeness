@@ -1407,7 +1407,7 @@ def coverage_html(coverage, papers, converters, info, commit):
                         '<div class="cov-title">%s</div>%s</th><td class="st">%s</td><td class="ln">%s</td>'
                         '<td class="nt">%s</td></tr>'
                         % (group, e(search), e(ref), PAPER_WORDS[source], title, card_link,
-                           status_chip(entry["status"]), names, e(entry["note"])))
+                           status_chip(entry["status"]), names, e(re.sub(r"\bCI2ZF\.", "", entry["note"]))))
         groups.append("<tbody>%s</tbody>" % "".join(rows))
     table = ('<div class="cov-wrap"><table class="coverage" id="coverage-table"><caption class="sr">Every '
              'numbered statement of both papers, with its formalization status, the Lean declarations '
@@ -1592,7 +1592,7 @@ def build(args):
     tiles = [
         ("Build jobs", f"{record['build_jobs']:,}", "warnings are errors"),
         ("Audited declarations", f"{record['audited_project_declarations']:,}", "transitive axiom check"),
-        ("Library modules", f"{record['joint_import_closure_files']:,}", "all reachable from CI2ZF"),
+        ("Library modules", f"{record['joint_import_closure_files']:,}", "all reachable from the root module"),
         ("Axioms used", str(len(record["allowed_axioms"])), " · ".join(record["allowed_axioms"])),
         ("Verified quotations", f"{quotes:,}", f"in {sum(len(v) for v in PAIRS.values())} correspondences"),
     ]
@@ -1882,7 +1882,7 @@ table.coverage { border-collapse: collapse; width: 100%; font-size: 14px; }
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <span class="brand"><span class="spark" aria-hidden="true">✻</span>CI2ZF <span class="brand-sub">Lean ↔ paper</span></span>
+  <span class="brand">Statement checker</span>
   <nav aria-label="Sections"><a href="index.html">Read the papers</a><a href="#status">Status</a><a href="#main">Main paper</a><a href="#appendix">Appendix A</a><a href="#coverage">Coverage</a><a href="#definitions">Definitions</a><a href="#literature">Cited results</a><a href="#reproduce">Reproduce</a></nav>
   <span class="spacer"></span>
   <button id="theme" type="button" title="Switch colour theme">Theme: auto</button>

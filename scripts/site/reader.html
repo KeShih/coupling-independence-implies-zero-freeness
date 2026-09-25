@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CI2ZF · Paper and Lean</title>
+<title>Coupling Independence Implies Zero-Freeness</title>
 <meta name="description" content="Coupling Independence Implies Zero-Freeness and its companion, read side by side with the Lean 4 declarations that formalize every numbered statement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -585,6 +585,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     state.paper = key; state.selected = null; state.pinned = false; state.hold = null; state.view = null; state.back = [];
     var p = DATA.papers[key];
     Array.prototype.forEach.call(tabs.children, function (b) { b.setAttribute("aria-selected", String(b.dataset.paper === key)); });
+    document.title = p.title;
     $("pdfLink").hidden = !p.pdf;
     if (p.pdf) $("pdfLink").href = p.pdf;
     doc.innerHTML = p.html || fallbackHtml(p);
