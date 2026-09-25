@@ -203,7 +203,7 @@ def rich(text):
     while k < len(toks):
         kind, tok = toks[k]
         if kind == "code":
-            out.append("<code>%s</code>" % html.escape(tok))
+            out.append("<code>%s</code>" % html.escape(re.sub(r"^CI2ZF\.", "", tok)))
             k += 1
         elif kind == "mathtick":
             out.append(math_span(tok))
