@@ -1345,12 +1345,14 @@
     "title": "Soft-CV child–middle row discrepancy",
     "status": "formalized",
     "lean": [
-      "ZeroFreeness.Appendix.CV.cv_child_middle_ham"
+      "ZeroFreeness.Appendix.CV.cv_child_middle_ham",
+      "ZeroFreeness.Appendix.CV.cv_child_middle_metric"
     ],
     "defs": [
-      "ZeroFreeness.Appendix.CV.cvKernel"
+      "ZeroFreeness.Appendix.CV.cvKernel",
+      "ZeroFreeness.Appendix.CV.geometricMetric"
     ],
-    "note": "Includes x = 1."
+    "note": ""
   },
   {
     "paper": "companion",
