@@ -143,17 +143,16 @@ h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
 .thm-remark .thm-name { font-weight: 400; font-style: italic; }
 .thm-plain .thm-title, .thm-definition .thm-title { font-weight: 400; }
 .thm.is-selected { background: var(--accent-wash); }
-/* The Lean mark: a quiet pill, with a check when Lean proves the statement. */
-.lean-mark { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px;
-  font: 600 12px/1 var(--sans); letter-spacing: 0.01em; padding: 6px 11px; border-radius: 999px; font-style: normal;
-  background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); box-shadow: 0 1px 2px rgba(0,0,0,.04);
-  transition: background .15s, color .15s, border-color .15s; }
-.lean-mark svg { width: 13px; height: 13px; margin-left: -3px; color: var(--good); flex: none; }
-.lean-mark svg.logo { width: auto; height: 10px; margin: 0; color: inherit; stroke-width: 1.5px; }
-.lean-mark:hover { border-color: var(--accent); color: var(--accent-ink); }
-.thm.is-current .lean-mark { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--accent-ink); }
-.thm.is-selected .lean-mark { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: none; }
-.thm.is-selected .lean-mark svg { color: #fff; }
+/* The Lean mark: the L∃∀N logo alone, grey at rest, in the accent colour for
+   the statement being read, on a soft tint when selected. */
+.lean-mark { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center;
+  padding: 7px 8px; border-radius: 8px; font-style: normal; color: var(--muted);
+  transition: background .15s, color .15s; }
+.lean-mark svg.logo { display: block; width: auto; height: 11px; stroke-width: 1.7px; }
+.lean-mark:hover { background: var(--surface-2); color: var(--ink); }
+.lean-mark:focus:not(:focus-visible) { outline: none; }
+.thm.is-current .lean-mark { color: var(--accent-ink); }
+.thm.is-selected .lean-mark { background: var(--accent-wash); color: var(--accent-ink); }
 @container (max-width: 979px) {
   .lean-mark { position: relative; top: auto; right: auto; float: right; margin: 2px -6px 6px 12px; }
 }
@@ -385,8 +384,11 @@ details.more-box[open] summary::before { content: "\2212  "; }
 .peek .lean-mark { display: none; }
 .peek .eq { margin: 0.4em 0; }
 .peek-label { font: 600 11px/1.3 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-.back-btn { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 15; font: 550 13px/1 var(--sans);
-  background: var(--ink); color: var(--page); padding: 10px 14px; border-radius: 999px; box-shadow: var(--shadow); }
+.back-btn { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 15; display: inline-flex;
+  align-items: center; gap: 4px; font: 550 13.5px/1 var(--sans); background: var(--surface); color: var(--ink-2);
+  border: 1px solid var(--line-2); padding: 8px 14px 8px 10px; border-radius: 999px; box-shadow: var(--shadow); }
+.back-btn:hover { color: var(--accent-ink); border-color: var(--accent); }
+.back-btn svg { width: 15px; height: 15px; }
 .toast { position: fixed; z-index: 70; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
   background: var(--ink); color: var(--page); font: 550 13px/1 var(--sans); padding: 10px 14px; border-radius: 999px; transition: opacity .2s, transform .2s; }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
@@ -488,7 +490,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
     prev: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>',
     next: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5 10.5 8 6 12.5"/></svg>',
     ext: '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9"/></svg>',
-    pin: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h4M7 2.5v3.8L4.8 8.8v1h6.4v-1L9 6.3V2.5M8 9.8v3.7"/></svg>',
     copy: '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h.5"/></svg>',
     chev: '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10 8 5.5l4.5 4.5"/></svg>',
     check: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.4 6.6 11.4 12.5 4.8"/></svg>',
@@ -669,10 +670,10 @@ details.more-box[open] summary::before { content: "\2212  "; }
       if (!s.lean.length) return;  // a remark with no Lean of its own
       var b = document.createElement("button");
       b.type = "button"; b.className = "lean-mark"; b.dataset.tone = tone(s);
-      b.innerHTML = (tone(s) === "good" ? ICON.check : "") + ICON.lean + '<span class="sr">Lean</span>';
+      b.innerHTML = ICON.lean + '<span class="sr">Lean</span>';
       b.title = DATA.statuses[s.status].label + ". Show the Lean statement.";
       b.setAttribute("aria-label", label(s) + ": " + DATA.statuses[s.status].label + ". Show the Lean statement");
-      b.addEventListener("click", function (e) { e.stopPropagation(); select(s, { hold: true, open: true }); });
+      b.addEventListener("click", function (e) { e.stopPropagation(); if (e.detail) b.blur(); select(s, { hold: true, open: true }); });
       el.insertBefore(b, el.firstChild);
     });
   }
@@ -705,28 +706,20 @@ details.more-box[open] summary::before { content: "\2212  "; }
     if (thm && (opts.select || el === thm)) select(byId[thm.dataset.stmt], { hold: true, noScroll: true });
     if (!thm || el !== thm) flash(el.closest(".eq, li, .bib li, .float, h2.h, h3.h, h4.h, .thm") || el);
   }
+  // After a followed link, one button returns to where the reader was.
   function pushBack() {
-    var near = currentContext();
-    state.back.push({ top: pane.scrollTop, name: near });
+    state.back.push(pane.scrollTop);
     if (state.back.length > 20) state.back.shift();
-    var b = $("backBtn");
-    b.textContent = "← Back to " + near;
-    b.hidden = false;
+    $("backBtn").hidden = false;
   }
+  $("backBtn").innerHTML = ICON.prev + "Back";
   $("backBtn").addEventListener("click", function () {
-    var last = state.back.pop();
-    if (!last) return;
-    pane.scrollTo({ top: last.top, behavior: "auto" });
+    var top = state.back.pop();
+    if (top === undefined) return;
+    pane.scrollTo({ top: top, behavior: "auto" });
     state.hold = null;
-    var b = $("backBtn");
-    if (state.back.length) b.textContent = "← Back to " + state.back[state.back.length - 1].name; else b.hidden = true;
+    $("backBtn").hidden = !state.back.length;
   });
-  function currentContext() {
-    var v = state.view;
-    if (v && v.type === "stmt") return label(byId[v.id]);
-    if (v && v.type === "section" && v.info) return (v.info.num ? "§" + v.info.num : "the section");
-    return "the top";
-  }
 
   doc.addEventListener("click", function (e) {
     var a = e.target.closest("a[href^='#']");
@@ -817,9 +810,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var list = DATA.papers[state.paper].statements;
     var prev = s ? list[s.index - 1] : null, next = s ? list[s.index + 1] : list[0];
     return '<div class="pv-nav">' +
-      (s ? '<button class="nav-btn" type="button" data-pin aria-pressed="' + state.pinned + '" aria-label="' +
-        (state.pinned ? "Unpin: follow the paper again" : "Pin this statement") + '" title="' +
-        (state.pinned ? "Pinned. Click to follow the paper again." : "Following the paper. Click to keep this statement here.") + '">' + ICON.pin + '</button>' : "") +
       '<button class="nav-btn" type="button" data-go="' + (prev ? esc(prev.id) : "") + '" aria-label="Previous statement" title="Previous statement (k)"' + (prev ? "" : " disabled") + '>' + ICON.prev + '</button>' +
       '<button class="nav-btn" type="button" data-go="' + (next ? esc(next.id) : "") + '" aria-label="Next statement" title="Next statement (j)"' + (next ? "" : " disabled") + '>' + ICON.next + '</button></div>';
   }
@@ -966,12 +956,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
   panel.addEventListener("click", function (e) {
     var go = e.target.closest("[data-go]");
     if (go && go.dataset.go) { goTo(go.dataset.go, { select: true, remember: false }); return; }
-    if (e.target.closest("[data-pin]")) {
-      state.pinned = !state.pinned;
-      if (!state.pinned) { state.hold = null; state.selected = null; thms.forEach(function (el) { el.classList.remove("is-selected"); }); refreshFollow(true); }
-      else show(state.view, true);
-      return;
-    }
     var copy = e.target.closest("[data-copy]");
     if (copy) copyText(copy.dataset.copy, "Copied " + copy.dataset.copy.split(".").pop());
   });
@@ -1068,7 +1052,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var b = e.target.closest("[data-go]");
     if (!b) return;
     openToc(false);
-    goTo(b.dataset.go, { select: !b.hasAttribute("data-sec"), remember: true, instant: true });
+    goTo(b.dataset.go, { select: !b.hasAttribute("data-sec"), instant: true });
   });
 
   // ---- Previews of references ---------------------------------------------------
@@ -1157,7 +1141,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
       e.preventDefault();
     } else if (e.key === "s") { $("stmtOnly").click(); }
     else if (e.key === "Escape") { openToc(false); hidePeek(); openSheet(false); }
-    else if (e.key === "p" && cur) { state.pinned = !state.pinned; show(state.view, true); }
   });
 
   window.addEventListener("hashchange", function () { route(); });
