@@ -86,6 +86,13 @@ code, pre { font-family: var(--mono); }
 .toc-btn:hover { border-color: var(--accent); color: var(--accent-ink); }
 .toc-btn[aria-expanded="true"] { background: var(--accent-wash); border-color: color-mix(in srgb, var(--accent) 45%, var(--line-2)); color: var(--accent-ink); }
 .icon-btn svg { width: 19px; height: 19px; }
+/* Back and forward through the reader's jumps, as in a PDF reader: always in
+   place, dimmed when there is nowhere to go. */
+.hist { display: inline-flex; gap: 2px; flex: none; margin-left: -6px; }
+.hist-btn { width: 32px; height: 34px; border-radius: 9px; display: inline-grid; place-items: center; color: var(--ink-2); }
+.hist-btn svg { width: 17px; height: 17px; }
+.hist-btn:hover:not(:disabled) { background: var(--surface-2); color: var(--ink); }
+.hist-btn:disabled { opacity: 0.3; cursor: default; }
 .papers { display: inline-flex; padding: 3px; border-radius: 11px; background: var(--surface-2); border: 1px solid var(--line); }
 .papers button { padding: 6px 12px; border-radius: 8px; font-size: 13.5px; font-weight: 550; color: var(--ink-2); white-space: nowrap; }
 .papers button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
@@ -386,12 +393,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
 .peek .lean-mark { display: none; }
 .peek .eq { margin: 0.4em 0; }
 .peek-label { font: 600 11px/1.3 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-/* After a followed link the bar offers the way back, so nothing covers the text. */
-.back-btn { display: inline-flex; align-items: center; gap: 3px; height: 34px; padding: 0 12px 0 8px; flex: none;
-  border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink);
-  font: 550 13.5px/1 var(--sans); white-space: nowrap; }
-.back-btn:hover { color: var(--accent-ink); border-color: var(--accent); }
-.back-btn svg { width: 15px; height: 15px; }
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: transparent; overflow: hidden; }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 
@@ -426,11 +427,14 @@ details.more-box[open] summary::before { content: "\2212  "; }
 }
 
 @media (max-width: 520px) { .papers .full { display: none; } .papers .brief { display: inline; }
-  .back-btn { padding: 0 8px; } .back-btn .word { display: none; }
-  /* Room for Back on a phone: the theme then follows the system. */
-  .bar:has(.back-btn:not([hidden])) #themeBtn { display: none; } }
-@media (max-width: 400px) { .bar { gap: 5px; padding: 0 6px; } .papers button { padding: 6px 7px; } .switch { padding: 7px 4px; } }
+  /* On a phone the arrows show only when they lead somewhere, and the theme
+     then follows the system. */
+  .hist { margin-left: 0; } .hist-btn:disabled { display: none; } .hist:not(:has(.hist-btn:enabled)) { display: none; }
+  .bar:has(.hist-btn:enabled) #themeBtn { display: none; } }
+@media (max-width: 400px) { .bar { gap: 5px; padding: 0 6px; } .papers button { padding: 6px 7px; } .switch { padding: 7px 4px; }
+  .hist-btn { width: 28px; } .bar:has(#backBtn:enabled):has(#fwdBtn:enabled) .switch > span { display: none; } }
 @media (max-width: 370px) { #themeBtn { display: none; } .papers button { padding: 6px 5px; } }
+@media (max-width: 350px) { .bar:has(.hist-btn:enabled) .switch > span { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -440,9 +444,16 @@ details.more-box[open] summary::before { content: "\2212  "; }
     <button class="toc-btn" id="tocBtn" type="button" aria-expanded="false" aria-controls="toc" aria-label="Contents" title="Contents">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 5.5h13M3.5 10h13M3.5 14.5h8"/></svg>
     </button>
+    <div class="hist" role="group" aria-label="History">
+      <button class="hist-btn" id="backBtn" type="button" aria-label="Back" disabled>
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 9h-11M8 4.5 3.5 9 8 13.5"/></svg>
+      </button>
+      <button class="hist-btn" id="fwdBtn" type="button" aria-label="Forward" disabled>
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9h11M10 4.5 14.5 9 10 13.5"/></svg>
+      </button>
+    </div>
     <div class="papers" role="tablist" aria-label="Paper" id="paperTabs"></div>
-    <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false" title="Show only the numbered statements (s)"><span>Statements<span class="long"> only</span></span></button>
-    <button class="back-btn" id="backBtn" type="button" aria-label="Back" title="Back to where you were" hidden></button>
+    <button class="switch" id="stmtOnly" type="button" role="switch" aria-checked="false" aria-pressed="false" aria-label="Statements only" title="Show only the numbered statements (s)"><span>Statements<span class="long"> only</span></span></button>
     <div class="bar-end">
       <a class="bar-link" id="pdfLink" href="#" target="_blank" rel="noopener">PDF</a>
       <a class="bar-link" id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
@@ -505,7 +516,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   Object.keys(DATA.papers).forEach(function (key) {
     DATA.papers[key].statements.forEach(function (s, i) { s.paper = key; s.index = i; byId[s.id] = s; });
   });
-  var state = { paper: null, view: null, selected: null, pinned: false, hold: null, back: [], positions: {} };
+  var state = { paper: null, view: null, selected: null, pinned: false, hold: null, positions: {} };
   $("githubLink").href = DATA.github;
 
   function sourceUrl(d) {
@@ -601,14 +612,14 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var b = document.createElement("button");
     b.type = "button"; b.setAttribute("role", "tab"); b.dataset.paper = key;
     b.innerHTML = '<span class="full">' + esc(DATA.papers[key].short) + '</span><span class="brief">' + esc(DATA.papers[key].short.split(" ")[0]) + '</span>';
-    b.addEventListener("click", function () { if (state.paper !== key) openPaper(key); });
+    b.addEventListener("click", function () { if (state.paper !== key) { record(); openPaper(key); } });
     tabs.appendChild(b);
   });
 
   var sectionOf = {}, headings = [], thms = [];
   function openPaper(key, target) {
     if (state.paper) state.positions[state.paper] = pane.scrollTop;
-    state.paper = key; state.selected = null; state.pinned = false; state.hold = null; state.view = null; state.back = [];
+    state.paper = key; state.selected = null; state.pinned = false; state.hold = null; state.view = null;
     var p = DATA.papers[key];
     Array.prototype.forEach.call(tabs.children, function (b) { b.setAttribute("aria-selected", String(b.dataset.paper === key)); });
     document.title = p.title;
@@ -619,7 +630,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
     indexDoc(p);
     decorate();
     buildToc();
-    $("backBtn").hidden = true;
     pane.scrollTop = 0;
     if (target) goTo(target, { select: true, instant: true });
     else if (state.positions[key]) pane.scrollTop = state.positions[key];
@@ -697,28 +707,73 @@ details.more-box[open] summary::before { content: "\2212  "; }
   function goTo(id, opts) {
     opts = opts || {};
     var s = byId[id];
-    if (s && s.paper !== state.paper) { openPaper(s.paper, id); return; }
+    if (s && s.paper !== state.paper) { if (opts.remember) record(); openPaper(s.paper, id); return; }
     var el = targetEl(id);
     if (!el) return;
-    if (opts.remember) pushBack();
+    if (opts.remember) record();
     scrollToEl(el, opts.instant);
     var thm = el.closest(".thm[data-stmt]");
     if (thm && (opts.select || el === thm)) select(byId[thm.dataset.stmt], { hold: true, noScroll: true });
     if (!thm || el !== thm) flash(el.closest(".eq, li, .bib li, .float, h2.h, h3.h, h4.h, .thm") || el);
   }
-  // After a followed link, one button returns to where the reader was.
-  function pushBack() {
-    state.back.push(pane.scrollTop);
-    if (state.back.length > 20) state.back.shift();
-    $("backBtn").hidden = false;
+  // ---- History --------------------------------------------------------------------
+  // Every jump (a link, the contents, a list in the panel, the other paper) is
+  // recorded; Back and Forward step through them as in a PDF reader.
+  var hist = { back: [], fwd: [] };
+  var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  $("backBtn").title = "Back (" + (mac ? "\u2318[" : "Alt+\u2190") + ")";
+  $("fwdBtn").title = "Forward (" + (mac ? "\u2318]" : "Alt+\u2192") + ")";
+  // Where the reader is: the block at the top of the pane, by its place among
+  // the paper's blocks, and its offset. A return then survives reflow and the
+  // rebuilt page of the other paper; the scroll position is the fallback.
+  var BLOCKS = ".p, .thm, .h, .eq, li, .float, table, .title-block";
+  function here() {
+    var r = pane.getBoundingClientRect(), d = doc.getBoundingClientRect(), el = null;
+    for (var dy = 6; dy < 200 && !el; dy += 16) {
+      var hit = document.elementFromPoint(d.left + d.width / 2, r.top + dy);
+      el = hit && hit !== doc && doc.contains(hit) ? hit.closest(BLOCKS) : null;
+    }
+    return { paper: state.paper, top: pane.scrollTop, off: el ? el.getBoundingClientRect().top - r.top : 0,
+      block: el ? Array.prototype.indexOf.call(doc.querySelectorAll(BLOCKS), el) : -1 };
   }
-  $("backBtn").innerHTML = ICON.prev + '<span class="word">Back</span>';
-  $("backBtn").addEventListener("click", function () {
-    var top = state.back.pop();
-    if (top === undefined) return;
-    pane.scrollTo({ top: top, behavior: "auto" });
+  function record() {
+    var h = here(), last = hist.back[hist.back.length - 1];
+    if (!last || last.paper !== h.paper || Math.abs(last.top - h.top) > 2) hist.back.push(h);
+    if (hist.back.length > 50) hist.back.shift();
+    hist.fwd = [];
+    updateHist();
+  }
+  function restore(h) {
+    if (h.paper !== state.paper) openPaper(h.paper);
+    var el = h.block >= 0 ? doc.querySelectorAll(BLOCKS)[h.block] : null;
+    if (el && el.getClientRects().length) {
+      ensureTypesetUpTo(el);
+      pane.scrollTop += el.getBoundingClientRect().top - pane.getBoundingClientRect().top - h.off;
+    } else pane.scrollTop = h.top;
     state.hold = null;
-    $("backBtn").hidden = !state.back.length;
+    refreshFollow(true);
+  }
+  function step(dir) {
+    var from = dir < 0 ? hist.back : hist.fwd, to = dir < 0 ? hist.fwd : hist.back;
+    if (!from.length) return false;
+    hidePeek();
+    to.push(here());
+    restore(from.pop());
+    updateHist();
+    return true;
+  }
+  function updateHist() {
+    $("backBtn").disabled = !hist.back.length;
+    $("fwdBtn").disabled = !hist.fwd.length;
+  }
+  $("backBtn").addEventListener("click", function () { step(-1); });
+  $("fwdBtn").addEventListener("click", function () { step(1); });
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest && e.target.closest("input, textarea")) return;
+    var dir = 0;
+    if (e.altKey && !e.metaKey && !e.ctrlKey && !e.shiftKey && /^Arrow(Left|Right)$/.test(e.key)) dir = e.key === "ArrowLeft" ? -1 : 1;
+    else if (mac && e.metaKey && !e.altKey && !e.ctrlKey && (e.key === "[" || e.key === "]")) dir = e.key === "[" ? -1 : 1;
+    if (dir && step(dir)) e.preventDefault();
   });
 
   doc.addEventListener("click", function (e) {
@@ -954,7 +1009,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
 
   panel.addEventListener("click", function (e) {
     var go = e.target.closest("[data-go]");
-    if (go && go.dataset.go) { goTo(go.dataset.go, { select: true, remember: false }); return; }
+    if (go && go.dataset.go) { goTo(go.dataset.go, { select: true, remember: !go.classList.contains("nav-btn") }); return; }
   });
 
   // ---- Bottom sheet on phones ------------------------------------------------------
@@ -1029,7 +1084,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var b = e.target.closest("[data-go]");
     if (!b) return;
     openToc(false);
-    goTo(b.dataset.go, { select: !b.hasAttribute("data-sec"), instant: true });
+    goTo(b.dataset.go, { select: !b.hasAttribute("data-sec"), instant: true, remember: true });
   });
 
   // ---- Previews of references ---------------------------------------------------

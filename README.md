@@ -37,7 +37,9 @@ shows both papers, rendered from their LaTeX, beside the Lean statement of
 the result you are reading, the definitions it uses, and links to the exact
 source lines. The ☰ button lists every section and statement (on wide
 screens, beside the paper); switch to *Statements only* to skim every
-numbered result with its Lean status.
+numbered result with its Lean status. The ← → arrows step back and forward
+through the references you follow, as in a PDF reader (⌘[ and ⌘] on a Mac,
+Alt+← and Alt+→ elsewhere).
 
 ## The main theorem
 
