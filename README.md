@@ -12,19 +12,15 @@
 
 [![The reader: Theorem 1.1 of the main paper, with the Lean declarations that state it beside it](https://github.com/user-attachments/assets/7fa6a483-fe0d-4fed-b555-f7d6861f99a4)](https://keshih.github.io/coupling-independence-implies-zero-freeness/)
 
-This repository formalizes two papers by Shuai Shao and Ke Shi in Lean 4
-with mathlib: *Coupling Independence Implies Zero-Freeness* (2026) and its
-companion, *Further Potts Zero-Free Regions from Coupling Independence*.
+Lean 4 formalization of two papers by Shuai Shao and Ke Shi,
+*Coupling Independence Implies Zero-Freeness* and its companion,
+*Further Potts Zero-Free Regions from Coupling Independence*. Every numbered
+theorem, lemma, proposition and corollary has a Lean statement, proved from
+mathlib and Lean's standard axioms alone.
 
-Every numbered theorem, lemma, proposition and corollary has a Lean
-statement, and the proofs rest on mathlib and Lean's three standard axioms
-alone. On the website, each statement of the papers sits beside its Lean,
-with a note wherever the two differ. Not formalized: a few claims about
-cited papers, the algorithmic claims, and the effective choice of ε.
+## Check it yourself
 
-## Check it with your own agent
-
-Paste this prompt into your coding agent:
+Paste this into your coding agent:
 
 ```text
 Verify the Lean formalization at
@@ -44,33 +40,11 @@ whose Lean statement does not match the paper.
 ```
 
 > [!WARNING]
-> **Full check.** This prompt compares every numbered statement of both
-> papers (107 in all) with its Lean. It is thorough but costs a great many
-> tokens.
+> For a full check of all 107 numbered statements, replace "zero-freeness
+> result" with "numbered statement". It costs a great many tokens.
 
-```text
-Verify the Lean formalization at
-https://github.com/KeShih/coupling-independence-implies-zero-freeness.
-
-1. Build it and confirm that it compiles without errors, contains no
-   sorry or admit, and depends only on mathlib and Lean's standard axioms
-   (propext, Classical.choice, Quot.sound).
-2. List every numbered theorem, lemma, proposition, corollary and
-   definition of both papers yourself, and compare each with the Lean
-   declarations that state it, following their definitions, without
-   relying on the repository's descriptions. The Lean must claim what the
-   paper claims: no extra assumptions, no weaker conclusion, no narrower
-   range of parameters.
-
-Report any build or trust-base problem, and every statement whose Lean
-does not match the paper.
-```
-
-## What to expect
-
-With prebuilt mathlib (`lake exe cache get`), building the library and running
-the axiom audit takes about 17 minutes on an Apple M4 (10 cores, 24 GB). A
-successful `bash scripts/check-all.sh` ends with:
+With prebuilt mathlib the build takes about 17 minutes on an Apple M4, and
+a successful `bash scripts/check-all.sh` ends with:
 
 ```text
 Build completed successfully (4069 jobs).
@@ -79,12 +53,5 @@ Complete-library axiom audit passed: 11320 declarations; allowed dependencies us
  Quot.sound]
 ```
 
-Three modules also print a note that `ring` fell back to `ring_nf`; it is
-harmless.
-
-[The formalization in detail](docs/formalization.md) lists the Lean names of
-the main results, the cited results proved in Lean, and how to build the
-library and the website.
-
-The formalization was developed with assistance from GPT-6 Astra and Claude
-Opus 5.5, as disclosed in both papers.
+More in [the formalization in detail](docs/formalization.md). Developed with
+assistance from GPT-6 Astra and Claude Opus 5.5, as disclosed in both papers.
