@@ -599,6 +599,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
         anchor = firstVisible(); anchorTop = anchor ? anchor.getBoundingClientRect().top : 0;
       }
       for (var i = 0; i < nodes.length; i++) typeset(nodes[i]);
+      fitEquations(chapter);
       if (anchor) pane.scrollTop += anchor.getBoundingClientRect().top - anchorTop;
       mathDone++;
     }
@@ -617,9 +618,28 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var chapters = doc.querySelectorAll(".chapter");
     for (var i = 0; i < chapters.length; i++) {
       renderMath(chapters[i]);
+      fitEquations(chapters[i]);
       if (chapters[i] === chapter) break;
     }
   }
+  // A display that is a few pixels too wide (rounding in the typeset math)
+  // is clipped rather than given a scrollbar; one that is really too wide is
+  // shrunk to fit, down to three quarters of its size, and scrolls beyond that.
+  function fitEquations(root) {
+    root.querySelectorAll(".eq").forEach(function (eq) {
+      if (!eq.querySelector(".katex")) return;
+      eq.style.fontSize = ""; eq.style.overflowX = "";
+      var over = eq.scrollWidth - eq.clientWidth;
+      if (over > 6 && eq.clientWidth / eq.scrollWidth >= 0.75) {
+        eq.style.fontSize = (98 * eq.clientWidth / eq.scrollWidth).toFixed(1) + "%";
+        over = eq.scrollWidth - eq.clientWidth;
+      }
+      if (over > 0 && over <= 6) eq.style.overflowX = "hidden";
+    });
+  }
+  var fitTimer = null;
+  function refit() { clearTimeout(fitTimer); fitTimer = setTimeout(function () { fitEquations(doc); }, 150); }
+  window.addEventListener("resize", refit);
 
   // ---- Paper ------------------------------------------------------------------
   var tabs = $("paperTabs");
@@ -1185,12 +1205,13 @@ details.more-box[open] summary::before { content: "\2212  "; }
       if (!dragging) return;
       dragging = false; sp.classList.remove("dragging");
       store.set("zero-freeness-lean-w", String(setW(e.clientX)));
+      refit();
     });
     sp.addEventListener("keydown", function (e) {
       var cur = parseInt(getComputedStyle(root).getPropertyValue("--lean-w"), 10) || 460;
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         var w = setW(window.innerWidth - cur + (e.key === "ArrowLeft" ? -24 : 24));
-        store.set("zero-freeness-lean-w", String(w)); e.preventDefault();
+        store.set("zero-freeness-lean-w", String(w)); refit(); e.preventDefault();
       }
     });
   })();
