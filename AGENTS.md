@@ -207,8 +207,11 @@ GitHub Pages serves `docs/` from `main` as committed. Keep `docs/.nojekyll`.
   - `richtext.py` typesets the formulas in notes and glosses.
   - `reader.html` is the template and holds all the CSS and JS.
 
-  The Lean panel shows a statement's `lean` declarations as code, without
-  docstrings, and its `defs` as rows with the paper's symbol and a gloss.
+  The Lean column is one flow in the paper's order: an overview, the section
+  names, and a card per statement with its `lean` declarations as code
+  (without docstrings) and its `defs` as rows with the paper's symbol and a
+  gloss. It scrolls with the paper, keeping the current statement's card
+  level with it.
 
   Lean declarations are located by a regex scan, so they must start in
   column 0 inside `namespace`/`section` blocks.

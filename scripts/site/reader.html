@@ -262,16 +262,28 @@ table.tab { border-collapse: collapse; margin: 0 auto; font-size: 0.86em; font-v
 
 /* Lean panel ---------------------------------------------------------- */
 .panel { padding: 24px 28px 64px; font-size: 15px; }
+/* The Lean column flows with the paper: its overview, then one card per
+   numbered statement in the paper's order, under the paper's section names. */
+.flow-sec { display: flex; gap: 0.6em; margin: 34px 0 0; padding-bottom: 8px; border-bottom: 1px solid var(--line);
+  font: 600 12px/1.4 var(--sans); letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.flow-sec.lvl2 { margin-top: 22px; border-bottom: 0; padding-bottom: 0; font-size: 13.5px; font-weight: 550;
+  letter-spacing: 0; text-transform: none; color: var(--ink-2); }
+.panel.stmt-only .flow-sec.no-stmt { display: none; }
+.fcard { position: relative; padding: 16px 0 22px; border-bottom: 1px solid var(--line); }
+.fcard::before { content: ""; position: absolute; left: -16px; top: 18px; bottom: 22px; width: 3px; border-radius: 3px;
+  background: transparent; transition: background-color .2s; }
+.fcard.is-current::before { background: var(--accent); }
+.fcard-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: 12px; width: 100%; text-align: left; }
+.fcard-head .t { color: var(--ink-2); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fcard-head .t .m.katex-done { white-space: nowrap; }
+.fcard-head:hover .pv-ref { text-decoration: underline; text-underline-offset: 3px; }
+.fcard .note { margin-top: 10px; }
+.fcard .decls { margin-top: 14px; }
+.fcard .defs { margin-top: 16px; }
 .pv-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; min-height: 30px; }
 .pv-stmt .pv-top { margin-bottom: 0; }
 .pv-head { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px; min-width: 0; }
 .pv-stmt .note { margin-top: 12px; }
-.pv-nav { display: flex; gap: 2px; align-items: center; flex: none; }
-.nav-btn { width: 30px; height: 30px; border-radius: 8px; display: inline-grid; place-items: center; color: var(--muted); }
-.nav-btn:hover:not(:disabled) { color: var(--ink); background: var(--surface); }
-.nav-btn:disabled { opacity: .35; cursor: default; }
-.nav-btn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent-wash); }
-.nav-btn svg { width: 16px; height: 16px; }
 .pv-title { margin: 0 0 12px; font-weight: 400; }
 .pv-ref { font: 600 14px/1.3 var(--sans); color: var(--accent-ink); }
 .pv-name { display: block; font: 400 25px/1.25 var(--paper); letter-spacing: -0.005em; text-wrap: balance; color: var(--ink); }
@@ -304,7 +316,7 @@ details.def > summary:hover .def-name { color: var(--accent-ink); }
 .def-gloss { grid-column: 2 / -1; color: var(--ink-2); font-size: 14.5px; line-height: 1.5; }
 details.def .decl { margin: 2px 0 14px 20px; }.m-raw { font-family: var(--mono); font-size: 0.9em; }
 pre.lean { margin: 0; padding: 13px 15px; background: var(--code-bg); border-radius: 10px; font-size: 13px; line-height: 1.65;
-  overflow: auto; max-height: 28em; tab-size: 2; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+  overflow-x: auto; tab-size: 2; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
 pre.lean .ln { display: block; text-indent: -3ch; }
 pre.lean .k { color: var(--lean-kw); font-weight: 600; }
 pre.lean .t { color: var(--lean-type); }
@@ -421,7 +433,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
   .sheet-handle small { font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sheet-handle .chev { margin-left: auto; color: var(--muted); transition: transform .2s; }
   .lean-pane.open .sheet-handle .chev { transform: rotate(180deg); }
-  /* Open, the panel shows the statement itself: the handle keeps only its grabber and chevron. */
+  /* Open, the sheet shows the Lean itself: the handle keeps only its grabber and chevron. */
   .lean-pane.open .sheet-handle { min-height: 34px; padding: 10px 16px 0; }
   .lean-pane.open .sheet-handle .txt { display: none; }
   .panel { padding: 6px 18px 40px; }
@@ -592,6 +604,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     }
     $("progress").style.width = mathQueue.length ? (100 * mathDone / mathTotal).toFixed(1) + "%" : "0";
     if (mathQueue.length) requestAnimationFrame(pumpMath); else { refreshFollow(); }
+    syncFlow();
   }
   function firstVisible() {
     var items = doc.querySelectorAll(".chapter > *"), top = pane.getBoundingClientRect().top;
@@ -632,11 +645,13 @@ details.more-box[open] summary::before { content: "\2212  "; }
     indexDoc(p);
     decorate();
     buildToc();
+    buildFlow();
     pane.scrollTop = 0;
     if (target) goTo(target, { select: true, instant: true });
     else if (state.positions[key]) pane.scrollTop = state.positions[key];
     scheduleMath();
     refreshFollow(true);
+    syncFlow(true);
     if (!target) history.replaceState(null, "", "#" + key);
   }
 
@@ -796,13 +811,20 @@ details.more-box[open] summary::before { content: "\2212  "; }
   // ---- Follow along -------------------------------------------------------------
   var ticking = false;
   pane.addEventListener("scroll", function () {
-    if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; refreshFollow(); }); }
+    if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; refreshFollow(); syncFlow(); }); }
     hidePeek();
   }, { passive: true });
 
   // Only the reader's own scrolling releases a held statement, not layout
   // shifts while math is typeset or programmatic jumps.
   ["wheel", "touchmove", "keydown", "pointerdown"].forEach(function (type) {
+    pane.addEventListener(type, function () { flow.free = false; }, { passive: true });
+    // Scrolling the Lean column by hand frees it until the paper is scrolled again.
+    leanScroll.addEventListener(type, function (e) {
+      if (type === "keydown" && !/^(Arrow|Page|Home|End| )/.test(e.key)) return;
+      if (type === "pointerdown" && e.target !== leanScroll) return;  // its scrollbar
+      flow.free = true;
+    }, { passive: true });
     pane.addEventListener(type, function (e) {
       if (!state.hold) return;
       if (type === "keydown" && !/^(Arrow|Page|Home|End| )/.test(e.key)) return;
@@ -844,7 +866,9 @@ details.more-box[open] summary::before { content: "\2212  "; }
     thms.forEach(function (el) { el.classList.toggle("is-selected", el.dataset.stmt === s.id); });
     show({ type: "stmt", id: s.id }, true);
     history.replaceState(null, "", "#" + s.id);
-    if (opts.open && narrow.matches) openSheet(true);
+    flow.free = false;
+    if (narrow.matches) { if (opts.open) openSheet(true); }
+    else syncFlow(!!opts.instant);
   }
 
   // ---- Panel ----------------------------------------------------------------------
@@ -854,35 +878,22 @@ details.more-box[open] summary::before { content: "\2212  "; }
     view.key = key;
     state.view = view;
     thms.forEach(function (el) { el.classList.toggle("is-current", view.type === "stmt" && el.dataset.stmt === view.id); });
-    if (view.type === "stmt") panel.innerHTML = stmtView(byId[view.id]);
-    else if (view.type === "section") panel.innerHTML = sectionView(view.info);
-    else panel.innerHTML = overview();
-    renderMath(panel);
-    leanScroll.scrollTop = 0;
+    panel.querySelectorAll(".fcard").forEach(function (c) { c.classList.toggle("is-current", view.type === "stmt" && c.dataset.stmt === view.id); });
     updateHandle();
     markToc();
   }
 
-  function navButtons(s) {
-    var list = DATA.papers[state.paper].statements;
-    var prev = s ? list[s.index - 1] : null, next = s ? list[s.index + 1] : list[0];
-    return '<div class="pv-nav">' +
-      '<button class="nav-btn" type="button" data-go="' + (prev ? esc(prev.id) : "") + '" aria-label="Previous statement" title="Previous statement (k)"' + (prev ? "" : " disabled") + '>' + ICON.prev + '</button>' +
-      '<button class="nav-btn" type="button" data-go="' + (next ? esc(next.id) : "") + '" aria-label="Next statement" title="Next statement (j)"' + (next ? "" : " disabled") + '>' + ICON.next + '</button></div>';
-  }
-
   function stripTags(h) { var d = document.createElement("div"); d.innerHTML = h; return d.textContent; }
 
-  // The panel for one statement: its status and note, the Lean statement as
-  // code, and the definitions needed to read it.
-  function stmtView(s) {
+  // One statement's card: its number, title and status, the note, the Lean
+  // statement as code, and the definitions needed to read it.
+  function card(s) {
     var st = DATA.statuses[s.status];
-    // The paper beside it already shows the number, title and statement, so the
-    // panel names the statement in one line with its status.
-    var html = '<div class="pv pv-stmt"><h2 class="sr">' + esc(label(s)) + ': ' + esc(s.title) + '</h2>' +
-      '<div class="pv-top"><div class="pv-head"><span class="pv-ref">' + esc(label(s)) + '</span>' +
+    var html = '<article class="fcard" data-stmt="' + esc(s.id) + '" aria-label="' + esc(label(s)) + ': ' + esc(s.title) + '">' +
+      '<button class="fcard-head" type="button" data-go="' + esc(s.id) + '" title="Show ' + esc(label(s)) + ' in the paper">' +
+      '<span class="pv-ref">' + esc(label(s)) + '</span><span class="t">' + titleHtml(s) + '</span>' +
       '<span class="status" data-tone="' + tone(s) + '" title="' + esc(st.meaning) + '">' + esc(st.label) +
-      '<span class="sr">. ' + esc(st.meaning) + '</span></span></div>' + navButtons(s) + '</div>';
+      '<span class="sr">. ' + esc(st.meaning) + '</span></span></button>';
     if (s.note) html += '<p class="note">' + s.note + '</p>';
     else if (!s.lean.length) html += '<p class="empty">No Lean declaration.</p>';
     if (s.lean.length) html += '<div class="decls">' + s.lean.map(declCard).join("") + '</div>';
@@ -891,8 +902,63 @@ details.more-box[open] summary::before { content: "\2212  "; }
       s.defs.forEach(function (d) { html += defRow(d); });
       html += '</section>';
     }
-    return html + '</div>';
+    return html + '</article>';
   }
+
+  // ---- The flow ---------------------------------------------------------------------
+  // The Lean column holds the paper's overview and a card for every statement,
+  // with the section names between them, in the paper's order. It scrolls with
+  // the paper: the card of the statement being read sits level with it, and
+  // stays at the top of the column once the statement has scrolled past, until
+  // the next statement or section takes over.
+  var flow = { pairs: [], byEl: new Map(), target: 0, anim: false, free: false };
+  function buildFlow() {
+    var html = overview(), paperEls = [];
+    doc.querySelectorAll("h2.h, h3.h, .thm[data-stmt]").forEach(function (el) {
+      if (el.classList.contains("h")) {
+        var info = headings.filter(function (h) { return h.el === el; })[0];
+        if (!info) return;
+        html += '<div class="flow-sec lvl' + info.level + (info.has ? "" : " no-stmt") + '" data-flow>' +
+          (info.num ? '<span>' + esc(info.num) + '</span>' : "") + '<span>' + info.title + '</span></div>';
+        paperEls.push(el);
+      } else if (byId[el.dataset.stmt]) {
+        html += card(byId[el.dataset.stmt]).replace('<article class="fcard"', '<article class="fcard" data-flow');
+        paperEls.push(el);
+      }
+    });
+    panel.innerHTML = html;
+    panel.classList.toggle("stmt-only", doc.classList.contains("stmt-only"));
+    renderMath(panel);
+    var flowEls = panel.querySelectorAll("[data-flow]");
+    flow.pairs = paperEls.map(function (el, i) { return { p: el, l: flowEls[i] }; });
+    flow.byEl = new Map(flow.pairs.map(function (pr) { return [pr.p, pr.l]; }));
+    flow.free = false;
+    leanScroll.scrollTop = 0;
+  }
+  function offsetIn(box, el) { return el.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop; }
+  function flowTarget() {
+    var v = state.view, el = null;
+    if (state.hold && state.selected) el = targetEl(state.selected);
+    else if (v && v.type === "stmt") el = targetEl(v.id);
+    else if (v && v.type === "section") el = v.info.el;
+    var box = el && flow.byEl.get(el);
+    if (!box || box.offsetParent === null) return v && v.type !== "overview" ? leanScroll.scrollTop : 0;
+    var top = el.getBoundingClientRect().top - pane.getBoundingClientRect().top;
+    return offsetIn(leanScroll, box) - Math.max(12, top);
+  }
+  function syncFlow(instant) {
+    if (narrow.matches || flow.free || !flow.pairs.length) return;
+    flow.target = Math.max(0, Math.min(flowTarget(), leanScroll.scrollHeight - leanScroll.clientHeight));
+    if (instant || matchMedia("(prefers-reduced-motion: reduce)").matches) { leanScroll.scrollTop = flow.target; return; }
+    if (!flow.anim) { flow.anim = true; requestAnimationFrame(stepFlow); }
+  }
+  function stepFlow() {
+    var d = flow.target - leanScroll.scrollTop;
+    if (flow.free || Math.abs(d) < 1) { if (!flow.free) leanScroll.scrollTop = flow.target; flow.anim = false; return; }
+    leanScroll.scrollTop += Math.abs(d) < 3 ? d : d * 0.35;
+    requestAnimationFrame(stepFlow);
+  }
+  window.addEventListener("resize", function () { syncFlow(true); });
 
   function declCard(name) {
     var d = DATA.decls[name];
@@ -948,33 +1014,6 @@ details.more-box[open] summary::before { content: "\2212  "; }
     return out + esc(code.slice(last));
   }
 
-  function sectionView(info) {
-    var p = DATA.papers[state.paper];
-    var inSection = function (s) {
-      var sec = sectionOf[s.id];
-      return sec && (info.level === 1 ? sec.chapter === info : sec.section === info || sec.chapter === info);
-    };
-    var list = p.statements.filter(inSection), scope = "here";
-    if (!list.length && info.level > 1 && info.chapter) {
-      list = p.statements.filter(function (s) { var sec = sectionOf[s.id]; return sec && sec.chapter === info.chapter; });
-      scope = "in Section " + info.chapter.num;
-    }
-    // The paper shows the heading; the panel names the section in one line.
-    var html = '<div class="pv"><h2 class="sr">' + (info.num ? "Section " + esc(info.num) + ": " : "") + esc(stripTags(info.title)) + '</h2>' +
-      '<div class="pv-top"><span class="pv-ref">' + (info.num ? "Section " + esc(info.num) : esc(stripTags(info.title))) + '</span>' + navButtons(null) + '</div>';
-    if (list.length) {
-      html += '<div class="sub"><h3>Numbered statements ' + esc(scope) + '</h3><span class="aside">' + list.length + '</span></div><ul class="sec-list">';
-      list.forEach(function (s) {
-        html += '<li><button class="row-btn" type="button" data-go="' + esc(s.id) + '">' +
-          '<b>' + esc(label(s)) + '</b><span class="t">' + titleHtml(s) + '</span></button></li>';
-      });
-      html += "</ul>";
-    } else {
-      html += '<p class="empty">No numbered statements in this section.</p>';
-    }
-    return html + "</div>";
-  }
-
   function overview() {
     var p = DATA.papers[state.paper], v = DATA.verification;
     var counts = {}, order = Object.keys(DATA.statuses);
@@ -982,8 +1021,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
     var colors = { formalized: "var(--good)", "formalized-equivalent": "color-mix(in srgb, var(--good) 65%, var(--lean-bg))",
       "formalized-narrowed": "color-mix(in srgb, var(--good) 40%, var(--lean-bg))", definition: "var(--muted)",
       remark: "color-mix(in srgb, var(--muted) 50%, var(--lean-bg))", "not-formalized": "#d03b3b" };
-    var html = '<div class="ov"><h2 class="sr">' + esc(p.title) + '</h2><div class="pv-top"><span class="pv-ref">Overview</span>' + navButtons(null) + '</div>' +
-      '<p class="lede">Every numbered statement of this paper is shown with the Lean statement that formalizes it. This panel follows the statement you are reading; click one to keep it here.</p>' +
+    var html = '<div class="ov"><h2 class="sr">' + esc(p.title) + '</h2><div class="pv-top"><span class="pv-ref">Overview</span></div>' +
+      '<p class="lede">Below, every numbered statement of this paper with the Lean statement that formalizes it, in the paper\'s order. This column scrolls with the paper; click a statement to line up its Lean.</p>' +
       '<div class="sub"><h3>' + p.statements.length + ' numbered statements</h3></div>' +
       '<div class="stack" role="img" aria-label="Formalization status of the ' + p.statements.length + ' numbered statements">';
     order.forEach(function (k) { if (counts[k]) html += '<span style="flex:' + counts[k] + ';background:' + colors[k] + '"></span>'; });
@@ -1011,7 +1050,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
 
   panel.addEventListener("click", function (e) {
     var go = e.target.closest("[data-go]");
-    if (go && go.dataset.go) { goTo(go.dataset.go, { select: true, remember: !go.classList.contains("nav-btn") }); return; }
+    if (go && go.dataset.go) { goTo(go.dataset.go, { select: true, remember: true }); return; }
   });
 
   // ---- Bottom sheet on phones ------------------------------------------------------
@@ -1025,6 +1064,8 @@ details.more-box[open] summary::before { content: "\2212  "; }
   function openSheet(open) {
     $("leanPane").classList.toggle("open", open);
     $("sheetHandle").setAttribute("aria-expanded", String(open));
+    var cur = open && state.view && state.view.type === "stmt" ? panel.querySelector('.fcard[data-stmt="' + state.view.id + '"]') : null;
+    if (cur) leanScroll.scrollTop = offsetIn(leanScroll, cur) - 8;
   }
   $("sheetHandle").addEventListener("click", function () { openSheet(!$("leanPane").classList.contains("open")); });
 
@@ -1161,8 +1202,10 @@ details.more-box[open] summary::before { content: "\2212  "; }
     this.setAttribute("aria-checked", String(on));
     var keep = state.view && state.view.type === "stmt" ? targetEl(state.view.id) : null;
     doc.classList.toggle("stmt-only", on);
+    panel.classList.toggle("stmt-only", on);
     if (keep) scrollToEl(keep, true);
     refreshFollow(true);
+    syncFlow(true);
   });
 
   document.addEventListener("keydown", function (e) {
