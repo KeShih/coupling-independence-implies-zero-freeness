@@ -171,10 +171,11 @@ h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
 .thm-plain .thm-title, .thm-definition .thm-title { font-weight: 400; }
 .thm.is-selected { background: var(--accent-wash); }
 /* The statement being read and its Lean card carry the same bar; a
-   statement the reader clicked and its card carry the same tint. */
+   statement the reader clicked and its card carry the same tint instead. */
 .thm::before, .fcard::before { content: ""; position: absolute; left: -5px; top: 14px; bottom: 12px; width: 3px;
   border-radius: 3px; background: transparent; transition: background-color .2s; }
 .thm.is-current::before, .fcard.is-current::before { background: var(--accent); }
+.thm.is-selected::before, .fcard.is-selected::before { background: transparent; }
 /* The Lean mark: the L∃∀N logo alone, grey at rest, in the accent colour for
    the statement being read, on a soft tint when selected. */
 .lean-mark { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center;
