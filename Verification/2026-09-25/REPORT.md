@@ -1,8 +1,8 @@
 # Verification of the Lean formalization
 
-> An example of what the README's verification prompt produces, run at
-> xhigh effort. `PaperForms.lean`, which the report refers to, is not in
-> the repository yet.
+> An example of what the README's verification prompt produces, run in
+> Claude Code at xhigh effort in about 30 minutes. `PaperForms.lean`, which
+> the report refers to, is not in the repository yet.
 
 Checked on 2026-09-25 against `origin/main` at commit
 261b3c42499dc7e3e236beef2a448201975233b8 of
