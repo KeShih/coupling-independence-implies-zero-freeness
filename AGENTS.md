@@ -188,6 +188,8 @@ python3 scripts/site/build_reader.py --out /tmp/preview.html  # every check, pag
   tooling that is not in the repository. It is already stale for
   `README.md` and `docs/appendix.pdf`, so do not assume a mismatch you find
   is yours.
+- **`Verification/<date>/`** holds reports from independent checks, linked
+  from the README. They are records of a past run, not part of the build.
 - **Pinned history.** The papers cite this repository at pinned commits
   (`paper/main/main.bib`, `paper/companion/anc/README.md`), so
   never rewrite the history of `main`.
