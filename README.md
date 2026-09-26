@@ -66,6 +66,22 @@ Report any build or trust-base problem, and every statement whose Lean
 does not match the paper.
 ```
 
+## What to expect
+
+With prebuilt mathlib (`lake exe cache get`), building the library and running
+the axiom audit takes about 17 minutes on an Apple M4 (10 cores, 24 GB). A
+successful `bash scripts/check-all.sh` ends with:
+
+```text
+Build completed successfully (4069 jobs).
+Complete-library axiom audit passed: 11320 declarations; allowed dependencies used: [propext,
+ Classical.choice,
+ Quot.sound]
+```
+
+Three modules also print a note that `ring` fell back to `ring_nf`; it is
+harmless.
+
 [The formalization in detail](docs/formalization.md) lists the Lean names of
 the main results, the cited results proved in Lean, and how to build the
 library and the website.
