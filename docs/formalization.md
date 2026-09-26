@@ -194,8 +194,8 @@ checks the transitive axioms of every project declaration. A successful
 run ends with
 
 ```text
-Build completed successfully (4066 jobs).
-Complete-library axiom audit passed: 11313 declarations; allowed dependencies used: [propext,
+Build completed successfully (4069 jobs).
+Complete-library axiom audit passed: 11320 declarations; allowed dependencies used: [propext,
  Classical.choice,
  Quot.sound]
 ```
