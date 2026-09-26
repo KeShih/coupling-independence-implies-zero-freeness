@@ -43,8 +43,9 @@ whose Lean statement does not match the paper.
 > For a full check of all 107 numbered statements, replace "zero-freeness
 > result" with "numbered statement". It costs a great many tokens.
 
-[An example report](Verification/2026-09-25/REPORT.md) from this prompt, run at
-xhigh effort, found no build, trust-base or statement problem.
+[An example report](Verification/2026-09-25/REPORT.md) from this prompt, run in
+Claude Code at xhigh effort in about 30 minutes, found no build, trust-base or
+statement problem.
 
 With prebuilt mathlib the build takes about 17 minutes on an Apple M4, and
 a successful `bash scripts/check-all.sh` ends with:
