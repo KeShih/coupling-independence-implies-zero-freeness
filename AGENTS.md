@@ -26,14 +26,11 @@ bash scripts/lake.sh env lean -DwarningAsError=true ZeroFreeness/Path/File.lean 
 - `lake env lean` builds nothing and ignores the lakefile's
   `moreLeanArgs`. Build the file's imports first, and pass
   `-DwarningAsError=true` yourself.
-- Call the scripts with `bash`: `check-appendix.sh` is not executable.
 - A passing full check ends with `Build completed successfully (N jobs).`
   and `Complete-library axiom audit passed: M declarations; allowed
   dependencies used: [propext, Classical.choice, Quot.sound]`. The current
   N and M are in `docs/verification.json` (`build_jobs`,
   `audited_project_declarations`).
-- `audit/CV.lean` is a standalone audit of `ZeroFreeness.Appendix.CV` that no
-  script runs.
 
 Website builds (see *Website* below):
 
