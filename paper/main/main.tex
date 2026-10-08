@@ -134,7 +134,7 @@ degree at most \(\Delta\) has no Fisher zeros in a graph-uniform complex
 neighbourhood of \([0,1]\).  For \(q>11\Delta/6\), the proof establishes
 coupling independence throughout \([0,1]\) using a soft version
 of Vigoda's flip dynamics.  Our main tool is a separator-shell transfer
-theorem for the Potts model on induced-subgraph-closed classes of graphs
+theorem for the Potts model on induced-subgraph closed classes of graphs
 of maximum degree at most \(\Delta\), with \(q\ge\Delta+1\).  It yields a
 graph-uniform zero-free neighbourhood of \([0,1]\) from Hamming coupling
 independence at \(0\) and a uniform coupling-independence bound on each
@@ -158,43 +158,119 @@ with Claude Opus 5.5.  The authors assume responsibility for all claims.
 \tableofcontents
 
 
-%
-%
 \section{Introduction}
 \label{sec:intro}
 
-For a finite simple graph \(G=(V,E)\) and a positive integer \(q\), write
-\(\colours=\{1,\ldots,q\}\) and define the Potts partition function
+The Potts model, which arises in statistical physics, describes
+interactions between neighbouring spins.  In this paper, we study the
+antiferromagnetic Potts model and the complex zeros of its partition
+function.  The model is defined on a finite simple graph \(G=(V,E)\),
+with each vertex assigned one of \(q\) spins, also called colours, from
+\(\colours=\{1,\ldots,q\}\).  A configuration is a mapping
+\(\sigma\colon V\to\colours\).  Its weight is \(z^{m_G(\sigma)}\), where
+\(z\) is an edge activity and \(m_G(\sigma)\) is the number of edges
+whose endpoints receive the same colour.  The \emph{partition function}
+is
 \begin{equation}
   \Zpart_G(q;z):=\sum_{\sigma\colon V\to\colours}z^{m_G(\sigma)},
   \qquad
-  m_G(\sigma):=\abs{\set{uv\in E:\sigma_u=\sigma_v}}.
+  m_G(\sigma):=\bigl|\{uv\in E:\sigma_u=\sigma_v\}\bigr|.
   \label{eq:intro-potts-Z}
 \end{equation}
-The antiferromagnetic interval \([0,1]\) interpolates between proper
-graph colourings and independent spins: \(\Zpart_G(q;0)\) counts proper
-\(q\)-colourings, while \(\Zpart_G(q;1)=q^{|V|}\).
-The zeros in the complex edge activity \(z\) are called \emph{Fisher
-zeros}~\cite{Fisher1965}.
-A zero-free neighbourhood of \([0,1]\), uniform over graphs of maximum
-degree at most \(\Deg\), permits deterministic approximate counting by
-interpolation~\cite{Barvinok2016,PatelRegts2017}.
+The model is \emph{antiferromagnetic} if the edge activity is a real
+number \(x\in[0,1]\); we reserve \(z\) for complex activities.  In this
+regime, each monochromatic edge contributes a factor \(x\le1\), whereas
+an edge whose endpoints receive different colours contributes~\(1\).
+In particular, if \(x=0\), then only configurations with no
+monochromatic edges contribute nonzero weight, and \(\Zpart_G(q;0)\)
+counts the \emph{proper \(q\)-colourings} of \(G\).  At \(x=1\), the
+spins are independent, and \(\Zpart_G(q;1)=q^{|V|}\).
 
-We obtain such a neighbourhood for \(q\ge11\Deg/6\), the classical
-colouring threshold associated with Vigoda's flip
-dynamics~\cite{Vigoda2000}.
-The proof extends colouring couplings to the soft Potts model and
-converts their real-variable control into complex zero-freeness through a
-general transfer theorem: coupling independence implies zero-freeness
-(\Cref{thm:potts-transfer}).
+In statistical physics, when \(x\ge0\), the partition function is the
+normalizing factor of the Gibbs distribution, under which a
+configuration \(\sigma\) has probability
+\(x^{m_G(\sigma)}/\Zpart_G(q;x)\).  The partition function also
+determines the free energy, whose nonanalytic behaviour in the
+thermodynamic limit is used to describe phase transitions.  Studying the
+partition function at complex activities provides a way to understand
+its analyticity.  The zeros of \(\Zpart_G(q;z)\) in the complex edge
+activity \(z\) are called \emph{Fisher zeros}~\cite{Fisher1965}.
+Throughout, \(q\) is a fixed positive integer.
 
-\subsection{Main result}
+From the computational perspective, approximating these partition
+functions is a basic problem that has driven the development of sampling
+algorithms and deterministic approximate counting.  Graph colourings are
+a particularly important test case: how many colours, relative to the
+maximum degree \(\Deg\), suffice for efficient approximation?
 
-We state the result for pinned partition functions, since conditioning
-is essential to the coupling argument.  Let \(\Lambda\subseteq V\), let
-\(\tau\colon\Lambda\to\colours\) be a pinning (precolouring), and let
-\(m_G(\tau)\) count monochromatic edges of \(G[\Lambda]\).  Define the
-\emph{normalized pinned partition function}
+\paragraph{Approximate counting of colourings.}
+The classical approach uses Markov chain Monte Carlo (MCMC): a rapidly
+mixing chain supplies approximate samples, which can be converted into a
+fully polynomial-time randomized approximation scheme (FPRAS) for
+counting.  Jerrum~\cite{Jerrum1995} established rapid mixing of Glauber
+dynamics when \(q>2\Deg\).  Vigoda~\cite{Vigoda2000} introduced a coupling
+of bounded two-colour flips and improved the condition to
+\(q>11\Deg/6\), a threshold that remained the benchmark for general
+graphs for nearly two decades.  Subsequent refinements reached
+\(q\ge(11/6-\varepsilon_0)\Deg\) for an absolute constant
+\(\varepsilon_0\approx10^{-5}\)~\cite{CDMPP2019},
+and \(q\ge1.809\Deg\) when \(\Deg\ge125\)~\cite{CarlsonVigoda2024}.
+
+Deterministic algorithms developed along two complementary directions.
+The first is \emph{correlation decay}, exemplified by Weitz's algorithm
+for the hard-core model~\cite{Weitz2006}.  Its central idea is to
+approximate local marginals by truncating a recursive computation once
+the influence of distant boundary conditions becomes sufficiently small.
+For colourings, Gamarnik and Katz~\cite{GamarnikKatz2012} developed a
+computation-tree approach and obtained an FPTAS on triangle-free graphs.
+Lu and Yin~\cite{LuYin2013} subsequently obtained an FPTAS on general
+graphs when \(q\ge\alpha\Deg+1\), for every fixed
+\(\alpha>\alpha_{\mathrm{LY}}\approx2.58071\).
+Here and below, deterministic approximation results are understood with
+\(q\) and \(\Deg\) fixed.
+
+The second direction uses \emph{complex zero-freeness}.  Barvinok's
+interpolation method approximates the logarithm of a partition function
+inside a zero-free region~\cite{Barvinok2016}; the bounded-degree
+coefficient-computation method of Patel and Regts~\cite{PatelRegts2017}
+turns this approach into an FPTAS in the settings considered here.
+For the antiferromagnetic Potts model, Bencs, Davies, Patel, and
+Regts~\cite{BencsDaviesPatelRegts2021} established a zero-free complex
+neighbourhood of \([0,1)\) for \(q\ge e\Deg+1\), allowing independent
+edge activities.  Liu, Sinclair, and
+Srivastava~\cite{LiuSinclairSrivastava2025} obtained a zero-free
+neighbourhood of \([0,1]\) for \(\Deg\ge3\) and \(q\ge2\Deg\), and
+hence an FPTAS for counting colourings at this threshold.
+Bencs, Berrekkal, and Regts~\cite{BencsBerrekkalRegts2026} further
+improved the condition to \(q\ge1.998\Deg\), for \(q,\Deg\ge3\).
+
+More recently, Chen, Feng, Guo, Zhang, and Zou~\cite{CFFGZZ2024}
+introduced a deterministic counting algorithm based on \emph{coupling
+independence}.  Informally, this property says that changing a single
+pinned spin admits a coupling of the resulting conditional distributions
+with a bounded expected number of disagreements, uniformly over the
+size of the graph.  Together with a lower bound on nonzero conditional
+marginals, it yields an FPTAS and recovers the improved colouring
+thresholds of the sampling algorithms above.  Thus deterministic
+approximate counting now reaches, and even surpasses, the classical
+\(11\Deg/6\) threshold.  However, the corresponding zero-freeness
+results had not reached this threshold on general bounded-degree
+graphs.  This leaves a structural question: can the coupling estimates
+that support efficient sampling and deterministic counting also exclude
+complex zeros?
+
+\subsection{Our main result}
+
+We establish a zero-free neighbourhood of the entire antiferromagnetic
+interval \([0,1]\) whenever \(q\ge11\Deg/6\), including equality.
+The neighbourhood is uniform over all graphs of maximum degree at most
+\(\Deg\), and the result remains valid under arbitrary pinnings after
+removing the zeros forced by edges between pinned vertices.
+
+To state this stronger conditional form, let \(\Lambda\subseteq V\),
+let \(\tau\colon\Lambda\to\colours\) be a pinning, and let
+\(m_G(\tau)\) denote the number of monochromatic edges in \(G[\Lambda]\).
+Define the \emph{normalized pinned partition function} by
 \begin{equation}
   \nZpin{G}{\tau}(q;z)
   :=\sum_{\substack{\sigma\colon V\to\colours\\
@@ -202,303 +278,239 @@ is essential to the coupling argument.  Let \(\Lambda\subseteq V\), let
        z^{m_G(\sigma)-m_G(\tau)}.
   \label{eq:intro-normalized-pinned}
 \end{equation}
-This polynomial removes the contribution of pinned-only edges, those
-with both ends in \(\Lambda\), from the usual pinned partition function
-\(\Zpin{G}{\tau}(q;z):=\sum_{\sigma\colon V\to\colours,\
-\sigma|_\Lambda=\tau}z^{m_G(\sigma)}\):
+The usual pinned partition function consequently satisfies
 \begin{equation}
   \Zpin{G}{\tau}(q;z)
   =z^{m_G(\tau)}\nZpin{G}{\tau}(q;z).
   \label{eq:intro-normalization}
 \end{equation}
-Unlike \(\Zpin{G}{\tau}\), the polynomial \(\nZpin{G}{\tau}\) has no
-forced zero at \(z=0\) when \(\tau\) is improper (that is, when
-\(m_G(\tau)\ge1\)); for the empty pinning it equals \(\Zpart_G(q;z)\).
-We suppress \(q\) when fixed and, for \(I\subseteq\C\), write
+This normalization removes the contribution of edges whose endpoints
+are both pinned.  For \(I\subseteq\C\), write
 \(\mathcal U_\eps(I):=\{z\in\C:\dist(z,I)<\eps\}\).
 
-\begin{theorem}[Potts zero-freeness near \texorpdfstring{$[0,1]$}{[0,1]}]
+\begin{theorem}[Potts zero-freeness]
 \label{thm:intro-main}
 Let \(q,\Deg\) be integers with \(\Deg\ge2\) and \(q\ge11\Deg/6\).
 There exists \(\eps=\eps(q,\Deg)>0\) such that, for every finite simple
 graph \(G\) of maximum degree at most \(\Deg\) and every pinning \(\tau\),
 \[
-  \nZpin{G}{\tau}(z)\ne0
+  \nZpin{G}{\tau}(q;z)\ne0
   \qquad\text{for every }z\in\mathcal U_\eps([0,1]).
 \]
-Consequently, \(\Zpin{G}{\tau}(z)=z^{m_G(\tau)}\nZpin{G}{\tau}(z)\) has
-no zeros in the same neighbourhood except, when \(m_G(\tau)\ge1\), a zero
-of multiplicity \(m_G(\tau)\) at \(z=0\).  In particular, \(\Zpart_G\),
-and \(\Zpin{G}{\tau}\) for every \(\tau\) proper on \(G[\Lambda]\), have
-no zeros in \(\mathcal U_\eps([0,1])\).
+In particular, \(\Zpart_G(q;z)\ne0\) throughout this neighbourhood.
+The same holds for the usual pinned partition function whenever
+\(\tau\) is proper on \(G[\Lambda]\); otherwise, its only zero in this
+neighbourhood is at \(z=0\), with multiplicity \(m_G(\tau)\).
 \end{theorem}
 
-\Cref{tab:intro-thresholds} places the theorem among earlier Fisher
-zero-freeness results for general graphs: it lowers the best previous
-threshold, \(q\ge1.998\Deg\)~\cite{BencsBerrekkalRegts2026}, to
-\(q\ge11\Deg/6\approx1.833\Deg\).  For integer \(q\), the new condition
-is strictly weaker than the previous ones for \(\Deg=2\) and every
-\(\Deg\ge6\), and coincides with \(q\ge2\Deg\) for \(3\le\Deg\le5\).
-These results concern zeros in \(z\), with the integer \(q\) fixed.
+The theorem improves the previous general-graph Fisher zero-freeness
+condition \(q\ge1.998\Deg\) to \(q\ge11\Deg/6\approx1.833\Deg\).
+For fixed \((q,\Deg)\), it also gives an FPTAS for
+\(\Zpart_G(q;x)\) at rational activities \(x\in[0,1]\), by applying
+Barvinok's interpolation method~\cite{Barvinok2016} from the explicitly
+computable value \(\Zpart_G(q;1)=q^{|V|}\) and computing the required
+coefficients with the algorithm of Patel and Regts~\cite{PatelRegts2017}.
+The neighbourhood can be chosen effectively from the explicit coupling
+bounds and the finite collection of bounded local systems in the proof.
+The contribution is the exclusion of complex zeros throughout this
+interval, including the hard-colouring endpoint; stronger counting
+thresholds at that endpoint already follow from~\cite{CFFGZZ2024}.
 
-\begin{table}[H]
-\centering
-\small
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{@{}ll@{}}
-\toprule
-Work & Parameters \\
-\midrule
-Bencs, Davies, Patel, and Regts~\cite{BencsDaviesPatelRegts2021}
-  & \(q\ge e\Deg+1\) \\
-Liu, Sinclair, and Srivastava~\cite{LiuSinclairSrivastava2025}
-  & \(\Deg\ge3\), \(q\ge2\Deg\) \\
-Bencs, Berrekkal, and Regts~\cite{BencsBerrekkalRegts2026}
-  & \(q,\Deg\ge3\), \(q\ge1.998\Deg\) \\
-\midrule
-\hyperref[thm:intro-main]{This paper}
-  & \(\Deg\ge2\), \(q\ge11\Deg/6\) \\
-\bottomrule
-\end{tabular}
-\smallskip
-
-\parbox{0.97\textwidth}{\raggedright\footnotesize
-All rows give a graph-uniform zero-free neighbourhood of \([0,1]\)
-for finite simple graphs of maximum degree at most~\(\Deg\).
-The first work also allows independent complex edge activities.}
-\caption{Fisher zero-freeness for the Potts model on general graphs.}
-\label{tab:intro-thresholds}
-\end{table}
-
-For triangle-free graphs, Liu, Sinclair, and Srivastava show that, for
-every \(\alpha>\alpha_*\approx1.7632\), where \(\alpha_*e^{-1/\alpha_*}=1\),
-there is a constant \(\beta=\beta(\alpha)\) such that, for every
-\(\Deg\ge3\), triangle-free graphs of maximum degree at most \(\Deg\)
-have a zero-free neighbourhood of \([0,1]\) whenever
-\(q\ge\alpha\Deg+\beta\)~\cite[Theorem~1.3]{LiuSinclairSrivastava2025}.
-Their proof uses the strong spatial mixing argument of Gamarnik, Katz,
-and Misra~\cite{GamarnikKatzMisra2015}.
-
-For fixed \((q,\Deg)\) and rational \(x\in[0,1]\), \Cref{thm:intro-main} gives
-a fully polynomial-time approximation scheme (FPTAS) for
-\(\Zpart_G(q;x)\): apply Barvinok's interpolation
-method~\cite{Barvinok2016} from \(\Zpart_G(q;1)=q^{|V|}\), computing the
-required low-order coefficients with the bounded-degree algorithm of
-Patel and Regts~\cite{PatelRegts2017}.  The radius \(\eps\) can be
-chosen effectively: the coupling constants used are explicit
-(\Cref{thm:strict-ci,cor:critical-line-input}, and, at \(x=0\) in the
-equality case \(q=11\Deg/6\), a bound polynomial in \(q\Deg\) from
-\cite[Theorem~20]{CFFGZZ2024}), and the bounded local systems used in
-the proof form a finite, effectively enumerable family.
-
-For each fixed
-\(x\in(0,1]\) and \(\Deg\ge3\), an FPTAS also follows from the coupling
-bounds of
-\Cref{sec:strict-potts} and the counting theorem
-of~\cite[Theorem~4]{CFFGZZ2024}, whose marginal-lower-bound hypothesis
-holds automatically at a fixed positive
-activity~\cite[Observation~10]{CFFGZZ2024};
-stronger counting thresholds at \(x=0\) are already
-known~\cite{CFFGZZ2024}.  Our main conclusion is therefore the uniform
-exclusion of complex zeros throughout the antiferromagnetic interval
-\([0,1]\).
-
-\subsection{Coupling independence implies zero-freeness}
+\subsection{From coupling independence to zero-freeness}
 \label{sec:intro-transfer}
 
-Vigoda's bounded two-colour flips give rapid mixing for proper
-colourings when \(q>11\Deg/6\)~\cite{Vigoda2000}.
-Chen, Feng, Guo, Zhang, and Zou use \emph{coupling independence}
-to turn contractive colouring couplings into deterministic approximate
-counting~\cite{CFFGZZ2024}.  Our transfer theorem takes Hamming coupling
-independence as its probabilistic input: for every pinning and every free
-site, the two conditional Gibbs laws at edge activity \(x\) obtained by
-fixing that site to two different colours admit a coupling whose expected
-Hamming disagreement on the remaining free sites is bounded independently
-of the graph, uniformly over \(x\) in a given set (\Cref{def:potts-ci}).
+Our proof establishes a transfer principle from real couplings to
+complex zero-freeness.  We say that a model satisfies \emph{Hamming
+coupling independence} with constant \(C\) if, under every pinning,
+fixing a free vertex to two different feasible spins produces two
+conditional Gibbs distributions that admit a coupling with expected
+Hamming disagreement at most \(C\) on the remaining free vertices.
+The constant is independent of the graph size.
+This controls the total effect of a local change and can be established
+using contractive couplings of Markov chains.
 
-\begin{theorem}[Coupling independence implies zero-freeness]
-\label{thm:potts-transfer}
-Fix integers \(q,\Deg\) with \(\Deg\ge2\) and \(q\ge\Deg+1\), and let
-\(\mathcal G\) be a class of finite simple graphs of maximum degree at
-most \(\Deg\) that is closed under taking induced subgraphs.  Assume:
-\begin{enumerate}[label=\textup{(\roman*)}]
-  \item \(\mathcal G\) satisfies coupling independence at \(x=0\) with
-        constant \(C_0\);
-  \item for every \(\delta\in(0,1]\), it satisfies coupling independence
-        on \([\delta,1]\) with a finite constant \(C_\delta\).
-\end{enumerate}
-Then there is \(\eps>0\) such that, for every \(G\in\mathcal G\) and every
-pinning \(\tau\),
-\[
-  \nZpin{G}{\tau}(z)\ne0
-  \qquad\text{for every }z\in\mathcal U_\eps([0,1]).
-\]
-Consequently, \(\Zpin{G}{\tau}(z)=z^{m_G(\tau)}\nZpin{G}{\tau}(z)\) has
-no zeros in the same neighbourhood except, when \(m_G(\tau)\ge1\), a zero
-of multiplicity \(m_G(\tau)\) at \(z=0\).
+The transfer uses a distance shell to separate a root from the rest of
+the graph.  If a coupling has expected total disagreement at most
+\(C\), then among \(L\) disjoint shells there is one on which its
+expected disagreement is at most \(C/L\).  This averaging observation
+also underlies the influence-decay argument
+of~\cite{CFFGZZ2024}.  On bounded-degree graphs, choosing \(L\) to be
+a sufficiently large constant gives a separator with a bounded interior
+and a small coupling cost on its boundary.
+
+Conditioning on the separator expresses the partition-function response
+to a complex perturbation as an average under a real boundary
+distribution.  Our complex-average stability lemma controls how this
+average changes when the boundary distribution changes, using its
+Hamming Wasserstein distance and the variation of the exterior response.
+An induction bounds that variation, while the bounded interior
+contributes a uniformly small error.  The small coupling cost makes the
+induction close and prevents cancellation in the partition function.
+At \(x=0\), configurations forbidden by the hard constraint can acquire
+nonzero weight under perturbation.  We control their contribution as an
+additive error, obtaining a zero-free disc that joins the
+positive-activity neighbourhoods.
+
+The following statement summarizes the transfer principle for the Potts
+model.  Its formulation separates the hard-colouring endpoint from
+positive activities, so it does not require a coupling bound that is
+uniform as \(x\downarrow0\).
+
+\begin{theorem}[Coupling independence implies zero-freeness, informal]
+\label{thm:potts-transfer-informal}
+Fix \(\Deg\ge2\) and \(q\ge\Deg+1\), and let \(\mathcal G\) be a class
+of finite simple graphs of maximum degree at most \(\Deg\), closed
+under taking induced subgraphs.  Suppose the Potts model on this class
+satisfies coupling independence at \(x=0\), and uniformly on
+\([\delta,1]\) for every fixed \(\delta>0\), under arbitrary pinnings.
+Then the normalized pinned partition functions have a common zero-free
+complex neighbourhood of \([0,1]\), independent of the graph and the
+pinning.
 \end{theorem}
 
-Unlike the general counting theorem of~\cite[Theorem~4]{CFFGZZ2024},
-the transfer uses no lower bound on nonzero conditional marginals.  At a
-fixed positive activity, such a marginal lower bound holds automatically
-for bounded-degree Potts models~\cite[Observation~10]{CFFGZZ2024}, but
-it need not remain bounded away from zero as \(x\downarrow0\): a colour
-that appears on \(k\ge1\) pinned neighbours of a free vertex \(v\) has
-conditional marginal of order \(x^k\) at \(v\).  \Cref{thm:potts-transfer} is
-proved in \Cref{sec:transfer-principle}.  To deduce \Cref{thm:intro-main},
-we verify the hypotheses of \Cref{thm:potts-transfer} for all graphs of
-maximum degree at most \(\Deg\) by extending Vigoda's flip coupling to positive Potts activities
-(\Cref{sec:strict-potts}).  For \(q>11\Deg/6\), the resulting
-coupling bound is uniform on all of \([0,1]\).  At equality, it is
-uniform on each \([\delta,1]\); we combine these bounds with the known
-hard-colouring bound at \(x=0\)~\cite[Theorem~20]{CFFGZZ2024}.
+The coupling assumptions at \(x=0\) are interpreted after deleting
+edges between pinned vertices, consistently with
+\eqref{eq:intro-normalized-pinned}.
+The transfer requires no uniform lower bound on nonzero conditional
+marginals.  This matters near \(x=0\): a colour forbidden by a pinned
+neighbour can have positive but vanishing marginal as \(x\downarrow0\).
+The precise statement is \Cref{thm:potts-transfer}, proved in
+\Cref{sec:transfer-principle}.
 
-\begin{remark}[Beyond Potts]
-\label{rem:beyond-potts}
-\Cref{thm:potts-transfer} is written in Potts notation to keep the
-statement concrete.  Its proof uses a finite local state space, bounded
-local interactions, and the Hamming coupling bound.  Extending it to
-another model also requires closure under the relevant pinnings and
-uniform control of the local factors, including those that vanish at a
-real base point.  \Cref{sec:other-applications} verifies these
-properties for colour fields and log-concave Holant problems.
-\end{remark}
+To obtain \Cref{thm:intro-main}, we extend Vigoda's flip coupling from
+proper colourings to positive Potts activities.  The identity
+\[
+  x\one{c=c'}+\one{c\ne c'}
+  =x+(1-x)\one{c\ne c'}
+\]
+represents a soft interaction as a mixture of an unconstrained edge and
+a hard inequality.  Conditioning on the resulting random constraints
+produces a list-colouring instance.  We couple both the constraints and
+the bounded flips, allowing the two instances to differ in edges and
+lists near the initial disagreement.  Averaging the contraction estimate
+then yields coupling independence.  For \(q>11\Deg/6\), the bound is
+uniform on \([0,1]\).  At equality, it is uniform on each
+\([\delta,1]\), and we use the hard-colouring coupling bound
+of~\cite[Theorem~20]{CFFGZZ2024} at \(x=0\).
+
+\paragraph{Further consequences.}
+The separator argument applies more broadly to local models for which
+the required coupling and bounded-interior estimates hold: its
+complex-average stability lemma is a statement about arbitrary laws on
+a finite metric space.  We develop the following applications.
+\begin{itemize}
+  \item \emph{Colour fields.}
+  For proper vertex and edge colourings, the method gives Lee--Yang
+  zero-freeness under independent colour fields, using the
+  coupling-independence inputs specified in \Cref{sec:lee-yang}.
+  \item \emph{Log-concave Holant problems.}
+  For Boolean Holant problems on bounded-degree graphs with signatures
+  from a fixed finite family of log-concave symmetric signatures \(f\)
+  satisfying \(f(0)>0\), we obtain graph-uniform zero-free polytubes
+  around every bounded box of nonnegative activities
+  (\Cref{sec:holant-consequence}).
+  \item \emph{Further Potts regimes.}
+  Additional coupling estimates, primarily from the companion
+  article~\cite{ShaoShi2026FurtherPotts}, give further zero-free
+  regions through the same transfer principle.  These include the
+  condition \(q\ge1.809\Deg\) for \(\Deg\ge125\); the inputs and
+  consequences are collected in \Cref{app:additional-potts}.
+\end{itemize}
 
 \subsection{Related work}
 
-The zero-freeness proofs of Liu, Sinclair, and Srivastava and of Bencs,
-Berrekkal, and Regts perturb real ratio-recursion estimates to nearby
-complex activities~\cite{LiuSinclairSrivastava2025,BencsBerrekkalRegts2026},
-while that of Bencs, Davies, Patel, and Regts traps the complex ratios
-directly~\cite{BencsDaviesPatelRegts2021}.
-Recent work also obtains zero-freeness by complexifying Markov-chain
-arguments~\cite{LiuWangYinYu2025,LiuYu2026}.  Here the complex-analytic
-step instead uses real couplings through a separator comparison.
+\paragraph{Correlation decay and complex zeros.}
+The connection between spatial mixing and analyticity has a long history
+in statistical physics.  For lattice systems, Dobrushin and Shlosman
+related suitable strong mixing conditions to \emph{complete
+analyticity}, which includes nonvanishing of finite-volume partition
+functions under small complex
+perturbations~\cite{DobrushinShlosman1985,DobrushinShlosman1987}.
+On bounded-degree graphs, a substantial line of work extends contraction
+estimates for real ratio recursions to complex parameters, proving
+zero-freeness for the hard-core model, the Ising model, and more general
+spin systems~\cite{PetersRegts2019,LiuSinclairSrivastava2019,PetersRegts2020,ShaoSun2021,LiuSinclairSrivastava2025}.
+Recent work treats the hard-core model on graphs of bounded connective
+constant~\cite{ChenShaoShi2026}.
+Peters, Regts, and Reppekus~\cite{PetersRegtsReppekus2026} show that,
+for suitable hard-core graph families, a strengthening of strong spatial
+mixing called \emph{very strong spatial mixing} implies zero-freeness.
 
-Classical work of Dobrushin and Shlosman showed that, for lattice systems
-on \(\mathbb Z^d\), a strong form of spatial mixing is equivalent to
-complete analyticity, which includes nonvanishing of finite-volume
-partition functions under small complex
-perturbations~\cite{DobrushinShlosman1985,DobrushinShlosman1987}.  For
-bounded-degree graph families, the ratio recursions underlying
-correlation-decay analyses have been studied at complex parameters,
-through contraction or complex-dynamics arguments, to prove
-zero-freeness~\cite{PetersRegts2019,LiuSinclairSrivastava2019,PetersRegts2020,ShaoSun2021,LiuSinclairSrivastava2025,ChenShaoShi2026}.
-For the hard-core model on bounded-degree induced-subgraph-closed
-families, Peters,
-Regts, and Reppekus show that a strengthening of strong spatial mixing
-implies zero-freeness~\cite{PetersRegtsReppekus2026}.
+For the Potts model, the proofs of Liu, Sinclair, and Srivastava and of
+Bencs, Berrekkal, and Regts perturb real recursion estimates to nearby
+complex activities~\cite{LiuSinclairSrivastava2025,BencsBerrekkalRegts2026}.
+Stronger thresholds are available with additional graph structure:
+on triangle-free graphs, Liu, Sinclair, and Srivastava obtain
+zero-freeness near \([0,1]\) when \(q\ge\alpha\Deg+\beta\), where
+\(\alpha>\alpha_*\approx1.7632\), \(\alpha_*e^{-1/\alpha_*}=1\),
+and \(\beta\) depends on \(\alpha\).  Their argument builds on the
+strong spatial mixing estimates of Gamarnik, Katz, and
+Misra~\cite{GamarnikKatzMisra2015}.
 
-Conversely, zero-freeness under pinnings implies strong spatial
-mixing~\cite{Regts2023,ShaoYe2024}, or an asymptotic form of it at
-superlogarithmic distances~\cite{Gamarnik2023}; for the ferromagnetic
-Ising model, zero-freeness without pinnings yields a Weitz-type FPTAS throughout the Lee--Yang
-zero-free region, without requiring strong spatial
-mixing~\cite{ShaoShi2026}.
+The reverse direction, from zero-freeness to spatial mixing, has also
+seen considerable progress.  Gamarnik~\cite{Gamarnik2023} derives an
+asymptotic form of spatial mixing at superlogarithmic distances.
+Regts~\cite{Regts2023} and Shao and Ye~\cite{ShaoYe2024} establish
+strong spatial mixing from suitable zero-free regions for graph
+polynomials and spin systems, with the required closure and boundary
+conditions.  For the ferromagnetic Ising model, Shao and
+Shi~\cite{ShaoShi2026} obtain a Weitz-type FPTAS throughout the
+Lee--Yang zero-free region without requiring strong spatial mixing on
+the whole region.  Together, these results clarify when analytic
+information can support local recursive approximation algorithms.
 
-Multivariate zero-freeness provides criteria for spectral
-independence~\cite{ChenLiuVigoda2024}.  Under the hypotheses of the
-relevant mixing theorems, spectral-independence bounds yield rapid mixing
-of the corresponding dynamics~\cite{AnariLiuOveisGharan2020}.  Coupling
-independence was
-formalized by Chen and Zhang for Boolean distributions as a criterion
-for spectral independence~\cite{ChenZhang2023}, and Chen and Feng used
-it to bound mixing times of multi-spin systems~\cite{ChenFeng2024};
-Chen, Feng, Guo, Zhang, and Zou showed that, with a marginal lower
-bound, it yields deterministic approximate counting on bounded-degree
-graphs~\cite{CFFGZZ2024}.  For the Potts model,
-\Cref{thm:potts-transfer} shows that coupling independence also implies
-zero-freeness.
+\paragraph{Couplings, spectral independence, and zero-freeness.}
+Spectral independence controls the eigenvalues of conditional influence
+matrices and provides a powerful route to rapid mixing, initiated by
+Anari, Liu, and Oveis Gharan~\cite{AnariLiuOveisGharan2020}.
+Chen, Liu, and Vigoda~\cite{ChenLiuVigoda2024} give criteria for
+spectral independence based on multivariate zero-freeness.
+Coupling independence supplies another such criterion: it was
+formalized for Boolean distributions by Chen and
+Zhang~\cite{ChenZhang2023}, and subsequently used by Chen and
+Feng~\cite{ChenFeng2024} to study mixing of multi-spin systems.
+The deterministic counting theorem of Chen, Feng, Guo, Zhang, and
+Zou~\cite{CFFGZZ2024} gives it an additional algorithmic role.
+Our transfer principle establishes a further implication, from coupling
+independence to complex zero-freeness in the settings considered here.
 
-\subsection{Proof overview}
+Another recent approach obtains zero-freeness by extending Markov-chain
+arguments themselves to complex parameters.  Liu, Wang, Yin, and
+Yu~\cite{LiuWangYinYu2025} develop this approach for hypergraph
+independent sets, and Liu and Yu~\cite{LiuYu2026} extend it to
+hypergraph colourings and constraint satisfaction problems.
+Our proof uses real couplings as input to a complex stability argument
+across a separator, allowing the probabilistic and analytic parts of the
+proof to be developed separately.
 
-We begin with a simple averaging observation, also used by Chen, Feng,
-Guo, Zhang, and Zou in the proof of~\cite[Theorem~12]{CFFGZZ2024}.
-If a coupling has expected total Hamming disagreement at most \(C\),
-then among \(L\) disjoint distance shells around a root there is one
-with expected disagreement at most \(C/L\).
-Taking \(L\) sufficiently large gives a separator with a bounded interior
-and a small coupling cost on its boundary.
-
-Fix a real base point \(x\in(0,1]\), a pinning \(\tau\), and a free root
-\(v\), and write \(\tau^{v=c}\) for \(\tau\) extended by \(v\mapsto c\).
-Summing over the colouring \(\xi\) of such a shell writes each
-conditional partition-function response as an average under the
-\emph{real} shell marginal \(\nu_c\):
-\[
-  \frac{\nZpin{G}{\tau^{v=c}}(z)}{\nZpin{G}{\tau^{v=c}}(x)}
-  =\E_{\xi\sim\nu_c}\bigl[e^{h(\xi)+\eta_c(\xi)}\bigr].
-\]
-Here \(h(\xi)\) is the logarithmic response of the exterior, which does
-not depend on \(c\), and \(\eta_c(\xi)\) is the logarithmic response of
-the bounded interior, which is small when \(z\) is close to \(x\).  The
-exterior response itself need not be small; the argument uses only its
-variation across shell colourings.  Induction makes
-\(h\) Lipschitz in the shell colouring, with a small constant \(A\) for
-Hamming distance.  For two root colours \(a,b\), our complex-average
-stability lemma (\Cref{lem:cavg}) then gives, with \(\WHam\) the
-Wasserstein distance for the Hamming metric,
-\[
-  \left|\Log\frac{\E_{\nu_a}[e^{h+\eta_a}]}{\E_{\nu_b}[e^{h+\eta_b}]}\right|
-  \le2A\,\WHam(\nu_a,\nu_b)
-     +4\max\bigl\{\|\eta_a\|_\infty,\|\eta_b\|_\infty\bigr\},
-\]
-provided the oscillation of \(h\) and both perturbations are at most
-\(1/8\).  The left-hand side is the quantity that the induction bounds by
-\(A\).  On the chosen shell, \(\WHam(\nu_a,\nu_b)\le C/L\), and for \(z\)
-close to \(x\), the perturbations are at most \(A/8\), so the right-hand
-side is at most \(2AC/L+A/2<A\) once \(L\ge64C\).  The bound therefore
-reproduces itself, and the colour recursion
-\eqref{eq:potts-colour-recursion} gives nonvanishing.  At
-\(x=0\) this representation breaks down: some interior weights vanish
-there, and the configurations they forbid acquire weight under a complex
-perturbation.  We control them as an additive error, obtaining a disc at
-zero that joins the positive-activity neighbourhoods.
-
-To construct the real couplings, we use, for the colours \(c,c'\) at the
-two ends of an edge, the identity
-\[
-  x\one{c=c'}+\one{c\ne c'}=x+(1-x)\one{c\ne c'}
-\]
-to express each soft Potts interaction as a mixture of an unconstrained
-edge and a hard inequality.  Conditioning on the random constraints
-gives a hard list-colouring instance.  Two colourings that differ at a
-single vertex may induce different hard instances, so the usual flip
-coupling on a fixed instance does not apply directly.  We couple the
-constraint sets and construct a conditional coupling of the bounded
-flips that allows differences in the edges incident to the disagreement
-vertex and in its list; we then average the contraction estimate and
-apply stationary comparison~\cite[Lemma~19]{CFFGZZ2024}.  The new ingredients
-are this soft flip coupling and the complex stability argument
-converting coupling independence into nonvanishing.
+\paragraph{Independent work.}
+Independently, Jingcheng Liu, Chunyang Wang, Yitong Yin, Yuichi Yoshida,
+Yixiao Yu, and Zihan Zhang (personal communication) have also shown
+that coupling independence implies zero-freeness.  Their results include
+multivariate zero-free neighbourhoods for strictly positive spin systems,
+a zero-free disc at the proper-colouring endpoint, and zero-freeness
+for certain symmetric Boolean Holant problems under appropriate
+coupling or adjacent-ratio assumptions.
 
 \paragraph{Organization.}
-\Cref{sec:prelim} fixes notation and defines coupling independence.
-\Cref{sec:transfer-principle} proves \Cref{thm:potts-transfer}, and
-\Cref{sec:strict-potts} proves the soft flip coupling bound
-(\Cref{thm:strict-ci}) and \Cref{thm:intro-main}.  The same shell
-method also yields Lee--Yang zero-freeness for proper vertex and edge
-colourings under independent colour fields (\Cref{sec:lee-yang}), and,
-for Boolean Holant problems on bounded-degree graphs with signatures from
-a fixed finite family of log-concave symmetric signatures \(f\)
-satisfying \(f(0)>0\),
-graph-uniform zero-free polytubes around every bounded box of
-nonnegative activities (\Cref{sec:holant-consequence}).
-\Cref{app:additional-potts} summarizes further coupling-independence
-inputs, mostly from the companion article~\cite{ShaoShi2026FurtherPotts},
-and the zero-free regions they yield, including the general-graph threshold \(q\ge1.809\Deg\) for
-\(\Deg\ge125\).
+\Cref{sec:prelim} introduces the notation and coupling independence.
+\Cref{sec:transfer-principle} proves the transfer theorem, and
+\Cref{sec:strict-potts} establishes the soft flip coupling and
+\Cref{thm:intro-main}.  The applications to colour fields and
+log-concave Holant problems appear in \Cref{sec:lee-yang,sec:holant-consequence}.
+\Cref{app:additional-potts} collects further Potts applications.
 
-
+%
+%
 \section{Preliminaries}\label{sec:prelim}
 %
 \subsection{Pinnings and partition functions}\label{sec:potts-setup}
 
 Throughout, \(q\) and \(\Deg\) are positive integers,
 \(\colours=\{1,\ldots,q\}\), \(x\in[0,1]\) is a real base point, and
-\(z\in\C\) is the complex edge-activity variable.  We write \(\one{A}\)
+\(z\in\C\) is the complex edge-activity variable.  Since \(q\) is
+fixed, we suppress it from partition functions, writing, for example,
+\(\nZpin{G}{\tau}(z)\) for \(\nZpin{G}{\tau}(q;z)\).  We write \(\one{A}\)
 for the indicator of an event \(A\), and use the convention \(0^0=1\).
 For a finite graph \(G\), write
 \[
@@ -666,7 +678,32 @@ at \(z=0\).
 \section{From coupling independence to zero-freeness}
 \label{sec:transfer-principle}
 
-This section proves \Cref{thm:potts-transfer}.
+This section proves the following precise form of
+\Cref{thm:potts-transfer-informal}, with coupling independence as in
+\Cref{def:potts-ci}.
+
+\begin{theorem}[Coupling independence implies zero-freeness]
+\label{thm:potts-transfer}
+Fix integers \(q,\Deg\) with \(\Deg\ge2\) and \(q\ge\Deg+1\), and let
+\(\mathcal G\) be a class of finite simple graphs of maximum degree at
+most \(\Deg\) that is closed under taking induced subgraphs.  Assume:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item \(\mathcal G\) satisfies coupling independence at \(x=0\) with
+        constant \(C_0\);
+  \item for every \(\delta\in(0,1]\), it satisfies coupling independence
+        on \([\delta,1]\) with a finite constant \(C_\delta\).
+\end{enumerate}
+Then there is \(\eps>0\) such that, for every \(G\in\mathcal G\) and every
+pinning \(\tau\),
+\[
+  \nZpin{G}{\tau}(z)\ne0
+  \qquad\text{for every }z\in\mathcal U_\eps([0,1]).
+\]
+Consequently, \(\Zpin{G}{\tau}(z)=z^{m_G(\tau)}\nZpin{G}{\tau}(z)\) has
+no zeros in the same neighbourhood except, when \(m_G(\tau)\ge1\), a zero
+of multiplicity \(m_G(\tau)\) at \(z=0\).
+\end{theorem}
+
 \Cref{sec:complex-average} proves a stability estimate for complex
 averages.  \Cref{sec:potts-induction} uses it in a separator induction
 on each interval \([\delta,1]\): induction makes the exterior response
@@ -690,12 +727,12 @@ us to compare logarithms.
 \begin{lemma}[Complex averages under nearby laws]\label{lem:cavg}
 Let \((\mathcal X,d)\) be a finite metric space, let \(\nu_0,\nu_1\) be
 probability measures on \(\mathcal X\), and let \(A\ge0\),
-\(\beta\in[0,1/8]\).
+\(\gamma\in[0,1/8]\).
 Suppose \(h,\eta,\eta'\colon\mathcal X\to\C\) satisfy
 \begin{align}
   |h(\xi)-h(\xi')|&\le A\,d(\xi,\xi'),\label{eq:cavg-lip}\\
   \max_{\xi,\xi'}|h(\xi)-h(\xi')|&\le1/8,\label{eq:cavg-range}\\
-  \|\eta\|_\infty,\ \|\eta'\|_\infty&\le\beta,\label{eq:cavg-eta}
+  \|\eta\|_\infty,\ \|\eta'\|_\infty&\le\gamma,\label{eq:cavg-eta}
 \end{align}
 where \(\|f\|_\infty=\max_\xi|f(\xi)|\).  Then the averages \(\E_{\nu_0}[e^{h+\eta}]\) and
 \(\E_{\nu_1}[e^{h+\eta'}]\) are nonzero
@@ -705,7 +742,7 @@ vanishes at \(h=\eta=\eta'=0\) on the convex set of triples
 \eqref{eq:cavg-lip}--\eqref{eq:cavg-eta},
 \begin{equation}\label{eq:cavg}
   \left|\Log\frac{\E_{\nu_0}[e^{h+\eta}]}{\E_{\nu_1}[e^{h+\eta'}]}\right|
-  \le2A\,\Wd(\nu_0,\nu_1)+4\beta.
+  \le2A\,\Wd(\nu_0,\nu_1)+4\gamma.
 \end{equation}
 \end{lemma}
 
@@ -733,7 +770,7 @@ The marginals identify the endpoints as
 Thus the required ratio is \(M(1)/M(0)\).
 
 We first check that this path stays away from zero.  Each endpoint
-exponent has absolute value at most \(1/8+\beta\le1/4\), so the same
+exponent has absolute value at most \(1/8+\gamma\le1/4\), so the same
 is true of \(u_t\).  The power-series inequality
 \(|e^w-1|\le e^{|w|}-1\) yields
 \[
@@ -751,12 +788,12 @@ so differentiation under the expectation gives
     \bigl(h(X)-h(Y)+\eta(X)-\eta'(Y)\bigr)\right].
 \]
 The Lipschitz condition bounds the first difference by \(A\,d(X,Y)\),
-and the two perturbations contribute at most \(2\beta\).  Since
+and the two perturbations contribute at most \(2\gamma\).  Since
 \(|e^{u_t}|\le e^{1/4}\), we obtain
 \[
   |M'(t)|
-  \le e^{1/4}\E\bigl[A\,d(X,Y)+2\beta\bigr]
-  =e^{1/4}\bigl(A\,\Wd(\nu_0,\nu_1)+2\beta\bigr).
+  \le e^{1/4}\E\bigl[A\,d(X,Y)+2\gamma\bigr]
+  =e^{1/4}\bigl(A\,\Wd(\nu_0,\nu_1)+2\gamma\bigr).
 \]
 This is where the coupling cost enters the estimate.
 
@@ -775,8 +812,8 @@ with the lower bound on \(|M(t)|\), we conclude that
   \left|\Log\frac{M(1)}{M(0)}\right|
   &\le\int_0^1\frac{|M'(t)|}{|M(t)|}\,dt\\
   &\le\frac{e^{1/4}}{2-e^{1/4}}
-       \bigl(A\,\Wd(\nu_0,\nu_1)+2\beta\bigr)\\
-  &\le2A\,\Wd(\nu_0,\nu_1)+4\beta,
+       \bigl(A\,\Wd(\nu_0,\nu_1)+2\gamma\bigr)\\
+  &\le2A\,\Wd(\nu_0,\nu_1)+4\gamma,
 \end{aligned}
 \]
 where the last step uses \(e^{1/4}/(2-e^{1/4})<2\).
@@ -786,15 +823,15 @@ In the diagram below, each arrow label bounds the modulus of the
 logarithm of the ratio of its endpoint averages.  The horizontal solid arrow uses
 \(\eta=\eta'=0\).  Along a vertical arrow the law stays fixed, so we
 take \(X=Y\), and one endpoint has zero perturbation.  The perturbation
-difference in the derivative bound is then at most \(\beta\), giving
-\(2\beta\).
+difference in the derivative bound is then at most \(\gamma\), giving
+\(2\gamma\).
 The dashed arrow is \eqref{eq:cavg}.  Thus coupling independence enters
 through the horizontal Wasserstein term, while the local perturbations
 account for the two vertical terms.
 \[
   \begin{tikzcd}[column sep=8em,row sep=3.2em,labels={font=\footnotesize}]
     \E_{\nu_0}[e^h]
-      \arrow[d, "{2\beta}"]
+      \arrow[d, "{2\gamma}"]
       &
     \E_{\nu_1}[e^h]
       \arrow[l, "{2A\,\Wd(\nu_0,\nu_1)}"']
@@ -802,8 +839,8 @@ account for the two vertical terms.
     \E_{\nu_0}[e^{h+\eta}]
       &
     \E_{\nu_1}[e^{h+\eta'}]
-      \arrow[u, "{2\beta}"']
-      \arrow[l, dashed, "{2A\,\Wd(\nu_0,\nu_1)+4\beta}"']
+      \arrow[u, "{2\gamma}"']
+      \arrow[l, dashed, "{2A\,\Wd(\nu_0,\nu_1)+4\gamma}"']
   \end{tikzcd}
 \]
 
@@ -978,7 +1015,7 @@ The separator identity is now exactly
   =\E_{\nu_c}[e^{h+\eta_c}].
 \end{equation}
 The hypotheses of \Cref{lem:cavg}, with \(A=\alpha\) and
-\(\beta=\alpha/8\), hold at every \(z'\) with \(|z'-x|<\eps\), and
+\(\gamma=\alpha/8\), hold at every \(z'\) with \(|z'-x|<\eps\), and
 \(h,\eta_a,\eta_b\) vanish at \(z'=x\).  Composing the continuous branch
 of \Cref{lem:cavg} with \(z'\mapsto(h,\eta_a,\eta_b)\) therefore gives a
 continuous logarithm of the ratio in \eqref{eq:potts-response-invariant}
@@ -2292,7 +2329,7 @@ by unpinning one shell vertex, and has oscillation at most
       =\E_{\nu_c}[e^{h+\eta_c}].
 \]
 The hypotheses of \Cref{lem:cavg}, with \(A=\alpha\) and
-\(\beta=\alpha/8\), hold along the segment from \(\mathbf1\) to
+\(\gamma=\alpha/8\), hold along the segment from \(\mathbf1\) to
 \(\lambda\), so, as in the proof of \Cref{lem:potts-positive-response},
 the branch in \Cref{lem:cavg} is the logarithm continued from
 \(\mathbf1\).  The lemma gives
@@ -2999,7 +3036,7 @@ The companion proofs of these inputs were produced by AI models ---
 GPT-5.6 Sol, except the girth-five results, which were proved by GPT-6
 Astra.  A Lean formalization, developed with assistance from GPT-6
 Astra and Claude Opus 5.5, proves the
-coupling-independence and zero-free statements for these regimes~\cite{Shi2026Formalization};
+coupling-independence and zero-free statements for these regimes~\cite{ShaoShi2026FurtherPotts};
 their public entry points retain only the displayed mathematical hypotheses.
 It also proves, in the form the proofs use, the results cited in the
 three girth rows, \cite[Lemmas~5.13 and~8.7 and Equation~(10)]{CLMM2023}

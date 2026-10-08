@@ -166,6 +166,12 @@ David Gamarnik.
 \newblock {\em Random Structures \& Algorithms}, 62(1):155--180, 2023.
 \newblock arXiv:2011.04915.
 
+\bibitem[GK12]{GamarnikKatz2012}
+David Gamarnik and Dmitriy Katz.
+\newblock Correlation decay and deterministic {FPTAS} for counting colorings of
+  a graph.
+\newblock {\em Journal of Discrete Algorithms}, 12:29--47, 2012.
+
 \bibitem[GKM15]{GamarnikKatzMisra2015}
 David Gamarnik, Dmitriy Katz, and Sidhant Misra.
 \newblock Strong spatial mixing of list coloring of graphs.
@@ -187,6 +193,12 @@ Kun He, Zhidan Li, Guoliang Qiu, and Chihao Zhang.
 \newblock {FPTAS} for {Holant} problems with log-concave signatures.
 \newblock In {\em Proceedings of SODA 2025}, pages 5468--5503, 2025.
 \newblock arXiv:2407.04989.
+
+\bibitem[Jer95]{Jerrum1995}
+Mark Jerrum.
+\newblock A very simple algorithm for estimating the number of $k$-colorings of
+  a low-degree graph.
+\newblock {\em Random Structures \& Algorithms}, 7(2):157--165, 1995.
 
 \bibitem[KPP26]{KuchukovaPerkinsPovill2026}
 Aiya Kuchukova, Will Perkins, and Xavier Povill.
@@ -228,6 +240,13 @@ T.-D. Lee and C.-N. Yang.
   {Lattice} gas and {Ising} model.
 \newblock {\em Physical Review}, 87(3):410--419, 1952.
 
+\bibitem[LY13]{LuYin2013}
+Pinyan Lu and Yitong Yin.
+\newblock Improved {FPTAS} for multi-spin systems.
+\newblock In {\em Approximation, Randomization, and Combinatorial Optimization.
+  Algorithms and Techniques (APPROX/RANDOM 2013)}, volume 8096 of {\em Lecture
+  Notes in Computer Science}, pages 639--654. Springer, 2013.
+
 \bibitem[LY26]{LiuYu2026}
 Jingcheng Liu and Yixiao Yu.
 \newblock Zero-free regions and concentration inequalities for hypergraph
@@ -268,13 +287,6 @@ Guus Regts.
   2023.
 \newblock arXiv:2111.04809.
 
-\bibitem[Shi26]{Shi2026Formalization}
-Ke~Shi.
-\newblock Coupling independence implies zero-freeness: {Lean} formalization.
-\newblock Source code and verification records, commit c388cfa,
-  \url{https://github.com/KeShih/coupling-independence-implies-zero-freeness/tree/c388cfa},
-  2026.
-
 \bibitem[SS21]{ShaoSun2021}
 Shuai Shao and Yuxin Sun.
 \newblock Contraction: A unified perspective of correlation decay and
@@ -285,8 +297,8 @@ Shuai Shao and Yuxin Sun.
 \bibitem[SS26a]{ShaoShi2026FurtherPotts}
 Shuai Shao and Ke~Shi.
 \newblock Further {Potts} zero-free regions from coupling independence.
-\newblock Companion preprint, version of 24~September 2026,
-  \url{https://github.com/KeShih/coupling-independence-implies-zero-freeness/blob/c388cfa/docs/appendix.pdf},
+\newblock Companion preprint,
+  \url{https://github.com/KeShih/coupling-independence-implies-zero-freeness},
   2026.
 
 \bibitem[SS26b]{ShaoShi2026}
@@ -314,5 +326,10 @@ David~G. Wagner.
 \newblock Weighted enumeration of spanning subgraphs with degree constraints.
 \newblock {\em Journal of Combinatorial Theory, Series B}, 99(2):347--357,
   2009.
+
+\bibitem[Wei06]{Weitz2006}
+Dror Weitz.
+\newblock Counting independent sets up to the tree threshold.
+\newblock In {\em Proceedings of STOC 2006}, pages 140--149, 2006.
 
 \end{thebibliography}
