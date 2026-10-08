@@ -65,15 +65,16 @@ coupling alone.
 
 ## What is formalized
 
-Theorem numbers follow the September 2026 versions of the two papers. Lean
-names are relative to `ZeroFreeness`.
+Theorem numbers follow the October 2026 version of the main paper and the
+September 2026 version of the companion. Lean names are relative to
+`ZeroFreeness`.
 
 ### Main paper
 
 | Result | Lean |
 | --- | --- |
 | Thm 1.1: Potts zero-freeness near `[0,1]` for `q ≥ 11Δ/6` | `Potts.potts_main_theorem`, `Potts.potts_main_strict` |
-| Thm 1.2: coupling independence implies zero-freeness on induced-subgraph-closed classes | `Potts.graph_class_potts_transfer_of_bounded` |
+| Thm 3.1 (informally Thm 1.2): coupling independence implies zero-freeness on induced-subgraph-closed classes | `Potts.graph_class_potts_transfer_of_bounded` |
 | Thm 4.1, Prop 4.10, Prop 4.12: the soft flip coupling and its conditional hard estimate | `Potts.root_strict_ci`, `conditionalHardCouplingEstimate`, `Potts.root_positive_ci` |
 | Prop 5.1, Thm 5.2: Lee–Yang polydiscs for vertex-colour fields | `LeeYang.prop_field_transfer`, `LeeYang.near_vigoda_vertex_field_zero_free`, `LeeYang.cv_vertex_field_zero_free`, `LeeYang.high_girth_residual_original_field_transfer` |
 | Cor 5.4: edge-colour fields for `q ≥ 3Δ` | `LeeYang.edge_lee_yang` |
@@ -104,16 +105,16 @@ Lean proof differs from the written one.
 numbered statements of the two papers, 32 in the main paper and 75 in the
 companion, with its status, the Lean declarations that state it, the
 definitions needed to read them, and a note on any difference of form.
-All Lean names elaborate. Each of the 92 theorems, lemmas,
+All Lean names elaborate. Each of the 93 theorems, lemmas,
 propositions and corollaries has one of the three `formalized` statuses:
 
 | Status | Entries | Meaning |
 | --- | --- | --- |
-| `formalized` | 77 | the Lean statement has the written strength (74 results and 3 remarks with mathematical content; the claims about cited work in those remarks are listed below) |
+| `formalized` | 78 | the Lean statement has the written strength (75 results and 3 remarks with mathematical content; the claims about cited work in those remarks are listed below) |
 | `formalized-equivalent` | 16 | an equivalent form, for example on boundary-count data, with the bridge named in the note |
 | `formalized-narrowed` | 2 | companion Lemmas 3.6 and 6.10, in the narrowed form the companion now states |
 | `definition` | 8 | a Lean definition; the claims made inside the definition are proved, except the citation noted below |
-| `remark` | 4 | a remark that makes no claim of its own: it describes the proof, or attributes or compares cited work |
+| `remark` | 3 | a remark that makes no claim of its own: it describes the proof, or attributes or compares cited work |
 
 ### What remains unformalized
 
@@ -134,7 +135,7 @@ is citation-level:
 - Cited background in remarks is not formalized: the Heilmann–Lieb
   theorem and Wagner's method in Remark 5.8 of the main paper
   (`rem:matching-degree-dependence`, whose star bound is proved), and the
-  attributions and comparisons in the four `remark` entries.
+  attributions and comparisons in the three `remark` entries.
 - Algorithmic and FPTAS claims are outside the scope of a Lean statement,
   and the claim that `ε` can be chosen effectively is not formalized.
 
