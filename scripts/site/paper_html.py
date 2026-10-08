@@ -1029,7 +1029,15 @@ def check_pdf(pdf_path, numbering, theorems):
     if pdf_thms != ours:
         problems.append("statements only in the PDF: %s; only in the source: %s"
                         % (sorted(pdf_thms - ours)[:8], sorted(ours - pdf_thms)[:8]))
-    pdf_eqs = {k.split(".", 1)[1] for k in names if k.startswith("equation.")}
+    pdf_eqs = set()
+    for k in names:
+        if k.startswith("equation."):
+            n = k.split(".", 1)[1]
+            # Some hyperref versions also put the section in an equation's
+            # anchor ("equation.3.12" for the printed (12)); keep the printed number.
+            if n not in numbering.equations and "." in n and n.split(".", 1)[1] in numbering.equations:
+                n = n.split(".", 1)[1]
+            pdf_eqs.add(n)
     if pdf_eqs != set(numbering.equations):
         problems.append("equations only in the PDF: %s; only in the source: %s"
                         % (sorted(pdf_eqs - set(numbering.equations))[:8],

@@ -122,7 +122,7 @@ GLOSSARY = [
     ("PottsCI.ham", r"\mathrm{Ham}", "The Hamming distance between configurations."),
     ("ZeroFreeness.Potts.GraphClass", r"\mathcal G",
      "A class of finite simple graphs closed under induced subgraphs."),
-    ("ZeroFreeness.Potts.GraphClassTransferInputs", r"\text{(i), (ii) of Theorem 1.2}",
+    ("ZeroFreeness.Potts.GraphClassTransferInputs", r"\text{(i), (ii) of the transfer theorem}",
      "Coupling independence at x = 0 and on every [δ, 1]."),
     ("ZeroFreeness.Appendix.Girth.UniformResidualGirthPottsZeroFree", r"\operatorname{girth}(G^\tau)\ge g",
      "The conclusion of the girth rows, with girth required only of the free graph."),
