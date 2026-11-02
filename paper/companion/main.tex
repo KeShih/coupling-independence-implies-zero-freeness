@@ -101,13 +101,13 @@ Ke Shi\footnotemark[1]\\
 \begin{abstract}
 The main article \cite{ShaoShi2026ZeroFreeness} establishes a transfer principle
 turning Hamming coupling independence of the antiferromagnetic Potts model
-into graph-uniform zero-free neighbourhoods of activity intervals, and
+into graph-uniform zero-free neighborhoods of activity intervals, and
 proves coupling independence above the Vigoda threshold
 \(q>11\Deg/6\).  The present companion article proves coupling
 independence in seven further regimes --- near-Vigoda, Carlson--Vigoda,
 large-girth, high-temperature, BBR-interval, edge-Potts, and girth-five
 --- and records, through the same transfer principle, the resulting
-zero-free neighbourhoods for all normalized pinned partition functions.
+zero-free neighborhoods for all normalized pinned partition functions.
 \end{abstract}
 
 \paragraph*{AI Disclosure.}
@@ -138,7 +138,7 @@ The main article \cite{ShaoShi2026ZeroFreeness} proves that on any
 induced-subgraph-closed class of graphs of maximum degree at most
 \(\Deg\) with \(q\ge\Deg+1\), Hamming coupling independence at \(x=0\)
 together with a uniform coupling bound on each \([\delta,1]\),
-\(\delta>0\), yields a graph-uniform zero-free neighbourhood of
+\(\delta>0\), yields a graph-uniform zero-free neighborhood of
 \([0,1]\) for all normalized pinned Potts partition functions
 (\Cref{thm:potts-transfer} below).  This article supplies the coupling
 input in seven further regimes; \Cref{tab:appendix-extensions} lists the
@@ -181,12 +181,12 @@ girth-five
 
 \parbox{0.97\textwidth}{\raggedright\scriptsize
 In every row the conclusion is \(\nZpin{G}{\tau}(z)\ne0\) for all \(z\)
-in an \(\eps\)-neighbourhood of the stated interval, with \(\eps>0\)
+in an \(\eps\)-neighborhood of the stated interval, with \(\eps>0\)
 depending only on the listed parameters, uniformly over graphs and
 pinnings; the unnormalized pinned polynomial has no zeros in the same
-neighbourhood except possibly at \(z=0\), of order \(m_G(\tau)\).
+neighborhood except possibly at \(z=0\), of order \(m_G(\tau)\).
 In the edge-Potts row the polynomial is \(\nZpin{L(G)}{\tau}\), with
-\(\tau\) an edge-colour pinning, and \(m_G(\tau)\) is replaced by
+\(\tau\) an edge-color pinning, and \(m_G(\tau)\) is replaced by
 \(m_{L(G)}(\tau)\).  In the BBR row,
 \(x_0:=1-\frac q\Deg\bigl(1-\frac k\Deg\bigr)^{\!2}
 \frac{\Deg-k}{\Deg-k/2}\) with \(k:=e\frac{\Deg-q/2}{\Deg-q}\) (and
@@ -259,8 +259,8 @@ and call \(G^\tau\) the \emph{free graph}.  For \(u\in V^\tau\) and
   \bcount_u^\tau(c)
   :=\abs{\set{p\in\Lambda:up\in E,\ \tau_p=c}}.
 \end{equation}
-Boundary counts record pinned neighbours separately, even when several
-have the same colour.  The normalized pinned partition function has the
+Boundary counts record pinned neighbors separately, even when several
+have the same color.  The normalized pinned partition function has the
 factorized form
 \begin{equation}\label{eq:potts-Z}
   \nZpin{G}{\tau}(z)
@@ -328,13 +328,13 @@ The multiplier \(z^{\bcount_r^\tau(a)}\) is determined when \(r\) is pinned.
 The normalized function \(\nZpin{G}{\tau^{r=a}}\) remains well defined even
 when this multiplier vanishes at \(z=0\).
 
-\subsection{Hard-colouring feasibility}
-A colour \(c\) is blocked at a free vertex \(u\) when
+\subsection{Hard-coloring feasibility}
+A color \(c\) is blocked at a free vertex \(u\) when
 \(\bcount_u^\tau(c)>0\).  Its hard effective list is
 \[
   \hardlist{\tau}{u}:=\set{c\in\colours:\bcount_u^\tau(c)=0}.
 \]
-A colouring \(\varphi\colon V^\tau\to\colours\) is \emph{hard-feasible}
+A coloring \(\varphi\colon V^\tau\to\colours\) is \emph{hard-feasible}
 if it is proper on \(G^\tau\) and
 \(\varphi_u\in\hardlist{\tau}{u}\) for every \(u\in V^\tau\).
 
@@ -349,7 +349,7 @@ Consequently \(\nZpin{G}{\tau}(0)>0\).
 \end{lemma}
 
 \begin{proof}
-At most \(\abs{N_G(u)\cap\Lambda}\) colours are blocked at \(u\).  Since
+At most \(\abs{N_G(u)\cap\Lambda}\) colors are blocked at \(u\).  Since
 \[
   \deg_{G^\tau}(u)+\abs{N_G(u)\cap\Lambda}
   =\deg_G(u)\le\Deg,
@@ -360,8 +360,8 @@ we have
   \ge q-\abs{N_G(u)\cap\Lambda}
   \ge \deg_{G^\tau}(u)+1.
 \]
-A greedy list-colouring of \(G^\tau\), in any vertex ordering, leaves an
-available colour at every step, so a hard-feasible colouring exists and
+A greedy list-coloring of \(G^\tau\), in any vertex ordering, leaves an
+available color at every step, so a hard-feasible coloring exists and
 \(\nZpin{G}{\tau}(0)>0\).
 \end{proof}
 
@@ -515,8 +515,8 @@ independence on \([\delta,1]\) with constant \(12/(11\delta)\).
 
 The soft-flip kernel \(K_{x,\rho}^{G,\tau}\) of a profile
 \(\rho=(\rho_s)_{s\ge1}\) samples independent Bernoulli\((1-x)\) coins on
-the labelled inequality constraints of the pinned system, runs the flip
-chain with profile \(\rho\) on the resulting hard list-colouring
+the labeled inequality constraints of the pinned system, runs the flip
+chain with profile \(\rho\) on the resulting hard list-coloring
 instance, and forgets the sampled constraints.  The following four
 lemmas, proved in \cite{ShaoShi2026ZeroFreeness}, are the interface used below.
 
@@ -529,20 +529,20 @@ For every profile \(\rho\) and \(x\in(0,1]\),
 
 \begin{lemma}[The two hard instances differ only near \(v\)]
 \label{lem:coupled-activation-root-local}
-For adjacent colourings \(X,Y\) differing at \(v\), with
+For adjacent colorings \(X,Y\) differing at \(v\), with
 \(X_v=a\ne b=Y_v\), draw one independent Bernoulli\((1-x)\) coin per
-labelled constraint and activate that constraint on either side exactly
+labeled constraint and activate that constraint on either side exactly
 when the coin is one and the inequality is satisfied there.  This
 common-coin construction has the correct activation marginals.
 The two instances have the same induced graph and lists off \(v\).  Their
-incident edge sets can differ only at neighbours of colour \(a\) or
-\(b\), and their root lists can differ only in those two colours.
+incident edge sets can differ only at neighbors of color \(a\) or
+\(b\), and their root lists can differ only in those two colors.
 \end{lemma}
 
-\begin{lemma}[Effect of adding one labelled free--pinned edge]
+\begin{lemma}[Effect of adding one labeled free--pinned edge]
 \label{lem:boundary-sensitivity}
 Let two pinned systems have the same free vertex set \(W\), of size
-\(m\ge1\), and the same labelled constraints except for one additional
+\(m\ge1\), and the same labeled constraints except for one additional
 free--pinned edge in the plus system.  For a profile with
 \(R_\rho:=\sup_{s\ge1}s\rho_s<\infty\), their soft kernels satisfy
 \begin{equation}\label{eq:one-boundary-row}
@@ -550,10 +550,10 @@ free--pinned edge in the plus system.  For a profile with
   \le\frac{(1-x)R_\rho}{mq}
   \qquad(\sigma\in\colours^W).
 \end{equation}
-For hard list kernels, deleting one colour from one list gives the bound
-\(R_\rho/(mq)\) on colourings feasible for the smaller list.
-Adding \(k\) labelled free--pinned edges (for hard list kernels,
-deleting \(k\) colours from lists) multiplies the respective bound
+For hard list kernels, deleting one color from one list gives the bound
+\(R_\rho/(mq)\) on colorings feasible for the smaller list.
+Adding \(k\) labeled free--pinned edges (for hard list kernels,
+deleting \(k\) colors from lists) multiplies the respective bound
 by \(k\).
 \end{lemma}
 

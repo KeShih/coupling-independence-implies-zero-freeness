@@ -9,7 +9,7 @@ for deterministic approximation of normalized pinned partition functions
 via Barvinok interpolation and the coefficient-computation framework
 of \cite{Barvinok2016,PatelRegts2017}.
 The coupling inputs are recalled in \Cref{sec:soft-flip-interface} and proved in the subsequent
-sections, except for the independent hard-colouring input on the critical line
+sections, except for the independent hard-coloring input on the critical line
 \(q=11\Deg/6\).
 
 Unless explicitly redefined, this article uses the pinning and normalized-child
@@ -24,7 +24,7 @@ For finite-dimensional vectors, \(\|\cdot\|_2\) is the Euclidean norm;
 \(L^2\) conventions used for the spectral-gap proof are specified in
 \Cref{sec:fixed-girth-ci}.
 
-\subsection{Zero-free neighbourhoods of \texorpdfstring{\([0,1]\)}{[0,1]}}
+\subsection{Zero-free neighborhoods of \texorpdfstring{\([0,1]\)}{[0,1]}}
 
 \begin{theorem}[Additional Potts zero-free regimes]
 \label{thm:additional-potts-zf}
@@ -48,7 +48,7 @@ simple graph \(G\) of maximum degree at most \(\Deg\) and every pinning
   \nZpin{G}{\tau}(z)\ne0
   \qquad\text{for every }z\in\mathcal U_\eps([0,1]).
 \]
-Consequently, \(\Zpin{G}{\tau}(z)\) has no zeros in the same neighbourhood
+Consequently, \(\Zpin{G}{\tau}(z)\) has no zeros in the same neighborhood
 except possibly at \(z=0\); its order of vanishing there is
 \(m_G(\tau)\).
 \end{theorem}
@@ -56,7 +56,7 @@ except possibly at \(z=0\); its order of vanishing there is
 \begin{remark}[Literature and algorithmic use of the three \texorpdfstring{$[0,1]$}{[0,1]} regimes]
 Regime~\textup{(i)} continues the strict \(11\Deg/6\) coupling argument
 proved in the main article \cite{ShaoShi2026ZeroFreeness}.  On the critical line, the endpoint input is the
-hard-colouring coupling of Chen, Feng, Guo, Zhang, and Zou, with the
+hard-coloring coupling of Chen, Feng, Guo, Zhang, and Zou, with the
 list-contraction estimates originating in the bounded-flip work of Chen,
 Delcourt, Moitra, Perarnau, and Postle; see
 \cite[Theorem~20 and Proposition~22]{CFFGZZ2024} and
@@ -69,7 +69,7 @@ interval.
 
 In contrast, the BBR result below concerns only \([x_0,1]\), not the
 full activity interval; its conclusion is a high-temperature zero-free
-neighbourhood.
+neighborhood.
 \end{remark}
 
 The following elementary observation isolates the finitely many integer
@@ -98,12 +98,12 @@ The fractional part of \(11\Deg/6\) belongs to
 \label{rem:critical-scope}
 Every integer pair with \(q=11\Deg/6\) and \(\Deg\ge2\) has
 \((\Deg,q)=(6j,11j)\) for some \(j\ge1\).  Thus \(\Deg\ge6\), and
-the hard-colouring input of
+the hard-coloring input of
 \cite[Theorem~20 and Proposition~22]{CFFGZZ2024} applies along the
 entire critical line.  Its list-contraction input comes from
 \cite[Section~6 and Appendix~E]{CDMPP2019}.
 To match the pinning conventions, recall that the normalized law at
-\(x=0\) is the uniform proper list-colouring law on \(G^\tau\), with
+\(x=0\) is the uniform proper list-coloring law on \(G^\tau\), with
 \[
   \hardlist{\tau}{u}=\{c\in\colours:\bcount_u^\tau(c)=0\},
   \qquad
@@ -139,7 +139,7 @@ of regime~\textup{(i)}.  At the exceptional pairs
 \[
   (\Deg,q)=(6j,11j),\qquad 1\le j\le20,\quad j\in\mathbb Z,
 \]
-the endpoint bound is supplied independently by the hard-colouring
+the endpoint bound is supplied independently by the hard-coloring
 coupling theorem, while one may take
 \(C_\delta=12/(11\delta)\).  No single uniform-in-\(x\) constant is
 asserted at these critical pairs.
@@ -179,11 +179,11 @@ pinned polynomial, so the established radius applies.  The statement for
 unnormalized pinnings follows from \eqref{eq:intro-normalization}.
 \end{proof}
 
-\subsection{High-temperature zero-free neighbourhoods}
+\subsection{High-temperature zero-free neighborhoods}
 
 The tree contraction of Bencs, Berrekkal, and
 Regts~\cite{BencsBerrekkalRegts2025Trees} gives a further region when the
-number of colours may be smaller than the maximum degree.  Retaining the
+number of colors may be smaller than the maximum degree.  Retaining the
 unrounded contraction parameter gives the following interval.
 
 \begin{theorem}[A BBR-certified interval at large girth]
@@ -216,7 +216,7 @@ After decreasing \(\eps\), if necessary, so that \(\eps<x_0\), the same
 zero-free statement holds for the unnormalized pinned polynomial.
 \end{theorem}
 
-\Cref{thm:intro-bbr-interval} addresses the zero-free-neighbourhood question
+\Cref{thm:intro-bbr-interval} addresses the zero-free-neighborhood question
 in \cite[Section~5]{BencsBerrekkalRegts2025Trees}.
 Outside \((q,\Deg)=(3,4)\), their endpoint is obtained from
 \eqref{eq:intro-bbr-x0} by replacing \(k\) with \(e^2\).
@@ -257,7 +257,7 @@ For the free-graph formulation, apply
 lies in \(\Gdegg{g_{\rm BBR}}\) and has the same normalized pinned
 partition function, so the radius just obtained applies.  Finally shrink
 it below \(x_0/2\), so the possible monomial zero of an unnormalized
-pinning is outside the neighbourhood.
+pinning is outside the neighborhood.
 \end{proof}
 
 \begin{corollary}[General-graph high-temperature intervals]
@@ -292,7 +292,7 @@ Shrinking the radius below \(x_*\) and using
 \eqref{eq:intro-normalization} gives the unnormalized statement.
 \end{proof}
 
-\subsection{Girth-five zero-free neighbourhoods at the \texorpdfstring{$(1+\delta)\Deg$}{(1+delta)Delta} threshold}
+\subsection{Girth-five zero-free neighborhoods at the \texorpdfstring{$(1+\delta)\Deg$}{(1+delta)Delta} threshold}
 \label{app:girth5-zero-free}
 
 Throughout this subsection, $\delta\in(0,1]$ is the slack parameter in
@@ -314,9 +314,9 @@ $\operatorname{girth}(G^\tau)\ge5$,
 The radius is independent of $G$ and $\tau$; no bounds on local
 five-cycle or six-cycle counts are assumed.
 The unnormalized polynomial $\Zpin{G}{\tau}(z)$ has no zeros in this
-neighbourhood except possibly at $z=0$, where its order of vanishing is
+neighborhood except possibly at $z=0$, where its order of vanishing is
 $m_G(\tau)$.  In particular, $Z_G(z)\ne0$ throughout the same
-neighbourhood when $G$ itself has girth at least five.
+neighborhood when $G$ itself has girth at least five.
 \end{theorem}
 \begin{proof}
 Since $q\ge\Deg+1$, \Cref{thm:girth5-ci,thm:potts-transfer} give

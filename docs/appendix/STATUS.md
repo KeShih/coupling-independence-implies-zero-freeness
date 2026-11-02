@@ -21,9 +21,9 @@ summarizes the coverage of every numbered statement.
 
 | Region | Coupling independence | Uniform zero-free conclusion |
 | --- | --- | --- |
-| Edge-Potts, maximum original degree Δ≥2 and q ≥ 3Δ | `Edge.root_children_ci`: actual root-conditioned edge-colour Gibbs laws have Hamming transportation distance at most Δ−1, for every x in [0,1] | `Edge.edge_potts_zero_free`, including arbitrary edge pinning and the exact forced-zero multiplicity at zero |
+| Edge-Potts, maximum original degree Δ≥2 and q ≥ 3Δ | `Edge.root_children_ci`: actual root-conditioned edge-color Gibbs laws have Hamming transportation distance at most Δ−1, for every x in [0,1] | `Edge.edge_potts_zero_free`, including arbitrary edge pinning and the exact forced-zero multiplicity at zero |
 | Large girth, Δ ≥ 3 and q ≥ Δ+3 | `Girth.high_girth_coupling`: a girth threshold and one coupling constant work uniformly in graph size, pinning, and x in [0,1] | `Girth.high_girth_zero_free` and `Girth.high_girth_residual_original_zero_free`, with girth required only of the free residual graph, including arbitrary improper pinning and the exact forced-zero multiplicity |
-| General-graph high temperature, x₀>0 and q>11(1−x₀)Δ/6 | `high_temperature_graph_coupling`: the explicit constant 2(1−x₀)Δ / (q−11(1−x₀)Δ/6) works on [x₀,1] | `high_temperature_zero_free`, for both normalized and full partition functions, without a hard-colouring feasibility bound |
+| General-graph high temperature, x₀>0 and q>11(1−x₀)Δ/6 | `high_temperature_graph_coupling`: the explicit constant 2(1−x₀)Δ / (q−11(1−x₀)Δ/6) works on [x₀,1] | `high_temperature_zero_free`, for both normalized and full partition functions, without a hard-coloring feasibility bound |
 | BBR large-girth interval, q≥3 and Δ/q≥(e−1/2)/(e−1) | `BBR.high_girth_coupling`: one girth threshold and one CI constant work on the entire closed interval [`BBR.start q Δ`,1] | `BBR.high_girth_zero_free` and `BBR.high_girth_residual_original_zero_free`, for both normalized and full partition functions, with girth required only of the free residual graph; `BBR.high_girth_original_zero_free_and_responses` adds the actual one-root response logarithms |
 | Carlson–Vigoda, Δ≥125 and q≥1.809Δ | `CV.option_root_ci` and `CV.root_coupling`: actual normalized root-child laws have Hamming transport at most 409060125/50858 < 8043.19, uniformly on [0,1] | `CV.zero_free`: the full original-graph statement, arbitrary pinning, normalized nonvanishing and exact forced-zero multiplicity |
 | Near-Vigoda, Δ≥2 and q≥(11/6−1/84000)Δ | `near_vigoda_uniform_ci`: one constant on [0,1], via the exact integer reduction `nearVigoda_regime_cases` to the proved strict-Vigoda and CV regimes and twenty critical pairs, which use the CV contraction on the critical line; `near_vigoda_transfer_inputs` gives the hard-endpoint and every-[δ,1] coupling inputs | `near_vigoda_zero_free`: the full uniform original-graph statement on [0,1] |
@@ -36,7 +36,7 @@ Names in the table are relative to `ZeroFreeness.Appendix`.
 No cited result is used. The proof constructs weighted finite
 slot models, proves their actual conditional Gibbs identities, exposure
 couplings and recursive transport bound, proves real-rooted finite slot
-approximations, projects to the finite colour space and passes to the limit.
+approximations, projects to the finite color space and passes to the limit.
 The zero-free corollary uses the already formalized graph-class transfer theorem.
 
 The countable slot lemmas are also proved as stated.
@@ -45,7 +45,7 @@ Lemma 8.3 (`lem:slot-fact`), the countable slot representation
 `Edge.slot_representation` for every `0 < x < 1`, by compactness from the
 finite real-rooted approximants rather than by the paper's
 Hadamard-factorization argument, and Lemma 8.4 (`lem:edge-slot-lift`), the
-exact lift `Edge.lem_edge_slot_lift` on `C × ℕ × ℕ` with exact colour
+exact lift `Edge.lem_edge_slot_lift` on `C × ℕ × ℕ` with exact color
 projection. [`Slots/OneLabel.lean`](../../ZeroFreeness/Coupling/Edge/Slots/OneLabel.lean)
 proves Lemma 8.5 (`lem:edge-one-label`), `Edge.OneLabel.edge_one_label`, on
 the countable slot model, by lumping all slots from `N` on into one and
@@ -103,13 +103,13 @@ start at distance one uniformly in `x` (`Girth.no_uniform_distance_one`).
 polynomial result with girth required only after pinning. For BBR the
 corresponding entry point is `BBR.high_girth_residual_original_zero_free`;
 its radius is reduced to exclude zero, so both the normalized and full
-polynomials are nonzero throughout the stated positive-temperature neighbourhood.
+polynomials are nonzero throughout the stated positive-temperature neighborhood.
 
 ### High-temperature proof and cited results
 
 No cited result is used. The concrete positive-activity
 Vigoda coupling supplies the explicit CI constant. The positive-base
-graph-family response induction supplies the uniform complex neighbourhood.
+graph-family response induction supplies the uniform complex neighborhood.
 The proof does not impose q≥Δ+1 and permits arbitrary improper pinning.
 
 ### BBR proof and cited results
@@ -167,7 +167,7 @@ paths, and the true output-score discount. The final geometric drift feeds
 weighted path coupling and a two-metric stationary comparison. Finite-state
 continuity gives x=0, while x=1 is the common product law. The bound and its
 uniform complex corollary do not retain any matching, drift, contraction,
-stationarity, or hard-colouring hypothesis.
+stationarity, or hard-coloring hypothesis.
 
 The lemmas of the CV appendix are also stated one by one.
 [`CV/ClosedKernel.lean`](../../ZeroFreeness/Coupling/CV/ClosedKernel.lean) defines the
@@ -214,7 +214,7 @@ Remark 4.4 (`rem:critical-scope`) is formalized in
 critical integer pair is `(6j,11j)` (`ZeroFreeness.Potts.critical_line_pairs`), the
 list slack is at least `5Δ/6` for arbitrary pinnings
 (`ZeroFreeness.Potts.hardList_slack_critical`), the `x = 0` law is uniform on proper
-list colourings (`ZeroFreeness.Potts.gibbs_zero_uniform`), and the `x = 0` coupling
+list colorings (`ZeroFreeness.Potts.gibbs_zero_uniform`), and the `x = 0` coupling
 input holds on original graphs along the whole critical line
 (`ZeroFreeness.Potts.critical_line_hard_endpoint`). The remark's claim that
 CFFGZZ Theorem 20 and Proposition 22 apply is a statement about the cited
@@ -234,7 +234,7 @@ conditioned laws are smaller instances, with the same root or rerooted at
 that vertex. The Lean bound uses `1 + log ℓ` where the written proof uses
 harmonic numbers. The formalized statement is the positive-activity branch
 with positive sphere-decay error; it does not reproduce the separate
-zero-temperature colouring endpoint. It assumes none of the spectral gap,
+zero-temperature coloring endpoint. It assumes none of the spectral gap,
 covariance
 bounds, response induction, weighted-source estimate, or girth-five
 coupling conclusion.
@@ -263,7 +263,7 @@ of `(tau.toPinningData G).graph`; pinned vertices may lie on shorter cycles.
 The Section 9 lemmas are also stated at their written strength.
 [`Covariance/Graph/Disintegration.lean`](../../ZeroFreeness/Coupling/Girth/Covariance/Graph/Disintegration.lean)
 proves Lemma 9.1 (`Girth.second_layer_disintegration`) for every `x ≥ 0`,
-including the hard-colouring law at `x = 0`.
+including the hard-coloring law at `x = 0`.
 [`Covariance/Insertion/OneEdgeOperator.lean`](../../ZeroFreeness/Coupling/Girth/Covariance/Insertion/OneEdgeOperator.lean)
 proves Lemma 9.2 (`Girth.girth5_one_edge`) for `0 ≤ x ≤ 1`.
 [`Spectral/OperatorGap.lean`](../../ZeroFreeness/Coupling/Girth/Spectral/OperatorGap.lean)
@@ -288,7 +288,7 @@ formalized in the narrowed form the companion now states:
   proved as
   `Girth.potts_eventual_transfer_uniform` and its two companions.
 - The `k`-fold clause of Lemma 3.6 (`lem:boundary-sensitivity`) counts
-  labelled free–pinned edges, as in the main text, and is proved as
+  labeled free–pinned edges, as in the main text, and is proved as
   `ZeroFreeness.Potts.lem_boundary_sensitivity`.
 
 Only citation-level claims remain unformalized: that CFFGZZ Theorem 20 and

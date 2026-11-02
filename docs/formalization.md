@@ -19,7 +19,7 @@ companion, *Further Potts Zero-Free Regions from Coupling Independence*.
 - **Standard axioms only.** The whole library depends only on Lean's
   `propext`, `Classical.choice` and `Quot.sound`.
 - **Actual partition functions.** The headline statements concern finite
-  partition functions. Potts pinnings are arbitrary partial colourings,
+  partition functions. Potts pinnings are arbitrary partial colorings,
   improper ones included, and every zero-free radius is chosen before the
   graph, its size and the pinning.
 
@@ -54,11 +54,11 @@ def ZeroFreeness.Potts.UniformPottsZeroFree (C : Type v) [Fintype C] (Δ : ℕ) 
 ```
 
 Here `pottsInterval` is `[0,1] ⊆ ℂ` and `thickening eps` is its open
-`eps`-neighbourhood. The normalized pinned polynomial has no zeros there.
+`eps`-neighborhood. The normalized pinned polynomial has no zeros there.
 The ordinary pinned polynomial vanishes there only at `z = 0`, to order equal
 to the number of monochromatic edges inside the pinned set, so not at all
 when the pinning is proper. On the line `6q = 11Δ` the proof needs a
-hard-colouring coupling bound, which the paper cites from Chen, Feng, Guo,
+hard-coloring coupling bound, which the paper cites from Chen, Feng, Guo,
 Zhang and Zou; Lean proves it with the Carlson–Vigoda contraction instead
 (see below). `potts_main_strict` proves the case `11Δ < 6q` from the Vigoda
 coupling alone.
@@ -76,8 +76,8 @@ September 2026 version of the companion. Lean names are relative to
 | Thm 1.1: Potts zero-freeness near `[0,1]` for `q ≥ 11Δ/6` | `Potts.potts_main_theorem`, `Potts.potts_main_strict` |
 | Thm 3.1 (informally Thm 1.2): coupling independence implies zero-freeness on induced-subgraph-closed classes | `Potts.graph_class_potts_transfer_of_bounded` |
 | Thm 4.1, Prop 4.10, Prop 4.12: the soft flip coupling and its conditional hard estimate | `Potts.root_strict_ci`, `conditionalHardCouplingEstimate`, `Potts.root_positive_ci` |
-| Prop 5.1, Thm 5.2: Lee–Yang polydiscs for vertex-colour fields | `LeeYang.prop_field_transfer`, `LeeYang.near_vigoda_vertex_field_zero_free`, `LeeYang.cv_vertex_field_zero_free`, `LeeYang.high_girth_residual_original_field_transfer` |
-| Cor 5.4: edge-colour fields for `q ≥ 3Δ` | `LeeYang.edge_lee_yang` |
+| Prop 5.1, Thm 5.2: Lee–Yang polydiscs for vertex-color fields | `LeeYang.prop_field_transfer`, `LeeYang.near_vigoda_vertex_field_zero_free`, `LeeYang.cv_vertex_field_zero_free`, `LeeYang.high_girth_residual_original_field_transfer` |
+| Cor 5.4: edge-color fields for `q ≥ 3Δ` | `LeeYang.edge_lee_yang` |
 | Thm 5.6, Cors 5.7 and 5.9: log-concave Holant problems, b-matchings and b-edge-covers | `Holant.exists_uniform_holant_polytube`, `Holant.bmatching_uniform_polytube`, `Holant.cor_bcover_short` |
 
 ### Companion: further Potts regimes
@@ -120,7 +120,7 @@ propositions and corollaries has one of the three `formalized` statuses:
 
 Companion Lemma 6.10 is stated for the Potts family at positive activity
 `x ∈ J ⊆ (0,1]`, the only case the companion uses, and the `k`-fold clause
-of Lemma 3.6 counts labelled free–pinned edges. What remains unformalized
+of Lemma 3.6 counts labeled free–pinned edges. What remains unformalized
 is citation-level:
 
 - Remark 4.4 of the companion (`rem:critical-scope`) says that CFFGZZ
@@ -148,7 +148,7 @@ library. No paper-facing theorem takes one as a hypothesis.
 
 | Cited result | Source | Lean theorem | File |
 | --- | --- | --- | --- |
-| Hard-colouring CI at `q = 11Δ/6` (Theorem 20) | Chen, Feng, Guo, Zhang, Zou, *Deterministic counting from coupling independence*, arXiv:2410.23225v2 | `Potts.critical_hard_colouring_input`, `Potts.external_critical_hard_colouring_theorem`, from `Appendix.CV.option_root_ci_critical` | `ZeroFreeness/Potts/Theorems/PottsExternalTheorem.lean`, `ZeroFreeness/Coupling/CV/RootCI.lean` |
+| Hard-coloring CI at `q = 11Δ/6` (Theorem 20) | Chen, Feng, Guo, Zhang, Zou, *Deterministic counting from coupling independence*, arXiv:2410.23225v2 | `Potts.critical_hard_colouring_input`, `Potts.external_critical_hard_colouring_theorem`, from `Appendix.CV.option_root_ci_critical` | `ZeroFreeness/Potts/Theorems/PottsExternalTheorem.lean`, `ZeroFreeness/Coupling/CV/RootCI.lean` |
 | Tree influence–Jacobian identity (Lemma 8.7) | Chen, Liu, Mani, Moitra, *Strong spatial mixing for colorings on trees and its algorithmic applications*, arXiv:2304.01954v3 | `Appendix.Girth.CavityTree.clmmInfluenceIdentity` | `ZeroFreeness/Coupling/Girth/Tree/InfluenceIdentity.lean` |
 | Sphere decay implies the coupling bound `2Δ^R` (Lemma 5.13) | same | `Appendix.CLMM.Lemma513.sphere_to_coupling` | `ZeroFreeness/Coupling/CLMM/SphereCoupling.lean` |
 | Graph sphere estimate (Equation (10), from Lemmas 5.19 and 5.20) | same | `Appendix.CLMM.Eq10.sphere_estimate_proof`, packaged as `Appendix.CLMM.literature` | `ZeroFreeness/Coupling/CLMM/SphereEstimate.lean` |
@@ -230,7 +230,7 @@ its folder in `paper/` and its PDF in `docs/`, then rerun the script.
 | `ZeroFreeness/Analysis/` | complex averages, analytic logarithms, local stability |
 | `ZeroFreeness/Coupling/` | the couplings: Vigoda flips, Carlson–Vigoda, edge-Potts, high temperature, large girth, BBR, girth five; the proofs of the cited CLMM and BBR results |
 | `ZeroFreeness/Potts/` | Potts models, pinnings and separators, the transfer theorem, the main theorems and the companion's regimes |
-| `ZeroFreeness/LeeYang/` | colour-field partition functions and zero-free polydiscs |
+| `ZeroFreeness/LeeYang/` | color-field partition functions and zero-free polydiscs |
 | `ZeroFreeness/Holant/` | log-concave Holant models and their applications |
 | `audit/` | axiom audits, kept outside the library |
 | `docs/` | the website, both papers as PDFs, proof guides, per-result status and the verification record |
