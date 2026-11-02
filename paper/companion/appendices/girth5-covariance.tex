@@ -21,13 +21,13 @@ $\mu_I$ for the normalized Gibbs law at the fixed activity $x$,
 $\mathbb E_I$ for its expectation, and $p_{I,v}$ for its marginal at $v$.
 The instance $I-v$ deletes $v$ and its incident edges but retains the
 boundary counts at the remaining vertices; pinning a vertex instead adds
-the corresponding boundary counts at its free neighbours.
+the corresponding boundary counts at its free neighbors.
 For $x>0$, $\mu_{I,w}^{v=c}$ denotes the marginal at $w$ after conditioning
-$v$ to colour $c$.  At $x=0$ it denotes the $w$-marginal of the
+$v$ to color $c$.  At $x=0$ it denotes the $w$-marginal of the
 normalized child law from \Cref{sec:potts-setup}, even when $c$ has zero probability
 in the parent law.  All distances and spheres refer to the stated free
 graph; in particular, $S_2^H(v):=\{w:\dist_H(v,w)=2\}$.
-In colour space, $I_q$ is the identity matrix and
+In color space, $I_q$ is the identity matrix and
 $\mathbf1\in\mathbb R^q$ is the all-ones vector.
 
 Set
@@ -35,7 +35,7 @@ Set
  m:=q-\Deg,\qquad B:=m^{-1},\qquad
  L_\Deg:=\frac{1+\sqrt{q/(m+1)}}{m}.
 \end{equation}
-The colour hypothesis gives $m\ge\delta\Deg$; the estimates below include
+The color hypothesis gives $m\ge\delta\Deg$; the estimates below include
 equality throughout.
 We use the threshold and gap constant
 \begin{equation}\label{eq:girth5-gap-constants}
@@ -62,7 +62,7 @@ It applies after every further pinning and deletion that preserves
 \label{lem:girth5-disintegration}
 Let $I=(H,\mathbf b)$ be a residual instance, let $v$ be free, and put
 $U=N_H(v)$, $S=S_2^H(v)$, and $\nu=\mu_{I-v}$.  If $\operatorname{girth}(H)\ge5$, then $U$ is independent,
-each $w\in S$ has a unique neighbour in $U$, and, with
+each $w\in S$ has a unique neighbor in $U$, and, with
 $O=V(H)\setminus(\{v\}\cup U\cup S)$, the following holds for every
 $\xi$ with $\nu(\sigma_S=\xi)>0$:
 \begin{equation}\label{eq:girth5-disintegration}
@@ -77,21 +77,21 @@ the marginal law on $S$ is not assumed to be a product law.
 \end{lemma}
 
 \begin{proof}
-There are no edges inside $U$ by the absence of triangles.  Every neighbour
+There are no edges inside $U$ by the absence of triangles.  Every neighbor
 of $u\in U$ other than $v$ lies in $S$, and uniqueness follows because two
-neighbours in $U$ would give a four-cycle through $v$.  After $S$ is fixed, all
+neighbors in $U$ would give a four-cycle through $v$.  After $S$ is fixed, all
 factors incident with $S$ become unary factors and the remaining Gibbs weight
 separates into the isolated vertices $U$ and the induced exterior graph $O$.
 Normalization gives \eqref{eq:girth5-disintegration}.
 \end{proof}
 
-The disintegration isolates the neighbours of the root once the second layer is
+The disintegration isolates the neighbors of the root once the second layer is
 revealed.  We next control how changing one second-layer coordinate changes
-that root-neighbour contribution in the colour direction.
+that root-neighbor contribution in the color direction.
 
-\begin{lemma}[One-edge colour operator]
+\begin{lemma}[One-edge color operator]
 \label{lem:girth5-one-edge}
-Assume $m\ge\delta\Deg$ and let $r$ be a cavity colour law obtained after
+Assume $m\ge\delta\Deg$ and let $r$ be a cavity color law obtained after
 deleting one incident constraint.  For $h\in\mathbb R^q$, define
 \[
  (T_r h)(t)=\frac{\langle r,h\rangle-sr(t)h(t)}{1-sr(t)},
@@ -109,7 +109,7 @@ If the updated one-site law $\varrho$ has atoms at most $B$, then
  \le BL_\Deg^2\|h\|_2^2.
 \end{equation}
 The estimate remains valid when $h$ depends on all other coordinates but not
-on the colour currently updated.
+on the color currently updated.
 \end{lemma}
 
 \begin{proof}
@@ -127,7 +127,7 @@ $\operatorname{Var}_{\varrho}(g)=\min_{a\in\mathbb R}
 \sum_j\varrho_j(g_j-a)^2\le B\|\Pi g\|_2^2$, which gives \eqref{eq:girth5-one-edge-variance}.
 \end{proof}
 
-\paragraph{Colour covariance defect.}
+\paragraph{Color covariance defect.}
 For the quantitative bounds below set
 \[
  a_B=(1-B)^{-1},\quad V_\pi=\frac{\Deg B L_\Deg^2}{\gamma_\delta},\quad
@@ -150,17 +150,17 @@ $K_\Deg=O_\delta(1)$, and
 $\widetilde\epsilon_\Deg=O_\delta(\Deg^{-1/2})$.
 
 The next lemma is the key girth-five estimate: the insertion residual has
-only a small colour-direction covariance, even though the second layer itself
+only a small color-direction covariance, even though the second layer itself
 need not be a product measure.
 
-\begin{lemma}[Colour covariance of the insertion residual]
+\begin{lemma}[Color covariance of the insertion residual]
 \label{lem:girth5-color-covariance}
 Assume $0<\delta\le1$, $\Deg\ge\Deg_0(\delta)$,
 $q\ge(1+\delta)\Deg$, and $0<x<1$.  Suppose that every residual instance
 used below satisfies the degree budget, so that \eqref{eq:girth5-poincare}
 applies.  Under the hypotheses of
-Lemma~\ref{lem:girth5-disintegration}, sums and products over neighbours
-range over $U$ unless stated otherwise.  Fix a colour $c$ and put
+Lemma~\ref{lem:girth5-disintegration}, sums and products over neighbors
+range over $U$ unless stated otherwise.  Fix a color $c$ and put
 $X_{u,c}=\mathbf1_{\{\sigma_u=c\}}$,
 $p_{u,c}=\mathbb E_\nu X_{u,c}$,
 \[
@@ -212,7 +212,7 @@ The affine formula for $G_c$ gives the stated expression for $\beta_{u,c}$.
 Changing $\sigma_w$ changes only $\pi_u$, so \eqref{eq:girth5-one-edge-variance}, applied to the vector
 $(z_c\beta_{u,c})_c$, gives \eqref{eq:girth5-coordinate-variance}.
 
-We now record the insertion estimates used below.  For a fixed colour $c$, set
+We now record the insertion estimates used below.  For a fixed color $c$, set
 \begin{equation}\label{eq:girth5-insertion-variables}
  M_c=\sum_{u\in U}(\pi_{u,c}-p_{u,c}),\qquad
  Y_c(\xi)=\prod_{u\in U}(1-s\pi_{u,c}(\xi)).
@@ -274,7 +274,7 @@ This is \eqref{eq:girth5-colour-covariance}, and the weighted covariance estimat
 conjugation.
 \end{proof}
 
-We now use these estimates to bound the response to a root-colour change
+We now use these estimates to bound the response to a root-color change
 uniformly over residual instances.
 
 \begin{theorem}[Unrestricted girth-five coupling independence]
@@ -301,12 +301,12 @@ of girth at least five satisfying the degree budget, and fix $\chi\ge1$.
 Choose a positive weight vector $\mathbf a=(a_w)_{w\in V(H)}$ with
 $\chi^{-1}\le a_u/a_w\le\chi$ on every free edge.  Let
 $f_I=\sum_w f_w(\sigma_w)$, where $f_w:\colours\to\mathbb R$ and
-$|f_w(c)|\le a_w$ for every colour $c$.  In a smaller residual instance
+$|f_w(c)|\le a_w$ for every color $c$.  In a smaller residual instance
 $J$, $f_J$ denotes the sum of the remaining source terms.  All bounds below
 are uniform over further pinnings, deletions, and $x\in(0,1)$.
 We first derive the exact response identity, then prove uniform weighted
 $2$- and $\infty$-norm bounds by induction, and finally convert those bounds
-into a root-colour Hamming coupling.
+into a root-color Hamming coupling.
 
 \paragraph{Response recursion.}
 For a free vertex $v$, put $U=N_H(v)$, $S=S_2^H(v)$,
@@ -322,8 +322,8 @@ $\|h_{I,v}\|_2/a_v$ and $\|h_{I,v}\|_\infty/(\sqrt B a_v)$ over all
 such instances with at most $n$ free vertices, all admissible weights and
 sources, all free roots, and all $x\in(0,1)$.  Set $U_0=V_0=0$.
 These suprema are finite at each fixed $n$: components not containing $v$
-cancel from the centred response, and weights in the root component differ
-from $a_v$ by at most $\chi^{n-1}$.  When analysing a particular $I$, write
+cancel from the centered response, and weights in the root component differ
+from $a_v$ by at most $\chi^{n-1}$.  When analyzing a particular $I$, write
 $n=|V(H)|$.
 
 For a real parameter $t$, define the tilted law and its marginals by
@@ -412,7 +412,7 @@ $-\log(1-y_i(c))\le\ell_B y_i(c)$; hence AM--GM over $C_0$ gives
  \ge Q\left(\prod_{c\in C_0}A_c\right)^{1/Q}
  \ge Q\exp\!\left(-\frac{d\ell_B}{Q}\right).
 \]
-For a fixed colour $c$ and $S_c=\sum_i y_i(c)$, ordinary AM--GM gives
+For a fixed color $c$ and $S_c=\sum_i y_i(c)$, ordinary AM--GM gives
 $A_c\le(1-S_c/d)^d$ (the case $d=0$ is void), while
 $S(1-S/d)^d\le (d/(d+1))^{d+1}=d^{d+1}/(d+1)^{d+1}\le e^{-1}$ for $0\le S\le d$, with equality at $S=d/(d+1)$.
 Therefore, with $\theta=d/Q$,
@@ -484,7 +484,7 @@ gives the analogous infinity-norm estimate.  These Jacobian blocks consequently 
  +r_\Deg\sqrt B\max_i\|h_i\|_2.
 \end{equation}
 When $d=0$, the empty block sums and their norms are zero; maxima of
-nonnegative quantities over an empty neighbour set are also taken to be
+nonnegative quantities over an empty neighbor set are also taken to be
 zero.  The source term is controlled by the elementary bounds
 \begin{equation}\label{eq:girth5-source-bounds}
  \|D_v(I_q-\mathbf1p_{I,v}^{\mathsf T})g\|_2
@@ -527,7 +527,7 @@ sources, free roots, and $n$-vertex size range used for $U_n,V_n$, of
  -\mathbb E_I[f_I\mid\sigma_v=d]\right|}{a_v},
  \qquad c,d\in\colours.
 \end{equation}
-To recover this unweighted root-colour response, take differences of two logarithmic
+To recover this unweighted root-color response, take differences of two logarithmic
 coordinates in \eqref{eq:girth5-response-recursion} before dividing by a root marginal.  This gives
 \[
  M_n\le2\bigl(1+\ell_\Deg\chi+K_\Deg\chi^2U_{n-1}\bigr)
@@ -539,7 +539,7 @@ so
       +2\Deg B\chi V^*<\infty.
 \end{equation}
 Choosing source signs at the fixed real base point and applying \eqref{eq:girth5-oscillation-bound} yields,
-for every admissible $\mathbf a$ and every pair of root colours,
+for every admissible $\mathbf a$ and every pair of root colors,
 \begin{equation}\label{eq:girth5-weighted-influence}
  \sum_{w\ne v}a_w\,
  \|\mu_{I,w}^{v=c}-\mu_{I,w}^{v=d}\|_{\rm TV}
@@ -556,6 +556,6 @@ distance functions is used.  Choose $R$ so that
 $M^*\chi^{-R}/2\le(8R\log\Deg)^{-1}$.  Restricting \eqref{eq:girth5-weighted-influence} to the fixed-ambient
 sphere and applying \cite[Lemma~5.13]{CLMM2023} gives a graph-size-independent Hamming
 coupling.  The endpoint $x=0$ follows by finite-state continuity for the
-normalized child laws (proper list colourings exist because $q\ge\Deg+1$);
+normalized child laws (proper list colorings exist because $q\ge\Deg+1$);
 at $x=1$ the root-excluded laws coincide directly.
 \end{proof}

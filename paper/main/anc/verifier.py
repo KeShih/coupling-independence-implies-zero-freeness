@@ -4,14 +4,14 @@
 The script verifies:
   * the two elementary Vigoda-profile inequalities;
   * the piecewise-linear residual-probability inequality;
-  * the regular-colour maxima for m = 0, 1, 2;
-  * the one-neighbour root-colour bounds used at the end of the proof.
+  * the regular-color maxima for m = 0, 1, 2;
+  * the one-neighbor root-color bounds used at the end of the proof.
 
-All arithmetic uses fractions.Fraction.  The regular-colour enumeration is
+All arithmetic uses fractions.Fraction.  The regular-color enumeration is
 intentionally enlarged: it ranges over every set partition of N_c,
 component sizes up to 7, and all feasible/infeasible choices.  Sizes at least
 7 carry zero flip probability, so this truncation is exact for the enlarged
-state set.  One realizability constraint is retained exactly: when the colour
+state set.  One realizability constraint is retained exactly: when the color
 is available at the root, a root swap is feasible if and only if all of its
 constituent off-root swaps are feasible.
 """
@@ -103,7 +103,7 @@ def root_is_feasible(allowed_at_root: bool, offroot_feasible: Sequence[int]) -> 
     return int(allowed_at_root and all(offroot_feasible))
 
 
-def regular_colour_charge(
+def regular_color_charge(
     m: int,
     allowed_at_root: bool,
     part_a: Sequence[Sequence[int]],
@@ -113,7 +113,7 @@ def regular_colour_charge(
     sizes_b: Sequence[int],
     feasible_b: Sequence[int],
 ) -> Fraction:
-    """Evaluate the enlarged right-hand side of the regular-colour bound."""
+    """Evaluate the enlarged right-hand side of the regular-color bound."""
     if m == 0:
         return Fraction(-1 if allowed_at_root else 0)
 
@@ -156,7 +156,7 @@ def regular_colour_charge(
     return charge
 
 
-def maximum_regular_colour_charge(
+def maximum_regular_color_charge(
     m: int, allowed_at_root: bool
 ) -> tuple[Fraction, tuple[object, ...] | None]:
     if m == 0:
@@ -172,7 +172,7 @@ def maximum_regular_colour_charge(
                 for sizes_b in component_size_vectors(part_b):
                     for feasible_a in product((0, 1), repeat=len(part_a)):
                         for feasible_b in product((0, 1), repeat=len(part_b)):
-                            value = regular_colour_charge(
+                            value = regular_color_charge(
                                 m,
                                 allowed_at_root,
                                 part_a,
@@ -304,7 +304,7 @@ def verify_profile_inequalities() -> None:
     print(f"root paired maximum: {max_paired} at t={paired_witness}")
 
 
-def verify_regular_colour_table() -> None:
+def verify_regular_color_table() -> None:
     expected = {
         (0, True): Fraction(-1),
         (1, True): Fraction(5, 6),
@@ -314,10 +314,10 @@ def verify_regular_colour_table() -> None:
         (2, False): Fraction(8, 3),
     }
 
-    print("\nregular-colour enlarged-state maxima:")
+    print("\nregular-color enlarged-state maxima:")
     for allowed in (True, False):
         for m in (0, 1, 2):
-            value, witness = maximum_regular_colour_charge(m, allowed)
+            value, witness = maximum_regular_color_charge(m, allowed)
             require(
                 value == expected[(m, allowed)],
                 (m, allowed, value, witness),
@@ -332,7 +332,7 @@ def verify_regular_colour_table() -> None:
 
 def main() -> None:
     verify_profile_inequalities()
-    verify_regular_colour_table()
+    verify_regular_color_table()
     print("\nAll exact-rational certificate checks passed.")
 
 

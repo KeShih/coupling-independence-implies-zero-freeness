@@ -23,7 +23,7 @@ they are well defined by \Cref{lem:hard-feas}.
 At $x=0$, the estimate is already contained in
 \cite[Theorem~5.10 and Lemma~5.13]{CLMM2023}; it is also recovered below by
 continuity.  To obtain the interval $[0,1]$, we extend the same tree argument
-to positive activities.  For $0<x<1$, the soft recursion is a weighted-colour
+to positive activities.  For $0<x<1$, the soft recursion is a weighted-color
 recursion whose scaled cavity messages are subdistributions.  Four units of
 palette slack below the root give a uniform contraction.  The contraction
 implies tree total-influence decay (TID) and relative strong spatial mixing
@@ -37,10 +37,10 @@ continuity supplies the value at $x=0$.
 
 We first take $0<x<1$ and put $s:=1-x$.  Root the free component of a tree
 of maximum degree at most \(\Deg\) and condition on a fixed pinning, treating
-every pinned neighbour as a boundary constraint.  At a free vertex $v$, let
+every pinned neighbor as a boundary constraint.  At a free vertex $v$, let
 $d_v$ be the number of free children and $k_v$ the number of pinned
-neighbours.  As in \Cref{sec:potts-setup}, $\bcount_v^\tau(c)$ counts those of
-colour $c$.  Thus
+neighbors.  As in \Cref{sec:potts-setup}, $\bcount_v^\tau(c)$ counts those of
+color $c$.  Thus
 \[
   d_v+k_v\le\Deg-1
 \]
@@ -137,7 +137,7 @@ We choose
 \end{equation}
 because its derivative factorizes the transformed Jacobian into one factor
 depending on the outgoing marginal and one measuring the incoming occupancy
-of a single colour.  In the original probability coordinate the same
+of a single color.  In the original probability coordinate the same
 potential is \(\psi_s(p)=\phi(sp)\).  The map \(\phi\) is
 increasing and concave on \([0,1/4]\); write
 \[
@@ -241,7 +241,7 @@ Then
   \qquad m_v(c)\le\frac14
   \label{eq:hg-marginal-bound}
 \end{equation}
-for every colour $c$.  In particular,
+for every color $c$.  In particular,
 \(m_v\in\mathcal D_s\).
 \end{lemma}
 
@@ -290,7 +290,7 @@ quantities by \(B_i:=B_{y_i}\) and \(\zeta_i:=\zeta_{y_i}\).
 \label{lem:hg-continuous-amortized}
 Under the hypotheses of \Cref{lem:hg-continuous-marginal}, suppose in addition
 that each free-child input satisfies $m_i(c)\le B_i$ for all $c$.  Then, for
-every colour $c$,
+every color $c$,
 \begin{equation}
   p_v(c)\sum_{i=1}^{d_v}m_i(c)
   \le \frac1{e\underline A_v}
@@ -350,7 +350,7 @@ Moreover
 
 \begin{proof}
 First reduce to the unscaled output.  Regard \(p_v\) in
-\eqref{eq:hg-scaled-recursion} as a recursion with weighted colour
+\eqref{eq:hg-scaled-recursion} as a recursion with weighted color
 availability \(a_v(c)\) and subdistribution inputs \(m_i\).
 The calculation below is first made in the relative interior of
 $\prod_i\mathcal D_s$; the displayed formulas extend continuously to
@@ -372,7 +372,7 @@ The diagonal factor is at most one because
 Thus it is enough to bound the unscaled Jacobian with
 \Cref{lem:hg-jacobian-factor}.  That factorization uses only
 \(\sum_cp_v(c)=1\) and \(\Sigma_v(c)\ge0\), not \(\sum_bm_i(b)=1\); the weighted
-colour availability enters only through \(Z_v\), controlled by
+color availability enters only through \(Z_v\), controlled by
 \Cref{lem:hg-continuous-marginal,lem:hg-continuous-amortized}.
 Bounding \(F_{1,v}\le
 \exp\bigl(2\xi_v/(\underline A_v-1)\bigr)\) by
@@ -391,7 +391,7 @@ Bounding \(F_{1,v}\le
 \end{equation}
 
 Let \(y_v=\xi_v/(\underline A_v-1)\le1/3\).  The elementary entropy inequality
-\cite[Fact~B.5]{CLMM2023} used in the weighted colouring recursion gives
+\cite[Fact~B.5]{CLMM2023} used in the weighted coloring recursion gives
 \begin{equation}
  0<\zeta_v<1,\qquad
  \frac1{1-\zeta_v}\le e^{y_v/2},
@@ -440,7 +440,7 @@ immediate.
 
 \begin{lemma}[From Jacobian contraction to message contraction]
 \label{lem:hg-finite-difference}
-Fix the local colour weights at a non-root vertex \(v\) and the child structural
+Fix the local color weights at a non-root vertex \(v\) and the child structural
 parameters that determine \(B_i,w_i\).  Let
 $(m_i)_{i=1}^{d_v}$ and $(m'_i)_{i=1}^{d_v}$ be two collections in
 $\mathcal D_s$ such that
@@ -708,8 +708,8 @@ $\rho^{\ell-1}=\rho^{-1}\rho^\ell$ gives exactly
 \end{proof}
 
 Uniform relative SSM cannot start at distance one. Indeed, on a single
-edge, compare boundary colours \(a\) and \(b\ne a\).  The probability that
-the free endpoint has colour \(a\) is respectively
+edge, compare boundary colors \(a\) and \(b\ne a\).  The probability that
+the free endpoint has color \(a\) is respectively
 \[
   \frac{x}{q-1+x}
   \qquad\text{and}\qquad
@@ -751,7 +751,7 @@ differ only on the shell.  Write
 \]
 Here each right-hand side denotes the one-site marginal at \(v\) under the
 indicated pinning.
-Then, for every root colour $c$,
+Then, for every root color $c$,
 \begin{equation}
  \left|\log\frac{p_v(c)}{p'_v(c)}\right|
  \le C_{\rm rel}\rho^{K-2}.
@@ -769,13 +769,13 @@ finite-state continuity; at \(x=1\) the left side is zero.
 
 \begin{proof}
 The pinned children adjacent to the root belong to the fixed pinning $\tau$,
-so their colour weights \(a_v(c)\) agree.  Write
+so their color weights \(a_v(c)\) agree.  Write
 \[
  P_c=\prod_i(1-m_i(c)),\qquad
  p_v(c)=\frac{a_v(c)P_c}{Z},\qquad
  Z=\sum_b a_v(b)P_b,
 \]
-and use primes for the second condition.  The potentially tiny root colour
+and use primes for the second condition.  The potentially tiny root color
 weight cancels exactly:
 \begin{equation}
  \log\frac{p_v(c)}{p'_v(c)}
@@ -798,7 +798,7 @@ $|Z-Z'|\le\sum_i\norm{m_i-m'_i}_1$, while the root version of
 \end{equation}
 
 The update adjacent to the shell is not compared by a Jacobian, because its
-local colour weights may change with the shell assignment.  Its two output
+local color weights may change with the shell assignment.  Its two output
 messages nevertheless obey \Cref{lem:hg-continuous-marginal}.  For
 \(1\le j\le K-1\), let \(\mathcal F_j\) be the free vertices at distance
 \(j\) from \(v\) in the same component after the vertices pinned by
@@ -818,7 +818,7 @@ The potential diameter and \eqref{eq:hg-weight-range} give
 \]
 The two boundary assignments pin the same set of shell vertices, so the two
 recursions have the same \(d_y,k_y,B_y,w_y\).  Every update strictly inside
-that shell has the same local colour weights on both sides.  Thus
+that shell has the same local color weights on both sides.  Thus
 \Cref{lem:hg-finite-difference} gives
 \[
  E_j\le\rho E_{j+1}
@@ -892,7 +892,7 @@ a pairwise spin system on its free graph \(G^\tau\), with spin set
 \]
 The family of these systems is closed under further pinnings and deletion of
 free vertices.  Pinning a free vertex $r$ to $c$ removes one free incidence at
-each neighbour and adds $c$ to its boundary count.  Hence, for every remaining
+each neighbor and adds $c$ to its boundary count.  Hence, for every remaining
 vertex $v$,
 \[
   \deg_{G^{\tau^{r=c}}}(v)

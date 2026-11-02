@@ -12,7 +12,7 @@ All operator inequalities are on the supported $L^2$ space of the current
 Gibbs law: $A\succeq B$ means that $A-B$ is positive semidefinite.
 We write $\|f\|_\mu^2:=\mathbb E_\mu|f|^2$ and similarly for $\rho$.
 Unsubscripted function norms are in $L^2(\mu)$, and unsubscripted operator
-norms are the induced Hilbert-space norms.  Finite colour matrices instead
+norms are the induced Hilbert-space norms.  Finite color matrices instead
 carry the subscript $2\to2$.  The identity $I$ acts on the space in
 question, and $\{A,B\}:=AB+BA$ denotes the anticommutator.
 
@@ -21,19 +21,19 @@ question, and $\{A,B\}:=AB+BA$ denotes the anticommutator.
 Fix $0<\delta\leq1$, $\Deg\geq\Deg_0(\delta)$,
 $q\ge(1+\delta)\Deg$, and $x\in[0,1]$, and put
 $s=1-x$.  Consider a supported conditional star from a residual instance
-satisfying \eqref{eq:girth5-degree-budget} at every free vertex.  Its centre
-has $d$ free leaves and $k$ fixed neighbours, with $d+k\leq\Deg$.  Write
+satisfying \eqref{eq:girth5-degree-budget} at every free vertex.  Its center
+has $d$ free leaves and $k$ fixed neighbors, with $d+k\leq\Deg$.  Write
 \[
  \mu(c,\sigma)=\frac{a_c}{Z}\prod_{i=1}^{d}
  \bigl[p_i(\sigma_i)(1-s\mathbf1_{\{\sigma_i=c\}})\bigr],
  \qquad a_c=x^{b(c)},\quad \sum_cb(c)=k,
 \]
-where $b(c)$ counts fixed neighbours of colour $c$ and each $p_i$ is
-the cavity law obtained after deleting the centre edge.
-Here $c\in\colours$ is the centre colour and
+where $b(c)$ counts fixed neighbors of color $c$ and each $p_i$ is
+the cavity law obtained after deleting the center edge.
+Here $c\in\colours$ is the center color and
 $\sigma=(\sigma_1,\ldots,\sigma_d)$ is the leaf configuration.  The
 normalizing constant is $Z=\sum_c a_c\prod_i(1-sp_i(c))$.
-Let $\nu$ be the centre marginal and $\rho=\bigotimes_i p_i$ the product
+Let $\nu$ be the center marginal and $\rho=\bigotimes_i p_i$ the product
 cavity law on the leaves; $\mu_{\rm leaves}$ denotes the actual leaf
 marginal.  Set
 \[
@@ -46,14 +46,14 @@ Then, uniformly over all supported stars (including $x=0$),
  s p_i(c)\le B_{\rm SG},\quad s\nu(c)\le B_{\rm SG},\quad
  \mathcal R:=\frac{d\mu_{\rm leaves}}{d\rho}\ge c_\delta.
 \end{equation}
-Let $P$ be the centre heat-bath projection and $Q=I-P$, and let
+Let $P$ be the center heat-bath projection and $Q=I-P$, and let
 $P_i$ and $Q_i=I-P_i$ denote the heat-bath projection and its complement at
 leaf $i$.  Decompose the mean-zero space into the conditional leaf Hoeffding
 sectors $K_0\oplus K_1\oplus K_{\ge2}$: $K_0$ consists of mean-zero
-functions of the centre, and $K_1$ is the orthogonal sum of the spaces of functions
+functions of the center, and $K_1$ is the orthogonal sum of the spaces of functions
 $g_i(c,\sigma_i)$ with $\mathbb E[g_i\mid c]=0$, and $K_{\ge2}$ is the
 sum of higher conditional Hoeffding sectors, involving at least two
-distinct conditionally centred leaf factors and allowing coefficients
+distinct conditionally centered leaf factors and allowing coefficients
 that depend on $c$.
 Write $K_+:=K_1\oplus K_{\ge2}$.  For a closed subspace $\mathcal S$,
 $\Pi_{\mathcal S}$ denotes orthogonal projection in $L^2(\mu)$.
@@ -91,8 +91,8 @@ Moreover, for $d\ge1$, put $\theta_0=(1+\delta/2)^{-1}$.  Then
 If $d=0$, then $\mathcal A=\{0\}$ and there is no additive sector to
 control.  All estimates below containing $1/d$, including
 \eqref{eq:sg-additive-compression}, are used only when $d\ge1$.
-At a free vertex with $k$ fixed and $d$ free neighbours, let $Z_{\rm loc}$
-be the sum of its $q$ conditional colour weights after the other spins are
+At a free vertex with $k$ fixed and $d$ free neighbors, let $Z_{\rm loc}$
+be the sum of its $q$ conditional color weights after the other spins are
 fixed.  The degree budget gives
 $Z_{\rm loc}\ge q-s(k+d)\ge\delta\Deg$.  Hence every one-site
 marginal satisfies $sp_i(c),s\nu(c)\le B_{\rm SG}$.  If
@@ -103,7 +103,7 @@ $A_0=\sum_ca_c$, then $A_0\ge q-sk\ge s(d+\delta\Deg)$ and
  \ge \frac{A_0-sd}{A_0}
  \ge \frac{\delta\Deg}{d+\delta\Deg}\ge c_\delta .
 \]
-At $s=0$ this is interpreted by continuity.  At $x=0$, centre-colour
+At $s=0$ this is interpreted by continuity.  At $x=0$, center-color
 coordinates and sums weighted by $\nu$ may be restricted to
 $\mathcal C_*=\{c:\nu(c)>0\}$; zero-$\nu$ terms vanish.
 Each leaf expectation and sum retains the full support of its own
@@ -166,7 +166,7 @@ with $\varepsilon_1$ as in \eqref{eq:sg-singleton-complement}.
 Together with $C\preceq rI$ below, this yields
 $H_{11}|_{\mathcal B}\succeq(1-r_*-\varepsilon_1)I$.
 
-For a mean-zero function $h$ of the centre alone, the expansion of
+For a mean-zero function $h$ of the center alone, the expansion of
 $(Ph)\mathcal R$ starts in degree one;
 \eqref{eq:sg-schur-product} and the same calculation give $\|Ph\|^2\le r_*\|h\|^2$,
 which is the bound on $r$.  The projection identities
@@ -194,7 +194,7 @@ $\bar h_i(c):=\mathbb E[h_i(\sigma_i)\mid c]=-sp_i(c)h_i(c)/(1-sp_i(c))$ and a d
  A_i=\sum_c\frac{\nu(c)}{1-sp_i(c)}.
 \]
 Thus $\mathcal D_i\ge\kappa_{B_{\rm SG}}\sum_cp_i(c)h_i(c)^2$, where
-$\kappa_{B_{\rm SG}}=1-B_{\rm SG}/(1-B_{\rm SG})^2\ge1-2B_{\rm SG}$.  Cauchy--Schwarz in the colour coordinate gives
+$\kappa_{B_{\rm SG}}=1-B_{\rm SG}/(1-B_{\rm SG})^2\ge1-2B_{\rm SG}$.  Cauchy--Schwarz in the color coordinate gives
 \begin{equation}\label{eq:sg-channel-bound}
  \|Q\bar h\|^2\le \frac{s^2}{(1-B_{\rm SG})^2}
  \max_c\left[\nu(c)\sum_i p_i(c)\right]
@@ -249,7 +249,7 @@ $H\mathcal A=0$ uses the special form of $\mathcal A$, not merely the
 fact that $H$ is a projection.  If
 $a=h-\mathbb E[h\mid c]\in\mathcal A$ with
 $h=\sum_i h_i(\sigma_i)$, then $Ph=h$ because $h$ is independent of the
-centre spin.  Remove the global constant from $h$ (which does not change
+center spin.  Remove the global constant from $h$ (which does not change
 $a$), and write $h=h_0+a$ with
 $h_0=\mathbb E[h\mid c]\in K_0$, the $K_0$ and $K_+$ blocks of $Qh=0$
 are
@@ -389,7 +389,7 @@ an edge $vu$,
  T_v:=Q_v+\tfrac12\{Q_v,W_v\}+N_v^2-N_v.
 \]
 Girth at least five implies that every distance-two pair has a unique common
-neighbour and that adjacent vertices have no common neighbour.  Therefore
+neighbor and that adjacent vertices have no common neighbor.  Therefore
 \begin{equation}\label{eq:sg-global-decomposition}
  \mathcal L^2=\sum_vT_v+2\sum_{\{u,w\}:\,\operatorname{dist}_H(u,w)\ge3}Q_uQ_w.
 \end{equation}
@@ -400,18 +400,18 @@ positive, and
  \frac{\beta_{vu}^2}{d_v}=\frac{1}{d_u}\bigl(1-(\beta_{vu}-1)^2\bigr),
  \qquad \sum_{v\sim u}\frac{\beta_{vu}^2}{d_v}\le1.
 \end{equation}
-For an isolated vertex $u$, the neighbour sum is empty.
-Applying \eqref{eq:sg-star-incidence} in every conditional-star fibre and summing with \eqref{eq:sg-incidence-sum}
+For an isolated vertex $u$, the neighbor sum is empty.
+Applying \eqref{eq:sg-star-incidence} in every conditional-star fiber and summing with \eqref{eq:sg-incidence-sum}
 shows
 \[
  \mathcal L^2\succeq \frac{1-\theta}{2}\mathcal L
  =\frac{\delta}{4(2+\delta)}\mathcal L.
 \]
 At $x>0$ the supported chain is irreducible. At $x=0$, remove from the
-colour list of a free vertex $v$ the colours used by its $k_v$ fixed
-neighbours, and denote the resulting list by $L_v$ and its size by
+color list of a free vertex $v$ the colors used by its $k_v$ fixed
+neighbors, and denote the resulting list by $L_v$ and its size by
 $\ell_v$.  Since at most
-$k_v$ colours are removed,
+$k_v$ colors are removed,
 \[
  \ell_v-d_v\ \ge\ q-k_v-d_v
  \ \ge\ q-\Deg
@@ -420,16 +420,16 @@ $k_v$ colours are removed,
 where the last inequality is part of the choice of $\Deg_0(\delta)$.
 Thus $\ell_v\ge d_v+2$ for every free vertex.  For completeness,
 connectivity follows by induction on the number of free vertices.  Given
-two proper list-colourings $\alpha,\beta$, choose a vertex $v$ and put
-$c=\beta(v)$.  For every neighbour $u$ of $v$ with current colour
-$\alpha(u)=c$, recolour $u$ (one at a time) to a colour in $L_u$ different
-from $c$ and from all colours currently used by the neighbours of $u$;
-at most $d_u+1$ colours are forbidden and $\ell_u\ge d_u+2$.  Now recolour
+two proper list-colorings $\alpha,\beta$, choose a vertex $v$ and put
+$c=\beta(v)$.  For every neighbor $u$ of $v$ with current color
+$\alpha(u)=c$, recolor $u$ (one at a time) to a color in $L_u$ different
+from $c$ and from all colors currently used by the neighbors of $u$;
+at most $d_u+1$ colors are forbidden and $\ell_u\ge d_u+2$.  Now recolor
 $v$ to $c$.  Keep $v$ fixed at $c$ and apply the induction hypothesis to
 $H-v$ with the reduced lists
-$L'_u=L_u\setminus\{c\}$ for neighbours of $v$ and $L'_u=L_u$ otherwise.
+$L'_u=L_u\setminus\{c\}$ for neighbors of $v$ and $L'_u=L_u$ otherwise.
 These lists satisfy $|L'_u|\ge\deg_{H-v}(u)+2$, and the current and target
-restrictions are proper list-colourings.  The base case has one vertex.
-Thus the proper-list-colouring support is connected, and
+restrictions are proper list-colorings.  The base case has one vertex.
+Thus the proper-list-coloring support is connected, and
 \eqref{eq:sg-gap} is the ordinary spectral-gap bound at the endpoint as well.
 \end{proof}

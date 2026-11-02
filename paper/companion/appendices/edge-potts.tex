@@ -3,10 +3,10 @@
 \label{sec:soft-edge}
 \label{app:soft-edge-ci}
 
-For a finite simple graph \(G=(V,E)\), edge-colour assignments are vertex
-colourings of the line graph \(L(G)\).  An edge-colour pinning
+For a finite simple graph \(G=(V,E)\), edge-color assignments are vertex
+colorings of the line graph \(L(G)\).  An edge-color pinning
 \(\tau:\Lambda\to\colours\), with \(\Lambda\subseteq E\), is likewise a
-vertex-colour pinning of \(L(G)\).  We write
+vertex-color pinning of \(L(G)\).  We write
 \[
   (\edgegibbs{G}{x})^\tau:=\mupin{L(G)}{\tau}{x}.
 \]
@@ -22,7 +22,7 @@ additional input is the following coupling bound.
 \begin{theorem}[Edge-Potts coupling independence]
 \label{thm:soft-edge-ci}
 Let \(q,\Deg\) be positive integers with \(q\ge3\Deg\).  For every finite simple graph \(G\)
-of maximum degree at most \(\Deg\), every edge-colour pinning \(\tau\),
+of maximum degree at most \(\Deg\), every edge-color pinning \(\tau\),
 every \(x\in[0,1]\), every free edge
 \(i\in E\setminus\operatorname{dom}\tau\), and all
 \(a,b\in\colours\), put, for \(c\in\colours\),
@@ -47,15 +47,15 @@ Then, on the common free edge set \(E\setminus(\operatorname{dom}\tau\cup\{i\})\
 Let \(q,\Deg\) be positive integers with \(\Deg\ge2\) and
 \(q\ge3\Deg\).  There exists
 \(\eps=\eps(q,\Deg)>0\) such that, for every finite simple graph \(G\) of
-maximum degree at most \(\Deg\) and every edge-colour pinning \(\tau\),
+maximum degree at most \(\Deg\) and every edge-color pinning \(\tau\),
 \[
   \nZpin{L(G)}{\tau}(z)\ne0
   \qquad\text{whenever }\dist(z,[0,1])<\eps.
 \]
-Thus the unnormalized pinned polynomial has no zero in this neighbourhood
+Thus the unnormalized pinned polynomial has no zero in this neighborhood
 except possibly at \(z=0\); its order of vanishing there is
 \(m_{L(G)}(\tau)\).  In particular,
-\(Z_{L(G)}(z)\ne0\) throughout the same neighbourhood.
+\(Z_{L(G)}(z)\ne0\) throughout the same neighborhood.
 \end{corollary}
 
 \begin{proof}
@@ -63,7 +63,7 @@ The line graph has maximum degree at most
 \(\Deg_L:=2\Deg-2\).  The class of line graphs of simple graphs of maximum
 degree at most \(\Deg\) is closed under taking induced subgraphs, since an
 induced subgraph on an edge set \(S\) is the line graph of \((V,S)\).
-Vertex pinnings in this class are exactly edge-colour pinnings, with the
+Vertex pinnings in this class are exactly edge-color pinnings, with the
 normalization in \eqref{eq:edge-normalization}.
 Moreover, \(q\ge3\Deg\) implies \(q\ge\Deg_L+1\), and
 \Cref{thm:soft-edge-ci} supplies one coupling-independence constant on
@@ -78,14 +78,14 @@ For \(0<x<1\), hidden endpoint slots represent the edge-Potts weight by a
 hard distinct-label constraint.  Replacing one occupied endpoint label
 admits a coupling with expected Hamming distance at most \((\Deg-1)/2\);
 conditioning \(i\) requires one replacement at each endpoint.  The resulting
-coupling is a countable weighted adaptation of the list-edge-colouring
+coupling is a countable weighted adaptation of the list-edge-coloring
 coupling in~\cite{CWZZ2025}.
 
 \subsection{Exact slot lift}
 
 Fix a finite simple graph \(G=(V,E)\) of maximum degree at most
 \(\Deg\), and \(q\ge3\Deg\).  Fix \(0<x<1\), a subset
-\(\Lambda\subseteq E\), and an edge-colour pinning
+\(\Lambda\subseteq E\), and an edge-color pinning
 \(\tau\colon\Lambda\to\colours\).  Thus
 \(\operatorname{dom}\tau=\Lambda\), and
 \(F_0=E\setminus\Lambda\) is the initial set of free edges.  Fix once and for all an
@@ -93,7 +93,7 @@ ordering \(e=(e^-,e^+)\) of the two endpoints of every \(e\in E\).  When
 using slot notation for \(e\), we always write
 \((u,v)=(e^-,e^+)\), so that \(e=uv\) has this fixed ordered meaning.
 For a vertex
-\(v\) and colour \(c\), write
+\(v\) and color \(c\), write
 \[
   \bcount_v^\tau(c)
   :=\abs{\set{e\in\operatorname{dom}\tau:e\ni v,\ \tau(e)=c}},
@@ -104,7 +104,7 @@ vertex $v$.  For \(\phi\colon F_0\to\colours\), put
   k_{v,c}(\phi)
   :=\abs{\set{e\in F_0:e\ni v,\ \phi(e)=c}}.
 \]
-For an edge colouring \(\psi:D\to\colours\), where \(D\subseteq E\), put
+For an edge coloring \(\psi:D\to\colours\), where \(D\subseteq E\), put
 \[
   \Nconf(\psi)
   :=\abs{\set{\{e,f\}\subseteq D:
@@ -183,7 +183,7 @@ Multiplication by \(k!\) gives \eqref{eq:slot-identity}.
 
 Thus \(k\) independent slots with law \((\kappa_r)\) are all distinct with
 probability \(x^{\binom k2}\).  Apply this identity separately at every
-vertex--colour pair.
+vertex--color pair.
 
 For a free edge \(e=uv\), use the lifted state
 \[
@@ -194,7 +194,7 @@ with activity
   w_e(c,r,s)
   :=x^{\bcount_u^\tau(c)+\bcount_v^\tau(c)}\kappa_r\kappa_s.
 \end{equation}
-These activities always use the original colour pinning $\tau$ and remain
+These activities always use the original color pinning $\tau$ and remain
 fixed during later lifted-state pinnings; the latter are recorded only in
 the occupied-label sets defined below.
 At \(u\) this state exposes the endpoint label
@@ -259,7 +259,7 @@ Pinning an admissible positive-activity state \(\xi\) on \(e=uv\) produces
 \begin{lemma}[Exact lift and inherited bounds]\label{lem:edge-slot-lift}
 Assume \(q\ge3\Deg\).  For the initial data
 \((F_0,\varnothing)\), where $\varnothing$ denotes the family of empty
-occupied-label sets, colour projection
+occupied-label sets, color projection
 \((c,r,s)\mapsto c\) sends the lifted law exactly to the normalized pinned
 edge-Potts law \((\edgegibbs{G}{x})^\tau\).
 
@@ -272,12 +272,12 @@ bounds has a finite, positive partition sum.
 \end{lemma}
 
 \begin{proof}
-Fix a colour assignment \(\phi\colon F_0\to\colours\) and sum over its slot
-fibre.  The sum factorizes over the pairs \((v,c)\).  If
+Fix a color assignment \(\phi\colon F_0\to\colours\) and sum over its slot
+fiber.  The sum factorizes over the pairs \((v,c)\).  If
 \(k=k_{v,c}(\phi)\), the activities contribute
 \(x^{\bcount_v^\tau(c)k}\), while admissibility requires the \(k\) endpoint
 slots to be distinct.  By \eqref{eq:slot-identity}, their total slot weight
-is \(x^{\binom k2}\).  Hence the fibre weight is
+is \(x^{\binom k2}\).  Hence the fiber weight is
 \[
   \prod_{v,c}
     x^{\bcount_v^\tau(c)k_{v,c}(\phi)+
@@ -328,7 +328,7 @@ It remains to check one pinning step for current data \((F,B)\).
 Suppose \(e\) is pinned and a
 remaining edge \(f\) meets \(e\).  Simplicity makes the common endpoint
 unique.  The new occupied label removes from \(M_f\) at most one endpoint
-fibre, whose activity is at most one by \eqref{eq:slot-fibre}; deleting
+fiber, whose activity is at most one by \eqref{eq:slot-fibre}; deleting
 \(e\) decreases \(d_F(f)\) by exactly one.  Thus
 \[
   M_f(B')-d_{F\setminus\set e}(f)
@@ -415,7 +415,7 @@ side.
 The avoidance events have positive probability.  Fix either current
 boundary \(B\in\{B^\alpha,B^\beta\}\).  For that side, greedily expose
 the free edges while additionally forbidding the missing label at \(v\).
-For an incident edge this removes at most one further endpoint fibre, so
+For an incident edge this removes at most one further endpoint fiber, so
 the available activity is at least
 \[
   M_e(B)-d_F(e)-1\ge\Deg+1>0.
@@ -437,11 +437,11 @@ with a zero numerator interpreted as zero.
 To bound these label-exposure odds, start from a configuration in
 \(E_j^\beta\), keep every state off \(j\) and replace the state of \(j\)
 by a compatible state that does not expose \(\beta\) at \(v\).  The other
-adjacent free edges exclude at most \(d_F(j)\) endpoint fibres, and
+adjacent free edges exclude at most \(d_F(j)\) endpoint fibers, and
 avoiding \(\beta\) excludes one more.  Thus the replacement activity is at
 least \(\Deg+1\).  Route the source weight among the replacements
 proportionally to their activities.  Conversely, for a fixed target, summing
-all source states whose endpoint colour is \(\beta\) gives total activity
+all source states whose endpoint color is \(\beta\) gives total activity
 \(x^{\bcount_u^\tau(\beta)+\bcount_v^\tau(\beta)}\le1\),
 which is also the bound supplied by \eqref{eq:slot-fibre}.  Summing this flow gives
 \[
@@ -567,19 +567,19 @@ If \(a=b\), the two normalized children are identical.  Assume
 \(a\ne b\), and write the root edge as \(i=uv\).
 
 \emph{Case \(x=1\).}
-Under every pinning, the remaining edge colours are independent and
+Under every pinning, the remaining edge colors are independent and
 uniform, so the root-excluded distance is zero.
 
 \emph{Case \(0<x<1\).}
 Construct the single slot lift associated with the original pinning
-\(\tau\).  By \Cref{lem:edge-slot-lift}, its colour projection is exactly
+\(\tau\).  By \Cref{lem:edge-slot-lift}, its color projection is exactly
 \((\edgegibbs{G}{x})^\tau\).  Conditioning the root edge \(i\) to
-colour \(a\) disintegrates the lifted child over the positive-mass root
+color \(a\) disintegrates the lifted child over the positive-mass root
 states \((a,r,s)\); the \(b\)-child is the analogous mixture over
 \((b,r',s')\).  Both are conditionals of this same lift.
 
 For \(c\in\{a,b\}\), let \(\Pi_c\) denote the law of \(\omega_i\) under
-\(\nu_{F_0,\varnothing}\), conditional on the colour coordinate of
+\(\nu_{F_0,\varnothing}\), conditional on the color coordinate of
 \(\omega_i\) being \(c\).  Thus every
 \(\xi\in\operatorname{supp}\Pi_c\) has the form \((c,r,s)\).  For such a
 state \(\xi\), delete \(i\) and define the occupied-label family on the
@@ -618,14 +618,14 @@ Couple the two countable root-state laws by the product law
 \((\xi,\xi')\), choose a coupling of \(\nu^\xi\) and \(\nu^{\xi'}\) whose
 expected cost is within \(\eta\) of the corresponding Wasserstein infimum,
 and then let \(\eta\downarrow0\).  Tonelli's theorem preserves the same
-uniform bound.  Colour projection cannot increase Hamming distance, so the
+uniform bound.  Color projection cannot increase Hamming distance, so the
 two edge-Potts children have root-excluded distance at most \(\Deg-1\).
 
 \emph{Case \(x=0\).}
-Work in the finite colour space.  Every normalized hard child exists:
-after fixing \(i\), greedily colour the remaining vertices of
+Work in the finite color space.  Every normalized hard child exists:
+after fixing \(i\), greedily color the remaining vertices of
 the line graph, equivalently the remaining free edges of \(G\).  Each sees
-at most \(2\Deg-2\) already coloured neighbours,
+at most \(2\Deg-2\) already colored neighbors,
 whereas \(q\ge3\Deg\).
 
 For \(c\in\set{a,b}\), put
@@ -637,7 +637,7 @@ Then
   m_{L(G)}(\tau^{i=c})
   =m_{L(G)}(\tau)+t_c,
 \]
-and for every colouring \(\phi\) of the remaining edges and \(x>0\),
+and for every coloring \(\phi\) of the remaining edges and \(x>0\),
 \[
 \begin{aligned}
   &x^{\Nconf(\tau^{i=c}\cup\phi)
