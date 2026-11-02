@@ -23,7 +23,7 @@ CITED = [
          source="Chen, Feng, Guo, Zhang, Zou, Deterministic counting from coupling "
                 "independence, arXiv:2410.23225v2, Theorem 20",
          url="https://arxiv.org/abs/2410.23225v2",
-         meaning="Hard-colouring coupling independence at x = 0 on all graphs of maximum "
+         meaning="Hard-coloring coupling independence at x = 0 on all graphs of maximum "
                  "degree at most Δ, for arbitrary pinnings, needed at q = 11Δ/6. "
                  "CriticalHardColouringInput is the same bound on boundary-count data.",
          route="Lean does not follow the citation. It extends the Carlson–Vigoda contraction "
@@ -57,7 +57,7 @@ CITED = [
                "vertex is free, the two laws agree off the ball. Otherwise the proof conditions "
                "on the free sphere vertex of least total variation through a maximal coupling; "
                "the conditioned laws are smaller instances. 1 + log ℓ replaces the harmonic "
-               "number H_ℓ. The separate zero-temperature colouring endpoint is outside this "
+               "number H_ℓ. The separate zero-temperature coloring endpoint is outside this "
                "formalized proposition."),
     dict(id="clmm-87", short="CLMM Lemma 8.7",
          statement=["ZeroFreeness.Appendix.Girth.CavityTree.CLMMInfluenceIdentity"],
@@ -96,18 +96,18 @@ CITED = [
 # The paper's notation: Lean name, TeX symbol and a gloss.
 GLOSSARY = [
     ("ZeroFreeness.Potts.normalizedPolynomial", r"\widehat Z^{\tau}_{G}",
-     "The normalized pinned polynomial: one monomial per colouring of the free vertices, "
+     "The normalized pinned polynomial: one monomial per coloring of the free vertices, "
      "counting free–pinned and free–free monochromatic edges."),
     ("ZeroFreeness.Potts.normalizedPartition", r"\widehat Z^{\tau}_{G}(z)", "Its value at z ∈ ℂ."),
     ("ZeroFreeness.Potts.fullPolynomial", r"Z^{\tau}_{G}",
      "The ordinary pinned polynomial, which also counts monochromatic edges inside the pinned set."),
     ("ZeroFreeness.Potts.fullPartition", r"Z^{\tau}_{G}(z)", "Its value at z ∈ ℂ."),
     ("PottsCI.PartialColouring", r"\tau\colon\Lambda\to[q]",
-     "A pinning: a finite domain and a colour for each of its vertices. No properness is required."),
+     "A pinning: a finite domain and a color for each of its vertices. No properness is required."),
     ("PottsCI.PartialColouring.pinnedConflictCount", r"m_G(\tau)",
      "The number of monochromatic edges with both ends pinned."),
     ("ZeroFreeness.pottsInterval", r"[0,1]\subset\mathbb C",
-     "Its open ε-neighbourhood Metric.thickening ε pottsInterval is the paper's U_ε([0, 1])."),
+     "Its open ε-neighborhood Metric.thickening ε pottsInterval is the paper's U_ε([0, 1])."),
     ("ZeroFreeness.Potts.UniformPottsZeroFree", r"\forall G\in\mathcal G_\Delta\ \forall\tau",
      "The conclusion of Theorem 1.1 for one radius ε, uniformly over graphs and pinnings."),
     ("PottsCI.PinningData", r"(G^{\tau},\,b^{\tau})",
@@ -135,7 +135,7 @@ GLOSSARY = [
     ("ZeroFreeness.Appendix.Girth.girthFiveThreshold", r"\Delta_0(\delta)",
      "⌈4096(1 + δ)e^{2/δ}/δ⁴⌉, as in the companion."),
     ("ZeroFreeness.LeeYang.normalizedFieldPartition", r"\widehat Z^{\tau}_{G}(\lambda)",
-     "The normalized pinned partition function with one field per free vertex and colour."),
+     "The normalized pinned partition function with one field per free vertex and color."),
     ("ZeroFreeness.LeeYang.UniformVertexFieldZeroFree", r"|\lambda_{u,c}-1|\le\theta",
      "The Lee–Yang polydisc conclusion, uniform over graphs and pinnings."),
     ("ZeroFreeness.Holant.Signature", r"f",

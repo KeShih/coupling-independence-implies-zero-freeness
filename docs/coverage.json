@@ -48,7 +48,7 @@
       "PottsCI.PinningData.DegreeBound",
       "PottsCI.PinningData.hardList"
     ],
-    "note": "Lean states both claims for residual instances whose free degree plus pinned-neighbour count is at most Δ at every vertex. For G ∈ 𝒢_Δ, the residual instance of τ is one, and its partition function at 0 is Ẑ^τ_G(0)."
+    "note": "Lean states both claims for residual instances whose free degree plus pinned-neighbor count is at most Δ at every vertex. For G ∈ 𝒢_Δ, the residual instance of τ is one, and its partition function at 0 is Ẑ^τ_G(0)."
   },
   {
     "paper": "main",
@@ -84,7 +84,7 @@
       "ZeroFreeness.pottsInterval",
       "PottsCI.PartialColouring.pinnedConflictCount"
     ],
-    "note": "Lean classes are closed under relabelled induced subgraphs. The coupling bounds are required only when both child laws exist, which q ≥ Δ+1 guarantees. Lean does not need Δ ≥ 2."
+    "note": "Lean classes are closed under relabeled induced subgraphs. The coupling bounds are required only when both child laws exist, which q ≥ Δ+1 guarantees. Lean does not need Δ ≥ 2."
   },
   {
     "paper": "main",
@@ -207,7 +207,7 @@
     "number": "4.4",
     "label": "lem:active-rep",
     "kind": "lemma",
-    "title": "Soft Potts as a random hard-colouring model",
+    "title": "Soft Potts as a random hard-coloring model",
     "status": "formalized-equivalent",
     "lean": [
       "PottsCI.PinningData.spinLawGivenActive_eq_uniformHardFibre"
@@ -235,7 +235,7 @@
       "PottsCI.Vigoda.HardListInstance",
       "ZeroFreeness.Potts.profileStep"
     ],
-    "note": "The swapped set is the alternating {X_u, c}-component of u, which equals the paper's induced component on proper colourings."
+    "note": "The swapped set is the alternating {X_u, c}-component of u, which equals the paper's induced component on proper colorings."
   },
   {
     "paper": "main",
@@ -287,14 +287,14 @@
       "PottsCI.Vigoda.RootLocalPair",
       "PottsCI.Vigoda.activeHardListInstance"
     ],
-    "note": "Lean adds that both colourings are proper for their instances and that the two active sets form a coupling of the activation laws supported on root-local pairs."
+    "note": "Lean adds that both colorings are proper for their instances and that the two active sets form a coupling of the activation laws supported on root-local pairs."
   },
   {
     "paper": "main",
     "number": "4.9",
     "label": "lem:boundary-sensitivity",
     "kind": "lemma",
-    "title": "Effect of adding one labelled free–pinned edge",
+    "title": "Effect of adding one labeled free–pinned edge",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Potts.lem_boundary_sensitivity"
@@ -432,7 +432,7 @@
     "number": "5.4",
     "label": "cor:edge-lee-yang",
     "kind": "corollary",
-    "title": "Edge-colour Lee–Yang polydisc",
+    "title": "Edge-color Lee–Yang polydisc",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.LeeYang.edge_lee_yang"
@@ -627,7 +627,7 @@
       "ZeroFreeness.pottsInterval",
       "PottsCI.PartialColouring.pinnedConflictCount"
     ],
-    "note": "Classes are closed under relabelled induced subgraphs, and the coupling inputs are required only when both child laws exist. Lean does not need Δ ≥ 2 and also gives the multiplicity m_G(τ) of the zero at 0."
+    "note": "Classes are closed under relabeled induced subgraphs, and the coupling inputs are required only when both child laws exist. Lean does not need Δ ≥ 2 and also gives the multiplicity m_G(τ) of the zero at 0."
   },
   {
     "paper": "companion",
@@ -739,7 +739,7 @@
     "number": "3.6",
     "label": "lem:boundary-sensitivity",
     "kind": "lemma",
-    "title": "Effect of adding one labelled free–pinned edge",
+    "title": "Effect of adding one labeled free–pinned edge",
     "status": "formalized-narrowed",
     "lean": [
       "ZeroFreeness.Potts.lem_boundary_sensitivity"
@@ -750,7 +750,7 @@
       "ZeroFreeness.Potts.flipKernel",
       "ZeroFreeness.Potts.boundaryExcess"
     ],
-    "note": "The companion now says ‘k labelled free–pinned edges’, as in the main text, in place of ‘k labelled constraints’."
+    "note": "The companion now says ‘k labeled free–pinned edges’, as in the main text, in place of ‘k labeled constraints’."
   },
   {
     "paper": "companion",
@@ -846,7 +846,7 @@
       "PottsCI.FinDist.W",
       "ZeroFreeness.Potts.actualRootChildGibbs"
     ],
-    "note": "The three regimes are stated on root-conditioned residual instances; relabelling gives every (G, τ, r) of 𝒢. In regime (i) one constant serves all of [0, 1], the critical pairs included, which the paper does not assert."
+    "note": "The three regimes are stated on root-conditioned residual instances; relabeling gives every (G, τ, r) of 𝒢. In regime (i) one constant serves all of [0, 1], the critical pairs included, which the paper does not assert."
   },
   {
     "paper": "companion",
@@ -923,7 +923,7 @@
       "ZeroFreeness.Potts.optionChildData",
       "PottsCI.PinningData.nonnegativeGibbs"
     ],
-    "note": "Stated for residual instances on Option O with root none; the (G, τ, r) form follows by relabelling V^τ as Option O with r ↦ none."
+    "note": "Stated for residual instances on Option O with root none; the (G, τ, r) form follows by relabeling V^τ as Option O with r ↦ none."
   },
   {
     "paper": "companion",
@@ -1048,7 +1048,7 @@
       "ZeroFreeness.PartialCoupling",
       "ZeroFreeness.Appendix.CV.hardStep"
     ],
-    "note": "Built for any choice of one root neighbour per colour and side (GlobalChoice), the paper's largest-component choice included. The claims inside the definition (full singleton matching, no overfilling, the one-unit saving, root-colour capacities) are proved."
+    "note": "Built for any choice of one root neighbor per color and side (GlobalChoice), the paper's largest-component choice included. The claims inside the definition (full singleton matching, no overfilling, the one-unit saving, root-color capacities) are proved."
   },
   {
     "paper": "companion",
@@ -1108,14 +1108,14 @@
       "ZeroFreeness.Appendix.CV.safeActivation",
       "ZeroFreeness.Appendix.CV.crossCredit"
     ],
-    "note": "Part 1 is proved for any set of regular colours with k_c ≤ 2, which covers 𝒞_low. The last assertion is stated as: the root's own score plus all cross credits is at most 𝒮_out."
+    "note": "Part 1 is proved for any set of regular colors with k_c ≤ 2, which covers 𝒞_low. The last assertion is stated as: the root's own score plus all cross credits is at most 𝒮_out."
   },
   {
     "paper": "companion",
     "number": "5.12",
     "label": "lem:cv-fresh",
     "kind": "lemma",
-    "title": "Fresh-colour gain",
+    "title": "Fresh-color gain",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_fresh"
@@ -1144,7 +1144,7 @@
       "ZeroFreeness.Appendix.CV.adjacentHardCoupling",
       "ZeroFreeness.Appendix.CV.targetConstraints"
     ],
-    "note": "Lean writes the contribution as θs_u times the root-kept mass disturbing w, minus θx^{t_w} times the same-neighbour entry, averaged over the coins; w need not be adjacent to u."
+    "note": "Lean writes the contribution as θs_u times the root-kept mass disturbing w, minus θx^{t_w} times the same-neighbor entry, averaged over the coins; w need not be adjacent to u."
   },
   {
     "paper": "companion",
@@ -1227,7 +1227,7 @@
     "number": "5.19",
     "label": "lem:cv-drift-decomposition",
     "kind": "lemma",
-    "title": "Drift decomposition by colour",
+    "title": "Drift decomposition by color",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.averaged_geometric_drift_corrected_le"
@@ -1261,7 +1261,7 @@
     "number": "5.21",
     "label": "lem:cv-high",
     "kind": "lemma",
-    "title": "High multiplicity and missing colours",
+    "title": "High multiplicity and missing colors",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.cv_high_bulk",
@@ -1279,7 +1279,7 @@
     "number": "5.22",
     "label": "lem:cv-special",
     "kind": "lemma",
-    "title": "The two root colours",
+    "title": "The two root colors",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.CV.rootColourCharge_le"
@@ -1288,7 +1288,7 @@
       "ZeroFreeness.Appendix.CV.rootColourCharge",
       "ZeroFreeness.Appendix.CV.bulk"
     ],
-    "note": "Lean states the bound for the colour a; the colour b follows by swapping the two sides."
+    "note": "Lean states the bound for the color a; the color b follows by swapping the two sides."
   },
   {
     "paper": "companion",
@@ -1375,7 +1375,7 @@
       "ZeroFreeness.Appendix.Girth.largeGirthFamily",
       "ZeroFreeness.Potts.PinningFamily.RootCouplingBound"
     ],
-    "note": "Stated on residual instances with a distinguished free root; the (G, τ, r) form follows by relabelling the free vertices so that r becomes the root."
+    "note": "Stated on residual instances with a distinguished free root; the (G, τ, r) form follows by relabeling the free vertices so that r becomes the root."
   },
   {
     "paper": "companion",
@@ -1501,7 +1501,7 @@
       "ZeroFreeness.Appendix.Girth.CavityTree.totalInfluenceConstant",
       "ZeroFreeness.Appendix.Girth.decayRate"
     ],
-    "note": "Stated on cavity trees, which record a pinned tree by its free component and pinned-neighbour colour counts, for each pair of root colours, with ℓ = k + 1."
+    "note": "Stated on cavity trees, which record a pinned tree by its free component and pinned-neighbor color counts, for each pair of root colors, with ℓ = k + 1."
   },
   {
     "paper": "companion",
@@ -1648,7 +1648,7 @@
       "ZeroFreeness.Appendix.Girth.largeGirthFamily",
       "ZeroFreeness.Potts.PinningFamily.PositiveRootCouplingBound"
     ],
-    "note": "Stated on residual instances (free graph with boundary counts) with a distinguished root; the (G, τ, r) form follows by relabelling the free vertices of G^τ so that r is the root."
+    "note": "Stated on residual instances (free graph with boundary counts) with a distinguished root; the (G, τ, r) form follows by relabeling the free vertices of G^τ so that r is the root."
   },
   {
     "paper": "companion",
@@ -1756,7 +1756,7 @@
     "number": "9.2",
     "label": "lem:girth5-one-edge",
     "kind": "lemma",
-    "title": "One-edge colour operator",
+    "title": "One-edge color operator",
     "status": "formalized",
     "lean": [
       "ZeroFreeness.Appendix.Girth.girth5_one_edge"
@@ -1774,7 +1774,7 @@
     "number": "9.3",
     "label": "lem:girth5-color-covariance",
     "kind": "lemma",
-    "title": "Colour covariance of the insertion residual",
+    "title": "Color covariance of the insertion residual",
     "status": "formalized-equivalent",
     "lean": [
       "ZeroFreeness.Appendix.Girth.GraphTwoLayer.actual_estimates",
@@ -1804,7 +1804,7 @@
       "ZeroFreeness.Potts.optionChildData",
       "PottsCI.FinDist.W"
     ],
-    "note": "Stated on residual instances with degree budget Δ and root none. The (G, τ, r) form follows by relabelling V^τ as Option O, since maximum degree Δ in G gives the budget."
+    "note": "Stated on residual instances with degree budget Δ and root none. The (G, τ, r) form follows by relabeling V^τ as Option O, since maximum degree Δ in G gives the budget."
   },
   {
     "paper": "companion",

@@ -114,7 +114,7 @@ code, pre { font-family: var(--mono); }
 .splitter::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: -7px; }
 .splitter:hover, .splitter.dragging { background: var(--accent); box-shadow: 1px 0 0 var(--accent); transition-delay: .12s; }
 .splitter:focus-visible { outline: none; background: var(--accent); box-shadow: 1px 0 0 var(--accent); }
-/* Thin scrollbars on a clear track, so a pane's edge is not a grey strip. */
+/* Thin scrollbars on a clear track, so a pane's edge is not a gray strip. */
 :root { scrollbar-color: color-mix(in srgb, var(--ink) 20%, transparent) transparent; }
 .paper-pane, .lean-scroll, .toc-list, .peek, pre.lean { scrollbar-width: thin; }
 @supports not (scrollbar-width: thin) {
@@ -176,7 +176,7 @@ h4.h { font-size: 1em; margin: 1.3em 0 0.4em; }
   border-radius: 3px; background: transparent; transition: background-color .2s; }
 .thm.is-current::before, .fcard.is-current::before { background: var(--accent); }
 .thm.is-selected::before, .fcard.is-selected::before { background: transparent; }
-/* The Lean mark: the L∃∀N logo alone, grey at rest, in the accent colour for
+/* The Lean mark: the L∃∀N logo alone, gray at rest, in the accent color for
    the statement being read, on a soft tint when selected. */
 .lean-mark { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center;
   padding: 7px 8px; border-radius: 8px; font-style: normal; color: var(--muted);
@@ -475,7 +475,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
       <span class="bar-sep" aria-hidden="true"></span>
       <a class="bar-link" id="pdfLink" href="#" target="_blank" rel="noopener">PDF</a>
       <a class="bar-link" id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
-      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch colour theme">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch color theme">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="6.5"/><path d="M10 3.5a6.5 6.5 0 0 0 0 13z" fill="currentColor"/></svg>
       </button>
     </div>
@@ -523,7 +523,7 @@ details.more-box[open] summary::before { content: "\2212  "; }
     chev: '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10 8 5.5l4.5 4.5"/></svg>',
     check: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.4 6.6 11.4 12.5 4.8"/></svg>',
     dot: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.6" fill="currentColor"/></svg>',
-    // The Lean logo, L∃∀N, drawn as strokes in the current colour.
+    // The Lean logo, L∃∀N, drawn as strokes in the current color.
     lean: '<svg class="logo" viewBox="30 56 1945 688" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       '<path vector-effect="non-scaling-stroke" d="M62 88V712H857V88H457M457 400H857M857 88 1150 712 1437 88M1004 400H1293M1437 712V88L1943 712V88"/></svg>',
     cross: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></svg>'
